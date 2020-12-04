@@ -1,7 +1,13 @@
 # Flutter Fair
 Fair是为Flutter设计的，UI&模板动态化框架
 
-> 欢迎大家github前排占位，Star/Fork，加速github开源倒计时ing。。。
+> 欢迎大家前排占位，Star/Fork，加速github开源倒计时ing。。。
+
+Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转义Best FLutter UI Templates部分页面后的效果：
+
+![best-ui-template](best-ui-template.png)
+
+> 使用的工程来自 https://github.com/mitesh77/Best-Flutter-UI-Templates
 
 ## 文档
 
