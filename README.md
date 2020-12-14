@@ -22,7 +22,7 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 * 开源准备 2020
 	* 项目清理
 	* 对外文档准备
-	* 官网准备 https://fair.hacktons.cn
+	* 官网准备 https://fair.58.com
 	* Github开源 https://github.com/wuba/fair
 * 项目维护 2020
 	* CI流程
@@ -42,5 +42,6 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
     * 逻辑组件优化
     
 ## 相关介绍
+* [Flutter Fair: A new package used to update widget tree dynamically](https://medium.com/p/98f6f94cb2bf)
 * [Flutter动态化框架Fair文档上线&开源倒计时](https://juejin.cn/post/6901600898603024391)
 * [Flutter动态化框架Fair的设计与思考](https://juejin.cn/post/6896655572910014478)
