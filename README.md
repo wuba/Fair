@@ -1,3 +1,4 @@
+
 # Flutter Fair
 Fair是为Flutter设计的，UI&模板动态化框架
 
@@ -42,5 +43,7 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
     * 逻辑组件优化
     
 ## 相关介绍
+* [Flutter Fair: A new package used to update widget tree dynamically](https://medium.com/p/98f6f94cb2bf)
 * [Flutter动态化框架Fair文档上线&开源倒计时](https://juejin.cn/post/6901600898603024391)
 * [Flutter动态化框架Fair的设计与思考](https://juejin.cn/post/6896655572910014478)
+
