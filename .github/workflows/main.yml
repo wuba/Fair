@@ -24,10 +24,10 @@ jobs:
       - name: build fair_example
         working-directory: fair/example
         run: |
-          flutter build apk
+          flutter build apk --target-platform android-arm64
           flutter build ios --release --no-codesign
-      - name: build  my_app
+      - name: build sample project my_app
         working-directory: samples/my_app
         run: |
-          flutter build apk
+          flutter build apk --target-platform android-arm64
           flutter build ios --release --no-codesign

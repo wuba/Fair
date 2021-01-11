@@ -51,7 +51,7 @@ const Color _kDefaultTabBarBorderColor = CupertinoDynamicColor.withBrightness(
 
 const double _defaultRefreshTriggerPullDistance = 100.0;
 const double _defaultRefreshIndicatorExtent = 60.0;
-var buildRefreshIndicator = CupertinoSliverRefreshControl.buildRefreshIndicator;
+//var buildRefreshIndicator = CupertinoSliverRefreshControl.buildRefreshIndicator;
 const double _kDefaultDiameterRatio = 1.07;
 const double _kSqueeze = 1.45;
 const double _kDefaultIndicatorRadius = 10.0;
