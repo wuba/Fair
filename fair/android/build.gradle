@@ -1,0 +1,39 @@
+/*
+ * Copyright (C) 2005-present, 58.com.  All rights reserved.
+ * Use of this source code is governed by a BSD type license that can be
+ * found in the LICENSE file.
+ */
+
+group 'com.wuba.fair'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.0'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 16
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+}

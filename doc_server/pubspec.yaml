@@ -1,0 +1,14 @@
+name: doc_server
+description: A web server built using the shelf package.
+environment:
+  sdk: '>=2.7.0 <3.0.0'
+
+dependencies:
+  args: ^1.5.0
+  shelf: ^0.7.5
+  shelf_static: ^0.2.8
+  shelf_router: ^0.7.3
+  io: ^0.3.4
+
+dev_dependencies:
+  pedantic: ^1.8.0

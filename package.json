@@ -1,0 +1,17 @@
+{
+  "name": "fair_document",
+  "version": "1.0.0",
+  "description": "Document for Flutter Fair",
+  "main": "index.js",
+  "repository": "https://github.com/wuba/fair.git",
+  "author": "Chaobin Wu <chaobinwu89@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "doc:dev": "vuepress dev doc",
+    "doc:build": "vuepress build doc"
+  },
+  "devDependencies": {
+    "vuepress": "^1.7.1"
+  }
+}

@@ -1,0 +1,264 @@
+{
+  "className": "SingleChildScrollView",
+  "na": {
+    "child": {
+      "className": "Column",
+      "na": {
+        "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+        "children": [
+          {
+            "className": "Padding",
+            "na": {
+              "padding": {
+                "className": "EdgeInsets.all",
+                "pa": [
+                  5
+                ]
+              },
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "FairWidget Example"
+                ],
+                "na": {
+                  "style": {
+                    "className": "TextStyle",
+                    "na": {
+                      "fontSize": 18
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "className": "Container",
+            "na": {
+              "width": "#(double.infinity)",
+              "child": {
+                "className": "FairWidget",
+                "na": {
+                  "type": "dynamic_widget",
+                  "path": "assets/bundle/dynamic.json",
+                  "data": {
+                    "content": "Nested FairWidget"
+                  },
+                  "debugShowFairBanner": false
+                }
+              },
+              "color": "#(Colors.grey)",
+              "padding": {
+                "className": "EdgeInsets.all",
+                "pa": [
+                  5
+                ]
+              }
+            }
+          },
+          {
+            "className": "Padding",
+            "na": {
+              "padding": {
+                "className": "EdgeInsets.all",
+                "pa": [
+                  5
+                ]
+              },
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "Sugar.ifEqual Example"
+                ],
+                "na": {
+                  "style": {
+                    "className": "TextStyle",
+                    "na": {
+                      "fontSize": 18
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "className": "Container",
+            "na": {
+              "width": "#(double.infinity)",
+              "child": {
+                "className": "Sugar.ifEqual",
+                "pa": [
+                  "#($count)",
+                  0
+                ],
+                "na": {
+                  "trueValue": {
+                    "className": "Text",
+                    "pa": [
+                      "True case, count = 0"
+                    ]
+                  },
+                  "falseValue": {
+                    "className": "Text",
+                    "pa": [
+                      "True case, count != 0"
+                    ]
+                  }
+                }
+              },
+              "color": "#(Colors.grey)",
+              "padding": {
+                "className": "EdgeInsets.all",
+                "pa": [
+                  5
+                ]
+              }
+            }
+          },
+          {
+            "className": "Padding",
+            "na": {
+              "padding": {
+                "className": "EdgeInsets.all",
+                "pa": [
+                  5
+                ]
+              },
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "Sugar.map Example"
+                ],
+                "na": {
+                  "style": {
+                    "className": "TextStyle",
+                    "na": {
+                      "fontSize": 18
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "className": "Container",
+            "na": {
+              "width": "#(double.infinity)",
+              "child": {
+                "className": "Row",
+                "na": {
+                  "children": {
+                    "className": "Sugar.map",
+                    "pa": [
+                      "A",
+                      "B",
+                      "C",
+                      "D"
+                    ],
+                    "na": {
+                      "builder": {
+                        "className": "SimpleTextItemBuilder"
+                      }
+                    }
+                  }
+                }
+              },
+              "color": "#(Colors.grey)",
+              "padding": {
+                "className": "EdgeInsets.all",
+                "pa": [
+                  5
+                ]
+              }
+            }
+          },
+          {
+            "className": "Padding",
+            "na": {
+              "padding": {
+                "className": "EdgeInsets.all",
+                "pa": [
+                  5
+                ]
+              },
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "Sugar.mapEach Example"
+                ],
+                "na": {
+                  "style": {
+                    "className": "TextStyle",
+                    "na": {
+                      "fontSize": 18
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "className": "Container",
+            "na": {
+              "width": "#(double.infinity)",
+              "child": {
+                "className": "Row",
+                "na": {
+                  "mainAxisAlignment": "#(MainAxisAlignment.spaceAround)",
+                  "children": {
+                    "className": "Container",
+                    "mapEach": [
+                      "A",
+                      "B",
+                      "C",
+                      "D"
+                    ],
+                    "na": {
+                      "child": {
+                        "className": "Text",
+                        "pa": [
+                          "#(Card $item)"
+                        ]
+                      },
+                      "alignment": "#(Alignment.center)",
+                      "margin": {
+                        "className": "EdgeInsets.only",
+                        "na": {
+                          "top": 30,
+                          "bottom": 30,
+                          "right": 10
+                        }
+                      },
+                      "color": {
+                        "className": "Sugar.ifRange",
+                        "pa": [
+                          "#($index)",
+                          [
+                            0,
+                            2
+                          ]
+                        ],
+                        "na": {
+                          "trueValue": "#(Colors.redAccent)",
+                          "falseValue": "#(Colors.yellow)"
+                        }
+                      },
+                      "width": 60,
+                      "height": 60
+                    }
+                  }
+                }
+              },
+              "color": "#(Colors.grey)",
+              "padding": {
+                "className": "EdgeInsets.all",
+                "pa": [
+                  5
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

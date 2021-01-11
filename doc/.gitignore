@@ -1,0 +1,4 @@
+_book/
+.DS_Store
+**/.DS_Store
+node_modules/

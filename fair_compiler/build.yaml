@@ -1,0 +1,26 @@
+builders:
+  fairc:
+    import: "package:fair_compiler/src/builder.dart"
+    builder_factories: ["build", "bind"]
+    build_extensions: {".dart": [".bundle.json", ".binding", ".fair.ignore"]}
+    auto_apply: root_package
+    build_to: cache
+    defaults:
+      generate_for:
+        - lib/**
+    applies_builders: [":archive"]
+    runs_before: [":archive"]
+
+  package:
+    import: "package:fair_compiler/src/builder.dart"
+    builder_factories: ["package"]
+    build_extensions: {"$lib$": ["generated/fair.dart"]}
+    required_inputs: [".fair.ignore"]
+    auto_apply: root_package
+    build_to: source
+
+post_process_builders:
+  archive:
+    import: "package:fair_compiler/src/builder.dart"
+    builder_factory: "archive"
+    input_extensions: [".bundle.json"]

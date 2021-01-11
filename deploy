@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+##################################################################
+##
+##  Publish static site
+##  https://vuepress.vuejs.org/zh/guide/deploy.html#github-pages
+##
+##  Author: Chaobin Wu
+##  Email : chaobinwu89@gmail.com
+##
+#################################################################
+
+set -e
+
+yarn doc:build
+cd doc/.vuepress/dist
+echo 'fair.hacktons.cn' > CNAME
+
+git init
+git add -A
+git commit -m 'deploy'
+
+git push -f git@github.com:hacktons/fair.hacktons.cn.git master
+
+cd -
