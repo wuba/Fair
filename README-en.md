@@ -5,7 +5,9 @@
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/flutter-Android%7CiOS%7CWeb-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
+  <a href="https://github.com/wuba/fair/actions"><img src="https://github.com/wuba/fair/workflows/build/badge.svg" alt="build"></a>
 </p>
+
 [简体中文](README.md)|[English](README-en.md)
 
 ---

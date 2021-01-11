@@ -2,9 +2,9 @@ name: build
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main, f-ci-action ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -18,19 +18,16 @@ jobs:
       - uses: actions/checkout@v1
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.22.x'
-          channel: 'beta'
-
+          flutter-version: '1.22.5'
       - run: dart --version
       - run: flutter --version
-      - run: flutter config --enable-web
-      - name: fair_example
+      - name: build fair_example
         working-directory: fair/example
         run: |
-          flutter pub get
-          flutter build web
-      - name: my_app
+          flutter build apk --target-platform android-arm64
+          flutter build ios --release --no-codesign
+      - name: build sample project my_app
         working-directory: samples/my_app
         run: |
-          flutter pub get
-          flutter build web
+          flutter build apk --target-platform android-arm64
+          flutter build ios --release --no-codesign

@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+##################################################################
+##
+##  Switch fair_version for CI workflow
+##
+##
+##  Author: Chaobin Wu
+##  Email : chaobinwu89@gmail.com
+##
+#################################################################
+arg="fair_version_name"
+if [ $# == 0 ]; then
+  script="${0##*/}"
+	echo "Usage: $script $arg"
+	exit 1
+fi
+die() {
+  echo "$*"
+  exit 1
+}
+version=$1
+if [ ! -d "fair_version/$version" ]; then
+  echo "$version is not a valid fair_version!"
+  echo "Consider one of listed version:"
+  tree fair_version -L 1
+  die "Abort!"
+fi
+
+{
+  echo ""
+  echo "# Switch to another stable flutter version"
+  echo "dependency_overrides:"
+  echo "  pedantic: ^1.8.0" # required by flutter_test lower version
+  echo "  path: ^1.6.4"     # required by flutter_test lower version
+  echo "  crypto: ^2.0.0"   # required by flutter_test lower version
+  echo "  archive: ^2.0.0"  # required by flutter_test lower version
+  echo "  fair_version:"    # required by flutter lower version
+  echo "    path: ../../fair_version/$version"
+  echo ""
+} >> fair/example/pubspec.yaml
