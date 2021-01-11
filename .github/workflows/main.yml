@@ -1,0 +1,36 @@
+name: build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest]
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '1.22.x'
+          channel: 'beta'
+
+      - run: dart --version
+      - run: flutter --version
+      - run: flutter config --enable-web
+      - name: fair_example
+        working-directory: fair/example
+        run: |
+          flutter pub get
+          flutter build web
+      - name: my_app
+        working-directory: samples/my_app
+        run: |
+          flutter pub get
+          flutter build web
