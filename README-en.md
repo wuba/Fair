@@ -36,10 +36,12 @@ Please check the runtime environment on your computer. Fair is based on Flutter 
 
 | Flutter Version          | Dart Version|
 | ------------------------ | ----------- |
-| Flutter 1.22.4/1.22.5    | Dart 2.10.4 |
-| Flutter 1.20.4           | Dart 2.9.2  |
-| Flutter 1.17.3           | Dart 2.8.4  |
-| Flutter 1.12.13+hotfix.9 | Dart 2.7.2  |
+| Flutter 1.22.4/1.22.5    | Dart 2.10.4 | ![v1.22.5](https://github.com/wuba/fair/workflows/build/badge.svg)|
+| Flutter 1.20.4           | Dart 2.9.2  | ![v1.20.4](https://github.com/wuba/fair/workflows/1_20_4/badge.svg)|
+| Flutter 1.17.3           | Dart 2.8.4  | ![v1.17.3](https://github.com/wuba/fair/workflows/1_17_3/badge.svg)|
+| Flutter 1.12.13+hotfix.9 | Dart 2.7.2  | ![v1.12.13](https://github.com/wuba/fair/workflows/1_12_13/badge.svg) |
+
+Attention：As flutter-tools is changing according to different version, the template project created by `flutter create` may failed to compile.
 
 > https://flutter.dev/docs/development/tools/sdk/releases?tab=macos
 

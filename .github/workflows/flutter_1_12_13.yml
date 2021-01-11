@@ -1,0 +1,26 @@
+name: 1_12_13
+
+on:
+  push:
+    branches: [ f-ci-action, version_test ]
+
+jobs:
+  build-1_12_13:
+    name: build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest]
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '1.12.13+hotfix.9'
+      - run: dart --version
+      - run: flutter --version
+      - run: scripts/switchFairVersion flutter_1_12_13
+      - name: build fair_example
+        working-directory: fair/example
+        run: |
+          flutter build apk --target-platform android-arm64
