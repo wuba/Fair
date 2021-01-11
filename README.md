@@ -6,6 +6,7 @@
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
 </p>
+
 [简体中文](README.md)|[English](README-en.md)
 
 ---
