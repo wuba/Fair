@@ -69,8 +69,8 @@ class FairWidget extends StatefulWidget {
           if (!(data is Map &&
               data.values
                   .every((e) => e is int || e is double || e is String))) {
-            throw FlutterError(
-                'data must be a map of primary value such as int, double or String');
+            log(
+                'data must be a map of primary value such as int, double or String. Object reference can be broken!');
           }
           return true;
         }(), ''),

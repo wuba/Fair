@@ -5,6 +5,7 @@
  */
 
 import 'package:fair/fair.dart';
+import 'package:fair/src/type.dart';
 import 'package:flutter/widgets.dart';
 
 import '../extension.dart';
@@ -63,6 +64,9 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         isWidget = internal ? widgetNames[name] : true;
       }
       assert(mapper != null, '$name is not registered!');
+      if (name == 'Sugar.mapEach') {
+        return _buildSugarMapEach(mapper, map, context);
+      }
       var source = map['mapEach'];
       if (source != null && source is List) {
         var children = Domain(source).forEach(($, _) {
@@ -171,5 +175,28 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }
     na['\$'] = context;
     return W<Map<String, dynamic>>(na, needBinding);
+  }
+
+  List<Widget> _buildSugarMapEach(Function mapEach, Map map, BuildContext context) {
+    var source = pa0(map);
+    var children = [];
+    if (source is String) {
+      var r = proxyMirror.evaluate(context, bound, source);
+      if (r.data != null) {
+        source = r.data;
+      }
+    }
+    if (!(source is List)) {
+      throw Exception('Sugar.mapEach has no valid source array');
+    }
+    if (source != null && source is List) {
+      children = Domain(source).forEach(($, _) {
+        return convert(context, pa1(map), domain: $);
+      });
+    }
+    var params = {
+      'pa': [source, children]
+    };
+    return mapEach.call(params);
   }
 }

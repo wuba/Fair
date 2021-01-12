@@ -14,11 +14,20 @@ class Domain<E> {
   bool match(dynamic exp) {
     return source != null &&
         exp is String &&
-        RegExp('#\\(.+\\)', multiLine: true).hasMatch(exp) &&
-        (exp.contains('\$item') || exp.contains('\$index'));
+        ((RegExp('#\\(.+\\)', multiLine: true).hasMatch(exp) &&
+                (exp.contains('\$item') || exp.contains('\$index'))) ||
+            exp == 'item' ||
+            exp == 'index');
   }
 
   String bindValue(String exp) {
+    // TODO mapEach
+    if (exp == 'item') {
+      return exp.replaceAll('item', '${source[index]}');
+    }
+    if (exp == 'index') {
+      return exp.replaceAll('item', '$index');
+    }
     var processed = exp.substring(2, exp.length - 1);
     processed = processed.replaceAll('\$item', '${source[index]}');
     processed = processed.replaceAll('\$index', '$index');

@@ -21,6 +21,11 @@ FairWidgetBinding provider = () {
 
       return (d.asIteratorOf<Widget>() ?? d).toList();
     },
+    'Sugar.mapEach': (props) {
+      var items = pa1(props);
+      assert(items is List, 'failed to generate list of Sugar.map');
+      return ((items as List).asIteratorOf<Widget>() ?? items).toList();
+    },
     'Sugar.ifEqual': (props) {
       var p0 = pa0(props);
       var p1 = pa1(props);
