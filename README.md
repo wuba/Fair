@@ -6,6 +6,7 @@
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
   <a href="https://github.com/wuba/fair/actions"><img src="https://github.com/wuba/fair/workflows/build/badge.svg" alt="build"></a>
+  <a href="https://gitter.im/flutter_fair/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge"><img src="https://badges.gitter.im/flutter_fair/community.svg" alt="Gitter"></a>
 </p>
 
 [简体中文](README.md)|[English](README-en.md)
@@ -24,6 +25,7 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 ![best-ui-template](best-ui-template.png)
 
 > 使用的工程来自 https://github.com/mitesh77/Best-Flutter-UI-Templates
+
 
 ## 🏛Architecture
 
