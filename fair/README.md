@@ -13,7 +13,7 @@ Fair is a lightweight package for Flutter, which can be used to update widget tr
 
 We create Fair so we can dispatch UI changes to users as bundle(s), the way similar to React Native. With Flutter Fair integrated, you can publish your UI pages without waiting for the next release date of your App. Fair provides standard widget, it can be used as a new dynamic page or as part of existing Flutter page.
 
-![what-is-fair](what-is-fair-en.png)
+![what-is-fair](https://github.com/wuba/fair/blob/main/fair/what-is-fair-en.png?raw=true)
 
 ## Quick Start
 Use Flutter Fair require few steps. Add dependency inside `pubspec.yaml`.

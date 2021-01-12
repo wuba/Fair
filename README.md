@@ -68,6 +68,11 @@ samples
 
 更多接入操作请参考 [https://fair.58.com/](https://fair.58.com/)
 
+* fair ![https://pub.dev/packages/fair](https://img.shields.io/pub/v/fair.svg)
+* fair_compiler ![https://pub.dev/packages/fair_compiler](https://img.shields.io/pub/v/fair_compiler.svg)
+* fair_annotation ![https://pub.dev/packages/fair_annotation](https://img.shields.io/pub/v/fair_annotation.svg)
+* fair_version ![https://pub.dev/packages/fair_version](https://img.shields.io/pub/v/fair_version.svg)
+
 ## 📎相关介绍
 * [Flutter动态化框架Fair文档上线&开源倒计时](https://juejin.cn/post/6901600898603024391)
 * [Flutter动态化框架Fair的设计与思考](https://juejin.cn/post/6896655572910014478)

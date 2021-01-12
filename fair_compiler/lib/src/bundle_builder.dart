@@ -58,7 +58,8 @@ An error `${e.runtimeType}` occurred while formatting the generated source for
 which was output to
   `${outputId.path}`.
 This may indicate an issue in the generator, the input source code, or in the
-source formatter.''',
+source formatter.\n==>\n$genPartContent
+''',
         e,
         stack,
       );
