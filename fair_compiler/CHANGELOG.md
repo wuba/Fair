@@ -1,5 +1,6 @@
 ## 0.2.0+3
 * print exception message when compile failed.
+
 ## 0.2.0+2
 * Fix stack overflow exception when parsing `with`
 

@@ -113,6 +113,8 @@ samples
 ## 🔧Contributing
 通过[Issue](https://github.com/wuba/fair/issues)提交问题，贡献代码走Pull Request，管理员将对代码进行审核。
 
+技术咨询、讨论，请移步至[![Gitter](https://badges.gitter.im/flutter_fair/community.svg)](https://gitter.im/flutter_fair/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 ## LICENSE
 Fair项目基于[BSD协议](LICENSE)开源。我们使用的更多依赖库详见pubspec.yaml
 

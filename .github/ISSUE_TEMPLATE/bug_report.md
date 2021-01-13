@@ -9,26 +9,27 @@ assignees: ''
 
 ## Attention
 Issue用于问题跟踪，技术咨询/讨论，请移步至讨论组 [![Gitter](https://badges.gitter.im/flutter_fair/community.svg)](https://gitter.im/flutter_fair/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 ---
 
-**Describe the bug**
+**问题**
 
-A clear and concise description of what the bug is.
+简要说明是什么问题
 
-**Environment details**
+**环境信息**
 
-Paste the flutter environment detail.
+执行下面的语句，并粘贴结果
 ```
+dart --version
 flutter doctor
-flutter --version
 ```
-Paste the package version.
+提供版本号
 ```
 dependencies:
   fair: x.y.z
 ```
 
-**To Reproduce**
+**复现操作【可选】**
 
 Steps to reproduce the behavior:
 1. Go to '...'
@@ -36,14 +37,14 @@ Steps to reproduce the behavior:
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
+**预期【可选】**
 
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
+**相关截图【可选】**
 
 If applicable, add screenshots to help explain your problem.
 
-**Additional context**
+**其他【可选】**
 
 Add any other context about the problem here.
