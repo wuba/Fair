@@ -115,6 +115,20 @@ samples
 
 技术咨询、讨论，请移步至[![Gitter](https://badges.gitter.im/flutter_fair/community.svg)](https://gitter.im/flutter_fair/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
+## 🧯FAQ
+
+* 为什么没有bin产物？
+
+bin为可选的flatbuffer产物，本机如果需要，请安装[flatc](http://google.github.io/flatbuffers/flatbuffers_guide_building.html)
+
+* 执行flutter pub run build_runner build后没有产物
+
+请根据适配要求，核查flutter，dart版本
+
+* 执行flutter pub run build_runner build后，提示编译错误信息
+
+根据错误日志，有几种情况：1.原代码中存在逻辑表达式，语法解析不通过，尝试剥离逻辑为module；2.`.dart_tool`文件权限问题，请删除后重试
+
 ## LICENSE
 Fair项目基于[BSD协议](LICENSE)开源。我们使用的更多依赖库详见pubspec.yaml
 

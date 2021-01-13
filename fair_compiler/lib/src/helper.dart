@@ -41,8 +41,10 @@ mixin FlatCompiler {
       content =
           jsonPath.substring(relativeIndex + 1).replaceAll('.json', '.bin');
     } else {
-      //error = '[Fair] $command is not installed, FlatBuffer is not generated';
-      //print(error);
+      print(
+          '[Fair] Since $command is not installed, the bin of bundle will not be generated!');
+      print(
+          'You may install flatc from : http://google.github.io/flatbuffers/flatbuffers_guide_building.html');
     }
     return content.isNotEmpty
         ? R.success(content, '$command execute success')
