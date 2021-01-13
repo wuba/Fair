@@ -177,7 +177,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return W<Map<String, dynamic>>(na, needBinding);
   }
 
-  List<Widget> _buildSugarMapEach(Function mapEach, Map map, BuildContext context) {
+  List<Widget> _buildSugarMapEach(
+      Function mapEach, Map map, BuildContext context) {
     var source = pa0(map);
     var children = [];
     if (source is String) {
