@@ -113,7 +113,13 @@ samples
 ## 🔧Contributing
 通过[Issue](https://github.com/wuba/fair/issues)提交问题，贡献代码走Pull Request，管理员将对代码进行审核。
 
-技术咨询、讨论，请移步至[![Gitter](https://badges.gitter.im/flutter_fair/community.svg)](https://gitter.im/flutter_fair/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+对Fair感兴趣的小伙伴，可以加入交流群。技术咨询、讨论，请移步至[![Gitter](https://badges.gitter.im/flutter_fair/community.svg)](https://gitter.im/flutter_fair/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+| 微信                         | 美事（内部）                 |
+| ---------------------------- | ---------------------------- |
+| ![wechat](https://fair.58.com/assets/img/wechat.a8ffe3f0.png) | ![meishi](https://fair.58.com/assets/img/meishi.5a7cba60.jpg) |
+
+> 如微信码过期，可以找管理员(请务必备注flutter fair，否则不予通过)：do_not_let_me_know
 
 ## 🧯FAQ
 
