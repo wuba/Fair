@@ -8,6 +8,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import 'widgets/version.dart';
 
 /// Show a dialog displaying the Fair information.
@@ -22,7 +23,8 @@ void showFairAboutDialog(BuildContext context) {
     }
   }
 
-  final textStyle = Theme.of(context).textTheme.bodyText2;
+  final textStyle =
+      TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black);
   final url = 'https://fair.58.com';
   final aboutBoxChildren = <Widget>[
     SizedBox(height: 24),

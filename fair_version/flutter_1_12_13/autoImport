@@ -16,6 +16,9 @@ die() {
 sed -i '' '13 i\
 part "../part/c.part.dart";' "lib/src/widgets/\$\$c.dart"
 
+# add // before var buildRefreshIndicator = CupertinoSliverRefreshControl.buildRefreshIndicator;
+sed -i '' 's/^var buildRefreshIndicator/\/\/&/' "lib/src/widgets/\$\$c.dart"
+
 # fix import of $$p.dart
 sed -i '' '11 i\
 import "dart:math" as math;' "lib/src/widgets/\$\$p.dart"
