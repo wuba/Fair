@@ -135,7 +135,7 @@ dependency_overrides:
   fair_version:
     git:
       url: https://github.com/wuba/fair.git
-      ref: master
+      ref: main
       path: fair_version/flutter_1_12_13
 ```
 ### 组件生成
