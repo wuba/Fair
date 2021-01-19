@@ -1,3 +1,6 @@
+## [0.2.0+3]
+* Remove some api for v1.12.13 to avoid compile issue.
+
 ## [0.2.0+2]
 * add `Sugar.mapEach` support in build method.
 
