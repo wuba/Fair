@@ -91,6 +91,8 @@ Future<State> _syncRepo() async {
   var temp = '${dir.path}/$repo-$branch-$appendix';
   await git.clone('https://github.com/$user/$repo.git', temp);
   await copyPath(temp, 'public');
+  // remove .git folder
+  await File('public/.git/').delete(recursive: true);
   await File(temp).delete(recursive: true);
   print('complete sync repo of $user/$repo');
   _syncState = _syncState == State.RUNNING ? State.SUCCESS : _syncState;

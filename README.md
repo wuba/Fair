@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/pub/v/fair.svg" alt="pub"></a>
-  <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/flutter-Android%7CiOS%7CWeb-blue.svg" alt="github"></a>
+  <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
   <a href="https://github.com/wuba/fair/actions"><img src="https://github.com/wuba/fair/workflows/build/badge.svg" alt="build"></a>
@@ -88,9 +88,9 @@ samples
 	* Github开源 https://github.com/wuba/fair ✅
   * i18n ⚠️✅
 * Bug修复
-	* Github issue处理
+	* Github issue处理✅
 * 维护迭代 2021
-	* Framework适配优化
+	* Framework适配优化✅
 	* 局部刷新支持 ✅
 	* 状态库支持Provider
 	* 独立cli工具
@@ -99,8 +99,8 @@ samples
   * Flutter Favorite Package支持
   * 其他Top UI Package支持
   * 逻辑组件优化 ✅
-	* CI流程
-	* 社区插件贡献方式
+  * CI流程✅
+  * 社区插件贡献方式
 
 ## ⚠️Unsupported Features
 由于dart语法解析工作量奇大，逻辑运算均不支持，由逻辑运算延伸的表达式则更多。
