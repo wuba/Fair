@@ -39,10 +39,11 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 
 | Flutter版本              | Dart版本    | CI |
 | ------------------------ | ----------- |----------- |
-| Flutter 1.22.4/1.22.5    | Dart 2.10.4 | ![v1.22.5](https://github.com/wuba/fair/workflows/build/badge.svg)|
-| Flutter 1.20.4           | Dart 2.9.2  | ![v1.20.4](https://github.com/wuba/fair/workflows/1_20_4/badge.svg)|
-| Flutter 1.17.3           | Dart 2.8.4  | ![v1.17.3](https://github.com/wuba/fair/workflows/1_17_3/badge.svg)|
-| Flutter 1.12.13+hotfix.9 | Dart 2.7.2  | ![v1.12.13](https://github.com/wuba/fair/workflows/1_12_13/badge.svg) |
+| Flutter 1.22.6           | Dart 2.10.5 | ![v1.22.5](https://github.com/wuba/fair/workflows/build/badge.svg)|
+| Flutter 1.22.4           | Dart 2.10.4 | ![v1.22.5](https://github.com/wuba/fair/workflows/1224/badge.svg)|
+| Flutter 1.20.4           | Dart 2.9.2  | ![v1.20.4](https://github.com/wuba/fair/workflows/1204/badge.svg)|
+| Flutter 1.17.3           | Dart 2.8.4  | ![v1.17.3](https://github.com/wuba/fair/workflows/1173/badge.svg)|
+| Flutter 1.12.13+hotfix.9 | Dart 2.7.2  | ![v1.12.13](https://github.com/wuba/fair/workflows/11213/badge.svg) |
 
 注意：由于部分版本flutter构建脚本存在巨大变化，会导致同一个模板工程无法同时运行在不同版本。
 

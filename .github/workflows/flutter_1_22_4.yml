@@ -1,11 +1,11 @@
-name: 11213
+name: 1224
 
 on:
   push:
     branches: [ f-ci-action, version_test ]
 
 jobs:
-  build-1_12_13:
+  build-1_22_4:
     name: build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -16,10 +16,10 @@ jobs:
       - uses: actions/checkout@v1
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.12.13+hotfix.9'
+          flutter-version: '1.22.4'
       - run: dart --version
       - run: flutter --version
-      - run: scripts/switchFairVersion flutter_1_12_13
+      - run: scripts/switchFairVersion flutter_1_22_4
       - name: build fair_example
         working-directory: fair/example
         run: |
