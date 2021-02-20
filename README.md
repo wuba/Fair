@@ -33,9 +33,7 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 
 ## 🚀 Running
 
-为了方便接入&体验Fair框架，请确认你的Flutter运行环境，Fair基于Flutter 1.20.4开发,目前已适配至1.22.x, **推荐使用v1.22.5体验**。
-
-后续将继续支持最新稳定版本。目前支持版本（如遇问题，Issue反馈）：
+为了方便接入&体验Fair框架，请确认你的Flutter运行环境，可以根据实际情况切换版本。目前支持版本（如遇问题，Issue反馈）：
 
 | Flutter版本              | Dart版本    | CI |
 | ------------------------ | ----------- |----------- |
@@ -45,9 +43,16 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 | Flutter 1.17.3           | Dart 2.8.4  | ![v1.17.3](https://github.com/wuba/fair/workflows/1173/badge.svg)|
 | Flutter 1.12.13+hotfix.9 | Dart 2.7.2  | ![v1.12.13](https://github.com/wuba/fair/workflows/11213/badge.svg) |
 
-注意：由于部分版本flutter构建脚本存在巨大变化，会导致同一个模板工程无法同时运行在不同版本。
+```
+# Switch to another stable flutter version
+#dependency_overrides:
+#  fair_version:
+#    path: ../../fair_version/flutter_1_22_6
 
+```
 > https://flutter.dev/docs/development/tools/sdk/releases?tab=macos
+
+注意：由于部分版本flutter构建脚本存在巨大变化，会导致同一个模板工程无法同时运行在不同版本。
 
 Fair的example位于fair/example目录，同时也附带了一些社区demo并转为fair动态化形式，工程位于samples目录下，克隆后直接build对应仓库即可即可。
 

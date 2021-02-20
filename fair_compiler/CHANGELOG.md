@@ -1,3 +1,6 @@
+## [0.3.0+1]
+* bug fix
+
 ## [0.3.0]
 * Minimize size of assets.
 

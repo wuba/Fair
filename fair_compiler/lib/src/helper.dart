@@ -58,7 +58,7 @@ mixin FairCompiler {
   final _startTag = '#####################fairc output begin#################';
   final _endTag = '#####################fairc output end#################';
   final command = 'dart';
-  final branch = 'f-flutter-version-compact';
+  final branch = 'main';
 
   Future<bool> supported(String version) async {
     var cache =
@@ -94,7 +94,7 @@ mixin FairCompiler {
         .readAsStringSync()
         .trimRight();
     if (!await supported(v)) {
-      stderr.writeln('not supported flutter version: $v');
+      stderr.writeln('not supported flutter version, with dart-$v');
       return Future.value();
     }
     if (_fair == null || !_fair.existsSync()) {
@@ -125,7 +125,8 @@ mixin FairCompiler {
     var matched = archive.where((element) => element.name.endsWith('fairc'));
     List<int> rawBytes;
     if (matched == null || matched.isEmpty) {
-      stderr.writeln('not supported flutter version');
+      stderr.writeln(
+          'not supported flutter version, with dart-$version, please copy log output and fire issue at: https://github.com/wuba/fair/issues/new?assignees=&labels=&template=bug_report.md&title=CompileFailed');
       return Future.value();
     }
     rawBytes = matched.first.content;
