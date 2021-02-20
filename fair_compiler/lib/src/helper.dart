@@ -10,6 +10,7 @@ import 'dart:io';
 import 'package:archive/archive.dart';
 import 'package:build/build.dart';
 import 'package:crypto/crypto.dart' show md5;
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:process/process.dart';
@@ -57,21 +58,34 @@ mixin FairCompiler {
   final _startTag = '#####################fairc output begin#################';
   final _endTag = '#####################fairc output end#################';
   final command = 'dart';
+  final branch = 'f-flutter-version-compact';
 
-  // Flutter 1.12.13.hotfix.9 Dart 2.7.2
-  // Flutter 1.17.3           Dart 2.8.4
-  // Flutter 1.20.4           Dart 2.9.2
-  // Flutter 1.22.4           Dart 2.10.2
-  bool supported(String v) {
-    switch (v) {
-      case '2.7.2':
-      case '2.8.4':
-      case '2.9.2':
-      case '2.10.4':
-        return true;
-      default:
-        return false;
+  Future<bool> supported(String version) async {
+    var cache =
+        File(path.join('.dart_tool', 'build', 'fairc', '${version.hashCode}'));
+    if (cache.existsSync()) {
+      return true;
     }
+    var result = await head(
+        'https://github.com/wuba/fair/raw/$branch/assets/$version.fairc.tar.gz');
+    return result.statusCode == 200;//
+  }
+
+  Future<bool> update(File des, String version) async {
+    var client = HttpClient();
+    var result = await client
+        .getUrl(Uri.parse(
+            'https://github.com/wuba/fair/raw/$branch/assets/$version.fairc.tar.gz'))
+        .then((HttpClientRequest request) => request.close())
+        .then((HttpClientResponse response) {
+      if (response.statusCode == 200) {
+        return response.pipe(des.openWrite());
+      }
+      return Future.value();
+    }).catchError((e) {
+      print(e);
+    });
+    return result != null;
   }
 
   Future<File> _bin(BuildStep buildStep) async {
@@ -79,37 +93,56 @@ mixin FairCompiler {
             path.dirname(path.dirname(Platform.resolvedExecutable)), 'version'))
         .readAsStringSync()
         .trimRight();
-    if (!supported(v)) {
+    if (!await supported(v)) {
+      stderr.writeln('not supported flutter version: $v');
       return Future.value();
     }
     if (_fair == null || !_fair.existsSync()) {
-      final asset = AssetId.resolve('package:fair_compiler/src/fairc');
-      final bytes = await buildStep.readAsBytes(asset);
-      var archive = TarDecoder().decodeBytes(GZipDecoder().decodeBytes(bytes));
-      var matched = archive.where((element) => element.name.endsWith(v));
-      List<int> rawBytes;
-      if (matched != null && matched.isNotEmpty) {
-        rawBytes = matched.first.content;
+      var cache =
+          await File(path.join('.dart_tool', 'build', 'fairc', '${v.hashCode}'))
+              .create(recursive: true);
+
+      if (cache.lengthSync() != 0) {
+        _fair = File((await cache.readAsString()).trim());
       } else {
-        stderr.writeln('not supported flutter version');
-      }
-      if (rawBytes != null) {
-        final digest = md5.convert(rawBytes).toString();
-        final dir = path.join('.dart_tool', 'build', 'fairc');
-        Directory(dir).createSync(recursive: true);
-        final file = File(path.join(dir, digest));
-        if (!file.existsSync()) {
-          file.writeAsBytesSync(rawBytes);
-        }
-        _fair = file;
-        var fbs = await File(
-                path.join('.dart_tool', 'build', 'fairc', 'fair_bundle.fbs'))
-            .create(recursive: true);
-        await fbs.writeAsBytes(await buildStep.readAsBytes(
-            AssetId.resolve('package:fair_compiler/src/fair_bundle.fbs')));
+        _fair = await syncCompiler(buildStep, cache, v);
       }
     }
     return _fair;
+  }
+
+  Future<File> syncCompiler(
+      BuildStep buildStep, File cacheFile, String version) async {
+    final tmp = await temp;
+    var success = await update(tmp, version);
+    if (!success) {
+      stderr.writeln('update compiler failed, retry later');
+      return Future.value();
+    }
+    final bytes = tmp.readAsBytesSync();
+    await tmp.delete();
+    var archive = TarDecoder().decodeBytes(GZipDecoder().decodeBytes(bytes));
+    var matched = archive.where((element) => element.name.endsWith('fairc'));
+    List<int> rawBytes;
+    if (matched == null || matched.isEmpty) {
+      stderr.writeln('not supported flutter version');
+      return Future.value();
+    }
+    rawBytes = matched.first.content;
+    final digest = md5.convert(rawBytes).toString();
+    final dir = path.join('.dart_tool', 'build', 'fairc');
+    Directory(dir).createSync(recursive: true);
+    final localCompiler = File(path.join(dir, digest));
+    if (!localCompiler.existsSync()) {
+      localCompiler.writeAsBytesSync(rawBytes);
+    }
+    await cacheFile.writeAsString(localCompiler.path);
+    var fbs =
+        await File(path.join('.dart_tool', 'build', 'fairc', 'fair_bundle.fbs'))
+            .create(recursive: true);
+    await fbs.writeAsBytes(await buildStep.readAsBytes(
+        AssetId.resolve('package:fair_compiler/src/fair_bundle.fbs')));
+    return localCompiler;
   }
 
   Future<File> get temp async {
@@ -135,7 +168,7 @@ mixin FairCompiler {
         }
         if (content.isEmpty) {
           var errorLog = await File(path.join('build', 'fair', 'log',
-                  '${DateFormat('yyyy-MM-dd HH:mm:sss').format(DateTime.now())}.txt'))
+                  '${DateFormat('yyyy-MM-dd_HH:mm:sss').format(DateTime.now())}.txt'))
               .create(recursive: true);
           var f = await errorLog.open(mode: FileMode.append);
           await f.writeString(output);

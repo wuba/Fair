@@ -30,10 +30,10 @@ fi
   echo ""
   echo "# Switch to another stable flutter version"
   echo "dependency_overrides:"
-  echo "  pedantic: ^1.8.0" # required by flutter_test lower version
-  echo "  path: ^1.6.4"     # required by flutter_test lower version
-  echo "  crypto: ^2.0.0"   # required by flutter_test lower version
-  echo "  archive: ^2.0.0"  # required by flutter_test lower version
+#  echo "  pedantic: ^1.8.0" # required by flutter_test lower version
+#  echo "  path: ^1.6.4"     # required by flutter_test lower version
+#  echo "  crypto: ^2.0.0"   # required by flutter_test lower version
+#  echo "  archive: ^2.0.0"  # required by flutter_test lower version
   echo "  fair_version:"    # required by flutter lower version
   echo "    path: ../../fair_version/$version"
   echo ""
