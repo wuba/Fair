@@ -68,7 +68,7 @@ mixin FairCompiler {
     }
     var result = await head(
         'https://github.com/wuba/fair/raw/$branch/assets/$version.fairc.tar.gz');
-    return result.statusCode == 200;//
+    return result.statusCode == 200;
   }
 
   Future<bool> update(File des, String version) async {

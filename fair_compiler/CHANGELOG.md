@@ -1,3 +1,6 @@
+## [0.3.0]
+* Minimize size of assets.
+
 ## 0.2.0+3
 * print exception message when compile failed.
 

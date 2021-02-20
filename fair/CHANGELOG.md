@@ -1,3 +1,8 @@
+## [0.3.0]
+* Bug fix of fair_version widgets
+* Add support of flutter 1.22.6
+* Minimize package size of fair_compiler
+
 ## [0.2.0+3]
 * Remove some api for v1.12.13 to avoid compile issue.
 
