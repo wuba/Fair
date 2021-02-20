@@ -39,7 +39,7 @@ var p = () => {
             applicationVersion: props['applicationVersion'],
             applicationIcon: props['applicationIcon'],
             applicationLegalese: props['applicationLegalese'],
-            children: as<dynamic>(props['children']),
+            children: as<Widget>(props['children']),
           ),
       'AboutListTile': (props) => AboutListTile(
             key: props['key'],
@@ -49,7 +49,7 @@ var p = () => {
             applicationVersion: props['applicationVersion'],
             applicationIcon: props['applicationIcon'],
             applicationLegalese: props['applicationLegalese'],
-            aboutBoxChildren: as<dynamic>(props['aboutBoxChildren']),
+            aboutBoxChildren: as<Widget>(props['aboutBoxChildren']),
             dense: props['dense'],
           ),
       'LicensePage': (props) => LicensePage(
@@ -228,7 +228,7 @@ var p = () => {
             contentPadding: props['contentPadding'] ??
                 const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
             contentTextStyle: props['contentTextStyle'],
-            actions: as<dynamic>(props['actions']),
+            actions: as<Widget>(props['actions']),
             actionsPadding: props['actionsPadding'] ?? EdgeInsets.zero,
             actionsOverflowDirection: props['actionsOverflowDirection'],
             actionsOverflowButtonSpacing:
@@ -258,7 +258,7 @@ var p = () => {
             title: props['title'],
             titlePadding: props['titlePadding'] ??
                 const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 0.0),
-            children: as<dynamic>(props['children']),
+            children: as<Widget>(props['children']),
             contentPadding: props['contentPadding'] ??
                 const EdgeInsets.fromLTRB(0.0, 12.0, 0.0, 16.0),
             backgroundColor: props['backgroundColor'],
@@ -287,7 +287,7 @@ var p = () => {
             automaticallyImplyLeading:
                 props['automaticallyImplyLeading'] ?? true,
             title: props['title'],
-            actions: as<dynamic>(props['actions']),
+            actions: as<Widget>(props['actions']),
             flexibleSpace: props['flexibleSpace'],
             bottom: props['bottom'],
             elevation: props['elevation']?.toDouble(),
@@ -311,7 +311,7 @@ var p = () => {
             automaticallyImplyLeading:
                 props['automaticallyImplyLeading'] ?? true,
             title: props['title'],
-            actions: as<dynamic>(props['actions']),
+            actions: as<Widget>(props['actions']),
             flexibleSpace: props['flexibleSpace'],
             bottom: props['bottom'],
             elevation: props['elevation']?.toDouble(),
@@ -360,7 +360,7 @@ var p = () => {
           ),
       'BottomNavigationBar': (props) => BottomNavigationBar(
             key: props['key'],
-            items: as<dynamic>(props['items']),
+            items: as<BottomNavigationBarItem>(props['items']),
             onTap: props['onTap'],
             currentIndex: props['currentIndex'] ?? 0,
             elevation: props['elevation']?.toDouble() ?? 8.0,
@@ -2012,7 +2012,7 @@ var p = () => {
             key: props['key'],
             content: props['content'],
             contentTextStyle: props['contentTextStyle'],
-            actions: as<dynamic>(props['actions']),
+            actions: as<Widget>(props['actions']),
             leading: props['leading'],
             backgroundColor: props['backgroundColor'],
             padding: props['padding'],
@@ -2109,7 +2109,7 @@ var p = () => {
       'PaginatedDataTable': (props) => PaginatedDataTable(
             key: props['key'],
             header: props['header'],
-            actions: as<dynamic>(props['actions']),
+            actions: as<Widget>(props['actions']),
             columns: as<DataColumn>(props['columns']),
             sortColumnIndex: props['sortColumnIndex'],
             sortAscending: props['sortAscending'] ?? true,
@@ -2242,7 +2242,7 @@ var p = () => {
       'ReorderableListView': (props) => ReorderableListView(
             key: props['key'],
             header: props['header'],
-            children: as<dynamic>(props['children']),
+            children: as<Widget>(props['children']),
             onReorder: props['onReorder'],
             scrollController: props['scrollController'],
             scrollDirection: props['scrollDirection'] ?? Axis.vertical,
@@ -2257,7 +2257,7 @@ var p = () => {
             floatingActionButtonLocation: props['floatingActionButtonLocation'],
             floatingActionButtonAnimator: props['floatingActionButtonAnimator'],
             persistentFooterButtons:
-                as<dynamic>(props['persistentFooterButtons']),
+                as<Widget>(props['persistentFooterButtons']),
             drawer: props['drawer'],
             endDrawer: props['endDrawer'],
             bottomNavigationBar: props['bottomNavigationBar'],
@@ -2538,7 +2538,7 @@ var p = () => {
           ),
       'TabBar': (props) => TabBar(
             key: props['key'],
-            tabs: as<dynamic>(props['tabs']),
+            tabs: as<Widget>(props['tabs']),
             controller: props['controller'],
             isScrollable: props['isScrollable'] ?? false,
             indicatorColor: props['indicatorColor'],
@@ -2562,7 +2562,7 @@ var p = () => {
       },
       'TabBarView': (props) => TabBarView(
             key: props['key'],
-            children: as<dynamic>(props['children']),
+            children: as<Widget>(props['children']),
             controller: props['controller'],
             physics: props['physics'],
             dragStartBehavior:
@@ -2612,7 +2612,7 @@ var p = () => {
             onChanged: props['onChanged'],
             onEditingComplete: props['onEditingComplete'],
             onSubmitted: props['onSubmitted'],
-            inputFormatters: as<dynamic>(props['inputFormatters']),
+            inputFormatters: as<TextInputFormatter>(props['inputFormatters']),
             enabled: props['enabled'],
             cursorWidth: props['cursorWidth']?.toDouble() ?? 2.0,
             cursorRadius: props['cursorRadius'],
@@ -2641,7 +2641,7 @@ var p = () => {
           ),
       'ToggleButtons': (props) => ToggleButtons(
             key: props['key'],
-            children: as<dynamic>(props['children']),
+            children: as<Widget>(props['children']),
             isSelected: as<bool>(props['isSelected']),
             onPressed: props['onPressed'],
             textStyle: props['textStyle'],
@@ -2654,7 +2654,7 @@ var p = () => {
             highlightColor: props['highlightColor'],
             hoverColor: props['hoverColor'],
             splashColor: props['splashColor'],
-            focusNodes: as<dynamic>(props['focusNodes']),
+            focusNodes: as<FocusNode>(props['focusNodes']),
             renderBorder: props['renderBorder'] ?? true,
             borderColor: props['borderColor'],
             selectedBorderColor: props['selectedBorderColor'],
@@ -2682,7 +2682,7 @@ var p = () => {
             decoration: props['decoration'],
             margin: props['margin'] ?? const EdgeInsets.only(bottom: 8.0),
             currentAccountPicture: props['currentAccountPicture'],
-            otherAccountsPictures: as<dynamic>(props['otherAccountsPictures']),
+            otherAccountsPictures: as<Widget>(props['otherAccountsPictures']),
             accountName: props['accountName'],
             accountEmail: props['accountEmail'],
             onDetailsPressed: props['onDetailsPressed'],
