@@ -12,9 +12,14 @@ die() {
   echo "$*"
   exit 1
 }
+# fix import of $$a.dart
+sed -i '' "s/material.dart';/material.dart' hide Gradient;/g" "lib/src/widgets/\$\$a.dart"
 # fix import of $$c.dart
 sed -i '' '13 i\
 part "../part/c.part.dart";' "lib/src/widgets/\$\$c.dart"
+
+# add // before var buildRefreshIndicator = CupertinoSliverRefreshControl.buildRefreshIndicator;
+sed -i '' 's/^var buildRefreshIndicator/\/\/&/' "lib/src/widgets/\$\$c.dart"
 
 # fix import of $$p.dart
 sed -i '' '11 i\

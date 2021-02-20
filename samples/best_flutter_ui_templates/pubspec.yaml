@@ -16,13 +16,19 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   smooth_star_rating: ^1.1.1
   intl: ^0.16.0
-  fair: ^0.2.0
+  fair:
+    path: ../../fair
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: ^1.4.0
-  fair_compiler: ^0.2.0
+  fair_compiler:
+    path: ../../fair_compiler
+
+#dependency_overrides:
+#  fair_version:
+#    path: ../../fair_version/flutter_1_22_6
 
 # The following section is specific to Flutter.
 flutter:

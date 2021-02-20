@@ -29,7 +29,8 @@ dependencies:
       url: https://github.com/AdobeXD/xd-to-flutter-plugin.git
       ref: v1.0.0
       path: adobe_xd
-  fair: ^0.2.0
+  fair:
+    path: ../../fair
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -40,7 +41,9 @@ dev_dependencies:
     sdk: flutter
 
   build_runner: ^1.4.0
-  fair_compiler: ^0.2.0
+  fair_compiler:
+    path: ../../fair_compiler
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

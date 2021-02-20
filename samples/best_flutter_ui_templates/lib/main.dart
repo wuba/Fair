@@ -44,8 +44,6 @@ class MyApp extends StatelessWidget {
         home: NavigationHomeScreen(),
       ),
       generated: p.AppGeneratedModule(),
-      // generated: p.p(),
-      // manual: createBinding(property: {}),
     );
   }
 }

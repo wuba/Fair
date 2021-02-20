@@ -11,31 +11,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 part "../part/c.part.dart";
-// Value inspected from Xcode 11 & iOS 13.0 Simulator.
-const BorderSide _kDefaultRoundedBorderSide = BorderSide(
-  color: CupertinoDynamicColor.withBrightness(
-    color: Color(0x33000000),
-    darkColor: Color(0x33FFFFFF),
-  ),
-  style: BorderStyle.solid,
-  width: 0.0,
-);
-const Border _kDefaultRoundedBorder = Border(
-  top: _kDefaultRoundedBorderSide,
-  bottom: _kDefaultRoundedBorderSide,
-  left: _kDefaultRoundedBorderSide,
-  right: _kDefaultRoundedBorderSide,
-);
-
-const BoxDecoration _kDefaultRoundedBorderDecoration = BoxDecoration(
-  color: CupertinoDynamicColor.withBrightness(
-    color: CupertinoColors.white,
-    darkColor: CupertinoColors.black,
-  ),
-  border: _kDefaultRoundedBorder,
-  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-);
-
 const CupertinoDynamicColor _kThumbColor = CupertinoDynamicColor.withBrightness(
   color: Color(0xFFFFFFFF),
   darkColor: Color(0xFF636366),
@@ -64,6 +39,31 @@ const Border _kDefaultNavBarBorder = Border(
   ),
 );
 const _defaultHeroTag = "";
+// Value inspected from Xcode 11 & iOS 13.0 Simulator.
+const BorderSide _kDefaultRoundedBorderSide = BorderSide(
+  color: CupertinoDynamicColor.withBrightness(
+    color: Color(0x33000000),
+    darkColor: Color(0x33FFFFFF),
+  ),
+  style: BorderStyle.solid,
+  width: 0.0,
+);
+const Border _kDefaultRoundedBorder = Border(
+  top: _kDefaultRoundedBorderSide,
+  bottom: _kDefaultRoundedBorderSide,
+  left: _kDefaultRoundedBorderSide,
+  right: _kDefaultRoundedBorderSide,
+);
+
+const BoxDecoration _kDefaultRoundedBorderDecoration = BoxDecoration(
+  color: CupertinoDynamicColor.withBrightness(
+    color: CupertinoColors.white,
+    darkColor: CupertinoColors.black,
+  ),
+  border: _kDefaultRoundedBorder,
+  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+);
+
 var p = () => {
       'CupertinoActionSheet': (props) => CupertinoActionSheet(
             key: props['key'],
