@@ -5,7 +5,7 @@ author:
 homepage: https://fair.58.com/
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.8.4 <3.0.0"
   flutter: ">=1.17.3 <2.0.0"
 
 dependencies:

@@ -4,8 +4,8 @@ version: 0.2.0
 homepage: https://fair.58.com/
 
 environment:
-  sdk: ">=2.10.0 <3.0.0"
-  flutter: ">=1.22.0 <2.0.0"
+  sdk: ">=2.10.5 <3.0.0"
+  flutter: ">=1.22.6 <2.0.0"
 
 dependencies:
   flutter:
