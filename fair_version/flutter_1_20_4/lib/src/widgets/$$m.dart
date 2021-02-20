@@ -366,7 +366,7 @@ var p = () => {
           ),
       'BottomNavigationBar': (props) => BottomNavigationBar(
             key: props['key'],
-            items: as<Widget>(props['items']),
+            items: as<BottomNavigationBarItem>(props['items']),
             onTap: props['onTap'],
             currentIndex: props['currentIndex'] ?? 0,
             elevation: props['elevation']?.toDouble(),
