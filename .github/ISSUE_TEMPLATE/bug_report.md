@@ -10,6 +10,12 @@ assignees: ''
 ## Attention
 Issue用于问题跟踪，技术咨询/讨论，请移步至讨论组 [![Gitter](https://badges.gitter.im/flutter_fair/community.svg)](https://gitter.im/flutter_fair/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
+## 自查步骤（新手必读）
+1. 核对flutter版本与readme说明，确认该版本已被Fair支持
+2. 核查fair_version分支版本于flutter一致，且等同于第一步版本号
+2. 如果尚未看过[文档](https://fair.58.com)，请先运行自带的sample，能跑起来再接入app
+3. 遇到编译错误，请查看终端日志，过滤fair关键词
+4. 到github提issue，或gitter。留档/解决，提供flutter环境信息`flutter doctor --verbose`
 ---
 
 **问题**
@@ -20,10 +26,9 @@ Issue用于问题跟踪，技术咨询/讨论，请移步至讨论组 [![Gitter]
 
 执行下面的语句，并粘贴结果
 ```
-dart --version
-flutter doctor
+flutter doctor --verbose
 ```
-提供版本号
+提供Fair版本号
 ```
 dependencies:
   fair: x.y.z
