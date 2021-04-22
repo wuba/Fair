@@ -11,6 +11,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
+import 'package:flutter_redux/flutter_redux.dart';
+
 part "../part/w.part.dart";
 const double kMiddleSpacing = 16.0;
 const Color _kColor = Color(0xA0B71C1C);
@@ -2676,4 +2678,19 @@ var p = () => {
             child: props['child'],
             onWillPop: props['onWillPop'],
           ),
+      'StoreConnector': (props) => StoreConnector(
+            key: props['key'],
+            builder: props['builder'],
+            converter: props['converter'],
+            distinct: props['distinct'],
+            onInit: props['onInit'],
+            onDispose: props['onDispose'],
+            rebuildOnChange: props['rebuildOnChange']??true,
+            ignoreChange: props['ignoreChange'],
+            onWillChange: props['onWillChange'],
+            onDidChange: props['onDidChange'],
+            onInitialBuild: props['onInitialBuild'],
+          ),
+
+
     };

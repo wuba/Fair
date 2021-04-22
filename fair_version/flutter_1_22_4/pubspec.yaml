@@ -11,6 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_redux: ^0.5.2
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
