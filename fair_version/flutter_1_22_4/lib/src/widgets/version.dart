@@ -553,4 +553,5 @@ const widgetNames = {
   'WrapAlignment': false,
   'WrapCrossAlignment': false,
   'StoreConnector': true,
+  '(BuildContext, dynamic) => Widget': true,
 };
