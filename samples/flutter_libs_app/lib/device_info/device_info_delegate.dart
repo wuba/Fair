@@ -31,9 +31,7 @@ class DeviceInfoDelegate extends FairDelegate{
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 300), (){
-      _getDeviceInfo();
-    });
+    _getDeviceInfo();
   }
 
   @override
