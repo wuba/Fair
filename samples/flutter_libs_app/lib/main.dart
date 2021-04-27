@@ -1,11 +1,15 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
+import 'device_info/device_info_delegate.dart';
 import 'index.dart';
 
 void main() {
   runApp(FairApp(
     child: MyApp(),
+    delegate: {
+      'device_info': (_, data) => DeviceInfoDelegate(),
+    },
   ));
 }
 

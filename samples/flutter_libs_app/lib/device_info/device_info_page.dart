@@ -27,8 +27,11 @@ class _DeviceInfoPageState extends State<DeviceInfoPage> {
   @override
   Widget build(BuildContext context) {
     return FairWidget(
-      name: "device info",
-      path: "assets/bundle/lib_home_page.fair.json",
+      name: "device_info",
+      path: "assets/bundle/lib_device_info_fair_device_info_widget.fair.json",
+      data: {
+        'title': "Device Info Demo Page"
+      },
     );
   }
 }

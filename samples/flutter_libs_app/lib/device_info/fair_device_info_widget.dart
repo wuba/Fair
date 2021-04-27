@@ -1,5 +1,7 @@
+import 'package:device_info/device_info.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_libs_app/colors.dart';
 
 @FairPatch()
 class FairDeviceInfoWidget extends StatefulWidget {
@@ -14,11 +16,24 @@ class FairDeviceInfoWidget extends StatefulWidget {
 }
 
 class _FairDeviceInfoWidgetState extends State<FairDeviceInfoWidget> {
+  @FairWell('_deviceInfo')
+  String _deviceInfo = "";
+  @FairWell('_textAlign')
+  TextAlign _textAlign = TextAlign.center;
 
   @override
   void initState() {
     super.initState();
+    _getDeviceInfo();
   }
+
+  @FairWell('_getDeviceInfo')
+  Future<void> _getDeviceInfo() async {
+
+  }
+
+  @FairWell('_pop')
+  void _pop(){}
 
   @override
   void dispose() {
@@ -34,11 +49,54 @@ class _FairDeviceInfoWidgetState extends State<FairDeviceInfoWidget> {
             Icons.arrow_back,
             size: 20,
           ),
+          onTap: _pop,
         ),
         centerTitle: true,
         title: Text(
           widget.title
         ),
+      ),
+      body: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "$_deviceInfo",
+                style: TextStyle(
+                    fontSize: 16,
+                    color: Color(0xFF333333)
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: GestureDetector(
+                  child: Container(
+                    width: 300,
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xFF1882F1),
+                    ),
+                    child: Text(
+                      "获取设备信息",
+                      textAlign: _textAlign,
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white
+                      ),
+                    ),
+                  ),
+                  onTap: _getDeviceInfo,
+                ),
+              )
+            ],
+          )
+        ],
       ),
     );
   }
