@@ -33,6 +33,8 @@ class Decoder {
 
   Decoder(this.page, {this.dataSource, this.url});
 
+  bool get hasResolved => _source != null;
+
   Future<void> resolve(BuildContext context) async {
     var jsonBean = await _loader.obtain(context).onLoad(url, _decoder,
         cache: true, h: const {'fairVersion': '$fairVersion#$flutterVersion'});
