@@ -540,7 +540,7 @@ packages:
     source: hosted
     version: "1.2.0"
   url_launcher:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: url_launcher
       url: "https://pub.flutter-io.cn"
