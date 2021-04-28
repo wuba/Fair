@@ -44,7 +44,6 @@ class UrlLauncherDelegate extends CommonDelegate{
   @override
   Map<String, PropertyValue> bindValue() {
     var value = super.bindValue();
-    value['_deviceInfo'] = () => _deviceInfo;
     value['_textAlign'] = () => _textAlign;
     value['_editingController'] = ()=> ValueNotifier(
       _editingController
