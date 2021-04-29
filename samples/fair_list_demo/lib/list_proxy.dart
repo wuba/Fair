@@ -31,6 +31,7 @@ class ListDelegate extends FairDelegate {
     pros.addAll({
       'list': () => list,
       '_scrollController': () => _scrollController,
+      'list.length': () => list.length,
     });
     return pros;
   }
