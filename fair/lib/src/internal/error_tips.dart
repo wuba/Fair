@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class WarningWidget extends StatelessWidget {
@@ -16,6 +17,8 @@ class WarningWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Failure!\ntag=$name\nbundle=$url\n$error'));
+    return Scaffold(
+      body: Center(child: Text('Failure!\ntag=$name\nbundle=$url\n$error')),
+    );
   }
 }

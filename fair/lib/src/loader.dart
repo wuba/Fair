@@ -20,6 +20,11 @@ class Loader {
     if (_decoder == null) {
       _decoder = Decoder(page, url: url, dataSource: data);
       await _decoder.resolve(context);
+    } else if(!_decoder.hasResolved){
+      // fix bug: in some conditions, _decoder has bean initial, but dataSource
+      // hasn't, the waining page will be shown.
+      // do nothing, waiting for resolving...
+      return null;
     }
     Widget widget;
     try {

@@ -128,7 +128,7 @@ class FairState extends State<FairWidget>
         ? 'Http'
         : 'Asset';
     parse(context, page: name, url: path, data: widget.data).then((value) {
-      if (mounted) {
+      if (mounted && value != null) {
         setState(() => _child = value);
       }
     });
