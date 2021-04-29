@@ -45,6 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
             }),
             _buildOperateBtn("url launcher page", (){
               FairRouter.push(context, RoutePath.urlLauncherPage);
+            }),
+            _buildOperateBtn("google font page", (){
+              FairRouter.push(context, RoutePath.googleFontPage);
             })
           ],
         ),
