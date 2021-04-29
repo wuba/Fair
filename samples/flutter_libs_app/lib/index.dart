@@ -48,6 +48,9 @@ class _MyHomePageState extends State<MyHomePage> {
             }),
             _buildOperateBtn("google font page", (){
               FairRouter.push(context, RoutePath.googleFontPage);
+            }),
+            _buildOperateBtn("package info page", (){
+              FairRouter.push(context, RoutePath.packageInfoPage);
             })
           ],
         ),
