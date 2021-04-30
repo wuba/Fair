@@ -5,6 +5,7 @@
  */
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'theme.dart';
 @FairPatch()
@@ -20,11 +21,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @FairWell('_counter')
   int _counter = 0;
 
+  @FairWell('_check')
+  bool _check = false;
+
   @FairWell('_incrementCounter')
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
+    _putPhotoCheck();
   }
 
   @override
@@ -39,11 +44,20 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'You have pushed the button this many times:',
+              style:  TextStyle(fontSize: 16, color: Colors.black),
+
             ),
             Text(
               '$_counter',
               style: ThemeStyle.headline4(context),
+
             ),
+            Text(
+              '$_check',
+              style: ThemeStyle.headline4(context),
+
+            ),
+
           ],
         ),
       ),
@@ -54,4 +68,21 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
+//@FairWell('_putPhotoCheck')
+void _putPhotoCheck() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setBool('survey_permission_check1',true);
+  _getPhotoCheck();
+}
+
+//@FairWell('_getPhotoCheck')
+void _getPhotoCheck() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  _check = prefs.getBool('survey_permission_check1');
+  setState(() {
+    _check = _check;
+  });
+}
+
 }

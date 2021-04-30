@@ -30,6 +30,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
+  shared_preferences: ^0.5.12
 
 dev_dependencies:
   flutter_test:
@@ -39,10 +40,9 @@ dev_dependencies:
     path: ../../fair_compiler
 
 # Switch to another stable flutter version
-#dependency_overrides:
-#  fair_version:
-#    path: ../../fair_version/flutter_1_22_6
-
+dependency_overrides:
+  fair_version:
+    path: ../../fair_version/flutter_1_17_3
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
