@@ -1,0 +1,85 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "Fair Demo"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "Column",
+      "na": {
+        "children": [
+          {
+            "className": "testView"
+          },
+          {
+            "className": "testView2",
+            "pa": [
+              2
+            ]
+          },
+          {
+            "className": "testView3",
+            "pa": [
+              3
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {
+    "testView": {
+      "className": "Text",
+      "pa": [
+        "测试方法嵌套"
+      ],
+      "na": {
+        "style": {
+          "className": "TextStyle",
+          "na": {
+            "fontSize": 17,
+            "color": "#(Colors.black)"
+          }
+        }
+      }
+    },
+    "testView2": {
+      "className": "Text",
+      "pa": [
+        "#(测试方法2：$index2)"
+      ],
+      "na": {
+        "style": {
+          "className": "TextStyle",
+          "na": {
+            "fontSize": 17,
+            "color": "#(Colors.red)"
+          }
+        }
+      }
+    },
+    "testView3": {
+      "className": "Text",
+      "pa": [
+        "#(测试方法3：$index3)"
+      ],
+      "na": {
+        "style": {
+          "className": "TextStyle",
+          "na": {
+            "fontSize": 17,
+            "color": "#(Colors.blue)"
+          }
+        }
+      }
+    }
+  }
+}

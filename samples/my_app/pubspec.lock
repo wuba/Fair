@@ -186,10 +186,10 @@ packages:
   fair:
     dependency: "direct main"
     description:
-      name: fair
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.2.0"
+      path: "../../fair"
+      relative: true
+    source: path
+    version: "0.3.0"
   fair_annotation:
     dependency: transitive
     description:
@@ -200,10 +200,10 @@ packages:
   fair_compiler:
     dependency: "direct dev"
     description:
-      name: fair_compiler
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.2.0"
+      path: "../../fair_compiler"
+      relative: true
+    source: path
+    version: "0.3.0+1"
   fair_version:
     dependency: transitive
     description:

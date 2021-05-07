@@ -30,7 +30,7 @@ abstract class DynamicBuilder {
   DynamicBuilder(this.tag, this.proxyMirror, this.page, this.bound,
       {this.bundle});
 
-  dynamic convert(BuildContext context, Map map);
+  dynamic convert(BuildContext context, Map map, Map methodMap);
 }
 
 class DynamicWidgetBuilder extends DynamicBuilder {
@@ -39,7 +39,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       : super('className', proxyMirror, page, bound, bundle: bundle);
 
   @override
-  dynamic convert(BuildContext context, Map map, {Domain domain}) {
+  dynamic convert(BuildContext context, Map map, Map methodMap, {Domain domain}) {
     assert(map != null, 'bundle map is null');
     var name = map[tag];
     if (name == null) {
@@ -54,7 +54,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       if (mapper == null) {
         mapper = bound?.functionOf(name) ?? bound.valueOf(name);
         if (mapper != null) {
-          return _block(map, context, domain, mapper, name, false,
+          return _block(map, methodMap, context, domain, mapper, name, false,
               forceApply: true);
         }
       }
@@ -65,16 +65,16 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }
       assert(mapper != null, '$name is not registered!');
       if (name == 'Sugar.mapEach') {
-        return _buildSugarMapEach(mapper, map, context);
+        return _buildSugarMapEach(mapper, map, methodMap, context);
       }
       var source = map['mapEach'];
       if (source != null && source is List) {
         var children = Domain(source).forEach(($, _) {
-          return _block(map, context, $, mapper, name, isWidget);
+          return _block(map, methodMap, context, $, mapper, name, isWidget);
         });
         return children.asListOf<Widget>() ?? children;
       }
-      return _block(map, context, domain, mapper, name, isWidget);
+      return _block(map, methodMap, context, domain, mapper, name, isWidget);
     } catch (e) {
       return WarningWidget(name: name, error: e, url: bundle);
     }
@@ -82,6 +82,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
   dynamic _block(
     Map map,
+    Map methodMap,
     BuildContext ctx,
     Domain domain,
     dynamic fun,
@@ -89,8 +90,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     bool widget, {
     bool forceApply = false,
   }) {
-    var na = _named(name, map['na'], ctx, domain);
-    var pa = _positioned(map['pa'], ctx, domain);
+    var na = _named(name, map['na'], methodMap, ctx, domain);
+    var pa = _positioned(map['pa'], methodMap, ctx, domain);
     final bind = widget && (na.binding || pa.binding);
     try {
       fun = FairModule.cast(ctx, fun);
@@ -110,13 +111,13 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }
   }
 
-  W<List> _positioned(dynamic paMap, BuildContext context, Domain domain) {
+  W<List> _positioned(dynamic paMap, Map methodMap, BuildContext context, Domain domain) {
     var pa = [];
     var needBinding = false;
     if (paMap is List) {
       paMap.forEach((e) {
         if (e is Map) {
-          pa.add(convert(context, e, domain: domain));
+          pa.add(convert(context, e, methodMap, domain: domain));
         } else if (domain != null && domain.match(e)) {
           pa.add(domain.bindValue(e));
         } else if (e is String) {
@@ -136,6 +137,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   W<Map<String, dynamic>> _named(
     String tag,
     dynamic naMap,
+    Map methodMap,
     BuildContext context,
     Domain domain,
   ) {
@@ -147,14 +149,20 @@ class DynamicWidgetBuilder extends DynamicBuilder {
           if (tag == 'FairWidget' && e.key.toString() == 'data') {
             na[e.key] = e.value;
           } else {
-            na[e.key] = convert(context, e.value, domain: domain);
-          }
+            // todo 主要修改的地方，此处将目标函数代入到解析的过程中
+            if (e.value['className'] is String && methodMap[e.value['className']] is Map) {
+              na[e.key] = convert(context,methodMap[e.value['className']], methodMap, domain: domain);
+            }
+            else {
+              na[e.key] = convert(context, e.value, methodMap, domain: domain);
+            }          }
         } else if (e.value is List) {
-          var children = (e.value as List).map((e) => e is Map
-              ? convert(context, e, domain: domain)
-              : (e is String && domain != null && domain.match(e)
-                  ? domain.bindValue(e)
-                  : e));
+          // todo 主要修改的地方，此处将目标函数代入到解析的过程中
+          var children = (e.value as List).map((obj) => obj is Map
+              ? ((obj['className'] is String && methodMap[obj['className']] is Map) ? convert(context, methodMap[obj['className']], methodMap, domain: domain) : convert(context, obj, methodMap, domain: domain))
+              : (obj is String && domain != null && domain.match(obj)
+              ? domain.bindValue(obj)
+              : obj));
           na[e.key] = (children.asIteratorOf<Widget>() ?? children).toList();
         } else if (domain != null && domain.match(e)) {
           na[e.key] = domain.bindValue(e as String);
@@ -178,7 +186,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   List<Widget> _buildSugarMapEach(
-      Function mapEach, Map map, BuildContext context) {
+      Function mapEach, Map map, Map methodMap, BuildContext context) {
     var source = pa0(map);
     var children = [];
     if (source is String) {
@@ -192,7 +200,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }
     if (source != null && source is List) {
       children = Domain(source).forEach(($, _) {
-        return convert(context, pa1(map), domain: $);
+        return convert(context, pa1(map), methodMap, domain: $);
       });
     }
     var params = {
