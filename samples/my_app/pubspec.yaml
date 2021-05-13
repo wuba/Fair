@@ -36,6 +36,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: ^1.4.0
+  flutter_slidable: ^0.5.4
   fair_compiler:
     path: ../../fair_compiler
 

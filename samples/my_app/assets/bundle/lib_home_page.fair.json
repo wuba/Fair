@@ -29,7 +29,7 @@
                   "style": {
                     "className": "TextStyle",
                     "na": {
-                      "fontSize": 20,
+                      "fontSize": 16,
                       "color": "#(Colors.black)"
                     }
                   }
@@ -61,6 +61,12 @@
                       "context"
                     ]
                   }
+                }
+              },
+              {
+                "className": "CustomWidget",
+                "na": {
+                  "title": "Test"
                 }
               }
             ]

@@ -5,6 +5,7 @@
  */
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
+import 'package:my_app/custom_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'theme.dart';
@@ -57,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: ThemeStyle.headline4(context),
 
             ),
-
+            CustomWidget(title: "Test",),
           ],
         ),
       ),
