@@ -8,7 +8,6 @@ import 'package:flutter_libs_app/package_info/package_info_delegate.dart';
 import 'common_delegate.dart';
 import 'device_info/device_info_delegate.dart';
 import 'google_fonts/fair_google_fonts.dart';
-import 'google_fonts/google_fonts_component.dart';
 import 'index.dart';
 
 void main() {
