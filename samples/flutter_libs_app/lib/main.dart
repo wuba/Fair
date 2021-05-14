@@ -2,9 +2,12 @@ import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_libs_app/google_fonts/google_font_page.dart';
 import 'package:flutter_libs_app/url_launcher/url_launcher_delegate.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'common_delegate.dart';
 import 'device_info/device_info_delegate.dart';
+import 'google_fonts/fair_google_fonts.dart';
+import 'google_fonts/google_fonts_component.dart';
 import 'index.dart';
 
 void main() {
@@ -15,7 +18,22 @@ void main() {
       'url_launcher': (_, data) => UrlLauncherDelegate(),
       'google_fonts': (_, data) => CommonDelegate()
     },
+    generated: SimpleGenerate(),
   ));
+}
+
+class SimpleGenerate extends GeneratedModule{
+  @override
+  Map<String, dynamic> components() {
+    return Map<String, dynamic>()
+      ..addAll(google_fonts_component);
+  }
+
+  @override
+  Map<String, bool> mapping() {
+    return Map<String, bool>();
+  }
+
 }
 
 class MyApp extends StatelessWidget {
