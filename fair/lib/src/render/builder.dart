@@ -42,6 +42,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   dynamic convert(BuildContext context, Map map, {Domain domain}) {
     assert(map != null, 'bundle map is null');
     var name = map[tag];
+    print('name:$name');
     if (name == null) {
       return WarningWidget(
           name: name, error: '$tag is not supported', url: bundle);
@@ -150,12 +151,25 @@ class DynamicWidgetBuilder extends DynamicBuilder {
             na[e.key] = convert(context, e.value, domain: domain);
           }
         } else if (e.value is List) {
-          var children = (e.value as List).map((e) => e is Map
-              ? convert(context, e, domain: domain)
-              : (e is String && domain != null && domain.match(e)
-                  ? domain.bindValue(e)
-                  : e));
-          na[e.key] = (children.asIteratorOf<Widget>() ?? children).toList();
+          var a = e.value as List;
+
+
+          var children = [];
+          a.forEach((e) {
+            var item ;
+            if (e is Map) {
+              item = convert(context, e, domain: domain);
+            } else {
+              if (e is String && domain != null && domain.match(e)) {
+                item = domain.bindValue(e);
+              } else {
+                item = e;
+              }
+            }
+            children.add(item);
+          });
+
+          na[e.key] = (children.asIteratorOf<Widget>().toList() ?? children);
         } else if (domain != null && domain.match(e)) {
           na[e.key] = domain.bindValue(e as String);
         } else if (e.value is String) {
