@@ -68,6 +68,7 @@ class BindingGenerator extends GeneratorForAnnotation<FairBinding> {
 
     var resource =
         annotation.peek('packages')?.listValue?.map((e) => e.toStringValue());
+    var s;
     if (resource != null && resource.isNotEmpty) {
       await Future.forEach(
           resource
@@ -75,8 +76,25 @@ class BindingGenerator extends GeneratorForAnnotation<FairBinding> {
           (element) async {
         buffer.writeln(element);
         var assetId = AssetId.resolve(element);
-        await _transitSource(buildStep, assetId, dir);
+        await _transitSource(buildStep, assetId, dir).then((value){
+              s = value
+                  .readAsLinesSync()
+                  .toSet()
+                  .where((l) => l.startsWith('export'))
+                  .map((e) => e.substring(e.indexOf('\'') + 1, e.lastIndexOf('\'')));
+            });
+
       });
+
+      if(s != null) {
+        await Future.forEach(
+            s.where((p) => p.startsWith('package:') && p.endsWith('.dart')),
+                (element) async {
+              buffer.writeln(element);
+              var assetId = AssetId.resolve(element);
+              await _transitSource(buildStep, assetId, dir);
+            });
+      }
     }
 
     var package = File(path.join(dir, 'fair.binding'))
