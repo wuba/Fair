@@ -1,0 +1,91 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "#(widget.title)"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "Center",
+      "na": {
+        "child": {
+          "className": "Column",
+          "na": {
+            "mainAxisAlignment": "#(MainAxisAlignment.center)",
+            "children": [
+              {
+                "className": "Text",
+                "pa": [
+                  "You have pushed the button this many times:"
+                ],
+                "na": {
+                  "style": {
+                    "className": "TextStyle",
+                    "na": {
+                      "fontSize": 16,
+                      "color": "#(Colors.black)"
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Text",
+                "pa": [
+                  "#($_counter)"
+                ],
+                "na": {
+                  "style": {
+                    "className": "ThemeStyle.headline4",
+                    "pa": [
+                      "context"
+                    ]
+                  }
+                }
+              },
+              {
+                "className": "Text",
+                "pa": [
+                  "#($_check)"
+                ],
+                "na": {
+                  "style": {
+                    "className": "ThemeStyle.headline4",
+                    "pa": [
+                      "context"
+                    ]
+                  }
+                }
+              },
+              {
+                "className": "CustomWidget",
+                "na": {
+                  "title": "Test"
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "floatingActionButton": {
+      "className": "FloatingActionButton",
+      "na": {
+        "onPressed": "#(_incrementCounter)",
+        "tooltip": "Increment",
+        "child": {
+          "className": "Icon",
+          "pa": [
+            "#(Icons.add)"
+          ]
+        }
+      }
+    }
+  }
+}
