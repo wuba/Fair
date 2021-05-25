@@ -42,6 +42,15 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             _buildOperateBtn("device info page", (){
               FairRouter.push(context, RoutePath.deviceInfoPage);
+            }),
+            _buildOperateBtn("url launcher page", (){
+              FairRouter.push(context, RoutePath.urlLauncherPage);
+            }),
+            _buildOperateBtn("google font page", (){
+              FairRouter.push(context, RoutePath.googleFontPage);
+            }),
+            _buildOperateBtn("package info page", (){
+              FairRouter.push(context, RoutePath.packageInfoPage);
             })
           ],
         ),
