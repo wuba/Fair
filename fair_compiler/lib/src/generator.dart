@@ -68,33 +68,42 @@ class BindingGenerator extends GeneratorForAnnotation<FairBinding> {
 
     var resource =
         annotation.peek('packages')?.listValue?.map((e) => e.toStringValue());
-    var s;
+    var list = [];
     if (resource != null && resource.isNotEmpty) {
       await Future.forEach(
           resource
               .where((p) => p.startsWith('package:') && p.endsWith('.dart')),
           (element) async {
         buffer.writeln(element);
+        var str = element
+            .toString()
+            .substring(0, element.toString().indexOf('\/') + 1);
         var assetId = AssetId.resolve(element);
-        await _transitSource(buildStep, assetId, dir).then((value){
-              s = value
-                  .readAsLinesSync()
-                  .toSet()
-                  .where((l) => l.startsWith('export'))
-                  .map((e) => e.substring(e.indexOf('\'') + 1, e.lastIndexOf('\'')));
-            });
-
+        await _transitSource(buildStep, assetId, dir).then((value) {
+          var elements = [];
+          value.readAsLinesSync().forEach((element) {
+            if (element.startsWith('export')) {
+              var package = element.substring(
+                  element.indexOf('\'') + 1, element.lastIndexOf('\''));
+              elements
+                  .add(element.contains('package:') ? package : str + package);
+            }
+          });
+          if (elements != null && elements.isNotEmpty) {
+            list.addAll(elements);
+          }
+        });
       });
-
-      if(s != null) {
+      if (list != null && list.isNotEmpty) {
         await Future.forEach(
-            s.where((p) => p.startsWith('package:') && p.endsWith('.dart')),
-                (element) async {
-              buffer.writeln(element);
-              var assetId = AssetId.resolve(element);
-              await _transitSource(buildStep, assetId, dir);
-            });
+            list.where((p) => p.startsWith('package:') && p.endsWith('.dart')),
+            (element) async {
+          buffer.writeln(element);
+          var assetId = AssetId.resolve(element);
+          await _transitSource(buildStep, assetId, dir);
+        });
       }
+
     }
 
     var package = File(path.join(dir, 'fair.binding'))
