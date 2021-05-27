@@ -6,7 +6,9 @@ import 'package:device_info/device_info.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
-class DeviceInfoDelegate extends FairDelegate{
+import '../common_delegate.dart';
+
+class DeviceInfoDelegate extends CommonDelegate{
   String _deviceInfo = "";
 
   TextAlign _textAlign = TextAlign.center;
@@ -46,7 +48,6 @@ class DeviceInfoDelegate extends FairDelegate{
   Map<String, Function> bindFunction() {
     var fun = super.bindFunction();
     fun['_getDeviceInfo'] = _getDeviceInfo;
-    fun['_pop'] = ()=>Navigator.pop(context);
     return fun;
   }
 }

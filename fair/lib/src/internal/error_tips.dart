@@ -17,8 +17,6 @@ class WarningWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Text('Failure!\ntag=$name\nbundle=$url\n$error')),
-    );
+    return Center(child: Text('Failure!\ntag=$name\nbundle=$url\n$error'));
   }
 }
