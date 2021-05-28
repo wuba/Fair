@@ -5,10 +5,12 @@
  */
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_compontent/custom_widget.dart';
+import 'package:flutter_component/slidable_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 import 'theme.dart';
+
 @FairPatch()
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -45,20 +47,20 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'You have pushed the button this many times:',
-              style:  TextStyle(fontSize: 16, color: Colors.black),
-
+              style: TextStyle(fontSize: 16, color: Colors.black),
             ),
             Text(
               '$_counter',
               style: ThemeStyle.headline4(context),
-
             ),
             Text(
               '$_check',
               style: ThemeStyle.headline4(context),
-
             ),
-            CustomWidget(title: "Test",),
+            CustomWidget(
+              title: "Test",
+            ),
+            //AnimateWidget(),
           ],
         ),
       ),
@@ -71,19 +73,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 //@FairWell('_putPhotoCheck')
-void _putPhotoCheck() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setBool('survey_permission_check1',true);
-  _getPhotoCheck();
-}
+  void _putPhotoCheck() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('survey_permission_check1', true);
+    _getPhotoCheck();
+  }
 
 //@FairWell('_getPhotoCheck')
-void _getPhotoCheck() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  _check = prefs.getBool('survey_permission_check1');
-  setState(() {
-    _check = _check;
-  });
-}
-
+  void _getPhotoCheck() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _check = prefs.getBool('survey_permission_check1');
+    setState(() {
+      _check = _check;
+    });
+  }
 }

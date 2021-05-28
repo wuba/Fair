@@ -3,14 +3,9 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_slidable/src/widgets/slidable.dart';
-import 'package:flutter_slidable/src/widgets/slidable_action_pane.dart';
-import 'package:flutter_slidable/src/widgets/slide_action.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
-@FairBinding(packages: ['package:my_app/custom_widget.dart',
-  'package:flutter_slidable/src/widgets/slidable.dart',
-  'package:flutter_slidable/src/widgets/slidable_action_pane.dart',
-  'package:flutter_slidable/src/widgets/slide_action.dart'])
+
 class CustomWidget extends StatelessWidget {
 
   final String title;

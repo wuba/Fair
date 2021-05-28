@@ -1,11 +1,14 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_compontent/src/generated.fair.dart';
+import 'package:flutter_component/src/generated.fair.dart';
 
 import 'delegate.dart';
 import 'module.dart';
 
-
+@FairBinding(packages: ['package:flutter_component/slidable_widget.dart',
+  'package:flutter_slidable/flutter_slidable.dart',
+  'package:flutter_component/animated_widget.dart',
+  'package:animated_text_kit/src/rotate.dart',])
 void main() {
   runApp(FairApp(
     child: MyApp(),

@@ -1,4 +1,4 @@
-name: flutter_compontent
+name: flutter_component
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -36,7 +36,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: ^1.4.0
-  flutter_slidable: ^0.5.4
+  flutter_slidable: 0.5.4
+  animated_text_kit: ^2.5.4
   fair_compiler:
     path: ../../fair_compiler
 
