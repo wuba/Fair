@@ -1,11 +1,10 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_libs_app/google_fonts/google_font_page.dart';
-import 'package:flutter_libs_app/url_launcher/url_launcher_delegate.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_libs_app/package_info/package_info_delegate.dart';
+import 'package:flutter_libs_app/url_launcher/url_launcher_delegate.dart';
 
 import 'common_delegate.dart';
+import 'convex_bottom_bar/fair_convex_bottom_bar.dart';
 import 'device_info/device_info_delegate.dart';
 import 'google_fonts/fair_google_fonts.dart';
 import 'index.dart';
@@ -27,6 +26,7 @@ class SimpleGenerate extends GeneratedModule{
   @override
   Map<String, dynamic> components() {
     return Map<String, dynamic>()
+      ..addAll(convex_bottom_bar_component)
       ..addAll(google_fonts_component);
   }
 

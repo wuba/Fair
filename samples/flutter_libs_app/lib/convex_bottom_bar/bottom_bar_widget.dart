@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 @FairPatch()
 class ConvexBottomBarWidget extends StatefulWidget {
-  ConvexBottomBarWidget({Key key}) : super(key: key);
+  final String title;
+
+  ConvexBottomBarWidget({Key key, this.title}) : super(key: key);
 
   @override
   _ConvexBottomBarWidgetState createState() {
@@ -26,7 +28,7 @@ class _ConvexBottomBarWidgetState extends State<ConvexBottomBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Hello ConvexAppBar')),
+      appBar: AppBar(title: Text(widget.title)),
       body: Center(
           child: Text("example for bottom bar")
       ),
@@ -37,8 +39,6 @@ class _ConvexBottomBarWidgetState extends State<ConvexBottomBarWidget> {
           TabItem(icon: Icons.calendar_today),
           TabItem(icon: Icons.assessment),
         ],
-        initialActiveIndex: 1,
-        onTap: (int i) => print('click index=$i'),
       ),
     );
   }

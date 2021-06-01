@@ -155,7 +155,11 @@ class DynamicWidgetBuilder extends DynamicBuilder {
               : (e is String && domain != null && domain.match(e)
                   ? domain.bindValue(e)
                   : e));
-          na[e.key] = (children.asIteratorOf<Widget>() ?? children).toList();
+          if (children?.every((element) => element is Widget) == true){
+            na[e.key] = (children.asIteratorOf<Widget>() ?? children).toList();
+          } else{
+            na[e.key] = children.toList();
+          }
         } else if (domain != null && domain.match(e)) {
           na[e.key] = domain.bindValue(e as String);
         } else if (e.value is String) {
