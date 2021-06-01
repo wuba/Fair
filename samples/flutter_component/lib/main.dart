@@ -3,22 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_component/src/generated.fair.dart';
 
 import 'delegate.dart';
+import 'home_page.dart';
 import 'module.dart';
 
 @FairBinding(packages: ['package:flutter_component/slidable_widget.dart',
   'package:flutter_slidable/flutter_slidable.dart',
   'package:flutter_component/animated_widget.dart',
-  'package:animated_text_kit/src/rotate.dart',])
+  'package:bottom_navy_bar/bottom_navy_bar.dart'])
 void main() {
   runApp(FairApp(
     child: MyApp(),
-    generated: AppGeneratedModule(),
+
     modules: {
-      SlidableModule.tagName:() => SlidableModule()
+      SlidableModule.tagName:() => SlidableModule(),
+      //BottomNavyBarModule.tagName:() => BottomNavyBarModule(),
     },
     delegate: {
       'home_page': (_, data) => MyHomePageDelegate(),
     },
+    generated: AppGeneratedModule(),
   ));
 }
 

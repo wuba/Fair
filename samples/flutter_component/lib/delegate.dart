@@ -7,6 +7,7 @@
 import 'dart:ui';
 
 import 'package:fair/fair.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'theme.dart';
@@ -14,6 +15,7 @@ import 'theme.dart';
 class MyHomePageDelegate extends FairDelegate {
   int _counter = 0;
   bool _check = false;
+  int _currentIndex = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -27,6 +29,13 @@ class MyHomePageDelegate extends FairDelegate {
     prefs.setBool('survey_permission_check',true);
 
     _getPhotoCheck();
+  }
+
+  void onItemSelect(index){
+    print(index);
+    setState(() {
+      _currentIndex = index;
+    });
   }
 
   void _getPhotoCheck() async {
@@ -43,17 +52,18 @@ class MyHomePageDelegate extends FairDelegate {
     value['_counter'] = () => _counter;
     value['_color'] = () => const Color(0xffff0000);
     value['_check']= () => _check;
+    value['_currentIndex']=()=>_currentIndex;
     return value;
   }
 
   @override
   Map<String, Function> bindFunction() {
     var fun = super.bindFunction();
+    fun['onItemSelect'] = (props) => onItemSelect(props);
     fun['_incrementCounter'] = _incrementCounter;
     fun['ThemeStyle.headline4'] = (props) => ThemeStyle.headline4(context);
     fun['putPhotoCheck'] = (props) => _putPhotoCheck;
     fun['getPhotoCheck'] = (props) => _getPhotoCheck;
-    //fun['AJKColors.ajkPrimaryColor'] = () => AJKColors.ajkPrimaryColor;
     return fun;
   }
 }

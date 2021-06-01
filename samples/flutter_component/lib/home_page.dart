@@ -7,7 +7,7 @@ import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_component/slidable_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 import 'theme.dart';
 
@@ -26,6 +26,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @FairWell('_check')
   bool _check = false;
+
+  @FairWell('_currentIndex')
+  int _currentIndex = 0;
 
   @FairWell('_incrementCounter')
   void _incrementCounter() {
@@ -59,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             CustomWidget(
               title: "Test",
-            ),
+            )
             //AnimateWidget(),
           ],
         ),
@@ -68,6 +71,18 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
+      ),
+      bottomNavigationBar: BottomNavyBar(
+        selectedIndex: _currentIndex,
+        onItemSelected: onItemSelect,
+        items: <BottomNavyBarItem>[
+          BottomNavyBarItem(title: Text('Item One'), icon: Icon(Icons.home)),
+          BottomNavyBarItem(title: Text('Item Two'), icon: Icon(Icons.apps)),
+          BottomNavyBarItem(
+              title: Text('Item Three'), icon: Icon(Icons.chat_bubble)),
+          BottomNavyBarItem(
+              title: Text('Item Four'), icon: Icon(Icons.settings)),
+        ],
       ),
     );
   }
@@ -87,4 +102,13 @@ class _MyHomePageState extends State<MyHomePage> {
       _check = _check;
     });
   }
+
+  @FairWell('onItemSelect')
+  void onItemSelect(index) {
+    print(index);
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
 }
