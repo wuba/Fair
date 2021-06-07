@@ -68,6 +68,25 @@
                 "na": {
                   "title": "Test"
                 }
+              },
+              {
+                "className": "RotateAnimatedTextKit",
+                "na": {
+                  "text": [
+                    "AWESOME",
+                    "OPTIMISTIC",
+                    "DIFFERENT"
+                  ],
+                  "textStyle": {
+                    "className": "TextStyle",
+                    "na": {
+                      "fontSize": 40.0,
+                      "fontFamily": "Horizon"
+                    }
+                  },
+                  "textAlign": "#(TextAlign.start)",
+                  "alignment": "#(Alignment.topLeft)"
+                }
               }
             ]
           }
@@ -90,7 +109,7 @@
     "bottomNavigationBar": {
       "className": "BottomNavyBar",
       "na": {
-        "selectedIndex":  "#(_currentIndex)",
+        "selectedIndex": "#(_currentIndex)",
         "onItemSelected": "#(onItemSelect)",
         "items": [
           {

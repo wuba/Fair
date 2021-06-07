@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_component/slidable_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:animated_text_kit/src/rotate.dart';
 
 import 'theme.dart';
 
@@ -60,8 +61,16 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_check',
               style: ThemeStyle.headline4(context),
             ),
+
             CustomWidget(
               title: "Test",
+            ),
+            RotateAnimatedTextKit(
+                text: ["AWESOME", "OPTIMISTIC", "DIFFERENT"],
+                textStyle: TextStyle(fontSize: 40.0, fontFamily: "Horizon"),
+                textAlign: TextAlign.start,
+                alignment: Alignment.topLeft
+              // or Alignment.topLeft )
             )
             //AnimateWidget(),
           ],

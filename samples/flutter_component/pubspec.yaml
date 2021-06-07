@@ -37,7 +37,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^1.4.0
   flutter_slidable: 0.5.4
-  # animated_text_kit: ^2.5.4
+  animated_text_kit: 2.4.0
   bottom_navy_bar: ^5.5.0
   fair_compiler:
     path: ../../fair_compiler

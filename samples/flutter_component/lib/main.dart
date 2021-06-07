@@ -8,7 +8,7 @@ import 'module.dart';
 
 @FairBinding(packages: ['package:flutter_component/slidable_widget.dart',
   'package:flutter_slidable/flutter_slidable.dart',
-  'package:flutter_component/animated_widget.dart',
+  'package:animated_text_kit/src/rotate.dart',
   'package:bottom_navy_bar/bottom_navy_bar.dart'])
 void main() {
   runApp(FairApp(
