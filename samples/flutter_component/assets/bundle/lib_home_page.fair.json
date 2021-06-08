@@ -70,6 +70,17 @@
                 }
               },
               {
+                "className": "IconButton",
+                "na": {
+                  "icon": {
+                    "className": "FaIcon",
+                    "pa": [
+                      "#(FontAwesomeIcons.solidCircle)"
+                    ]
+                  }
+                }
+              },
+              {
                 "className": "RotateAnimatedTextKit",
                 "na": {
                   "text": [

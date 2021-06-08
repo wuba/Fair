@@ -9,6 +9,7 @@ import 'package:flutter_component/slidable_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:animated_text_kit/src/rotate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'theme.dart';
 
@@ -64,6 +65,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
             CustomWidget(
               title: "Test",
+            ),
+            IconButton(
+              // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
+                icon: FaIcon(FontAwesomeIcons.solidCircle),
             ),
             RotateAnimatedTextKit(
                 text: ["AWESOME", "OPTIMISTIC", "DIFFERENT"],
