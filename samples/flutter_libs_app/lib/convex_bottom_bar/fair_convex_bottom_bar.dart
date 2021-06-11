@@ -51,7 +51,7 @@ var convex_bottom_bar_component = {
     badgePadding: props['badgePadding'],
     badgeMargin: props['badgeMargin'],
     badgeBorderRadius: props['badgeBorderRadius']?.toDouble(),
-    items: props['items'],
+    items: List<TabItem>.from(props['items']),
     initialActiveIndex: props['initialActiveIndex'],
     disableDefaultTabController:
     props['disableDefaultTabController'] ?? false,
