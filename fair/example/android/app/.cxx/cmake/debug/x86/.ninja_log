@@ -1,0 +1,12 @@
+# ninja log v5
+1	52	0	src/main/cpp/sdk/CMakeFiles/fairflutter.dir/jni_helper.cpp.o	1c56029829d45e10
+0	54	0	src/main/cpp/sdk/CMakeFiles/fairflutter.dir/mxflutter_ffi.cpp.o	bcb9709f149cee52
+1	107	0	src/main/cpp/sdk/CMakeFiles/fairflutter.dir/mxflutter_app.cpp.o	bfc46a3a522f4893
+1	514	0	src/main/cpp/sdk/CMakeFiles/fairflutter.dir/MXFFICallbackManager.cpp.o	645a2a1bcfcfdd7c
+514	592	0	../../../../src/main/jniLibs/x86/libfairflutter.so	cf727fa77ba6a3d6
+1	131	0	src/main/cpp/sdk/CMakeFiles/fairflutter.dir/mxflutter_app.cpp.o	bfc46a3a522f4893
+131	225	0	../../../../src/main/jniLibs/x86/libfairflutter.so	cf727fa77ba6a3d6
+1	149	0	src/main/cpp/sdk/CMakeFiles/fairflutter.dir/mxflutter_app.cpp.o	bfc46a3a522f4893
+150	253	0	../../../../src/main/jniLibs/x86/libfairflutter.so	cf727fa77ba6a3d6
+1	151	0	src/main/cpp/sdk/CMakeFiles/fairflutter.dir/mxflutter_app.cpp.o	bfc46a3a522f4893
+151	248	0	../../../../src/main/jniLibs/x86/libfairflutter.so	cf727fa77ba6a3d6

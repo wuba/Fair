@@ -1,0 +1,73 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "/Users/bujie/flutter/dev/fair-new/fair/example/android",
+      "sdkFolder": "/Users/bujie/Library/Android/sdk",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "/Users/bujie/flutter/dev/fair-new/fair/example/build/app/intermediates",
+      "gradleModulePathName": ":app",
+      "moduleRootFolder": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app",
+      "makeFile": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "compilerSettingsCacheFolder": "/Users/bujie/flutter/dev/fair-new/fair/example/android/.cxx",
+      "cxxFolder": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx",
+      "ndkFolder": "/Users/bujie/Library/Android/sdk/ndk/22.1.7171670",
+      "ndkVersion": "22.1.7171670",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [],
+    "cFlagList": [],
+    "cppFlagsList": [
+      "",
+      "-DTENCENT_SHELL\u003d0"
+    ],
+    "variantName": "debug",
+    "soFolder": "/Users/bujie/flutter/dev/fair-new/fair/example/build/app/intermediates/cmake/debug/lib",
+    "objFolder": "/Users/bujie/flutter/dev/fair-new/fair/example/build/app/intermediates/cmake/debug/obj",
+    "jsonFolder": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug",
+    "gradleBuildOutputFolder": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cxx/debug",
+    "isDebuggableEnabled": true,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": []
+  },
+  "abi": "ARMEABI_V7A",
+  "abiPlatformVersion": 16,
+  "cxxBuildFolder": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug/armeabi-v7a",
+  "jsonFile": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug/armeabi-v7a/android_gradle_build.json",
+  "gradleBuildOutputFolder": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cxx/debug/armeabi-v7a",
+  "objFolder": "/Users/bujie/flutter/dev/fair-new/fair/example/build/app/intermediates/cmake/debug/obj/armeabi-v7a",
+  "buildCommandFile": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug/armeabi-v7a/build_command.txt",
+  "buildOutputFile": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug/armeabi-v7a/build_output.txt",
+  "modelOutputFile": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug/armeabi-v7a/build_model.json",
+  "cmake": {
+    "cmakeListsWrapperFile": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cxx/debug/armeabi-v7a/CMakeLists.txt",
+    "toolchainWrapperFile": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cxx/debug/armeabi-v7a/android_gradle_build.toolchain.cmake",
+    "buildGenerationStateFile": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cxx/debug/armeabi-v7a/build_generation_state.json",
+    "cacheKeyFile": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cxx/debug/armeabi-v7a/compiler_cache_key.json",
+    "compilerCacheUseFile": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cxx/debug/armeabi-v7a/compiler_cache_use.json",
+    "compilerCacheWriteFile": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cxx/debug/armeabi-v7a/compiler_cache_write.json",
+    "toolchainSettingsFromCacheFile": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cxx/debug/armeabi-v7a/compiler_settings_cache.cmake",
+    "cmakeWrappingBaseFolder": "."
+  },
+  "jsonGenerationLoggingRecordFile": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug/armeabi-v7a/json_generation_record.json",
+  "compileCommandsJsonFile": "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug/armeabi-v7a/compile_commands.json"
+}
