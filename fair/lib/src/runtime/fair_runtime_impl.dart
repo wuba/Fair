@@ -4,14 +4,11 @@ import 'dart:ffi'; // For FFI
 import 'dart:io'; // For Platform.isX
 import 'package:ffi/ffi.dart';
 
+import 'fair_message_channel.dart';
 import 'fair_runtime_declaration.dart';
 
-final DynamicLibrary dl = Platform.isAndroid
-    ? DynamicLibrary.open("libfairflutter.so")
-    : DynamicLibrary.open("FairFFI.framework/FairFFI");
-
-class FairRuntimeImpl implements IRuntime {
-  static final FairRuntimeImpl _runtime = FairRuntimeImpl._internal();
+class Runtime implements IRuntime {
+  static final Runtime _runtime = Runtime._internal();
   final _callBacks = <String, RuntimeCallback>{};
 
   @override
@@ -19,29 +16,22 @@ class FairRuntimeImpl implements IRuntime {
     _callBacks[key] = callback;
   }
 
-  factory FairRuntimeImpl() {
+  factory Runtime() {
     return _runtime;
   }
 
-  BasicMessageChannel<String> _channel;
-  Pointer<Utf8> Function(Pointer<Utf8>) invokeJSCommonFuncSync = dl
-      .lookup<NativeFunction<Pointer<Utf8> Function(Pointer<Utf8>)>>(
-          'invokeJSCommonFuncSync')
-      .asFunction();
+  FairMessageChannel _channel;
 
-  //为了测试Android
-  FairRuntimeImpl._internal() {
+  Runtime._internal() {
     init(true);
-    _channel ??=
-        BasicMessageChannel('com.wuba.fair/loaderAndroid', StringCodec());
 
-    _channel.setMessageHandler((String message) async {
+    _channel ??= FairMessageChannel();
+
+    _channel.setMessageHandler((message) {
       var data = json.decode(message);
       var className = data['className'];
       var call = _callBacks[className];
       call?.call(message);
-
-      return 'success';
     });
   }
 
@@ -56,7 +46,7 @@ class FairRuntimeImpl implements IRuntime {
     return Future.value('{\'version\' : \'1.0.0\'}');
   }
 
-  BasicMessageChannel<String> getChannel() {
+  FairMessageChannel getChannel() {
     return _channel;
   }
 
@@ -69,8 +59,8 @@ class FairRuntimeImpl implements IRuntime {
     map[FairMessage.JS] = script;
     var msg = FairMessage(pageName, FairMessage.EVALUATE, map);
     var from = msg.from();
-    var reply =
-        Utf8.fromUtf8(invokeJSCommonFuncSync(Utf8.toUtf8(jsonEncode(from))));
+    var reply = Utf8.fromUtf8(
+        _channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from))));
     return Future.value(reply);
   }
 
@@ -80,8 +70,8 @@ class FairRuntimeImpl implements IRuntime {
     map[FairMessage.JS] = script;
     var msg = FairMessage(pageName, FairMessage.VARIABLE, map);
     var from = msg.from();
-    final Map<String, dynamic> reMap = jsonDecode(
-        Utf8.fromUtf8(invokeJSCommonFuncSync(Utf8.toUtf8(jsonEncode(from)))));
+    final Map<String, dynamic> reMap = jsonDecode(Utf8.fromUtf8(
+        _channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from)))));
     return reMap;
   }
 
@@ -93,7 +83,7 @@ class FairRuntimeImpl implements IRuntime {
     map[FairMessage.ARGS] = parameters;
     var msg = FairMessage(pageName, FairMessage.METHOD, map);
     var from = msg.from();
-    var reply = _channel.send(jsonEncode(from));
+    var reply = _channel.sendCommonMessage(jsonEncode(from));
     return Future.value(reply);
   }
 
@@ -105,14 +95,15 @@ class FairRuntimeImpl implements IRuntime {
     map[FairMessage.ARGS] = parameters;
     var msg = FairMessage(pageName, FairMessage.METHOD, map);
     var from = msg.from();
-    return Utf8.fromUtf8(invokeJSCommonFuncSync(Utf8.toUtf8(jsonEncode(from))));
+    return Utf8.fromUtf8(
+        _channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from))));
   }
 
   @override
   Future<String> variables(
       String pageName, Map<dynamic, dynamic> variableNames) {
     var msg = FairMessage(pageName, FairMessage.VARIABLE, variableNames);
-    var reply = _channel.send(jsonEncode(msg.from()));
+    var reply = _channel.sendCommonMessage(jsonEncode(msg.from()));
     return Future.value(reply);
   }
 
@@ -120,6 +111,7 @@ class FairRuntimeImpl implements IRuntime {
   String variablesSync(String pageName, Map<dynamic, dynamic> variableNames) {
     var msg = FairMessage(pageName, FairMessage.VARIABLE, variableNames);
     var from = msg.from();
-    return Utf8.fromUtf8(invokeJSCommonFuncSync(Utf8.toUtf8(jsonEncode(from))));
+    return Utf8.fromUtf8(
+        _channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from))));
   }
 }

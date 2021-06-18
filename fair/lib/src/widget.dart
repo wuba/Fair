@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair/src/runtime/fair_message_dispatcher.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -63,7 +64,7 @@ class FairWidget extends StatefulWidget {
     this.delegate,
     this.wantKeepAlive = false,
   })  : assert(!(name == null && path == null),
-            'FairWidget require a global registered `name` or bundle `path`'),
+  'FairWidget require a global registered `name` or bundle `path`'),
         assert(() {
           if (data == null) return true;
           if (!(data is Map &&
@@ -90,7 +91,8 @@ class FairWidget extends StatefulWidget {
 }
 
 class FairState extends State<FairWidget>
-    with Loader, AutomaticKeepAliveClientMixin<FairWidget> {
+    with Loader, AutomaticKeepAliveClientMixin<FairWidget>
+    implements FairMessageCallback<String> {
   Widget _child;
   FairApp _fairApp;
   String bundleType;
@@ -158,6 +160,14 @@ class FairState extends State<FairWidget>
 
   String get state2key =>
       widget.name ?? widget.key.toString() ?? '${toStringShort()}#$hashCode';
+
+  @override
+  void call(String t) {
+    setState(() {});
+  }
+
+  @override
+  String getMessageKey() => state2key;
 }
 
 /// Delegate for business logic. The delegate share similar life-circle with [State].
