@@ -1,49 +1,98 @@
 package com.wuba.fair;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
+import com.eclipsesource.v8.V8;
+import com.eclipsesource.v8.V8Object;
+import com.wuba.fair.jsexecutor.JSExecutor;
+import com.wuba.fair.v8.V8Executor;
+
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 
-/** FairPlugin */
+/**
+ * FairPlugin
+ */
 public class FairPlugin implements FlutterPlugin, MethodCallHandler {
-  /// The MethodChannel that will the communication between Flutter and native Android
-  ///
-  /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-  /// when the Flutter Engine is detached from the Activity
-  private MethodChannel channel;
 
-  @Override
-  public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-    channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "fair");
-    channel.setMethodCallHandler(this);
-  }
+    private V8 v8;
+    private static JSExecutor mJSExecutor;
+    private BinaryMessenger binaryMessenger;
 
-  // This static function is optional and equivalent to onAttachedToEngine. It supports the old
-  // pre-Flutter-1.12 Android projects. You are encouraged to continue supporting
-  // plugin registration via this function while apps migrate to use the new Android APIs
-  // post-flutter-1.12 via https://flutter.dev/go/android-project-migration.
-  //
-  // It is encouraged to share logic between onAttachedToEngine and registerWith to keep
-  // them functionally equivalent. Only one of onAttachedToEngine or registerWith will be called
-  // depending on the user's project. onAttachedToEngine or registerWith must both be defined
-  // in the same class.
-  public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "fair");
-    channel.setMethodCallHandler(new FairPlugin());
-  }
+    @SuppressLint("StaticFieldLeak")
+    private static FairPlugin plugin;
+    private JsFlutterEngine mJsFlutterEngine;
+    private FairApp _FairApp;
+    private Context mContext;
 
-  @Override
-  public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-    result.notImplemented();
-  }
 
-  @Override
-  public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
-    channel.setMethodCallHandler(null);
-  }
+    public static FairPlugin get() {
+        return plugin;
+    }
+
+    @Override
+    public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+        mContext = flutterPluginBinding.getApplicationContext();
+        plugin = this;
+        binaryMessenger = flutterPluginBinding.getBinaryMessenger();
+
+        if (v8 != null) {
+            v8 = V8.createV8Runtime();
+        }
+
+        if (mJSExecutor != null) {
+            mJSExecutor = new V8Executor();
+        }
+
+        if (mJsFlutterEngine != null) {
+            mJsFlutterEngine = new JsFlutterEngine();
+        }
+
+        if (_FairApp != null) {
+            _FairApp = new FairApp();
+        }
+
+    }
+
+
+    @Override
+    public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
+
+    }
+
+    @Override
+    public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+
+    }
+
+    public V8 getV8() {
+        return v8;
+    }
+
+    public BinaryMessenger getBinaryMessenger() {
+        return binaryMessenger;
+    }
+
+    public JSExecutor getJsExecutor() {
+        return mJSExecutor;
+    }
+
+    public JsFlutterEngine getJsFlutterEngine() {
+        return mJsFlutterEngine;
+    }
+
+    public V8Object getV8Object() {
+        return mJSExecutor.getV8Object();
+    }
+
+    public Context getContext() {
+        return mContext;
+    }
 }

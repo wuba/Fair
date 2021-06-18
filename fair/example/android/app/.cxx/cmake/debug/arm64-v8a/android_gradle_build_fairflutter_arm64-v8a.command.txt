@@ -1,0 +1,8 @@
+Executable : /Users/bujie/Library/Android/sdk/cmake/3.6.4111459/bin/cmake
+arguments : 
+--build
+/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug/arm64-v8a
+--target
+fairflutter
+jvmArgs : 
+

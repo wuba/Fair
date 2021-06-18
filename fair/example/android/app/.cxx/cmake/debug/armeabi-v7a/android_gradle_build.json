@@ -1,0 +1,60 @@
+
+{
+	"buildFiles" : 
+	[
+		"/Users/bujie/flutter/dev/fair-new/fair/example/android/app/CMakeLists.txt",
+		"/Users/bujie/flutter/dev/fair-new/fair/example/android/app/src/main/cpp/sdk/CMakeLists.txt"
+	],
+	"cleanCommands" : 
+	[
+		"/Users/bujie/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug/armeabi-v7a --target clean"
+	],
+	"cppFileExtensions" : [ "cpp" ],
+	"libraries" : 
+	{
+		"fairflutter-Debug-armeabi-v7a" : 
+		{
+			"abi" : "armeabi-v7a",
+			"artifactName" : "fairflutter",
+			"buildCommand" : "/Users/bujie/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug/armeabi-v7a --target fairflutter",
+			"buildType" : "debug",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=armv7-none-linux-androideabi16 --gcc-toolchain=/Users/bujie/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/bujie/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dfairflutter_EXPORTS -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -DTENCENT_SHELL=0 -O0 -fno-limit-debug-info  -g -fPIC    -c ",
+					"src" : "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/src/main/cpp/sdk/mxflutter_ffi.cpp",
+					"workingDirectory" : "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --target=armv7-none-linux-androideabi16 --gcc-toolchain=/Users/bujie/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/bujie/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dfairflutter_EXPORTS -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -DTENCENT_SHELL=0 -O0 -fno-limit-debug-info  -g -fPIC    -c ",
+					"src" : "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/src/main/cpp/sdk/mxflutter_app.cpp",
+					"workingDirectory" : "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --target=armv7-none-linux-androideabi16 --gcc-toolchain=/Users/bujie/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/bujie/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dfairflutter_EXPORTS -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -DTENCENT_SHELL=0 -O0 -fno-limit-debug-info  -g -fPIC    -c ",
+					"src" : "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/src/main/cpp/sdk/jni_helper.cpp",
+					"workingDirectory" : "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --target=armv7-none-linux-androideabi16 --gcc-toolchain=/Users/bujie/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/bujie/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dfairflutter_EXPORTS -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -DTENCENT_SHELL=0 -O0 -fno-limit-debug-info  -g -fPIC    -c ",
+					"src" : "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/src/main/cpp/sdk/MXFFICallbackManager.cpp",
+					"workingDirectory" : "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/.cxx/cmake/debug/armeabi-v7a"
+				}
+			],
+			"output" : "/Users/bujie/flutter/dev/fair-new/fair/example/android/app/src/main/jniLibs/armeabi-v7a/libfairflutter.so",
+			"toolchain" : "8542377049654003641"
+		}
+	},
+	"toolchains" : 
+	{
+		"8542377049654003641" : 
+		{
+			"cCompilerExecutable" : "/Users/bujie/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
+			"cppCompilerExecutable" : "/Users/bujie/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+		}
+	}
+}
