@@ -15,10 +15,12 @@ final String JS_LOADER = 'com.wuba.fair/js_loader';
 final String COMMON_MESSAGE_CHANNEL = 'com.wuba.fair/common_message_channel';
 
 class FairMessageChannel {
-  Pointer<Utf8> Function(Pointer<Utf8>) invokeJSCommonFuncSync = dl
-      .lookup<NativeFunction<Pointer<Utf8> Function(Pointer<Utf8>)>>(
-          'invokeJSCommonFuncSync')
-      .asFunction();
+  // Pointer<Utf8> Function(Pointer<Utf8>) invokeJSCommonFuncSync = dl
+  //     .lookup<NativeFunction<Pointer<Utf8> Function(Pointer<Utf8>)>>(
+  //         'invokeJSCommonFuncSync')
+  //     .asFunction();
+  Pointer<Utf8> Function(Pointer<Utf8>) invokeJSCommonFuncSync = null;
+
   BasicMessageChannel<String> _commonChannel;
   MethodChannel _methodChannel;
 
@@ -52,7 +54,7 @@ class FairMessageChannel {
   }
 
   Future<dynamic> loadJS(String path, StringMsgCallback callback) {
-    return _methodChannel.invokeMethod('loadMainJs');
+    return _methodChannel.invokeMethod('loadMainJs',path);
   }
 
   Future<dynamic> release(VoidMsgCallback callback) {

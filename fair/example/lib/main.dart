@@ -12,6 +12,7 @@ import 'src/page/hello_world_proxy.dart';
 import 'src/page/sample_dynamic_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(FairApp(
     delegate: {
       'hello_world': (ctx, _) => HelloWorldDelegate(),
