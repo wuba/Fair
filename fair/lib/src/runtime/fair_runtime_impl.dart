@@ -51,12 +51,17 @@ class Runtime implements IRuntime {
   }
 
   @override
-  void addScript(String script) {}
+  Future<dynamic> addScript(String script) {
+    var map = <dynamic, dynamic>{};
+    map[FairMessage.PATH] = script;
+    var msg = FairMessage(null, FairMessage.LOAD_JS, map);
+    return _channel.loadJS(jsonEncode(msg.from()), null);
+  }
 
   @override
   Future<dynamic> executeScript(String pageName, String script) {
     var map = <dynamic, dynamic>{};
-    map[FairMessage.JS] = script;
+    map[FairMessage.LOAD_JS] = script;
     var msg = FairMessage(pageName, FairMessage.EVALUATE, map);
     var from = msg.from();
     var reply = Utf8.fromUtf8(
@@ -67,7 +72,7 @@ class Runtime implements IRuntime {
   @override
   Map<String, String> executeScriptSync(String pageName, String script) {
     var map = <dynamic, dynamic>{};
-    map[FairMessage.JS] = script;
+    map[FairMessage.LOAD_JS] = script;
     var msg = FairMessage(pageName, FairMessage.VARIABLE, map);
     var from = msg.from();
     final Map<String, dynamic> reMap = jsonDecode(Utf8.fromUtf8(

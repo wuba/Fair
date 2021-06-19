@@ -64,7 +64,7 @@ class FairWidget extends StatefulWidget {
     this.delegate,
     this.wantKeepAlive = false,
   })  : assert(!(name == null && path == null),
-  'FairWidget require a global registered `name` or bundle `path`'),
+            'FairWidget require a global registered `name` or bundle `path`'),
         assert(() {
           if (data == null) return true;
           if (!(data is Map &&
@@ -112,9 +112,15 @@ class FairState extends State<FairWidget>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    (_fairApp ??= FairApp.of(context))?.register(this);
-    delegate?.didChangeDependencies();
-    _reload();
+    _fairApp ??= FairApp.of(context);
+    //加载js的文件地址
+    var js = "file:///android_asset/lib_src_page_sample_page_with_logic.js";
+    _fairApp.runtime.addScript(js).then((value) {
+      //结果回调，native端加载js成功之后，开始注册相关函数,可以做相关通讯
+      (_fairApp ??= FairApp.of(context))?.register(this);
+      delegate?.didChangeDependencies();
+      _reload();
+    });
   }
 
   @override
