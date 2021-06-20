@@ -29,69 +29,14 @@ public class JsFlutterEngine {
     }
 
     private BasicMessageChannel.MessageHandler<String> callHandler = (message, reply) -> {
-        //todo 处理来在dart的请求，准备走同一个js中的方法
-        IJSExecutor executor = FairPlugin.get().getJsExecutor();
-        executor.invokeJSChannel(message);
-
-
-//            JSONObject jsonObject = new JSONObject(message);
-//            String type = jsonObject.getString("type");
-//            String pageName = jsonObject.getString("pageName");
-//            String data = jsonObject.getString("data");
-//            JSONObject dataObject = new JSONObject(data);
-//
-//            IJSExecutor executor = FairPlugin.get().getJsExecutor();
-//            switch (type) {
-//                //获取js中的变量
-//                case "variable":
-//                    FairThread.get().run(() -> {
-//                        JSONObject dataObj = new JSONObject();
-//                        Iterator<String> keys = dataObj.keys();
-//
-//                        JSONArray jsNames = new JSONArray();
-//
-//                        while (keys.hasNext()) {
-//                            jsNames.put(keys.next());
-//                        }
-//                        //如果未传入要获取的变量值，那么返回全部的变量值，否则只返回传入的指定的变量
-//                        Object result2 = executor.invokeVariables(pageName, jsNames.toString());
-//                        FairThread.runOnUI(() -> reply.reply(result2.toString()));
-//                    });
-//                    break;
-//                //调用js中的方法
-//                case "method":
-//                    FairThread.get().run(() -> {
-//                        try {
-//                            String funcName = dataObject.getString("funcName");
-//                            JSONArray args = dataObject.getJSONArray("args");
-//                            Object[] par = new Object[args.length()];
-//                            for (int i = 0; i < args.length(); i++) {
-//                                par[i] = args.get(i);
-//                            }
-//                            Object invokeR = executor.invokeMethod(pageName, funcName, par);
-//                            FairThread.runOnUI(() -> reply.reply(wrapperResult(invokeR.toString())));
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    });
-//                    break;
-//                //通知js计算某个脚本
-//                case "evaluate":
-//                    FairThread.get().run(() -> {
-//                        String js = null;
-//                        try {
-//                            js = dataObject.getString("js");
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                        Object result = executor.evaluateJS(pageName, js);
-//                        FairThread.runOnUI(() -> reply.reply(wrapperResult(result.toString())));
-//                    });
-//                    break;
-//                default:
-//                    break;
-//
-//            }
+        Object obj;
+        try {
+            IJSExecutor executor = FairPlugin.get().getJsExecutor();
+            obj = executor.invokeJSChannel(message);
+            reply.reply(obj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     };
 
     private String wrapperResult(String src) {

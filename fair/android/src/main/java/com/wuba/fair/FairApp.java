@@ -4,7 +4,15 @@ import com.eclipsesource.v8.JavaCallback;
 import com.eclipsesource.v8.V8;
 import com.eclipsesource.v8.V8Array;
 import com.eclipsesource.v8.V8Function;
+import com.eclipsesource.v8.V8Object;
 import com.wuba.fair.constant.FairConstant;
+import com.wuba.fair.logger.FairLogger;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import io.flutter.plugin.common.MethodChannel;
 
@@ -38,9 +46,17 @@ public class FairApp {
     private MethodChannel.MethodCallHandler methodHandler = (call, result) -> {
         switch (call.method) {
             case FairConstant.LOAD_MAIN_JS:
-                FairPlugin.get().getJsExecutor().loadJS("用户的js文件", (r) -> {
-                    result.success("success");
-                });
+                try {
+                    FairLogger.d("用户的js文件地址" + call.arguments);
+                    JSONObject jsonObject = new JSONObject(String.valueOf(call.arguments));
+                    JSONObject argObject = jsonObject.getJSONObject("args");
+                    String jsLocalPath = argObject.getString("path");
+                    FairPlugin.get().getJsExecutor().loadJS(jsLocalPath, (r) -> {
+                        result.success("success");
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
             case FairConstant.RELEASE_MAIN_JS:
                 FairPlugin.get().getJsExecutor().release();
@@ -71,6 +87,27 @@ public class FairApp {
             });
 
         }, FairConstant.JS_INVOKE_FLUTTER_CHANNEL);
+
+
+        //setData
+        v8.registerJavaMethod((receiver, parameters) -> {
+            V8Object call = (V8Object) parameters.get(0);
+            String[] keys = call.getKeys();
+
+            Map<Object, Object> obj = new HashMap<>();
+            for (String key : keys) {
+                Object vObject = call.get(key);
+                obj.put(key, vObject);
+            }
+
+            JSONObject jsonObject = new JSONObject(obj);
+
+            //通知消息到dart侧
+            FairPlugin.get().getJsFlutterEngine().invokeFlutterChannel(jsonObject.toString(), (v) -> {
+
+            });
+
+        }, FairConstant.SET_DATA);
 
     }
 

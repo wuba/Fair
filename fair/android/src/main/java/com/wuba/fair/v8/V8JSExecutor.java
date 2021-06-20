@@ -11,7 +11,7 @@ import com.wuba.fair.utils.FairFileUtil;
 /**
  * v8引擎加载文件控制
  */
-public class V8Executor extends JSExecutor {
+public class V8JSExecutor extends JSExecutor {
 
     private V8 v8 = FairPlugin.get().getV8();
 
@@ -51,6 +51,7 @@ public class V8Executor extends JSExecutor {
     @Override
     public Object invokeJSChannel(Object src) {
         V8Array array = new V8Array(v8);
+        array.push(src);
         return v8.executeFunction(FairConstant.INVOKE_JS_FUNC, array);
     }
 

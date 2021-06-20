@@ -51,7 +51,7 @@ public class FairFfi {
                 countDownLatch.await(3, TimeUnit.SECONDS);
             } catch (Exception e) {
                 e.printStackTrace();
-                return "syncPropsCallback exception";
+                return " exception";
             }
 
             return result[0].toString();
@@ -60,7 +60,7 @@ public class FairFfi {
         return "jsAppObj is null";
     }
 
-    private native String nativeCallFlutterFunctionSync(String jsonString);
+//    private native String nativeCallFlutterFunctionSync(String jsonString);
 
     private native void init(FairFfi mxFlutterFfi);
 

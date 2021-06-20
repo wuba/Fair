@@ -2,6 +2,7 @@
 class FairMessage {
   static final String METHOD = 'method';
   static final String VARIABLE = 'variable';
+  static final String ALL_BIND_DATA = 'getAllBindData';
   static final String EVALUATE = 'evaluate';
   static final String FUNC_NAME = 'funcName';
   static final String ARGS = 'args';
@@ -76,6 +77,9 @@ abstract class IRuntime {
 
   /// 同步执行脚本语句
   Map<String, dynamic> executeScriptSync(String pageName, String script);
+
+  ///获取指定页面的所有变量和方法
+  dynamic getBindVariableAndFuncSync(String pageName);
 
   void bindCallback(String key, RuntimeCallback callback);
 }

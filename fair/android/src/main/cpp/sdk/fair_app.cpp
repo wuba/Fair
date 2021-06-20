@@ -1,29 +1,41 @@
 
-#include <mxflutter_ffi.h>
-#include <mxflutter_app.h>
+#include <fair_app.h>
 #include <jni.h>
-#include <android/log.h>
-#include <jni_helper.h>
+#include <fair_ffi.h>
+#include <cstring>
+#include <cstdlib>
 
-/// 同步属性回调
-extern "C" JNIEXPORT __attribute__((used))
-const char *syncPropsCallback(char *args) {
-  if (get_mx_flutter_ffi() != nullptr) {
-    int attach = 0;
-    JNIEnv *env = get_env(&attach);
-    jclass clazz_mxflutter_app = env->GetObjectClass(get_mx_flutter_ffi());
-    jmethodID method_syncPropsCallback = env->GetMethodID(clazz_mxflutter_app,
-                                                          "syncPropsCallback",
-                                                          "(Ljava/lang/String;)Ljava/lang/String;");
-    auto result = (jstring)env->CallObjectMethod(get_mx_flutter_ffi(),
-                        method_syncPropsCallback,
-                        env->NewStringUTF(args));
-    const char *resultString = env->GetStringUTFChars(result, nullptr);
-    if (attach == 1) {
-      del_env();
-    }
-    return resultString;
-  }
-  return "Fair为空";
+jobject fair_ffi;
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_wuba_fair_channel_FairFfi_init(JNIEnv *env,
+                                                           jobject instance,
+                                                           jobject obj) {
+//---- 强全局变量
+  fair_ffi = env->NewGlobalRef(obj);
 }
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_wuba_fair_channel_FairFfi_release(JNIEnv *env,
+                                                              jobject instance) {
+  env->DeleteGlobalRef(fair_ffi);
+}
+
+jobject get_fair_ffi() {
+  return fair_ffi;
+}
+//extern "C"
+//JNIEXPORT jstring JNICALL
+//Java_com_wuba_fair_channel_FairFfi_nativeCallFlutterFunctionSync(
+//    JNIEnv *env,
+//    jobject thiz,
+//    jstring json_string) {
+//  const char *convert_param = env->GetStringUTFChars(json_string, nullptr);
+//  char *result = NativeCallFlutterFunctionSync(strdup(convert_param));
+//  jstring resultString = env->NewStringUTF(result);
+//  free(result);
+//  return resultString;
+//}
 

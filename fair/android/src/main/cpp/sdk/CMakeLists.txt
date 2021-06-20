@@ -4,6 +4,7 @@ add_library( fairflutter
 
         fair_app.cpp
         fair_ffi.cpp
+        jni_helper.cpp
         )
 
 # 从系统库中查找依赖库

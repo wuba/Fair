@@ -7,31 +7,40 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/foundation.dart';
 
-class HelloWorldDelegate extends FairDelegate {
-  final ValueNotifier<int> _count = ValueNotifier<int>(0);
-
-  @override
-  Map<String, Function> bindFunction() {
-    var functions = super.bindFunction();
-    functions.addAll({
-      'onTapText': onTapText,
-    });
-    return functions;
-  }
-
-  @override
-  Map<String, PropertyValue> bindValue() {
-    var pros = super.bindValue();
-    pros.addAll({
-      '_platform': () => 'Fair v$fairVersion',
-      '_count': () => _count,
-    });
-    return pros;
-  }
-
-  void onTapText() {
-    debugPrint('click ${_count.value}');
-    _count.value++;
-    setState(() {});
-  }
+class HelloWorldDelegate2 extends FairDelegate {
+  // void _bindAllFunc(Map data) {
+  //   data.forEach((key, value) {
+  //     bindFunction()
+  //         .addAll({key: () => runtime.invokeMethod(pageName, value, null)});
+  //   });
+  // }
+  //
+  // void bindAll(Map allVariables) {
+  //   //todo 这应该获取js中的数据
+  //   _bindAllFunc({
+  //
+  //   });
+  //   _bindAllValue({});
+  // }
+  //
+  // void _bindAllValue(Map data) {
+  //   data.forEach((key, value) {
+  //     bindValue().addAll({key: () => createValueNotifier(key, value)});
+  //   });
+  // }
+  //
+  // final Map valueMap = {};
+  //
+  // dynamic createValueNotifier(key, value) {
+  //   valueMap[key] = value;
+  //   return valueMap[key];
+  // }
+  //
+  // //纯数据驱动
+  // void notifyValue(Map values) {
+  //   values.forEach((key, value) {
+  //     valueMap[key] = value;
+  //   });
+  //   setState(() {});
+  // }
 }
