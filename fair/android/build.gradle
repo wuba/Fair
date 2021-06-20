@@ -48,6 +48,13 @@ android {
         disable 'InvalidPackage'
     }
 
+    /** 编译mxflutter so时反注释掉此处,编译完恢复 **/
+    externalNativeBuild {
+        cmake {
+            path 'CMakeLists.txt'
+        }
+    }
+
     //java版本8
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -56,10 +63,11 @@ android {
 
 
     packagingOptions {
-        exclude 'lib/armeabi-v7a/libj2v8.so'
-        exclude 'lib/arm64-v8a/libj2v8.so'
-        exclude 'lib/x86/libj2v8.so'
-        exclude 'lib/x86_64/libj2v8.so'
+        pickFirst 'lib/arm64-v8a/libfairflutter.so'
+        pickFirst 'lib/armeabi-v7a/libfairflutter.so'
+        pickFirst 'lib/armeabi/libfairflutter.so'
+        pickFirst 'lib/x86/libfairflutter.so'
+        pickFirst 'lib/x86_64/libfairflutter.so'
     }
 
     buildTypes {

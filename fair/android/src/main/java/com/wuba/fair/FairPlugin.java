@@ -7,13 +7,13 @@ import androidx.annotation.NonNull;
 
 import com.eclipsesource.v8.V8;
 import com.eclipsesource.v8.V8Object;
+import com.wuba.fair.channel.FairFfi;
 import com.wuba.fair.jsexecutor.JSExecutor;
-import com.wuba.fair.v8.V8Executor;
+import com.wuba.fair.v8.V8JSExecutor;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodCall;
-import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 
@@ -31,7 +31,7 @@ public class FairPlugin implements FlutterPlugin, MethodCallHandler {
     private JsFlutterEngine mJsFlutterEngine;
     private FairApp _FairApp;
     private Context mContext;
-
+    private FairFfi fairFfi;
 
     public static FairPlugin get() {
         return plugin;
@@ -43,19 +43,22 @@ public class FairPlugin implements FlutterPlugin, MethodCallHandler {
         plugin = this;
         binaryMessenger = flutterPluginBinding.getBinaryMessenger();
 
-        if (v8 != null) {
+        if (v8 == null) {
             v8 = V8.createV8Runtime();
         }
-
-        if (mJSExecutor != null) {
-            mJSExecutor = new V8Executor();
+        if (fairFfi==null) {
+            fairFfi=new FairFfi();
         }
 
-        if (mJsFlutterEngine != null) {
+        if (mJSExecutor == null) {
+            mJSExecutor = new V8JSExecutor();
+        }
+
+        if (mJsFlutterEngine == null) {
             mJsFlutterEngine = new JsFlutterEngine();
         }
 
-        if (_FairApp != null) {
+        if (_FairApp == null) {
             _FairApp = new FairApp();
         }
 

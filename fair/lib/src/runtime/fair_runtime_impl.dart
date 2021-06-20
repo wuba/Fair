@@ -119,4 +119,10 @@ class Runtime implements IRuntime {
     return Utf8.fromUtf8(
         _channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from))));
   }
+
+  @override
+  Map getBindVariableAndFuncSync(String pageName) {
+
+    return jsonDecode(invokeMethodSync(pageName, 'getAllJSBindData', null));
+  }
 }

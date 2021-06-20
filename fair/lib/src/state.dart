@@ -40,6 +40,8 @@ mixin AppState {
     log('register state: ${state.state2key}');
     _mFairHandler.register(state);
     var delegate = state.delegate;
+    delegate.setRunTime(runtime);
+    delegate.bindAll({});
     bindData.putIfAbsent(
       state.state2key,
       () => BindingData(

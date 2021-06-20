@@ -5,6 +5,7 @@
  */
 
 import 'package:fair/fair.dart';
+import 'package:fair_example/src/page/hello_world_proxy2.dart';
 import 'package:fair_example/src/page/modules.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,8 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(FairApp(
     delegate: {
-      'hello_world': (ctx, _) => HelloWorldDelegate(),
+      // 'hello_world': (ctx, _) => HelloWorldDelegate(),
+      'hello_world': (ctx, _) => HelloWorldDelegate2(),
     },
     modules: {
       ShowFairAlertModule.tagName: () => ShowFairAlertModule(),

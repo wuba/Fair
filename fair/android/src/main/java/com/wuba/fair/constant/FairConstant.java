@@ -11,6 +11,7 @@ public class FairConstant {
 
     public static final String JS_INVOKE_FLUTTER_CHANNEL = "jsInvokeFlutterChannel";
     public static final String JS_INVOKE_FLUTTER_CHANNEL_SYNC = "jsInvokeFlutterChannel";
+    public static final String SET_DATA = "setData";
 
     public static final String LOAD_MAIN_JS = "loadMainJs";
     public static final String RELEASE_MAIN_JS = "releaseMainJs";

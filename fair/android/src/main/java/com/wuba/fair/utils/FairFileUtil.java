@@ -1,9 +1,11 @@
 package com.wuba.fair.utils;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
+import com.wuba.fair.FairPlugin;
 import com.wuba.fair.constant.FairConstant;
 import com.wuba.fair.logger.FairLogger;
 
@@ -25,7 +27,9 @@ public class FairFileUtil {
         }
 
         if (file.startsWith(FairConstant.AndroidConfig.ASSERT)) {
-            return null;
+            Context context = FairPlugin.get().getContext();
+            String filename = file.replace(FairConstant.AndroidConfig.ASSERT, "");
+            return getScriptFromAssets(context, filename);
         }
 
         return getScriptFromPath(file);
@@ -75,6 +79,50 @@ public class FairFileUtil {
         return null;
     }
 
+    /**
+     * 获取asset目录下指定文件内容
+     */
+    public static String getScriptFromAssets(Context context, String fileName) {
+        InputStream input = null;
+        try {
+            input = context.getAssets().open(fileName);
+        } catch (IOException e) {
+            printError(e);
+        }
+        return getOutputFromInput(input);
+    }
+
+    @Nullable
+    private static String getOutputFromInput(InputStream input) {
+        if (input == null) {
+            return null;
+        }
+        ByteArrayOutputStream output = null;
+        try {
+            output = new ByteArrayOutputStream();
+            byte[] buffer = new byte[4096];
+            int len;
+            while ((len = input.read(buffer)) != -1) {
+                output.write(buffer, 0, len);
+            }
+            output.flush();
+            return output.toString();
+        } catch (IOException e) {
+            printError(e);
+        } finally {
+            try {
+                if (output != null) {
+                    output.close();
+                }
+                if (input != null) {
+                    input.close();
+                }
+            } catch (IOException e) {
+                printError(e);
+            }
+        }
+        return null;
+    }
 
     private static void printError(Exception e) {
         FairLogger.e("FairUtils", e.getMessage());
