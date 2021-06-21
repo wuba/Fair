@@ -1,22 +1,37 @@
 PODS:
+  - fair (0.0.1):
+    - Flutter
+  - FairDynamicJSPlugin (0.0.1):
+    - FairDynamicJSPlugin/FairDynamicJSPlugin (= 0.0.1)
+    - Flutter
+  - FairDynamicJSPlugin/FairDynamicJSPlugin (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - url_launcher (0.0.1):
     - Flutter
 
 DEPENDENCIES:
+  - fair (from `.symlinks/plugins/fair/ios`)
+  - FairDynamicJSPlugin (from `./FairDynamic/`)
   - Flutter (from `Flutter`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
 EXTERNAL SOURCES:
+  fair:
+    :path: ".symlinks/plugins/fair/ios"
+  FairDynamicJSPlugin:
+    :path: "./FairDynamic/"
   Flutter:
     :path: Flutter
   url_launcher:
     :path: ".symlinks/plugins/url_launcher/ios"
 
 SPEC CHECKSUMS:
+  fair: b366fa7e02b246303acc4081cce51cad0c1c3fda
+  FairDynamicJSPlugin: 307e3121724e60079e18af618da0ffb5f07915fd
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
 
-PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+PODFILE CHECKSUM: ec956271e4f7d1f7fd0a49438277ef8ac6f51e54
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.1
