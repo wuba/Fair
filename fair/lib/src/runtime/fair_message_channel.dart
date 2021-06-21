@@ -19,7 +19,6 @@ class FairMessageChannel {
       .lookup<NativeFunction<Pointer<Utf8> Function(Pointer<Utf8>)>>(
           'invokeJSCommonFuncSync')
       .asFunction();
-  // Pointer<Utf8> Function(Pointer<Utf8>) invokeJSCommonFuncSync = null;
 
   BasicMessageChannel<String> _commonChannel;
   MethodChannel _methodChannel;
@@ -53,12 +52,12 @@ class FairMessageChannel {
     _callback = callback;
   }
 
-  Future<dynamic> loadJS(String path, StringMsgCallback callback) {
-    return _methodChannel.invokeMethod('loadMainJs',path);
+  Future<dynamic> loadJS(String args, StringMsgCallback callback) {
+    return _methodChannel.invokeMethod('loadMainJs', args);
   }
 
-  Future<dynamic> release(VoidMsgCallback callback) {
-    return _methodChannel.invokeMethod('releaseMainJs');
+  Future<dynamic> release(String args, VoidMsgCallback callback) {
+    return _methodChannel.invokeMethod('releaseMainJs', args);
   }
 
   Future<String> sendCommonMessage(dynamic msg) async {

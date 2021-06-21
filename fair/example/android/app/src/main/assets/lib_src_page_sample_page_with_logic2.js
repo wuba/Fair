@@ -1,4 +1,4 @@
-GLOBAL['hello_world'] = (function () {
+GLOBAL['hello_world2'] = (function () {
     var __global__ = this;
 
     class DemoItem {
@@ -31,7 +31,7 @@ GLOBAL['hello_world'] = (function () {
             this.data._count++;
             this.data._response.total = this.data._response.total + 1;
             let map = {
-                pageName: "hello_world",
+                pageName: "hello_world2",
                 _count: this.data._count
             }
             setData(map);
@@ -53,5 +53,3 @@ GLOBAL['hello_world'] = (function () {
 
     }
 })()
-
-
