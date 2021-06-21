@@ -7,7 +7,9 @@ class FairMessage {
   static final String FUNC_NAME = 'funcName';
   static final String ARGS = 'args';
   static final String LOAD_JS = 'loadJsFile';
+  static final String RELEASE_JS = 'loadJsFile';
   static final String PATH = 'path';
+  static final String PAGE_NAME = 'pageName';
 
   FairMessage(this.pageName, this.type, this.args);
 
@@ -30,13 +32,13 @@ abstract class IRuntime {
   void init(bool isDebug);
 
   /// 释放资源
-  void release();
+  void release(String pageName);
 
   /// 获取JS侧版本号
   Future<String> version();
 
   /// 添加脚本文件
-  Future<dynamic> addScript(String script);
+  Future<dynamic> addScript(String pageName,String script);
 
   /// 异步方法调用
   /// pageName 页面名称

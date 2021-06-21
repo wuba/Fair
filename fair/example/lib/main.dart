@@ -18,6 +18,7 @@ void main() {
     delegate: {
       // 'hello_world': (ctx, _) => HelloWorldDelegate(),
       'hello_world': (ctx, _) => HelloWorldDelegate2(),
+      'hello_world2': (ctx, _) => HelloWorldDelegate2(),
     },
     modules: {
       ShowFairAlertModule.tagName: () => ShowFairAlertModule(),
@@ -25,14 +26,19 @@ void main() {
     child: MaterialApp(
       home: FairWidget(
         // todo：测试demo
-        name: 'widget_method_demo',
-        path: 'assets/bundle/lib_widget_method_demo.json',
-        data: {
-          'index2': 3,
-          'index3': 4,
-        },
+        // name: 'widget_method_demo',
+        // path: 'assets/bundle/lib_widget_method_demo.json',
+        // data: {
+        //   'index2': 3,
+        //   'index3': 4,
+        // },
         // name: 'hello_world',
         // path: 'assets/bundle/lib_src_page_hello_world.fair.bin',
+
+        name: 'hello_world',
+        jsPath:'file:///android_asset/lib_src_page_sample_page_with_logic.js',
+        path: 'assets/bundle/lib_src_page_hello_world.fair.bin',
+
       ) /*HelloWorldPage()*/,
       routes: {
         'sample_dynamic_page': (_) => SampleDynamicPage(),

@@ -46,8 +46,8 @@ public class FairPlugin implements FlutterPlugin, MethodCallHandler {
         if (v8 == null) {
             v8 = V8.createV8Runtime();
         }
-        if (fairFfi==null) {
-            fairFfi=new FairFfi();
+        if (fairFfi == null) {
+            fairFfi = new FairFfi();
         }
 
         if (mJSExecutor == null) {
@@ -91,8 +91,8 @@ public class FairPlugin implements FlutterPlugin, MethodCallHandler {
         return mJsFlutterEngine;
     }
 
-    public V8Object getV8Object() {
-        return mJSExecutor.getV8Object();
+    public V8Object getV8Object(String name) {
+        return mJSExecutor.getV8ObjectByName(name);
     }
 
     public Context getContext() {

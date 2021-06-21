@@ -38,7 +38,7 @@ class FairWidget extends StatefulWidget {
   ///
   /// * [name], unique name binds to this FairWidget
   final String path;
-
+  final String jsPath;
   /// Optional, data source relate to this FairWidget.
   final Map<String, dynamic> data;
 
@@ -67,7 +67,8 @@ class FairWidget extends StatefulWidget {
     this.holder,
     this.delegate,
     this.wantKeepAlive = false,
-  })  : assert(!(name == null && path == null),
+    this.jsPath ,
+  })  : assert(!(name == null && path == null&&jsPath==null),
             'FairWidget require a global registered `name` or bundle `path`'),
         assert(() {
           if (data == null) return true;
@@ -118,8 +119,8 @@ class FairState extends State<FairWidget>
     super.didChangeDependencies();
     _fairApp ??= FairApp.of(context);
     //加载js的文件地址
-    var js = "file:///android_asset/lib_src_page_sample_page_with_logic.js";
-    _fairApp.runtime.addScript(js).then((value) {
+    // var js = "file:///android_asset/lib_src_page_sample_page_with_logic.js";
+    _fairApp.runtime.addScript(state2key, widget.jsPath).then((value) {
       //结果回调，native端加载js成功之后，开始注册相关函数,可以做相关通讯
       (_fairApp ??= FairApp.of(context))?.register(this);
       delegate?.didChangeDependencies();
@@ -181,7 +182,7 @@ class FairState extends State<FairWidget>
 }
 
 /// Delegate for business logic. The delegate share similar life-circle with [State].
-class FairDelegate extends RuntimeFairDelegate{
+class FairDelegate extends RuntimeFairDelegate {
   FairState _state;
   String _key;
 

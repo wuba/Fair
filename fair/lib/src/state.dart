@@ -57,5 +57,6 @@ mixin AppState {
     _mFairHandler.unregister(state);
     log('unregister state: $key');
     bindData.remove(key)?.clear();
+    runtime.release(key);
   }
 }

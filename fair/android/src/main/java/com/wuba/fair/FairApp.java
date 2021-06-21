@@ -49,9 +49,9 @@ public class FairApp {
                 try {
                     FairLogger.d("用户的js文件地址" + call.arguments);
                     JSONObject jsonObject = new JSONObject(String.valueOf(call.arguments));
-                    JSONObject argObject = jsonObject.getJSONObject("args");
-                    String jsLocalPath = argObject.getString("path");
-                    FairPlugin.get().getJsExecutor().loadJS(jsLocalPath, (r) -> {
+                    String jsLocalPath = jsonObject.getString("path");
+                    String jsName = jsonObject.getString("pageName");
+                    FairPlugin.get().getJsExecutor().loadJS(jsName, jsLocalPath, (r) -> {
                         result.success("success");
                     });
                 } catch (Exception e) {
@@ -59,7 +59,14 @@ public class FairApp {
                 }
                 break;
             case FairConstant.RELEASE_MAIN_JS:
-                FairPlugin.get().getJsExecutor().release();
+                try {
+                    JSONObject jsonObject = new JSONObject(String.valueOf(call.arguments));
+                    String pageName = jsonObject.getString("pageName");
+                    FairPlugin.get().getJsExecutor().releaseV8Object(pageName);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 break;
             default:
                 break;
@@ -83,7 +90,8 @@ public class FairApp {
             FairPlugin.get().getJsFlutterEngine().invokeFlutterChannel(call, (v) -> {
                 V8Array v8Array = new V8Array(v8);
                 v8Array.push(v);
-                callback.call(FairPlugin.get().getV8Object(), v8Array);
+                //todo 指定的v8object
+                callback.call(FairPlugin.get().getV8Object(""), v8Array);
             });
 
         }, FairConstant.JS_INVOKE_FLUTTER_CHANNEL);
