@@ -1,0 +1,449 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B0CB73BE264BBDDC00326A82 /* FairDynamicFlutter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CB73B4264BBDDC00326A82 /* FairDynamicFlutter.framework */; };
+		B0CB73C3264BBDDC00326A82 /* FairDynamicFlutterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B0CB73C2264BBDDC00326A82 /* FairDynamicFlutterTests.m */; };
+		B0CB73C5264BBDDC00326A82 /* FairDynamicFlutter.h in Headers */ = {isa = PBXBuildFile; fileRef = B0CB73B7264BBDDC00326A82 /* FairDynamicFlutter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B0CB73D3264BD3F500326A82 /* FairDynamicFlutter.m in Sources */ = {isa = PBXBuildFile; fileRef = B0CB73D2264BD3F400326A82 /* FairDynamicFlutter.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B0CB73BF264BBDDC00326A82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B0CB73AB264BBDDC00326A82 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B0CB73B3264BBDDC00326A82;
+			remoteInfo = FairDynamicFlutter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B0CB73B4264BBDDC00326A82 /* FairDynamicFlutter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FairDynamicFlutter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0CB73B7264BBDDC00326A82 /* FairDynamicFlutter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FairDynamicFlutter.h; sourceTree = "<group>"; };
+		B0CB73B8264BBDDC00326A82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0CB73BD264BBDDC00326A82 /* FairDynamicFlutterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FairDynamicFlutterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0CB73C2264BBDDC00326A82 /* FairDynamicFlutterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FairDynamicFlutterTests.m; sourceTree = "<group>"; };
+		B0CB73C4264BBDDC00326A82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0CB73D2264BD3F400326A82 /* FairDynamicFlutter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FairDynamicFlutter.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B0CB73B1264BBDDC00326A82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0CB73BA264BBDDC00326A82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0CB73BE264BBDDC00326A82 /* FairDynamicFlutter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B0CB73AA264BBDDC00326A82 = {
+			isa = PBXGroup;
+			children = (
+				B0CB73B6264BBDDC00326A82 /* FairDynamicFlutter */,
+				B0CB73C1264BBDDC00326A82 /* FairDynamicFlutterTests */,
+				B0CB73B5264BBDDC00326A82 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B0CB73B5264BBDDC00326A82 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B0CB73B4264BBDDC00326A82 /* FairDynamicFlutter.framework */,
+				B0CB73BD264BBDDC00326A82 /* FairDynamicFlutterTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B0CB73B6264BBDDC00326A82 /* FairDynamicFlutter */ = {
+			isa = PBXGroup;
+			children = (
+				B0CB73B7264BBDDC00326A82 /* FairDynamicFlutter.h */,
+				B0CB73D2264BD3F400326A82 /* FairDynamicFlutter.m */,
+				B0CB73B8264BBDDC00326A82 /* Info.plist */,
+			);
+			path = FairDynamicFlutter;
+			sourceTree = "<group>";
+		};
+		B0CB73C1264BBDDC00326A82 /* FairDynamicFlutterTests */ = {
+			isa = PBXGroup;
+			children = (
+				B0CB73C2264BBDDC00326A82 /* FairDynamicFlutterTests.m */,
+				B0CB73C4264BBDDC00326A82 /* Info.plist */,
+			);
+			path = FairDynamicFlutterTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B0CB73AF264BBDDC00326A82 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0CB73C5264BBDDC00326A82 /* FairDynamicFlutter.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		B0CB73B3264BBDDC00326A82 /* FairDynamicFlutter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0CB73C8264BBDDC00326A82 /* Build configuration list for PBXNativeTarget "FairDynamicFlutter" */;
+			buildPhases = (
+				B0CB73AF264BBDDC00326A82 /* Headers */,
+				B0CB73B0264BBDDC00326A82 /* Sources */,
+				B0CB73B1264BBDDC00326A82 /* Frameworks */,
+				B0CB73B2264BBDDC00326A82 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FairDynamicFlutter;
+			productName = FairDynamicFlutter;
+			productReference = B0CB73B4264BBDDC00326A82 /* FairDynamicFlutter.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B0CB73BC264BBDDC00326A82 /* FairDynamicFlutterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0CB73CB264BBDDC00326A82 /* Build configuration list for PBXNativeTarget "FairDynamicFlutterTests" */;
+			buildPhases = (
+				B0CB73B9264BBDDC00326A82 /* Sources */,
+				B0CB73BA264BBDDC00326A82 /* Frameworks */,
+				B0CB73BB264BBDDC00326A82 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B0CB73C0264BBDDC00326A82 /* PBXTargetDependency */,
+			);
+			name = FairDynamicFlutterTests;
+			productName = FairDynamicFlutterTests;
+			productReference = B0CB73BD264BBDDC00326A82 /* FairDynamicFlutterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B0CB73AB264BBDDC00326A82 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					B0CB73B3264BBDDC00326A82 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					B0CB73BC264BBDDC00326A82 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+				};
+			};
+			buildConfigurationList = B0CB73AE264BBDDC00326A82 /* Build configuration list for PBXProject "FairDynamicFlutter" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B0CB73AA264BBDDC00326A82;
+			productRefGroup = B0CB73B5264BBDDC00326A82 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B0CB73B3264BBDDC00326A82 /* FairDynamicFlutter */,
+				B0CB73BC264BBDDC00326A82 /* FairDynamicFlutterTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B0CB73B2264BBDDC00326A82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0CB73BB264BBDDC00326A82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B0CB73B0264BBDDC00326A82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0CB73D3264BD3F500326A82 /* FairDynamicFlutter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0CB73B9264BBDDC00326A82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0CB73C3264BBDDC00326A82 /* FairDynamicFlutterTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B0CB73C0264BBDDC00326A82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B0CB73B3264BBDDC00326A82 /* FairDynamicFlutter */;
+			targetProxy = B0CB73BF264BBDDC00326A82 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B0CB73C6264BBDDC00326A82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B0CB73C7264BBDDC00326A82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B0CB73C9264BBDDC00326A82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FairDynamicFlutter/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.58.FairDynamicFlutter;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B0CB73CA264BBDDC00326A82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FairDynamicFlutter/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.58.FairDynamicFlutter;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B0CB73CC264BBDDC00326A82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FairDynamicFlutterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.58.FairDynamicFlutterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B0CB73CD264BBDDC00326A82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FairDynamicFlutterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.58.FairDynamicFlutterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B0CB73AE264BBDDC00326A82 /* Build configuration list for PBXProject "FairDynamicFlutter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0CB73C6264BBDDC00326A82 /* Debug */,
+				B0CB73C7264BBDDC00326A82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B0CB73C8264BBDDC00326A82 /* Build configuration list for PBXNativeTarget "FairDynamicFlutter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0CB73C9264BBDDC00326A82 /* Debug */,
+				B0CB73CA264BBDDC00326A82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B0CB73CB264BBDDC00326A82 /* Build configuration list for PBXNativeTarget "FairDynamicFlutterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0CB73CC264BBDDC00326A82 /* Debug */,
+				B0CB73CD264BBDDC00326A82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B0CB73AB264BBDDC00326A82 /* Project object */;
+}

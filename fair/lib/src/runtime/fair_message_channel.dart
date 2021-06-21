@@ -9,7 +9,7 @@ typedef StringMsgCallback = void Function(String msg);
 
 final DynamicLibrary dl = Platform.isAndroid
     ? DynamicLibrary.open('libfairflutter.so')
-    : DynamicLibrary.open('FairFFI.framework/FairFFI');
+    : DynamicLibrary.open('FairDynamicFlutter.framework/FairDynamicFlutter');
 
 final String JS_LOADER = 'com.wuba.fair/js_loader';
 final String COMMON_MESSAGE_CHANNEL = 'com.wuba.fair/common_message_channel';
