@@ -39,7 +39,12 @@ class Runtime implements IRuntime {
   void init(bool isDebug) {}
 
   @override
-  void release() {}
+  void release(String pageName) {
+    var map = <dynamic, dynamic>{};
+    map[FairMessage.PAGE_NAME] = pageName;
+    var msg = FairMessage(pageName, FairMessage.RELEASE_JS, map);
+    _channel.release(jsonEncode(msg.from()), () {});
+  }
 
   @override
   Future<String> version() {
@@ -51,11 +56,11 @@ class Runtime implements IRuntime {
   }
 
   @override
-  Future<dynamic> addScript(String script) {
+  Future<dynamic> addScript(String pageName, String script) {
     var map = <dynamic, dynamic>{};
     map[FairMessage.PATH] = script;
-    var msg = FairMessage(null, FairMessage.LOAD_JS, map);
-    return _channel.loadJS(jsonEncode(msg.from()), null);
+    map[FairMessage.PAGE_NAME] = pageName;
+    return _channel.loadJS(jsonEncode(map), null);
   }
 
   @override
@@ -122,7 +127,6 @@ class Runtime implements IRuntime {
 
   @override
   Map getBindVariableAndFuncSync(String pageName) {
-
     return jsonDecode(invokeMethodSync(pageName, 'getAllJSBindData', null));
   }
 }

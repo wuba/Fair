@@ -7,6 +7,8 @@ import com.wuba.fair.callback.JsResultCallback;
  */
 public interface IJSExecutor {
 
+    void init();
+
     /**
      * 释放 js引擎，目前Android端采用的是google的v8引擎
      */
@@ -19,7 +21,7 @@ public interface IJSExecutor {
      * @param js       文件地址
      * @param complete 加载结果的回调
      */
-    void loadJS(String js, JsResultCallback<String> complete);
+    void loadJS(String name, String js, JsResultCallback<String> complete);
 
     /**
      * 执行js的操作，这个操作包括获取js侧变量、方法、js脚本结果等，
@@ -30,5 +32,9 @@ public interface IJSExecutor {
      */
     Object invokeJSChannel(Object src);
 
+    /**
+     * 释放指定的js文件资源
+     */
+    void releaseV8Object(String pageName);
 
 }

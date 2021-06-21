@@ -18,6 +18,7 @@ void main() {
     delegate: {
       // 'hello_world': (ctx, _) => HelloWorldDelegate(),
       'hello_world': (ctx, _) => HelloWorldDelegate2(),
+      'hello_world2': (ctx, _) => HelloWorldDelegate2(),
     },
     modules: {
       ShowFairAlertModule.tagName: () => ShowFairAlertModule(),
@@ -25,6 +26,7 @@ void main() {
     child: MaterialApp(
       home: FairWidget(
         name: 'hello_world',
+        jsPath:'file:///android_asset/lib_src_page_sample_page_with_logic.js',
         path: 'assets/bundle/lib_src_page_hello_world.fair.bin',
       ) /*HelloWorldPage()*/,
       routes: {

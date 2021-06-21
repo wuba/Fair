@@ -2,6 +2,7 @@ package com.wuba.fair.v8;
 
 import com.eclipsesource.v8.V8;
 import com.eclipsesource.v8.V8Array;
+import com.eclipsesource.v8.V8Object;
 import com.wuba.fair.FairPlugin;
 import com.wuba.fair.callback.JsResultCallback;
 import com.wuba.fair.constant.FairConstant;
@@ -14,6 +15,17 @@ import com.wuba.fair.utils.FairFileUtil;
 public class V8JSExecutor extends JSExecutor {
 
     private V8 v8 = FairPlugin.get().getV8();
+
+    public V8JSExecutor() {
+        init();
+    }
+
+    @Override
+    public void init() {
+        //加载本地js
+        String js = FairFileUtil.getScriptFromAssets(FairPlugin.get().getContext(), "base_js.js");
+        v8.executeVoidScript(js);
+    }
 
     /**
      * 释放 js引擎，目前Android端采用的是google的v8引擎
@@ -31,9 +43,9 @@ public class V8JSExecutor extends JSExecutor {
      * @param complete 加载结果的回调
      */
     @Override
-    public void loadJS(String filePath, JsResultCallback<String> complete) {
+    public void loadJS(String name, String filePath, JsResultCallback<String> complete) {
         String js = FairFileUtil.getScript(filePath);
-        v8Object = v8.executeObjectScript(js);
+        v8ObjectMap.put(name, v8.executeObjectScript(js));
 
         if (complete != null) {
             complete.call("result");
@@ -53,6 +65,20 @@ public class V8JSExecutor extends JSExecutor {
         V8Array array = new V8Array(v8);
         array.push(src);
         return v8.executeFunction(FairConstant.INVOKE_JS_FUNC, array);
+    }
+
+    /**
+     * 释放指定的js文件资源
+     */
+    @Override
+    public void releaseV8Object(String pageName) {
+        V8Object v8Object;
+
+
+        if ((v8Object = getV8ObjectByName(pageName)) != null && !v8Object.isReleased()) {
+//            v8Object.close();
+            v8.removeExecutor(v8Object);
+        }
     }
 
 }
