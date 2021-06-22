@@ -7,7 +7,7 @@ class FairMessage {
   static final String FUNC_NAME = 'funcName';
   static final String ARGS = 'args';
   static final String LOAD_JS = 'loadJsFile';
-  static final String RELEASE_JS = 'loadJsFile';
+  static final String RELEASE_JS = 'releaseJS';
   static final String PATH = 'path';
   static final String PAGE_NAME = 'pageName';
 

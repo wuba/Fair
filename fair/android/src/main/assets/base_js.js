@@ -1,5 +1,5 @@
-
 let GLOBAL = {}
+
 
 function invokeJSFunc(parameter) {
     if (parameter === null) {
@@ -37,6 +37,9 @@ function _invokeMethod(parameter) {
 
     if ('getAllJSBindData' === funcName) {
         return getAllJSBindData(parameter)
+    }
+    if ('releaseJS' === funcName) {
+        return _release(parameter)
     }
 
     let mClass = GLOBAL[pageName]
@@ -101,6 +104,14 @@ function getAllJSBindData(parameter) {
     return JSON.stringify(result)
 }
 
+function _release(parameter) {
+    let o = JSON.parse(parameter)
+    let pageName = o['pageName']
+    GLOBAL[pageName] = null
+    return null
+}
+
+
 function isFunc(name) {
     return typeof name === "function"
 }
@@ -111,6 +122,25 @@ function isNull(prop) {
         || undefined === typeof prop
         || 'null' === prop
 }
+
+function setData(pageName, obj) {
+    let p = {};
+    p['funcName'] = 'setData'
+    p['pageName'] = pageName
+    p['args'] = obj
+    let map = JSON.stringify(p)
+    invokeFlutterCommonChannel(map)
+}
+
+//todo 正式开发，放到统一的FairGlobal中
+const invokeFlutterCommonChannel = (invokeData, callback) => {
+    jsInvokeFlutterChannel(invokeData, (resultStr) => {
+        console.log('resultStr' + resultStr)
+        if (callback) {
+            callback(resultStr);
+        }
+    });
+};
 
 
 

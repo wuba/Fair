@@ -9,6 +9,8 @@ import com.wuba.fair.constant.FairConstant;
 import com.wuba.fair.jsexecutor.JSExecutor;
 import com.wuba.fair.utils.FairFileUtil;
 
+import org.json.JSONObject;
+
 /**
  * v8引擎加载文件控制
  */
@@ -63,7 +65,7 @@ public class V8JSExecutor extends JSExecutor {
     @Override
     public Object invokeJSChannel(Object src) {
         V8Array array = new V8Array(v8);
-        array.push(src);
+        array.push(src.toString());
         return v8.executeFunction(FairConstant.INVOKE_JS_FUNC, array);
     }
 
@@ -71,14 +73,24 @@ public class V8JSExecutor extends JSExecutor {
      * 释放指定的js文件资源
      */
     @Override
-    public void releaseV8Object(String pageName) {
+    public void releaseV8Object(String script) {
         V8Object v8Object;
+        try {
 
+            JSONObject jsonObject = new JSONObject(script);
+            String pageName = jsonObject.getString("pageName");
 
-        if ((v8Object = getV8ObjectByName(pageName)) != null && !v8Object.isReleased()) {
-//            v8Object.close();
-            v8.removeExecutor(v8Object);
+            if ((v8Object = getV8ObjectByName(pageName)) != null && !v8Object.isReleased()) {
+                V8Array v8Array=new V8Array(v8);
+                v8Array.push(script);
+
+                v8.executeFunction(FairConstant.INVOKE_JS_FUNC, v8Array);
+                v8.removeExecutor(v8Object);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
 }

@@ -31,10 +31,9 @@ GLOBAL['hello_world'] = (function () {
             this.data._count++;
             this.data._response.total = this.data._response.total + 1;
             let map = {
-                pageName: "hello_world",
                 _count: this.data._count
             }
-            setData(map);
+            setData("hello_world",map);
 
         },
         _initData: function _initData(id) {
