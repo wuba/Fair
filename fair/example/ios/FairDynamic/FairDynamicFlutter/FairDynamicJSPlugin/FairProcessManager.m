@@ -42,7 +42,7 @@
     [FairJSBridge sharedInstance].delegate = self;
 
     // 设置执行js的执行环境
-//    [[FairJSBridge sharedInstance] evaluateScriptWithJSFileAsync:@"main" callback:nil];
+    [[FairJSBridge sharedInstance] evaluateScriptWithJSFileAsync:@"main" callback:nil];
     // 后续可能会废弃
 //    NSString *testJS = @"loadData({_count: 5,\n_onTapText: function () {\nthis._count = this._count + 1;console.log(this._count);\n this.setData({_count: this._count})\n}})";
 //    [[FairJSBridge sharedInstance] evaluateScriptWithJSScriptAsync:testJS callback:nil];
@@ -86,22 +86,13 @@
 
 
 /// JS 同步调用 Dart
-- (void)FairExecuteDartFunctionSync:(NSDictionary *)data
+- (void)FairExecuteDartFunctionSync:(NSDictionary *)dic
 {
-    NSMutableString *str = [NSMutableString stringWithString:@"{"];
-    for (int i = 0; i < data.allKeys.count; i++) {
-        NSString *key = [data.allKeys objectAtIndex:i];
-        NSString *value = [data objectForKey:key];
-        if (i == data.allKeys.count - 1) {
-            [str appendFormat:@"\"%@\":%@", key, value];
-        }
-        else {
-            [str appendFormat:@"\"%@\":%@,", key, value];
-        }
-        
-    }
-    [str appendString:@"}"];
-    [[FairDartBridge sharedInstance] sendMessageToDart:str];
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:0 error:&error];
+    NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] ;
+
+    [[FairDartBridge sharedInstance] sendMessageToDart:result];
 }
 
 @end
