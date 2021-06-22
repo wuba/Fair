@@ -1,0 +1,43 @@
+name: fairbloc
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.0
+  bloc: ^6.1.3
+  flutter_bloc: ^6.1.3
+
+  fair:
+    path: /Users/liuchao/Documents/dev/github/fair/fair
+
+  flutter_redux: ^0.5.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  build_runner: ^1.4.0
+  #  fair_compiler: ^0.2.0
+  fair_compiler:
+    path: /Users/liuchao/Documents/dev/github/fair/fair_compiler
+
+dependency_overrides:
+  fair_version:
+    path: /Users/liuchao/Documents/dev/github/fair/fair_version/flutter_1_22_4
+
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/bundle/
