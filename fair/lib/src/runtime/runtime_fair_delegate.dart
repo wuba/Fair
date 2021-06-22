@@ -24,10 +24,12 @@ abstract class RuntimeFairDelegate {
   }
 
   Map<String, PropertyValue> bindValue() {
+    bindBaseValue();
     return _bindValuesMap;
   }
 
   Map<String, Function> bindFunction() {
+    bindBaseFunc();
     return _bindFunctionsMap;
   }
 
@@ -82,5 +84,13 @@ abstract class RuntimeFairDelegate {
       _valueMap[key]?.value = value;
     });
     setState(() {});
+  }
+
+  void bindBaseFunc() {
+
+  }
+
+  void bindBaseValue(){
+    _bindValuesMap.addAll({'_platform': () => 'Fair v$fairVersion'});
   }
 }
