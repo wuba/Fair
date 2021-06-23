@@ -23,6 +23,9 @@ typedef NS_ENUM(NSUInteger, K_FLUTTER_TO_NATIVE_TYPE) {
 
 @protocol FairDartBridgeExecuteJS <NSObject>
 
+/// 释放JS页面
+- (void)disposePage:(NSString *)pageName;
+
 /// 注入JS
 - (void)injectionJSScriptWtihFilePath:(NSString *)filePath callback:(FairCallback)callBack;
 

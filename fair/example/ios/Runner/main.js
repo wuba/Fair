@@ -1,4 +1,4 @@
-let GLOBAL = {}
+let GLOBAL = {};
 
 function invokeJSFunc(parameter) {
     if (parameter === null) {
@@ -8,9 +8,9 @@ function invokeJSFunc(parameter) {
     let map = JSON.parse(parameter);
 
     if ('method' === map['type']) {
-        return _invokeMethod(parameter)
+        return _invokeMethod(parameter);
     }
-    return null
+    return null;
 
 }
 
@@ -22,21 +22,24 @@ function test() {
             "funcName": "getAllJSBindData",
             "args": null
         }
-    }
+    };
 
-    console.log('all bind data :' + invokeJSFunc(JSON.stringify(map)))
+    console.log('all bind data :' + invokeJSFunc(JSON.stringify(map)));
 }
 
 function _invokeMethod(parameter) {
-    let o = JSON.parse(parameter) let pageName = o['pageName'] let funcName = o['args']['funcName'] let args = o['args']['args'];
+    let o = JSON.parse(parameter);
+    let pageName = o['pageName'];
+    let funcName = o['args']['funcName'];
+    let args = o['args']['args'];
 
     if ('getAllJSBindData' === funcName) {
-        return getAllJSBindData(parameter)
+        return getAllJSBindData(parameter);
     }
 
-    let mClass = GLOBAL[pageName]
+    let mClass = GLOBAL[pageName];
 
-    let methodResult = mClass[funcName].apply(mClass, args)
+    let methodResult = mClass[funcName].apply(mClass, args);
 
     let result = {
         pageName: pageName,
@@ -44,57 +47,61 @@ function _invokeMethod(parameter) {
             result: methodResult
         }
 
-    }
-    return JSON.stringify(result)
+    };
+    return JSON.stringify(result);
 }
 
 //demo 获取所有的变量和绑定的方法
 function getAllJSBindData(parameter) {
-    let o = JSON.parse(parameter) let pageName = o['pageName'] let mc = GLOBAL[pageName]
+    let o = JSON.parse(parameter);
+    let pageName = o['pageName'];
+    let mc = GLOBAL[pageName];
 
-    let bind = {}
+    let bind = {};
 
     if (isNull(mc)) {
-        return JSON.stringify(bind)
+        return JSON.stringify(bind);
     }
 
-    let bindFunc = [] let keys;
+    let bindFunc = [];
+    let keys;
 
     if (!isNull(keys = Object.keys(mc))) {
         let kIndex = 0;
         for (let i = 0; i < keys.length; i++) {
-            let k = keys[i]
+            let k = keys[i];
 
             if (!mc.hasOwnProperty(k)) {
                 continue
             }
             if (isFunc(mc[k])) {
 
-                bindFunc[kIndex] = k kIndex++
+                bindFunc[kIndex] = k;
+                kIndex++;
                 continue
             }
             //先只要data里面的变量
             if ('data' === k) {
-                bind['variable'] = mc[k]
+                bind['variable'] = mc[k];
             }
         }
     }
 
-    bind['func'] = bindFunc let result = {
+    bind['func'] = bindFunc;
+    let result = {
         pageName: pageName,
         result: {
             result: bind
         }
+    };
 
-    }
-
-    return JSON.stringify(result)
+    return JSON.stringify(result);
 }
 
 function isFunc(name) {
-    return typeof name === "function"
+    return typeof name === "function";
 }
 
 function isNull(prop) {
-    return prop === null || 'undefined' === prop || 'undefined' === typeof prop || undefined === typeof prop || 'null' === prop
+    return (prop === null || 'undefined' === prop || 'undefined' === typeof prop || undefined === typeof prop || 'null' === prop);
 }

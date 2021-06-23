@@ -68,6 +68,12 @@
     [[FairJSBridge sharedInstance] evaluateScriptWithJSFileAsync:filePath callback:callback];
 }
 
+/// 释放JS页面
+- (void)disposePage:(NSString *)pageName
+{
+    [[FairJSBridge sharedInstance] disposePage:pageName];
+}
+
 #pragma mark - FairJSExportDelegate
 
 /// JS 异步调用 Dart

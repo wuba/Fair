@@ -100,18 +100,13 @@ FairSingletonM(FairJSBridge)
         callback(value, nil);
     }
     return value;
-    
-//    @try {
-//        JSValue *value = [jsValue callWithArguments:params];
-//
-//        if (callback) {
-//            callback(value, nil);
-//        }
-//        return value;
-//    } @catch (NSException *exception) {
-//        NSLog(@"exception:%@", exception.description);
-//    }
-    return nil;
+}
+
+- (void)disposePage:(NSString *)pageName
+{
+    if (FAIR_IS_NOT_EMPTY_STRING(pageName)) {
+        self.context[pageName] = nil;
+    }
 }
 
 #pragma mark - Other Method
