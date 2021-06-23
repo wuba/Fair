@@ -8,6 +8,7 @@ import com.eclipsesource.v8.V8Array;
 import com.eclipsesource.v8.V8Function;
 import com.eclipsesource.v8.V8Object;
 import com.wuba.fair.constant.FairConstant;
+import com.wuba.fair.logger.Console;
 import com.wuba.fair.logger.FairLogger;
 
 import org.json.JSONArray;
@@ -101,7 +102,7 @@ public class FairApp {
             if (TextUtils.isEmpty(r[0]) && FairPlugin.get().getV8Object(r[0]) == null) {
                 return;
             }
-
+            //获取flutter的结果成功之后，返回给js的回调函数
             FairPlugin.get().getJsFlutterEngine().invokeFlutterChannel(call, (v) -> {
                 V8Array v8Array = new V8Array(v8);
                 v8Array.push(v);
@@ -114,6 +115,13 @@ public class FairApp {
 
         }, FairConstant.JS_INVOKE_FLUTTER_CHANNEL);
 
+        //注册 console
+        Console console = new Console();
+        V8Object v8Console = new V8Object(v8);
+        v8.add("console", v8Console);
+        v8Console.registerJavaMethod(console, "log", "log", new Class[]{Object[].class});
+        v8Console.registerJavaMethod(console, "error", "error", new Class[]{Object[].class});
+        v8Console.registerJavaMethod(console, "warn", "warn", new Class[]{Object[].class});
     }
 
 }
