@@ -5,7 +5,7 @@ import 'fair_plugin.dart';
 class FairPluginDispatcher {
   static final pluginMap = <String, IFairPlugin>{};
 
-  static dynamic dispatch(dynamic msg) {
+  static Future<dynamic> dispatch(dynamic msg) async {
     var obj = jsonDecode(msg);
     var className = obj['className']?.toString();
 
@@ -14,8 +14,8 @@ class FairPluginDispatcher {
     }
 
     if (pluginMap[className] != null) {
-      pluginMap[className].invoke(msg);
-      return null;
+      var d=await pluginMap[className].invoke(msg);
+      return d ;
     }
   }
 }

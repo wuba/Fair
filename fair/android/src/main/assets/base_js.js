@@ -39,7 +39,7 @@ function _invokeMethod(parameter) {
         return getAllJSBindData(parameter)
     }
     if ('releaseJS' === funcName) {
-        return _release(parameter)
+        return null;
     }
 
     let mClass = GLOBAL[pageName]
@@ -53,6 +53,8 @@ function _invokeMethod(parameter) {
         }
 
     }
+    return null;
+
     return JSON.stringify(result)
 }
 

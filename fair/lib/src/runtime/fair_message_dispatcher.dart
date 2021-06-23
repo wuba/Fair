@@ -16,6 +16,7 @@ class FairHandler {
   final Runtime _runtime;
 
   FairHandler(this._runtime) {
+    //接收native发送过来的消息，实际上是js发送的消息，通过native端透传过来
     _runtime.getChannel().setMessageHandler((String message) {
       var data = json.decode(message);
       var funcName = data['funcName']?.toString();
@@ -23,21 +24,22 @@ class FairHandler {
       var args = data['args'];
 
       if (funcName == null || funcName.isEmpty) {
-        return 'error';
+        return '';
       }
 
       //当用户调用setData的时候相当于刷新了数据，通知刷新页更新
       if (funcName == 'setData') {
         _dispatchMessage(pageName, jsonEncode(args));
-        return 'success';
+        return '';
       }
 
-      //js 异步调用dart中的相关方法
-      if (funcName == 'invokePlugin') {
-        return FairPluginDispatcher.dispatch(jsonEncode(args));
-      }
-
-      return null;
+      // //js 异步调用dart中的相关方法
+      // if (funcName == 'invokePlugin') {
+      //   FairPluginDispatcher.dispatch(jsonEncode(args))
+      //       .then((value) => _runtime.getChannel().sendCommonMessage(value));
+      //   return '';
+      // }
+      return '';
     });
   }
 
