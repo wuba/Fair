@@ -8,12 +8,13 @@ class FairNet extends IFairPlugin {
   }
 
   @override
-  dynamic invoke(dynamic par) => Function.apply(c[getMethodName(par)], null);
+  dynamic invoke(dynamic par) => Function.apply(c[getMethodName(par)], ['null']);
 
   dynamic request(par) async {
     // var method=p
     var dio = Dio();
-    var response = await Dio().get('http://www.google.com');
-    return response;
+    var response = await dio.get<String>('http://www.google.com');
+
+    return Future.value(response.toString());
   }
 }

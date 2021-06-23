@@ -6,7 +6,8 @@ abstract class IFairPlugin {
   dynamic invoke(dynamic par);
 
   String getMethodName(dynamic par) {
-    var obj = jsonDecode(par);
+    var a = jsonDecode(par);
+    var obj = a['args'];
     var name = obj['className']?.toString();
 
     if (name.contains('#')) {
