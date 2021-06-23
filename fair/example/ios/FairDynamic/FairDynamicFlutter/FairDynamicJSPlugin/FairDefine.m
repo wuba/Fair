@@ -23,8 +23,6 @@ NSString * const FairMessageChannelMethodType = @"method";
 
 NSString * const FairJSThreadName = @"_FairJSThreadName_";
 
-NSString * const FairUpdateDartFunction = @"setData";
-
 NSString * const FairExecuteDartFunctionAsync = @"jsInvokeFlutterChannel";
 
 NSString * const FairExecuteDartFunctionSync = @"jsInvokeFlutterChannelSync";
