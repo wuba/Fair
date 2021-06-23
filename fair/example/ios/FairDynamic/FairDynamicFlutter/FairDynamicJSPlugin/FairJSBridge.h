@@ -53,4 +53,8 @@ FairSingletonH()
 /// @return              返回值可为空
 - (JSValue *)invokeJSFuctionSync:(NSString *)functionName params:(NSArray *)params;
 
+/// 释放JS页面
+/// @param pageName     JS页面名称
+- (void)disposePage:(NSString *)pageName;
+
 @end
