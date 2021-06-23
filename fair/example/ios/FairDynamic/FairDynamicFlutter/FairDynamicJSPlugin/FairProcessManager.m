@@ -52,12 +52,12 @@
 
 /// 同步执行JS
 - (JSValue *)executeJSFunctionSync:(NSString *)functionName params:(NSArray *)params {
-    return [[FairJSBridge sharedInstance] invokeJSFuctionSync:functionName params:params];
+    return [[FairJSBridge sharedInstance] invokeJSFunctionSync:functionName params:params];
 }
 
 /// 异步执行JS
 - (void)executeJSFunctionAsync:(NSString *)functionName params:(NSArray *)params callback:(FairCallback)callback {
-    [[FairJSBridge sharedInstance] invokeJSFuctionAsync:functionName params:params callback:callback];
+    [[FairJSBridge sharedInstance] invokeJSFunctionAsync:functionName params:params callback:callback];
 }
 
 /// Dart 注入到 JS
@@ -68,31 +68,27 @@
     [[FairJSBridge sharedInstance] evaluateScriptWithJSFileAsync:filePath callback:callback];
 }
 
+/// 释放JS页面
+- (void)disposePage:(NSString *)pageName
+{
+    [[FairJSBridge sharedInstance] disposePage:pageName];
+}
+
 #pragma mark - FairJSExportDelegate
 
 /// JS 异步调用 Dart
-- (void)FairExecuteDartFunctionAsync:(NSDictionary *)dic callBack:(FairCallback)callback
+- (void)FairExecuteDartFunctionAsync:(NSString *)data callback:(JSValue *)callback
 {
-    NSError *error = nil;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:0 error:&error];
-    NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] ;
-
-    [[FairDartBridge sharedInstance] sendMessageToDart:result];
-
-    if (callback) {
-        callback(result, nil);
-    }
+    [[FairDartBridge sharedInstance] sendMessageToDart:data callback:^(id result, NSError *error) {
+        [[FairJSBridge sharedInstance] invokeJSFunction:callback param:result];
+    }];
 }
 
 
 /// JS 同步调用 Dart
-- (void)FairExecuteDartFunctionSync:(NSDictionary *)dic
+- (void)FairExecuteDartFunctionSync:(NSString *)data callback:(JSValue *)callback
 {
-    NSError *error = nil;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:0 error:&error];
-    NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] ;
-
-    [[FairDartBridge sharedInstance] sendMessageToDart:result];
+    [[FairDartBridge sharedInstance] sendMessageToDart:data callback:nil];
 }
 
 @end

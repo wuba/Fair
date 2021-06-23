@@ -29,6 +29,7 @@ FairSingletonM(FairJSBridge)
     return self;
 }
 
+#pragma mark -  执行JS注入到Native
 
 - (void)evaluateScriptWithJSFileAsync:(NSString *)jsFilePath callback:(FairCallback)callback
 {
@@ -74,23 +75,25 @@ FairSingletonM(FairJSBridge)
     return jsValue;
 }
 
-- (void)invokeJSFuctionAsync:(NSString *)functionName params:(NSArray *)params callback:(FairCallback)callback
+#pragma mark -  执行JS某个方法
+
+- (void)invokeJSFunctionAsync:(NSString *)functionName params:(NSArray *)params callback:(FairCallback)callback
 {
     if ([NSThread currentThread] != self.jsThread) {
 
-        [self performSelector:@selector(invokeJSFuction:params:callback:) onThread:self.jsThread waitUntilDone:NO withObjects:functionName, params, callback, [FairEndMark end]];
+        [self performSelector:@selector(invokeJSFunctionOnJSThread:params:callback:) onThread:self.jsThread waitUntilDone:NO withObjects:functionName, params, callback, [FairEndMark end]];
     }
     else {
-        [self invokeJSFuction:functionName params:params callback:callback];
+        [self invokeJSFunctionOnJSThread:functionName params:params callback:callback];
     }
 }
 
-- (JSValue *)invokeJSFuctionSync:(NSString *)functionName params:(NSArray *)params
+- (JSValue *)invokeJSFunctionSync:(NSString *)functionName params:(NSArray *)params
 {
-    return [self invokeJSFuction:functionName params:params callback:nil];
+    return [self invokeJSFunctionOnJSThread:functionName params:params callback:nil];
 }
 
-- (JSValue *)invokeJSFuction:(NSString *)functionName params:(NSArray *)params callback:(FairCallback)callback
+- (JSValue *)invokeJSFunctionOnJSThread:(NSString *)functionName params:(NSArray *)params callback:(FairCallback)callback
 {
     JSValue *jsValue = self.context[functionName];
     
@@ -100,18 +103,50 @@ FairSingletonM(FairJSBridge)
         callback(value, nil);
     }
     return value;
+}
+
+#pragma mark -  通过JSValue直接执行这个JS方法
+
+- (void)invokeJSFunction:(JSValue *)function param:(id)param
+{
+    if (!function || !param) {
+        FairLog(@"数据异常,无法执行：%@-%@", function, param);
+        return;
+    }
+    NSArray *params;
+    if (FAIR_IS_NOT_EMPTY_STRING(param)) {
+        params = @[param];
+    }
+    else if ([param isKindOfClass:[NSArray class]]) {
+        params = param;
+    }
+    else {
+        params = @[];
+    }
     
-//    @try {
-//        JSValue *value = [jsValue callWithArguments:params];
-//
-//        if (callback) {
-//            callback(value, nil);
-//        }
-//        return value;
-//    } @catch (NSException *exception) {
-//        NSLog(@"exception:%@", exception.description);
-//    }
-    return nil;
+    if ([NSThread currentThread] != self.jsThread) {
+
+        [self performSelector:@selector(invokeJSFunctionOnJSThread:params:) onThread:self.jsThread waitUntilDone:NO withObjects:function, params, [FairEndMark end]];
+    }
+    else {
+        [self invokeJSFunctionOnJSThread:function params:params];
+    }
+
+}
+
+- (JSValue *)invokeJSFunctionOnJSThread:(JSValue *)function params:(NSArray *)params
+{
+    JSValue *value = [function callWithArguments:params];
+    return value;
+}
+
+#pragma mark -  释放
+
+- (void)disposePage:(NSString *)pageName
+{
+    if (FAIR_IS_NOT_EMPTY_STRING(pageName)) {
+        self.context[pageName] = nil;
+    }
 }
 
 #pragma mark - Other Method
@@ -139,6 +174,29 @@ FairSingletonM(FairJSBridge)
     }
     
     return jsString;
+}
+
+/// 任意类型数据转换为字符串
+- (NSString *)convertStringWithData:(id)data
+{
+    NSString *result;
+    if ([data isKindOfClass:[NSDictionary class]] || [data isKindOfClass:[NSArray class]]) {
+        NSError *error = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:0 error:&error];
+        if (error) {
+            result = @"";
+        }
+        else {
+            result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] ;
+        }
+    }
+    else if ([data isKindOfClass:[NSString class]]) {
+        result = data;
+    }
+    else {
+        result = @"";
+    }
+    return result;
 }
 
 /// 线程保活
@@ -185,34 +243,23 @@ FairSingletonM(FairJSBridge)
         
         FairWeakSelf(weakSelf);
         
-        // JS 更新 Dart
-        _context[FairUpdateDartFunction] = ^(NSDictionary *data) {
-            FairStrongObject(strongSelf, weakSelf)
-            
-            if ([strongSelf.delegate respondsToSelector:@selector(FairExecuteDartFunctionAsync:callBack:)]) {
-                [strongSelf.delegate FairExecuteDartFunctionAsync:data callBack:^(id result, NSError *error) {
-                    FairLog(@"%@", result);
-                }];
-            }
-        };
-        
         // JS 异步调用 Dart
-        _context[FairExecuteDartFunctionAsync] = ^(NSDictionary *data) {
+        _context[FairExecuteDartFunctionAsync] = ^(id receiver, JSValue *callback) {
             FairStrongObject(strongSelf, weakSelf)
             
-            if ([strongSelf.delegate respondsToSelector:@selector(FairExecuteDartFunctionAsync:callBack:)]) {
-                [strongSelf.delegate FairExecuteDartFunctionAsync:data callBack:^(id result, NSError *error) {
-                    FairLog(@"%@", result);
-                }];
+            NSString *data = [strongSelf convertStringWithData:receiver];
+            if ([strongSelf.delegate respondsToSelector:@selector(FairExecuteDartFunctionAsync:callback:)]) {
+                [strongSelf.delegate FairExecuteDartFunctionAsync:data callback:callback];
             }
         };
         
         // JS 同步调用 Dart
-        _context[FairExecuteDartFunctionSync] = ^(NSDictionary *data) {
+        _context[FairExecuteDartFunctionSync] = ^(id receiver, JSValue *callback) {
             FairStrongObject(strongSelf, weakSelf)
             
-            if ([strongSelf.delegate respondsToSelector:@selector(FairExecuteDartFunctionSync:)]) {
-                [strongSelf.delegate FairExecuteDartFunctionSync:data];
+            NSString *data = [strongSelf convertStringWithData:receiver];
+            if ([strongSelf.delegate respondsToSelector:@selector(FairExecuteDartFunctionSync: callback:)]) {
+                [strongSelf.delegate FairExecuteDartFunctionSync:data callback:callback];
             }
         };
     }

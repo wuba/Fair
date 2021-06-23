@@ -25,8 +25,12 @@
 
 FairSingletonM(FairDartBridge);
 
-- (void)sendMessageToDart:(NSString *)message {
-    [self.flutterBasicMessageChannel sendMessage:message];
+- (void)sendMessageToDart:(NSString *)message callback:(FairCallback)callback {
+    [self.flutterBasicMessageChannel sendMessage:message reply:^(id reply) {
+        if (callback && FAIR_IS_NOT_EMPTY_STRING(reply)) {
+            callback(reply, nil);
+        }
+    }];
 }
 
 - (void)setDartChannel {
@@ -73,10 +77,8 @@ FairSingletonM(FairDartBridge);
         }
         // 释放js
         else if ([method isEqualToString:@"releaseMainJs"]) {
-            if ([strongSelf.delegate respondsToSelector:@selector(injectionJSScriptWtihFilePath: callback:)]) {
-                [strongSelf.delegate injectionJSScriptWtihFilePath:model.path callback:^(id result, NSError *error) {
-                    callback(@"success");
-                }];
+            if ([strongSelf.delegate respondsToSelector:@selector(disposePage:)] && FAIR_IS_NOT_EMPTY_STRING(model.pageName)) {
+                [strongSelf.delegate disposePage:model.pageName];
             }
         }
     }];
