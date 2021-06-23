@@ -29,7 +29,7 @@ class Runtime implements IRuntime {
 
     _channel.setMessageHandler((message) {
       var data = json.decode(message);
-      var className = data['className'];
+      var className = data['pageName'];
       var call = _callBacks[className];
       call?.call(message);
     });
@@ -41,9 +41,9 @@ class Runtime implements IRuntime {
   @override
   void release(String pageName) {
     var map = <dynamic, dynamic>{};
-    map[FairMessage.PAGE_NAME] = pageName;
-    var msg = FairMessage(pageName, FairMessage.RELEASE_JS, map);
-    _channel.release(jsonEncode(msg.from()), () {});
+    map[FairMessage.FUNC_NAME] = FairMessage.RELEASE_JS;
+    var msg = FairMessage(pageName, FairMessage.METHOD, map);
+    _channel.release(jsonEncode(msg.from()), null);
   }
 
   @override
@@ -94,6 +94,8 @@ class Runtime implements IRuntime {
     var msg = FairMessage(pageName, FairMessage.METHOD, map);
     var from = msg.from();
     var reply = _channel.sendCommonMessage(jsonEncode(from));
+    // reply.then((value) => print('来自Native端的消息invokeMethod${value}'));
+
     return Future.value(reply);
   }
 

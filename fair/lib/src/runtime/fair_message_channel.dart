@@ -1,11 +1,13 @@
+import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
 
+import 'package:fair/src/runtime/plugin/plugin_dispatcher.dart';
 import 'package:ffi/ffi.dart';
 import 'package:flutter/services.dart';
 
 typedef VoidMsgCallback = void Function();
-typedef StringMsgCallback = void Function(String msg);
+typedef StringMsgCallback = String Function(String msg);
 
 final DynamicLibrary dl = Platform.isAndroid
     ? DynamicLibrary.open('libfairflutter.so')
@@ -39,6 +41,16 @@ class FairMessageChannel {
     _methodChannel ??= MethodChannel(JS_LOADER);
 
     _commonChannel.setMessageHandler((String message) async {
+      print('来自native端的消息：$message');
+      //js 异步调用dart中的相关方法
+      var data = json.decode(message);
+      var funcName = data['funcName']?.toString();
+
+      if (funcName == 'invokePlugin') {
+        var p = await FairPluginDispatcher.dispatch(jsonEncode('args'));
+        return p;
+      }
+
       _callback?.call(message);
       return 'reply from dart';
     });
