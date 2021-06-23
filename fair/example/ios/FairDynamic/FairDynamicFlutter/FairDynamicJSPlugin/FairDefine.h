@@ -83,13 +83,10 @@ extern NSString * const FairMessageChannelMethodType;
 /// JS函数调用的线程
 extern NSString * const FairJSThreadName;
 
-/// JS 更新 Dart
-extern NSString * const FairUpdateDartFunction;
-
 /// JS 异步调用 Dart
 extern NSString * const FairExecuteDartFunctionAsync;
 
-/// JS 同步调用 Dart 
+/// JS 同步调用 Dart
 extern NSString * const FairExecuteDartFunctionSync;
 
 

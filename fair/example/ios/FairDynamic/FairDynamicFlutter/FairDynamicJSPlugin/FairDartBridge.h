@@ -45,7 +45,7 @@ typedef NS_ENUM(NSUInteger, K_FLUTTER_TO_NATIVE_TYPE) {
 FairSingletonH();
 
 /// 通过channel像dart传输数据
-- (void)sendMessageToDart:(NSString *)message;
+- (void)sendMessageToDart:(NSString *)message callback:(FairCallback)callback;
 
 /// 设置channel
 - (void)setDartChannel;

@@ -25,8 +25,12 @@
 
 FairSingletonM(FairDartBridge);
 
-- (void)sendMessageToDart:(NSString *)message {
-    [self.flutterBasicMessageChannel sendMessage:message];
+- (void)sendMessageToDart:(NSString *)message callback:(FairCallback)callback {
+    [self.flutterBasicMessageChannel sendMessage:message reply:^(id reply) {
+        if (callback && FAIR_IS_NOT_EMPTY_STRING(reply)) {
+            callback(reply, nil);
+        }
+    }];
 }
 
 - (void)setDartChannel {
