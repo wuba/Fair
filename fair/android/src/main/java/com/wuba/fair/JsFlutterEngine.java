@@ -28,12 +28,15 @@ public class JsFlutterEngine {
         msgChannel.setMessageHandler(callHandler);
     }
 
+    /**
+     * 接收dart返回结果，执行js，获取js的结果返回给dart端，
+     */
     private BasicMessageChannel.MessageHandler<String> callHandler = (message, reply) -> {
         Object obj;
         try {
             IJSExecutor executor = FairPlugin.get().getJsExecutor();
             obj = executor.invokeJSChannel(message);
-            reply.reply(obj.toString());
+            reply.reply(String.valueOf(obj));
         } catch (Exception e) {
             e.printStackTrace();
         }

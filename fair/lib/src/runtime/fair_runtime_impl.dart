@@ -94,6 +94,8 @@ class Runtime implements IRuntime {
     var msg = FairMessage(pageName, FairMessage.METHOD, map);
     var from = msg.from();
     var reply = _channel.sendCommonMessage(jsonEncode(from));
+    // reply.then((value) => print('来自Native端的消息invokeMethod${value}'));
+
     return Future.value(reply);
   }
 
