@@ -47,7 +47,7 @@ class FairMessageChannel {
       var funcName = data['funcName']?.toString();
 
       if (funcName == 'invokePlugin') {
-        var p = await FairPluginDispatcher.dispatch(jsonEncode('args'));
+        var p = await FairPluginDispatcher.dispatch(message);
         return p;
       }
 

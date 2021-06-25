@@ -33,7 +33,19 @@ GLOBAL['hello_world'] = (function () {
             let map = {
                 _count: this.data._count
             }
-            setData("hello_world",map);
+            setData("hello_world", map);
+
+            FairNet.request({
+                className:'hello_world',
+                method: 'GET',
+                url: 'https://www.baidu.com',
+                complete: function (params) {
+                    console.log('测试成功回调' + params)
+                },
+                error: function (params) {
+                    console.log('测试失败回调' + params)
+                }
+            })
 
         },
         _initData: function _initData(id) {

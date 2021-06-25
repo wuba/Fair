@@ -5,6 +5,7 @@
  */
 
 import 'package:fair/fair.dart';
+import 'package:fair_example/src/fair_plugin.dart';
 import 'package:fair_example/src/page/hello_world_proxy2.dart';
 import 'package:fair_example/src/page/modules.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ import 'src/page/sample_dynamic_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+  FairPluginDispatcher.registerPlugin('FairNet',FairNet());
   runApp(FairApp(
     delegate: {
       // 'hello_world': (ctx, _) => HelloWorldDelegate(),
