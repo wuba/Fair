@@ -38,12 +38,12 @@ GLOBAL['hello_world'] = (function () {
             FairNet.request({
                 className:'hello_world',
                 method: 'GET',
-                url: 'https://www.baidu.com',
+                url: 'https://wanandroid.com/user_article/list/0/json',
                 complete: function (params) {
-                    console.log('测试成功回调' + params)
+                    console.log('请求成功返回的数据： ' + params)
                 },
                 error: function (params) {
-                    console.log('测试失败回调' + params)
+                    console.log('请求失败返回的返回的数据： ' + params)
                 }
             })
 

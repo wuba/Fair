@@ -7,16 +7,14 @@
 import 'package:fair/fair.dart';
 import 'package:fair_example/src/fair_plugin.dart';
 import 'package:fair_example/src/page/hello_world_proxy2.dart';
+import 'package:fair_example/src/page/listdemo/sampe_list_view_src.dart';
 import 'package:fair_example/src/page/modules.dart';
 import 'package:flutter/material.dart';
-
-import 'src/page/hello_world_proxy.dart';
-import 'src/page/sample_dynamic_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  FairPluginDispatcher.registerPlugin('FairNet',FairNet());
+  FairPluginDispatcher.registerPlugin('FairNet', FairNet());
   runApp(FairApp(
     delegate: {
       // 'hello_world': (ctx, _) => HelloWorldDelegate(),
@@ -39,12 +37,12 @@ void main() {
         // path: 'assets/bundle/lib_src_page_hello_world.fair.bin',
 
         name: 'hello_world',
-        jsPath:'file:///android_asset/lib_src_page_sample_page_with_logic.js',
+        jsPath: 'file:///android_asset/lib_src_page_sample_page_with_logic.js',
         path: 'assets/bundle/lib_src_page_hello_world.fair.bin',
 
       ) /*HelloWorldPage()*/,
       routes: {
-        'sample_dynamic_page': (_) => SampleDynamicPage(),
+        'sample_dynamic_page': (_) => SampleWanAndroidPageSrc(),
       },
     ),
   ));

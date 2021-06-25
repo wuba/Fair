@@ -134,7 +134,7 @@ function setData(pageName, obj) {
 
 //todo 正式开发，放到统一的FairGlobal中
 const invokeFlutterCommonChannel = (invokeData, callback) => {
-    console.log("invokeData"+invokeData)
+    console.log("invokeData" + invokeData)
     jsInvokeFlutterChannel(invokeData, (resultStr) => {
         console.log('resultStr' + resultStr);
         if (callback) {
@@ -144,36 +144,46 @@ const invokeFlutterCommonChannel = (invokeData, callback) => {
 };
 
 /*这个地方是用户自定拓展的plugin，实际的时候需要用户自己定义格式*/
-//储存js的回调
+//存储FairNet callback回调，目前只是demo
 let callBack = {};
 
 let FairNet = {
     mFairNetId: 0,
     request: function (params) {
         let id = 'FairNet$' + this.mFairNetId++;
+        let requestParameter = {};
         params['id'] = id;
         params['className'] = "FairNet#request";
-        callBack[id] = params;
-
-        let p = {};
-        p['funcName'] = 'invokePlugin';
-        p['pageName'] = ['pageName'];
-        p['args'] = params;
-        let map = JSON.stringify(p);
+        callBack[id] = [params['complete'], params['error']];
+        requestParameter['funcName'] = 'invokePlugin';
+        requestParameter['pageName'] = ['pageName'];
+        requestParameter['args'] = params;
+        let map = JSON.stringify(requestParameter);
 
         invokeFlutterCommonChannel(map, (resultStr) => {
-            console.log("resultStr"+resultStr)
-            //这两个函数用户拓展的
-            let complete = params['complete'];
-            let error = params['error'];
+            console.log("resultStr" + resultStr)
+            let responseMap = JSON.parse(resultStr);
+            let code = responseMap['statusCode']
+            let data = responseMap['data']
+            let id = responseMap['id']
 
-            //根据返回的结果值，判断是通知成功还是失败
-            if (complete) {
-                complete('complete');
+            //这两个函数用户拓展的
+            if (callBack[id] === null) {
+                return;
             }
 
-            if (error) {
-                error('error');
+            let complete = callBack[id][0];
+            let error = callBack[id][1];
+            let statusMessage = responseMap['statusMessage']
+
+            if (code === 200) {
+                if (complete) {
+                    complete(data);
+                }
+            } else {
+                if (error) {
+                    error(statusMessage);
+                }
             }
 
         })
