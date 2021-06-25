@@ -1,0 +1,275 @@
+{
+  "className": "GestureDetector",
+  "na": {
+    "child": {
+      "className": "Column",
+      "na": {
+        "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+        "children": [
+          {
+            "className": "Container",
+            "na": {
+              "alignment": "#(Alignment.centerLeft)",
+              "color": "#(Colors.white)",
+              "height": 116,
+              "child": {
+                "className": "Flex",
+                "na": {
+                  "direction": "#(Axis.horizontal)",
+                  "children": [
+                    {
+                      "className": "Expanded",
+                      "na": {
+                        "child": {
+                          "className": "Row",
+                          "na": {
+                            "children": [
+                              {
+                                "className": "GestureDetector",
+                                "na": {
+                                  "child": {
+                                    "className": "Image.network",
+                                    "pa": [
+                                      "%(_iconLoupan)"
+                                    ],
+                                    "na": {
+                                      "fit": "#(BoxFit.cover)",
+                                      "width": 95.0,
+                                      "height": 84.0
+                                    }
+                                  },
+                                  "onTap": "@(_onImageTap)"
+                                }
+                              },
+                              {
+                                "className": "Column",
+                                "na": {
+                                  "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                  "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                  "children": [
+                                    {
+                                      "className": "Container",
+                                      "na": {
+                                        "alignment": "#(Alignment.centerLeft)",
+                                        "margin": {
+                                          "className": "EdgeInsets.only",
+                                          "na": {
+                                            "left": 16,
+                                            "bottom": 8
+                                          }
+                                        },
+                                        "child": {
+                                          "className": "Row",
+                                          "na": {
+                                            "children": [
+                                              {
+                                                "className": "Container",
+                                                "na": {
+                                                  "height": 18,
+                                                  "alignment": "#(Alignment.center)",
+                                                  "color": {
+                                                    "className": "Color",
+                                                    "pa": [
+                                                      "0xFF23C993"
+                                                    ]
+                                                  },
+                                                  "padding": {
+                                                    "className": "EdgeInsets.only",
+                                                    "na": {
+                                                      "left": 4,
+                                                      "right": 4,
+                                                      "top": 0
+                                                    }
+                                                  },
+                                                  "child": {
+                                                    "className": "Text",
+                                                    "pa": [
+                                                      "楼盘"
+                                                    ],
+                                                    "na": {
+                                                      "textAlign": "#(TextAlign.center)",
+                                                      "style": {
+                                                        "className": "TextStyle",
+                                                        "na": {
+                                                          "fontSize": 12,
+                                                          "color": {
+                                                            "className": "Color",
+                                                            "pa": [
+                                                              "0xFFFFFFFF"
+                                                            ]
+                                                          },
+                                                          "wordSpacing": 0
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              {
+                                                "className": "Container",
+                                                "na": {
+                                                  "width": 160,
+                                                  "padding": {
+                                                    "className": "EdgeInsets.only",
+                                                    "na": {
+                                                      "left": 4
+                                                    }
+                                                  },
+                                                  "child": {
+                                                    "className": "Text",
+                                                    "pa": [
+                                                      "%(_generateTitle)"
+                                                    ],
+                                                    "na": {
+                                                      "overflow": "#(TextOverflow.ellipsis)",
+                                                      "maxLines": 1,
+                                                      "textAlign": "#(TextAlign.left)",
+                                                      "style": {
+                                                        "className": "TextStyle",
+                                                        "na": {
+                                                          "fontSize": 16,
+                                                          "color": {
+                                                            "className": "Color",
+                                                            "pa": [
+                                                              "0xFF0B0F12"
+                                                            ]
+                                                          },
+                                                          "wordSpacing": 0
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "className": "Padding",
+                                      "na": {
+                                        "padding": {
+                                          "className": "EdgeInsets.only",
+                                          "na": {
+                                            "left": 16,
+                                            "bottom": 8
+                                          }
+                                        },
+                                        "child": {
+                                          "className": "Text",
+                                          "pa": [
+                                            "%(_generateSubtitle)"
+                                          ],
+                                          "na": {
+                                            "overflow": "#(TextOverflow.ellipsis)",
+                                            "maxLines": 1,
+                                            "style": {
+                                              "className": "TextStyle",
+                                              "na": {
+                                                "fontSize": 12,
+                                                "color": {
+                                                  "className": "Color",
+                                                  "pa": [
+                                                    "0xFF0B0F12"
+                                                  ]
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "className": "Padding",
+                                      "na": {
+                                        "padding": {
+                                          "className": "EdgeInsets.only",
+                                          "na": {
+                                            "left": 16,
+                                            "bottom": 8
+                                          }
+                                        },
+                                        "child": {
+                                          "className": "RichText",
+                                          "na": {
+                                            "text": {
+                                              "className": "TextSpan",
+                                              "na": {
+                                                "children": [
+                                                  {
+                                                    "className": "TextSpan",
+                                                    "na": {
+                                                      "text": "%(_generatePrice)",
+                                                      "style": {
+                                                        "className": "TextStyle",
+                                                        "na": {
+                                                          "fontSize": 18,
+                                                          "color": {
+                                                            "className": "Color",
+                                                            "pa": [
+                                                              "0xFFFF0000"
+                                                            ]
+                                                          },
+                                                          "wordSpacing": 0
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  {
+                                                    "className": "TextSpan",
+                                                    "na": {
+                                                      "text": "万",
+                                                      "style": {
+                                                        "className": "TextStyle",
+                                                        "na": {
+                                                          "fontSize": 12,
+                                                          "color": {
+                                                            "className": "Color",
+                                                            "pa": [
+                                                              "0xFF0B0F12"
+                                                            ]
+                                                          },
+                                                          "wordSpacing": 0
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                ]
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "className": "Container",
+            "na": {
+              "height": 0.5,
+              "color": {
+                "className": "Color",
+                "pa": [
+                  "0xFFE7EBEE"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "onTap": "@(_onItemTap)"
+  }
+}

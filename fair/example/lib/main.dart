@@ -7,8 +7,9 @@
 import 'package:fair/fair.dart';
 import 'package:fair_example/src/fair_plugin.dart';
 import 'package:fair_example/src/page/hello_world_proxy2.dart';
-import 'package:fair_example/src/page/listdemo/sampe_list_view_src.dart';
+import 'package:fair_example/src/page/list/sample_list_with_logic.dart';
 import 'package:fair_example/src/page/modules.dart';
+import 'package:fair_example/src/page/plugins/net/sampe_list_view_src.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -38,11 +39,11 @@ void main() {
 
         name: 'hello_world',
         jsPath: 'file:///android_asset/lib_src_page_sample_page_with_logic.js',
-        path: 'assets/bundle/lib_src_page_hello_world.fair.bin',
-
+        path: 'assets/bundle/lib_src_page_hello_world.fair.json',
       ) /*HelloWorldPage()*/,
       routes: {
         'sample_dynamic_page': (_) => SampleWanAndroidPageSrc(),
+        'sample_list_with_dynamic_cell_page': (_) => DynamicCellPage(),
       },
     ),
   ));
