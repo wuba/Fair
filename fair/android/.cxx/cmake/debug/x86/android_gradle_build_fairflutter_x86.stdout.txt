@@ -1,0 +1,2 @@
+ninja: Entering directory `/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/x86'
+ninja: no work to do.

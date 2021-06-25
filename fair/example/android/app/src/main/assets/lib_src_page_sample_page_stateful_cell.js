@@ -1,4 +1,4 @@
-(function() {
+GLOBAL['fair_cell'] =(function() {
     var __global__ = this;
 
     class LouPanDetail {
@@ -23,14 +23,15 @@
     return {
                 data: {
 //                    _louPanDetail: (JSON.parse('#(FairProps)'))._louPanDetail
-//                      _louPanDetail: {          id: 1,
-//                                                number: 100 * 20,
-//                                                type: 0,
-//                                                goodsId: 111,
-//                                                imgUrl:
-//                                                    'http://pic1.ajkimg.com/display/anjuke/d6e675-%E5%8E%A6%E9%97%A8%E6%B5%8B%E8%AF%95%E5%85%AC%E5%8F%B8/3ed05d79ec1de21e4fbbaf146573985a-800x570.jpg',
-//                                                }
-                    _louPanDetail: 0
+                      _louPanDetail: {          id: 1,
+                                                number: 100 * 20,
+                                                type: 0,
+                                                goodsId: 111,
+                                                imgUrl:
+                                                    "http://pic1.ajkimg.com/display/anjuke/d6e675-%E5%8E%A6%E9%97%A8%E6%B5%8B%E8%AF%95%E5%85%AC%E5%8F%B8/3ed05d79ec1de21e4fbbaf146573985a-800x570.jpg",
+                                                goodsDesc: [{boldText: "汤臣一品", normalText: ""}, {boldText: "", normalText: "上海浦东新区陆家嘴"}, {boldText: "3000", normalText: "万"}],
+                                      },
+
                 },
 
                 onLaunch: function onLaunch()  {
@@ -63,10 +64,10 @@
                 },
                 _onImageTap: function _onImageTap() {
                     this.data._louPanDetail.goodsDesc[0].normalText = ' ##';
-                    this.setData({_louPanDetail: this.data._louPanDetail});
+                    setData("fair_cell", {_louPanDetail: this.data._louPanDetail});
                 },
                 _onItemTap: function _onItemTap() {
                     this.data._louPanDetail.goodsDesc[0].normalText = ' ++';
-                    this.setData({_louPanDetail: this.data._louPanDetail});
+                    setData("fair_cell", {_louPanDetail: this.data._louPanDetail});
                 }
-   }})
+   }})()

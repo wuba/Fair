@@ -1,0 +1,73 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android",
+      "sdkFolder": "/Users/anjuke/Library/Android/sdk",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/build/fair/intermediates",
+      "gradleModulePathName": ":fair",
+      "moduleRootFolder": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android",
+      "makeFile": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "compilerSettingsCacheFolder": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/.cxx",
+      "cxxFolder": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx",
+      "ndkFolder": "/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462",
+      "ndkVersion": "21.1.6352462",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [],
+    "cFlagList": [],
+    "cppFlagsList": [
+      "",
+      "-DTENCENT_SHELL\u003d0"
+    ],
+    "variantName": "debug",
+    "soFolder": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/build/fair/intermediates/cmake/debug/lib",
+    "objFolder": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/build/fair/intermediates/cmake/debug/obj",
+    "jsonFolder": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug",
+    "gradleBuildOutputFolder": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cxx/debug",
+    "isDebuggableEnabled": true,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": []
+  },
+  "abi": "X86",
+  "abiPlatformVersion": 19,
+  "cxxBuildFolder": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/x86",
+  "jsonFile": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/x86/android_gradle_build.json",
+  "gradleBuildOutputFolder": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cxx/debug/x86",
+  "objFolder": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/build/fair/intermediates/cmake/debug/obj/x86",
+  "buildCommandFile": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/x86/build_command.txt",
+  "buildOutputFile": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/x86/build_output.txt",
+  "modelOutputFile": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/x86/build_model.json",
+  "cmake": {
+    "cmakeListsWrapperFile": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cxx/debug/x86/CMakeLists.txt",
+    "toolchainWrapperFile": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cxx/debug/x86/android_gradle_build.toolchain.cmake",
+    "buildGenerationStateFile": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cxx/debug/x86/build_generation_state.json",
+    "cacheKeyFile": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cxx/debug/x86/compiler_cache_key.json",
+    "compilerCacheUseFile": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cxx/debug/x86/compiler_cache_use.json",
+    "compilerCacheWriteFile": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cxx/debug/x86/compiler_cache_write.json",
+    "toolchainSettingsFromCacheFile": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cxx/debug/x86/compiler_settings_cache.cmake",
+    "cmakeWrappingBaseFolder": "."
+  },
+  "jsonGenerationLoggingRecordFile": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/x86/json_generation_record.json",
+  "compileCommandsJsonFile": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/x86/compile_commands.json"
+}

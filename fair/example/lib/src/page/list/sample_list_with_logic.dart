@@ -68,7 +68,7 @@ class _State extends State<DynamicCellPage> {
           child: FairWidget(
             name: item.id,
             path: 'assets/bundle/lib_src_page_sample_page_stateful_cell.fair.json',
-            jsPath:'file:///android_asset/lib_src_page_sample_page_stateful_cell.fair.js',
+            jsPath:'file:///android_asset/lib_src_page_sample_page_stateful_cell.js',
             data: {"_louPanDetail": louPanDetail},
           ));
 

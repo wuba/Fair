@@ -87,7 +87,15 @@ abstract class RuntimeFairDelegate {
   }
 
   void bindBaseFunc() {
-
+    _bindFunctionsMap['runtimeInvokeMethod'] = (props) {
+      runtime?.invokeMethod(pageName, props, null);
+    };
+    _bindFunctionsMap['runtimeInvokeMethodSync'] = (props) {
+      return runtime?.invokeMethodSync(pageName, props, null);
+    };
+    _bindFunctionsMap['runtimeParseVar'] = (props) {
+      return runtime?.variablesSync(pageName, props);
+    };
   }
 
   void bindBaseValue(){
