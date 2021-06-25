@@ -1,0 +1,58 @@
+{
+  "stringTable": {
+    "0": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/.cxx/cmake/profile/x86_64",
+    "1": "--target=x86_64-none-linux-android21 --gcc-toolchain=/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dfairflutter_EXPORTS -I../../../../src/main/cpp/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -g -fPIC"
+  },
+  "buildFiles": [
+    "/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/src/main/cpp/sdk/CMakeLists.txt",
+    "/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake",
+    "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/anjuke/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/.cxx/cmake/profile/x86_64\" clean"
+  ],
+  "buildTargetsCommand": "/Users/anjuke/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/.cxx/cmake/profile/x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "fairflutter-Debug-x86_64": {
+      "buildCommand": "/Users/anjuke/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/.cxx/cmake/profile/x86_64\" fairflutter",
+      "buildType": "debug",
+      "toolchain": "4090523807",
+      "abi": "x86_64",
+      "artifactName": "fairflutter",
+      "files": [
+        {
+          "src": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/src/main/cpp/sdk/mxflutter_ffi.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/src/main/cpp/sdk/mxflutter_app.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/src/main/cpp/sdk/jni_helper.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/src/main/cpp/sdk/MXFFICallbackManager.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/src/main/jniLibs/x86_64/libfairflutter.so"
+    }
+  },
+  "toolchains": {
+    "4090523807": {
+      "cppCompilerExecutable": "/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}
