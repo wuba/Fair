@@ -46,8 +46,8 @@ public class V8JSExecutor extends JSExecutor {
      */
     @Override
     public void loadJS(String name, String filePath, JsResultCallback<String> complete) {
-        String js = FairFileUtil.getScript(filePath);
-        v8ObjectMap.put(name, v8.executeObjectScript(js));
+//        String js = FairFileUtil.getScript(filePath);
+        v8ObjectMap.put(name, v8.executeObjectScript(filePath));
 
         if (complete != null) {
             complete.call("result");

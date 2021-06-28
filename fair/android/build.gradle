@@ -48,7 +48,6 @@ android {
         disable 'InvalidPackage'
     }
 
-    /** 编译mxflutter so时反注释掉此处,编译完恢复 **/
     externalNativeBuild {
         cmake {
             path 'CMakeLists.txt'
