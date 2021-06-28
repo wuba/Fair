@@ -1,0 +1,5 @@
+/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/x86/CMakeFiles/edit_cache.dir
+/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/x86/CMakeFiles/rebuild_cache.dir
+/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/x86/src/main/cpp/sdk/CMakeFiles/edit_cache.dir
+/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/x86/src/main/cpp/sdk/CMakeFiles/rebuild_cache.dir
+/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/x86/src/main/cpp/sdk/CMakeFiles/fairflutter.dir

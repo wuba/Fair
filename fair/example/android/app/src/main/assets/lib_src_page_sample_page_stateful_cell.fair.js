@@ -34,11 +34,11 @@
                 },
 
                 onLaunch: function onLaunch()  {
-                    Console.log("onLaunch");
+                    console.log("onLaunch");
                 },
 
                 onDispose: function onDispose()  {
-                    Console.log("onDispose");
+                    console.log("onDispose");
                 },
 
                 _iconLoupan: function _iconLoupan() {

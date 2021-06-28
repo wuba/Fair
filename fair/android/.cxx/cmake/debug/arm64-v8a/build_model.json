@@ -1,0 +1,73 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "/Users/wayne/project/fair-new/fair/example/android",
+      "sdkFolder": "/Users/wayne/Library/Android/sdk",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "/Users/wayne/project/fair-new/fair/example/build/fair/intermediates",
+      "gradleModulePathName": ":fair",
+      "moduleRootFolder": "/Users/wayne/project/fair-new/fair/android",
+      "makeFile": "/Users/wayne/project/fair-new/fair/android/CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "compilerSettingsCacheFolder": "/Users/wayne/project/fair-new/fair/example/android/.cxx",
+      "cxxFolder": "/Users/wayne/project/fair-new/fair/android/.cxx",
+      "ndkFolder": "/Users/wayne/Library/Android/sdk/ndk/22.1.7171670",
+      "ndkVersion": "22.1.7171670",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [],
+    "cFlagList": [],
+    "cppFlagsList": [
+      "",
+      "-DTENCENT_SHELL\u003d0"
+    ],
+    "variantName": "debug",
+    "soFolder": "/Users/wayne/project/fair-new/fair/example/build/fair/intermediates/cmake/debug/lib",
+    "objFolder": "/Users/wayne/project/fair-new/fair/example/build/fair/intermediates/cmake/debug/obj",
+    "jsonFolder": "/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug",
+    "gradleBuildOutputFolder": "/Users/wayne/project/fair-new/fair/android/.cxx/cxx/debug",
+    "isDebuggableEnabled": true,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": []
+  },
+  "abi": "ARM64_V8A",
+  "abiPlatformVersion": 19,
+  "cxxBuildFolder": "/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a",
+  "jsonFile": "/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a/android_gradle_build.json",
+  "gradleBuildOutputFolder": "/Users/wayne/project/fair-new/fair/android/.cxx/cxx/debug/arm64-v8a",
+  "objFolder": "/Users/wayne/project/fair-new/fair/example/build/fair/intermediates/cmake/debug/obj/arm64-v8a",
+  "buildCommandFile": "/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a/build_command.txt",
+  "buildOutputFile": "/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a/build_output.txt",
+  "modelOutputFile": "/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a/build_model.json",
+  "cmake": {
+    "cmakeListsWrapperFile": "/Users/wayne/project/fair-new/fair/android/.cxx/cxx/debug/arm64-v8a/CMakeLists.txt",
+    "toolchainWrapperFile": "/Users/wayne/project/fair-new/fair/android/.cxx/cxx/debug/arm64-v8a/android_gradle_build.toolchain.cmake",
+    "buildGenerationStateFile": "/Users/wayne/project/fair-new/fair/android/.cxx/cxx/debug/arm64-v8a/build_generation_state.json",
+    "cacheKeyFile": "/Users/wayne/project/fair-new/fair/android/.cxx/cxx/debug/arm64-v8a/compiler_cache_key.json",
+    "compilerCacheUseFile": "/Users/wayne/project/fair-new/fair/android/.cxx/cxx/debug/arm64-v8a/compiler_cache_use.json",
+    "compilerCacheWriteFile": "/Users/wayne/project/fair-new/fair/android/.cxx/cxx/debug/arm64-v8a/compiler_cache_write.json",
+    "toolchainSettingsFromCacheFile": "/Users/wayne/project/fair-new/fair/android/.cxx/cxx/debug/arm64-v8a/compiler_settings_cache.cmake",
+    "cmakeWrappingBaseFolder": "."
+  },
+  "jsonGenerationLoggingRecordFile": "/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a/json_generation_record.json",
+  "compileCommandsJsonFile": "/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a/compile_commands.json"
+}
