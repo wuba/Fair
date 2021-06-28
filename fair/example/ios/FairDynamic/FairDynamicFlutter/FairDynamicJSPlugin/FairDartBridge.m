@@ -66,8 +66,11 @@ FairSingletonM(FairDartBridge);
                 if ([model.path containsString:@"lib_src_page_sample_page_with_logic2"]) {
                     model.path = @"lib_src_page_sample_page_with_logic2.js";
                 }
-                else {
+                else if ([model.path containsString:@"lib_src_page_sample_page_with_logic"]) {
                     model.path = @"lib_src_page_sample_page_with_logic.js";
+                }
+                else {
+                    model.path = @"lib_src_page_sample_page_stateful_cell.js";
                 }
 #endif
                 [strongSelf.delegate injectionJSScriptWtihFilePath:model.path callback:^(id result, NSError *error) {
