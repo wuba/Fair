@@ -84,6 +84,7 @@ abstract class IRuntime {
   dynamic getBindVariableAndFuncSync(String pageName);
 
   void bindCallback(String key, RuntimeCallback callback);
+  Future<Map> getBindVariableAndFunc(String pageName);
 }
 
 typedef RuntimeCallback = void Function(dynamic);

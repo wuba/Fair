@@ -17,11 +17,6 @@ void main() {
 
   FairPluginDispatcher.registerPlugin('FairNet', FairNet());
   runApp(FairApp(
-    delegate: {
-      // 'hello_world': (ctx, _) => HelloWorldDelegate(),
-      'hello_world': (ctx, _) => HelloWorldDelegate2(),
-      'hello_world2': (ctx, _) => HelloWorldDelegate2(),
-    },
     modules: {
       ShowFairAlertModule.tagName: () => ShowFairAlertModule(),
     },
@@ -38,7 +33,7 @@ void main() {
         // path: 'assets/bundle/lib_src_page_hello_world.fair.bin',
 
         name: 'hello_world',
-        jsPath: 'file:///android_asset/lib_src_page_sample_page_with_logic.js',
+        jsPath: 'assets/js/lib_src_page_sample_page_with_logic.js',
         path: 'assets/bundle/lib_src_page_hello_world.fair.json',
       ) /*HelloWorldPage()*/,
       routes: {

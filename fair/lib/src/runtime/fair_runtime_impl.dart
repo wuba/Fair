@@ -56,9 +56,10 @@ class Runtime implements IRuntime {
   }
 
   @override
-  Future<dynamic> addScript(String pageName, String script) {
+  Future<dynamic> addScript(String pageName, String script) async {
+   var scriptSource= await rootBundle.loadString(script);
     var map = <dynamic, dynamic>{};
-    map[FairMessage.PATH] = script;
+    map[FairMessage.PATH] = scriptSource;
     map[FairMessage.PAGE_NAME] = pageName;
     return _channel.loadJS(jsonEncode(map), null);
   }
@@ -130,5 +131,11 @@ class Runtime implements IRuntime {
   @override
   Map getBindVariableAndFuncSync(String pageName) {
     return jsonDecode(invokeMethodSync(pageName, 'getAllJSBindData', null));
+  }
+
+  @override
+  Future<Map> getBindVariableAndFunc(String pageName) async {
+    var r = await invokeMethod(pageName, 'getAllJSBindData', null);
+    return Future.value(jsonDecode(r));
   }
 }
