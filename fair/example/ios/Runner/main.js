@@ -9,9 +9,9 @@ function invokeJSFunc(parameter) {
     let map = JSON.parse(parameter);
 
     if ('method' === map['type']) {
-        return _invokeMethod(parameter)
+        return _invokeMethod(parameter);
     }
-    return null
+    return null;
 
 }
 
@@ -23,28 +23,28 @@ function test() {
             "funcName": "getAllJSBindData",
             "args": null
         }
-    }
+    };
 
-    console.log('all bind data :' + invokeJSFunc(JSON.stringify(map)))
+    console.log('all bind data :' + invokeJSFunc(JSON.stringify(map)));
 }
 
 
 function _invokeMethod(parameter) {
-    let o = JSON.parse(parameter)
-    let pageName = o['pageName']
-    let funcName = o['args']['funcName']
+    let o = JSON.parse(parameter);
+    let pageName = o['pageName'];
+    let funcName = o['args']['funcName'];
     let args = o['args']['args'];
 
     if ('getAllJSBindData' === funcName) {
-        return getAllJSBindData(parameter)
+        return getAllJSBindData(parameter);
     }
     if ('releaseJS' === funcName) {
-        return null;
+        return _release(parameter);
     }
 
-    let mClass = GLOBAL[pageName]
+    let mClass = GLOBAL[pageName];
 
-    let methodResult = mClass[funcName].apply(mClass, args)
+    let methodResult = mClass[funcName].apply(mClass, args);
 
     let result = {
         pageName: pageName,
@@ -52,97 +52,142 @@ function _invokeMethod(parameter) {
             result: methodResult
         }
 
-    }
-    return null;
-
-    return JSON.stringify(result)
+    };
+    return JSON.stringify(result);
 }
 
 
 //demo 获取所有的变量和绑定的方法
 function getAllJSBindData(parameter) {
-    let o = JSON.parse(parameter)
-    let pageName = o['pageName']
-    let mc = GLOBAL[pageName]
+    let o = JSON.parse(parameter);
+    let pageName = o['pageName'];
+    let mc = GLOBAL[pageName];
 
-    let bind = {}
+    let bind = {};
 
     if (isNull(mc)) {
-        return JSON.stringify(bind)
+        return JSON.stringify(bind);
     }
 
-    let bindFunc = []
+    let bindFunc = [];
     let keys;
 
     if (!isNull(keys = Object.keys(mc))) {
         let kIndex = 0;
         for (let i = 0; i < keys.length; i++) {
-            let k = keys[i]
+            let k = keys[i];
 
             if (!mc.hasOwnProperty(k)) {
-                continue
+                continue;
             }
             if (isFunc(mc[k])) {
 
-                bindFunc[kIndex] = k
-                kIndex++
-                continue
+                bindFunc[kIndex] = k;
+                kIndex++;
+                continue;
             }
             //先只要data里面的变量
             if ('data' === k) {
-                bind['variable'] = mc[k]
+                bind['variable'] = mc[k];
             }
         }
     }
-    bind['func'] = bindFunc
+    bind['func'] = bindFunc;
     let result = {
         pageName: pageName,
         result: {
             result: bind
         }
 
-    }
+    };
 
-    return JSON.stringify(result)
+    return JSON.stringify(result);
 }
 
 function _release(parameter) {
-    let o = JSON.parse(parameter)
-    let pageName = o['pageName']
-    GLOBAL[pageName] = null
-    return null
+    let o = JSON.parse(parameter);
+    let pageName = o['pageName'];
+    GLOBAL[pageName] = null;
+    return null;
 }
 
 
 function isFunc(name) {
-    return typeof name === "function"
+    return typeof name === "function";
 }
 
 function isNull(prop) {
     return prop === null || 'undefined' === prop
         || 'undefined' === typeof prop
         || undefined === typeof prop
-        || 'null' === prop
+        || 'null' === prop;
 }
 
 function setData(pageName, obj) {
     let p = {};
-    p['funcName'] = 'setData'
-    p['pageName'] = pageName
-    p['args'] = obj
-    let map = JSON.stringify(p)
-    invokeFlutterCommonChannel(map)
+    p['funcName'] = 'setData';
+    p['pageName'] = pageName;
+    p['args'] = obj;
+    let map = JSON.stringify(p);
+    invokeFlutterCommonChannel(map);
 }
 
 //todo 正式开发，放到统一的FairGlobal中
 const invokeFlutterCommonChannel = (invokeData, callback) => {
+    console.log("invokeData" + invokeData)
     jsInvokeFlutterChannel(invokeData, (resultStr) => {
-        console.log('resultStr:' + resultStr)
+        console.log('resultStr' + resultStr);
         if (callback) {
             callback(resultStr);
         }
     });
 };
 
+/*这个地方是用户自定拓展的plugin，实际的时候需要用户自己定义格式*/
+//存储FairNet callback回调，目前只是demo
+let callBack = {};
+
+let FairNet = {
+    mFairNetId: 0,
+    request: function (params) {
+        let id = 'FairNet$' + this.mFairNetId++;
+        let requestParameter = {};
+        params['id'] = id;
+        params['className'] = "FairNet#request";
+        callBack[id] = [params['complete'], params['error']];
+        requestParameter['funcName'] = 'invokePlugin';
+        requestParameter['pageName'] = ['pageName'];
+        requestParameter['args'] = params;
+        let map = JSON.stringify(requestParameter);
+
+        invokeFlutterCommonChannel(map, (resultStr) => {
+            console.log("resultStr" + resultStr)
+            let responseMap = JSON.parse(resultStr);
+            let code = responseMap['statusCode']
+            let data = responseMap['data']
+            let id = responseMap['id']
+
+            //这两个函数用户拓展的
+            if (callBack[id] === null) {
+                return;
+            }
+
+            let complete = callBack[id][0];
+            let error = callBack[id][1];
+            let statusMessage = responseMap['statusMessage']
+
+            if (code === 200) {
+                if (complete) {
+                    complete(data);
+                }
+            } else {
+                if (error) {
+                    error(statusMessage);
+                }
+            }
+
+        })
+    }
+}
 
 
