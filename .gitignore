@@ -22,3 +22,4 @@ doc/.vuepress/dist/
 github-pages/
 samples/fair_example
 fair/android/.cxx/
+fair/example/android/app/.cxx/
