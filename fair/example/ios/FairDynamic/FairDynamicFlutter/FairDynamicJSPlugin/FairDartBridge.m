@@ -60,20 +60,8 @@ FairSingletonM(FairDartBridge);
         
         // 加载js
         if ([method isEqualToString:@"loadMainJs"]) {
-            if ([strongSelf.delegate respondsToSelector:@selector(injectionJSScriptWtihFilePath: callback:)]) {
-#warning 测试代码，后期会直接加载JS语句
-#ifdef DEBUG
-                if ([model.path containsString:@"lib_src_page_sample_page_with_logic2"]) {
-                    model.path = @"lib_src_page_sample_page_with_logic2.js";
-                }
-                else if ([model.path containsString:@"lib_src_page_sample_page_with_logic"]) {
-                    model.path = @"lib_src_page_sample_page_with_logic.js";
-                }
-                else {
-                    model.path = @"lib_src_page_sample_page_stateful_cell.js";
-                }
-#endif
-                [strongSelf.delegate injectionJSScriptWtihFilePath:model.path callback:^(id result, NSError *error) {
+            if ([strongSelf.delegate respondsToSelector:@selector(injectionJSScriptWtihJSScript: callback:)]) {
+                [strongSelf.delegate injectionJSScriptWtihJSScript:model.path callback:^(id result, NSError *error) {
                     callback(@"success");
                 }];
             }
