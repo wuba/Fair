@@ -36,12 +36,12 @@ mixin AppState {
     _proxy.addGeneratedBinding(generated);
   }
 
-  void register(FairState state) {
+  Future<dynamic> register(FairState state) async {
     log('register state: ${state.state2key}');
     _mFairHandler.register(state);
     var delegate = state.delegate;
     delegate.setRunTime(runtime);
-    delegate.bindAll({});
+    await delegate.bindAll({});
     bindData.putIfAbsent(
       state.state2key,
       () => BindingData(
@@ -50,6 +50,7 @@ mixin AppState {
         values: delegate.bindValue(),
       ),
     );
+    return Future.value(null);
   }
 
   void unregister(FairState state) {
