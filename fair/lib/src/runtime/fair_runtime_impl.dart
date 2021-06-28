@@ -56,9 +56,13 @@ class Runtime implements IRuntime {
   }
 
   @override
-  Future<dynamic> addScript(String pageName, String script) async {
+  Future<dynamic> addScript(String pageName, String script, dynamic props) async {
    var scriptSource= await rootBundle.loadString(script);
-    var map = <dynamic, dynamic>{};
+   if (props != null && props['fairProps'] != null) {
+     scriptSource = scriptSource.replaceFirst(new RegExp(r'#FairProps#'), props['fairProps']);
+     scriptSource = scriptSource.replaceAll(new RegExp(r'#FairPageName#'), pageName);
+   }
+   var map = <dynamic, dynamic>{};
     map[FairMessage.PATH] = scriptSource;
     map[FairMessage.PAGE_NAME] = pageName;
     return _channel.loadJS(jsonEncode(map), null);

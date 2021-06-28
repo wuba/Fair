@@ -21,5 +21,10 @@ doc/.vuepress/public/project/
 doc/.vuepress/dist/
 github-pages/
 samples/fair_example
+<<<<<<< HEAD
 #fair/android/.cxx/
 #fair/example/android/app/.cxx/
+=======
+fair/android/.cxx/
+fair/android/src/main/jniLibs/
+>>>>>>> [Fair][Logic]: 添加参数支持

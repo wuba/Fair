@@ -69,4 +69,11 @@
                     this.data._louPanDetail.goodsDesc[0].normalText = ' ++';
                     this.setData({_louPanDetail: this.data._louPanDetail});
                 }
+<<<<<<< HEAD:fair/example/android/app/src/main/assets/lib_src_page_sample_page_stateful_cell.fair.js
    }})
+=======
+   }})()
+
+
+
+>>>>>>> [Fair][Logic]: 添加参数支持:fair/example/android/app/src/main/assets/lib_src_page_sample_page_stateful_cell.js
