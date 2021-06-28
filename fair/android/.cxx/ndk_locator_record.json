@@ -1,5 +1,5 @@
 {
-  "ndkFolder": "/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462",
+  "ndkFolder": "/Users/bujie/Library/Android/sdk/ndk/22.1.7171670",
   "messages": [
     {
       "level": "INFO",
@@ -7,7 +7,7 @@
     },
     {
       "level": "INFO",
-      "message": "ndk.dir in local.properties is /Users/anjuke/Library/Android/sdk/ndk/21.1.6352462"
+      "message": "ndk.dir in local.properties is not set"
     },
     {
       "level": "INFO",
@@ -15,27 +15,23 @@
     },
     {
       "level": "INFO",
-      "message": "sdkFolder is /Users/anjuke/Library/Android/sdk"
+      "message": "sdkFolder is /Users/bujie/Library/Android/sdk"
     },
     {
       "level": "INFO",
-      "message": "Considering /Users/anjuke/Library/Android/sdk/ndk/21.1.6352462 by ndk.dir"
+      "message": "Considering /Users/bujie/Library/Android/sdk/ndk-bundle in SDK ndk-bundle folder"
     },
     {
       "level": "INFO",
-      "message": "Considering /Users/anjuke/Library/Android/sdk/ndk-bundle in SDK ndk-bundle folder"
+      "message": "Considering /Users/bujie/Library/Android/sdk/ndk/22.1.7171670 in SDK ndk folder"
     },
     {
       "level": "INFO",
-      "message": "Considering /Users/anjuke/Library/Android/sdk/ndk/21.1.6352462 in SDK ndk folder"
+      "message": "Rejected /Users/bujie/Library/Android/sdk/ndk-bundle in SDK ndk-bundle folder because that location has no source.properties"
     },
     {
       "level": "INFO",
-      "message": "Rejected /Users/anjuke/Library/Android/sdk/ndk-bundle in SDK ndk-bundle folder because that location has no source.properties"
-    },
-    {
-      "level": "INFO",
-      "message": "Found requested ndk.dir (/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462) which has version 21.1.6352462"
+      "message": "No user requested version, choosing /Users/bujie/Library/Android/sdk/ndk/22.1.7171670 which is version 22.1.7171670"
     }
   ]
 }

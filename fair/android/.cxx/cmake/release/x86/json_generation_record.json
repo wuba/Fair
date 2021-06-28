@@ -1,0 +1,26 @@
+[
+  {
+    "level": "INFO",
+    "message": "Start JSON generation. Platform version: 19 min SDK version: x86"
+  },
+  {
+    "level": "INFO",
+    "message": "No CMake version was specified in build.gradle. Choosing a suitable version."
+  },
+  {
+    "level": "INFO",
+    "message": "Trying to locate CMake in local SDK repository."
+  },
+  {
+    "level": "INFO",
+    "message": "- CMake found in SDK at \u0027/Users/bujie/Library/Android/sdk/cmake/3.6.4111459\u0027 had version \u00273.6.0\u0027"
+  },
+  {
+    "level": "INFO",
+    "message": "JSON \u0027/Users/bujie/flutter/dev/fair-new/fair/android/.cxx/cmake/release/x86/android_gradle_build.json\u0027 was up-to-date"
+  },
+  {
+    "level": "INFO",
+    "message": "JSON generation completed without problems"
+  }
+]

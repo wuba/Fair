@@ -1,0 +1,11 @@
+CMake Warning at /Users/bujie/Library/Android/sdk/ndk/22.1.7171670/build/cmake/android.toolchain.cmake:449 (message):
+  An old version of CMake is being used that cannot automatically detect
+  compiler attributes.  Compiler identification is being bypassed.  Some
+  values may be wrong or missing.  Update to CMake 3.19 or newer to use
+  CMake's built-in compiler identification.
+Call Stack (most recent call first):
+  .cxx/cmake/release/x86_64/CMakeFiles/3.6.0-rc2/CMakeSystem.cmake:6 (include)
+  CMakeLists.txt
+
+
+CMAKE_SOURCE_DIR = /Users/bujie/flutter/dev/fair-new/fair/android

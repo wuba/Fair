@@ -8,7 +8,7 @@ include("/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.
 set(CMAKE_SYSTEM "Android-1")
 set(CMAKE_SYSTEM_NAME "Android")
 set(CMAKE_SYSTEM_VERSION "1")
-set(CMAKE_SYSTEM_PROCESSOR "i686")
+set(CMAKE_SYSTEM_PROCESSOR "aarch64")
 
 set(CMAKE_CROSSCOMPILING "TRUE")
 
