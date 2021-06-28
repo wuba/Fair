@@ -1,7 +1,8 @@
-Executable : /Users/anjuke/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja
+Executable : /Users/wayne/Library/Android/sdk/cmake/3.6.4111459/bin/cmake
 arguments : 
--C
-/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/x86_64
+--build
+/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/x86_64
+--target
 fairflutter
 jvmArgs : 
 

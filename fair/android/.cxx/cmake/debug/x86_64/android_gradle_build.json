@@ -1,53 +1,54 @@
+
 {
-  "stringTable": {
-    "0": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/x86_64",
-    "1": "--target=x86_64-none-linux-android21 --gcc-toolchain=/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dfairflutter_EXPORTS -I../../../../src/main/cpp/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -DTENCENT_SHELL=0 -O0 -fno-limit-debug-info -g -fPIC"
-  },
-  "buildFiles": [
-    "/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
-    "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/src/main/cpp/sdk/CMakeLists.txt",
-    "/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake",
-    "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/CMakeLists.txt"
-  ],
-  "cleanCommands": [
-    "/Users/anjuke/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/x86_64\" clean"
-  ],
-  "buildTargetsCommand": "/Users/anjuke/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
-  "libraries": {
-    "fairflutter-Debug-x86_64": {
-      "buildCommand": "/Users/anjuke/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/x86_64\" fairflutter",
-      "buildType": "debug",
-      "toolchain": "4090523807",
-      "abi": "x86_64",
-      "artifactName": "fairflutter",
-      "files": [
-        {
-          "src": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/src/main/cpp/sdk/fair_app.cpp",
-          "flagsOrdinal": 1,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/src/main/cpp/sdk/fair_ffi.cpp",
-          "flagsOrdinal": 1,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/src/main/cpp/sdk/jni_helper.cpp",
-          "flagsOrdinal": 1,
-          "workingDirectoryOrdinal": 0
-        }
-      ],
-      "headers": [],
-      "output": "/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/src/main/jniLibs/x86_64/libfairflutter.so"
-    }
-  },
-  "toolchains": {
-    "4090523807": {
-      "cppCompilerExecutable": "/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
-    }
-  },
-  "cFileExtensions": [],
-  "cppFileExtensions": [
-    "cpp"
-  ]
+	"buildFiles" : 
+	[
+		"/Users/wayne/project/fair-new/fair/android/CMakeLists.txt",
+		"/Users/wayne/project/fair-new/fair/android/src/main/cpp/sdk/CMakeLists.txt"
+	],
+	"cleanCommands" : 
+	[
+		"/Users/wayne/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/x86_64 --target clean"
+	],
+	"cppFileExtensions" : [ "cpp" ],
+	"libraries" : 
+	{
+		"fairflutter-Debug-x86_64" : 
+		{
+			"abi" : "x86_64",
+			"artifactName" : "fairflutter",
+			"buildCommand" : "/Users/wayne/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/x86_64 --target fairflutter",
+			"buildType" : "debug",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android21 --gcc-toolchain=/Users/wayne/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/wayne/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dfairflutter_EXPORTS -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -DTENCENT_SHELL=0 -O0 -fno-limit-debug-info  -g -fPIC    -c ",
+					"src" : "/Users/wayne/project/fair-new/fair/android/src/main/cpp/sdk/fair_app.cpp",
+					"workingDirectory" : "/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/x86_64"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android21 --gcc-toolchain=/Users/wayne/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/wayne/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dfairflutter_EXPORTS -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -DTENCENT_SHELL=0 -O0 -fno-limit-debug-info  -g -fPIC    -c ",
+					"src" : "/Users/wayne/project/fair-new/fair/android/src/main/cpp/sdk/fair_ffi.cpp",
+					"workingDirectory" : "/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/x86_64"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android21 --gcc-toolchain=/Users/wayne/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/wayne/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dfairflutter_EXPORTS -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -DTENCENT_SHELL=0 -O0 -fno-limit-debug-info  -g -fPIC    -c ",
+					"src" : "/Users/wayne/project/fair-new/fair/android/src/main/cpp/sdk/jni_helper.cpp",
+					"workingDirectory" : "/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/x86_64"
+				}
+			],
+			"output" : "/Users/wayne/project/fair-new/fair/android/src/main/jniLibs/x86_64/libfairflutter.so",
+			"toolchain" : "13600600593806504482"
+		}
+	},
+	"toolchains" : 
+	{
+		"13600600593806504482" : 
+		{
+			"cCompilerExecutable" : "/Users/wayne/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
+			"cppCompilerExecutable" : "/Users/wayne/Library/Android/sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+		}
+	}
 }

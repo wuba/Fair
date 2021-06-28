@@ -1,2 +1,1 @@
-ninja: Entering directory `/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/armeabi-v7a'
 ninja: no work to do.

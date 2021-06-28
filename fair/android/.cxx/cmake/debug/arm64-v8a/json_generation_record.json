@@ -5,15 +5,7 @@
   },
   {
     "level": "INFO",
-    "message": "rebuilding JSON /Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a/android_gradle_build.json due to:"
-  },
-  {
-    "level": "INFO",
-    "message": "- expected json /Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a/android_gradle_build.json file is not present, will remove stale json folder"
-  },
-  {
-    "level": "INFO",
-    "message": "- missing previous command file /Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a/build_command.txt, will remove stale json folder"
+    "message": "rebuilding JSON /Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a/android_gradle_build.json due to:"
   },
   {
     "level": "INFO",
@@ -21,15 +13,39 @@
   },
   {
     "level": "INFO",
-    "message": "removing stale contents from \u0027/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a\u0027"
+    "message": "- a dependent build file changed"
   },
   {
     "level": "INFO",
-    "message": "created folder \u0027/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a\u0027"
+    "message": "  - /Users/anjuke/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake"
   },
   {
     "level": "INFO",
-    "message": "executing cmake Executable : /Users/anjuke/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake\narguments : \n-H/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android\n-B/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a\n-DANDROID_ABI\u003darm64-v8a\n-DANDROID_PLATFORM\u003dandroid-19\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/build/fair/intermediates/cmake/debug/obj/arm64-v8a\n-DCMAKE_BUILD_TYPE\u003dDebug\n-DANDROID_NDK\u003d/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462\n-DCMAKE_CXX_FLAGS\u003d -DTENCENT_SHELL\u003d0\n-DCMAKE_SYSTEM_NAME\u003dAndroid\n-DCMAKE_ANDROID_ARCH_ABI\u003darm64-v8a\n-DCMAKE_SYSTEM_VERSION\u003d19\n-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\n-DCMAKE_ANDROID_NDK\u003d/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/anjuke/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake\n-G Ninja\n-DCMAKE_MAKE_PROGRAM\u003d/Users/anjuke/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja\njvmArgs : \n\n"
+    "message": "  - /Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/src/main/cpp/sdk/CMakeLists.txt"
+  },
+  {
+    "level": "INFO",
+    "message": "  - /Users/anjuke/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+  },
+  {
+    "level": "INFO",
+    "message": "  - /Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/CMakeLists.txt"
+  },
+  {
+    "level": "INFO",
+    "message": "removing stale contents from \u0027/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a\u0027"
+  },
+  {
+    "level": "INFO",
+    "message": "created folder \u0027/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a\u0027"
+  },
+  {
+    "level": "INFO",
+    "message": "executing cmake Executable : /Users/wayne/Library/Android/sdk/cmake/3.6.4111459/bin/cmake\narguments : \n-H/Users/wayne/project/fair-new/fair/android\n-B/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a\n-DANDROID_ABI\u003darm64-v8a\n-DANDROID_PLATFORM\u003dandroid-19\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/wayne/project/fair-new/fair/example/build/fair/intermediates/cmake/debug/obj/arm64-v8a\n-DCMAKE_BUILD_TYPE\u003dDebug\n-DANDROID_NDK\u003d/Users/wayne/Library/Android/sdk/ndk/22.1.7171670\n-DCMAKE_CXX_FLAGS\u003d -DTENCENT_SHELL\u003d0\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/wayne/Library/Android/sdk/ndk/22.1.7171670/build/cmake/android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003d/Users/wayne/Library/Android/sdk/cmake/3.6.4111459/bin/ninja\n-GAndroid Gradle - Ninja\njvmArgs : \n\n"
+  },
+  {
+    "level": "INFO",
+    "message": "Executable : /Users/wayne/Library/Android/sdk/cmake/3.6.4111459/bin/cmake\narguments : \n-H/Users/wayne/project/fair-new/fair/android\n-B/Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a\n-DANDROID_ABI\u003darm64-v8a\n-DANDROID_PLATFORM\u003dandroid-19\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/wayne/project/fair-new/fair/example/build/fair/intermediates/cmake/debug/obj/arm64-v8a\n-DCMAKE_BUILD_TYPE\u003dDebug\n-DANDROID_NDK\u003d/Users/wayne/Library/Android/sdk/ndk/22.1.7171670\n-DCMAKE_CXX_FLAGS\u003d -DTENCENT_SHELL\u003d0\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/wayne/Library/Android/sdk/ndk/22.1.7171670/build/cmake/android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003d/Users/wayne/Library/Android/sdk/cmake/3.6.4111459/bin/ninja\n-GAndroid Gradle - Ninja\njvmArgs : \n\n"
   },
   {
     "level": "INFO",
@@ -37,11 +53,11 @@
   },
   {
     "level": "INFO",
-    "message": "write build output /Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a/build_output.txt"
+    "message": "write build output /Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a/build_output.txt"
   },
   {
     "level": "INFO",
-    "message": "write command file /Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a/build_command.txt"
+    "message": "write command file /Users/wayne/project/fair-new/fair/android/.cxx/cmake/debug/arm64-v8a/build_command.txt"
   },
   {
     "level": "INFO",
