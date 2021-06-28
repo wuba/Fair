@@ -26,7 +26,7 @@ public class FairFfi {
     /**
      * 释放native全局变量
      */
-    public void onMxFlutterAppClose() {
+    public void onAppClose() {
         if (isSoLoadSuccess) {
             release();
         }
@@ -62,7 +62,7 @@ public class FairFfi {
 
 //    private native String nativeCallFlutterFunctionSync(String jsonString);
 
-    private native void init(FairFfi mxFlutterFfi);
+    private native void init(FairFfi ffi);
 
     private native void release();
 }
