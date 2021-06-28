@@ -14,9 +14,6 @@
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		B03201FB26525266008064E0 /* GeneratedPluginRegistrant+RegisterPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = B03201FA26525266008064E0 /* GeneratedPluginRegistrant+RegisterPlugin.m */; };
-		B06852DA26896A52003FF48E /* lib_src_page_sample_page_stateful_cell.js in Resources */ = {isa = PBXBuildFile; fileRef = B06852D926896A52003FF48E /* lib_src_page_sample_page_stateful_cell.js */; };
-		B0B0CF1A26806FDF007470CB /* lib_src_page_sample_page_with_logic.js in Resources */ = {isa = PBXBuildFile; fileRef = B0B0CF1926806FDF007470CB /* lib_src_page_sample_page_with_logic.js */; };
-		B0B0CF1C26818553007470CB /* lib_src_page_sample_page_with_logic2.js in Resources */ = {isa = PBXBuildFile; fileRef = B0B0CF1B26818552007470CB /* lib_src_page_sample_page_with_logic2.js */; };
 		B0B4B772266F976A00EDB4DE /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = B0B4B771266F976A00EDB4DE /* main.js */; };
 		D425B3CBF7F7B0DC0B53812E /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DA2F1FF031065A77A753604 /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
@@ -54,9 +51,6 @@
 		9C4BA9F461934644875918C7 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		B03201F926525266008064E0 /* GeneratedPluginRegistrant+RegisterPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeneratedPluginRegistrant+RegisterPlugin.h"; sourceTree = "<group>"; };
 		B03201FA26525266008064E0 /* GeneratedPluginRegistrant+RegisterPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GeneratedPluginRegistrant+RegisterPlugin.m"; sourceTree = "<group>"; };
-		B06852D926896A52003FF48E /* lib_src_page_sample_page_stateful_cell.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = lib_src_page_sample_page_stateful_cell.js; path = ../../android/app/src/main/assets/lib_src_page_sample_page_stateful_cell.js; sourceTree = "<group>"; };
-		B0B0CF1926806FDF007470CB /* lib_src_page_sample_page_with_logic.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = lib_src_page_sample_page_with_logic.js; sourceTree = "<group>"; };
-		B0B0CF1B26818552007470CB /* lib_src_page_sample_page_with_logic2.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = lib_src_page_sample_page_with_logic2.js; path = ../../android/app/src/main/assets/lib_src_page_sample_page_with_logic2.js; sourceTree = "<group>"; };
 		B0B4B771266F976A00EDB4DE /* main.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,9 +117,6 @@
 				B03201FA26525266008064E0 /* GeneratedPluginRegistrant+RegisterPlugin.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
-				B06852D926896A52003FF48E /* lib_src_page_sample_page_stateful_cell.js */,
-				B0B0CF1926806FDF007470CB /* lib_src_page_sample_page_with_logic.js */,
-				B0B0CF1B26818552007470CB /* lib_src_page_sample_page_with_logic2.js */,
 				B0B4B771266F976A00EDB4DE /* main.js */,
 			);
 			path = Runner;
@@ -205,11 +196,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
-				B06852DA26896A52003FF48E /* lib_src_page_sample_page_stateful_cell.js in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
-				B0B0CF1A26806FDF007470CB /* lib_src_page_sample_page_with_logic.js in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
-				B0B0CF1C26818553007470CB /* lib_src_page_sample_page_with_logic2.js in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 				B0B4B772266F976A00EDB4DE /* main.js in Resources */,
 			);

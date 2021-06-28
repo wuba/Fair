@@ -43,9 +43,6 @@
 
     // 设置执行js的执行环境
     [[FairJSBridge sharedInstance] evaluateScriptWithJSFileAsync:@"main" callback:nil];
-    // 后续可能会废弃
-//    NSString *testJS = @"loadData({_count: 5,\n_onTapText: function () {\nthis._count = this._count + 1;console.log(this._count);\n this.setData({_count: this._count})\n}})";
-//    [[FairJSBridge sharedInstance] evaluateScriptWithJSScriptAsync:testJS callback:nil];
 }
 
 #pragma mark - protocol FairDartBridgeExecuteJS
@@ -61,11 +58,11 @@
 }
 
 /// Dart 注入到 JS
-- (void)injectionJSScriptWtihFilePath:(NSString *)filePath callback:(FairCallback)callback
+- (void)injectionJSScriptWtihJSScript:(NSString *)JSScript callback:(FairCallback)callback
 {
-    FairLog(@"%@", filePath);
+    FairLog(@"%@", JSScript);
     // 异步注入到JSContext里
-    [[FairJSBridge sharedInstance] evaluateScriptWithJSFileAsync:filePath callback:callback];
+    [[FairJSBridge sharedInstance] evaluateScriptWithJSScriptAsync:JSScript callback:callback];
 }
 
 /// 释放JS页面
