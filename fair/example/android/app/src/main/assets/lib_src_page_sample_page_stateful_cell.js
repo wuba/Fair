@@ -71,3 +71,6 @@ GLOBAL['fair_cell'] =(function() {
                     setData("fair_cell", {_louPanDetail: this.data._louPanDetail});
                 }
    }})()
+
+
+

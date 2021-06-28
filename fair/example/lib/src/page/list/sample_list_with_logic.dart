@@ -25,7 +25,7 @@ class _State extends State<DynamicCellPage> {
 
   void _initData() {
     var value =
-        '{\"list\": [{ 			\"id\": \"0001\", 			\"type\": \"normal\", 			\"name\": \"58\" 		}, 		{ 			\"id\": \"fair_cell\", 			\"type\": \"fair\", 			\"name\": \"58\", 			\"path\": \"assets/bundle/lib_src_page_sample_page_stateful_cell.json\", 			\"data\": \"{ \\\"_id \\\":  \\\"10000 \\\"}\" 		}, 		{ 			\"id\": \"0001\", 			\"type\": \"normal\", 			\"name\": \"58\" 		} 	], 	\"total\": 10 }';
+        '{\"list\": [{ 			\"id\": \"0001\", 			\"type\": \"normal\", 			\"name\": \"58\" 		}, 		{ 			\"id\": \"fair_cell\", 			\"type\": \"fair\", 			\"name\": \"58\", 			\"path\": \"assets/bundle/lib_src_page_sample_page_stateful_cell.json\", 			\"data\": \"{ \\\"_id \\\":  \\\"10000 \\\"}\" 		}, 		{ 			\"id\": \"0001\", 			\"type\": \"normal\", 			\"name\": \"fair\" 		} 	], 	\"total\": 10 }';
     _response = DemoList.fromJson(jsonDecode(value));
   }
 
@@ -50,7 +50,7 @@ class _State extends State<DynamicCellPage> {
       List goodsList = List<GoodsDesc>();
       goodsList.add(GoodsDesc(boldText: '汤臣一品', normalText: ''));
       goodsList.add(GoodsDesc(boldText: '', normalText: '上海浦东新区陆家嘴'));
-      goodsList.add(GoodsDesc(boldText: '30000', normalText: '万'));
+      goodsList.add(GoodsDesc(boldText: '90000', normalText: '万'));
       LouPanDetail louPanDetail = LouPanDetail(
           id: 1,
           number: 100 * 20,
@@ -69,7 +69,7 @@ class _State extends State<DynamicCellPage> {
             name: item.id,
             path: 'assets/bundle/lib_src_page_sample_page_stateful_cell.fair.json',
             jsPath:'assets/js/lib_src_page_sample_page_stateful_cell.js',
-            data: {"_louPanDetail": louPanDetail},
+            data: {"fairProps": json.encode(louPanDetail)},
           ));
 
       // 原生实现效果

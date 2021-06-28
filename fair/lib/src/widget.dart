@@ -10,6 +10,7 @@ import 'package:fair/src/runtime/fair_message_dispatcher.dart';
 import 'package:fair/src/runtime/runtime_fair_delegate.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'app.dart';
 import 'experiment/sugar.dart';
@@ -121,8 +122,7 @@ class FairState extends State<FairWidget>
     _fairApp ??= FairApp.of(context);
     //加载js的文件地址
     // var js = "file:///android_asset/lib_src_page_sample_page_with_logic.js";
-
-    _fairApp.runtime.addScript(state2key, widget.jsPath).then((value) {
+    _fairApp.runtime.addScript(state2key, widget.jsPath, widget.data).then((value) {
       //结果回调，native端加载js成功之后，开始注册相关函数,可以做相关通讯
       (_fairApp ??= FairApp.of(context))?.register(this)?.then((value) {
         delegate?.didChangeDependencies();
@@ -153,7 +153,6 @@ class FairState extends State<FairWidget>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    print('执行了build方法');
     assert(_fairApp != null, 'FairWidget must be descendant of FairApp');
     var builder = widget.holder ?? _fairApp.placeholderBuilder;
     var result = _child ?? builder(context);

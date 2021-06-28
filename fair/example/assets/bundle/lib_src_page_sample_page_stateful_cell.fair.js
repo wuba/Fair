@@ -1,4 +1,4 @@
-(function() {
+GLOBAL['#FairPageName#'] = (function() {
     var __global__ = this;
 
     class LouPanDetail {
@@ -22,7 +22,7 @@
 
     return {
                 data: {
-                    _louPanDetail: (JSON.parse('#(FairProps)'))._louPanDetail
+                    fairProps: (JSON.parse('#FairProps#'))._fairProps
                 },
 
                 onLaunch: function onLaunch()  {

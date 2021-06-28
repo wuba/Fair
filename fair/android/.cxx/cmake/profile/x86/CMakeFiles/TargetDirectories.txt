@@ -1,5 +1,0 @@
-/Users/bujie/flutter/dev/fair-new/fair/android/.cxx/cmake/profile/x86/CMakeFiles/edit_cache.dir
-/Users/bujie/flutter/dev/fair-new/fair/android/.cxx/cmake/profile/x86/CMakeFiles/rebuild_cache.dir
-/Users/bujie/flutter/dev/fair-new/fair/android/.cxx/cmake/profile/x86/src/main/cpp/sdk/CMakeFiles/edit_cache.dir
-/Users/bujie/flutter/dev/fair-new/fair/android/.cxx/cmake/profile/x86/src/main/cpp/sdk/CMakeFiles/rebuild_cache.dir
-/Users/bujie/flutter/dev/fair-new/fair/android/.cxx/cmake/profile/x86/src/main/cpp/sdk/CMakeFiles/fairflutter.dir

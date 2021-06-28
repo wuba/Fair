@@ -38,7 +38,7 @@ abstract class IRuntime {
   Future<String> version();
 
   /// 添加脚本文件
-  Future<dynamic> addScript(String pageName,String script);
+  Future<dynamic> addScript(String pageName,String script, dynamic props);
 
   /// 异步方法调用
   /// pageName 页面名称

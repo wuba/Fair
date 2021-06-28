@@ -21,3 +21,5 @@ doc/.vuepress/public/project/
 doc/.vuepress/dist/
 github-pages/
 samples/fair_example
+fair/android/.cxx/
+fair/android/src/main/jniLibs/
