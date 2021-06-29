@@ -1,5 +1,0 @@
-# ninja log v5
-1	87	1624606429	src/main/cpp/sdk/CMakeFiles/fairflutter.dir/fair_ffi.cpp.o	25bc0cb868a9b587
-1	88	1624606429	src/main/cpp/sdk/CMakeFiles/fairflutter.dir/jni_helper.cpp.o	b81d42fd11cd7403
-0	151	1624606429	src/main/cpp/sdk/CMakeFiles/fairflutter.dir/fair_app.cpp.o	25b8098343e139e6
-151	182	1624606429	../../../../src/main/jniLibs/x86_64/libfairflutter.so	3b5ab994253a183c

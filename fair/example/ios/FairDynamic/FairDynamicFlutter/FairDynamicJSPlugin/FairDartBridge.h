@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, K_FLUTTER_TO_NATIVE_TYPE) {
 - (void)disposePage:(NSString *)pageName;
 
 /// 注入JS
-- (void)injectionJSScriptWtihFilePath:(NSString *)filePath callback:(FairCallback)callBack;
+- (void)injectionJSScriptWtihJSScript:(NSString *)JSScript callback:(FairCallback)callBack;
 
 /// 异步执行JS
 - (void)executeJSFunctionAsync:(NSString *)functionName params:(NSArray *)params callback:(FairCallback)callBack;

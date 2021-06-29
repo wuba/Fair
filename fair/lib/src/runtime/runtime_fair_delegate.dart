@@ -46,8 +46,8 @@ abstract class RuntimeFairDelegate {
   ///绑定js端的数据，这个方法调用需要在js加载完成之后调用，否则会获取不成功
   ///这个地方需要同步调用，因为涉及到数据的绑定，只有将所有数据绑定成功之后，
   ///才能做接下来的操作
-  void bindAll(Map allVariables) {
-    var map = runtime.getBindVariableAndFuncSync(key());
+  Future<dynamic> bindAll(Map allVariables) async {
+    var map = await runtime.getBindVariableAndFunc(key());
 
     var s = map['result'];
     var d;
@@ -65,6 +65,7 @@ abstract class RuntimeFairDelegate {
 
     _bindAllFunc(mapFunc);
     _bindAllValue(variables);
+    return Future.value(null);
   }
 
   ///将绑定JS端的变量绑定到当前位置
@@ -98,7 +99,7 @@ abstract class RuntimeFairDelegate {
     };
   }
 
-  void bindBaseValue(){
+  void bindBaseValue() {
     _bindValuesMap.addAll({'_platform': () => 'Fair v$fairVersion'});
   }
 }

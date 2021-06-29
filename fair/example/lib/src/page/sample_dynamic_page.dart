@@ -15,7 +15,7 @@ class SampleDynamicPage extends StatelessWidget {
       appBar: AppBar(title: Text('Demo DynamicWidget')),
       body: FairWidget(
         name: 'hello_world2',
-        jsPath:'file:///android_asset/lib_src_page_sample_page_with_logic2.js',
+        jsPath:'assets/js/lib_src_page_sample_page_with_logic2.js',
         path: 'assets/bundle/lib_src_page_hello_world.fair.bin',
         // data: {
         //   'content': 'Red Box',

@@ -20,17 +20,19 @@ GLOBAL['#FairPageName#'] = (function() {
       }
     }
 
+    _fairProps = (JSON.parse('#FairProps#'));
+
     return {
                 data: {
-                    fairProps: (JSON.parse('#FairProps#'))._fairProps
+                    _louPanDetail:_fairProps,
                 },
 
                 onLaunch: function onLaunch()  {
-                    Console.log("onLaunch");
+                    console.log("onLaunch");
                 },
 
                 onDispose: function onDispose()  {
-                    Console.log("onDispose");
+                    console.log("onDispose");
                 },
 
                 _iconLoupan: function _iconLoupan() {
@@ -55,10 +57,10 @@ GLOBAL['#FairPageName#'] = (function() {
                 },
                 _onImageTap: function _onImageTap() {
                     this.data._louPanDetail.goodsDesc[0].normalText = ' ##';
-                    this.setData({_louPanDetail: this.data._louPanDetail});
+                    setData('#FairPageName#', {_louPanDetail: this.data._louPanDetail});
                 },
                 _onItemTap: function _onItemTap() {
                     this.data._louPanDetail.goodsDesc[0].normalText = ' ++';
-                    this.setData({_louPanDetail: this.data._louPanDetail});
+                    setData('#FairPageName#', {_louPanDetail: this.data._louPanDetail});
                 }
-   }})
+   }})()

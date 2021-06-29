@@ -225,9 +225,9 @@ FairSingletonM(FairJSBridge)
          * 以 block 形式关联 JavaScript function
          */
         // 打印日志
-        _context[@"log"] = ^(NSString *str)
+        _context[@"console"][@"log"] = ^(JSValue *value)
         {
-            FairLog(@"%@", str);
+            FairLog(@"%@", value);
         };
         
         // 调试用，注意：js的alert会阻塞进程，导致卡住OC的主线程，所以拦截alert进行原生弹窗
