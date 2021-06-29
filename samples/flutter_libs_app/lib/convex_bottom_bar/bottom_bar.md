@@ -3,7 +3,7 @@
 ## 接入方式
 ### 命令生成component
 ``` dart
-fairc -k sdk -f -k sdk -f /Users/sz/.pub-cache/hosted/pub.flutter-io.cn/convex_bottom_bar-2.7.1+2/lib/convex_bottom_bar.dart -o sdk -s bottom_bar
+fairc -k sdk -f /Users/sz/.pub-cache/hosted/pub.flutter-io.cn/convex_bottom_bar-2.7.1+2/lib/convex_bottom_bar.dart -o sdk -s bottom_bar
 ```
 
 ### 将component添加到Generate中
