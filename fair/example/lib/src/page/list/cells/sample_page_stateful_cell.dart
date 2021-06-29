@@ -1,11 +1,11 @@
 import 'package:fair/fair.dart';
 import '../../../model/bean/loupan_bean.dart';
 import 'package:flutter/material.dart';
+
 part 'sample_page_stateful_cell.js.dart';
 
 @FairPatch()
 class StatefulCell extends StatefulWidget {
-
   var _fairProps;
 
   StatefulCell(this._fairProps);
@@ -14,11 +14,9 @@ class StatefulCell extends StatefulWidget {
   State<StatefulWidget> createState() {
     return _State();
   }
-
 }
 
 class _State extends State<StatefulCell> {
-
   @override
   void initState() {
     super.initState();
