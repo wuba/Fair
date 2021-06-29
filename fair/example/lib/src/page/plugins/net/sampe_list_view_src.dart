@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-import 'package:fair/fair.dart';
-import 'package:fair_example/src/fair_plugin.dart';
+import 'package:fair_example/src/page/plugins/net/fair_plugin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

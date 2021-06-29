@@ -59,7 +59,7 @@ GLOBAL['hello_world'] = (function () {
 
         },
         onDispose: function onDispose() {
-            Console.log("onDispose");
+            console.log("onDispose");
         }
 
     }
