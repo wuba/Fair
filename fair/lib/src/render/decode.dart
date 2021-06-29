@@ -19,8 +19,9 @@ import 'builder.dart';
 class _DataSource {
   final Map layout;
   final Map data;
+  final Map methodMap;
 
-  _DataSource({this.layout, this.data});
+  _DataSource({this.layout, this.data, this.methodMap});
 }
 
 class Decoder {
@@ -39,14 +40,19 @@ class Decoder {
     var jsonBean = await _loader.obtain(context).onLoad(url, _decoder,
         cache: true, h: const {'fairVersion': '$fairVersion#$flutterVersion'});
     var data = <dynamic, dynamic>{};
+    var methodMap = <String, dynamic>{};
+
     var d = jsonBean.remove('data');
+    methodMap = jsonBean['methodMap'];
+    jsonBean.remove('methodMap');
+
     if (d != null) {
       data.addAll(d);
     }
     if (dataSource != null) {
       data.addAll(dataSource);
     }
-    var s = _DataSource(layout: jsonBean, data: data);
+    var s = _DataSource(layout: jsonBean, data: data, methodMap: methodMap);
     _source = s;
     return Future.value();
   }
@@ -56,12 +62,13 @@ class Decoder {
       var source = _source;
       var layout = source.layout;
       var data = source.data;
-      var widget = _convert(context, layout, data: data);
+      var methodMap = source.methodMap;
+      var widget = _convert(context, layout, methodMap, data: data);
       return widget;
     });
   }
 
-  Widget _convert(BuildContext context, Map map, {Map data}) {
+  Widget _convert(BuildContext context, Map map, Map methodMap, {Map data}) {
     var app = FairApp.of(context);
     var bound = app.bindData[page];
     if (data != null && data.isNotEmpty) {
@@ -71,7 +78,7 @@ class Decoder {
     }
     var proxy = app.proxy;
     Widget w = DynamicWidgetBuilder(proxy, page, bound, bundle: url)
-            .convert(context, map) ??
+            .convert(context, map, methodMap) ??
         WarningWidget(
             name: page, url: url, error: 'tag name not supported yet');
     return w;

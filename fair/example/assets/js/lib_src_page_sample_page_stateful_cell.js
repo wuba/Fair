@@ -33,7 +33,7 @@ GLOBAL['#FairPageName#'] = (function(_fairProps) {
                     console.log("onDispose");
                 },
 
-                _iconLoupan: function _iconLoupan() {
+                _loupanIcon: function _loupanIcon() {
                     return this.data._louPanDetail.imgUrl;
                 },
 
