@@ -3,7 +3,7 @@ import 'dart:convert';
 abstract class IFairPlugin {
   final c = <String, Function>{};
 
-  dynamic invoke(dynamic par);
+  Future<dynamic> invoke(dynamic par);
 
   String getMethodName(dynamic par) {
     var a = jsonDecode(par);

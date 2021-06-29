@@ -7,17 +7,19 @@ class FairPluginDispatcher {
 
   static Future<dynamic> dispatch(dynamic msg) async {
     var obj = jsonDecode(msg);
-    var args= obj['args'];
+    var args = obj['args'];
     var className = args['className']?.toString();
 
     if (className == null || className.isEmpty) {
       return null;
     }
+
     if (className.contains('#')) {
       className = className.split('#')[0];
     }
+
     if (pluginMap[className] != null) {
-      var d = await pluginMap[className].invoke(msg);
+      var d = await pluginMap[className]?.invoke(msg);
       return d;
     }
   }

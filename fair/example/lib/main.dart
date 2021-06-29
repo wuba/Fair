@@ -5,10 +5,9 @@
  */
 
 import 'package:fair/fair.dart';
-import 'package:fair_example/src/fair_plugin.dart';
-import 'package:fair_example/src/page/hello_world_proxy2.dart';
 import 'package:fair_example/src/page/list/sample_list_with_logic.dart';
 import 'package:fair_example/src/page/modules.dart';
+import 'package:fair_example/src/page/plugins/net/fair_plugin.dart';
 import 'package:fair_example/src/page/plugins/net/sampe_list_view_src.dart';
 import 'package:flutter/material.dart';
 
