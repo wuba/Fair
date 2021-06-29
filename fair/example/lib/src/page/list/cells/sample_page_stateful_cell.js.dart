@@ -1,5 +1,6 @@
 part of 'sample_page_stateful_cell.dart';  
 
+  @FairProps()
   LouPanDetail _louPanDetail;
   
   String _loupanIcon() {

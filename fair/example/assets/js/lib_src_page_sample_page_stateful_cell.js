@@ -24,7 +24,7 @@ GLOBAL['#FairPageName#'] = (function() {
 
     return {
                 data: {
-                    _louPanDetail:_fairProps,
+                    _louPanDetail: _fairProps,
                 },
 
                 onLaunch: function onLaunch()  {
