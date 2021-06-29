@@ -26,12 +26,13 @@ class Runtime implements IRuntime {
     init(true);
 
     _channel ??= FairMessageChannel();
-
+    //接收setData()的信息
     _channel.setMessageHandler((message) {
       var data = json.decode(message);
       var className = data['pageName'];
       var call = _callBacks[className];
       call?.call(message);
+      return null;
     });
   }
 
@@ -56,13 +57,16 @@ class Runtime implements IRuntime {
   }
 
   @override
-  Future<dynamic> addScript(String pageName, String script, dynamic props) async {
-   var scriptSource= await rootBundle.loadString(script);
-   if (props != null && props['fairProps'] != null) {
-     scriptSource = scriptSource.replaceFirst(new RegExp(r'#FairProps#'), props['fairProps']);
-     scriptSource = scriptSource.replaceAll(new RegExp(r'#FairPageName#'), pageName);
-   }
-   var map = <dynamic, dynamic>{};
+  Future<dynamic> addScript(
+      String pageName, String script, dynamic props) async {
+    var scriptSource = await rootBundle.loadString(script);
+    if (props != null && props['fairProps'] != null) {
+      scriptSource = scriptSource.replaceFirst(
+          new RegExp(r'#FairProps#'), props['fairProps']);
+      scriptSource =
+          scriptSource.replaceAll(new RegExp(r'#FairPageName#'), pageName);
+    }
+    var map = <dynamic, dynamic>{};
     map[FairMessage.PATH] = scriptSource;
     map[FairMessage.PAGE_NAME] = pageName;
     return _channel.loadJS(jsonEncode(map), null);
