@@ -8,3 +8,4 @@ library fair_annotation;
 
 export 'src/fair_patch.dart';
 export 'src/fair_well.dart';
+export 'src/fair_props.dart';

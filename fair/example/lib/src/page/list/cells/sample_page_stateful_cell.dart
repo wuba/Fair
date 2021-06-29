@@ -22,6 +22,8 @@ class _State extends State<StatefulCell> {
   @override
   void initState() {
     super.initState();
+
+    // dart 源文件可以直接对象映射，JS逻辑部分会转化为JSON
     _louPanDetail = widget._fairProps;
   }
 
