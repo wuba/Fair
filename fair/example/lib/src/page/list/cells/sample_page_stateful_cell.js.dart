@@ -1,8 +1,9 @@
 part of 'sample_page_stateful_cell.dart';  
 
+  // FairProps 注解标记为接受父组件传入数据的接受变量，每个文件只能有一个
   @FairProps()
   LouPanDetail _louPanDetail;
-  
+
   String _loupanIcon() {
     return _louPanDetail.imgUrl;
   }

@@ -10,7 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  fair_annotation: ^0.2.0
+
+#  fair_annotation: ^0.2.0
+  fair_annotation:
+    path: ../fair_annotation
+
   fair_version: ^0.2.0
   flat_buffers: ^1.12.0
   url_launcher: ^5.7.2

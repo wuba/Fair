@@ -1,4 +1,4 @@
-GLOBAL['#FairPageName#'] = (function() {
+GLOBAL['#FairPageName#'] = (function(_fairProps) {
     var __global__ = this;
 
     class LouPanDetail {
@@ -19,8 +19,6 @@ GLOBAL['#FairPageName#'] = (function() {
         this.normalText = normalText;
       }
     }
-
-    _fairProps = (JSON.parse('#FairProps#'));
 
     return {
                 data: {
@@ -63,4 +61,4 @@ GLOBAL['#FairPageName#'] = (function() {
                     this.data._louPanDetail.goodsDesc[0].normalText = ' ++';
                     setData('#FairPageName#', {_louPanDetail: this.data._louPanDetail});
                 }
-   }})()
+   }})(JSON.parse('#FairProps#'))
