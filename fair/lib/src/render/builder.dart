@@ -82,15 +82,15 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   dynamic _block(
-    Map map,
-    Map methodMap,
-    BuildContext ctx,
-    Domain domain,
-    dynamic fun,
-    String name,
-    bool widget, {
-    bool forceApply = false,
-  }) {
+      Map map,
+      Map methodMap,
+      BuildContext ctx,
+      Domain domain,
+      dynamic fun,
+      String name,
+      bool widget, {
+        bool forceApply = false,
+      }) {
     var na = _named(name, map['na'], methodMap, ctx, domain);
     var pa = _positioned(map['pa'], methodMap, ctx, domain);
     final bind = widget && (na.binding || pa.binding);
@@ -136,12 +136,12 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   W<Map<String, dynamic>> _named(
-    String tag,
-    dynamic naMap,
-    Map methodMap,
-    BuildContext context,
-    Domain domain,
-  ) {
+      String tag,
+      dynamic naMap,
+      Map methodMap,
+      BuildContext context,
+      Domain domain,
+      ) {
     var na = <String, dynamic>{};
     var needBinding = false;
     if (naMap is Map) {
@@ -150,8 +150,13 @@ class DynamicWidgetBuilder extends DynamicBuilder {
           if (tag == 'FairWidget' && e.key.toString() == 'data') {
             na[e.key] = e.value;
           } else {
+<<<<<<< HEAD
             // todo 主要修改的地方，此处将目标函数代入到解析的过程中
             if (e.value['className'] is String && methodMap[e.value['className']] is Map) {
+=======
+            // 主要修改的地方，此处将目标函数代入到解析的过程中
+            if (methodMap != null && e.value['className'] is String && methodMap[e.value['className']] is Map) {
+>>>>>>> 处理混编方法
               na[e.key] = convert(context,methodMap[e.value['className']], methodMap, domain: domain);
             }
             else {
@@ -183,7 +188,31 @@ class DynamicWidgetBuilder extends DynamicBuilder {
           //   children.add(item);
           // });
 
+<<<<<<< HEAD
           na[e.key] = (children.asIteratorOf<Widget>().toList() ?? children);
+=======
+          var children = [];
+          a.forEach((e) {
+            var item ;
+            if (e is Map) {
+              // 主要修改的地方，此处将目标函数代入到解析的过程中
+              item = (methodMap != null && (e['className'] is String && methodMap[e['className']] is Map) ? convert(context, methodMap[e['className']], methodMap, domain: domain) : convert(context, e, methodMap, domain: domain));
+            } else {
+              if (e is String && domain != null && domain.match(e)) {
+                item = domain.bindValue(e);
+              } else {
+                if(methodMap != null && methodMap[_subFunctionName(e)] != null){
+                  item = convert(context, methodMap[_subFunctionName(e)], methodMap, domain: domain);
+                }else{
+                  item = e;
+                }
+
+              }
+            }
+            children.add(item);
+          });
+          na[e.key] = (children.asIteratorOf<Widget>()?.toList() ?? children);
+>>>>>>> 处理混编方法
         } else if (domain != null && domain.match(e)) {
           na[e.key] = domain.bindValue(e as String);
         } else if (e.value is String) {
@@ -227,5 +256,13 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       'pa': [source, children]
     };
     return mapEach.call(params);
+  }
+
+  String _subFunctionName(String expFunc){
+    if(RegExp(r'\%\(\w+\)', multiLine: true).hasMatch(expFunc)){
+      return expFunc.substring(2,expFunc.length-1);
+    }else{
+      return expFunc;
+    }
   }
 }

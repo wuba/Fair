@@ -44,6 +44,7 @@ function _invokeMethod(parameter) {
 
     let mClass = GLOBAL[pageName];
 
+    console.log('pageName' + pageName + " ---" + funcName);
     let methodResult = mClass[funcName].apply(mClass, args);
 
     let result = {
