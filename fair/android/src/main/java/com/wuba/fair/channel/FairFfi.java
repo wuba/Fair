@@ -1,6 +1,7 @@
 package com.wuba.fair.channel;
 
-import com.wuba.fair.FairPlugin;
+import com.wuba.fair.FairPlugin2;
+import com.wuba.fair.thread.FairTask;
 import com.wuba.fair.thread.FairThread;
 
 import java.util.concurrent.CountDownLatch;
@@ -17,7 +18,7 @@ public class FairFfi {
 
     public FairFfi() {
         isSoLoadSuccess = LibraryLoader
-                .load(FairPlugin.get().getContext(), "fairflutter");
+                .load(FairPlugin2.get().getContext(), "fairflutter");
         if (isSoLoadSuccess) {
             init(this);
         }
@@ -41,10 +42,13 @@ public class FairFfi {
             final Object[] result = new Object[1];
             //线程等待
             CountDownLatch countDownLatch = new CountDownLatch(1);
-            FairThread.runOnUI(() -> {
-                //获取js中的值
-                result[0] = FairPlugin.get().getJsExecutor().invokeJSChannel(args);
-                countDownLatch.countDown();
+            FairThread.get().execute(new FairTask() {
+                @Override
+                public void runTask() {
+                    //获取js中的值
+                    result[0] = FairPlugin2.get().getJsExecutor().invokeJSChannel(args);
+                    countDownLatch.countDown();
+                }
             });
 
             try {
