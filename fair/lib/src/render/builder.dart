@@ -15,6 +15,7 @@ import '../widgets/component.dart';
 import '../widgets/version.dart';
 import 'base.dart';
 import 'domain.dart';
+import 'expression.dart';
 import 'property.dart';
 import 'proxy.dart';
 
@@ -201,8 +202,9 @@ class DynamicWidgetBuilder extends DynamicBuilder {
               if (e is String && domain != null && domain.match(e)) {
                 item = domain.bindValue(e);
               } else {
-                if(methodMap != null && methodMap[_subFunctionName(e)] != null){
-                  item = convert(context, methodMap[_subFunctionName(e)], methodMap, domain: domain);
+                var body;
+                if(methodMap != null && _isFuncExp(e) && (body = methodMap[_subFunctionName(e)]) != null){
+                  item = convert(context, body, methodMap, domain: domain);
                 }else{
                   item = e;
                 }
@@ -258,8 +260,12 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return mapEach.call(params);
   }
 
+  bool _isFuncExp(String exp){
+    return FunctionExpression().hitTest(exp, '');
+  }
+
   String _subFunctionName(String expFunc){
-    if(RegExp(r'\%\(\w+\)', multiLine: true).hasMatch(expFunc)){
+    if(_isFuncExp(expFunc)){
       return expFunc.substring(2,expFunc.length-1);
     }else{
       return expFunc;
