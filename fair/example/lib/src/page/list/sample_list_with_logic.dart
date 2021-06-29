@@ -73,12 +73,12 @@ class _State extends State<DynamicCellPage> {
           ));
 
       // 原生实现效果
-      // return Container(
-      //     alignment: Alignment.centerLeft,
-      //     color: Colors.white,
-      //     height: 120,
-      //     child: StatefulCell(louPanDetail)
-      //     );
+      return Container(
+          alignment: Alignment.centerLeft,
+          color: Colors.white,
+          height: 120,
+          child: StatefulCell(louPanDetail)
+          );
 
     } else {
       return Column(

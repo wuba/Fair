@@ -1,0 +1,3 @@
+class FairProps {
+  const FairProps();
+}

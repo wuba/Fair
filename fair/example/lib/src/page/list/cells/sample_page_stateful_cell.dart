@@ -6,6 +6,10 @@ part 'sample_page_stateful_cell.js.dart';
 @FairPatch()
 class StatefulCell extends StatefulWidget {
 
+  var _fairProps;
+
+  StatefulCell(this._fairProps);
+
   @override
   State<StatefulWidget> createState() {
     return _State();
@@ -14,6 +18,12 @@ class StatefulCell extends StatefulWidget {
 }
 
 class _State extends State<StatefulCell> {
+
+  @override
+  void initState() {
+    super.initState();
+    _louPanDetail = widget._fairProps;
+  }
 
   @override
   Widget build(BuildContext context) {
