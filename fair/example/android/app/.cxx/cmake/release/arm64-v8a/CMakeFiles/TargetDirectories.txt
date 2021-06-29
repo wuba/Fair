@@ -1,5 +1,0 @@
-/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/.cxx/cmake/release/arm64-v8a/CMakeFiles/rebuild_cache.dir
-/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/.cxx/cmake/release/arm64-v8a/CMakeFiles/edit_cache.dir
-/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/.cxx/cmake/release/arm64-v8a/src/main/cpp/sdk/CMakeFiles/rebuild_cache.dir
-/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/.cxx/cmake/release/arm64-v8a/src/main/cpp/sdk/CMakeFiles/edit_cache.dir
-/Users/anjuke/haijun/Anjuke-Flutter/fair-new/fair/example/android/app/.cxx/cmake/release/arm64-v8a/src/main/cpp/sdk/CMakeFiles/fairflutter.dir
