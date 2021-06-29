@@ -1,12 +1,10 @@
 import 'package:fair/fair.dart';
-import 'package:fair_example/src/model/bean/loupan_bean.dart';
+import '../../../model/bean/loupan_bean.dart';
 import 'package:flutter/material.dart';
+part 'sample_page_stateful_cell.js.dart';
 
 @FairPatch()
 class StatefulCell extends StatefulWidget {
-  LouPanDetail _louPanDetail;
-
-  StatefulCell(this._louPanDetail);
 
   var _fairProps;
 
@@ -16,16 +14,10 @@ class StatefulCell extends StatefulWidget {
   State<StatefulWidget> createState() {
     return _State();
   }
+
 }
 
 class _State extends State<StatefulCell> {
-  LouPanDetail _louPanDetail;
-
-  @override
-  void initState() {
-    super.initState();
-    _louPanDetail = widget._louPanDetail;
-  }
 
   @override
   void initState() {
@@ -149,36 +141,5 @@ class _State extends State<StatefulCell> {
         ]),
       ),
     );
-  }
-
-  String _loupanIcon() {
-    return _louPanDetail.imgUrl;
-  }
-
-  String _generateTitle() {
-    return _louPanDetail.goodsDesc[0].boldText +
-        _louPanDetail.goodsDesc[0].normalText;
-  }
-
-  String _generateSubtitle() {
-    return _louPanDetail.goodsDesc[1].normalText;
-  }
-
-  String _generatePrice() {
-    return _louPanDetail.goodsDesc[2].boldText;
-  }
-
-  String _generateUnit() {
-    return _louPanDetail.goodsDesc[2].normalText;
-  }
-
-  void _onImageTap() {
-    _louPanDetail.goodsDesc[0].normalText = ' ##';
-    setState(() {});
-  }
-
-  void _onItemTap() {
-    _louPanDetail.goodsDesc[0].normalText = ' ++';
-    setState(() {});
   }
 }
