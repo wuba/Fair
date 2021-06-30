@@ -64,7 +64,7 @@ public class FairV8JsLoader extends FairJsLoader {
              * 获取flutter的结果成功之后，返回给js的回调函数
              */
             FairPlugin2.get().getJsFlutterEngine().invokeFlutterChannel(call, (v) -> {
-                FairThread.get().execute(new FairTask() {
+                FairThread.get().run(new FairTask() {
                     @Override
                     public void runTask() {
                         V8Array v8Array = new V8Array(getV8());

@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
-import com.wuba.fair.FairPlugin;
+import com.wuba.fair.FairPlugin2;
 import com.wuba.fair.constant.FairConstant;
 import com.wuba.fair.logger.FairLogger;
 
@@ -16,9 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * 文件处理
- */
 public class FairFileUtil {
 
     public static String getScript(String file) {
@@ -27,7 +24,7 @@ public class FairFileUtil {
         }
 
         if (file.startsWith(FairConstant.AndroidConfig.ASSERT)) {
-            Context context = FairPlugin.get().getContext();
+            Context context = FairPlugin2.get().getContext();
             String filename = file.replace(FairConstant.AndroidConfig.ASSERT, "");
             return getScriptFromAssets(context, filename);
         }
@@ -114,9 +111,7 @@ public class FairFileUtil {
                 if (output != null) {
                     output.close();
                 }
-                if (input != null) {
-                    input.close();
-                }
+                input.close();
             } catch (IOException e) {
                 printError(e);
             }

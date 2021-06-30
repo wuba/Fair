@@ -42,7 +42,7 @@ public class FairFfi {
             final Object[] result = new Object[1];
             //线程等待
             CountDownLatch countDownLatch = new CountDownLatch(1);
-            FairThread.get().execute(new FairTask() {
+            FairThread.get().run(new FairTask() {
                 @Override
                 public void runTask() {
                     //获取js中的值
@@ -63,8 +63,6 @@ public class FairFfi {
 
         return "jsAppObj is null";
     }
-
-//    private native String nativeCallFlutterFunctionSync(String jsonString);
 
     private native void init(FairFfi ffi);
 

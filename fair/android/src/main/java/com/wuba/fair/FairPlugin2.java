@@ -1,5 +1,6 @@
 package com.wuba.fair;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -8,7 +9,6 @@ import com.wuba.fair.channel.FairFfi;
 import com.wuba.fair.core.FairJsEngineProvider;
 import com.wuba.fair.core.FairJsFlutterEngine;
 import com.wuba.fair.core.base.FairJsLoader;
-import com.wuba.fair.core.event.FairMessageEvent;
 import com.wuba.fair.jsexecutor.JSExecutor;
 import com.wuba.fair.thread.FairTask;
 import com.wuba.fair.thread.FairThread;
@@ -20,11 +20,11 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
 
 public class FairPlugin2 implements FlutterPlugin {
+    @SuppressLint("StaticFieldLeak")
     private static FairPlugin2 plugin;
     private volatile JSExecutor jsExecutor;
     private volatile FairJsLoader jsLoader;
     private BinaryMessenger binaryMessenger;
-    private FairMessageEvent event;
     private Context mContext;
     private FairJsFlutterEngine engine;
     private FairFfi fairFfi;
@@ -34,10 +34,10 @@ public class FairPlugin2 implements FlutterPlugin {
         mContext = binding.getApplicationContext();
         plugin = this;
         binaryMessenger = binding.getBinaryMessenger();
-        fairFfi=new FairFfi();
+        fairFfi = new FairFfi();
         CountDownLatch countDownLatch = new CountDownLatch(1);
         //等待js引擎加载成功
-        FairThread.get().execute(new FairTask() {
+        FairThread.get().run(new FairTask() {
             @Override
             public void runTask() {
                 //初始化js引擎
@@ -89,5 +89,9 @@ public class FairPlugin2 implements FlutterPlugin {
 
     public FairJsFlutterEngine getJsFlutterEngine() {
         return engine;
+    }
+
+    public FairFfi getFairFFi() {
+        return fairFfi;
     }
 }

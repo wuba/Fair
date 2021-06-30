@@ -34,7 +34,7 @@ public class FairJsFlutterEngine {
     private BasicMessageChannel.MessageHandler<String> callHandler = (message, reply) -> {
         final Object[] obj = new Object[1];
         try {
-          FairThread.get().execute(new FairTask() {
+          FairThread.get().run(new FairTask() {
               @Override
               public void runTask() {
                   IJSExecutor executor = FairPlugin2.get().getJsExecutor();
