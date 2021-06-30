@@ -26,7 +26,7 @@ class _SignInWithApplePageState extends State<SignInWithApplePage> {
   Widget build(BuildContext context) {
     return FairWidget(
       name: "sign_in_with_app",
-      path: "assets/bundle/lib_google_fonts_fair_google_fonts_widget.fair.json",
+      path: "assets/bundle/lib_sign_in_with_app_sign_in_with_apple_widget.fair.json",
       data: {
         'title': "Sign In With Apple Page"
       },
