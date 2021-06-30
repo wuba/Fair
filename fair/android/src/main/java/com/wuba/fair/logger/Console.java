@@ -6,16 +6,16 @@ public class Console {
 
     @JavascriptInterface
     public void log(Object... args) {
-        FairLogger.i("Console [INFO] ", (args == null ? "" : args[0].toString()));
+        FairLogger.i("Console [f_info] ", (args == null ? "" : args[0].toString()));
     }
 
     @JavascriptInterface
     public void error(Object... args) {
-        FairLogger.e("Console [ERROR] ", (args == null ? "" : args[0].toString()));
+        FairLogger.e("Console [f_error] ", (args == null ? "" : args[0].toString()));
     }
 
     @JavascriptInterface
     public void warn(Object... args) {
-        FairLogger.w("Console [WARN] ", (args == null ? "" : args[0].toString()));
+        FairLogger.w("Console [f_warn] ", (args == null ? "" : args[0].toString()));
     }
 }

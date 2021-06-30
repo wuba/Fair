@@ -29,8 +29,8 @@ public class FairThread implements Executor {
         return INSTANCE.thread;
     }
 
-    public void run(Runnable runnable) {
-        execute(runnable);
+    public void run(FairTask task) {
+        execute(task);
     }
 
     @Override

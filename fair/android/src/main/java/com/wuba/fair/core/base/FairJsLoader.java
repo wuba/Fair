@@ -28,7 +28,7 @@ public abstract class FairJsLoader {
     private MethodChannel.MethodCallHandler methodHandler = (call, result) -> {
         switch (call.method) {
             case FairConstant.LOAD_MAIN_JS:
-                FairThread.get().execute(new FairTask() {
+                FairThread.get().run(new FairTask() {
                     @Override
                     public void runTask() {
                         loadMainJs(call.arguments, s -> {
@@ -43,7 +43,7 @@ public abstract class FairJsLoader {
                 });
                 break;
             case FairConstant.RELEASE_MAIN_JS:
-                FairThread.get().execute(new FairTask() {
+                FairThread.get().run(new FairTask() {
                     @Override
                     public void runTask() {
                         releaseJsObject(call.arguments);
