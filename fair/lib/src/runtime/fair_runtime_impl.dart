@@ -8,6 +8,7 @@ import 'fair_message_channel.dart';
 import 'fair_runtime_declaration.dart';
 
 class Runtime implements IRuntime {
+  final loadBaseJsConstant = [false];
   static final Runtime _runtime = Runtime._internal();
   final _callBacks = <String, RuntimeCallback>{};
 
@@ -69,6 +70,9 @@ class Runtime implements IRuntime {
     var map = <dynamic, dynamic>{};
     map[FairMessage.PATH] = scriptSource;
     map[FairMessage.PAGE_NAME] = pageName;
+    //添加base js
+    await _loadCoreJs();
+
     return _channel.loadJS(jsonEncode(map), null);
   }
 
@@ -145,5 +149,41 @@ class Runtime implements IRuntime {
   Future<Map> getBindVariableAndFunc(String pageName) async {
     var r = await invokeMethod(pageName, 'getAllJSBindData', null);
     return Future.value(jsonDecode(r));
+  }
+
+  /*
+   * 加载用户的基础配置 //todo 单线程模型修改是否会出现值不同步问题
+   */
+  Future<dynamic> _loadCoreJs() async {
+    //如果没有加载过js
+    var map = <dynamic, dynamic>{};
+    if (!loadBaseJsConstant[0]) {
+      //用户配置的脚本，里面包含core_js以及用户的拓展
+      var configJson =
+          await rootBundle.loadString('assets/fair_basic_config.json');
+      var basicConfig = jsonDecode(configJson);
+      var path = basicConfig['coreJs']['path'];
+      //加载基础js
+      var baseJsSource = await rootBundle.loadString(path);
+      //加载用户自定义的plugin
+      var pluginJsSource = ' ';
+      Map plugins = basicConfig['plugin'];
+
+      if (plugins != null) {
+        Iterable<String> keys = plugins.keys;
+        for (var k in keys) {
+          pluginJsSource =
+              pluginJsSource + '  ' + await rootBundle.loadString(plugins[k]);
+        }
+      }
+      loadBaseJsConstant[0] = true;
+      map[FairMessage.PATH] = baseJsSource + ' ' + pluginJsSource;
+      map[FairMessage.PAGE_NAME] = 'loadCoreJs';
+    }
+
+    if (map.isEmpty) {
+      return Future.value(null);
+    }
+    return _channel.loadJS(jsonEncode(map), null);
   }
 }

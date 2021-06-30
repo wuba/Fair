@@ -33,10 +33,6 @@ public class FairV8JsExecutor extends JSExecutor {
                 }
             }
         }
-        String js = FairFileUtil.getScriptFromAssets(FairPlugin2.get().getContext(), "base_js.js");
-        v8.executeVoidScript(js);
-        String iterable = FairFileUtil.getScriptFromAssets(FairPlugin2.get().getContext(), "list.js");
-        v8.executeObjectScript(iterable);
     }
 
     /**
