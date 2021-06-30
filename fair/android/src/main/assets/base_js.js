@@ -1,6 +1,5 @@
 let GLOBAL = {}
 
-
 function invokeJSFunc(parameter) {
     if (parameter === null) {
         return null;

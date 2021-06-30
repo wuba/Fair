@@ -160,7 +160,7 @@
         "child": {
           "className": "Text",
           "pa": [
-            ""
+            "%(_generateTitle)"
           ],
           "na": {
             "overflow": "#(TextOverflow.ellipsis)",
