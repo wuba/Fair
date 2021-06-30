@@ -23,13 +23,10 @@ mixin FlatCompiler {
   Future<R> compile(String jsonPath) async {
     var content = '';
     var error = '';
-    print('jsonPath = ${jsonPath}');
-    print('command = ${command}');
     if (LocalProcessManager().canRun(command)) {
       _fbs ??= await File(
               path.join('.dart_tool', 'build', 'fairc', 'fair_bundle.fbs'))
           .create(recursive: true);
-      print('_fbs = ${_fbs}');
       final result = Process.runSync(command, [
         '-o',
         File(jsonPath).parent.absolute.path,
@@ -135,11 +132,8 @@ mixin FairCompiler {
     rawBytes = matched.first.content;
     final digest = md5.convert(rawBytes).toString();
     final dir = path.join('.dart_tool', 'build', 'fairc');
-    print('[Fair] dir = $dir');
-
     Directory(dir).createSync(recursive: true);
     final localCompiler = File(path.join(dir, digest));
-    print('localCompiler.path = ${localCompiler.path}');
     if (!localCompiler.existsSync()) {
       localCompiler.writeAsBytesSync(rawBytes);
     }
@@ -161,12 +155,9 @@ mixin FairCompiler {
   Future<R> compile(BuildStep buildStep, List<String> arguments) async {
     var content = '';
     var error = '';
-    print('[Fair command =] $command');
-
     if (LocalProcessManager().canRun(command)) {
       // final fair = (await _bin(buildStep))?.absolute?.path;
       final fair = '/Users/anjuke/haijun/Anjuke-Flutter/fairc/lib/fairc.dart';
-      print('[Fair fair =] $fair');
       if (fair != null) {
         final result = Process.runSync(command, [fair, ...arguments]);
         var output = result.stdout.toString();

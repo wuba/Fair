@@ -29,12 +29,14 @@ public class FairV8JsExecutor extends JSExecutor {
         if (v8 == null) {
             synchronized (locker) {
                 if (v8 == null) {
-                    v8 = V8.createV8Runtime();
+                    v8 = V8.createV8Runtime("global");
                 }
             }
         }
         String js = FairFileUtil.getScriptFromAssets(FairPlugin2.get().getContext(), "base_js.js");
         v8.executeVoidScript(js);
+        String iterable = FairFileUtil.getScriptFromAssets(FairPlugin2.get().getContext(), "list.js");
+        v8.executeObjectScript(iterable);
     }
 
     /**
