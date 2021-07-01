@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 abstract class IFairPlugin {
-  final c = <String, Function>{};
-
-  Future<dynamic> invoke(dynamic par);
+  Future<dynamic> invoke(dynamic par) async {
+    var resp =
+        await Function.apply(getRegisterMethods()[getMethodName(par)], [par]);
+    return Future.value(resp);
+  }
 
   String getMethodName(dynamic par) {
     var a = jsonDecode(par);
@@ -20,7 +22,5 @@ abstract class IFairPlugin {
     return '';
   }
 
-  void registerMethod(String k, Function f) {
-    c[k] = f;
-  }
+  Map<String, Function> getRegisterMethods();
 }
