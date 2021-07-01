@@ -40,9 +40,6 @@
     
     // 设置native调用js的delegate
     [FairJSBridge sharedInstance].delegate = self;
-
-    // 设置执行js的执行环境
-    [[FairJSBridge sharedInstance] evaluateScriptWithJSFileAsync:@"main" callback:nil];
 }
 
 #pragma mark - protocol FairDartBridgeExecuteJS
