@@ -26,16 +26,5 @@ Java_com_wuba_fair_channel_FairFfi_release(JNIEnv *env,
 jobject get_fair_ffi() {
   return fair_ffi;
 }
-//extern "C"
-//JNIEXPORT jstring JNICALL
-//Java_com_wuba_fair_channel_FairFfi_nativeCallFlutterFunctionSync(
-//    JNIEnv *env,
-//    jobject thiz,
-//    jstring json_string) {
-//  const char *convert_param = env->GetStringUTFChars(json_string, nullptr);
-//  char *result = NativeCallFlutterFunctionSync(strdup(convert_param));
-//  jstring resultString = env->NewStringUTF(result);
-//  free(result);
-//  return resultString;
-//}
+
 

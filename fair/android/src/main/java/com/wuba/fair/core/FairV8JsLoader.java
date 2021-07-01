@@ -6,7 +6,7 @@ import com.eclipsesource.v8.V8;
 import com.eclipsesource.v8.V8Array;
 import com.eclipsesource.v8.V8Function;
 import com.eclipsesource.v8.V8Object;
-import com.wuba.fair.FairPlugin2;
+import com.wuba.fair.FairPlugin;
 import com.wuba.fair.callback.JsResultCallback;
 import com.wuba.fair.constant.Constant;
 import com.wuba.fair.constant.FairConstant;
@@ -57,13 +57,13 @@ public class FairV8JsLoader extends FairJsLoader {
                 e.printStackTrace();
             }
 
-            if (TextUtils.isEmpty(r[0]) && FairPlugin2.get().getJsExecutor().getV8ObjectByName(r[0]) == null) {
+            if (TextUtils.isEmpty(r[0]) && FairPlugin.get().getJsExecutor().getV8ObjectByName(r[0]) == null) {
                 return;
             }
             /*
              * 获取flutter的结果成功之后，返回给js的回调函数
              */
-            FairPlugin2.get().getJsFlutterEngine().invokeFlutterChannel(call, (v) -> {
+            FairPlugin.get().getJsFlutterEngine().invokeFlutterChannel(call, (v) -> {
                 FairThread.get().run(new FairTask() {
                     @Override
                     public void runTask() {
@@ -71,7 +71,7 @@ public class FairV8JsLoader extends FairJsLoader {
                         v8Array.push(v);
 
                         if (callback != null) {
-                            callback.call(FairPlugin2.get().getJsExecutor().getV8ObjectByName(r[0]), v8Array);
+                            callback.call(FairPlugin.get().getJsExecutor().getV8ObjectByName(r[0]), v8Array);
                         }
                     }
                 });
@@ -128,7 +128,7 @@ public class FairV8JsLoader extends FairJsLoader {
 
     private FairV8JsExecutor getV8JsExecutor() {
         if (v8JsExecutor == null) {
-            v8JsExecutor = ((FairV8JsExecutor) FairPlugin2.get().getJsExecutor());
+            v8JsExecutor = ((FairV8JsExecutor) FairPlugin.get().getJsExecutor());
         }
         return v8JsExecutor;
     }
