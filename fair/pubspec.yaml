@@ -33,4 +33,4 @@ dev_dependencies:
 flutter:
   plugin:
     androidPackage: com.wuba.fair
-    pluginClass: FairPlugin2
+    pluginClass: FairPlugin

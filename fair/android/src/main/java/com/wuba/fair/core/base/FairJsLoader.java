@@ -1,6 +1,6 @@
 package com.wuba.fair.core.base;
 
-import com.wuba.fair.FairPlugin2;
+import com.wuba.fair.FairPlugin;
 import com.wuba.fair.callback.JsResultCallback;
 import com.wuba.fair.constant.FairConstant;
 import com.wuba.fair.thread.FairTask;
@@ -19,7 +19,7 @@ public abstract class FairJsLoader {
 
     private void loadMsgChannel() {
         FairThread.runOnUI(() -> {
-            methodChannel = new MethodChannel(FairPlugin2.get().getBinaryMessenger(),
+            methodChannel = new MethodChannel(FairPlugin.get().getBinaryMessenger(),
                     FairConstant.FLUTTER_LOADER_MESSAGE_CHANNEL);
             methodChannel.setMethodCallHandler(methodHandler);
         });

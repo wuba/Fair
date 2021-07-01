@@ -1,6 +1,6 @@
 package com.wuba.fair.core;
 
-import com.wuba.fair.FairPlugin2;
+import com.wuba.fair.FairPlugin;
 import com.wuba.fair.constant.FairConstant;
 import com.wuba.fair.jsexecutor.IJSExecutor;
 import com.wuba.fair.thread.FairTask;
@@ -22,7 +22,7 @@ public class FairJsFlutterEngine {
 
     private void setupChannel() {
         msgChannel = new BasicMessageChannel<>(
-                FairPlugin2.get().getBinaryMessenger(), FairConstant.FLUTTER_COMMON_MESSAGE_CHANNEL,
+                FairPlugin.get().getBinaryMessenger(), FairConstant.FLUTTER_COMMON_MESSAGE_CHANNEL,
                 StringCodec.INSTANCE);
 
         msgChannel.setMessageHandler(callHandler);
@@ -37,7 +37,7 @@ public class FairJsFlutterEngine {
           FairThread.get().run(new FairTask() {
               @Override
               public void runTask() {
-                  IJSExecutor executor = FairPlugin2.get().getJsExecutor();
+                  IJSExecutor executor = FairPlugin.get().getJsExecutor();
                   obj[0] = executor.invokeJSChannel(message);
                   FairThread.runOnUI(() -> {
                       reply.reply(String.valueOf(obj[0]));

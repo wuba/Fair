@@ -3,12 +3,10 @@ package com.wuba.fair.core;
 import com.eclipsesource.v8.V8;
 import com.eclipsesource.v8.V8Array;
 import com.eclipsesource.v8.V8Object;
-import com.wuba.fair.FairPlugin2;
 import com.wuba.fair.callback.JsResultCallback;
 import com.wuba.fair.constant.Constant;
 import com.wuba.fair.constant.FairConstant;
 import com.wuba.fair.jsexecutor.JSExecutor;
-import com.wuba.fair.utils.FairFileUtil;
 
 import org.json.JSONObject;
 

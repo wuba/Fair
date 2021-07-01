@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
-import com.wuba.fair.FairPlugin2;
+import com.wuba.fair.FairPlugin;
 import com.wuba.fair.constant.FairConstant;
 import com.wuba.fair.logger.FairLogger;
 
@@ -24,7 +24,7 @@ public class FairFileUtil {
         }
 
         if (file.startsWith(FairConstant.AndroidConfig.ASSERT)) {
-            Context context = FairPlugin2.get().getContext();
+            Context context = FairPlugin.get().getContext();
             String filename = file.replace(FairConstant.AndroidConfig.ASSERT, "");
             return getScriptFromAssets(context, filename);
         }

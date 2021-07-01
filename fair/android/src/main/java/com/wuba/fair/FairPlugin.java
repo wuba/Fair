@@ -19,9 +19,9 @@ import java.util.concurrent.TimeUnit;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
 
-public class FairPlugin2 implements FlutterPlugin {
+public class FairPlugin implements FlutterPlugin {
     @SuppressLint("StaticFieldLeak")
-    private static FairPlugin2 plugin;
+    private static FairPlugin plugin;
     private volatile JSExecutor jsExecutor;
     private volatile FairJsLoader jsLoader;
     private BinaryMessenger binaryMessenger;
@@ -75,7 +75,7 @@ public class FairPlugin2 implements FlutterPlugin {
         return binaryMessenger;
     }
 
-    public static FairPlugin2 get() {
+    public static FairPlugin get() {
         return plugin;
     }
 
