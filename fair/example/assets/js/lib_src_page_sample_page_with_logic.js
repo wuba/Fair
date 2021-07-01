@@ -35,18 +35,32 @@ GLOBAL['hello_world'] = (function () {
             }
             setData("hello_world", map);
 
-            FairNet.request({
-                className:'hello_world',
-                method: 'GET',
-                url: 'https://wanandroid.com/user_article/list/0/json',
-                complete: function (params) {
-                    console.log('请求成功返回的数据： ' + params)
-                },
-                error: function (params) {
-                    console.log('请求失败返回的返回的数据： ' + params)
-                }
-            })
-
+//            FairNet.request({
+//                className:'hello_world',
+//                method: 'GET',
+//                url: 'https://wanandroid.com/user_article/list/0/json',
+//                complete: function (params) {
+//                    console.log('请求成功返回的数据： ' + params)
+//                },
+//                error: function (params) {
+//                    console.log('请求失败返回的返回的数据： ' + params)
+//                }
+//            })
+               FairPlugin.call({
+                               className:'WBPermission#photoPermission',
+//                               className:'FairNet#request',
+                               method: 'photoPermission',
+//                               args:{
+//                                    method: 'GET',
+//                                    url: 'https://wanandroid.com/user_article/list/0/json',
+//                               },
+                               complete: function (params) {
+                                   console.log('请求返回的数据： ' + params)
+                               },
+                               error: function (params) {
+                                   console.log('请求失败返回的返回的数据： ' + params)
+                               }
+                           })
         },
         _initData: function _initData(id) {
 //         FairNet.request({url:"http://op.juhe.cn/onebox/weather/query",header: {"Content-Type" : "application/x-www-form-urlencoded"},method:"POST",data: {"cityname" : "上海", "key" : "1430ec127e097e1113259c5e1be1ba70"},complete:function dummy(value)  {
