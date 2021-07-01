@@ -7,10 +7,7 @@ import 'package:fair/fair.dart';
 class FairNet extends IFairPlugin {
   static final FairNet _fairNet = FairNet._internal();
 
-  FairNet._internal() {
-    //注册要暴露给js端使用的方法
-    registerMethod('request', _jsRequest);
-  }
+  FairNet._internal();
 
   factory FairNet() {
     return _fairNet;
@@ -21,12 +18,6 @@ class FairNet extends IFairPlugin {
   Dio _getDio() {
     _dio ??= Dio();
     return _dio;
-  }
-
-  @override
-  Future<dynamic> invoke(dynamic par) async {
-    var resp = await Function.apply(c[getMethodName(par)], [par]);
-    return Future.value(resp);
   }
 
   //处理来自js的网络请求
@@ -135,5 +126,12 @@ class FairNet extends IFairPlugin {
       {Map<String, dynamic> queryParameters}) async {
     var resp = await _getDio().get(path, queryParameters: queryParameters);
     return Future.value(resp);
+  }
+
+  @override
+  Map<String, Function> getRegisterMethods() {
+    var functions = <String, Function>{};
+    functions.putIfAbsent('request', () => _jsRequest);
+    return functions;
   }
 }

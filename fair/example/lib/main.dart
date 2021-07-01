@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
+  //todo 是否可以通过注解的方式注册
   FairPluginDispatcher.registerPlugin('FairNet', FairNet());
   runApp(FairApp(
     modules: {

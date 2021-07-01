@@ -27,4 +27,8 @@ class FairPluginDispatcher {
   static void registerPlugin(String key, IFairPlugin plugin) {
     pluginMap[key] = plugin;
   }
+
+  static void registerPlugins(Map<String, IFairPlugin> plugins) {
+    pluginMap.addAll(plugins);
+  }
 }
