@@ -1,12 +1,18 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
+import 'package:my_app/src/generated.fair.dart';
 
 import 'delegate.dart';
-import 'home_page.dart';
+import 'module.dart';
+
 
 void main() {
   runApp(FairApp(
     child: MyApp(),
+    generated: AppGeneratedModule(),
+    modules: {
+      SlidableModule.tagName:() => SlidableModule()
+    },
     delegate: {
       'home_page': (_, data) => MyHomePageDelegate(),
     },

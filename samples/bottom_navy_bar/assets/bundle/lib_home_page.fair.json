@@ -1,0 +1,117 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "#(widget.title)"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "Center",
+      "na": {
+        "child": {
+          "className": "Column",
+          "na": {
+            "mainAxisAlignment": "#(MainAxisAlignment.center)",
+            "children": [
+              {
+                "className": "IconButton",
+                "na": {
+                  "icon": {
+                    "className": "FaIcon",
+                    "pa": [
+                      "#(FontAwesomeIcons.solidCircle)"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "bottomNavigationBar": {
+      "className": "BottomNavyBar",
+      "na": {
+        "selectedIndex": "#(_currentIndex)",
+        "onItemSelected": "#(onItemSelect)",
+        "items": [
+          {
+            "className": "BottomNavyBarItem",
+            "na": {
+              "title": {
+                "className": "Text",
+                "pa": [
+                  "Item One"
+                ]
+              },
+              "icon": {
+                "className": "Icon",
+                "pa": [
+                  "#(Icons.home)"
+                ]
+              }
+            }
+          },
+          {
+            "className": "BottomNavyBarItem",
+            "na": {
+              "title": {
+                "className": "Text",
+                "pa": [
+                  "Item Two"
+                ]
+              },
+              "icon": {
+                "className": "Icon",
+                "pa": [
+                  "#(Icons.apps)"
+                ]
+              }
+            }
+          },
+          {
+            "className": "BottomNavyBarItem",
+            "na": {
+              "title": {
+                "className": "Text",
+                "pa": [
+                  "Item Three"
+                ]
+              },
+              "icon": {
+                "className": "Icon",
+                "pa": [
+                  "#(Icons.chat_bubble)"
+                ]
+              }
+            }
+          },
+          {
+            "className": "BottomNavyBarItem",
+            "na": {
+              "title": {
+                "className": "Text",
+                "pa": [
+                  "Item Four"
+                ]
+              },
+              "icon": {
+                "className": "Icon",
+                "pa": [
+                  "#(Icons.settings)"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
