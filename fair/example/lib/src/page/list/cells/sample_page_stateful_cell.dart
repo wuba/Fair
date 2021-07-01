@@ -102,7 +102,7 @@ class _State extends State<StatefulCell> {
     return Container(
         width: 160,
         padding: EdgeInsets.only(left: 4),
-        child: Text('',
+        child: Text(_generateTitle(),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             textAlign: TextAlign.left,

@@ -11,7 +11,7 @@
             "na": {
               "alignment": "#(Alignment.centerLeft)",
               "color": "#(Colors.white)",
-              "height": 116,
+              "height": 216,
               "child": {
                 "className": "Flex",
                 "na": {

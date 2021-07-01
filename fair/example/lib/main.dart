@@ -9,12 +9,15 @@ import 'package:fair_example/src/page/list/sample_list_with_logic.dart';
 import 'package:fair_example/src/page/modules.dart';
 import 'package:fair_example/src/page/plugins/net/fair_plugin.dart';
 import 'package:fair_example/src/page/plugins/net/sampe_list_view_src.dart';
+import 'package:fair_example/src/page/plugins/permission/fair_permission_plugin.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   //todo 是否可以通过注解的方式注册
   FairPluginDispatcher.registerPlugin('FairNet', FairNet());
+  FairPluginDispatcher.registerPlugin('WBPermission', WBPermission());
+
   runApp(FairApp(
     modules: {
       ShowFairAlertModule.tagName: () => ShowFairAlertModule(),

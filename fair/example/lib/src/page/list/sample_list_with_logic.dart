@@ -64,7 +64,7 @@ class _State extends State<DynamicCellPage> {
       return Container(
           alignment: Alignment.centerLeft,
           color: Colors.white,
-          height: 120,
+          constraints: BoxConstraints(minHeight: 80),
           child: FairWidget(
             name: item.id,
             path: 'assets/bundle/lib_src_page_sample_page_stateful_cell.fair.json',

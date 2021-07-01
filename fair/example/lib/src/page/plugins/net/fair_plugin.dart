@@ -26,8 +26,8 @@ class FairNet extends IFairPlugin {
     var requestPar = jsonDecode(par);
     var args = requestPar['args'];
     var pageName = requestPar['pageName'];
-    var method = args['method'];
-    var url = args['url'];
+    var method = args['args']['method'];
+    var url = args['args']['url'];
     var id = args['id'];
 
     Response<String> response;
