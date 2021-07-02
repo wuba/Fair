@@ -151,47 +151,16 @@ class DynamicWidgetBuilder extends DynamicBuilder {
           if (tag == 'FairWidget' && e.key.toString() == 'data') {
             na[e.key] = e.value;
           } else {
-<<<<<<< HEAD
-            // todo 主要修改的地方，此处将目标函数代入到解析的过程中
-            if (e.value['className'] is String && methodMap[e.value['className']] is Map) {
-=======
             // 主要修改的地方，此处将目标函数代入到解析的过程中
             if (methodMap != null && e.value['className'] is String && methodMap[e.value['className']] is Map) {
->>>>>>> 处理混编方法
               na[e.key] = convert(context,methodMap[e.value['className']], methodMap, domain: domain);
             }
             else {
               na[e.key] = convert(context, e.value, methodMap, domain: domain);
             }          }
         } else if (e.value is List) {
-          // todo 主要修改的地方，此处将目标函数代入到解析的过程中
-          var children = (e.value as List).map((obj) => obj is Map
-              ? ((obj['className'] is String && methodMap[obj['className']] is Map) ? convert(context, methodMap[obj['className']], methodMap, domain: domain) : convert(context, obj, methodMap, domain: domain))
-              : (obj is String && domain != null && domain.match(obj)
-              ? domain.bindValue(obj)
-              : obj));
-          na[e.key] = (children.asIteratorOf<Widget>() ?? children).toList();
-          // var a = e.value as List;
-          //
-          //
-          // var children = [];
-          // a.forEach((e) {
-          //   var item ;
-          //   if (e is Map) {
-          //     item = convert(context, e, domain: domain);
-          //   } else {
-          //     if (e is String && domain != null && domain.match(e)) {
-          //       item = domain.bindValue(e);
-          //     } else {
-          //       item = e;
-          //     }
-          //   }
-          //   children.add(item);
-          // });
+          var a = e.value as List;
 
-<<<<<<< HEAD
-          na[e.key] = (children.asIteratorOf<Widget>().toList() ?? children);
-=======
           var children = [];
           a.forEach((e) {
             var item ;
@@ -214,7 +183,6 @@ class DynamicWidgetBuilder extends DynamicBuilder {
             children.add(item);
           });
           na[e.key] = (children.asIteratorOf<Widget>()?.toList() ?? children);
->>>>>>> 处理混编方法
         } else if (domain != null && domain.match(e)) {
           na[e.key] = domain.bindValue(e as String);
         } else if (e.value is String) {
