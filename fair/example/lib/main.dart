@@ -33,7 +33,6 @@ void main() {
         // },
         // name: 'hello_world',
         // path: 'assets/bundle/lib_src_page_hello_world.fair.bin',
-
         name: 'hello_world',
         jsPath: 'assets/js/lib_src_page_sample_page_with_logic.js',
         path: 'assets/bundle/lib_src_page_hello_world.fair.json',
