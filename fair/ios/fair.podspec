@@ -20,4 +20,9 @@ A new Flutter plugin.
 
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
+
+
+  s.preserve_paths = 'FairDynamicFlutter/Products/FairDynamicFlutter.framework'
+  s.vendored_frameworks = 'FairDynamicFlutter/Products/FairDynamicFlutter.framework'
+
 end

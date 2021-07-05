@@ -21,9 +21,9 @@
 
 + (void)load {
     
-    Method originalMethod = class_getClassMethod(self.class, @selector(registerWithRegistry:));
-    Method customMethod = class_getClassMethod(self.class, @selector(customRegisterWithRegistry:));
-    method_exchangeImplementations(originalMethod, customMethod);
+//    Method originalMethod = class_getClassMethod(self.class, @selector(registerWithRegistry:));
+//    Method customMethod = class_getClassMethod(self.class, @selector(customRegisterWithRegistry:));
+//    method_exchangeImplementations(originalMethod, customMethod);
 }
 
 
