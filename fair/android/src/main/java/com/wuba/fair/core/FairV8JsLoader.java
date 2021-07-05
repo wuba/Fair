@@ -107,12 +107,22 @@ public class FairV8JsLoader extends FairJsLoader {
 
     @Override
     public void releaseJsObject(Object arguments) {
-        getV8JsExecutor().releaseV8Object(String.valueOf(arguments));
+        FairThread.get().run(new FairTask() {
+            @Override
+            public void runTask() {
+                getV8JsExecutor().releaseV8Object(String.valueOf(arguments));
+            }
+        });
     }
 
     @Override
     public void release() {
-
+        FairThread.get().run(new FairTask() {
+            @Override
+            public void runTask() {
+                getV8JsExecutor().release();
+            }
+        });
     }
 
     private V8 v8;

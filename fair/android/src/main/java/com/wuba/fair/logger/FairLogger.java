@@ -22,19 +22,19 @@ public class FairLogger {
 
     public static void i(String TAG, String msg) {
         if (isDebug) {
-            Log.d(TAG, msg);
+            Log.i(TAG, msg);
         }
     }
 
     public static void e(String TAG, String msg) {
         if (isDebug) {
-            Log.d(TAG, msg);
+            Log.e(TAG, msg);
         }
     }
 
     public static void w(String TAG, String msg) {
         if (isDebug) {
-            Log.d(TAG, msg);
+            Log.w(TAG, msg);
         }
     }
 

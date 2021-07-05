@@ -18,6 +18,10 @@ void main() {
   FairPluginDispatcher.registerPlugin('FairNet', FairNet());
   FairPluginDispatcher.registerPlugin('WBPermission', WBPermission());
 
+  Runtime().loadCoreJs().then((value) => _runApp());
+}
+
+void _runApp() {
   runApp(FairApp(
     modules: {
       ShowFairAlertModule.tagName: () => ShowFairAlertModule(),

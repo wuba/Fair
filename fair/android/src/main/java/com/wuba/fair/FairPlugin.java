@@ -10,6 +10,7 @@ import com.wuba.fair.core.FairJsEngineProvider;
 import com.wuba.fair.core.FairJsFlutterEngine;
 import com.wuba.fair.core.base.FairJsLoader;
 import com.wuba.fair.jsexecutor.JSExecutor;
+import com.wuba.fair.logger.FairLogger;
 import com.wuba.fair.thread.FairTask;
 import com.wuba.fair.thread.FairThread;
 
@@ -31,6 +32,7 @@ public class FairPlugin implements FlutterPlugin {
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+        FairLogger.w("FairPlugin","调用了onAttachedToEngine()");
         mContext = binding.getApplicationContext();
         plugin = this;
         binaryMessenger = binding.getBinaryMessenger();
