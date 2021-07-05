@@ -19,8 +19,8 @@ class FairPluginDispatcher {
     }
 
     if (pluginMap[className] != null) {
-      var d = await pluginMap[className]?.invoke(msg);
-      return d;
+      // var d = await ;
+      return pluginMap[className]?.invoke(msg);
     }
   }
 

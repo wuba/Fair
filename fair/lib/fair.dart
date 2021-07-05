@@ -18,3 +18,4 @@ export 'src/widget.dart';
 export 'src/runtime/plugin/fair_plugin.dart';
 export 'src/runtime/plugin/plugin_dispatcher.dart';
 export 'src/runtime/fair_runtime_impl.dart';
+export 'src/runtime/plugin/fair_plugin_suggar.dart';
