@@ -30,10 +30,10 @@
 }
 
 /// 开始Fair的整个流程
-- (void)startFairProcess
+- (void)startFairProcessWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar
 {
     // 设置和dart的通信
-    [[FairDartBridge sharedInstance] setDartChannel];
+    [[FairDartBridge sharedInstance] setDartChannelWithRegistrar:registrar];
     
     // 设置dart调用js的delegate
     [FairDartBridge sharedInstance].delegate = self;

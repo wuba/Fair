@@ -10,6 +10,7 @@
 #import <FairDynamicFlutter/FairDynamicFlutter.h>
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "FairDefine.h"
+#import <Flutter/FlutterPlugin.h>
 
 /// Flutter 调用 Native 的类型
 typedef NS_ENUM(NSUInteger, K_FLUTTER_TO_NATIVE_TYPE) {
@@ -48,6 +49,6 @@ FairSingletonH();
 - (void)sendMessageToDart:(NSString *)message callback:(FairCallback)callback;
 
 /// 设置channel
-- (void)setDartChannel;
+- (void)setDartChannelWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar;
 
 @end

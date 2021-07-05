@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import <FairDynamicFlutter/FairDynamicFlutter.h>
 #import "FairJSBridge.h"
+#import <Flutter/FlutterPlugin.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (FairProcessManager *)sharedInstance;
 
 /// 开始Fair流程
-- (void)startFairProcess;
+- (void)startFairProcessWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar;
 
 @end
 

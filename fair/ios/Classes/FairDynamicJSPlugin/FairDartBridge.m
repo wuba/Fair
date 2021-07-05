@@ -33,11 +33,11 @@ FairSingletonM(FairDartBridge);
     }];
 }
 
-- (void)setDartChannel {
+- (void)setDartChannelWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     // 设置同步执行代理
     [FairDynamicFlutter sharedInstance].delegate = self;
     
-    self.binaryMessenger = (id <FlutterBinaryMessenger>)[UIApplication sharedApplication].delegate.window.rootViewController;
+    self.binaryMessenger = (id <FlutterBinaryMessenger>)registrar.messenger;
     // 设置从flutter拿到的js脚本的通道
     self.flutterMethodChannel = [FlutterMethodChannel methodChannelWithName:FairMessageChannelInjectionID binaryMessenger:self.binaryMessenger];
     // 设置Flutter通信通道代理

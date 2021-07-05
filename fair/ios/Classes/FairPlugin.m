@@ -9,7 +9,7 @@
     FairPlugin* instance = [[FairPlugin alloc] init];
     [registrar addMethodCallDelegate:instance channel:channel];
     
-    [[FairProcessManager sharedInstance] startFairProcess];
+    [[FairProcessManager sharedInstance] startFairProcessWithRegistrar:registrar];
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {

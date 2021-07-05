@@ -23,7 +23,7 @@ static JSContext *context = nil;
 /// @param registrar 注册者
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar> *)registrar {
     // 启动Fair
-    [[FairProcessManager sharedInstance] startFairProcess];
+    [[FairProcessManager sharedInstance] startFairProcessWithRegistrar:registrar];
 
 }
 /// 释放
