@@ -7,7 +7,7 @@
 
 #import "FairDynamicFlutter.h"
 
-/// 调用该方法前，需主动设置executeScriptSyncImpl
+/// 同步方法调用，通过executeScriptSyncImpl进行回调
 /// @param args 参数
 /// @return 返回值
 const char *invokeJSCommonFuncSync(char *args) {

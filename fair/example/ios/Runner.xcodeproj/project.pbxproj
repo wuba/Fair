@@ -13,7 +13,6 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
-		B03201FB26525266008064E0 /* GeneratedPluginRegistrant+RegisterPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = B03201FA26525266008064E0 /* GeneratedPluginRegistrant+RegisterPlugin.m */; };
 		B0B4B772266F976A00EDB4DE /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = B0B4B771266F976A00EDB4DE /* main.js */; };
 		D425B3CBF7F7B0DC0B53812E /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DA2F1FF031065A77A753604 /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
@@ -49,8 +48,6 @@
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		988114F5714901D7C879D0C5 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		9C4BA9F461934644875918C7 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
-		B03201F926525266008064E0 /* GeneratedPluginRegistrant+RegisterPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeneratedPluginRegistrant+RegisterPlugin.h"; sourceTree = "<group>"; };
-		B03201FA26525266008064E0 /* GeneratedPluginRegistrant+RegisterPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GeneratedPluginRegistrant+RegisterPlugin.m"; sourceTree = "<group>"; };
 		B0B4B771266F976A00EDB4DE /* main.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,8 +110,6 @@
 				97C147021CF9000F007C117D /* Info.plist */,
 				1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */,
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
-				B03201F926525266008064E0 /* GeneratedPluginRegistrant+RegisterPlugin.h */,
-				B03201FA26525266008064E0 /* GeneratedPluginRegistrant+RegisterPlugin.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
 				B0B4B771266F976A00EDB4DE /* main.js */,
@@ -280,7 +275,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B03201FB26525266008064E0 /* GeneratedPluginRegistrant+RegisterPlugin.m in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);
