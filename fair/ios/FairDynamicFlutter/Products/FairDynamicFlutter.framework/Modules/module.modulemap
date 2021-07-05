@@ -1,0 +1,6 @@
+framework module FairDynamicFlutter {
+  umbrella header "FairDynamicFlutter.h"
+
+  export *
+  module * { export * }
+}

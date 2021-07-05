@@ -45,7 +45,7 @@ class ComponentExpression extends Expression {
       var r = proxy.componentOf(obj);
       if (r is Map) {
         assert(!(r[prop] is Function),
-            'should be an instance of widget or const value');
+        'should be an instance of widget or const value');
         return R(r[prop], exp: processed);
       }
     }
@@ -111,6 +111,37 @@ class ValueExpression extends Expression {
   }
 }
 
+class FunctionExpression extends Expression {
+  @override
+  R onEvaluate(ProxyMirror proxy, BindingData binding, String exp, String pre) {
+    var regexp = RegExp(r'\%\(\w+\)');
+    var matches = regexp.allMatches(exp);
+    var builder = _FunctionBuilder(
+        matches: matches, data: exp, proxyMirror: proxy, binding: binding);
+    binding.addBindValue(builder);
+    return R(builder, exp: exp, needBinding: false);
+  }
+
+  @override
+  bool hitTest(String exp, String pre) {
+    return RegExp(r'\%\(\w+\)', multiLine: true).hasMatch(exp);
+  }
+}
+
+class GestureExpression extends Expression {
+  @override
+  R onEvaluate(ProxyMirror proxy, BindingData binding, String exp, String pre) {
+    var prop = binding?.bindFunctionOf(exp.substring(2, exp.length - 1));
+    return R(prop, exp: exp, needBinding: false);
+  }
+
+  @override
+  bool hitTest(String exp, String pre) {
+    return RegExp(r'\@\(\w+\)', multiLine: true).hasMatch(exp);
+  }
+}
+
+
 class _BindValueBuilder<T> extends ValueNotifier<T> implements LifeCircle {
   final String data;
   final ProxyMirror proxyMirror;
@@ -160,9 +191,9 @@ class _InlineVariableBuilder extends _BindValueBuilder<String> {
     var extract = data;
     matches
         .map((e) => {
-              '0': binding?.bindDataOf(e.group(0).substring(1)),
-              '1': e.group(0)
-            })
+      '0': binding?.bindDataOf(e.group(0).substring(1)),
+      '1': e.group(0)
+    })
         .forEach((e) {
       var first = e['0'] is ValueNotifier ? e['0'].value : e['0'];
       if (first != null) {
@@ -187,6 +218,41 @@ class _PropBuilder extends _BindValueBuilder {
     return prop is ValueNotifier ? prop.value : prop;
   }
 }
+
+class _FunctionBuilder extends _BindValueBuilder<String> {
+  final Iterable<RegExpMatch> matches;
+
+  _FunctionBuilder(
+      {this.matches, String data, ProxyMirror proxyMirror, BindingData binding})
+      : super(data, proxyMirror, binding) {
+    matches.forEach((e) {
+      var bindProp ;
+      bindProp = binding?.runFunctionOf(e.group(0).substring(2, e.group(0).length - 1));
+      if (bindProp is ValueNotifier) {
+        _watchedProps.add(bindProp);
+      }
+    });
+    attach();
+  }
+
+  @override
+  String get value {
+    var extract = data;
+    matches
+        .map((e) => {
+      '0': binding?.runFunctionOf(e.group(0).substring(2, e.group(0).length - 1)),
+      '1': e.group(0)
+    })
+        .forEach((e) {
+      var first = e['0'] is ValueNotifier ? e['0'].value : e['0'];
+      if (first != null) {
+        extract = extract.replaceFirst(e['1'], '$first');
+      }
+    });
+    return extract;
+  }
+}
+
 
 abstract class LifeCircle {
   void attach();

@@ -157,6 +157,8 @@ mixin FairCompiler {
     var error = '';
     if (LocalProcessManager().canRun(command)) {
       final fair = (await _bin(buildStep))?.absolute?.path;
+      // 本地联调，可以先配置环境
+      // final fair = '/Users/anjuke/haijun/Anjuke-Flutter/fairc/lib/fairc.dart';
       if (fair != null) {
         final result = Process.runSync(command, [fair, ...arguments]);
         var output = result.stdout.toString();

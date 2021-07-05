@@ -1,0 +1,11 @@
+{
+  "coreJs": {
+    "version": 1.0,
+    "path": "assets/basic/fair_core.js"
+  },
+  "plugin": {
+    "fair_net": "assets/plugin/fair_net_plugin.js",
+    "fair_plugin": "assets/plugin/fair_plugins.js",
+    "list_view": "assets/plugin/list.js"
+  }
+}

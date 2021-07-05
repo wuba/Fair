@@ -15,6 +15,7 @@ import '../widgets/component.dart';
 import '../widgets/version.dart';
 import 'base.dart';
 import 'domain.dart';
+import 'expression.dart';
 import 'property.dart';
 import 'proxy.dart';
 
@@ -82,15 +83,15 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   dynamic _block(
-    Map map,
-    Map methodMap,
-    BuildContext ctx,
-    Domain domain,
-    dynamic fun,
-    String name,
-    bool widget, {
-    bool forceApply = false,
-  }) {
+      Map map,
+      Map methodMap,
+      BuildContext ctx,
+      Domain domain,
+      dynamic fun,
+      String name,
+      bool widget, {
+        bool forceApply = false,
+      }) {
     var na = _named(name, map['na'], methodMap, ctx, domain);
     var pa = _positioned(map['pa'], methodMap, ctx, domain);
     final bind = widget && (na.binding || pa.binding);
@@ -136,12 +137,12 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   W<Map<String, dynamic>> _named(
-    String tag,
-    dynamic naMap,
-    Map methodMap,
-    BuildContext context,
-    Domain domain,
-  ) {
+      String tag,
+      dynamic naMap,
+      Map methodMap,
+      BuildContext context,
+      Domain domain,
+      ) {
     var na = <String, dynamic>{};
     var needBinding = false;
     if (naMap is Map) {
@@ -150,40 +151,38 @@ class DynamicWidgetBuilder extends DynamicBuilder {
           if (tag == 'FairWidget' && e.key.toString() == 'data') {
             na[e.key] = e.value;
           } else {
-            // todo 主要修改的地方，此处将目标函数代入到解析的过程中
-            if (e.value['className'] is String && methodMap[e.value['className']] is Map) {
+            // 主要修改的地方，此处将目标函数代入到解析的过程中
+            if (methodMap != null && e.value['className'] is String && methodMap[e.value['className']] is Map) {
               na[e.key] = convert(context,methodMap[e.value['className']], methodMap, domain: domain);
             }
             else {
               na[e.key] = convert(context, e.value, methodMap, domain: domain);
             }          }
         } else if (e.value is List) {
-          // todo 主要修改的地方，此处将目标函数代入到解析的过程中
-          var children = (e.value as List).map((obj) => obj is Map
-              ? ((obj['className'] is String && methodMap[obj['className']] is Map) ? convert(context, methodMap[obj['className']], methodMap, domain: domain) : convert(context, obj, methodMap, domain: domain))
-              : (obj is String && domain != null && domain.match(obj)
-              ? domain.bindValue(obj)
-              : obj));
-          na[e.key] = (children.asIteratorOf<Widget>() ?? children).toList();
-          // var a = e.value as List;
-          //
-          //
-          // var children = [];
-          // a.forEach((e) {
-          //   var item ;
-          //   if (e is Map) {
-          //     item = convert(context, e, domain: domain);
-          //   } else {
-          //     if (e is String && domain != null && domain.match(e)) {
-          //       item = domain.bindValue(e);
-          //     } else {
-          //       item = e;
-          //     }
-          //   }
-          //   children.add(item);
-          // });
+          var a = e.value as List;
 
-          na[e.key] = (children.asIteratorOf<Widget>().toList() ?? children);
+          var children = [];
+          a.forEach((e) {
+            var item ;
+            if (e is Map) {
+              // 主要修改的地方，此处将目标函数代入到解析的过程中
+              item = (methodMap != null && (e['className'] is String && methodMap[e['className']] is Map) ? convert(context, methodMap[e['className']], methodMap, domain: domain) : convert(context, e, methodMap, domain: domain));
+            } else {
+              if (e is String && domain != null && domain.match(e)) {
+                item = domain.bindValue(e);
+              } else {
+                var body;
+                if(methodMap != null && _isFuncExp(e) && (body = methodMap[_subFunctionName(e)]) != null){
+                  item = convert(context, body, methodMap, domain: domain);
+                }else{
+                  item = e;
+                }
+
+              }
+            }
+            children.add(item);
+          });
+          na[e.key] = (children.asIteratorOf<Widget>()?.toList() ?? children);
         } else if (domain != null && domain.match(e)) {
           na[e.key] = domain.bindValue(e as String);
         } else if (e.value is String) {
@@ -227,5 +226,17 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       'pa': [source, children]
     };
     return mapEach.call(params);
+  }
+
+  bool _isFuncExp(String exp){
+    return FunctionExpression().hitTest(exp, '');
+  }
+
+  String _subFunctionName(String expFunc){
+    if(_isFuncExp(expFunc)){
+      return expFunc.substring(2,expFunc.length-1);
+    }else{
+      return expFunc;
+    }
   }
 }

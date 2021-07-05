@@ -1,49 +1,99 @@
 package com.wuba.fair;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
+import com.wuba.fair.channel.FairFfi;
+import com.wuba.fair.core.FairJsEngineProvider;
+import com.wuba.fair.core.FairJsFlutterEngine;
+import com.wuba.fair.core.base.FairJsLoader;
+import com.wuba.fair.jsexecutor.JSExecutor;
+import com.wuba.fair.logger.FairLogger;
+import com.wuba.fair.thread.FairTask;
+import com.wuba.fair.thread.FairThread;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
-import io.flutter.plugin.common.MethodCall;
-import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
-import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
+import io.flutter.plugin.common.BinaryMessenger;
 
-/** FairPlugin */
-public class FairPlugin implements FlutterPlugin, MethodCallHandler {
-  /// The MethodChannel that will the communication between Flutter and native Android
-  ///
-  /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-  /// when the Flutter Engine is detached from the Activity
-  private MethodChannel channel;
+public class FairPlugin implements FlutterPlugin {
+    @SuppressLint("StaticFieldLeak")
+    private static FairPlugin plugin;
+    private volatile JSExecutor jsExecutor;
+    private volatile FairJsLoader jsLoader;
+    private BinaryMessenger binaryMessenger;
+    private Context mContext;
+    private FairJsFlutterEngine engine;
+    private FairFfi fairFfi;
 
-  @Override
-  public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-    channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "fair");
-    channel.setMethodCallHandler(this);
-  }
+    @Override
+    public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+        FairLogger.w("FairPlugin","调用了onAttachedToEngine()");
+        mContext = binding.getApplicationContext();
+        plugin = this;
+        binaryMessenger = binding.getBinaryMessenger();
+        fairFfi = new FairFfi();
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        //等待js引擎加载成功
+        FairThread.get().run(new FairTask() {
+            @Override
+            public void runTask() {
+                //初始化js引擎
+                if (jsExecutor == null) {
+                    jsExecutor = FairJsEngineProvider.createJsExecutor(FairJsEngineProvider.V8);
+                }
 
-  // This static function is optional and equivalent to onAttachedToEngine. It supports the old
-  // pre-Flutter-1.12 Android projects. You are encouraged to continue supporting
-  // plugin registration via this function while apps migrate to use the new Android APIs
-  // post-flutter-1.12 via https://flutter.dev/go/android-project-migration.
-  //
-  // It is encouraged to share logic between onAttachedToEngine and registerWith to keep
-  // them functionally equivalent. Only one of onAttachedToEngine or registerWith will be called
-  // depending on the user's project. onAttachedToEngine or registerWith must both be defined
-  // in the same class.
-  public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "fair");
-    channel.setMethodCallHandler(new FairPlugin());
-  }
+                if (jsLoader == null) {
+                    jsLoader = FairJsEngineProvider.createJsLoader(FairJsEngineProvider.V8);
+                }
 
-  @Override
-  public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-    result.notImplemented();
-  }
+                if (engine == null) {
+                    engine = new FairJsFlutterEngine();
+                }
+                countDownLatch.countDown();
 
-  @Override
-  public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
-    channel.setMethodCallHandler(null);
-  }
+            }
+        });
+
+        try {
+            countDownLatch.await(5, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+        if (jsLoader != null) {
+            jsLoader.release();
+        }
+    }
+
+    public BinaryMessenger getBinaryMessenger() {
+        return binaryMessenger;
+    }
+
+    public static FairPlugin get() {
+        return plugin;
+    }
+
+    public JSExecutor getJsExecutor() {
+        return jsExecutor;
+    }
+
+    public Context getContext() {
+        return mContext;
+    }
+
+    public FairJsFlutterEngine getJsFlutterEngine() {
+        return engine;
+    }
+
+    public FairFfi getFairFFi() {
+        return fairFfi;
+    }
 }
