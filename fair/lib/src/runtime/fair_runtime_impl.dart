@@ -64,14 +64,14 @@ class Runtime implements IRuntime {
     if (props != null && props['fairProps'] != null) {
       scriptSource = scriptSource.replaceFirst(
           new RegExp(r'#FairProps#'), props['fairProps']);
-      scriptSource =
-          scriptSource.replaceAll(new RegExp(r'#FairPageName#'), pageName);
     }
+    scriptSource =
+        scriptSource.replaceAll(new RegExp(r'#FairPageName#'), pageName);
     var map = <dynamic, dynamic>{};
     map[FairMessage.PATH] = scriptSource;
     map[FairMessage.PAGE_NAME] = pageName;
     //添加base js
-    await _loadCoreJs();
+    // await loadCoreJs();
 
     return _channel.loadJS(jsonEncode(map), null);
   }
@@ -154,7 +154,7 @@ class Runtime implements IRuntime {
   /*
    * 加载用户的基础配置 //todo 单线程模型修改是否会出现值不同步问题
    */
-  Future<dynamic> _loadCoreJs() async {
+  Future<dynamic> loadCoreJs() async {
     //如果没有加载过js
     var map = <dynamic, dynamic>{};
     if (!loadBaseJsConstant[0]) {
