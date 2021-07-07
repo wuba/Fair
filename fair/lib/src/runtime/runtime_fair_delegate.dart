@@ -70,7 +70,7 @@ abstract class RuntimeFairDelegate {
 
   ///将绑定JS端的变量绑定到当前位置
   void _bindAllValue(Map data) {
-    data.forEach((key, value) {
+    data?.forEach((key, value) {
       _bindValuesMap[key] = () => createValueNotifier(key, value);
     });
   }
