@@ -35,6 +35,10 @@ FairWidgetBinding provider = () {
       }
       return p0 == p1 ? props['trueValue'] : props['falseValue'];
     },
+    'Sugar.ifEqualBool': (props) {
+      var state = pa0(props);
+      return state ? props['trueValue'] : props['falseValue'];
+    },
     'Sugar.ifRange': (props) {
       var p0 = pa0(props);
       var p1 = pa1(props);
