@@ -64,13 +64,10 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
     var strBin = bin.toString();
     var dirEndIndex = strBin.lastIndexOf(Platform.pathSeparator);
     var binDir = strBin.substring(0, dirEndIndex);
-    String partPath = Directory.current.path +
-        '/' +
-        input.replaceFirst('.bundle.json', '.js.dart');
+    var partPath  = path.join(Directory.current.path, input.replaceFirst('.bundle.json', '.js.dart'));
     print('\u001b[33m [Fair Dart2JS] partPath => ${partPath} \u001b[0m');
     if (File(partPath).existsSync()) {
-      String transferPath =
-          Directory.current.parent.parent.path + '/fair_compiler/lib/entry.aot';
+      var transferPath  = path.join(Directory.current.parent.parent.path, 'fair_compiler', 'lib', 'entry.aot');
       print('\u001b[33m [Fair Dart2JS] transferPath => ${transferPath} \u001b[0m');
       print(
           '\u001b[33m [Fair Dart2JS] dartaotruntime path => ${binDir}/dartaotruntime \u001b[0m');
@@ -78,7 +75,7 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
           '\u001b[33m [Fair Dart2JS] jsName => ${jsName} \u001b[0m');
       try {
         result =
-            await Process.run('$binDir/dartaotruntime', [transferPath, partPath]);
+            await Process.run('$binDir/dartaotruntime', [transferPath, '--compress', partPath]);
         File(jsName)..writeAsString(result.stdout.toString());
       } catch(e) {
         print(
