@@ -93,10 +93,10 @@ mixin FairCompiler {
             path.dirname(path.dirname(Platform.resolvedExecutable)), 'version'))
         .readAsStringSync()
         .trimRight();
-    if (!await supported(v)) {
-      stderr.writeln('not supported flutter version, with dart-$v');
-      return Future.value();
-    }
+    // if (!await supported(v)) {
+    //   stderr.writeln('not supported flutter version, with dart-$v');
+    //   return Future.value();
+    // }
     if (_fair == null || !_fair.existsSync()) {
       var cache =
           await File(path.join('.dart_tool', 'build', 'fairc', '${v.hashCode}'))
@@ -156,12 +156,23 @@ mixin FairCompiler {
     var content = '';
     var error = '';
     if (LocalProcessManager().canRun(command)) {
-      final fair = (await _bin(buildStep))?.absolute?.path;
+      // final fair = (await _bin(buildStep))?.absolute?.path;
       // 本地联调，可以先配置环境
       // final fair = '/Users/anjuke/haijun/Anjuke-Flutter/fairc/lib/fairc.dart';
-      if (fair != null) {
-        final result = Process.runSync(command, [fair, ...arguments]);
-        var output = result.stdout.toString();
+      // if (fair != null) {
+      // final result = Process.runSync(command, [fair, ...arguments]);
+
+
+      var whichCommand = await Process.run('which', ['dart']);
+      var strBin = whichCommand.stdout.toString();
+      var dirEndIndex = strBin.lastIndexOf(Platform.pathSeparator);
+      var binDir = strBin.substring(0, dirEndIndex);
+
+      var transferPath  = path.join(Directory.current.parent.parent.path, 'fair_compiler', 'lib', 'fairc.aot');
+      final result = Process.runSync('$binDir/dartaotruntime', [transferPath, ...arguments]);
+      print(result);
+
+      var output = result.stdout.toString();
         if (output != null && output.isNotEmpty) {
           final startIndex = output.indexOf(_startTag);
           final endIndex = output.indexOf(_endTag);
@@ -179,7 +190,7 @@ mixin FairCompiler {
           error = 'No content is generated: ${errorLog.path}';
           print('[Fair] $error');
         }
-      }
+      // }
     } else {
       error = '[Fair] Please checkout the flutter & dart version';
       print(error);
