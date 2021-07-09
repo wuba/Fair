@@ -26,6 +26,13 @@ class Sugar {
   }) =>
       expect == actual ? trueValue : falseValue;
 
+  static K ifEqualBool<T, K>(
+      bool state, {
+        K trueValue,
+        K falseValue,
+      }) =>
+      state ? trueValue : falseValue;
+
   /// Map operation with index
   static List<T> mapEach<T, E>(List<E> data, T Function(int index, E item) f) {
     return data.mapEach((index, item) => f(index, item));
