@@ -7,6 +7,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:archive/archive.dart';
 import 'package:build/build.dart';
 import 'package:crypto/crypto.dart' show md5;
 import 'package:path/path.dart' as path;
@@ -52,6 +53,10 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
         .writeAsStringSync(buffer.toString());
 
     print('[Fair] New bundle generated => ${file.path}');
+
+    // 压缩下发产物
+    var zipPath  = path.join(Directory.current.path, 'build', 'fair');
+    _zip(Directory(zipPath), File('./build/fair/fair_patch.zip'));
   }
 
   @override
@@ -83,4 +88,21 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
       }
     }
   }
+
+  void _zip(Directory data, File zipFile) {
+    final Archive archive = Archive();
+    for (FileSystemEntity entity in data.listSync(recursive: false)) {
+      if (entity is! File) {
+        continue;
+      }
+      if (entity.path.endsWith('.js') || entity.path.endsWith('.json')) {
+        final File file = entity as File;
+        var filename = file.path.split("/").last;
+        final List<int> bytes = file.readAsBytesSync();
+        archive.addFile(ArchiveFile(filename, bytes.length, bytes));
+      }
+    }
+    zipFile.writeAsBytesSync(ZipEncoder().encode(archive), flush: false);
+  }
+
 }
