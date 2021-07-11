@@ -13,6 +13,7 @@ import 'package:fair_example/src/page/plugins/permission/fair_permission_plugin.
 import 'package:flutter/material.dart';
 
 import 'src/page/fair_example_main.dart';
+import 'src/proxy/list_proxy.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,22 +29,25 @@ void _runApp() {
     modules: {
       ShowFairAlertModule.tagName: () => ShowFairAlertModule(),
     },
+    delegate:  {
+      'listLoadMore': (ctx, _) => ListDelegate(),
+    },
     child: MaterialApp(
-      // home: FairWidget(
-      //   // todo：测试demo
-      //   // name: 'widget_method_demo',
-      //   // path: 'assets/bundle/lib_widget_method_demo.json',
-      //   // data: {
-      //   //   'index2': 3,
-      //   //   'index3': 4,
-      //   // },
-      //   // name: 'hello_world',
-      //   // path: 'assets/bundle/lib_src_page_hello_world.fair.bin',
-      //   name: 'hello_world',
-      //   jsPath: 'assets/js/lib_src_page_sample_page_with_logic.js',
-      //   path: 'assets/bundle/lib_src_page_hello_world.fair.json',
-      // )
-      home: JRListWidget(),
+      home: FairWidget(
+        // todo：测试demo
+        // name: 'widget_method_demo',
+        // path: 'assets/bundle/lib_widget_method_demo.json',
+        // data: {
+        //   'index2': 3,
+        //   'index3': 4,
+        // },
+        // name: 'hello_world',
+        // path: 'assets/bundle/lib_src_page_hello_world.fair.bin',
+        name: 'listLoadMore',
+        jsPath: 'assets/js/lib_src_page_fair_example_main.fair.js',
+        path: 'assets/bundle/lib_src_page_fair_example_main.fair.json',
+      ),
+      // home: JRListWidget(),
       routes: {
         'sample_dynamic_page': (_) => SampleWanAndroidPageSrc(),
         'sample_list_with_dynamic_cell_page': (_) => DynamicCellPage(),
