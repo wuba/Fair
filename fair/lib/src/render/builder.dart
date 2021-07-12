@@ -168,8 +168,11 @@ class DynamicWidgetBuilder extends DynamicBuilder {
             }
             children.add(item);
           });
-
-          na[e.key] = (children.asIteratorOf<Widget>().toList() ?? children);
+          if (children?.every((element) => element is Widget) == true){
+            na[e.key] = (children.asIteratorOf<Widget>().toList() ?? children);
+          } else{
+            na[e.key] = children;
+          }
         } else if (domain != null && domain.match(e)) {
           na[e.key] = domain.bindValue(e as String);
         } else if (e.value is String) {
