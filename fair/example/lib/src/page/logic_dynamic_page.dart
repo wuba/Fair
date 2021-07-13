@@ -9,14 +9,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class SampleDynamicPage extends StatelessWidget {
+
+  var _pageName;
+
+  SampleDynamicPage(String name) {
+    _pageName = name;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Demo DynamicWidget')),
+      appBar: AppBar(title: Text(_pageName)),
       body: FairWidget(
-        name: 'hello_world2',
-        jsPath:'assets/js/lib_src_page_sample_page_with_logic2.js',
-        path: 'assets/bundle/lib_src_page_hello_world.fair.bin',
+        name: _pageName,
+        jsPath:'assets/js/lib_src_page_logic-page_sample_logic_page.fair.js',
+        path: 'assets/bundle/lib_src_page_logic-page_sample_logic_page.fair.json',
         // data: {
         //   'content': 'Red Box',
         //   'data.content': '张三',
