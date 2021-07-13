@@ -61,10 +61,14 @@ class Runtime implements IRuntime {
   Future<dynamic> addScript(
       String pageName, String script, dynamic props) async {
     var scriptSource = await rootBundle.loadString(script);
+    var fairProps;
     if (props != null && props['fairProps'] != null) {
-      scriptSource = scriptSource.replaceFirst(
-          new RegExp(r'#FairProps#'), props['fairProps']);
+      fairProps = props['fairProps'];
+    } else {
+      fairProps = '{}';
     }
+    scriptSource =
+        scriptSource.replaceFirst(new RegExp(r'#FairProps#'), fairProps);
     scriptSource =
         scriptSource.replaceAll(new RegExp(r'#FairPageName#'), pageName);
     var map = <dynamic, dynamic>{};

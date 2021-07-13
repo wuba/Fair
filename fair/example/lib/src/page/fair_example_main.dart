@@ -13,45 +13,16 @@ class JRListWidget extends StatefulWidget {
 
 class JRListState extends State<JRListWidget> {
 
-  // 监听listview的滑动
-  ScrollController _scrollController;
-
   @override
   void initState() {
     super.initState();
-    _refresh();
-    // 监听滑动
-    _scrollController = ScrollController()
-      ..addListener(() {
-        //判断是否滑到底
-        if (_scrollController.position.pixels ==
-            _scrollController.position.maxScrollExtent) {
-          _loadMore();
-        }
-      });
+    onLaunch();
   }
 
   @override
   void dispose() {
     super.dispose();
-    _scrollController.dispose();
-  }
-
-  Future _loadMore() async {
-    await Future.delayed(Duration(seconds: 2), () {
-      setState(() {
-        list.addAll(
-            List.generate(Random().nextInt(5) + 1, (i) => 'more Item $i'));
-      });
-    });
-  }
-
-  Future<void> _refresh() async {
-    await Future.delayed(Duration(seconds: 3), () {
-      setState(() {
-        list = List.generate(Random().nextInt(20) + 15, (i) => 'Item $i');
-      });
-    });
+    onDispose();
   }
 
   @override

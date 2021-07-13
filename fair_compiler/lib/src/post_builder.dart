@@ -55,8 +55,9 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
     print('[Fair] New bundle generated => ${file.path}');
 
     // 压缩下发产物
-    var zipPath  = path.join(Directory.current.path, 'build', 'fair');
-    _zip(Directory(zipPath), File('./build/fair/fair_patch.zip'));
+    var zipSrcPath  = path.join(Directory.current.path, 'build', 'fair');
+    var zipDesPath  = path.join(Directory.current.path, 'build', 'fair', 'fair_patch.zip');
+    _zip(Directory(zipSrcPath), File(zipDesPath));
   }
 
   @override
