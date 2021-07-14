@@ -1,3 +1,5 @@
+const global = this;
+
 ;(function(){
 const __global__ = global;
 
