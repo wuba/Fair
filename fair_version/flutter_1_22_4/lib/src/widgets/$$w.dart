@@ -1427,7 +1427,7 @@ var p = () =>
         padding: props['padding'],
         itemExtent: props['itemExtent']?.toDouble(),
         itemBuilder: props['itemBuilder'],
-        itemCount: props['itemCount'],
+        itemCount:  (props['itemCount'] is num) ? props['itemCount'] : num.parse(props['itemCount']),
         addAutomaticKeepAlives: props['addAutomaticKeepAlives'] ?? true,
         addRepaintBoundaries: props['addRepaintBoundaries'] ?? true,
         addSemanticIndexes: props['addSemanticIndexes'] ?? true,
