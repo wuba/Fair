@@ -7,12 +7,12 @@ function invokeJSFunc(parameter) {
     }
 
     let map = JSON.parse(parameter);
-
     if ('method' === map['type']) {
         return _invokeMethod(parameter);
+    } else if ('variable' === map['type']) {
+        return _invokeVariable(parameter);
     }
     return null;
-
 }
 
 function test() {
@@ -28,6 +28,21 @@ function test() {
     console.log('all bind data :' + invokeJSFunc(JSON.stringify(map)));
 }
 
+function _invokeVariable(parameter) {
+    let o = JSON.parse(parameter);
+    let pageName = o['pageName'];
+    let varMap = o['args'];
+    let mc = GLOBAL[pageName];
+    let result = {};
+
+    if (!isNull(varMap)) {
+        for (let varKey in varMap) {
+            result[varKey] = mc[varKey];
+        }
+        return JSON.stringify(result);
+    }
+    return JSON.stringify(result);
+}
 
 function _invokeMethod(parameter) {
     let o = JSON.parse(parameter);

@@ -178,7 +178,7 @@ class _InlineVariableBuilder extends _BindValueBuilder<String> {
       {this.matches, String data, ProxyMirror proxyMirror, BindingData binding})
       : super(data, proxyMirror, binding) {
     matches.forEach((e) {
-      final bindProp = binding?.bindDataOf(e.group(0).substring(1));
+      final bindProp = binding?.bindRuntimeValueOf(e.group(0).substring(1));
       if (bindProp is ValueNotifier) {
         _watchedProps.add(bindProp);
       }
@@ -191,7 +191,7 @@ class _InlineVariableBuilder extends _BindValueBuilder<String> {
     var extract = data;
     matches
         .map((e) => {
-      '0': binding?.bindDataOf(e.group(0).substring(1)),
+      '0': binding?.bindRuntimeValueOf(e.group(0).substring(1)),
       '1': e.group(0)
     })
         .forEach((e) {

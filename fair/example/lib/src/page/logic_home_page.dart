@@ -16,8 +16,8 @@ class LogicHomePage extends StatelessWidget {
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('界面动态', () {
-              Navigator.pushNamed(context, 'sample_logic_dynamic_page',
-                  arguments: {'pageName': '界面动态'});
+              Navigator.pushNamed(context, 'fair_page',
+                  arguments: {'route': 'assets/bundle/lib_src_page_logic-page_sample_logic_page.fair', 'data': {'pageName': '界面动态'}});
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('自定义插件', () {}),

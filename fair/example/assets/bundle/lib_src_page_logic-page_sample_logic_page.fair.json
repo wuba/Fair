@@ -7,7 +7,7 @@
         "title": {
           "className": "Text",
           "pa": [
-            "Flutter Fair Example"
+            "%(getTitle)"
           ]
         }
       }
@@ -38,7 +38,7 @@
                   "child": {
                     "className": "Text",
                     "pa": [
-                      "#(Running with $_platform, click count = $_count)"
+                      "#(Click Count = $_count)"
                     ]
                   }
                 }

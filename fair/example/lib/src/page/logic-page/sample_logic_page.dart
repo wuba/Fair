@@ -22,7 +22,7 @@ class _State extends State<HelloWorldPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Fair Example'),
+        title: Text(getTitle()),
       ),
       body: Center(
         child: Column(
@@ -31,7 +31,7 @@ class _State extends State<HelloWorldPage> {
             Image.asset('assets/image/logo.png'),
             Padding(
               padding: EdgeInsets.only(bottom: 40),
-              child: Text(getShowText()),
+              child: Text('$_count'),
             ),
           ],
         ),
