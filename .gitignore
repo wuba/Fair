@@ -13,6 +13,7 @@ fairc
 yarn.lock
 yarn.error
 example/pubspec.lock
+fair/example/ios/Podfile.lock
 fair/pubspec.lock
 example/ios/Podfile.lock
 fair_compiler/test
