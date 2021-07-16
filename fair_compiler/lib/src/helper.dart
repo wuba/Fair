@@ -168,7 +168,11 @@ mixin FairCompiler {
       var dirEndIndex = strBin.lastIndexOf(Platform.pathSeparator);
       var binDir = strBin.substring(0, dirEndIndex);
 
-      var transferPath  = path.join(Directory.current.parent.parent.path, 'fair_compiler', 'lib', 'fairc.aot');
+      var aotParentPath = Directory.current.parent.parent.path;
+      var aotPath = await Process.run('find', [aotParentPath, "-name", 'fairc.aot']);
+      var transferPath = aotPath.stdout.toString().replaceAll('\r', '').replaceAll('\n', '');
+      print('\u001b[33m [Fair Dart2DSL] fairc.aot => 【${transferPath}】 \u001b[0m');
+
       final result = Process.runSync('$binDir/dartaotruntime', [transferPath, ...arguments]);
       print(result);
 
