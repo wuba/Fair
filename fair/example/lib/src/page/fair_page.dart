@@ -25,7 +25,6 @@ class FairPage extends StatelessWidget {
     var DSLPath = _route + '.json';
     return FairWidget(
       name: _route,
-      jsPath: jsPath,
       path: DSLPath,
       data: {'fairProps': jsonEncode(_data)},
     );
