@@ -34,10 +34,9 @@ function _invokeVariable(parameter) {
     let varMap = o['args'];
     let mc = GLOBAL[pageName];
     let result = {};
-
     if (!isNull(varMap)) {
         for (let varKey in varMap) {
-            result[varKey] = mc[varKey];
+            result[varKey] = eval('mc.' + varKey.toString());
         }
         return JSON.stringify(result);
     }

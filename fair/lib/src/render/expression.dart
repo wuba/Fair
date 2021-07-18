@@ -75,6 +75,24 @@ class InlineExpression extends Expression {
   }
 }
 
+class InlineObjectExpression extends Expression {
+  @override
+  R onEvaluate(ProxyMirror proxy, BindingData binding, String exp, String pre) {
+    var regexp = RegExp(r'\$\{\w.+\}');
+    var matches = regexp.allMatches(pre);
+    var builder = _InlineObjectVariableBuilder(
+        matches: matches, data: pre, proxyMirror: proxy, binding: binding);
+    binding.addBindValue(builder);
+    return R(builder, exp: exp, needBinding: true);
+  }
+
+  @override
+  bool hitTest(String exp, String pre) {
+    return RegExp(r'\$\{\w.+\}', multiLine: true).hasMatch(pre);
+  }
+}
+
+
 class WidgetParamExpression extends Expression {
   @override
   R onEvaluate(ProxyMirror proxy, BindingData binding, String exp, String pre) {
@@ -203,6 +221,41 @@ class _InlineVariableBuilder extends _BindValueBuilder<String> {
     return extract;
   }
 }
+
+class _InlineObjectVariableBuilder extends _BindValueBuilder<String> {
+  final Iterable<RegExpMatch> matches;
+
+  _InlineObjectVariableBuilder(
+      {this.matches, String data, ProxyMirror proxyMirror, BindingData binding})
+      : super(data, proxyMirror, binding) {
+    matches.forEach((e) {
+      final bindProp =
+      binding?.bindRuntimeValueOf(e.group(0).substring(2, e.group(0).length - 1));
+      if (bindProp is ValueNotifier) {
+        _watchedProps.add(bindProp);
+      }
+    });
+    attach();
+  }
+
+  @override
+  String get value {
+    var extract = data;
+    matches
+        .map((e) => {
+      '0': binding?.bindRuntimeValueOf(e.group(0).substring(2, e.group(0).length - 1)),
+      '1': e.group(0)
+    })
+        .forEach((e) {
+      var first = e['0'] is ValueNotifier ? e['0'].value : e['0'];
+      if (first != null) {
+        extract = extract.replaceFirst(e['1'], '$first');
+      }
+    });
+    return extract;
+  }
+}
+
 
 class _PropBuilder extends _BindValueBuilder {
   _PropBuilder(String data, ValueNotifier prop, ProxyMirror proxyMirror,

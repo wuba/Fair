@@ -3,12 +3,12 @@ part of 'sample_logic_page.dart';
 @FairProps()
 var fairProps;
 
-int _count = 0;
+DemoList _demoList = DemoList(list: List.empty(), total: 0);
 
 String getTitle() {
   return fairProps['pageName'];
 }
 
 void onTapText() {
-  setData(fairProps['pageName'], {_count: _count++});
+  setData(fairProps['pageName'], {_demoList.total: _demoList.total++});
 }

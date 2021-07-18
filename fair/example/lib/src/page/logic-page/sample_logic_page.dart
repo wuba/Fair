@@ -5,8 +5,8 @@
  */
 
 import 'package:fair/fair.dart';
+import '../../model/bean/list_with_logic_bean.dart';
 import 'package:flutter/material.dart';
-
 part 'sample_logic_page.js.dart';
 
 @FairPatch()
@@ -36,7 +36,7 @@ class _State extends State<SampleLogicPage> {
             Image.asset('assets/image/logo.png'),
             Padding(
               padding: EdgeInsets.only(bottom: 40),
-              child: Text('$_count'),
+              child: Text('${_demoList.total}'),
             ),
           ],
         ),
