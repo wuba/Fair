@@ -11,11 +11,6 @@ class Runtime implements IRuntime {
   final loadBaseJsConstant = [false];
   static final Runtime _runtime = Runtime._internal();
   final _callBacks = <String, RuntimeCallback>{};
-  var _state;
-
-  void setState(dynamic fn) {
-    _state.setState(fn);
-  }
 
   @override
   void bindCallback(String key, RuntimeCallback callback) {
