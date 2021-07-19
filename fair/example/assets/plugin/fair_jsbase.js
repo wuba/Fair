@@ -1,5 +1,3 @@
-const global = this;
-
 function inherit(cls, sup) {
     var oldProto = cls.prototype;
     cls.prototype = Object.create(Object.create(sup.prototype));
@@ -24,10 +22,9 @@ function convertObjectLiteralToSetOrMap(obj) {
 
 Object.prototype.ctor = function(){};
 Object.__inner__ = function(){};
->>>>>>> [Fair][Logic]: 支持变量直写
 
 ;(function(){
-const __global__ = global;
+const __global__ = this;
 
 function Duration() {
     const inner = Duration.__inner__;
