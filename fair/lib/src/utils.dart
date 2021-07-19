@@ -42,6 +42,10 @@ class FairUtils {
     if (widgetData.na != null) {
       map['na'] = serializeReference(Reference.fromBuffer(_b(widgetData.na)));
     }
+
+    if (widgetData.methodMap != null) {
+      map['methodMap'] = serializeReference(Reference.fromBuffer(_b(widgetData.methodMap)));
+    }
     var end2 = watch.elapsedMilliseconds;
     log('[Fair] FlatBuffer construct: $end1 ms, serialize: $end2 ms');
     return map;

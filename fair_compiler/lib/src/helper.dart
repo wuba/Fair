@@ -27,6 +27,7 @@ mixin FlatCompiler {
       _fbs ??= await File(
               path.join('.dart_tool', 'build', 'fairc', 'fair_bundle.fbs'))
           .create(recursive: true);
+
       final result = Process.runSync(command, [
         '-o',
         File(jsonPath).parent.absolute.path,
@@ -161,8 +162,7 @@ mixin FairCompiler {
       // final fair = '/Users/anjuke/haijun/Anjuke-Flutter/fairc/lib/fairc.dart';
       // if (fair != null) {
       // final result = Process.runSync(command, [fair, ...arguments]);
-
-
+      await _bin(buildStep);
       var whichCommand = await Process.run('which', ['dart']);
       var strBin = whichCommand.stdout.toString();
       var dirEndIndex = strBin.lastIndexOf(Platform.pathSeparator);

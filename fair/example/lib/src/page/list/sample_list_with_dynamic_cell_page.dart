@@ -67,8 +67,8 @@ class _State extends State<DynamicCellPage> {
           constraints: BoxConstraints(minHeight: 80),
           child: FairWidget(
             name: item.id,
-            path: 'assets/bundle/lib_src_page_sample_page_stateful_cell.fair.json',
-            jsPath:'assets/js/lib_src_page_sample_page_stateful_cell.js',
+            path: 'assets/bundle/lib_src_page_list_cells_sample_page_stateful_cell.fair.bin',
+            jsPath:'assets/js/lib_src_page_list_cells_sample_page_stateful_cell.fair.js',
             data: {"fairProps": json.encode(louPanDetail)},
           ));
 
