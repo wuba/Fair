@@ -47,6 +47,14 @@ class BindingData {
     return () => _functions['runtimeInvokeMethod'](props);
   }
 
+  dynamic bindRuntimeValueOf(String key) {
+    if (key.isNotEmpty) {
+      var result = _functions['runtimeParseVar']({key: ''});
+      var value = jsonDecode(result);
+      return ValueNotifier(value[key]);
+    }
+    return null;
+  }
 
   Function functionOf(String key) {
     return _functions != null ? _functions[key] : null;

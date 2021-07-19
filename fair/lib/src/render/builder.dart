@@ -94,12 +94,13 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }) {
     var na = _named(name, map['na'], methodMap, ctx, domain);
     var pa = _positioned(map['pa'], methodMap, ctx, domain);
+    var arguments = map['arguments'];
     final bind = widget && (na.binding || pa.binding);
     try {
       fun = FairModule.cast(ctx, fun);
       if (forceApply || !bind) {
         return Function.apply(
-            fun, [Property.extract(list: pa.data, map: na.data)], null);
+            fun, [Property.extract(list: pa.data, map: na.data, data: arguments)], null);
       }
       return FairComponent(name, func: fun, na: na.data, pa: pa.data);
     } catch (e, stack) {

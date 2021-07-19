@@ -1,16 +1,14 @@
 part of 'sample_logic_page.dart';
 
-final String _platform = 'Fair v$fairVersion';
+@FairProps()
+var fairProps;
 
-int _count = 0;
+DemoList _demoList = DemoList(list: List.empty(), total: 0);
+
+String getTitle() {
+  return fairProps['pageName'];
+}
 
 void onTapText() {
-  setData({_count++});
+  setData(fairProps['pageName'], {_demoList.total: _demoList.total++});
 }
-
-String getShowText() {
-  return 'Running with , click count = ';
-}
-
-
-void setData(Set<int> set) {}

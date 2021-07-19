@@ -25,23 +25,6 @@
                 "pa": [
                   "assets/image/logo.png"
                 ]
-              },
-              {
-                "className": "Padding",
-                "na": {
-                  "padding": {
-                    "className": "EdgeInsets.only",
-                    "na": {
-                      "bottom": 40
-                    }
-                  },
-                  "child": {
-                    "className": "Text",
-                    "pa": [
-                      "#(${_demoList.total})"
-                    ]
-                  }
-                }
               }
             ]
           }
@@ -59,10 +42,23 @@
               "child": {
                 "className": "Icon",
                 "pa": [
-                  "#(Icons.add)"
+                  "#(Icons.open_in_new)"
                 ]
               },
-              "onPressed": "@(onTapText)"
+              "onPressed": {
+                "className": "Navigator.pushNamed",
+                "pa": [
+                  "@(context)",
+                  "fair_page"
+                ],
+                "arguments": {
+                  "name": "动态界面跳转&传值",
+                  "path": "assets/bundle/lib_src_page_logic-page_sample_logic_page.fair.json",
+                  "data": {
+                    "pageName": "动态界面跳转&传值"
+                  }
+                }
+              }
             }
           }
         ]
