@@ -17,6 +17,7 @@ class ProxyMirror with P {
   final List<Expression> _expressions = [
     ComponentExpression(),
     InlineExpression(),
+    InlineObjectExpression(),
     WidgetParamExpression(),
     FunctionExpression(),
     GestureExpression(),

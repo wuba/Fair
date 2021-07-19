@@ -5,13 +5,14 @@
  */
 
 import 'package:fair/fair.dart';
-import '../../model/bean/list_with_logic_bean.dart';
 import 'package:flutter/material.dart';
-part 'sample_logic_page.js.dart';
+
+part 'sample_logic_page2page.js.dart';
 
 @FairPatch()
-class SampleLogicPage extends StatefulWidget {
-  SampleLogicPage(dynamic data) {
+class SampleLogicPage2Page extends StatefulWidget {
+
+  SampleLogicPage2Page(dynamic data) {
     fairProps = data;
   }
 
@@ -22,7 +23,7 @@ class SampleLogicPage extends StatefulWidget {
   }
 }
 
-class _State extends State<SampleLogicPage> {
+class _State extends State<SampleLogicPage2Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,10 +35,6 @@ class _State extends State<SampleLogicPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/image/logo.png'),
-            Padding(
-              padding: EdgeInsets.only(bottom: 40),
-              child: Text('${_demoList.total}'),
-            ),
           ],
         ),
       ),
@@ -45,8 +42,15 @@ class _State extends State<SampleLogicPage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: onTapText,
+            child: Icon(Icons.open_in_new),
+            onPressed: () {
+              Navigator.pushNamed(context, 'fair_page', arguments: {
+                'name': '动态界面跳转&传值',
+                'path':
+                    'assets/bundle/lib_src_page_logic-page2page_sample_logic_page2page.fair.json',
+                'data': {'pageName': '动态界面跳转&传值'}
+              });
+            },
           )
         ],
       ),

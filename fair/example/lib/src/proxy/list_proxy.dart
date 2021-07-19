@@ -63,7 +63,6 @@ class ListDelegate extends FairDelegate {
     return FairWidget(
       name: itemData,
       path: 'assets/bundle/lib_src_page_list_sample_list_with_logic.fair.json',
-      jsPath:'assets/js/lib_src_page_list_sample_list_with_logic.fair.js',
       data: {'fairProps': jsonEncode({'item': '${itemData}'})},
     );
   }
