@@ -52,10 +52,12 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
     if (File(partPath).existsSync()) {
 
       var aotParentPath = Directory.current.parent.parent.path;
-      var aotPath = await Process.run('find', [aotParentPath, "-name", 'entry.aot']);
-      var transferPath = aotPath.stdout.toString().replaceAll('\r', '').replaceAll('\n', '');
+      var aotPathResult = await Process.run('find', [aotParentPath, "-name", 'entry.aot']);
+      var aotPathStr = aotPathResult.stdout.toString();
+      var transferPath = aotPathStr.split('\n')[0].split('\r')[0];
 
-      print('\u001b[33m [Fair Dart2JS] transferPath => ${transferPath} \u001b[0m');
+
+      print('\u001b[33m [Fair Dart2JS] entry.aot => ${transferPath} \u001b[0m');
       print(
           '\u001b[33m [Fair Dart2JS] dartaotruntime path => ${binDir}/dartaotruntime \u001b[0m');
       print(
