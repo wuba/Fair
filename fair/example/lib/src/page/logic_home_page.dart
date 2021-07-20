@@ -19,12 +19,12 @@ class LogicHomePage extends StatelessWidget {
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('界面动态', () {
               // 动态界面
-              // Navigator.pushNamed(context, 'fair_page',
-              //     arguments: {'name': '界面动态', 'path': 'assets/bundle/lib_src_page_logic-page_sample_logic_page.fair.json', 'data': {'pageName': '界面动态'}});
+              Navigator.pushNamed(context, 'fair_page',
+                  arguments: {'name': '界面动态', 'path': 'assets/bundle/lib_src_page_logic-page_sample_logic_page.fair.json', 'data': {'pageName': '界面动态'}});
               // 原生界面
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) => SampleLogicPage({'pageName': '界面动态'}),
-              ));
+              // Navigator.push(context, MaterialPageRoute(
+              //   builder: (context) => SampleLogicPage({'pageName': '界面动态'}),
+              // ));
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('动态界面跳转&传值', () {

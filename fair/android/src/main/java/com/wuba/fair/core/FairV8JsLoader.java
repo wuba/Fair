@@ -97,17 +97,18 @@ public class FairV8JsLoader extends FairJsLoader {
     @Override
     public void loadMainJs(Object arguments, JsResultCallback<String> callback) {
         try {
-            if ("false".equals(getV8().executeScript("typeof GLOBAL === \'object\'").toString())) {
-                FairLogger.d("用户的js文件地址" + arguments);
-                JSONObject jsonObject = new JSONObject(String.valueOf(arguments));
-                String jsLocalPath = jsonObject.getString("path");
-                String jsName = jsonObject.getString("pageName");
-                getV8JsExecutor().loadJS(jsName, jsLocalPath, callback);
-            } else {
+            FairLogger.d("用户的js文件地址" + arguments);
+            JSONObject jsonObject = new JSONObject(String.valueOf(arguments));
+            String jsLocalPath = jsonObject.getString("path");
+            String jsName = jsonObject.getString("pageName");
+            if ("loadCoreJs".equals(jsName) && "true"
+                .equals(getV8().executeScript("typeof GLOBAL === \'object\'").toString())) {
                 if (callback != null) {
                     callback.call("result");
                 }
+                return ;
             }
+            getV8JsExecutor().loadJS(jsName, jsLocalPath, callback);
         } catch (Exception e) {
             e.printStackTrace();
         }
