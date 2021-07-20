@@ -1,3 +1,4 @@
+let global = this;
 function inherit(cls, sup) {
     var oldProto = cls.prototype;
     cls.prototype = Object.create(Object.create(sup.prototype));
