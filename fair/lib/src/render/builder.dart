@@ -149,57 +149,15 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     if (naMap is Map) {
       naMap.entries.forEach((e) {
         if (e.value is Map) {
-          if (tag == 'FairWidget' && e.key.toString() == 'data') {
-            na[e.key] = e.value;
-          } else {
-            // 主要修改的地方，此处将目标函数代入到解析的过程中
-            if (methodMap != null && e.value['className'] is String && methodMap[e.value['className']] is Map) {
-              na[e.key] = convert(context,methodMap[e.value['className']], methodMap, domain: domain);
-            }
-            else {
-              if(_isSupportedNa(e.value)){
-                na[e.key] = convert(context, e.value, methodMap, domain: domain);
-              }else {
-                na[e.key] = e.value;
-              }
-            }          }
+          na[e.key] = _namedMap(tag, naMap, methodMap, context, domain, e);
         } else if (e.value is List) {
-          var a = e.value as List;
-
-          var children = [];
-          a.forEach((e) {
-            var item ;
-            if (e is Map) {
-              // 主要修改的地方，此处将目标函数代入到解析的过程中
-              item = (methodMap != null && (e['className'] is String && methodMap[e['className']] is Map) ? convert(context, methodMap[e['className']], methodMap, domain: domain) : convert(context, e, methodMap, domain: domain));
-            } else {
-              if (e is String && domain != null && domain.match(e)) {
-                item = domain.bindValue(e);
-              } else {
-                var body;
-                if(methodMap != null && _isFuncExp(e) && (body = methodMap[_subFunctionName(e)]) != null){
-                  item = convert(context, body, methodMap, domain: domain);
-                }else{
-                  item = e;
-                }
-
-              }
-            }
-            children.add(item);
-          });
-          na[e.key] = (children.asIteratorOf<Widget>()?.toList() ?? children);
+          na[e.key] = _namedList(tag, naMap, methodMap, context, domain, e.value);
         } else if (domain != null && domain.match(e)) {
           na[e.key] = domain.bindValue(e as String);
         } else if (e.value is String) {
-          var r = proxyMirror.evaluate(context, bound, e.value);
-          if (r.binding) {
-            needBinding = true;
-          }
-          if (r.data is FairModule) {
-            na[e.key] = (r.data as FairModule).onCreateComponent(context, null);
-          } else {
-            na[e.key] = r.data;
-          }
+          var w = _namedString(tag, naMap, methodMap, context, domain, e.value);
+          needBinding = w.binding;
+          na[e.key] = w.data;
         } else {
           na[e.key] = e.value;
         }
@@ -207,6 +165,76 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }
     na['\$'] = context;
     return W<Map<String, dynamic>>(na, needBinding);
+  }
+
+  dynamic _namedMap(String tag, dynamic naMap, Map methodMap,
+      BuildContext context, Domain domain,MapEntry e) {
+    var result;
+    if (tag == 'FairWidget' && e.key.toString() == 'data') {
+      result = e.value;
+    } else {
+      var body;
+      if ((body = _replaceMethod(methodMap, e.value['className'])) != null) {
+        result = convert(context, body, methodMap,
+            domain: domain);
+      } else {
+        if (_isSupportedNa(e.value)) {
+          result = convert(context, e.value, methodMap, domain: domain);
+        } else {
+          result = e.value;
+        }
+      }
+    }
+    return result;
+  }
+
+  dynamic _namedList(String tag, dynamic naMap, Map methodMap,
+      BuildContext context, Domain domain,List v) {
+
+    var children = [];
+    v.forEach((e) {
+      var item ;
+      if (e is Map) {
+        var body;
+        item = (body = _replaceMethod(methodMap, e['className'])) != null ? convert(context, body, methodMap, domain: domain) : convert(context, e, methodMap, domain: domain);
+      } else if(e is String){
+        if (domain != null && domain.match(e)) {
+          item = domain.bindValue(e);
+        } else {
+          var body;
+          if((body = _replaceMethod(methodMap, e)) != null){
+            item = convert(context, body, methodMap, domain: domain);
+          }else {
+            item = _namedString(tag, naMap, methodMap, context, domain, e);
+          }
+        }
+      }else{
+        item = e;
+      }
+      children.add(item);
+    });
+    return children.asIteratorOf<Widget>()?.toList() ?? children;
+  }
+
+  W _namedString(String tag, dynamic naMap, Map methodMap,
+      BuildContext context, Domain domain,String v) {
+    var result;
+    var needBinding = false;
+    var body;
+    if((body = _replaceMethod(methodMap, v)) != null){
+      result = convert(context, body, methodMap, domain: domain);
+    }else{
+      var r = proxyMirror.evaluate(context, bound, v);
+      if (r.binding) {
+        needBinding = true;
+      }
+      if (r.data is FairModule) {
+        result = (r.data as FairModule).onCreateComponent(context, null);
+      } else {
+        result = r.data;
+      }
+    }
+    return W(result, needBinding);
   }
 
   List<Widget> _buildSugarMapEach(
@@ -243,6 +271,14 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }else{
       return expFunc;
     }
+  }
+
+  dynamic _replaceMethod(Map methodMap,String exp){
+    var body;
+    if(methodMap != null && exp != null && _isFuncExp(exp)){
+      body = methodMap[_subFunctionName(exp)];
+    }
+    return body;
   }
 
   bool _isSupportedNa(Map map){

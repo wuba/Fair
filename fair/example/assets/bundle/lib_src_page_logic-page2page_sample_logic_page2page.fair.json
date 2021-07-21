@@ -53,7 +53,7 @@
                 ],
                 "na": {
                   "arguments": {
-                    "name": "动态界面跳转&传值",
+                    "name": "%(getTitle)",
                     "path": "assets/bundle/lib_src_page_logic-page2page_sample_logic_page2page.fair.json",
                     "data": {
                       "pageName": "动态界面跳转&传值"
