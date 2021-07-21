@@ -7,27 +7,53 @@
 import 'package:fair/fair.dart';
 import '../../model/bean/list_with_logic_bean.dart';
 import 'package:flutter/material.dart';
-part 'sample_logic_page.js.dart';
 
 @FairPatch()
 class SampleLogicPage extends StatefulWidget {
+
+  var fairProps;
+
   SampleLogicPage(dynamic data) {
     fairProps = data;
   }
 
   @override
   State<StatefulWidget> createState() {
-    // 配置代理，由于使用Part方式，需要重构State的数据驱动部分，实现原生和动态的一致
     return FairStateWarpper(_State());
   }
 }
 
 class _State extends State<SampleLogicPage> {
+
+  @FairProps()
+  var fairProps;
+
+  DemoList _demoList = DemoList(list: List.empty(), total: 0);
+
+  String getTitle() {
+    return fairProps['pageName'];
+  }
+
+  void onTapText() {
+    setData(fairProps['pageName'], {_demoList.total: _demoList.total++});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fairProps = widget.fairProps;
+  }
+
+  Widget _titleWidget() {
+    return Text(getTitle());
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(getTitle()),
+        title: _titleWidget(),
       ),
       body: Center(
         child: Column(

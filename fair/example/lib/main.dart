@@ -9,7 +9,6 @@ import 'dart:convert';
 import 'package:fair/fair.dart';
 import 'package:fair_example/src/page/home_page.dart';
 import 'package:fair_example/src/page/list/sample_list_with_dynamic_cell_page.dart';
-import 'package:fair_example/src/page/fair_page.dart';
 import 'package:fair_example/src/page/logic_home_page.dart';
 import 'package:fair_example/src/page/modules.dart';
 import 'package:fair_example/src/page/plugins/net/fair_plugin.dart';
