@@ -48,7 +48,7 @@ class _State extends State<SampleLogicPage2Page> {
                 'name': '动态界面跳转&传值',
                 'path':
                     'assets/bundle/lib_src_page_logic-page2page_sample_logic_page2page.fair.json',
-                'data': {'pageName': '动态界面跳转&传值'}
+                'data': {'pageName': getTitle()}
               });
             },
           )
