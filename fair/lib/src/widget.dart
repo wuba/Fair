@@ -286,7 +286,7 @@ State FairStateWarpper(State state) {
 }
 
 void setData(String pageName, Map data) {
-  fairState.setState(() {
+  fairState?.setState(() {
     if (data?.isNotEmpty) {
       data.forEach((key, value) {
         key = value;

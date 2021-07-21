@@ -3,5 +3,6 @@ table WidgetData {
   data:[ubyte](flexbuffer);
   na:[ubyte](flexbuffer);
   pa:[ubyte](flexbuffer);
+  methodMap:[ubyte](flexbuffer);
 }
 root_type WidgetData;

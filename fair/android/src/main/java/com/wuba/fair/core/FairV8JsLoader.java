@@ -43,7 +43,7 @@ public class FairV8JsLoader extends FairJsLoader {
          */
         getV8().registerJavaMethod((receiver, parameters) -> {
             String call = parameters.get(0).toString();
-            V8Function callback = (V8Function) parameters.get(1);
+            V8Function callback = (V8Function)parameters.get(1);
 
             if (TextUtils.isEmpty(call)) {
                 return;
@@ -57,7 +57,8 @@ public class FairV8JsLoader extends FairJsLoader {
                 e.printStackTrace();
             }
 
-            if (TextUtils.isEmpty(r[0]) && FairPlugin.get().getJsExecutor().getV8ObjectByName(r[0]) == null) {
+            if (TextUtils.isEmpty(r[0])
+                && FairPlugin.get().getJsExecutor().getV8ObjectByName(r[0]) == null) {
                 return;
             }
             /*
@@ -71,7 +72,8 @@ public class FairV8JsLoader extends FairJsLoader {
                         v8Array.push(v);
 
                         if (callback != null) {
-                            callback.call(FairPlugin.get().getJsExecutor().getV8ObjectByName(r[0]), v8Array);
+                            callback.call(FairPlugin.get().getJsExecutor().getV8ObjectByName(r[0]),
+                                v8Array);
                         }
                     }
                 });
@@ -99,6 +101,13 @@ public class FairV8JsLoader extends FairJsLoader {
             JSONObject jsonObject = new JSONObject(String.valueOf(arguments));
             String jsLocalPath = jsonObject.getString("path");
             String jsName = jsonObject.getString("pageName");
+            if ("loadCoreJs".equals(jsName) && "true"
+                .equals(getV8().executeScript("typeof GLOBAL === \'object\'").toString())) {
+                if (callback != null) {
+                    callback.call("result");
+                }
+                return ;
+            }
             getV8JsExecutor().loadJS(jsName, jsLocalPath, callback);
         } catch (Exception e) {
             e.printStackTrace();
@@ -138,7 +147,7 @@ public class FairV8JsLoader extends FairJsLoader {
 
     private FairV8JsExecutor getV8JsExecutor() {
         if (v8JsExecutor == null) {
-            v8JsExecutor = ((FairV8JsExecutor) FairPlugin.get().getJsExecutor());
+            v8JsExecutor = ((FairV8JsExecutor)FairPlugin.get().getJsExecutor());
         }
         return v8JsExecutor;
     }

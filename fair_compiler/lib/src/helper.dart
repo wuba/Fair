@@ -27,6 +27,7 @@ mixin FlatCompiler {
       _fbs ??= await File(
               path.join('.dart_tool', 'build', 'fairc', 'fair_bundle.fbs'))
           .create(recursive: true);
+
       final result = Process.runSync(command, [
         '-o',
         File(jsonPath).parent.absolute.path,
@@ -161,17 +162,18 @@ mixin FairCompiler {
       // final fair = '/Users/anjuke/haijun/Anjuke-Flutter/fairc/lib/fairc.dart';
       // if (fair != null) {
       // final result = Process.runSync(command, [fair, ...arguments]);
-
-
+      await _bin(buildStep);
       var whichCommand = await Process.run('which', ['dart']);
       var strBin = whichCommand.stdout.toString();
       var dirEndIndex = strBin.lastIndexOf(Platform.pathSeparator);
       var binDir = strBin.substring(0, dirEndIndex);
 
       var aotParentPath = Directory.current.parent.parent.path;
-      var aotPath = await Process.run('find', [aotParentPath, "-name", 'fairc.aot']);
-      var transferPath = aotPath.stdout.toString().replaceAll('\r', '').replaceAll('\n', '');
-      print('\u001b[33m [Fair Dart2DSL] fairc.aot => 【${transferPath}】 \u001b[0m');
+      var aotPathResult = await Process.run('find', [aotParentPath, "-name", 'fairc.aot']);
+      var aotPathStr = aotPathResult.stdout.toString();
+      var transferPath = aotPathStr.split('\r')[0].split('\n')[0];
+      print('\u001b[33m [Fair Dart2JS] fairc.aot => ${transferPath} \u001b[0m');
+
 
       final result = Process.runSync('$binDir/dartaotruntime', [transferPath, ...arguments]);
       print(result);
