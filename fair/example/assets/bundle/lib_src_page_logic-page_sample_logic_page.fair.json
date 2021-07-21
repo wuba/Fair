@@ -4,12 +4,7 @@
     "appBar": {
       "className": "AppBar",
       "na": {
-        "title": {
-          "className": "Text",
-          "pa": [
-            "%(getTitle)"
-          ]
-        }
+        "title": "%(_titleWidget)"
       }
     },
     "body": {
@@ -74,6 +69,12 @@
       "className": "FairStateWarpper",
       "pa": [
         "%(_State)"
+      ]
+    },
+    "_titleWidget": {
+      "className": "Text",
+      "pa": [
+        "%(getTitle)"
       ]
     }
   }
