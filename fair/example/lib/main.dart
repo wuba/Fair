@@ -22,11 +22,18 @@ import 'src/proxy/list_proxy.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  //todo 是否可以通过注解的方式注册
-  FairPluginDispatcher.registerPlugin('FairNet', FairNet());
-  FairPluginDispatcher.registerPlugin('WBPermission', WBPermission());
-
-  Runtime().loadCoreJs().then((value) => _runApp());
+  //
+  // FairPluginDispatcher.registerPlugin('FairNet', FairNet());
+  // FairPluginDispatcher.registerPlugin('WBPermission', WBPermission());
+  //
+  // Runtime().loadCoreJs().then((value) => _runApp());
+  FairApp.runApplication(
+    _getApp(),
+    plugins: {
+      'FairNet': FairNet(),
+      'WBPermission': WBPermission(),
+    },
+  );
 }
 
 void _runApp() {
@@ -57,3 +64,25 @@ _getParams(BuildContext context, String key) =>
     (ModalRoute.of(context).settings.arguments is Map)
         ? (ModalRoute.of(context).settings.arguments as Map)[key]
         : null;
+
+dynamic _getApp() => FairApp(
+      modules: {
+        ShowFairAlertModule.tagName: () => ShowFairAlertModule(),
+      },
+      delegate: {
+        'listLoadMore': (ctx, _) => ListDelegate(),
+      },
+      child: MaterialApp(
+        home: HomePage(),
+        routes: {
+          'sample_dynamic_page': (_) => SampleWanAndroidPageSrc(),
+          'sample_list_with_dynamic_cell_page': (_) => DynamicCellPage(),
+          'sample_logic_home_page': (_) => LogicHomePage(),
+          'sample_logic_pic_net_demo': (_) => PicNetDemoFairPage(),
+          'fair_page': (context) => FairWidget(
+              name: _getParams(context, 'name'),
+              path: _getParams(context, 'path'),
+              data: {'fairProps': jsonEncode(_getParams(context, 'data'))}),
+        },
+      ),
+    );
