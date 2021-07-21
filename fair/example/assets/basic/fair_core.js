@@ -1,112 +1,100 @@
-let GLOBAL = {}
+/*
+ * 用户的基础js，一般情况不需要改动
+ */
 
-//用户的基础js，一般情况不需要改动
+let GLOBAL = {};
+
 function invokeJSFunc(parameter) {
     if (parameter === null) {
         return null;
     }
-
     let map = JSON.parse(parameter);
     if ('method' === map['type']) {
-        return _invokeMethod(parameter);
+        return _invokeMethod(map);
     } else if ('variable' === map['type']) {
-        return _invokeVariable(parameter);
+        return _invokeVariable(map);
     }
     return null;
 }
 
-function test() {
-    let map = {
-        "pageName": "hello_world",
-        "type": "method",
-        "args": {
-            "funcName": "getAllJSBindData",
-            "args": null
-        }
+function _invokeVariable(par) {
+    console.log('_invokeVariable' + JSON.stringify(par));
+    let pName = par['pageName'];
+    let varMap = par['args'];
+    let curPage = GLOBAL[pName];
+    let callResult = {
+        pageName: pName,
+        result: {}
     };
-
-    console.log('all bind data :' + invokeJSFunc(JSON.stringify(map)));
-}
-
-function _invokeVariable(parameter) {
-    let o = JSON.parse(parameter);
-    let pageName = o['pageName'];
-    let varMap = o['args'];
-    let mc = GLOBAL[pageName];
-    let result = {};
-    if (!isNull(varMap)) {
-        for (let varKey in varMap) {
-            result[varKey] = eval('mc.' + varKey.toString());
-        }
-        return JSON.stringify(result);
+    if (!isNull(varMap) && Object.keys(varMap).length > 0) {
+        Object.keys(varMap).forEach(function (varKey) {
+            callResult['result'][varKey] = eval('curPage.' + varKey.toString());
+        });
+        return JSON.stringify(callResult);
     }
-    return JSON.stringify(result);
+    //如果没有传参数，默认返回全部的变量以及结果值
+    Object.keys(curPage).forEach(function (key) {
+        if (!isFunc(curPage[key])) {
+            callResult['result'][key] = eval('curPage.' + key.toString());
+        }
+    });
+    return JSON.stringify(callResult);
 }
 
-function _invokeMethod(parameter) {
-    let o = JSON.parse(parameter);
-    let pageName = o['pageName'];
-    let funcName = o['args']['funcName'];
-    let args = o['args']['args'];
+function _invokeMethod(par) {
+    let pageName = par['pageName'];
+    let funcName = par['args']['funcName'];
+    let args = par['args']['args'];
 
     if ('getAllJSBindData' === funcName) {
-        return getAllJSBindData(parameter);
+        return getAllJSBindData(par);
     }
     if ('releaseJS' === funcName) {
-        return _release(parameter);
+        return _release(par);
     }
-
     let mClass = GLOBAL[pageName];
-
     let methodResult = mClass[funcName].apply(mClass, args);
-
     let result = {
         pageName: pageName,
         result: {
             result: methodResult
         }
-
     };
     return JSON.stringify(result);
 }
 
-
-//demo 获取所有的变量和绑定的方法
-function getAllJSBindData(parameter) {
-    let o = JSON.parse(parameter);
-    let pageName = o['pageName'];
+function _getAll(par) {
+    let pageName = par['pageName'];
     let mc = GLOBAL[pageName];
-
     let bind = {};
-
     if (isNull(mc)) {
         return JSON.stringify(bind);
     }
-
     let bindFunc = [];
+    let bindVariables = {};
     let keys;
-
     if (!isNull(keys = Object.keys(mc))) {
-        let kIndex = 0;
         for (let i = 0; i < keys.length; i++) {
             let k = keys[i];
-
             if (!mc.hasOwnProperty(k)) {
                 continue;
             }
             if (isFunc(mc[k])) {
-
-                bindFunc[kIndex] = k;
-                kIndex++;
-                continue;
-            }
-            //先只要data里面的变量
-            if ('data' === k) {
-                bind['variable'] = mc[k];
+                bindFunc.push(k);
+            } else {
+                bindVariables[k] = mc[k];
             }
         }
     }
     bind['func'] = bindFunc;
+    bind['variable'] = bindVariables;
+    return bind;
+}
+
+//demo 获取所有的变量和绑定的方法
+function getAllJSBindData(par) {
+    let pageName = par['pageName'];
+    let bind = _getAll(par);
     let result = {
         pageName: pageName,
         result: {
@@ -114,13 +102,12 @@ function getAllJSBindData(parameter) {
         }
 
     };
-
     return JSON.stringify(result);
 }
 
-function _release(parameter) {
-    let o = JSON.parse(parameter);
-    let pageName = o['pageName'];
+
+function _release(par) {
+    let pageName = par['pageName'];
     GLOBAL[pageName] = null;
     return null;
 }
@@ -138,15 +125,16 @@ function isNull(prop) {
 }
 
 function setData(pageName, obj) {
+    console.log('JS:setData()_before'+pageName+'-'+obj);
     let p = {};
     p['funcName'] = 'setData';
     p['pageName'] = pageName;
     p['args'] = obj;
     let map = JSON.stringify(p);
+    console.log('JS:setData()'+map);
     invokeFlutterCommonChannel(map);
 }
 
-//todo 正式开发，放到统一的FairGlobal中
 const invokeFlutterCommonChannel = (invokeData, callback) => {
     console.log("invokeData" + invokeData)
     jsInvokeFlutterChannel(invokeData, (resultStr) => {

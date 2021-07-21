@@ -9,8 +9,8 @@ abstract class IFairPlugin {
 
   String getMethodName(dynamic par) {
     var a = jsonDecode(par);
-    var obj = a['args'];
-    var name = obj['className']?.toString();
+    // var obj = a['args'];
+    var name = a['className']?.toString();
 
     if (name.contains('#')) {
       var list = name.split('#');
