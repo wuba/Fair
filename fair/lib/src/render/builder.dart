@@ -94,13 +94,13 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }) {
     var na = _named(name, map['na'], methodMap, ctx, domain);
     var pa = _positioned(map['pa'], methodMap, ctx, domain);
-    var arguments = map['arguments'];
+    // var arguments = map['arguments'];
     final bind = widget && (na.binding || pa.binding);
     try {
       fun = FairModule.cast(ctx, fun);
       if (forceApply || !bind) {
         return Function.apply(
-            fun, [Property.extract(list: pa.data, map: na.data, data: arguments)], null);
+            fun, [Property.extract(list: pa.data, map: na.data)], null);
       }
       return FairComponent(name, func: fun, na: na.data, pa: pa.data);
     } catch (e, stack) {
@@ -157,7 +157,11 @@ class DynamicWidgetBuilder extends DynamicBuilder {
               na[e.key] = convert(context,methodMap[e.value['className']], methodMap, domain: domain);
             }
             else {
-              na[e.key] = convert(context, e.value, methodMap, domain: domain);
+              if(_isSupportedNa(e.value)){
+                na[e.key] = convert(context, e.value, methodMap, domain: domain);
+              }else {
+                na[e.key] = e.value;
+              }
             }          }
         } else if (e.value is List) {
           var a = e.value as List;
@@ -239,5 +243,10 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }else{
       return expFunc;
     }
+  }
+
+  bool _isSupportedNa(Map map){
+    var name = map[tag];
+    return name != null;
   }
 }
