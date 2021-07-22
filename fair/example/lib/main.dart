@@ -14,6 +14,7 @@ import 'package:fair_example/src/page/logic_home_page.dart';
 import 'package:fair_example/src/page/modules.dart';
 import 'package:fair_example/src/page/plugins/net/fair_plugin.dart';
 import 'package:fair_example/src/page/plugins/net/pic/net_demo_pic.dart';
+import 'package:fair_example/src/page/plugins/net/pic/net_demo_pic2.dart';
 import 'package:fair_example/src/page/plugins/net/pic/net_demo_pic_fair.dart';
 import 'package:fair_example/src/page/plugins/net/sampe_list_view_src.dart';
 import 'package:fair_example/src/page/plugins/permission/fair_permission_plugin.dart';
