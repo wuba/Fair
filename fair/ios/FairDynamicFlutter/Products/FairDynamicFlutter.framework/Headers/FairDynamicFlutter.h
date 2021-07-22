@@ -15,13 +15,13 @@
 
 /// 使用dart:ffi，实现dart->js的同步调用
 
-/// 同步属性回调
+/// 同步回调
 FAIR_FFI_EXTERN const char *invokeJSCommonFuncSync(char *args);
 
 /// FFI协议
 @protocol FAIRFFIProtocol <NSObject>
 
-/// 同步属性调用
+/// 同步调用
 /// @param args 参数
 - (const char *)executeScriptSyncImpl:(char *)args;
 
