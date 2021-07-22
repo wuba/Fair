@@ -142,7 +142,7 @@ class FunctionExpression extends Expression {
 
   @override
   bool hitTest(String exp, String pre) {
-    return RegExp(r'\%\(\w+\)', multiLine: true).hasMatch(exp);
+    return RegExp(r'\%\(\w+\)', multiLine: false).hasMatch(exp);
   }
 }
 
@@ -155,10 +155,28 @@ class GestureExpression extends Expression {
 
   @override
   bool hitTest(String exp, String pre) {
-    return RegExp(r'\@\(\w+\)', multiLine: true).hasMatch(exp);
+    return RegExp(r'\@\(\w+\)', multiLine: false).hasMatch(exp);
   }
 }
 
+class PropValueExpression extends Expression {
+  @override
+  R onEvaluate(ProxyMirror proxy, BindingData binding, String exp, String pre) {
+    var expression = exp.substring(2, exp.length - 1);
+    var prop = binding?.bindRuntimeValueOf(expression);
+    if (prop is ValueNotifier) {
+      var data = _PropValueBuilder(expression, prop, proxy, binding);
+      binding.addBindValue(data);
+      return R(data, exp: expression, needBinding: true);
+    }
+    return R(prop, exp: expression, needBinding: false);
+  }
+
+  @override
+  bool hitTest(String exp, String pre) {
+    return RegExp(r'\^\(\w+\)', multiLine: false).hasMatch(exp);
+  }
+}
 
 class _BindValueBuilder<T> extends ValueNotifier<T> implements LifeCircle {
   final String data;
@@ -268,6 +286,22 @@ class _PropBuilder extends _BindValueBuilder {
   @override
   dynamic get value {
     final prop = binding?.bindDataOf(data);
+    return prop is ValueNotifier ? prop.value : prop;
+  }
+}
+
+class _PropValueBuilder extends _BindValueBuilder {
+  final prop ;
+
+  _PropValueBuilder(String data, this.prop, ProxyMirror proxyMirror,
+      BindingData binding)
+      : super(data, proxyMirror, binding) {
+    _watchedProps.add(prop);
+    attach();
+  }
+
+  @override
+  dynamic get value {
     return prop is ValueNotifier ? prop.value : prop;
   }
 }

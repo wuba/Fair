@@ -21,6 +21,7 @@ class ProxyMirror with P {
     WidgetParamExpression(),
     FunctionExpression(),
     GestureExpression(),
+    PropValueExpression(),
     ValueExpression(),
   ];
   final _generatedMapping = <String, bool>{};
