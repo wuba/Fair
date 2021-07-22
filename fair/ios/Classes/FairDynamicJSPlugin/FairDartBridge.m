@@ -130,7 +130,9 @@ FairSingletonM(FairDartBridge);
 {
     JSValue *obj;
     if (self.delegate && [self.delegate respondsToSelector:@selector(executeJSFunctionSync:params:)]) {
-        obj = [self.delegate executeJSFunctionSync:FairExecuteJSFunction params:@[[NSString stringWithFormat:@"%s", args]]];
+        
+        NSString *str = [NSString stringWithUTF8String:args];
+        obj = [self.delegate executeJSFunctionSync:FairExecuteJSFunction params:@[str]];
     }
     NSString *result = [NSString stringWithFormat:@"%@", obj.toString];
     FairLog(@"result:%@", result);
