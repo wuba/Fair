@@ -11,7 +11,7 @@
             "title": {
               "className": "Text",
               "pa": [
-                "加载网络获取地址的图片"
+                "插件"
               ]
             }
           }
@@ -26,24 +26,31 @@
                   {
                     "className": "Image.network",
                     "pa": [
-                      "#(${_picData.picUrl})"
+                      "#($_picUrl)"
                     ],
                     "na": {
-                      "width": 1000
+                      "width": 10000,
+                      "height": 300,
+                      "fit": "#(BoxFit.cover)",
+                      "repeat": "#(ImageRepeat.noRepeat)"
                     }
                   },
                   {
-                    "className": "Text",
-                    "pa": [
-                      "#(${_picData.title})"
-                    ],
+                    "className": "Expanded",
                     "na": {
-                      "maxLines": 3,
-                      "style": {
-                        "className": "TextStyle",
+                      "child": {
+                        "className": "Text",
+                        "pa": [
+                          "#($description)"
+                        ],
                         "na": {
-                          "color": "#(Colors.blue)",
-                          "fontSize": 19
+                          "style": {
+                            "className": "TextStyle",
+                            "na": {
+                              "color": "#(Colors.black)",
+                              "fontSize": 17
+                            }
+                          }
                         }
                       }
                     }
@@ -52,19 +59,8 @@
               }
             }
           }
-        },
-        "floatingActionButton": {
-          "className": "FloatingActionButton",
-          "na": {
-            "child": {
-              "className": "Icon",
-              "pa": [
-                "#(Icons.add)"
-              ]
-            },
-            "onPressed": "@(onClick)"
-          }
         }
+
       }
     }
   },

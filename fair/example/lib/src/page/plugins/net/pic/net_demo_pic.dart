@@ -25,7 +25,7 @@ class _PicNetDemoPageStateful extends State {
           body: Container(
             child: Column(
               children: [
-                Image.network('${_picData.picUrl}', width: double.infinity),
+                Image.network('${_picData.picUrl}', width: 1000),
                 Text(
                   '${_picData.title}',
                   maxLines: 3,
