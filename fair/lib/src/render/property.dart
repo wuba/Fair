@@ -39,9 +39,6 @@ class Property {
     } else {
       result['pa'] = pa;
     }
-    if (data != null) {
-      result['arguments'] = data;
-    }
     return result;
   }
 }

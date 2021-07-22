@@ -37,7 +37,9 @@ class LogicHomePage extends StatelessWidget {
               ));
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
-            addItem('自定义插件', () {}),
+            addItem('自定义插件', () {
+              Navigator.pushNamed(context, 'sample_logic_pic_net_demo');
+            }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('DSL 逻辑语法糖', () {}),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),

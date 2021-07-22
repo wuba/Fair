@@ -57,8 +57,9 @@ public class FairFfi {
                 e.printStackTrace();
                 return " exception";
             }
-
-            return result[0].toString();
+            if (result[0] != null) {
+                return result[0].toString();
+            }
         }
 
         return "jsAppObj is null";

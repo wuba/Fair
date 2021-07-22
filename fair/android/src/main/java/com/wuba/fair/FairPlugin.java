@@ -32,7 +32,7 @@ public class FairPlugin implements FlutterPlugin {
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
-        FairLogger.w("FairPlugin","调用了onAttachedToEngine()");
+        logSp();
         mContext = binding.getApplicationContext();
         plugin = this;
         binaryMessenger = binding.getBinaryMessenger();
@@ -95,5 +95,13 @@ public class FairPlugin implements FlutterPlugin {
 
     public FairFfi getFairFFi() {
         return fairFfi;
+    }
+
+    private void logSp() {
+        FairLogger.d("FairPlugin", "********FairPlugin********");
+        FairLogger.d("FairPlugin", "*                        *");
+        FairLogger.d("FairPlugin", "*     当前平台:Android    *");
+        FairLogger.d("FairPlugin", "*                        *");
+        FairLogger.d("FairPlugin", "********FairPlugin********");
     }
 }

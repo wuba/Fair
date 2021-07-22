@@ -26,9 +26,9 @@ class FairNet extends IFairPlugin {
     var requestPar = jsonDecode(par);
     var args = requestPar['args'];
     var pageName = requestPar['pageName'];
-    var method = args['args']['method'];
-    var url = args['args']['url'];
-    var id = args['id'];
+    var method = args['method'];
+    var url = args['url'];
+    var id = requestPar['id'];
 
     Response<String> response;
 
@@ -74,18 +74,17 @@ class FairNet extends IFairPlugin {
       _get(url, queryParameters: req).then((value) {
         //获取结果成功
         if (200 == value?.statusCode) {
-          if (completeCallback != null) {
-            if (successCallback != null) {
-              Function.apply(successCallback, value?.data);
-            }
+          if (successCallback != null) {
+            Function.apply(successCallback, [value?.data]);
+          }
 
-            if (completeCallback != null) {
-              Function.apply(completeCallback, null);
-            }
+          if (completeCallback != null) {
+            Function.apply(completeCallback, null);
           }
         } else {
           //返回值根据实际需要返回相关的数据
-          if (errorCallback != null) Function.apply(errorCallback, value?.data);
+          if (errorCallback != null)
+            Function.apply(errorCallback, [value?.data]);
 
           if (completeCallback != null) Function.apply(completeCallback, null);
         }
@@ -97,7 +96,7 @@ class FairNet extends IFairPlugin {
         if (200 == value?.statusCode) {
           if (completeCallback != null) {
             if (successCallback != null) {
-              Function.apply(successCallback, value?.data);
+              Function.apply(successCallback, [value?.data]);
             }
 
             if (completeCallback != null) {
@@ -106,7 +105,8 @@ class FairNet extends IFairPlugin {
           }
         } else {
           //返回值根据实际需要返回相关的数据
-          if (errorCallback != null) Function.apply(errorCallback, value?.data);
+          if (errorCallback != null)
+            Function.apply(errorCallback, [value?.data]);
 
           if (completeCallback != null) Function.apply(completeCallback, null);
         }

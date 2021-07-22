@@ -7,8 +7,8 @@ class FairPluginDispatcher {
 
   static Future<dynamic> dispatch(dynamic msg) async {
     var obj = jsonDecode(msg);
-    var args = obj['args'];
-    var className = args['className']?.toString();
+    // var args = obj['args'];
+    var className = obj['className']?.toString();
 
     if (className == null || className.isEmpty) {
       return null;
