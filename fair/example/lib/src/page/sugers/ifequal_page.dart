@@ -9,11 +9,11 @@ import '../../model/bean/list_with_logic_bean.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
-class SampleLogicPage extends StatefulWidget {
+class IfEqualPage extends StatefulWidget {
 
   var fairProps;
 
-  SampleLogicPage(dynamic data) {
+  IfEqualPage(dynamic data) {
     fairProps = data;
   }
 
@@ -23,19 +23,19 @@ class SampleLogicPage extends StatefulWidget {
   }
 }
 
-class _State extends State<SampleLogicPage> {
+class _State extends State<IfEqualPage> {
 
   @FairProps()
   var fairProps;
 
-  DemoList _demoList = DemoList(list: List.empty(), total: 0);
+  int _count = 0;
 
   String getTitle() {
     return fairProps['pageName'];
   }
 
   void onTapText() {
-    setData(fairProps['pageName'], {_demoList.total: _demoList.total++});
+    setData(fairProps['pageName'], {_count: _count++});
   }
 
   @override
@@ -44,25 +44,24 @@ class _State extends State<SampleLogicPage> {
     fairProps = widget.fairProps;
   }
 
-  Widget _titleWidget() {
-    return Text(getTitle());
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: _titleWidget(),
+        title: Text(getTitle()),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/image/logo.png'),
+            Sugar.ifEqual(_count , 2 , falseValue: Image.asset('assets/image/logo.png'), trueValue: Image.asset('assets/image/logo2.png')),
             Padding(
-              padding: EdgeInsets.only(bottom: 40),
-              child: Text('${_demoList.total}'),
+              padding: EdgeInsets.only(top: 20),
+              child: Text('_count = $_count'),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Text('_count == 2,  update image !'),
             ),
           ],
         ),
@@ -71,7 +70,7 @@ class _State extends State<SampleLogicPage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            child: Icon(Icons.add),
+            child: Icon(Icons.threesixty),
             onPressed: onTapText,
           )
         ],

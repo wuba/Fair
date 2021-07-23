@@ -1,5 +1,6 @@
 import 'package:fair_example/src/page/logic-page/sample_logic_page.dart';
 import 'package:fair_example/src/page/logic-page2page/sample_logic_page2page.dart';
+import 'package:fair_example/src/page/sugers/sugers_home_page.dart';
 import 'package:flutter/material.dart';
 
 class LogicHomePage extends StatelessWidget {
@@ -41,7 +42,11 @@ class LogicHomePage extends StatelessWidget {
               Navigator.pushNamed(context, 'sample_logic_pic_net_demo');
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
-            addItem('DSL 逻辑语法糖', () {}),
+            addItem('DSL 逻辑语法糖', () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => SugerListPage(),
+              ));
+            }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('列表', () {}),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),

@@ -4,7 +4,12 @@
     "appBar": {
       "className": "AppBar",
       "na": {
-        "title": "%(_titleWidget)"
+        "title": {
+          "className": "Text",
+          "pa": [
+            "%(getTitle)"
+          ]
+        }
       }
     },
     "body": {
@@ -16,10 +21,25 @@
             "mainAxisAlignment": "#(MainAxisAlignment.center)",
             "children": [
               {
-                "className": "Image.asset",
+                "className": "Sugar.ifRange",
                 "pa": [
-                  "assets/image/logo.png"
-                ]
+                  "^(_count)",
+                  "^(_list)"
+                ],
+                "na": {
+                  "falseValue": {
+                    "className": "Image.asset",
+                    "pa": [
+                      "assets/image/logo.png"
+                    ]
+                  },
+                  "trueValue": {
+                    "className": "Image.asset",
+                    "pa": [
+                      "assets/image/logo2.png"
+                    ]
+                  }
+                }
               },
               {
                 "className": "Padding",
@@ -27,13 +47,30 @@
                   "padding": {
                     "className": "EdgeInsets.only",
                     "na": {
-                      "bottom": 40
+                      "top": 20
                     }
                   },
                   "child": {
                     "className": "Text",
                     "pa": [
-                      "#(${_demoList.total})"
+                      "#(_count = $_count)"
+                    ]
+                  }
+                }
+              },
+              {
+                "className": "Padding",
+                "na": {
+                  "padding": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "top": 20
+                    }
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "_count in  2, 4, 6, 8, 10,  update image !"
                     ]
                   }
                 }
@@ -54,7 +91,7 @@
               "child": {
                 "className": "Icon",
                 "pa": [
-                  "#(Icons.add)"
+                  "#(Icons.threesixty)"
                 ]
               },
               "onPressed": "@(onTapText)"
@@ -69,12 +106,6 @@
       "className": "FairStateWarpper",
       "pa": [
         "%(_State)"
-      ]
-    },
-    "_titleWidget": {
-      "className": "Text",
-      "pa": [
-        "%(getTitle)"
       ]
     }
   }

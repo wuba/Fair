@@ -15,9 +15,8 @@ FairWidgetBinding provider = () {
       var source = pa(props);
       assert(source is List, '$source should be array');
       var builder = props['builder'];
-      assert(
-          builder is Function, '$builder should be Function with one argument');
-      var d = (source as List).map((s) => builder(s));
+
+      var d = (source as List).map((s) => builder);
 
       return (d.asIteratorOf<Widget>() ?? d).toList();
     },
