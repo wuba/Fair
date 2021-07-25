@@ -86,8 +86,8 @@ class FairApp extends InheritedWidget with AppState {
 
   static FairApp of(BuildContext context, {bool rebuild = false}) {
     return rebuild
-        ? context.dependOnInheritedWidgetOfExactType<FairApp>()
-        : context.findAncestorWidgetOfExactType<FairApp>();
+        ? context?.dependOnInheritedWidgetOfExactType<FairApp>()
+        : context?.findAncestorWidgetOfExactType<FairApp>();
   }
 
   String pathOfBundle(String tag) {

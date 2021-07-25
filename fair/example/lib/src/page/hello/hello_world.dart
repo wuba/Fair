@@ -5,6 +5,7 @@
  */
 
 import 'package:fair/fair.dart';
+import 'package:fair_example/src/page/plugins/net/sampe_list_view_src.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -53,7 +54,9 @@ class _State extends State<HelloWorldPage> {
             heroTag: 'open_dynamic',
             backgroundColor: Colors.pink,
             onPressed: () {
-              Navigator.pushNamed(context, 'sample_dynamic_page');
+              MaterialPageRoute(
+                builder: (context) => SampleWanAndroidPageSrc(),
+              );
             },
           ),
           Padding(padding: EdgeInsets.only(right: Sugar.paddingTop(context))),

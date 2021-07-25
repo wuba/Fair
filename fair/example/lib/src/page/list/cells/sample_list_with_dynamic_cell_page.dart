@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:fair/fair.dart';
 import 'package:fair_example/src/model/bean/loupan_bean.dart';
 import 'package:fair_example/src/model/bean/list_with_logic_bean.dart';
-import 'package:fair_example/src/page/list/cells/sample_page_stateful_cell.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -33,7 +32,7 @@ class _State extends State<DynamicCellPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('LogicList'),
+          title: Text('动态Cell混排'),
         ),
         body: Container(
             color: Colors.white,
