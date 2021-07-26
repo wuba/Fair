@@ -13,6 +13,7 @@ class ListDelegate extends FairDelegate {
     var functions = super.bindFunction();
     functions.addAll({
       '_itemBuilder': _itemBuilder,
+      '_onRefresh': _onRefresh,
     });
     return functions;
   }
@@ -53,13 +54,17 @@ class ListDelegate extends FairDelegate {
   }
 
   void _onLoadMore() {
-    runtime?.invokeMethod(pageName, 'onLoadMore', null);
+    runtime?.invokeMethod(pageName, '_onLoadMore', null);
+  }
+
+  Future<void> _onRefresh() async {
+    await runtime?.invokeMethod(pageName, '_onRefresh', null);
   }
 
   Widget _itemBuilder(context, index) {
-    var result = runtime?.invokeMethodSync(pageName, 'onListData', null);
+    var result = runtime?.invokeMethodSync(pageName, '_onItemByIndex', [index]);
     var value = jsonDecode(result);
-    var itemData = value['result']['result'][index];
+    var itemData = value['result']['result'];
     return FairWidget(
       name: itemData,
       path: 'assets/bundle/lib_src_page_list_sample_list_with_logic.fair.json',

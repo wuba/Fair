@@ -45,9 +45,9 @@ class _State extends State<SampleLogicPage2Page> {
             child: Icon(Icons.open_in_new),
             onPressed: () {
               Navigator.pushNamed(context, 'fair_page', arguments: {
-                'name': '动态界面跳转&传值',
+                'name': '逻辑动态界面跳转&传值',
                 'path':
-                    'assets/bundle/lib_src_page_logic-page2page_sample_logic_page2page.fair.json',
+                    'assets/bundle/lib_src_page_logic-page_sample_logic_page.fair.json',
                 'data': {'pageName': getTitle()}
               });
             },

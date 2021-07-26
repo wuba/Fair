@@ -1,3 +1,4 @@
+import 'package:fair_example/src/page/logic_home_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,7 +16,9 @@ class HomePage extends StatelessWidget {
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('带逻辑动态化', () {
-              Navigator.pushNamed(context, 'sample_logic_home_page');
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => LogicHomePage(),
+              ));
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
           ],
