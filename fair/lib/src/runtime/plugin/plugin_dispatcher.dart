@@ -6,7 +6,12 @@ class FairPluginDispatcher {
   static final pluginMap = <String, IFairPlugin>{};
 
   static Future<dynamic> dispatch(dynamic msg) async {
-    var obj = jsonDecode(msg);
+    dynamic obj;
+    if (msg is Map) {
+      obj = msg;
+    } else {
+      obj = jsonDecode(msg);
+    }
     // var args = obj['args'];
     var className = obj['className']?.toString();
 
