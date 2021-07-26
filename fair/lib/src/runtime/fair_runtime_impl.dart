@@ -27,7 +27,7 @@ class Runtime implements IRuntime {
     init(true);
 
     _channel ??= FairMessageChannel();
-    //接收setData()的信息
+    //接收setState()的信息
     _channel.setMessageHandler((message) {
       var data = json.decode(message);
       var className = data['pageName'];
@@ -70,7 +70,7 @@ class Runtime implements IRuntime {
     scriptSource =
         scriptSource.replaceFirst(new RegExp(r'#FairProps#'), fairProps);
     scriptSource =
-        scriptSource.replaceAll(new RegExp(r'#FairPageName#'), pageName);
+        scriptSource.replaceAll(new RegExp(r'#FairKey#'), pageName);
     var map = <dynamic, dynamic>{};
     map[FairMessage.PATH] = scriptSource;
     map[FairMessage.PAGE_NAME] = pageName;

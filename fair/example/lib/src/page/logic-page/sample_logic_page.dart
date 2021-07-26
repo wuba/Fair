@@ -19,7 +19,7 @@ class SampleLogicPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return FairStateWarpper(_State());
+    return _State();
   }
 }
 
@@ -35,7 +35,9 @@ class _State extends State<SampleLogicPage> {
   }
 
   void onTapText() {
-    setData(fairProps['pageName'], {_demoList.total: _demoList.total++});
+    setState(() {
+      _demoList.total= _demoList.total++;
+    });
   }
 
   @override

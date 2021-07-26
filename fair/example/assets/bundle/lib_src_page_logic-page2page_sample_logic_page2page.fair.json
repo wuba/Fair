@@ -25,6 +25,23 @@
                 "pa": [
                   "assets/image/logo.png"
                 ]
+              },
+              {
+                "className": "Padding",
+                "na": {
+                  "padding": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "bottom": 40
+                    }
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "#($_count)"
+                    ]
+                  }
+                }
               }
             ]
           }
@@ -42,9 +59,23 @@
               "child": {
                 "className": "Icon",
                 "pa": [
+                  "#(Icons.add)"
+                ]
+              },
+              "heroTag": "onTapText",
+              "onPressed": "@(onTapText)"
+            }
+          },
+          {
+            "className": "FloatingActionButton",
+            "na": {
+              "child": {
+                "className": "Icon",
+                "pa": [
                   "#(Icons.open_in_new)"
                 ]
               },
+              "heroTag": "pushNamed",
               "onPressed": {
                 "className": "Navigator.pushNamed",
                 "pa": [
@@ -53,10 +84,10 @@
                 ],
                 "na": {
                   "arguments": {
-                    "name": "%(getTitle)",
+                    "name": "动态界面跳转&传值",
                     "path": "assets/bundle/lib_src_page_logic-page2page_sample_logic_page2page.fair.json",
                     "data": {
-                      "pageName": "动态界面跳转&传值"
+                      "_count": 58
                     }
                   }
                 }

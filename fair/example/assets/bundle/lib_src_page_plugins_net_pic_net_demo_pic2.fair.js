@@ -1,4 +1,4 @@
-GLOBAL['#FairPageName#'] = (function (__initProps__) {
+GLOBAL['#FairKey#'] = (function (__initProps__) {
     const __global__ = this;
     return {
         _picUrl: 'https://bkimg.cdn.bcebos.com/pic/b3119313b07eca8065388426576e80dda144ac342596', description: "大暑，二十四节气之一，夏季最后一个节气。每年的公历7月22日、23\n" +

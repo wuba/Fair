@@ -10,5 +10,5 @@
 // }
 //
 // void onTapText() {
-//   setData(fairProps['pageName'], {_demoList.total: _demoList.total++});
+//   setState(fairProps['pageName'], {_demoList.total: _demoList.total++});
 // }

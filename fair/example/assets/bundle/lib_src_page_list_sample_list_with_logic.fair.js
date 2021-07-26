@@ -1,4 +1,4 @@
-GLOBAL['#FairPageName#'] = (function(__initProps__) {
+GLOBAL['#FairKey#'] = (function(__initProps__) {
   const __global__ = this;
   return {
     fairProps: __initProps__,

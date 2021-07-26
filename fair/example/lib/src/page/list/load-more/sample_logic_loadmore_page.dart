@@ -13,7 +13,7 @@ class JRListWidget extends StatefulWidget {
   }
 
   @override
-  JRListState createState() => FairStateWarpper(JRListState());
+  JRListState createState() => JRListState();
 }
 
 class JRListState extends State<JRListWidget> {
@@ -33,7 +33,7 @@ class JRListState extends State<JRListWidget> {
     await Future.delayed(Duration(seconds: 100), () {
       list.addAll(
           List.generate(Random().nextInt(5) + 5, (i) => 'more Item $i'));
-      setData('LoadMore', {});
+      setState(() {});
     });
   }
 
@@ -41,7 +41,9 @@ class JRListState extends State<JRListWidget> {
     await Future.delayed(Duration(seconds: 1), () {
       list.insertAll(
           0, List.generate(Random().nextInt(5) + 5, (i) => 'refresh Item $i'));
-      setData('LoadMore', {});
+      setState(() {
+
+      });
     });
   }
 
@@ -49,7 +51,8 @@ class JRListState extends State<JRListWidget> {
     Future.delayed(Duration(seconds: 1), () {
       list.insertAll(
           0, List.generate(Random().nextInt(5) + 15, (i) => 'Item $i'));
-      setData('LoadMore', {});
+      setState(() {
+      });
     });
 
     // 监听滑动

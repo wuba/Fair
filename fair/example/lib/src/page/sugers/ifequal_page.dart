@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 
 @FairPatch()
 class IfEqualPage extends StatefulWidget {
-
   var fairProps;
 
   IfEqualPage(dynamic data) {
@@ -19,12 +18,11 @@ class IfEqualPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return FairStateWarpper(_State());
+    return _State();
   }
 }
 
 class _State extends State<IfEqualPage> {
-
   @FairProps()
   var fairProps;
 
@@ -35,7 +33,9 @@ class _State extends State<IfEqualPage> {
   }
 
   void onTapText() {
-    setData(fairProps['pageName'], {_count: _count++});
+    setState(() {
+      _count = _count++;
+    });
   }
 
   @override
@@ -54,7 +54,9 @@ class _State extends State<IfEqualPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Sugar.ifEqual(_count , 2 , falseValue: Image.asset('assets/image/logo.png'), trueValue: Image.asset('assets/image/logo2.png')),
+            Sugar.ifEqual(_count, 2,
+                falseValue: Image.asset('assets/image/logo.png'),
+                trueValue: Image.asset('assets/image/logo2.png')),
             Padding(
               padding: EdgeInsets.only(top: 20),
               child: Text('_count = $_count'),

@@ -13,14 +13,14 @@
 //   await Future.delayed(Duration(seconds: 1), () {
 //     list.addAll(
 //         List.generate(Random().nextInt(5) + 1, (i) => 'more Item $i'));
-//     setData('LoadMore', {});
+//     setState('LoadMore', {});
 //   });
 // }
 //
 // Future<void> _onRefresh() async {
 //   await Future.delayed(Duration(seconds: 1), () {
 //     list.insertAll(0,  List.generate(Random().nextInt(5) + 5, (i) => 'refresh Item $i'));
-//     setData('LoadMore', {});
+//     setState('LoadMore', {});
 //   });
 // }
 //
@@ -28,7 +28,7 @@
 //
 //   Future.delayed(Duration(seconds: 1), () {
 //     list.insertAll(0,  List.generate(Random().nextInt(10) + 5, (i) => 'Item $i'));
-//     setData('LoadMore', {});
+//     setState('LoadMore', {});
 //   });
 //
 //   // 监听滑动

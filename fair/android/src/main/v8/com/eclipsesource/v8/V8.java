@@ -212,7 +212,7 @@ public class V8 extends V8Object {
      * @param key The key used to reference this object
      * @param value The object to associate with this runtime
      */
-    public synchronized void setData(final String key, final Object value) {
+    public synchronized void setState(final String key, final Object value) {
         if (data == null) {
             data = new HashMap<String, Object>();
         }

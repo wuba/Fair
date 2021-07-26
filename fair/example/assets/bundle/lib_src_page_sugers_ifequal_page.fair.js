@@ -1,4 +1,4 @@
-GLOBAL['#FairPageName#'] = (function(__initProps__) {
+GLOBAL['#FairKey#'] = (function(__initProps__) {
     const __global__ = this;
     return {
         fairProps: __initProps__,
@@ -12,7 +12,7 @@ GLOBAL['#FairPageName#'] = (function(__initProps__) {
         onTapText: function onTapText() {
             const __thiz__ = this;
             with(__thiz__) {
-                setData(fairProps.__op_idx__('pageName'), convertObjectLiteralToSetOrMap({ _count : _count++,
+                setState('#FairKey#', convertObjectLiteralToSetOrMap({ _count : _count++,
                 }));
             }
         },

@@ -18,7 +18,7 @@ PicData _picData = PicData();
 
 void onClick() {
   FairNet().request({
-    'pageName': '#FairPageName#',
+    'pageName': '#FairKey#',
     'method': 'GET',
     'url': 'https://www.wanandroid.com/banner/json',
     'success': (resp) {
@@ -29,13 +29,13 @@ void onClick() {
       String u = data[0]['imagePath'];
       _picData.picUrl = u;
       _picData.title = data[0]['title'];
-      setData(
-        '#FairPageName#',
-        {
-          _picData.title: data[0]['title'],
-          _picData.picUrl: u,
-        },
-      );
+      // setState(
+      //   '#FairKey#',
+      //   {
+      //     _picData.title: data[0]['title'],
+      //     _picData.picUrl: u,
+      //   },
+      // );
     }
   });
 }

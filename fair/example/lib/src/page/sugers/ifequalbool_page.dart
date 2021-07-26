@@ -19,7 +19,7 @@ class IfEqualBoolPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return FairStateWarpper(_State());
+    return _State();
   }
 }
 
@@ -35,7 +35,9 @@ class _State extends State<IfEqualBoolPage> {
   }
 
   void onTapText() {
-    setData(fairProps['pageName'], {_count: _count++});
+    setState(() {
+      _count = _count++;
+    });
   }
 
   bool _countCanMod2() {

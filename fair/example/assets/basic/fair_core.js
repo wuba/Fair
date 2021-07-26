@@ -124,14 +124,14 @@ function isNull(prop) {
         || 'null' === prop;
 }
 
-function setData(pageName, obj) {
-    console.log('JS:setData()_before'+pageName+'-'+obj);
+function setState(pageName, obj) {
+    console.log('JS:setState()_before'+pageName+'-'+obj);
     let p = {};
-    p['funcName'] = 'setData';
+    p['funcName'] = 'setState';
     p['pageName'] = pageName;
     p['args'] = obj;
     let map = JSON.stringify(p);
-    console.log('JS:setData()'+map);
+    console.log('JS:setState()'+map);
     invokeFlutterCommonChannel(map);
 }
 

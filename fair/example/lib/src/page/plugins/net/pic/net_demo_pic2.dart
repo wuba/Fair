@@ -12,7 +12,7 @@ part 'net_demo_pic2.js.dart';
 class PicDemoPage2 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return FairStateWarpper(_PicNetDemoPageStateful());
+    return _PicNetDemoPageStateful();
   }
 }
 
