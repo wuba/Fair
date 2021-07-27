@@ -158,12 +158,12 @@ mixin FairCompiler {
         AssetId.resolve('package:fair_compiler/src/fair_bundle.fbs')));
     return fbs;
   }
-  //
-  // Future<File> get temp async {
-  //   return File(path.join('.dart_tool', 'build', 'fairc',
-  //           DateTime.now().toString().hashCode.toString()))
-  //       .create(recursive: true);
-  // }
+
+  Future<File> get temp async {
+    return File(path.join('.dart_tool', 'build', 'fairc',
+            DateTime.now().toString().hashCode.toString()))
+        .create(recursive: true);
+  }
 
   Future<R> compile(BuildStep buildStep, List<String> arguments) async {
     var content = '';
