@@ -66,7 +66,7 @@ function _invokeMethod(par) {
 function _getAll(par) {
     let pageName = par['pageName'];
     let mc = GLOBAL[pageName];
-    let bind = {};
+    let bind = {}
     if (isNull(mc)) {
         return JSON.stringify(bind);
     }

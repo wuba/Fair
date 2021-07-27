@@ -7,7 +7,7 @@
         "title": {
           "className": "Text",
           "pa": [
-            "%(getTitle)"
+            "逻辑动态界面跳转&传值"
           ]
         }
       }
@@ -62,7 +62,7 @@
                   "#(Icons.add)"
                 ]
               },
-              "heroTag": "onTapText",
+              "heroTag": "add",
               "onPressed": "@(onTapText)"
             }
           },
@@ -75,16 +75,16 @@
                   "#(Icons.open_in_new)"
                 ]
               },
-              "heroTag": "pushNamed",
+              "heroTag": "open_in_new",
               "onPressed": {
                 "className": "Navigator.pushNamed",
                 "pa": [
-                  "@(context)",
+                  "^(context)",
                   "fair_page"
                 ],
                 "na": {
                   "arguments": {
-                    "name": "动态界面跳转&传值",
+                    "name": "逻辑动态界面跳转&传值",
                     "path": "assets/bundle/lib_src_page_logic-page2page_sample_logic_page2page.fair.json",
                     "data": {
                       "_count": 58
@@ -99,11 +99,6 @@
     }
   },
   "methodMap": {
-    "createState": {
-      "className": "FairStateWarpper",
-      "pa": [
-        "%(_State)"
-      ]
-    }
+    "createState": "%(_Page2PageState)"
   }
 }

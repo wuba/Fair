@@ -2,8 +2,6 @@ import 'package:fair/fair.dart';
 import '../../../model/bean/loupan_bean.dart';
 import 'package:flutter/material.dart';
 
-part 'sample_page_stateful_cell.js.dart';
-
 @FairPatch()
 class StatefulCell extends StatefulWidget {
   var _fairProps;
@@ -17,12 +15,52 @@ class StatefulCell extends StatefulWidget {
 }
 
 class _State extends State<StatefulCell> {
+
+  @FairProps()
+  var _fairProps;
+
+  var _louPanDetail;
+
+  String _loupanIcon() {
+    return _louPanDetail.imgUrl;
+  }
+
+  String _generateTitle() {
+    return _louPanDetail.goodsDesc[0].boldText +
+        _louPanDetail.goodsDesc[0].normalText;
+  }
+
+  String _generateSubtitle() {
+    return _louPanDetail.goodsDesc[1].normalText;
+  }
+
+  String _generatePrice() {
+    return _louPanDetail.goodsDesc[2].boldText;
+  }
+
+  String _generateUnit() {
+    return _louPanDetail.goodsDesc[2].normalText;
+  }
+
+  void _onImageTap() {
+    _louPanDetail.goodsDesc[0].normalText = ' ##';
+    setState(() {});
+  }
+
+  void _onItemTap() {
+    _louPanDetail.goodsDesc[0].normalText = ' ++';
+    setState(() {});
+  }
+
+  void onLaunch() {
+    _louPanDetail = _fairProps['louPanDetail'];
+  }
+
   @override
   void initState() {
     super.initState();
-
-    // dart 源文件可以直接对象映射，JS逻辑部分会转化为JSON
-    _louPanDetail = widget._fairProps;
+    _fairProps = widget._fairProps;
+    onLaunch();
   }
 
   @override

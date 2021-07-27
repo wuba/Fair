@@ -42,14 +42,8 @@ class ListDelegate extends FairDelegate {
   }
 
   @override
-  void didChangeDependencies() {
-    runtime?.invokeMethod(pageName, 'onLaunch', null);
-  }
-
-  @override
   void dispose() {
     super.dispose();
-    runtime?.invokeMethod(pageName, 'onDispose', null);
     _scrollController.dispose();
   }
 

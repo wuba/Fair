@@ -40,9 +40,8 @@ class _State extends State<IfRangePage> {
   }
 
   void onTapText() {
-    setState(() {
-      _count= _count++;
-    });
+    _count = _count + 1;
+    setState(() {});
   }
 
   @override

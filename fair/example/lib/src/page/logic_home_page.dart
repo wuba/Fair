@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:fair_example/src/page/list/cells/sample_list_with_dynamic_cell_page.dart';
 import 'package:fair_example/src/page/list/logic_list_home_page.dart';
 import 'package:fair_example/src/page/logic-page/sample_logic_page.dart';
@@ -22,7 +24,7 @@ class LogicHomePage extends StatelessWidget {
                 'name': '逻辑动态界面',
                 'path':
                     'assets/bundle/lib_src_page_logic-page_sample_logic_page.fair.json',
-                'data': {'pageName': '逻辑动态界面'}
+                'data': {"fairProps": {'pageName': '逻辑动态界面', '_count': 58}}
               });
               // 原生界面
               // Navigator.push(context, MaterialPageRoute(

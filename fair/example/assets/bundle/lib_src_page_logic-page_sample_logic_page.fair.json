@@ -65,12 +65,7 @@
     }
   },
   "methodMap": {
-    "createState": {
-      "className": "FairStateWarpper",
-      "pa": [
-        "%(_State)"
-      ]
-    },
+    "createState": "%(_State)",
     "_titleWidget": {
       "className": "Text",
       "pa": [

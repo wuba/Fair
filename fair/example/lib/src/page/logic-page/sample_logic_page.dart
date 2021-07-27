@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 
 @FairPatch()
 class SampleLogicPage extends StatefulWidget {
-
   var fairProps;
 
   SampleLogicPage(dynamic data) {
@@ -24,7 +23,6 @@ class SampleLogicPage extends StatefulWidget {
 }
 
 class _State extends State<SampleLogicPage> {
-
   @FairProps()
   var fairProps;
 
@@ -35,9 +33,8 @@ class _State extends State<SampleLogicPage> {
   }
 
   void onTapText() {
-    setState(() {
-      _demoList.total= _demoList.total++;
-    });
+    _demoList.total = _demoList.total + 1;
+    setState(() {});
   }
 
   @override
@@ -49,7 +46,6 @@ class _State extends State<SampleLogicPage> {
   Widget _titleWidget() {
     return Text(getTitle());
   }
-
 
   @override
   Widget build(BuildContext context) {

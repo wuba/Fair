@@ -228,11 +228,17 @@ class FairDelegate extends RuntimeFairDelegate {
 
   void initState() {}
 
-  void didChangeDependencies() {}
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
 
   void didUpdateWidget(covariant FairWidget oldWidget) {}
 
-  void dispose() {}
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   String key() {

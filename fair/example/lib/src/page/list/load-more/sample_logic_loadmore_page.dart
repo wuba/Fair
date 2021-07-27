@@ -17,6 +17,7 @@ class JRListWidget extends StatefulWidget {
 }
 
 class JRListState extends State<JRListWidget> {
+
   @FairProps()
   var fairProps;
 
