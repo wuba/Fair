@@ -129,7 +129,9 @@ function setState(pageName, obj) {
     let p = {};
     p['funcName'] = 'setState';
     p['pageName'] = pageName;
-    p['args'] = obj;
+    // console.log('JS:setState(states)'+JSON.stringify(Object.getOwnPropertySymbols(obj)));
+    obj();
+    p['args'] = null;
     let map = JSON.stringify(p);
     console.log('JS:setState()'+map);
     invokeFlutterCommonChannel(map);
