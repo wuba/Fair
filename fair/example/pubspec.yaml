@@ -19,6 +19,7 @@ dependencies:
     path: ../../fair
   dio: ^3.0.0
   permission_handler: 5.0.1+1
+  image_picker: ^0.6.7+22
 
 dev_dependencies:
   flutter_test:

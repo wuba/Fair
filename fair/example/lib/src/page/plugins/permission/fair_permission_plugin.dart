@@ -19,37 +19,58 @@ class WBPermission extends IFairPlugin {
     return _wbPermission;
   }
 
-  dynamic photoPermission(par) async {
-    print('WBPermission.photoPermission$par');
-    var requestPar = jsonDecode(par);
-    var args = requestPar['args'];
-    var pageName = requestPar['pageName'];
-    var id = args['id'];
-
-    var responseMap = {
-      'id': id,
-      'pageName': pageName,
-    };
+  Future<dynamic> requestPermission(map) async {
+    if (map == null) {
+      return;
+    }
+    var req;
+    bool isDart;
+    if (map is Map) {
+      isDart = true;
+      req = map;
+    } else {
+      isDart = false;
+      req = jsonDecode(map);
+    }
+    var pageName = req['pageName'];
+    var args = req['args'];
+    var callId = args['callId'];
+    var GrantedCallback = args['Granted'];
+    var RestrictedCallback = args['Restricted'];
+    //用户可以自定义参数，通过参数确定图片的选择方式
+    var isGranted = false;
     if (Platform.isIOS) {
-      if (await Permission.photos.request().isGranted) {
-        responseMap['data'] = 'Granted';
+      isGranted = await Permission.photos.request().isGranted;
+    } else {
+      isGranted = await Permission.storage.request().isGranted;
+    }
+
+    //需要判断发起方的请求是dart端还是js端
+    if (isDart) {
+      if (isGranted) {
+        GrantedCallback?.call(true);
       } else {
-        responseMap['data'] = 'Restricted';
+        RestrictedCallback?.call();
       }
     } else {
-      if (await Permission.storage.request().isGranted) {
-        responseMap['data'] = 'Granted';
-      } else {
-        responseMap['data'] = 'Restricted';
-      }
+      var resp = {
+        //pageName必传，因为每个pageName代表不同页面的作用域
+        'pageName': pageName,
+        'args': {
+          'callId': callId,
+          'isGranted': true,
+        }
+      };
+      return Future.value(jsonEncode(resp));
     }
-    return Future.value(jsonEncode(responseMap));
+
+    return Future.value();
   }
 
   @override
   Map<String, Function> getRegisterMethods() {
     var functions = <String, Function>{};
-    functions.putIfAbsent('photoPermission', () => photoPermission);
+    functions.putIfAbsent('requestPermission', () => requestPermission);
     return functions;
   }
 }
