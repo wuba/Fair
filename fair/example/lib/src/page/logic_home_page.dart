@@ -42,7 +42,7 @@ class LogicHomePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        SampleLogicPage2Page(),
+                        SampleLogicPage2Page({'pageName': '逻辑动态界面跳转&传值', '_count': 58}),
                   ));
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
