@@ -1,8 +1,10 @@
 let FairPhotoSelectorCallback = {};
 let FairPhotoSelectorId = 1;
 let FairPhotoSelector = function () {
+    console.log('FairPhotoSelector#contractor');
     return {
         getPhoto: function (req) {
+            console.log('FairPhotoSelector#getPhoto');
             //准备需要发送的消息
             let selectorId = 'FairPhotoSelectorId' + FairPhotoSelectorId++;
             let reqFunc = {};

@@ -6,13 +6,10 @@ import 'package:fair_example/src/page/plugins/permission/fair_take_photo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-part 'sample_permission_page.js.dart';
-
 @FairPatch()
 class PermissionPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() =>
-      FairStateWarpper(PermissionPageState());
+  State<StatefulWidget> createState() => PermissionPageState();
 }
 
 class PermissionPageState extends State<PermissionPage> {
@@ -67,5 +64,59 @@ class PermissionPageState extends State<PermissionPage> {
         ),
       ),
     );
+  }
+
+  bool isGranted = false;
+  String picUrl =
+      '/storage/emulated/0/Android/data/fair.example/files/Pictures/80e10da6-2599-4935-b26b-ae59857fdf175734646925196256918.jpg';
+
+  void requestPermission() {
+    WBPermission().requestPermission({
+      'pageName': '#FairKey#',
+      'args': {
+        'type': 'Permission_Photo',
+        'Granted': (resp) {
+          isGranted = true;
+          takePhoto();
+        },
+        'Restricted': (resp) {
+          isGranted = false;
+          takePhoto();
+        },
+      }
+    });
+  }
+
+  void selectFromAlbum() {
+    FairPhotoSelector().getPhoto({
+      'pageName': '#FairKey#',
+      'args': {
+        'type': 'album',
+        'success': (resp) {
+          picUrl = resp;
+          setState(() {});
+        },
+        'failure': () {
+          //用户获取图片失败
+        },
+      }
+    });
+  }
+
+  void takePhoto() {
+    FairPhotoSelector().getPhoto({
+      'pageName': '#FairKey#',
+      'args': {
+        'type': 'photo',
+        'success': (resp) {
+          picUrl = resp;
+          print('picUrl'+picUrl);
+          setState(() {});
+        },
+        'failure': () {
+          //用户获取图片失败
+        },
+      }
+    });
   }
 }

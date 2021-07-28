@@ -1,22 +1,26 @@
-var WBPermissionCallback = {};
-var WBPermissionId = 1;
+let WBPermissionCallback = {};
+let WBPermissionId = 1;
 let WBPermission = function () {
     return {
-        getPhoto: function (req) {
+        requestPermission: function (req) {
+            console.log('WBPermission#requestPermission'+req);
             //准备需要发送的消息
             let selectorId = 'WBPermissionId' + WBPermissionId++;
             let reqFunc = {};
-            Object.keys(req).forEach(function (key) {
-                if (typeof key === "function") {
-                    reqFunc[key] = reqFunc;
+            let args=req.get('args');
+            for (let [k, v] of args) {
+                if (typeof v === "function") {
+                    console.log('key'+k);
+                    reqFunc[k] = v;
                 }
                 WBPermissionCallback[selectorId] = reqFunc;
-            });
+            }
 
 
             let reqMap = {
-                pageName: req['pageName'],
+                pageName: req.get('pageName'),
                 funcName: 'invokePlugin',
+                'className':'WBPermission#requestPermission',
                 args: {
                     callId: selectorId,
                 }
@@ -27,15 +31,15 @@ let WBPermission = function () {
                 let respMap = JSON.parse(resp);
                 let respArgs = respMap['args'];
                 let respCallId = respArgs['callId'];
-                let isGranted = respArgs['Granted'];
+                let isGranted = respArgs['isGranted'];
 
                 //用户自行处理需要返回的结果值
                 let callback = WBPermissionCallback[respCallId];
                 if (callback == null) {
                     return
                 }
-                let GrantedCallback = respArgs['Granted'];
-                let RestrictedCallback = respArgs['Restricted'];
+                let GrantedCallback = callback['Granted'];
+                let RestrictedCallback = callback['Restricted'];
                 if (isGranted && GrantedCallback != null) {
                     GrantedCallback(true);
                 } else {

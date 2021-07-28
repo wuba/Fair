@@ -37,20 +37,22 @@ class WBPermission extends IFairPlugin {
     var callId = args['callId'];
     var GrantedCallback = args['Granted'];
     var RestrictedCallback = args['Restricted'];
+    var type=args['args'];
     //用户可以自定义参数，通过参数确定图片的选择方式
     var isGranted = false;
-    if (Platform.isIOS) {
-      isGranted = await Permission.photos.request().isGranted;
-    } else {
-      isGranted = await Permission.storage.request().isGranted;
+    if(Permission_Photo==type){
+      if (Platform.isIOS) {
+        isGranted = await Permission.photos.request().isGranted;
+      } else {
+        isGranted = await Permission.storage.request().isGranted;
+      }
     }
-
     //需要判断发起方的请求是dart端还是js端
     if (isDart) {
       if (isGranted) {
         GrantedCallback?.call(true);
       } else {
-        RestrictedCallback?.call();
+        RestrictedCallback?.call(false);
       }
     } else {
       var resp = {

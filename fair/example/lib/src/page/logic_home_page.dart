@@ -5,6 +5,7 @@ import 'package:fair_example/src/page/list/logic_list_home_page.dart';
 import 'package:fair_example/src/page/logic-page/sample_logic_page.dart';
 import 'package:fair_example/src/page/logic-page2page/sample_logic_page2page.dart';
 import 'package:fair_example/src/page/plugins/net/pic/net_demo_pic_fair.dart';
+import 'package:fair_example/src/page/plugins/sample_plugin.dart';
 import 'package:fair_example/src/page/sugers/sugers_home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -49,7 +50,7 @@ class LogicHomePage extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PicNetDemoFairPage(),
+                    builder: (context) => SamplePluginPage(),
                   ));
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),

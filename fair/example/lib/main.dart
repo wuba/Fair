@@ -12,6 +12,7 @@ import 'package:fair_example/src/page/logic-page2page/sample_logic_page2page.dar
 import 'package:fair_example/src/page/modules.dart';
 import 'package:fair_example/src/page/plugins/net/fair_plugin.dart';
 import 'package:fair_example/src/page/plugins/permission/fair_permission_plugin.dart';
+import 'package:fair_example/src/page/plugins/permission/fair_take_photo.dart';
 import 'package:flutter/material.dart';
 import 'src/proxy/list_proxy.dart';
 
@@ -23,6 +24,7 @@ void main() {
     plugins: {
       'FairNet': FairNet(),
       'WBPermission': WBPermission(),
+      'FairPhotoSelector': FairPhotoSelector(),
     },
   );
 }

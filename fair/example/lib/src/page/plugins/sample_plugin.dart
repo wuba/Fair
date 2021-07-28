@@ -1,3 +1,5 @@
+import 'package:fair_example/src/page/plugins/permission/sample_permission_demo_page.dart';
+import 'package:fair_example/src/page/plugins/permission/sample_permission_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,31 +17,42 @@ class SamplePluginState extends State<SamplePluginPage> {
       home: Scaffold(
         body: ListView(
           children: [
-            getItem('网络功能', () {
+            addItem('网络功能', () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => PicNetDemoFairPage()));
             }),
-            getItem('拍照功能', () {}),
+            addItem('拍照功能', () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PermissionSamplePage()));
+                      // builder: (context) => PermissionPage()));
+            }),
           ],
         ),
       ),
     );
   }
 
-  Widget getItem(String text, callBack) {
+  Widget addItem(String itemName, dynamic onPress) {
     return GestureDetector(
-      onTap: callBack,
-      child: Container(
-        child: Text(
-          text,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 17,
-          ),
-        ),
-      ),
-    );
+        child: Container(
+            alignment: Alignment.centerLeft,
+            color: Colors.white,
+            height: 100,
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Text(
+              itemName,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              textAlign: TextAlign.left,
+            )),
+        onTap: onPress);
   }
 }
