@@ -49,7 +49,7 @@ dynamic _getApp() => FairApp(
       child: MaterialApp(
         home: HomePage(),
         routes: {
-          'native_page': (context) => SampleLogicPage2Page(),
+          'native_page': (context) => SampleLogicPage2Page(_getData(context, _getParams(context, 'name'))), // 测试Fair跳转原生使用
           'fair_page': (context) => FairWidget(
                   name: _getParams(context, 'name'),
                   path: _getParams(context, 'path'),
