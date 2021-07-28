@@ -14,7 +14,7 @@ abstract class IFairPlugin {
     } else {
       a = jsonDecode(par);
     }
-    // var obj = a['args'];
+
     var name = a['className']?.toString();
 
     if (name.contains('#')) {
