@@ -102,11 +102,6 @@
     }
   },
   "methodMap": {
-    "createState": {
-      "className": "FairStateWarpper",
-      "pa": [
-        "%(_State)"
-      ]
-    }
+    "createState": "%(_State)"
   }
 }

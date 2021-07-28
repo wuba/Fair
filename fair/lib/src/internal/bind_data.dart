@@ -51,8 +51,9 @@ class BindingData {
     if (key.isNotEmpty) {
       var result = _functions['runtimeParseVar']({key: ''});
       var value = jsonDecode(result);
-      // return ValueNotifier(value[key]);
-       return ValueNotifier(value['result'][key]);;
+      if (value['result'][key] != null) {
+        return ValueNotifier(value['result'][key]);;
+      }
     }
     return null;
   }

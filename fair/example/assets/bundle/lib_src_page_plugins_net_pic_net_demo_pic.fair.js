@@ -1,4 +1,4 @@
-GLOBAL['#FairPageName#'] = (function (__initProps__) {
+GLOBAL['#FairKey#'] = (function (__initProps__) {
     const __global__ = this;
 
     function PicData() {
@@ -37,7 +37,7 @@ GLOBAL['#FairPageName#'] = (function (__initProps__) {
             const __thiz__ = this;
             with (__thiz__) {
                 FairNet().request(convertObjectLiteralToSetOrMap({
-                    ['pageName']: '#FairPageName#',
+                    ['pageName']: '#FairKey#',
                     ['method']: 'GET',
                     ['url']: 'https://www.wanandroid.com/banner/json',
                     ['success']: function dummy(resp) {
@@ -49,7 +49,7 @@ GLOBAL['#FairPageName#'] = (function (__initProps__) {
                         let u = data.__op_idx__(0)['imagePath'];
                         _picData.picUrl = u;
                         _picData.title = data.__op_idx__(0)['title'];
-                        setData('#FairPageName#', convertObjectLiteralToSetOrMap({
+                        setState('#FairKey#', convertObjectLiteralToSetOrMap({
                             [_picData.title]: data.__op_idx__(0)['title'],
                             [_picData.picUrl]: u,
                         }));

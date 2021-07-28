@@ -47,7 +47,7 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
     var strBin = bin.toString();
     var dirEndIndex = strBin.lastIndexOf(Platform.pathSeparator);
     var binDir = strBin.substring(0, dirEndIndex);
-    var partPath  = path.join(Directory.current.path, input.replaceFirst('.bundle.json', '.js.dart'));
+    var partPath  = path.join(Directory.current.path, input.replaceFirst('.bundle.json', '.dart'));
     print('\u001b[33m [Fair Dart2JS] partPath => ${partPath} \u001b[0m');
     if (File(partPath).existsSync()) {
 

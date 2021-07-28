@@ -1,11 +1,1 @@
-GLOBAL['#FairPageName#'] = (function (__initProps__) {
-    const __global__ = this;
-    return {
-        fairProps: __initProps__, getTitle: function getTitle() {
-            const __thiz__ = this;
-            with (__thiz__) {
-                return fairProps.__op_idx__('pageName');
-            }
-        },
-    };
-})(convertObjectLiteralToSetOrMap(JSON.parse('#FairProps#')));
+GLOBAL['#FairKey#']=(function(__initProps__){const __global__=this;function _Page2PageState(){const inner=_Page2PageState.__inner__;if(this==__global__){return new _Page2PageState({__args__:arguments});}else{const args=arguments.length>0?arguments[0].__args__||arguments:[];inner.apply(this,args);_Page2PageState.prototype.ctor.apply(this,args);return this;}}_Page2PageState.__inner__=function inner(){this._count=10;};_Page2PageState.prototype={onTapText:function onTapText(){const __thiz__=this;with(__thiz__){_count=_count+1;setState('#FairKey#',function dummy(){});}},};_Page2PageState.prototype.ctor=function(){Object.prototype.ctor.call(this);};;return _Page2PageState();})(convertObjectLiteralToSetOrMap(JSON.parse('#FairProps#')));

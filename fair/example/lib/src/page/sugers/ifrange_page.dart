@@ -18,7 +18,7 @@ class IfRangePage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return FairStateWarpper(_State());
+    return _State();
   }
 }
 
@@ -40,7 +40,8 @@ class _State extends State<IfRangePage> {
   }
 
   void onTapText() {
-    setData(fairProps['pageName'], {_count: _count++});
+    _count = _count + 1;
+    setState(() {});
   }
 
   @override

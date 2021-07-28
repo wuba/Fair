@@ -26,12 +26,12 @@
    
    },_onTapText: function _onTapText()  { 
      this.data._response.total = this.data._response.total+1;
-   this.setData({_response: this.data._response});
+   this.setState('#FairKey#',{_response: this.data._response});
    
    },_initData: function _initData(id)  { 
 //         FairNet.request({url:"http://op.juhe.cn/onebox/weather/query",header: {"Content-Type" : "application/x-www-form-urlencoded"},method:"POST",data: {"cityname" : "上海", "key" : "1430ec127e097e1113259c5e1be1ba70"},complete:function dummy(value)  {
 //     _data.count = value['count'];
-//   this.setData({count: that.data._data._count});
+//   this.setState({count: that.data._data._count});
 //
 //   }});
    

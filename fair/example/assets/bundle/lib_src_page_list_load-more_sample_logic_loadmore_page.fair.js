@@ -1,4 +1,4 @@
-GLOBAL['#FairPageName#'] = (function (__initProps__) {
+GLOBAL['#FairKey#'] = (function (__initProps__) {
     const __global__ = this;
     return {
         list: List(), _scrollController: null, listIsEmpty: function listIsEmpty() {
@@ -11,12 +11,12 @@ GLOBAL['#FairPageName#'] = (function (__initProps__) {
             with (__thiz__) {
                 // await Future.delayed(Duration({seconds: 2}), function dummy() {
                 //     list.addAll(List.generate(Random().nextInt(5) + 1, (i) => `more Item ${i}`));
-                //     setData('ListLoadMore', {});
+                //     setState('ListLoadMore', {});
                 // });
                 for (var i = 0; i < 4; i++) {
                     list.add(`More Item ${i}`);
                 }
-                setData('ListLoadMore', {});
+                setState('ListLoadMore', {});
             }
         }, _onRefresh: async function _onRefresh() {
             const __thiz__ = this;
@@ -25,7 +25,7 @@ GLOBAL['#FairPageName#'] = (function (__initProps__) {
                 Duration({seconds: 3}), function dummy() {
                     list = List.generate(Random().nextInt(20) + 15, (i) => `Item ${i}`);
                     console.log('JS:_onRefresh');
-                    setData('ListLoadMore', {});
+                    setState('ListLoadMore', {});
                 }//);
             }
         }, onLaunch: function onLaunch() {

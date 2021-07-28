@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:fair/fair.dart';
 import 'package:fair_example/src/model/bean/loupan_bean.dart';
 import 'package:fair_example/src/model/bean/list_with_logic_bean.dart';
+import 'package:fair_example/src/page/list/cells/sample_page_stateful_cell.dart';
 import 'package:flutter/material.dart';
 
-@FairPatch()
 class DynamicCellPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -66,8 +66,8 @@ class _State extends State<DynamicCellPage> {
           constraints: BoxConstraints(minHeight: 80),
           child: FairWidget(
             name: item.id,
-            path: 'assets/bundle/lib_src_page_list_cells_sample_page_stateful_cell.fair.bin',
-            data: {"fairProps": json.encode(louPanDetail)},
+            path: 'assets/bundle/lib_src_page_list_cells_sample_page_stateful_cell.fair.json',
+            data: {"fairProps": json.encode({'louPanDetail': louPanDetail})},
           ));
 
       // 原生实现效果
@@ -75,7 +75,7 @@ class _State extends State<DynamicCellPage> {
       //     alignment: Alignment.centerLeft,
       //     color: Colors.white,
       //     height: 120,
-      //     child: StatefulCell(louPanDetail)
+      //     child: StatefulCell({'louPanDetail': louPanDetail})
       //     );
 
     } else {
