@@ -101,6 +101,7 @@ class FairState extends State<FairWidget>
   Widget _child;
   FairApp _fairApp;
   String bundleType;
+  String state2key;
 
   // None nullable
   FairDelegate delegate;
@@ -108,6 +109,7 @@ class FairState extends State<FairWidget>
   @override
   void initState() {
     super.initState();
+    state2key = GlobalState.id(widget.name);
     delegate = widget.delegate ??
         GlobalState.of(widget.name).call(context, widget.data);
     delegate._bindState(this);
@@ -170,8 +172,8 @@ class FairState extends State<FairWidget>
     delegate?.dispose();
   }
 
-  String get state2key =>
-      widget.name ?? widget.key.toString() ?? '${toStringShort()}#$hashCode';
+  // String get state2key =>
+  //     widget.name ?? widget.key.toString() ?? '${toStringShort()}#$hashCode';
 
   @override
   void call(String t) {
@@ -226,11 +228,17 @@ class FairDelegate extends RuntimeFairDelegate {
 
   void initState() {}
 
-  void didChangeDependencies() {}
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
 
   void didUpdateWidget(covariant FairWidget oldWidget) {}
 
-  void dispose() {}
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   String key() {
@@ -276,21 +284,4 @@ class _CheckedModeBanner extends StatelessWidget {
     }());
     properties.add(DiagnosticsNode.message(message));
   }
-}
-
-State fairState;
-
-State FairStateWarpper(State state) {
-  fairState = state;
-  return fairState;
-}
-
-void setData(String pageName, Map data) {
-  fairState?.setState(() {
-    if (data?.isNotEmpty) {
-      data.forEach((key, value) {
-        key = value;
-      });
-    }
-  });
 }

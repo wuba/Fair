@@ -27,8 +27,8 @@ class FairHandler {
         return '';
       }
 
-      //当用户调用setData的时候相当于刷新了数据，通知刷新页更新
-      if (funcName == 'setData') {
+      //当用户调用setState的时候相当于刷新了数据，通知刷新页更新
+      if (funcName == 'setState') {
         _dispatchMessage(pageName, jsonEncode(args));
         return '';
       }

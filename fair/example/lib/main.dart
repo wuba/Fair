@@ -8,6 +8,7 @@ import 'dart:convert';
 
 import 'package:fair/fair.dart';
 import 'package:fair_example/src/page/home_page.dart';
+import 'package:fair_example/src/page/logic-page2page/sample_logic_page2page.dart';
 import 'package:fair_example/src/page/modules.dart';
 import 'package:fair_example/src/page/plugins/net/fair_plugin.dart';
 import 'package:fair_example/src/page/plugins/permission/fair_permission_plugin.dart';
@@ -31,6 +32,13 @@ dynamic _getParams(BuildContext context, String key) =>
         ? (ModalRoute.of(context).settings.arguments as Map)[key]
         : null;
 
+dynamic _getData(BuildContext context, String name) {
+  var data =
+      Map.from((ModalRoute.of(context).settings.arguments as Map)['data']);
+  data.addAll({'pageName': name});
+  return data;
+}
+
 dynamic _getApp() => FairApp(
       modules: {
         ShowFairAlertModule.tagName: () => ShowFairAlertModule(),
@@ -41,10 +49,14 @@ dynamic _getApp() => FairApp(
       child: MaterialApp(
         home: HomePage(),
         routes: {
+          'native_page': (context) => SampleLogicPage2Page(),
           'fair_page': (context) => FairWidget(
-              name: _getParams(context, 'name'),
-              path: _getParams(context, 'path'),
-              data: {'fairProps': jsonEncode(_getParams(context, 'data'))}),
+                  name: _getParams(context, 'name'),
+                  path: _getParams(context, 'path'),
+                  data: {
+                    'fairProps': jsonEncode(
+                        _getData(context, _getParams(context, 'name')))
+                  }),
         },
       ),
     );

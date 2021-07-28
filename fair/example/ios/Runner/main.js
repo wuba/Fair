@@ -123,9 +123,9 @@ function isNull(prop) {
         || 'null' === prop;
 }
 
-function setData(pageName, obj) {
+function setState(pageName, obj) {
     let p = {};
-    p['funcName'] = 'setData';
+    p['funcName'] = 'setState';
     p['pageName'] = pageName;
     p['args'] = obj;
     let map = JSON.stringify(p);

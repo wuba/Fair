@@ -81,9 +81,9 @@ abstract class RuntimeFairDelegate {
 
   //获取js端的数据，刷新指定数据
   void notifyValue(Map values) {
-    values.forEach((key, value) {
-      _valueMap[key]?.value = value;
-    });
+    // values.forEach((key, value) {
+    //   _valueMap[key]?.value = value;
+    // });
     setState(() {});
   }
 
@@ -101,5 +101,13 @@ abstract class RuntimeFairDelegate {
 
   void bindBaseValue() {
     _bindValuesMap.addAll({'_platform': () => 'Fair v$fairVersion'});
+  }
+
+  void didChangeDependencies() {
+    runtime?.invokeMethod(pageName, 'onLaunch', null);
+  }
+
+  void dispose() {
+    runtime?.invokeMethod(pageName, 'onDispose', null);
   }
 }
