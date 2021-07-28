@@ -9,6 +9,10 @@ import 'package:flutter/material.dart';
 
 @FairPatch()
 class SampleLogicPage2Page extends StatefulWidget {
+  var _props;
+
+  SampleLogicPage2Page(this._props);
+
   @override
   State<StatefulWidget> createState() {
     return _Page2PageState();
@@ -16,19 +20,34 @@ class SampleLogicPage2Page extends StatefulWidget {
 }
 
 class _Page2PageState extends State<SampleLogicPage2Page> {
+  @FairProps()
+  var fairProps;
 
-  var _count = 10;
+  var _count;
+  var _name;
 
   void onTapText() {
     _count = _count + 1;
     setState(() {});
   }
 
+  void onLaunch() {
+    _name = fairProps['pageName'];
+    _count = fairProps['_count'];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fairProps = widget._props;
+    onLaunch();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('逻辑动态界面跳转&传值'),
+        title: Text(_name),
       ),
       body: Center(
         child: Column(
@@ -55,7 +74,7 @@ class _Page2PageState extends State<SampleLogicPage2Page> {
             heroTag: 'open_in_new',
             onPressed: () {
               Navigator.pushNamed(context, 'fair_page', arguments: {
-                'name': '逻辑动态界面跳转&传值',
+                'name': '动态界面&传值',
                 'path':
                     'assets/bundle/lib_src_page_logic-page2page_sample_logic_page2page.fair.json',
                 'data': {'_count': 58}

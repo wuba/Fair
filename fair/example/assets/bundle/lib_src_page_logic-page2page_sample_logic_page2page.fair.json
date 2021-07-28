@@ -7,7 +7,7 @@
         "title": {
           "className": "Text",
           "pa": [
-            "逻辑动态界面跳转&传值"
+            "^(_name)"
           ]
         }
       }
@@ -80,12 +80,11 @@
                 "className": "Navigator.pushNamed",
                 "pa": [
                   "^(context)",
-                  "fair_page"
+                  "native_page"
                 ],
                 "na": {
                   "arguments": {
-                    "name": "逻辑动态界面跳转&传值",
-                    "path": "assets/bundle/lib_src_page_logic-page2page_sample_logic_page2page.fair.json",
+                    "name": "原生",
                     "data": {
                       "_count": 58
                     }
