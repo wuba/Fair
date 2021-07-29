@@ -2102,7 +2102,6 @@ var p = () =>
         cacheWidth: props['cacheWidth'],
         cacheHeight: props['cacheHeight'],
       ),
-  'File': (props) => File(props['pa'][0]),
   'Image.file': (props) =>
       Image.file(
         props['pa'][0],
