@@ -6,6 +6,8 @@
   "plugin": {
     "fair_net": "assets/plugin/fair_net_plugin.js",
     "fair_plugin": "assets/plugin/fair_plugins.js",
-    "fair_jscore": "assets/plugin/fair_jsbase.js"
+    "fair_jscore": "assets/plugin/fair_jsbase.js",
+    "fair_permission": "assets/plugin/sample_fair_permission.js",
+    "fair_photo": "assets/plugin/sample_fair_photo_selector.js"
   }
 }

@@ -4,6 +4,8 @@
  * found in the LICENSE file.
  */
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'utils.dart';
@@ -1427,7 +1429,8 @@ var p = () =>
         padding: props['padding'],
         itemExtent: props['itemExtent']?.toDouble(),
         itemBuilder: props['itemBuilder'],
-        itemCount:  (props['itemCount'] is num) ? props['itemCount'] : num.parse(props['itemCount']),
+        itemCount: (props['itemCount'] is num) ? props['itemCount'] : num.parse(
+            props['itemCount']),
         addAutomaticKeepAlives: props['addAutomaticKeepAlives'] ?? true,
         addRepaintBoundaries: props['addRepaintBoundaries'] ?? true,
         addSemanticIndexes: props['addSemanticIndexes'] ?? true,
@@ -2951,31 +2954,32 @@ var p = () =>
         onDidChange: props['onDidChange'],
         onInitialBuild: props['onInitialBuild'],
       ),
-  '(BuildContext, dynamic) => Scaffold': (props) => (BuildContext context, dynamic state) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text("123"),
-        ),
-        body: Center(
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'You have pushed the button this many times:',
-                ),
-                Text(
+  '(BuildContext, dynamic) => Scaffold': (props) =>
+      (BuildContext context, dynamic state) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("123"),
+      ),
+      body: Center(
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'You have pushed the button this many times:',
+              ),
+              Text(
                   '321'
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: (){},
-          tooltip: 'Increment',
-          child: Icon(Icons.add),
-        ),
-      );
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+    );
   },
 };
