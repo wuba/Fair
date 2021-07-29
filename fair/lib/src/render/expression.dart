@@ -167,7 +167,7 @@ class PropValueExpression extends Expression {
     if (prop is ValueNotifier) {
       var data = _PropValueBuilder(expression, prop, proxy, binding);
       binding.addBindValue(data);
-      return R(data, exp: expression, needBinding: true);
+      return R(data, exp: expression, needBinding: false);
     }
     return R(prop, exp: expression, needBinding: false);
   }

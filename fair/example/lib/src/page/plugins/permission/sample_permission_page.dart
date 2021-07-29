@@ -30,16 +30,14 @@ class PermissionPageState extends State<PermissionPage> {
                     height: 500,
                   ),
                   falseValue: Image.file(
-                    File('$picUrl'),
+                    File(picUrl),
                     width: 1000,
                     height: 500,
                   )),
               Text('点击按钮拍照'),
               MaterialButton(
-                color: Colors.grey[350],
-                onPressed: () {
-                  requestPermission();
-                },
+                color: Colors.grey,
+                onPressed: requestPermission,
                 child: Text(
                   '相机',
                   style: TextStyle(
@@ -48,10 +46,8 @@ class PermissionPageState extends State<PermissionPage> {
                 ),
               ),
               MaterialButton(
-                color: Colors.grey[350],
-                onPressed: () {
-                  selectFromAlbum();
-                },
+                color: Colors.grey,
+                onPressed: selectFromAlbum,
                 child: Text(
                   '相册',
                   style: TextStyle(
@@ -67,8 +63,7 @@ class PermissionPageState extends State<PermissionPage> {
   }
 
   bool isGranted = false;
-  String picUrl =
-      '/storage/emulated/0/Android/data/fair.example/files/Pictures/80e10da6-2599-4935-b26b-ae59857fdf175734646925196256918.jpg';
+  String picUrl = '';
 
   void requestPermission() {
     WBPermission().requestPermission({
@@ -110,7 +105,6 @@ class PermissionPageState extends State<PermissionPage> {
         'type': 'photo',
         'success': (resp) {
           picUrl = resp;
-          print('picUrl'+picUrl);
           setState(() {});
         },
         'failure': () {

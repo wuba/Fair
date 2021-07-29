@@ -45,7 +45,7 @@
                           {
                             "className": "File",
                             "pa": [
-                              "#($picUrl)"
+                              "^(picUrl)"
                             ]
                           }
                         ],
@@ -65,6 +65,7 @@
                   {
                     "className": "MaterialButton",
                     "na": {
+                      "color": "#(Colors.grey)",
                       "onPressed": "@(requestPermission)",
                       "child": {
                         "className": "Text",
@@ -85,6 +86,7 @@
                   {
                     "className": "MaterialButton",
                     "na": {
+                      "color": "#(Colors.grey)",
                       "onPressed": "@(selectFromAlbum)",
                       "child": {
                         "className": "Text",
