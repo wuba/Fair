@@ -87,81 +87,114 @@ class _MyHomePageState extends State<MyHomePage> {
 ```
 
 ## Fair改造
-为了生存代码，我们将main.dart拆分独立文件；
-* main.dart runApp入口
-* app.dart 从main剥离出app部分
-* proxy.dart 新增
 
 ### main.dart
 
-替换MyHomePage的引用，改为对FairWidget的引用
-```dart {2,6,18-22}
-import 'package:demo/proxy.dart';
+#### 修改main方法和引用
+
+```dart
+import 'dart:convert';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(FairApp(child: MyApp(), profile: true));
-}
+    WidgetsFlutterBinding.ensureInitialized();
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: FairWidget(
-        name: 'counting',
-        path: 'assets/bundle/lib_app.fair.bin',
-        data: {'widget.title': 'Flutter Demo Home Page'},
-        stateProxy: CountingStateProxy(),
-      ),
-      // home: MyHomePage(title: 'Flutter Demo Home Page'),
+    FairApp.runApplication(
+        _getApp(),
+        plugins: {},
     );
-  }
+    // runApp(MyApp());
 }
 ```
 
-### app.dart
-改造后的app既可以直接运行，也可以作为基础生成fair产物。
-```dart {1,13,15,18,25}
-import 'package:fair/fair.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+#### 对接原方法
 
+```dart
+
+dynamic _getApp() => FairApp(
+  modules: {},
+  delegate: {},
+  child: MyApp(),
+);
+
+```
+
+#### 替换动态界面
+
+```dart
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            // home: MyHomePage(data: {'pageName': 'Flutter Demo Home Page'}));
+            home: FairWidget(
+                    name: '58 Fair',
+                    path: 'assets/bundle/lib_main.fair.json',
+                    data: {
+                      'fairProps': jsonEncode({'pageName': '58 Fair', 'count': 58})
+                    }));
+  }
+}
+
+```
+
+#### 原始界面改造
+```dart
+@FairPatch()
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  
+  MyHomePage({Key key, this.data}) : super(key: key) {
+    title = data['pageName'];
+  }
+
+  String title;
+  dynamic data;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-@FairPatch()
 class _MyHomePageState extends State<MyHomePage> {
-  @FairWell('_counter')
-  int _counter = 0;
+  
+  // 定义唯一传递参数
+  @FairProps()
+  var fairProps;
 
-  @FairWell('_incrementCounter')
+  int _counter = 0;
+  var _pageName;
+
+  // JS初始化变量自动调用
+  void onLaunch() {
+    _pageName = fairProps['pageName'];
+    _counter = fairProps['count'];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // 此处fairProps需要在onLaunch 外部赋值，JS中会自动赋值
+    fairProps = widget.data;
+    onLaunch();
+  }
+
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
   }
 
-  @FairWell('themeStyle')
-  TextStyle themeStyle() {
-    return Theme.of(context).textTheme.headline4;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(_pageName),
       ),
       body: Center(
         child: Column(
@@ -172,7 +205,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: themeStyle(),
             ),
           ],
         ),
@@ -183,37 +215,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
-  }
-}
-```
-
-### proxy.dart
-代理对象，负责状态绑定
-```dart
-import 'package:fair/fair.dart';
-import 'package:flutter/material.dart';
-
-class CountingStateProxy extends FairStateProxy {
-  ValueNotifier<int> _counter;
-
-  void _incrementCounter() {
-    _counter.value++;
-  }
-
-  @override
-  Map<String, FairBlocBuilder> property() {
-    var props = super.property();
-    _counter ??= ValueNotifier(0);
-    props['_counter'] = () => _counter;
-    props['themeStyle'] = () => Theme.of(context).textTheme.headline4;
-    return props;
-  }
-
-  @override
-  Map<String, dynamic> func() {
-    var func = super.func();
-    func['_incrementCounter'] = _incrementCounter;
-    return func;
   }
 }
 ```

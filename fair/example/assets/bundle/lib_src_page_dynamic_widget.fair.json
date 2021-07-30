@@ -1,0 +1,37 @@
+{
+  "className": "Center",
+  "na": {
+    "child": {
+      "className": "Container",
+      "na": {
+        "child": {
+          "className": "Text",
+          "pa": [
+            "^(content)"
+          ],
+          "na": {
+            "style": {
+              "className": "TextStyle",
+              "na": {
+                "fontSize": 30,
+                "color": "#(Colors.yellow)"
+              }
+            }
+          }
+        },
+        "alignment": "#(Alignment.center)",
+        "margin": {
+          "className": "EdgeInsets.only",
+          "na": {
+            "top": 30,
+            "bottom": 30
+          }
+        },
+        "color": "#(Colors.redAccent)",
+        "width": 300,
+        "height": 300
+      }
+    }
+  },
+  "methodMap": {}
+}

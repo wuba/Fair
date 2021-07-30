@@ -45,14 +45,12 @@ class DynamicWidget extends StatelessWidget {
 第一步：添加注解：
 
 * @FairPatch() 修饰组件的定义，必须是顶级class
-* @FairWell() 修饰属性参数，命名需要和注解参数一致
 
 ```dart
 // 修饰当前页面为一个动态bundle资源
 @FairPatch()
 class DynamicWidget extends StatelessWidget {
-  // 修饰该属性会被build函数使用
-  @FairWell('content')
+  
   final String content;
   const DynamicWidget({Key key, this.content}) : super(key: key);
 
@@ -119,8 +117,7 @@ FairWidget(
 ```dart
 @FairPatch()
 class DynamicWidget extends StatelessWidget {
-
-  @FairWell('data')
+  
   final Data data;
 
   const DynamicWidget({Key key, this.data}) : super(key: key);
