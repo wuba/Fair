@@ -22,18 +22,33 @@ dependencies:
 Wrap your app with FairApp Widget.
 ```dart
 void main() {
-  runApp(
-    FairApp(
-      child: MaterialApp(home: App())
-    ),
+  WidgetsFlutterBinding.ensureInitialized();
+
+  FairApp.runApplication(
+    _getApp(),
+    plugins: {
+    },
   );
 }
+
+dynamic _getApp() => FairApp(
+  modules: {
+  },
+  delegate: {
+  },
+  child: MaterialApp(
+    home: FairWidget(
+            name: 'DynamicWidget',
+            path: 'assets/bundle/lib_src_page_dynamic_widget.fair.json',
+            data: {"fairProps": json.encode({})}),
+  ),
+);
 ```
 
 Import a dynamic widget as FairWidget
 ```dart
 FairWidget(
-  type: 'hello_world',
-  path: 'assets/bundle/hello_world.json',
-)
+  name: 'DynamicWidget',
+  path: 'assets/bundle/lib_src_page_dynamic_widget.fair.json',
+  data: {"fairProps": json.encode({})}),
 ```

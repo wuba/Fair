@@ -32,7 +32,7 @@ class _State extends State<DynamicCellPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('动态Cell混排'),
+          title: Text('原生列表 + 动态卡片'),
         ),
         body: Container(
             color: Colors.white,

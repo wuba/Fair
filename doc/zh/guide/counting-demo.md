@@ -120,7 +120,7 @@ dynamic _getApp() => FairApp(
 
 ```
 
-#### 替换动态界面
+#### 替换Home入口
 
 ```dart
 class MyApp extends StatelessWidget {
@@ -133,25 +133,25 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.blue,
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
-            // home: MyHomePage(data: {'pageName': 'Flutter Demo Home Page'}));
+            // home: MyHomePage(data: {'title': 'Flutter Demo Home Page'}));
             home: FairWidget(
                     name: '58 Fair',
                     path: 'assets/bundle/lib_main.fair.json',
                     data: {
-                      'fairProps': jsonEncode({'pageName': '58 Fair', 'count': 58})
+                      'fairProps': jsonEncode({'title': '58 Fair'})
                     }));
   }
 }
 
 ```
 
-#### 原始界面改造
+#### 改造原始界面
 ```dart
 @FairPatch()
 class MyHomePage extends StatefulWidget {
   
   MyHomePage({Key key, this.data}) : super(key: key) {
-    title = data['pageName'];
+    title = data['title'];
   }
 
   String title;
@@ -163,23 +163,22 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   
-  // 定义唯一传递参数
+  // 定义与JS侧传递的参数，只能传递一个Map类型
   @FairProps()
   var fairProps;
 
   int _counter = 0;
-  var _pageName;
+  var _title;
 
   // JS生命周期方法--在JS加载完成自动调用
   void onLoad() {
-    _pageName = fairProps['pageName'];
-    _counter = fairProps['count'];
+    _title = fairProps['title'];
   }
 
   @override
   void initState() {
     super.initState();
-    // 此处fairProps需要在onLaunch 外部赋值，JS中会自动赋值
+    // 此处fairProps需要在onLoad 外部赋值，JS中会自动赋值
     fairProps = widget.data;
     onLoad();
   }
@@ -194,7 +193,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_pageName),
+        title: Text(_title),
       ),
       body: Center(
         child: Column(
@@ -205,6 +204,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
+              // 暂不支持 style: Theme.of(context).textTheme.headline4,
+              // 可替换成:
+              style: TextStyle(fontSize: 40, color: Color(0xffeb4237), wordSpacing: 0),
             ),
           ],
         ),

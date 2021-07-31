@@ -2,43 +2,103 @@
 
 在Fair接入完成后，我们需要一个bundle才能更显示动态页面，那么怎么编写bundle呢？
 
-这一节我们一起写一个demo页面，并逐步将demo做一些复杂调整。
+这一节我们继续基于Counting Demo做示例，逐步将Demo做一些复杂调整。
 
-## 1. 编写红色方块
+## 1. 增加逻辑方法
 
-首先我们写一个红色方块的代码。
+首先我们写一个在build内部，通过逻辑判断替换Fair Logo的功能。
 
-下面的代码完全使用flutter编写，入参是一个文本。
+下面的代码完全使用flutter编写，这样的好处是源代码可以无缝在原生和动态之间切换。
+Demo的入参是一个文本和一个数字。
 
 ```dart
-class DynamicWidget extends StatelessWidget {
-  final String content;
-  const DynamicWidget({Key key, this.content}) : super(key: key);
+class IfEqualBoolPage extends StatefulWidget {
+  var fairProps;
+
+  IfEqualBoolPage(dynamic data) {
+    fairProps = data;
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    return _State();
+  }
+}
+
+class _State extends State<IfEqualBoolPage> {
+  
+  @FairProps()
+  var fairProps;
+
+  String _title;
+  int _count;
+
+  // JS生命周期方法--在JS加载完成自动调用
+  void onLoad() {
+    _title = fairProps['pageName'];
+    _count = fairProps['count'];
+  }
+  
+  void onTapText() {
+    _count = _count + 1;
+    setState(() {});
+  }
+
+  // 逻辑方法
+  bool _countCanMod2() {
+    return _count % 2 == 1;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fairProps = widget.fairProps;
+    onLoad();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: Text(
-          content,
-          style: TextStyle(fontSize: 30, color: Colors.yellow),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Sugar.ifEqualBool 为逻辑和布局混编场景下的语法糖
+            Sugar.ifEqualBool(_countCanMod2(),
+                falseValue: Image.asset('assets/image/logo.png'),
+                trueValue: Image.asset('assets/image/logo2.png')),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Text('_count = $_count'),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Text('if _count % 2 == 1,  update image !'),
+            ),
+          ],
         ),
-        alignment: Alignment.center,
-        margin: EdgeInsets.only(top: 30, bottom: 30),
-        color: Colors.redAccent,
-        width: 300,
-        height: 300,
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            child: Icon(Icons.threesixty),
+            onPressed: onTapText,
+          )
+        ],
       ),
     );
   }
 }
 ```
 
-![](./assets/demo-redbox-1.png)
+![](./assets/sample_logic_page.jpg)
 
 
-
-## 2. 将红色方块动态化展示
+## 2. 动态化展示
 
 现在我们把它转换为Fair能够动态处理的bundle。
 
@@ -47,30 +107,11 @@ class DynamicWidget extends StatelessWidget {
 * @FairPatch() 修饰组件的定义，必须是顶级class
 
 ```dart
-// 修饰当前页面为一个动态bundle资源
-@FairPatch()
-class DynamicWidget extends StatelessWidget {
-  
-  final String content;
-  const DynamicWidget({Key key, this.content}) : super(key: key);
+// 修饰当前页面为一个动态bundle资源,只需添加@FairPatch()
 
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: Text(
-          content,
-          style: TextStyle(fontSize: 30, color: Colors.yellow),
-        ),
-        alignment: Alignment.center,
-        margin: EdgeInsets.only(top: 30, bottom: 30),
-        color: Colors.redAccent,
-        width: 300,
-        height: 300,
-      ),
-    );
-  }
-}
+@FairPatch()
+class IfEqualBoolPage
+
 ```
 
 第二步：现在然我们生成bundle吧
@@ -82,6 +123,7 @@ class DynamicWidget extends StatelessWidget {
 * .fair.bin 格式为release产物
 * .fair.json 格式为debug产物
 * .fair.metadata 格式为元数据，标记了源码与产物的关联信息
+* .fair.js 格式为逻辑产物
 
 ![bundle](./assets/demo-redbox-2.png)
 
@@ -91,108 +133,110 @@ class DynamicWidget extends StatelessWidget {
 
 ![demo-redbox-3](./assets/demo-redbox-3.png)
 
-```dart
-FairWidget(
-  path: 'assets/bundle/lib_page_dynamic_widget.fair.bin',
-  data: {'content': 'Red Box'},
-)
-```
+第四步：预埋入口
 
-重新运行app后，可以看到新的效果，前后效果是像素级别一模一样的。
+    routes: {
+        'fair_page': (context) => FairWidget(
+            name: _getParams(context, 'name'),
+            path: _getParams(context, 'path'),
+            data: {
+                'fairProps': jsonEncode(
+                _getData(context, _getParams(context, 'name')))
+            }),
+    },
+
+第五步：调用展示
+
+    Navigator.pushNamed(context, 'fair_page',
+                  arguments: {'name': 'ifEqualBool', 'path': 'assets/bundle/lib_src_page_sugers_ifequalbool_page.fair.json', 'data': {'pageName': 'ifEqualBool'，'count': 58}});
+
+
+
+重新运行app后，可以看到新的效果，前后效果是像素级别一模一样的。同一份代码，可以原生和动态无缝切换使用。
 
 | Flutter源码效果                              | Fair 动态效果                                |
 | -------------------------------------------- | -------------------------------------------- |
 | ![demo-redbox-4](./assets/demo-redbox-1.png) | ![demo-redbox-4](./assets/demo-redbox-4.png) |
 
-## 3. 让红色小块复杂一些
+## 3. 让功能复杂一些
 
-现在我们希望重新编写红色小块，让他做一些调整，然后重新渲染出来（为了方便我们任然采用了内置路径，实际上可以通过url路径）。
+现在我们希望把build内的布局做一些拆分，封装一些布局子方法
 
 具体改动如下：
 
-* 把文案改写一下，变成两个名字：张三李四
-* 在文字下面加几个图标
-* 添加一个网络图片，替换掉红色背景
+* 把Text(_title) 封装成子方法，再调用
 
 ```dart
-@FairPatch()
-class DynamicWidget extends StatelessWidget {
-  
-  final Data data;
+class _State extends State<IfEqualBoolPage> {
+  @FairProps()
+  var fairProps;
 
-  const DynamicWidget({Key key, this.data}) : super(key: key);
+  int _count = 0;
+
+  String getTitle() {
+    return fairProps['pageName'];
+  }
+
+  void onTapText() {
+    _count = _count + 1;
+    setState(() {});
+  }
+
+  bool _countCanMod2() {
+    return _count % 2 == 1;
+  }
+
+  // 示例修改点
+  Widget _buildTitle() {
+    return Text(getTitle());
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fairProps = widget.fairProps;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: Stack(
-          alignment: Alignment.center,
+    return Scaffold(
+      appBar: AppBar(
+        title: _buildTitle(), //示例修改点
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text.rich(TextSpan(
-              text: data.content,
-              style: TextStyle(fontSize: 30, color: Colors.yellow),
-              children: [
-                TextSpan(
-                  text: data.content2,
-                  style: TextStyle(fontSize: 30, color: Colors.blue),
-                ),
-              ],
-            )),
-            Positioned.fill(
-              child: Icon(Icons.android, color: Colors.white),
-              top: 100,
+            Sugar.ifEqualBool(_countCanMod2(),
+                falseValue: Image.asset('assets/image/logo.png'),
+                trueValue: Image.asset('assets/image/logo2.png')),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Text('_count = $_count'),
             ),
-            Positioned.fill(
-              child: Icon(Icons.people, color: Colors.white),
-              top: 100,
-              left: 100,
-            ),
-            Positioned.fill(
-              child: Icon(Icons.desktop_mac, color: Colors.white),
-              top: 100,
-              right: 100,
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Text('if _count % 2 == 1,  update image !'),
             ),
           ],
         ),
-        margin: EdgeInsets.only(top: 30, bottom: 30),
-        decoration: BoxDecoration(
-            color: Colors.redAccent,
-            image: DecorationImage(image: NetworkImage(data.url))),
-        width: 300,
-        height: 300,
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            child: Icon(Icons.threesixty),
+            onPressed: onTapText,
+          )
+        ],
       ),
     );
   }
 }
-
-class Data {
-  final String content;
-  final String content2;
-  final String url;
-
-  Data(this.content, this.content2, this.url);
-}
 ```
-
 
 
 编写完代码后，重新生成bundle，app加载新的资源即可。
-
-注意我们的数据原相比一个字段，多了三个，为了方便，这里使用了Bean，当然也可以分散为多个变量：
-
-* bean不能嵌套，名字需要于参数对齐
-
-```dart
-FairWidget(
-  path: 'assets/bundle/lib_page_dynamic_widget2.fair.bin',
-  data: {
-    'data.content': '张三',
-    'data.content2': '李四',
-  'data.url':'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2665922796,3139592461&fm=26&gp=0.jpg'
-  },
-)
-```
 
 
 
