@@ -35,11 +35,11 @@
 //
 //   }});
    
-   },onLaunch: function onLaunch()  {
+   },onLoad: function onLoad()  {
 
        },
-          onDispose: function onDispose()  {
-                      Console.log("onDispose");
+         onUnload: function onUnload()  {
+                      Console.log("onUnload");
                  }
        
    }})

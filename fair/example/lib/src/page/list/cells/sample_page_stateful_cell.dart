@@ -52,7 +52,7 @@ class _State extends State<StatefulCell> {
     setState(() {});
   }
 
-  void onLaunch() {
+  void onLoad() {
     _louPanDetail = _fairProps['louPanDetail'];
   }
 
@@ -60,7 +60,7 @@ class _State extends State<StatefulCell> {
   void initState() {
     super.initState();
     _fairProps = widget._fairProps;
-    onLaunch();
+    onLoad();
   }
 
   @override

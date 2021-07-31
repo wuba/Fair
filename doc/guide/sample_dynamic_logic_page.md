@@ -19,11 +19,11 @@
      Text('${_demoList.total}'),
 
 ### 3、生命周期
-#### onLaunch
+#### onLoad
     变量初始化方法，需要声明单独的onLaunch，来完成数据的初始化，以及网络访问等操作。
     在原生开发时，一般在initState中调用；在动态界面中使用时，会在逻辑文件初始化之后调用。
 
-#### onDispose
+#### onUnload
     如果有资源需要回收，需要声明单独的onDispose方法。
     在原生开发时，一般在dispose中调用；在动态界面中使用时，会在Widget销毁之后调用。
 

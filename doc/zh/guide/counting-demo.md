@@ -170,8 +170,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   var _pageName;
 
-  // JS初始化变量自动调用
-  void onLaunch() {
+  // JS生命周期方法--在JS加载完成自动调用
+  void onLoad() {
     _pageName = fairProps['pageName'];
     _counter = fairProps['count'];
   }
@@ -181,7 +181,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     // 此处fairProps需要在onLaunch 外部赋值，JS中会自动赋值
     fairProps = widget.data;
-    onLaunch();
+    onLoad();
   }
 
   void _incrementCounter() {

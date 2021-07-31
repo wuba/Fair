@@ -48,7 +48,7 @@ class JRListState extends State<JRListWidget> {
     });
   }
 
-  void onLaunch() {
+  void onLoad() {
     Future.delayed(Duration(seconds: 1), () {
       list.insertAll(
           0, List.generate(Random().nextInt(5) + 15, (i) => 'Item $i'));
@@ -67,7 +67,7 @@ class JRListState extends State<JRListWidget> {
       });
   }
 
-  void onDispose() {
+  void onUnload() {
     _scrollController.dispose();
   }
 
@@ -89,13 +89,13 @@ class JRListState extends State<JRListWidget> {
   void initState() {
     super.initState();
     fairProps = widget.fairProps;
-    onLaunch();
+    onLoad();
   }
 
   @override
   void dispose() {
     super.dispose();
-    onDispose();
+    onUnload();
   }
 
   @override
