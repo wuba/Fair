@@ -1,75 +1,63 @@
 {
-  "className": "MaterialApp",
+  "className": "Scaffold",
   "na": {
-    "title": "hello",
-    "home": {
-      "className": "Scaffold",
+    "appBar": {
+      "className": "AppBar",
       "na": {
-        "appBar": {
-          "className": "AppBar",
+        "title": {
+          "className": "Text",
+          "pa": [
+            "自定义插件"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "Container",
+      "na": {
+        "child": {
+          "className": "Column",
           "na": {
-            "title": {
-              "className": "Text",
-              "pa": [
-                "插件"
-              ]
-            }
-          }
-        },
-        "body": {
-          "className": "Container",
-          "na": {
-            "child": {
-              "className": "Column",
-              "na": {
-                "children": [
-                  {
-                    "className": "Image.network",
+            "children": [
+              {
+                "className": "Image.network",
+                "pa": [
+                  "^(_picUrl)"
+                ],
+                "na": {
+                  "width": 500,
+                  "height": 150,
+                  "fit": "#(BoxFit.cover)",
+                  "repeat": "#(ImageRepeat.noRepeat)"
+                }
+              },
+              {
+                "className": "Expanded",
+                "na": {
+                  "child": {
+                    "className": "Text",
                     "pa": [
-                      "#($_picUrl)"
+                      "^(description)"
                     ],
                     "na": {
-                      "width": 10000,
-                      "height": 300,
-                      "fit": "#(BoxFit.cover)",
-                      "repeat": "#(ImageRepeat.noRepeat)"
-                    }
-                  },
-                  {
-                    "className": "Expanded",
-                    "na": {
-                      "child": {
-                        "className": "Text",
-                        "pa": [
-                          "#($description)"
-                        ],
+                      "style": {
+                        "className": "TextStyle",
                         "na": {
-                          "style": {
-                            "className": "TextStyle",
-                            "na": {
-                              "color": "#(Colors.black)",
-                              "fontSize": 17
-                            }
-                          }
+                          "color": "#(Colors.black)",
+                          "fontSize": 17
                         }
                       }
                     }
                   }
-                ]
+                }
               }
-            }
+            ]
           }
         }
-
       }
     }
   },
   "methodMap": {
-    "createState": {
-      "className": "FairStateWarpper",
-      "pa": [
-        "%(_PicNetDemoPageStateful)"
-      ]
-    }
+    "createState": "%(_PicNetDemoPageStateful)"
   }
 }

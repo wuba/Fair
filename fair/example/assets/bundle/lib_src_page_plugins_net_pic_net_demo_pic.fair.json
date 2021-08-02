@@ -1,79 +1,68 @@
 {
-  "className": "MaterialApp",
+  "className": "Scaffold",
   "na": {
-    "title": "hello",
-    "home": {
-      "className": "Scaffold",
+    "appBar": {
+      "className": "AppBar",
       "na": {
-        "appBar": {
-          "className": "AppBar",
+        "title": {
+          "className": "Text",
+          "pa": [
+            "加载网络获取地址的图片"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "Container",
+      "na": {
+        "child": {
+          "className": "Column",
           "na": {
-            "title": {
-              "className": "Text",
-              "pa": [
-                "加载网络获取地址的图片"
-              ]
-            }
-          }
-        },
-        "body": {
-          "className": "Container",
-          "na": {
-            "child": {
-              "className": "Column",
-              "na": {
-                "children": [
-                  {
-                    "className": "Image.network",
-                    "pa": [
-                      "#(${_picData.picUrl})"
-                    ],
+            "children": [
+              {
+                "className": "Image.network",
+                "pa": [
+                  "#(${_picData.picUrl})"
+                ],
+                "na": {
+                  "width": 1000
+                }
+              },
+              {
+                "className": "Text",
+                "pa": [
+                  "#(${_picData.title})"
+                ],
+                "na": {
+                  "maxLines": 3,
+                  "style": {
+                    "className": "TextStyle",
                     "na": {
-                      "width": 1000
-                    }
-                  },
-                  {
-                    "className": "Text",
-                    "pa": [
-                      "#(${_picData.title})"
-                    ],
-                    "na": {
-                      "maxLines": 3,
-                      "style": {
-                        "className": "TextStyle",
-                        "na": {
-                          "color": "#(Colors.blue)",
-                          "fontSize": 19
-                        }
-                      }
+                      "color": "#(Colors.blue)",
+                      "fontSize": 19
                     }
                   }
-                ]
+                }
               }
-            }
-          }
-        },
-        "floatingActionButton": {
-          "className": "FloatingActionButton",
-          "na": {
-            "child": {
-              "className": "Icon",
-              "pa": [
-                "#(Icons.add)"
-              ]
-            },
-            "onPressed": "@(onClick)"
+            ]
           }
         }
+      }
+    },
+    "floatingActionButton": {
+      "className": "FloatingActionButton",
+      "na": {
+        "child": {
+          "className": "Icon",
+          "pa": [
+            "#(Icons.add)"
+          ]
+        },
+        "onPressed": "@(onClick)"
       }
     }
   },
   "methodMap": {
-    "createState": {
-      "className": "FairStateWarpper",
-      "pa": [
-        "%(_PicNetDemoPageStateful)"
-      ]
-    }
+    "createState": "%(_PicNetDemoPageStateful)"
   }
 }

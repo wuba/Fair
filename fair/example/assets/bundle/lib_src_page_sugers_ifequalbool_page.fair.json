@@ -4,12 +4,7 @@
     "appBar": {
       "className": "AppBar",
       "na": {
-        "title": {
-          "className": "Text",
-          "pa": [
-            "%(getTitle)"
-          ]
-        }
+        "title": "%(_buildTitle)"
       }
     },
     "body": {
@@ -101,6 +96,12 @@
     }
   },
   "methodMap": {
-    "createState": "%(_State)"
+    "createState": "%(_State)",
+    "_buildTitle": {
+      "className": "Text",
+      "pa": [
+        "%(getTitle)"
+      ]
+    }
   }
 }
