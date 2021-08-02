@@ -1,11 +1,10 @@
-//
-//  FairProcessManager.h
-//  FairDynamicJSPlugin
-//
-//  Created by 单鹏涛 on 2021/6/8.
-//
-//  Fair通信流程管理类
-//
+/*
+ * Copyright (C) 2005-present, 58.com.  All rights reserved.
+ * Use of this source code is governed by a BSD type license that can be
+ * found in the LICENSE file.
+ */
+
+/*  Fair通信流程管理类 */
 
 #import <Foundation/Foundation.h>
 #import <FairDynamicFlutter/FairDynamicFlutter.h>

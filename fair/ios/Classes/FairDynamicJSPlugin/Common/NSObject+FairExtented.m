@@ -1,9 +1,8 @@
-//
-//  NSObject+FairExtented.m
-//  FairDynamicJSPlugin
-//
-//  Created by 单鹏涛 on 2021/6/11.
-//
+/*
+ * Copyright (C) 2005-present, 58.com.  All rights reserved.
+ * Use of this source code is governed by a BSD type license that can be
+ * found in the LICENSE file.
+ */
 
 #import "NSObject+FairExtented.h"
 

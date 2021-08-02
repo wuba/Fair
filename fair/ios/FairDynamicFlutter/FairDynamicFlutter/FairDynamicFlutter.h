@@ -1,9 +1,8 @@
-//
-//  FairDynamicFlutter.h
-//  FairDynamicFlutter
-//
-//  Created by 单鹏涛 on 2021/5/12.
-//
+/*
+ * Copyright (C) 2005-present, 58.com.  All rights reserved.
+ * Use of this source code is governed by a BSD type license that can be
+ * found in the LICENSE file.
+ */
 
 #import <Foundation/Foundation.h>
 
@@ -13,7 +12,6 @@
 #define FAIR_FFI_EXTERN extern __attribute__((visibility("default"))) __attribute__((used))
 #endif
 
-/// 使用dart:ffi，实现dart->js的同步调用
 
 /// 同步方法调用
 FAIR_FFI_EXTERN const char *invokeJSCommonFuncSync(char *args);
