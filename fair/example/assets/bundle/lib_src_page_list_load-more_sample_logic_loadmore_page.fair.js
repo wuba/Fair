@@ -28,10 +28,10 @@ GLOBAL['#FairKey#'] = (function (__initProps__) {
                     setState('ListLoadMore', {});
                 }//);
             }
-        }, onLaunch: function onLaunch() {
+        }, onLoad: function onLoad() {
             const __thiz__ = this;
             with (__thiz__) {
-                console.log('JS:onLaunch');
+                console.log('JS:onLoad');
                 // _onRefresh();
                 // list = List.generate(Random().nextInt(20) + 15, (i) => `Item ${i}`);
                 // _scrollController = (function () {
@@ -47,7 +47,7 @@ GLOBAL['#FairKey#'] = (function (__initProps__) {
                     list.add(`Item ${i}`);
                 }
             }
-        }, onDispose: function onDispose() {
+        }, onUnload: function onUnload() {
             const __thiz__ = this;
             with (__thiz__) {
                 _scrollController.dispose();

@@ -31,7 +31,7 @@ class _Page2PageState extends State<SampleLogicPage2Page> {
     setState(() {});
   }
 
-  void onLaunch() {
+  void onLoad() {
     _name = fairProps['pageName'];
     _count = fairProps['_count'];
   }
@@ -40,7 +40,7 @@ class _Page2PageState extends State<SampleLogicPage2Page> {
   void initState() {
     super.initState();
     fairProps = widget._props;
-    onLaunch();
+    onLoad();
   }
 
   @override

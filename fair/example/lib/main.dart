@@ -14,6 +14,7 @@ import 'package:fair_example/src/page/plugins/net/fair_plugin.dart';
 import 'package:fair_example/src/page/plugins/permission/fair_permission_plugin.dart';
 import 'package:fair_example/src/page/plugins/permission/fair_take_photo.dart';
 import 'package:flutter/material.dart';
+import 'src/page/dynamic_widget.dart';
 import 'src/proxy/list_proxy.dart';
 
 void main() {
@@ -50,6 +51,10 @@ dynamic _getApp() => FairApp(
       },
       child: MaterialApp(
         home: HomePage(),
+        // home: FairWidget(
+        //     name: 'DynamicWidget',
+        //     path: 'assets/bundle/lib_src_page_dynamic_widget.fair.json',
+        //     data: {"fairProps": json.encode({})}),
         routes: {
           'native_page': (context) => SampleLogicPage2Page(_getData(context, _getParams(context, 'name'))), // 测试Fair跳转原生使用
           'fair_page': (context) => FairWidget(

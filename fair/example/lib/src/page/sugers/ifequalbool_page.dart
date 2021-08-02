@@ -41,6 +41,10 @@ class _State extends State<IfEqualBoolPage> {
     return _count % 2 == 1;
   }
 
+  Widget _buildTitle() {
+    return Text(getTitle());
+  }
+
   @override
   void initState() {
     super.initState();
@@ -51,7 +55,7 @@ class _State extends State<IfEqualBoolPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(getTitle()),
+        title: _buildTitle(),
       ),
       body: Center(
         child: Column(

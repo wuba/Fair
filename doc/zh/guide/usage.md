@@ -53,12 +53,17 @@ dependency_overrides:
 
 ```dart
 void main() {
-  runApp(
-    FairApp(
-      child: MaterialApp(home: App())
-    ),
+  WidgetsFlutterBinding.ensureInitialized();
+
+  FairApp.runApplication(
+    _getApp(),
+    plugins: {
+      'FairNet': FairNet(),
+    },
   );
 }
+
+
 ```
 
 
