@@ -11,7 +11,7 @@ features:
 - title: 易扩展
   details: 插拔式的组件，一个注解搞定业务组件和社区UI库，扩展你的无限想象。
 - title: 更灵活
-  details: 通过一份Flutter源代码转换，可以更灵活的在原生和动态之间切换。  
+  details: 通过一份Flutter源代码，动态&原生灵活转换，成本无限小。  
 footer: Copyright © 2020 58.com | Powered by The Fair Authors
 ---
 ## 现在就上车

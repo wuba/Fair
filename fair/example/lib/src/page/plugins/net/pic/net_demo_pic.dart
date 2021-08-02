@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2005-present, 58.com.  All rights reserved.
+ * Use of this source code is governed by a BSD type license that can be
+ * found in the LICENSE file.
+ */
+
 import 'package:fair/fair.dart';
 import 'package:fair_example/src/page/plugins/net/fair_plugin.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,13 +21,6 @@ class _PicNetDemoPageStateful extends State {
 
   PicData _picData = PicData();
 
-  void request() {
-    FairNet().request({
-      'method': 'GET',
-      'url': 'http://www.baidu.com',
-    });
-  }
-
   void onClick() {
     FairNet().request({
       'pageName': '#FairKey#',
@@ -35,41 +34,32 @@ class _PicNetDemoPageStateful extends State {
         String u = data[0]['imagePath'];
         _picData.picUrl = u;
         _picData.title = data[0]['title'];
-        // setState(
-        //   '#FairKey#',
-        //   {
-        //     _picData.title: data[0]['title'],
-        //     _picData.picUrl: u,
-        //   },
-        // );
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'hello',
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text('加载网络获取地址的图片'),
-          ),
-          body: Container(
-            child: Column(
-              children: [
-                Image.network('${_picData.picUrl}', width: 1000),
-                Text(
-                  '${_picData.title}',
-                  maxLines: 3,
-                  style: TextStyle(color: Colors.blue, fontSize: 19),
-                )
-              ],
-            ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: onClick,
-          )),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('加载网络获取地址的图片'),
+      ),
+      body: Container(
+        child: Column(
+          children: [
+            Image.network('${_picData.picUrl}', width: 500),
+            Text(
+              '${_picData.title}',
+              maxLines: 3,
+              style: TextStyle(color: Colors.blue, fontSize: 19),
+            )
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: onClick,
+      ),
     );
   }
 }

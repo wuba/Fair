@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2005-present, 58.com.  All rights reserved.
+ * Use of this source code is governed by a BSD type license that can be
+ * found in the LICENSE file.
+ */
+
 import 'dart:convert';
 
 import 'package:fair_example/src/page/list/cells/sample_list_with_dynamic_cell_page.dart';
@@ -19,13 +25,13 @@ class LogicHomePage extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            addItem('逻辑动态界面', () {
+            addItem('动态界面', () {
               // 动态界面
               Navigator.pushNamed(context, 'fair_page', arguments: {
-                'name': '逻辑动态界面',
+                'name': '动态界面',
                 'path':
                     'assets/bundle/lib_src_page_logic-page_sample_logic_page.fair.json',
-                'data': {"fairProps": {'pageName': '逻辑动态界面', '_count': 58}}
+                'data': {"fairProps": {'pageName': '动态界面', '_count': 58}}
               });
               // 原生界面
               // Navigator.push(context, MaterialPageRoute(
@@ -33,7 +39,7 @@ class LogicHomePage extends StatelessWidget {
               // ));
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
-            addItem('逻辑动态界面跳转&传值', () {
+            addItem('动态界面跳转&传值', () {
               // 动态界面跳转&传值
               // Navigator.pushNamed(context, 'fair_page',
               //     arguments: {'name': '逻辑动态界面跳转&传值', 'path': 'assets/bundle/lib_src_page_logic-page2page_sample_logic_page2page.fair.json', 'data': {'pageName': '逻辑动态界面跳转&传值'}});
@@ -42,7 +48,7 @@ class LogicHomePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        SampleLogicPage2Page({'pageName': '逻辑动态界面跳转&传值', '_count': 58}),
+                        SampleLogicPage2Page({'pageName': '动态界面跳转&传值', '_count': 58}),
                   ));
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
@@ -54,7 +60,7 @@ class LogicHomePage extends StatelessWidget {
                   ));
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
-            addItem('DSL 逻辑语法糖', () {
+            addItem('DSL 语法糖', () {
               Navigator.push(
                   context,
                   MaterialPageRoute(

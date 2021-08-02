@@ -1,112 +1,107 @@
 {
-  "className": "MaterialApp",
+  "className": "Scaffold",
   "na": {
-    "home": {
-      "className": "Scaffold",
+    "appBar": {
+      "className": "AppBar",
       "na": {
-        "appBar": {
-          "className": "AppBar",
+        "title": {
+          "className": "Text",
+          "pa": [
+            "图片选择"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "Container",
+      "na": {
+        "child": {
+          "className": "Column",
           "na": {
-            "title": {
-              "className": "Text",
-              "pa": [
-                "图片选择"
-              ]
-            }
-          }
-        },
-        "body": {
-          "className": "Container",
-          "na": {
-            "child": {
-              "className": "Column",
-              "na": {
-                "children": [
-                  {
-                    "className": "Sugar.ifEqual",
+            "children": [
+              {
+                "className": "Sugar.ifEqual",
+                "pa": [
+                  "^(picUrl)",
+                  ""
+                ],
+                "na": {
+                  "trueValue": {
+                    "className": "Image.network",
                     "pa": [
-                      "#($picUrl)",
-                      ""
+                      "https://img.58cdn.com.cn/logo/58/252_84/logo-o.png"
                     ],
                     "na": {
-                      "trueValue": {
-                        "className": "Image.network",
-                        "pa": [
-                          "https://img.58cdn.com.cn/logo/58/252_84/logo-o.png"
-                        ],
-                        "na": {
-                          "width": 1000,
-                          "height": 500
-                        }
-                      },
-                      "falseValue": {
-                        "className": "Image.file",
-                        "pa": [
-                          {
-                            "className": "File",
-                            "pa": [
-                              "^(picUrl)"
-                            ]
-                          }
-                        ],
-                        "na": {
-                          "width": 1000,
-                          "height": 500
-                        }
-                      }
+                      "width": 500,
+                      "height": 250
                     }
                   },
-                  {
+                  "falseValue": {
+                    "className": "Image.file",
+                    "pa": [
+                      {
+                        "className": "File",
+                        "pa": [
+                          "^(picUrl)"
+                        ]
+                      }
+                    ],
+                    "na": {
+                      "width": 500,
+                      "height": 250
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Text",
+                "pa": [
+                  "点击按钮拍照"
+                ]
+              },
+              {
+                "className": "MaterialButton",
+                "na": {
+                  "color": "#(Colors.grey)",
+                  "onPressed": "@(requestPermission)",
+                  "child": {
                     "className": "Text",
                     "pa": [
-                      "点击按钮拍照"
-                    ]
-                  },
-                  {
-                    "className": "MaterialButton",
+                      "相机"
+                    ],
                     "na": {
-                      "color": "#(Colors.grey)",
-                      "onPressed": "@(requestPermission)",
-                      "child": {
-                        "className": "Text",
-                        "pa": [
-                          "相机"
-                        ],
+                      "style": {
+                        "className": "TextStyle",
                         "na": {
-                          "style": {
-                            "className": "TextStyle",
-                            "na": {
-                              "fontSize": 19
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "className": "MaterialButton",
-                    "na": {
-                      "color": "#(Colors.grey)",
-                      "onPressed": "@(selectFromAlbum)",
-                      "child": {
-                        "className": "Text",
-                        "pa": [
-                          "相册"
-                        ],
-                        "na": {
-                          "style": {
-                            "className": "TextStyle",
-                            "na": {
-                              "fontSize": 19
-                            }
-                          }
+                          "fontSize": 19
                         }
                       }
                     }
                   }
-                ]
+                }
+              },
+              {
+                "className": "MaterialButton",
+                "na": {
+                  "color": "#(Colors.grey)",
+                  "onPressed": "@(selectFromAlbum)",
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "相册"
+                    ],
+                    "na": {
+                      "style": {
+                        "className": "TextStyle",
+                        "na": {
+                          "fontSize": 19
+                        }
+                      }
+                    }
+                  }
+                }
               }
-            }
+            ]
           }
         }
       }

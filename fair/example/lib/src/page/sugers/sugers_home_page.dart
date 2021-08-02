@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2005-present, 58.com.  All rights reserved.
+ * Use of this source code is governed by a BSD type license that can be
+ * found in the LICENSE file.
+ */
+
 import 'package:fair_example/src/page/logic-page/sample_logic_page.dart';
 import 'package:fair_example/src/page/logic-page2page/sample_logic_page2page.dart';
 import 'package:fair_example/src/page/sugers/ifequal_page.dart';
@@ -12,7 +18,7 @@ class SugerListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('逻辑语法糖'),
+          title: Text('DSL语法糖'),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

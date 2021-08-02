@@ -123,7 +123,7 @@ class IfEqualBoolPage
 * .fair.bin 格式为release产物
 * .fair.json 格式为debug产物
 * .fair.metadata 格式为元数据，标记了源码与产物的关联信息
-* .fair.js 格式为逻辑产物
+* .fair.js 格式为逻辑转换为JS后的产物
 
 ![bundle](./assets/demo-redbox-2.png)
 
