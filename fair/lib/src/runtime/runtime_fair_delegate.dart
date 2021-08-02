@@ -104,10 +104,10 @@ abstract class RuntimeFairDelegate {
   }
 
   void didChangeDependencies() {
-    runtime?.invokeMethod(pageName, 'onLaunch', null);
+    runtime?.invokeMethod(pageName, 'onLoad', null);
   }
 
   void dispose() {
-    runtime?.invokeMethod(pageName, 'onDispose', null);
+    runtime?.invokeMethod(pageName, 'onUnload', null);
   }
 }

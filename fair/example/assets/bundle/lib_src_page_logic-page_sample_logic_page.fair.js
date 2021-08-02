@@ -124,6 +124,7 @@ GLOBAL['#FairKey#'] = (function (__initProps__) {
             with (__thiz__) {
                 _demoList.total = _demoList.total + 1;
                 setState('#FairKey#', function dummy() {
+                    _demoList.total = _demoList.total + 1;
                 });
             }
         }, initState: function initState() {

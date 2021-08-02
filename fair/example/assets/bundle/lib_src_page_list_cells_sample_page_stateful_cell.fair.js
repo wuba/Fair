@@ -173,7 +173,7 @@ GLOBAL['#FairKey#'] = (function (__initProps__) {
                 setState('#FairKey#', function dummy() {
                 });
             }
-        }, onLaunch: function onLaunch() {
+        }, onLoad: function onLoad() {
             const __thiz__ = this;
             with (__thiz__) {
                 _louPanDetail = _fairProps.__op_idx__('louPanDetail');
@@ -182,7 +182,7 @@ GLOBAL['#FairKey#'] = (function (__initProps__) {
             const __thiz__ = this;
             with (__thiz__) {
                 _fairProps = widget._fairProps;
-                onLaunch();
+                onLoad();
             }
         },
     };
