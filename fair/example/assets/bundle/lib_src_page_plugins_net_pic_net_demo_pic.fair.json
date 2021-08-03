@@ -25,7 +25,7 @@
                   "#(${_picData.picUrl})"
                 ],
                 "na": {
-                  "width": 1000
+                  "width": 500
                 }
               },
               {
