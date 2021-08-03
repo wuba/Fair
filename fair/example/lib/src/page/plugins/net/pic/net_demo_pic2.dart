@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2005-present, 58.com.  All rights reserved.
+ * Use of this source code is governed by a BSD type license that can be
+ * found in the LICENSE file.
+ */
+
 import 'package:fair/fair.dart';
 import 'package:fair_example/src/page/plugins/net/fair_plugin.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,7 +21,6 @@ class PicDemoPage2 extends StatefulWidget {
 }
 
 class _PicNetDemoPageStateful extends State {
-
   String _picUrl =
       'https://bkimg.cdn.bcebos.com/pic/b3119313b07eca8065388426576e80dda144ac342596';
   String description = '''
@@ -28,38 +33,29 @@ class _PicNetDemoPageStateful extends State {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'hello',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('插件'),
-        ),
-        body: Container(
-          child: Column(
-            children: [
-              Image.network(
-                '$_picUrl',
-                width: 1000,
-                height: 300,
-                fit: BoxFit.cover,
-                repeat: ImageRepeat.noRepeat,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('自定义插件'),
+      ),
+      body: Container(
+        child: Column(
+          children: [
+            Image.network(
+              _picUrl,
+              width: 500,
+              height: 150,
+              fit: BoxFit.cover,
+              repeat: ImageRepeat.noRepeat,
+            ),
+            Expanded(
+              child: Text(
+                description,
+                style: TextStyle(color: Colors.black, fontSize: 17),
               ),
-              Expanded(
-                child: Text(
-                  '$description',
-                  style: TextStyle(color: Colors.black, fontSize: 17),
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   child: Icon(Icons.autorenew),
-        //   onPressed: onClick,
-        // )
       ),
     );
   }
-
-// void onClick() {}
 }

@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2005-present, 58.com.  All rights reserved.
+ * Use of this source code is governed by a BSD type license that can be
+ * found in the LICENSE file.
+ */
+
 import 'package:fair_example/src/page/list/cells/sample_list_with_dynamic_cell_page.dart';
 import 'package:flutter/material.dart';
 import 'load-more/sample_logic_loadmore_page.dart';
