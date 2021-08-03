@@ -37,3 +37,6 @@ flutter:
   plugin:
     androidPackage: com.wuba.fair
     pluginClass: FairPlugin
+  assets:
+    - assets/
+    - assets/fair_core/
