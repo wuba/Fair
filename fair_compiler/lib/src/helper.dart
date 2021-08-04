@@ -100,8 +100,7 @@ mixin FairCompiler {
       var transferPath = aotPathStr.split('\r')[0].split('\n')[0];
       print('\u001b[33m [Fair Dart2JS] fairc.aot => ${transferPath} \u001b[0m');
 
-
-      final result = Process.runSync('$binDir/dartaotruntime', [transferPath, ...arguments]);
+      final result = Process.runSync(path.join('$binDir','dartaotruntime'), [transferPath, ...arguments]);
       print(result);
 
       var output = result.stdout.toString();
