@@ -544,7 +544,7 @@ let FairPhotoSelector = function () {
 
 可以不增加改文件，名称一定要是这个名称，否则会读取js资源失败**
 
-![demo-redbox-4](./assets/demo-redbox-4.png)
+![demo-redbox-4](./assets/demo_custom_plugin.jpg)
 
 eg:
 
