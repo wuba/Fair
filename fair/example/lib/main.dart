@@ -4,29 +4,62 @@
  * found in the LICENSE file.
  */
 
-import 'package:fair/fair.dart';
-import 'package:fair_example/src/page/modules.dart';
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-import 'src/page/hello_world_proxy.dart';
-import 'src/page/sample_dynamic_page.dart';
+import 'package:fair/fair.dart';
+import 'package:fair_example/src/page/home_page.dart';
+import 'package:fair_example/src/page/logic-page2page/sample_logic_page2page.dart';
+import 'package:fair_example/src/page/logic_home_page.dart';
+import 'package:fair_example/src/page/modules.dart';
+import 'package:fair_example/src/page/plugins/net/fair_plugin.dart';
+import 'package:fair_example/src/page/plugins/permission/fair_permission_plugin.dart';
+import 'package:fair_example/src/page/plugins/pick-image/fair_take_photo.dart';
+import 'package:flutter/material.dart';
+import 'src/proxy/list_proxy.dart';
 
 void main() {
-  runApp(FairApp(
-    delegate: {
-      'hello_world': (ctx, _) => HelloWorldDelegate(),
+  WidgetsFlutterBinding.ensureInitialized();
+
+  FairApp.runApplication(
+    _getApp(),
+    plugins: {
+      'FairNet': FairNet(),
+      'WBPermission': WBPermission(),
+      'FairPhotoSelector': FairPhotoSelector(),
     },
-    modules: {
-      ShowFairAlertModule.tagName: () => ShowFairAlertModule(),
-    },
-    child: MaterialApp(
-      home: FairWidget(
-        name: 'hello_world',
-        path: 'assets/bundle/lib_src_page_hello_world.fair.bin',
-      ) /*HelloWorldPage()*/,
-      routes: {
-        'sample_dynamic_page': (_) => SampleDynamicPage(),
-      },
-    ),
-  ));
+  );
 }
+
+dynamic _getParams(BuildContext context, String key) =>
+    (ModalRoute.of(context).settings.arguments is Map)
+        ? (ModalRoute.of(context).settings.arguments as Map)[key]
+        : null;
+
+dynamic _getData(BuildContext context, String name) {
+  var data =
+      Map.from((ModalRoute.of(context).settings.arguments as Map)['data']);
+  data.addAll({'pageName': name});
+  return data;
+}
+
+dynamic _getApp() => FairApp(
+      modules: {
+        ShowFairAlertModule.tagName: () => ShowFairAlertModule(),
+      },
+      delegate: {
+        'ListLoadMore': (ctx, _) => ListDelegate(),
+      },
+      child: MaterialApp(
+        home: LogicHomePage(),
+        routes: {
+          'native_page': (context) => SampleLogicPage2Page(_getData(context, _getParams(context, 'name'))), // 测试Fair跳转原生使用
+          'fair_page': (context) => FairWidget(
+                  name: _getParams(context, 'name'),
+                  path: _getParams(context, 'path'),
+                  data: {
+                    'fairProps': jsonEncode(
+                        _getData(context, _getParams(context, 'name')))
+                  }),
+        },
+      ),
+    );

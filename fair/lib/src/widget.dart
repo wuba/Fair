@@ -4,13 +4,19 @@
  * found in the LICENSE file.
  */
 
+import 'dart:convert';
+
+import 'package:fair/src/runtime/fair_message_dispatcher.dart';
+import 'package:fair/src/runtime/runtime_fair_delegate.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'app.dart';
 import 'experiment/sugar.dart';
 import 'internal/global_state.dart';
 import 'loader.dart';
+import 'runtime/fair_runtime_impl.dart';
 import 'type.dart';
 
 /// [FairWidget] renders a dynamic DSL as [Widget]. Must be descendant of [FairApp].
@@ -90,10 +96,12 @@ class FairWidget extends StatefulWidget {
 }
 
 class FairState extends State<FairWidget>
-    with Loader, AutomaticKeepAliveClientMixin<FairWidget> {
+    with Loader, AutomaticKeepAliveClientMixin<FairWidget>
+    implements FairMessageCallback<String> {
   Widget _child;
   FairApp _fairApp;
   String bundleType;
+  String state2key;
 
   // None nullable
   FairDelegate delegate;
@@ -101,6 +109,7 @@ class FairState extends State<FairWidget>
   @override
   void initState() {
     super.initState();
+    state2key = GlobalState.id(widget.name);
     delegate = widget.delegate ??
         GlobalState.of(widget.name).call(context, widget.data);
     delegate._bindState(this);
@@ -110,9 +119,16 @@ class FairState extends State<FairWidget>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    (_fairApp ??= FairApp.of(context))?.register(this);
-    delegate?.didChangeDependencies();
-    _reload();
+    _fairApp ??= FairApp.of(context);
+    //加载js的文件地址
+    var js = widget.path.substring(0, widget.path?.lastIndexOf('.')) + '.js';
+    _fairApp.runtime.addScript(state2key, js, widget.data).then((value) {
+      //结果回调，native端加载js成功之后，开始注册相关函数,可以做相关通讯
+      (_fairApp ??= FairApp.of(context))?.register(this)?.then((value) {
+        delegate?.didChangeDependencies();
+        _reload();
+      });
+    });
   }
 
   @override
@@ -156,12 +172,20 @@ class FairState extends State<FairWidget>
     delegate?.dispose();
   }
 
-  String get state2key =>
-      widget.name ?? widget.key.toString() ?? '${toStringShort()}#$hashCode';
+  // String get state2key =>
+  //     widget.name ?? widget.key.toString() ?? '${toStringShort()}#$hashCode';
+
+  @override
+  void call(String t) {
+    delegate.notifyValue(jsonDecode(t));
+  }
+
+  @override
+  String getMessageKey() => state2key;
 }
 
 /// Delegate for business logic. The delegate share similar life-circle with [State].
-class FairDelegate {
+class FairDelegate extends RuntimeFairDelegate {
   FairState _state;
   String _key;
 
@@ -173,6 +197,7 @@ class FairDelegate {
 
   /// state change can rebuild the widget tree, which can lead to DSL rebuild.
   /// Usually this can cost several milliseconds depend on the complexity of DSL.
+  @override
   void setState(VoidCallback fn) {
     if (_state == null || !_state.mounted) return;
     // ignore: invalid_use_of_protected_member
@@ -184,12 +209,14 @@ class FairDelegate {
     return _state.context;
   }
 
+  @override
   Map<String, PropertyValue> bindValue() {
-    return <String, PropertyValue>{};
+    return super.bindValue();
   }
 
+  @override
   Map<String, Function> bindFunction() {
-    var func = <String, Function>{};
+    var func = super.bindFunction();
     func['Sugar.paddingTop'] = (props) => Sugar.paddingTop(context);
     func['Sugar.paddingBottom'] = (props) => Sugar.paddingBottom(context);
     func['Sugar.height'] = (props) => Sugar.height(context);
@@ -201,12 +228,19 @@ class FairDelegate {
 
   void initState() {}
 
-  void didChangeDependencies() {}
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
 
   void didUpdateWidget(covariant FairWidget oldWidget) {}
 
-  void dispose() {}
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
+  @override
   String key() {
     return _key;
   }

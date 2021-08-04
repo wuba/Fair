@@ -4,6 +4,8 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair/src/runtime/fair_message_dispatcher.dart';
+import 'package:fair/src/runtime/fair_runtime_impl.dart';
 import 'package:fair_version/fair_version.dart';
 
 import 'internal/bind_data.dart';
@@ -18,6 +20,8 @@ mixin AppState {
   final modules = FairModuleRegistry();
   final bindData = <String, BindingData>{};
   final _proxy = ProxyMirror();
+  final runtime = Runtime();
+  final _mFairHandler = FairHandler(Runtime());
 
   P get proxy => _proxy;
 
@@ -32,9 +36,12 @@ mixin AppState {
     _proxy.addGeneratedBinding(generated);
   }
 
-  void register(FairState state) {
+  Future<dynamic> register(FairState state) async {
     log('register state: ${state.state2key}');
+    _mFairHandler.register(state);
     var delegate = state.delegate;
+    delegate.setRunTime(runtime);
+    await delegate.bindAll({});
     bindData.putIfAbsent(
       state.state2key,
       () => BindingData(
@@ -43,11 +50,14 @@ mixin AppState {
         values: delegate.bindValue(),
       ),
     );
+    return Future.value(null);
   }
 
   void unregister(FairState state) {
     var key = state.state2key;
+    _mFairHandler.unregister(state);
     log('unregister state: $key');
     bindData.remove(key)?.clear();
+    runtime.release(key);
   }
 }

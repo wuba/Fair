@@ -24,7 +24,16 @@
                 "className": "Text",
                 "pa": [
                   "You have pushed the button this many times:"
-                ]
+                ],
+                "na": {
+                  "style": {
+                    "className": "TextStyle",
+                    "na": {
+                      "fontSize": 16,
+                      "color": "#(Colors.black)"
+                    }
+                  }
+                }
               },
               {
                 "className": "Text",
@@ -38,6 +47,26 @@
                       "context"
                     ]
                   }
+                }
+              },
+              {
+                "className": "Text",
+                "pa": [
+                  "#($_check)"
+                ],
+                "na": {
+                  "style": {
+                    "className": "ThemeStyle.headline4",
+                    "pa": [
+                      "context"
+                    ]
+                  }
+                }
+              },
+              {
+                "className": "CustomWidget",
+                "na": {
+                  "title": "Test"
                 }
               }
             ]

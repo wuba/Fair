@@ -17,7 +17,11 @@ class ProxyMirror with P {
   final List<Expression> _expressions = [
     ComponentExpression(),
     InlineExpression(),
+    InlineObjectExpression(),
     WidgetParamExpression(),
+    FunctionExpression(),
+    GestureExpression(),
+    PropValueExpression(),
     ValueExpression(),
   ];
   final _generatedMapping = <String, bool>{};

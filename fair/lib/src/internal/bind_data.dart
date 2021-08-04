@@ -4,6 +4,10 @@
  * found in the LICENSE file.
  */
 
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+
 import '../module/module_registry.dart';
 import '../render/expression.dart';
 import '../type.dart';
@@ -31,6 +35,27 @@ class BindingData {
       return data[key];
     }
     return functionOf(key);
+  }
+
+  dynamic runFunctionOf(String key, {String exp}) {
+    var result = _functions['runtimeInvokeMethodSync'](key);
+    var value = jsonDecode(result);
+    return ValueNotifier(value['result']['result']);
+  }
+
+  dynamic bindFunctionOf(String props) {
+    return () => _functions['runtimeInvokeMethod'](props);
+  }
+
+  dynamic bindRuntimeValueOf(String key) {
+    if (key.isNotEmpty) {
+      var result = _functions['runtimeParseVar']({key: ''});
+      var value = jsonDecode(result);
+      if (value['result'][key] != null) {
+        return ValueNotifier(value['result'][key]);;
+      }
+    }
+    return null;
   }
 
   Function functionOf(String key) {

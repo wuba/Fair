@@ -49,6 +49,10 @@ module.exports = {
                     'guide/generate_binding.md',
                     'guide/generate_bundle.md',
                     'guide/layout_sugar.md',
+                    'guide/sample_dynamic_logic_page.md',
+                    'guide/sample_page2page.md',
+                    'guide/sample_list_dynamic_cells.md',
+                    'guide/sample_list_dynamic.md',
                   ]
                 },
             		{
@@ -95,6 +99,10 @@ module.exports = {
                     'zh/guide/generate_binding.md',
                     'zh/guide/generate_bundle.md',
                     'zh/guide/layout_sugar.md',
+                    'zh/guide/sample_dynamic_logic_page.md',
+                    'zh/guide/sample_page2page.md',
+                    'zh/guide/sample_list_dynamic_cells.md',
+                    'zh/guide/sample_list_dynamic.md',
                   ]
                 },
             		{

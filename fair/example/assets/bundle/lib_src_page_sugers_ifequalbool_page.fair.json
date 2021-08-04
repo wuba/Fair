@@ -1,0 +1,107 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": "%(_buildTitle)"
+      }
+    },
+    "body": {
+      "className": "Center",
+      "na": {
+        "child": {
+          "className": "Column",
+          "na": {
+            "mainAxisAlignment": "#(MainAxisAlignment.center)",
+            "children": [
+              {
+                "className": "Sugar.ifEqualBool",
+                "pa": [
+                  "%(_countCanMod2)"
+                ],
+                "na": {
+                  "falseValue": {
+                    "className": "Image.asset",
+                    "pa": [
+                      "assets/image/logo.png"
+                    ]
+                  },
+                  "trueValue": {
+                    "className": "Image.asset",
+                    "pa": [
+                      "assets/image/logo2.png"
+                    ]
+                  }
+                }
+              },
+              {
+                "className": "Padding",
+                "na": {
+                  "padding": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "top": 20
+                    }
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "#(_count = $_count)"
+                    ]
+                  }
+                }
+              },
+              {
+                "className": "Padding",
+                "na": {
+                  "padding": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "top": 20
+                    }
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "if _count % 2 == 1,  update image !"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "floatingActionButton": {
+      "className": "Row",
+      "na": {
+        "mainAxisAlignment": "#(MainAxisAlignment.end)",
+        "children": [
+          {
+            "className": "FloatingActionButton",
+            "na": {
+              "child": {
+                "className": "Icon",
+                "pa": [
+                  "#(Icons.threesixty)"
+                ]
+              },
+              "onPressed": "@(onTapText)"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {
+    "createState": "%(_State)",
+    "_buildTitle": {
+      "className": "Text",
+      "pa": [
+        "%(getTitle)"
+      ]
+    }
+  }
+}
