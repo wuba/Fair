@@ -187,22 +187,26 @@ class Runtime implements IRuntime {
        * 读取用户配置的内容
        * 例如用户配置的插件，或者用户的其它拓展等，该配置json名称固定
        */
-      var customConfigJson =
-          await rootBundle.loadString('assets/fair_basic_config.json');
-      var customConfig = jsonDecode(customConfigJson);
-      //加载用户自定义的plugin
       var pluginJsSource = ' ';
-      Map plugins = customConfig['plugin'];
+      try{
+        var customConfigJson =
+        await rootBundle.loadString('assets/fair_basic_config.json');
+        var customConfig = jsonDecode(customConfigJson);
+        //加载用户自定义的plugin
+        Map plugins = customConfig['plugin'];
 
-      if (plugins != null) {
-        Iterable<String> keys = plugins.keys;
-        for (var k in keys) {
-          pluginJsSource =
-              pluginJsSource + ' ; ' + await rootBundle.loadString(plugins[k]);
+        if (plugins != null) {
+          Iterable<String> keys = plugins.keys;
+          for (var k in keys) {
+            pluginJsSource =
+                pluginJsSource + ' ; ' + await rootBundle.loadString(plugins[k]);
+          }
         }
+      }catch(e){
+        print('##没有配置fair_basic_config.json文件,请检查文件是否配置或者名称是否正确##');
       }
       loadBaseJsConstant[0] = true;
-      map[FairMessage.PATH] = baseJsSource + ' ' + pluginJsSource;
+      map[FairMessage.PATH] = baseJsSource + ' ; ' + pluginJsSource;
       map[FairMessage.PAGE_NAME] = 'loadCoreJs';
     }
 
