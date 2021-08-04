@@ -213,7 +213,10 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }
       children.add(item);
     });
-    return children.asIteratorOf<Widget>()?.toList() ?? children;
+    if (children?.every((element) => element is Widget) == true){
+      return children.asIteratorOf<Widget>()?.toList() ?? children;
+    }
+    return children;
   }
 
   W _namedString(String tag, dynamic naMap, Map methodMap,

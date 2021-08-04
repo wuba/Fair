@@ -38,6 +38,10 @@ dependencies:
 
   google_fonts: ^1.1.2
 
+  convex_bottom_bar: ^2.7.1
+
+  sign_in_with_apple: ^2.5.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
