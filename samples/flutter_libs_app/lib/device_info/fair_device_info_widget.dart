@@ -16,9 +16,9 @@ class FairDeviceInfoWidget extends StatefulWidget {
 }
 
 class _FairDeviceInfoWidgetState extends State<FairDeviceInfoWidget> {
-  @FairWell('_deviceInfo')
+  // @FairWell('_deviceInfo')
   String _deviceInfo = "";
-  @FairWell('_textAlign')
+  // @FairWell('_textAlign')
   TextAlign _textAlign = TextAlign.center;
 
   @override
@@ -27,12 +27,12 @@ class _FairDeviceInfoWidgetState extends State<FairDeviceInfoWidget> {
     _getDeviceInfo();
   }
 
-  @FairWell('_getDeviceInfo')
+  // @FairWell('_getDeviceInfo')
   Future<void> _getDeviceInfo() async {
 
   }
 
-  @FairWell('_pop')
+  // @FairWell('_pop')
   void _pop(){}
 
   @override

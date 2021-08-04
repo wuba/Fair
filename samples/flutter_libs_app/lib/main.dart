@@ -10,8 +10,9 @@ import 'google_fonts/fair_google_fonts.dart';
 import 'index.dart';
 
 void main() {
-  runApp(FairApp(
-    child: MyApp(),
+  WidgetsFlutterBinding.ensureInitialized();
+
+  FairApp.runApplication(FairApp(
     delegate: {
       'device_info': (_, data) => DeviceInfoDelegate(),
       'url_launcher': (_, data) => UrlLauncherDelegate(),
@@ -19,10 +20,15 @@ void main() {
       'package_info': (_, data) => PackageInfoDelegate(),
     },
     generated: SimpleGenerate(),
-  ));
+    child: MyApp(),
+  ),plugins: {
+    // 'FairNet': FairNet(),
+    // 'WBPermission': WBPermission(),
+    // 'FairPhotoSelector': FairPhotoSelector(),
+  },);
 }
 
-class SimpleGenerate extends GeneratedModule{
+class SimpleGenerate extends GeneratedModule {
   @override
   Map<String, dynamic> components() {
     return Map<String, dynamic>()
@@ -34,7 +40,6 @@ class SimpleGenerate extends GeneratedModule{
   Map<String, bool> mapping() {
     return Map<String, bool>();
   }
-
 }
 
 class MyApp extends StatelessWidget {
