@@ -11,7 +11,7 @@ import 'package:fair_example/src/page/home_page.dart';
 import 'package:fair_example/src/page/logic-page2page/sample_logic_page2page.dart';
 import 'package:fair_example/src/page/logic_home_page.dart';
 import 'package:fair_example/src/page/modules.dart';
-import 'package:fair_example/src/page/plugins/net/fair_plugin.dart';
+import 'package:fair_example/src/page/plugins/net/fair_net_plugin.dart';
 import 'package:fair_example/src/page/plugins/permission/fair_permission_plugin.dart';
 import 'package:fair_example/src/page/plugins/pick-image/fair_take_photo.dart';
 import 'package:flutter/material.dart';

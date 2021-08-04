@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair_example/src/page/plugins/net/pic/net_demo_pic.dart';
 import 'package:fair_example/src/page/plugins/permission/sample_permission_demo_page.dart';
 import 'package:fair_example/src/page/plugins/permission/sample_permission_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,6 +29,7 @@ class SamplePluginState extends State<SamplePluginPage> {
           addItem('网络功能', () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => PicNetDemoFairPage()));
+                // MaterialPageRoute(builder: (context) => PicNetDemoPage()));
           }),
           Container(height: 0.5, color: Color(0xFFE7EBEE)),
           addItem('拍照功能', () {

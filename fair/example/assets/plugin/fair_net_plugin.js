@@ -11,7 +11,7 @@ let FairNet = function () {
             }
             let id = 'FairNet$' + (++callBackId);
             let requestParameter = {};
-            requestParameter['id'] = id;
+            requestParameter['callId'] = id;
             requestParameter['className'] = "FairNet#request";
             callBack[id] = [respMap['complete'], respMap['error'], respMap['success']];
             requestParameter['funcName'] = 'invokePlugin';
@@ -22,9 +22,9 @@ let FairNet = function () {
             invokeFlutterCommonChannel(map, (resultStr) => {
                 console.log('FairNet请求结果：' + resultStr);
                 let responseMap = JSON.parse(resultStr);
-                console.log('FairNet请求结果1：' + responseMap);
+                console.log('FairNet请求结果1：' + responseMap['data']);
                 let data = JSON.parse(responseMap['data'])
-                let id = responseMap['id']
+                let id = responseMap['callId']
                 console.log('FairNet请求结果2：' + id);
                 //这两个函数用户拓展的
                 if (callBack[id] === null) {
@@ -43,7 +43,7 @@ let FairNet = function () {
                     });
                 }
                 console.log('FairNet请求结果6：' + success);
-                success(respMap);
+//                success(respMap);
                 if (responseMap['statusCode'] === 200) {
                     if (success != null) {
                         console.log('FairNet请求结果4：' + success);
