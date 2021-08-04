@@ -538,11 +538,7 @@ let FairPhotoSelector = function () {
 
 
 
-**（1）将js文件放入assets目录下用户自定义位置即可（2）assets根目录下创建fair_basic_config.json（3）
-
-并在fair_basic_config.json文件中配置对应路径以及名称，如果不需要配置
-
-可以不增加改文件，名称一定要是这个名称，否则会读取js资源失败**
+**（1）将js文件放入assets目录下用户自定义位置即可（2）assets根目录下创建fair_basic_config.json（3）并在fair_basic_config.json文件中配置对应路径以及名称，如果不需要配置可以不增加改文件，名称一定要是这个名称，否则会读取js资源失败**
 
 ![demo-redbox-4](./assets/demo_custom_plugin.jpg)
 
