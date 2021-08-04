@@ -47,7 +47,7 @@ dev_dependencies:
 
 dependency_overrides:
   fair_version:
-    path: ../../fair_version/flutter_1_20_4
+    path: ../../fair_version/flutter_1_22_4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -63,6 +63,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/bundle/
+    - assets/image/
+    - assets/
+    - assets/basic/
+    - assets/plugin/
     - google_fonts/
   #   - images/a_dot_ham.jpeg
 
