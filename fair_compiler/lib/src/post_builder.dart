@@ -64,7 +64,7 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
           '\u001b[33m [Fair Dart2JS] jsName => ${jsName} \u001b[0m');
       try {
         result =
-        await Process.run('$binDir/dartaotruntime', [transferPath, '--compress', partPath]);
+        await Process.run(path.join('$binDir','dartaotruntime'), [transferPath, '--compress', partPath]);
         File(jsName)..writeAsStringSync(result.stdout.toString());
       } catch(e) {
         print(
