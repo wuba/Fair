@@ -23,7 +23,7 @@
         "title": {
           "className": "Text",
           "pa": [
-            "#(widget.title)"
+            "$(widget.title)"
           ]
         }
       }
@@ -189,5 +189,8 @@
         ]
       }
     }
+  },
+  "methodMap": {
+    "createState": "%(_FairPackageInfoWidgetState)"
   }
 }

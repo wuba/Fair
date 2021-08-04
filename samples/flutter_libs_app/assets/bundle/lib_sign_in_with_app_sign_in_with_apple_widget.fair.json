@@ -30,7 +30,7 @@
                 "child": {
                   "className": "SignInWithAppleButton",
                   "na": {
-                    "onPressed": "#('+methodInvocationExpression.callee.asIdentifier.name+')"
+                    "onPressed": "$(_signInRequest)"
                   }
                 }
               }
@@ -39,5 +39,8 @@
         }
       }
     }
+  },
+  "methodMap": {
+    "createState": "%(_SignInWithAppleExamplePageState)"
   }
 }
