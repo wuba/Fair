@@ -44,29 +44,29 @@
                   "style": {
                     "className": "ThemeStyle.headline4",
                     "pa": [
-                      "context"
+                      "^(context)"
                     ]
                   }
                 }
               },
               {
-                "className": "Text",
-                "pa": [
-                  "#($_check)"
-                ],
+                "className": "RotateAnimatedTextKit",
                 "na": {
-                  "style": {
-                    "className": "ThemeStyle.headline4",
-                    "pa": [
-                      "context"
-                    ]
-                  }
-                }
-              },
-              {
-                "className": "CustomWidget",
-                "na": {
-                  "title": "Test"
+                  "text": [
+                    "AWESOME",
+                    "OPTIMISTIC",
+                    "DIFFERENT"
+                  ],
+                  "textStyle": {
+                    "className": "TextStyle",
+                    "na": {
+                      "fontSize": 40.0,
+                      "fontFamily": "Horizon"
+                    }
+                  },
+                  "textAlign": "#(TextAlign.start)",
+                  "isRepeatingAnimation": true,
+                  "alignment": "#(Alignment.centerRight)"
                 }
               }
             ]
@@ -77,7 +77,7 @@
     "floatingActionButton": {
       "className": "FloatingActionButton",
       "na": {
-        "onPressed": "#(_incrementCounter)",
+        "onPressed": "@(_incrementCounter)",
         "tooltip": "Increment",
         "child": {
           "className": "Icon",
@@ -87,5 +87,6 @@
         }
       }
     }
-  }
+  },
+  "methodMap": {}
 }

@@ -7,7 +7,6 @@
 import 'dart:ui';
 
 import 'package:fair/fair.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'theme.dart';
 
@@ -19,23 +18,8 @@ class MyHomePageDelegate extends FairDelegate {
     setState(() {
       _counter++;
     });
-    _putPhotoCheck();
   }
 
-  void _putPhotoCheck() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('survey_permission_check',true);
-
-    _getPhotoCheck();
-  }
-
-  void _getPhotoCheck() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool check = prefs.getBool('survey_permission_check');
-    setState(() {
-      _check = check;
-    });
-  }
 
   @override
   Map<String, PropertyValue> bindValue() {
@@ -51,8 +35,6 @@ class MyHomePageDelegate extends FairDelegate {
     var fun = super.bindFunction();
     fun['_incrementCounter'] = _incrementCounter;
     fun['ThemeStyle.headline4'] = (props) => ThemeStyle.headline4(context);
-    fun['putPhotoCheck'] = (props) => _putPhotoCheck;
-    fun['getPhotoCheck'] = (props) => _getPhotoCheck;
     //fun['AJKColors.ajkPrimaryColor'] = () => AJKColors.ajkPrimaryColor;
     return fun;
   }
