@@ -61,13 +61,12 @@ mixin FairCompiler {
   final command = 'dart';
   final branch = 'main';
 
-  Future<File> _syncFbs(
-      BuildStep buildStep) async {
+  Future<File> _syncFbs(BuildStep buildStep) async {
     final dir = path.join('.dart_tool', 'build', 'fairc');
     Directory(dir).createSync(recursive: true);
     var fbs =
-    await File(path.join('.dart_tool', 'build', 'fairc', 'fair_bundle.fbs'))
-        .create(recursive: true);
+        await File(path.join('.dart_tool', 'build', 'fairc', 'fair_bundle.fbs'))
+            .create(recursive: true);
     await fbs.writeAsBytes(await buildStep.readAsBytes(
         AssetId.resolve('package:fair_compiler/src/fair_bundle.fbs')));
     return fbs;
@@ -95,33 +94,34 @@ mixin FairCompiler {
       var binDir = strBin.substring(0, dirEndIndex);
 
       var aotParentPath = Directory.current.parent.parent.path;
-      var aotPathResult = await Process.run('find', [aotParentPath, "-name", 'fairc.aot']);
+      var aotPathResult =
+          await Process.run('find', [aotParentPath, "-name", 'fairc.aot']);
       var aotPathStr = aotPathResult.stdout.toString();
       var transferPath = aotPathStr.split('\r')[0].split('\n')[0];
       print('\u001b[33m [Fair Dart2JS] fairc.aot => ${transferPath} \u001b[0m');
 
-
-      final result = Process.runSync('$binDir/dartaotruntime', [transferPath, ...arguments]);
+      final result = Process.runSync(
+          path.join('$binDir', 'dartaotruntime'), [transferPath, ...arguments]);
       print(result);
 
       var output = result.stdout.toString();
-        if (output != null && output.isNotEmpty) {
-          final startIndex = output.indexOf(_startTag);
-          final endIndex = output.indexOf(_endTag);
-          if (startIndex != -1 && endIndex != -1) {
-            content = output.substring(startIndex + _startTag.length, endIndex);
-          }
+      if (output != null && output.isNotEmpty) {
+        final startIndex = output.indexOf(_startTag);
+        final endIndex = output.indexOf(_endTag);
+        if (startIndex != -1 && endIndex != -1) {
+          content = output.substring(startIndex + _startTag.length, endIndex);
         }
-        if (content.isEmpty) {
-          var errorLog = await File(path.join('build', 'fair', 'log',
-                  '${DateFormat('yyyy-MM-dd_HH:mm:sss').format(DateTime.now())}.txt'))
-              .create(recursive: true);
-          var f = await errorLog.open(mode: FileMode.append);
-          await f.writeString(output);
-          await f.writeString(result.stderr);
-          error = 'No content is generated: ${errorLog.path}';
-          print('[Fair] $error');
-        }
+      }
+      if (content.isEmpty) {
+        var errorLog = await File(path.join('build', 'fair', 'log',
+                '${DateFormat('yyyy-MM-dd_HH:mm:sss').format(DateTime.now())}.txt'))
+            .create(recursive: true);
+        var f = await errorLog.open(mode: FileMode.append);
+        await f.writeString(output);
+        await f.writeString(result.stderr);
+        error = 'No content is generated: ${errorLog.path}';
+        print('[Fair] $error');
+      }
       // }
     } else {
       error = '[Fair] Please checkout the flutter & dart version';
