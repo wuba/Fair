@@ -7,7 +7,7 @@
         "title": {
           "className": "Text",
           "pa": [
-            "#(widget.title)"
+            "$(widget.title)"
           ],
           "na": {
             "style": {
@@ -20,5 +20,8 @@
         }
       }
     }
+  },
+  "methodMap": {
+    "createState": "%(_GoogleFontsExamplePageState)"
   }
 }

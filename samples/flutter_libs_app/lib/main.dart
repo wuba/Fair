@@ -1,18 +1,18 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_libs_app/google_fonts/google_font_page.dart';
-import 'package:flutter_libs_app/url_launcher/url_launcher_delegate.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_libs_app/package_info/package_info_delegate.dart';
+import 'package:flutter_libs_app/url_launcher/url_launcher_delegate.dart';
 
 import 'common_delegate.dart';
+import 'convex_bottom_bar/fair_convex_bottom_bar.dart';
 import 'device_info/device_info_delegate.dart';
 import 'google_fonts/fair_google_fonts.dart';
 import 'index.dart';
 
 void main() {
-  runApp(FairApp(
-    child: MyApp(),
+  WidgetsFlutterBinding.ensureInitialized();
+
+  FairApp.runApplication(FairApp(
     delegate: {
       'device_info': (_, data) => DeviceInfoDelegate(),
       'url_launcher': (_, data) => UrlLauncherDelegate(),
@@ -20,13 +20,19 @@ void main() {
       'package_info': (_, data) => PackageInfoDelegate(),
     },
     generated: SimpleGenerate(),
-  ));
+    child: MyApp(),
+  ),plugins: {
+    // 'FairNet': FairNet(),
+    // 'WBPermission': WBPermission(),
+    // 'FairPhotoSelector': FairPhotoSelector(),
+  },);
 }
 
-class SimpleGenerate extends GeneratedModule{
+class SimpleGenerate extends GeneratedModule {
   @override
   Map<String, dynamic> components() {
     return Map<String, dynamic>()
+      ..addAll(convex_bottom_bar_component)
       ..addAll(google_fonts_component);
   }
 
@@ -34,7 +40,6 @@ class SimpleGenerate extends GeneratedModule{
   Map<String, bool> mapping() {
     return Map<String, bool>();
   }
-
 }
 
 class MyApp extends StatelessWidget {

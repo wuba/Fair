@@ -75,8 +75,7 @@ class Runtime implements IRuntime {
     }
     scriptSource =
         scriptSource.replaceFirst(new RegExp(r'#FairProps#'), fairProps);
-    scriptSource =
-        scriptSource.replaceAll(new RegExp(r'#FairKey#'), pageName);
+    scriptSource = scriptSource.replaceAll(new RegExp(r'#FairKey#'), pageName);
     var map = <dynamic, dynamic>{};
     map[FairMessage.PATH] = scriptSource;
     map[FairMessage.PAGE_NAME] = pageName;
@@ -168,26 +167,46 @@ class Runtime implements IRuntime {
     //如果没有加载过js
     var map = <dynamic, dynamic>{};
     if (!loadBaseJsConstant[0]) {
-      //用户配置的脚本，里面包含core_js以及用户的拓展
-      var configJson =
-          await rootBundle.loadString('assets/fair_basic_config.json');
-      var basicConfig = jsonDecode(configJson);
-      var path = basicConfig['coreJs']['path'];
-      //加载基础js
-      var baseJsSource = await rootBundle.loadString(path);
-      //加载用户自定义的plugin
-      var pluginJsSource = ' ';
-      Map plugins = basicConfig['plugin'];
+      /*
+       * 用户配置的脚本，里面包含core_js以及用户的拓展
+       */
+      var baseJsSource = '';
 
-      if (plugins != null) {
-        Iterable<String> keys = plugins.keys;
-        for (var k in keys) {
-          pluginJsSource =
-              pluginJsSource + '  ' + await rootBundle.loadString(plugins[k]);
+      /*
+       * 读取基础配置内容
+       */
+      var coreConfigJson = await rootBundle
+          .loadString('packages/fair/assets/fair_home.json');
+      var coreConfig = jsonDecode(coreConfigJson)['coreJs'];
+      Iterable<String> coreKeys = coreConfig.keys;
+      for (var key in coreKeys) {
+        baseJsSource += '${await rootBundle.loadString(coreConfig[key])} ;';
+      }
+
+      /*
+       * 读取用户配置的内容
+       * 例如用户配置的插件，或者用户的其它拓展等，该配置json名称固定
+       */
+      var pluginJsSource = ' ';
+      try{
+        var customConfigJson =
+        await rootBundle.loadString('assets/fair_basic_config.json');
+        var customConfig = jsonDecode(customConfigJson);
+        //加载用户自定义的plugin
+        Map plugins = customConfig['plugin'];
+
+        if (plugins != null) {
+          Iterable<String> keys = plugins.keys;
+          for (var k in keys) {
+            pluginJsSource =
+                pluginJsSource + ' ; ' + await rootBundle.loadString(plugins[k]);
+          }
         }
+      }catch(e){
+        print('##没有配置fair_basic_config.json文件,请检查文件是否配置或者名称是否正确##');
       }
       loadBaseJsConstant[0] = true;
-      map[FairMessage.PATH] = baseJsSource + ' ' + pluginJsSource;
+      map[FairMessage.PATH] = baseJsSource + ' ; ' + pluginJsSource;
       map[FairMessage.PAGE_NAME] = 'loadCoreJs';
     }
 

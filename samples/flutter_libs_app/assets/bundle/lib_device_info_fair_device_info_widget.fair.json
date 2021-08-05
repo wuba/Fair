@@ -16,14 +16,14 @@
                 "size": 20
               }
             },
-            "onTap": "#(_pop)"
+            "onTap": "@(_pop)"
           }
         },
         "centerTitle": true,
         "title": {
           "className": "Text",
           "pa": [
-            "#(widget.title)"
+            "$(widget.title)"
           ]
         }
       }
@@ -106,7 +106,7 @@
                                 "获取设备信息"
                               ],
                               "na": {
-                                "textAlign": "#(_textAlign)",
+                                "textAlign": "@(_textAlign)",
                                 "style": {
                                   "className": "TextStyle",
                                   "na": {
@@ -118,7 +118,7 @@
                             }
                           }
                         },
-                        "onTap": "#(_getDeviceInfo)"
+                        "onTap": "@(_getDeviceInfo)"
                       }
                     }
                   }
@@ -129,5 +129,8 @@
         ]
       }
     }
+  },
+  "methodMap": {
+    "createState": "%(_FairDeviceInfoWidgetState)"
   }
 }
