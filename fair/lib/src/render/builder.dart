@@ -205,7 +205,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
           if((body = _replaceMethod(methodMap, e)) != null){
             item = convert(context, body, methodMap, domain: domain);
           }else {
-            item = _namedString(tag, naMap, methodMap, context, domain, e);
+            item = _namedString(tag, naMap, methodMap, context, domain, e).data;
           }
         }
       }else{
