@@ -6,9 +6,6 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'theme.dart';
 
 @FairPatch()
 class MyHomePage extends StatefulWidget {
@@ -21,7 +18,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  @FairWell('_currentIndex')
   int _currentIndex = 0;
 
 
@@ -35,10 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            IconButton(
-              // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-                icon: FaIcon(FontAwesomeIcons.solidCircle),
-            ),
+
           ],
         ),
       ),
@@ -62,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void onItemSelect(index) {
     print(index);
     setState(() {
-      _currentIndex = index;
+
     });
   }
 

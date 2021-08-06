@@ -6,20 +6,27 @@ import 'delegate.dart';
 import 'module.dart';
 
 @FairBinding(packages: [
-  'package:bottom_navy_bar/bottom_navy_bar.dart',
-  'package:font_awesome_flutter/font_awesome_flutter.dart'])
+  'package:bottom_navy_bar/bottom_navy_bar.dart',])
 void main() {
-  runApp(FairApp(
-    child: MyApp(),
-    modules: {
-      BottomNavyBarModule.tagName:() => BottomNavyBarModule(),
-    },
-    delegate: {
-      'home_page': (_, data) => MyHomePageDelegate(),
-    },
-    generated: AppGeneratedModule(),
-  ));
+  WidgetsFlutterBinding.ensureInitialized();
+  FairApp.runApplication(
+      _getApp(),
+      plugins: {
+
+      });
 }
+
+dynamic _getApp() => FairApp(
+  child: MyApp(),
+  delegate: {
+    //'home_page': (_, data) => MyHomePageDelegate(),
+  },
+  modules: {
+    BottomNavyBarModule.tagName:() => BottomNavyBarModule(),
+  },
+  generated: AppGeneratedModule(),
+);
+
 
 class MyApp extends StatelessWidget {
   @override
