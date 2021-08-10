@@ -19,19 +19,7 @@
           "className": "Column",
           "na": {
             "mainAxisAlignment": "#(MainAxisAlignment.center)",
-            "children": [
-              {
-                "className": "IconButton",
-                "na": {
-                  "icon": {
-                    "className": "FaIcon",
-                    "pa": [
-                      "#(FontAwesomeIcons.solidCircle)"
-                    ]
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -39,7 +27,7 @@
     "bottomNavigationBar": {
       "className": "BottomNavyBar",
       "na": {
-        "selectedIndex": "#(_currentIndex)",
+        "selectedIndex": "@(_currentIndex)",
         "onItemSelected": "#(onItemSelect)",
         "items": [
           {
@@ -113,5 +101,6 @@
         ]
       }
     }
-  }
+  },
+  "methodMap": {}
 }

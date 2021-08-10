@@ -5,6 +5,7 @@
  */
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:analyzer/dart/element/element.dart';
@@ -124,9 +125,33 @@ class BindingGenerator extends GeneratorForAnnotation<FairBinding> {
   Future<File> _transitSource(
       BuildStep buildStep, AssetId assetId, String dir) async {
     var annotatedSource = await File(path.join(dir, assetId.package,
-            assetId.changeExtension('.fair.dart').path.replaceAll('/', '_')))
+        assetId.changeExtension('.fair.dart').path.replaceAll('/', '_')))
         .create(recursive: true);
-    return annotatedSource.writeAsBytes(await buildStep.readAsBytes(assetId));
+
+    var source = await _replaceRelativeImport(await buildStep.readAsString(assetId), assetId);
+    annotatedSource.writeAsStringSync(source);
+    return annotatedSource;
+  }
+
+  /// replace relative import path to absolute path
+  Future<String> _replaceRelativeImport(String sourceStr,AssetId assetId) async{
+    var source = StringBuffer();
+    var ls = LineSplitter();
+    var lines = ls.convert(sourceStr);;
+    lines.forEach((line) {
+      if (line.startsWith('import') && !line.contains(':')) {
+        var asset = line.replaceFirst('import', '').replaceAll('\'', '').replaceAll(';', '').trim();
+        try {
+          var lAssetId = AssetId.resolve(asset,from: assetId);
+          line = 'import \'package:${assetId.package}${lAssetId.path.replaceFirst('lib', '')}\';';
+        } catch (e) {
+          print(e);
+        }
+      }
+      source.write('$line\n');
+    });
+
+    return source.toString();
   }
 }
 

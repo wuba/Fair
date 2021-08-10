@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_libs_app/convex_bottom_bar/bottom_bar_page.dart';
 import 'package:flutter_libs_app/google_fonts/google_font_page.dart';
 import 'package:flutter_libs_app/url_launcher/url_launcher_page.dart';
 import 'package:flutter_libs_app/package_info/package_info_page.dart';
@@ -17,6 +18,8 @@ class FairRouter {
         return GoogleFontsPage(params: params);
       case RoutePath.packageInfoPage:
         return PackageInfoPage(params: params);
+      case RoutePath.bottomBarPage:
+        return BottomBarPage();
     }
     return null;
   };
@@ -52,5 +55,6 @@ enum RoutePath {
   deviceInfoPage,
   urlLauncherPage,
   googleFontPage,
-  packageInfoPage
+  packageInfoPage,
+  bottomBarPage
 }

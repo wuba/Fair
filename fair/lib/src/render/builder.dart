@@ -205,7 +205,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
           if((body = _replaceMethod(methodMap, e)) != null){
             item = convert(context, body, methodMap, domain: domain);
           }else {
-            item = _namedString(tag, naMap, methodMap, context, domain, e);
+            item = _namedString(tag, naMap, methodMap, context, domain, e).data;
           }
         }
       }else{
@@ -213,7 +213,10 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }
       children.add(item);
     });
-    return children.asIteratorOf<Widget>()?.toList() ?? children;
+    if (children?.every((element) => element is Widget) == true){
+      return children.asIteratorOf<Widget>()?.toList() ?? children;
+    }
+    return children;
   }
 
   W _namedString(String tag, dynamic naMap, Map methodMap,

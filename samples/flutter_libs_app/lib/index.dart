@@ -51,6 +51,9 @@ class _MyHomePageState extends State<MyHomePage> {
             }),
             _buildOperateBtn("package info page", (){
               FairRouter.push(context, RoutePath.packageInfoPage);
+            }),
+            _buildOperateBtn("bottom bar page", (){
+              FairRouter.push(context, RoutePath.bottomBarPage);
             })
           ],
         ),

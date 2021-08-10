@@ -5,8 +5,7 @@
  */
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
-import 'package:my_app/custom_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:animated_text_kit/src/rotate.dart';
 
 import 'theme.dart';
 @FairPatch()
@@ -19,18 +18,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  @FairWell('_counter')
   int _counter = 0;
 
-  @FairWell('_check')
-  bool _check = false;
-
-  @FairWell('_incrementCounter')
   void _incrementCounter() {
+    _counter= _counter+1;
     setState(() {
-      _counter++;
+
     });
-    _putPhotoCheck();
+
   }
 
   @override
@@ -53,12 +48,14 @@ class _MyHomePageState extends State<MyHomePage> {
               style: ThemeStyle.headline4(context),
 
             ),
-            Text(
-              '$_check',
-              style: ThemeStyle.headline4(context),
-
-            ),
-            CustomWidget(title: "Test",),
+            RotateAnimatedTextKit(
+                text: ["AWESOME", "OPTIMISTIC", "DIFFERENT"],
+                textStyle: TextStyle(fontSize: 40.0, fontFamily: "Horizon"),
+                textAlign: TextAlign.start,
+                isRepeatingAnimation: true,
+                alignment: Alignment.centerRight
+              // or Alignment.topLeft )
+            )
           ],
         ),
       ),
@@ -70,20 +67,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-//@FairWell('_putPhotoCheck')
-void _putPhotoCheck() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setBool('survey_permission_check1',true);
-  _getPhotoCheck();
-}
-
-//@FairWell('_getPhotoCheck')
-void _getPhotoCheck() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  _check = prefs.getBool('survey_permission_check1');
-  setState(() {
-    _check = _check;
-  });
-}
 
 }
