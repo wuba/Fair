@@ -81,6 +81,7 @@ class FairNet extends IFairPlugin {
         'data': response?.data,
         'statusMessage': response?.statusMessage,
       };
+      print('resp ${response?.data.runtimeType.toString()}');
       return Future.value(jsonEncode(resp));
     }
   }

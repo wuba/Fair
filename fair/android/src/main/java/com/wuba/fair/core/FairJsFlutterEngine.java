@@ -11,6 +11,8 @@ import com.wuba.fair.jsexecutor.IJSExecutor;
 import com.wuba.fair.thread.FairTask;
 import com.wuba.fair.thread.FairThread;
 
+import java.util.Arrays;
+
 import io.flutter.plugin.common.BasicMessageChannel;
 import io.flutter.plugin.common.StringCodec;
 
@@ -37,15 +39,14 @@ public class FairJsFlutterEngine {
      * 接收dart返回结果，执行js，获取js的结果返回给dart端，
      */
     private BasicMessageChannel.MessageHandler<String> callHandler = (message, reply) -> {
-        final Object[] obj = new Object[1];
         try {
           FairThread.get().run(new FairTask() {
               @Override
               public void runTask() {
                   IJSExecutor executor = FairPlugin.get().getJsExecutor();
-                  obj[0] = executor.invokeJSChannel(message);
+                  Object result= executor.invokeJSChannel(message);
                   FairThread.runOnUI(() -> {
-                      reply.reply(String.valueOf(obj[0]));
+                      reply.reply(String.valueOf(result));
                   });
               }
           });

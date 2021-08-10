@@ -29,10 +29,12 @@ class _PicNetDemoPageStateful extends State {
         if (resp == null) {
           return;
         }
-        List data = resp['data'];
+        var data = resp['data'];
         String u = data[0]['imagePath'];
         _picData.picUrl = u;
         _picData.title = data[0]['title'];
+        setState(() {
+        });
       }
     });
   }
