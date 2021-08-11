@@ -37,22 +37,30 @@ class BindingData {
     return functionOf(key);
   }
 
-  dynamic runFunctionOf(String key, {String exp}) {
-    var result = _functions['runtimeInvokeMethodSync'](key);
-    var value = jsonDecode(result);
-    return ValueNotifier(value['result']['result']);
-  }
-
-  dynamic bindFunctionOf(String props) {
-    return () => _functions['runtimeInvokeMethod'](props);
-  }
-
-  dynamic bindRuntimeValueOf(String key) {
-    if (key.isNotEmpty) {
-      var result = _functions['runtimeParseVar']({key: ''});
+  dynamic runFunctionOf(String funcName, {String exp}) {
+    if (_functions[funcName] == null) {
+      var result = _functions['runtimeInvokeMethodSync'](funcName);
       var value = jsonDecode(result);
-      if (value['result'][key] != null) {
-        return ValueNotifier(value['result'][key]);;
+      return ValueNotifier(value['result']['result']);
+    } else {
+      return _functions[funcName];
+    }
+  }
+
+  dynamic bindFunctionOf(String funcName) {
+    if (_functions[funcName] == null) {
+      return ([props]) => _functions['runtimeInvokeMethod'](funcName, props);
+    } else {
+      return _functions[funcName];
+    }
+  }
+
+  dynamic bindRuntimeValueOf(String name) {
+    if (name.isNotEmpty) {
+      var result = _functions['runtimeParseVar']({name: ''});
+      var value = jsonDecode(result);
+      if (value['result'][name] != null) {
+        return ValueNotifier(value['result'][name]);
       }
     }
     return null;

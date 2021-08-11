@@ -18,10 +18,7 @@
         "children": {
           "className": "Sugar.map",
           "pa": [
-            "A",
-            "B",
-            "C",
-            "D"
+            "^(_list)"
           ],
           "na": {
             "builder": {
@@ -81,7 +78,9 @@
                                                   {
                                                     "className": "Text",
                                                     "pa": [
-                                                      "#($_count)"
+                                                      {
+                                                        "className": "item.toString"
+                                                      }
                                                     ],
                                                     "na": {
                                                       "textAlign": "#(TextAlign.left)",
