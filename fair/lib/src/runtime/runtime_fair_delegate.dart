@@ -61,15 +61,15 @@ abstract class RuntimeFairDelegate {
     List<dynamic> func;
     if (s != null && (d = s['result']) != null) {
       variables = d['variable'];
-      func = d['func'];
+      // func = d['func'];
     }
 
-    var mapFunc = {};
-    func.forEach((element) {
-      mapFunc[element] = '';
-    });
-
-    _bindAllFunc(mapFunc);
+    // var mapFunc = {};
+    // func.forEach((element) {
+    //   mapFunc[element] = '';
+    // });
+    //
+    // _bindAllFunc(mapFunc);
     _bindAllValue(variables);
     return Future.value(null);
   }
@@ -94,14 +94,19 @@ abstract class RuntimeFairDelegate {
   }
 
   void bindBaseFunc() {
-    _bindFunctionsMap['runtimeInvokeMethod'] = (props) {
-      runtime?.invokeMethod(pageName, props, null);
+    _bindFunctionsMap['runtimeInvokeMethod'] = (funcName, [props]) {
+      var arguments = null;
+      if (props != null) {
+        arguments = List();
+        arguments.add(props);
+      }
+      return runtime?.invokeMethod(pageName, funcName, arguments);
     };
-    _bindFunctionsMap['runtimeInvokeMethodSync'] = (props) {
-      return runtime?.invokeMethodSync(pageName, props, null);
+    _bindFunctionsMap['runtimeInvokeMethodSync'] = (funcName) {
+      return runtime?.invokeMethodSync(pageName, funcName, null);
     };
-    _bindFunctionsMap['runtimeParseVar'] = (props) {
-      return runtime?.variablesSync(pageName, props);
+    _bindFunctionsMap['runtimeParseVar'] = (varNames) {
+      return runtime?.variablesSync(pageName, varNames);
     };
   }
 

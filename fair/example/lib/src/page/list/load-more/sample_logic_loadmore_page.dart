@@ -37,7 +37,7 @@ class JRListState extends State<JRListWidget> {
   }
 
   Future _onLoadMore() async {
-    await Future.delayed(Duration(seconds: 100), () {
+    await Future.delayed(Duration(seconds: 2), () {
       list.addAll(
           List.generate(Random().nextInt(5) + 5, (i) => 'more Item $i'));
       setState(() {});
@@ -104,6 +104,10 @@ class JRListState extends State<JRListWidget> {
     onUnload();
   }
 
+  int _itemCount() {
+    return list.length + 1;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,7 +124,7 @@ class JRListState extends State<JRListWidget> {
                 ),
                 falseValue: ListView.builder(
                     controller: _scrollController,
-                    itemCount: list.length + 1,
+                    itemCount: _itemCount(),
                     itemBuilder: _itemBuilder)),
             onRefresh: _onRefresh),
       ),

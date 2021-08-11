@@ -27,8 +27,8 @@
     "bottomNavigationBar": {
       "className": "BottomNavyBar",
       "na": {
-        "selectedIndex": "@(_currentIndex)",
-        "onItemSelected": "#(onItemSelect)",
+        "selectedIndex": "^(_currentIndex)",
+        "onItemSelected": "@(onItemSelect)",
         "items": [
           {
             "className": "BottomNavyBarItem",
