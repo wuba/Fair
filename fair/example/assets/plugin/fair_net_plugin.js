@@ -22,10 +22,10 @@ let FairNet = function () {
             invokeFlutterCommonChannel(map, (resultStr) => {
                 console.log('FairNet请求结果：' + resultStr);
                 let responseMap = JSON.parse(resultStr);
-                console.log('FairNet请求结果1：' + responseMap['data']);
-                let data = responseMap['data']
-                let id = responseMap['callId']
-                let statusMessage=responseMap['responseMap'];
+                console.log('FairNet请求结果1：' + responseMap);
+                let data = JSON.parse(responseMap['data'])
+                responseMap['data'] = data.data;
+                let id = responseMap['id']
                 console.log('FairNet请求结果2：' + id);
                 //这两个函数用户拓展的
                 if (callBack[id] === null) {
@@ -43,15 +43,15 @@ let FairNet = function () {
                 //         respMap.set(k, data[k]);
                 //     });
                 // }
-                let respMap=convertObjectLiteralToSetOrMap(data);
-                console.log('FairNet请求结果6：' + (responseMap['statusCode'] == 200));
-                if (responseMap['statusCode'] == 200) {
+                console.log('FairNet请求结果6：' + success);
+                // success(respMap);
+                if (responseMap['statusCode'] === 200) {
                     if (success != null) {
                         console.log('FairNet请求结果4：' + success);
-                        success(respMap);
+                        success(convertObjectLiteralToSetOrMap(responseMap));
                     }
                     if (complete != null) {
-                        complete(respMap);
+                        complete(convertObjectLiteralToSetOrMap(responseMap));
                     }
                 } else {
                     if (error != null) {
