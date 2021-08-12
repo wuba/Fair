@@ -76,9 +76,7 @@
                                                   {
                                                     "className": "Text",
                                                     "pa": [
-                                                      {
-                                                        "className": "index.toString"
-                                                      }
+                                                      "#($index)"
                                                     ],
                                                     "na": {
                                                       "textAlign": "#(TextAlign.left)",

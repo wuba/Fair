@@ -24,7 +24,7 @@ class _State extends State<MapPage> {
   @FairProps()
   var fairProps;
 
-  var _list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  var _list = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 100];
 
   @override
   void initState() {
@@ -65,7 +65,7 @@ class _State extends State<MapPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      item.toString(),
+                                      '$item',
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                           decoration: TextDecoration.none,

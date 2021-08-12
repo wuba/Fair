@@ -60,7 +60,7 @@ class BindingData {
       var result = _functions['runtimeParseVar']({name: ''});
       var value = jsonDecode(result);
       if (value['result'][name] != null) {
-        return ValueNotifier(value['result'][name]);
+        return value['result'][name];
       }
     }
     return null;
