@@ -36,13 +36,14 @@ let FairNet = function () {
                 let success = callBack[id][2];
                 console.log('FairNet请求结果3：' + responseMap['statusCode']);
 
-                let respMap = new Map();
-                if (data != null) {
-                    Object.keys(data).forEach(function (k) {
-                        console.log('FairNet请求结果5：' + k);
-                        respMap.set(k, data[k]);
-                    });
-                }
+                // let respMap = new Map();
+                // if (data != null) {
+                //     Object.keys(data).forEach(function (k) {
+                //         console.log('FairNet请求结果5：' + k);
+                //         respMap.set(k, data[k]);
+                //     });
+                // }
+                let respMap=convertObjectLiteralToSetOrMap(data);
                 console.log('FairNet请求结果6：' + (responseMap['statusCode'] == 200));
                 if (responseMap['statusCode'] == 200) {
                     if (success != null) {
