@@ -47,7 +47,7 @@ mixin AppState {
       () => BindingData(
         modules,
         functions: delegate.bindFunction(),
-        values: delegate.bindValue(),
+        delegateValues: delegate.bindValue(),
       ),
     );
     return Future.value(null);

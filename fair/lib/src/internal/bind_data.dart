@@ -17,15 +17,17 @@ class BindingData {
   final FairModuleRegistry modules;
   final Map<String, Function> _functions;
   final Map<String, PropertyValue> _values;
+  final Map<String, PropertyValue> _delegateValues;
   Map data;
   final Set<LifeCircle> _boundValue = {};
 
   BindingData(this.modules,
       {this.data,
       Map<String, Function> functions,
-      Map<String, PropertyValue> values})
+      Map<String, PropertyValue> values, Map<String, PropertyValue> delegateValues})
       : _functions = functions,
         _values = values,
+        _delegateValues = delegateValues,
         super();
 
   dynamic bindDataOf(String key) {
@@ -56,11 +58,16 @@ class BindingData {
   }
 
   dynamic bindRuntimeValueOf(String name) {
-    if (name.isNotEmpty) {
-      var result = _functions['runtimeParseVar']({name: ''});
-      var value = jsonDecode(result);
-      if (value['result'][name] != null) {
-        return value['result'][name];
+    // _delegateValues优先级高于JS，如果要使用JS的变量，需要重命名变量
+    if (_delegateValues[name] == null) {
+        var result = _functions['runtimeParseVar']({name: ''});
+        var value = jsonDecode(result);
+        if (value['result'][name] != null) {
+          return value['result'][name];
+        }
+    } else {
+      if (_delegateValues != null && _delegateValues[name] != null) {
+        return Function.apply(_delegateValues[name], null);
       }
     }
     return null;

@@ -61,15 +61,7 @@ abstract class RuntimeFairDelegate {
     List<dynamic> func;
     if (s != null && (d = s['result']) != null) {
       variables = d['variable'];
-      // func = d['func'];
     }
-
-    // var mapFunc = {};
-    // func.forEach((element) {
-    //   mapFunc[element] = '';
-    // });
-    //
-    // _bindAllFunc(mapFunc);
     _bindAllValue(variables);
     return Future.value(null);
   }
