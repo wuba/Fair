@@ -66,7 +66,7 @@ class _State extends State<MapEachPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  index.toString(),
+                                  '$index',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                       decoration: TextDecoration.none,

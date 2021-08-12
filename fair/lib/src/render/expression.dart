@@ -164,11 +164,6 @@ class PropValueExpression extends Expression {
   R onEvaluate(ProxyMirror proxy, BindingData binding, String exp, String pre) {
     var expression = exp.substring(2, exp.length - 1);
     var prop = binding?.bindRuntimeValueOf(expression);
-    if (prop is ValueNotifier) {
-      var data = _PropValueBuilder(expression, prop, proxy, binding);
-      binding.addBindValue(data);
-      return R(data, exp: expression, needBinding: false);
-    }
     return R(prop, exp: expression, needBinding: false);
   }
 

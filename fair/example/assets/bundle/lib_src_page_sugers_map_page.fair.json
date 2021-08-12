@@ -78,9 +78,7 @@
                                                   {
                                                     "className": "Text",
                                                     "pa": [
-                                                      {
-                                                        "className": "item.toString"
-                                                      }
+                                                      "#($item)"
                                                     ],
                                                     "na": {
                                                       "textAlign": "#(TextAlign.left)",
