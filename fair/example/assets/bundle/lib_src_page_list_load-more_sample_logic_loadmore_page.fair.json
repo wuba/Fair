@@ -7,7 +7,7 @@
         "title": {
           "className": "Text",
           "pa": [
-            "LoadMore"
+            "ListLoadMore"
           ]
         }
       }
@@ -36,18 +36,27 @@
                 "falseValue": {
                   "className": "ListView.builder",
                   "na": {
-                    "controller": "#(_scrollController)",
+                    "controller": "^(_scrollController)",
                     "itemCount": "%(_itemCount)",
-                    "itemBuilder": "#(_itemBuilder)"
+                    "itemBuilder": "@(_itemBuilder)"
                   }
                 }
               }
             },
-            "onRefresh": "#(_onRefresh)"
+            "onRefresh": "@(_onRefresh)"
           }
         }
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {
+    "_itemBuilder": {
+      "className": "ListTile",
+      "na": {
+        "title": {
+          "className": "Text"
+        }
+      }
+    }
+  }
 }

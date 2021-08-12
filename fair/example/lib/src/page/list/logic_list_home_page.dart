@@ -27,15 +27,15 @@ class LogicListPage extends StatelessWidget {
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('LoadMore & PullRefresh', () {
-              // Navigator.pushNamed(context, 'fair_page',
-              //     arguments: {'name': 'ListLoadMore', 'path': 'assets/bundle/lib_src_page_list_load-more_sample_logic_loadmore_page.fair.json', 'data': {'pageName': 'ListLoadMore'}});
+              Navigator.pushNamed(context, 'fair_page',
+                  arguments: {'name': 'ListLoadMore', 'path': 'assets/bundle/lib_src_page_list_load-more_sample_logic_loadmore_page.fair.json', 'data': {'pageName': 'ListLoadMore'}});
 
               // 原生界面
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => JRListWidget({'pageName': 'ListLoadMore'}),
-                  ));
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => JRListWidget({'pageName': 'ListLoadMore'}),
+              //     ));
             }),
 
             Container(height: 0.5, color: Color(0xFFE7EBEE)),

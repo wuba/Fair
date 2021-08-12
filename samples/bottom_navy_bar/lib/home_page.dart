@@ -51,9 +51,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
-  @FairWell('onItemSelect')
   void onItemSelect(index) {
-    print(index);
+    _currentIndex = index;
     setState(() {
 
     });
