@@ -19,7 +19,7 @@ class _FairDeviceInfoWidgetState extends State<FairDeviceInfoWidget> {
   // @FairWell('_deviceInfo')
   String _deviceInfo = "";
   // @FairWell('_textAlign')
-  TextAlign _textAlign = TextAlign.center;
+  // TextAlign _textAlign = TextAlign.center;
 
   @override
   void initState() {
@@ -84,7 +84,7 @@ class _FairDeviceInfoWidgetState extends State<FairDeviceInfoWidget> {
                     ),
                     child: Text(
                       "获取设备信息",
-                      textAlign: _textAlign,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 16,
                           color: Colors.white
