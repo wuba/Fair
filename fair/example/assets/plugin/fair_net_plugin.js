@@ -23,9 +23,9 @@ let FairNet = function () {
                 console.log('FairNet请求结果：' + resultStr);
                 let responseMap = JSON.parse(resultStr);
                 console.log('FairNet请求结果1：' + responseMap);
-                let data = JSON.parse(responseMap['data'])
+               let data = responseMap['data']
                 responseMap['data'] = data.data;
-                let id = responseMap['id']
+                let id = responseMap['callId']
                 console.log('FairNet请求结果2：' + id);
                 //这两个函数用户拓展的
                 if (callBack[id] === null) {

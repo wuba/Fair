@@ -53,7 +53,13 @@ function _invokeMethod(par) {
         return _release(par);
     }
     let mClass = GLOBAL[pageName];
-    let methodResult = mClass[funcName].apply(mClass, args);
+    let func = mClass[funcName];
+    let methodResult;
+    if (isNull(func)) {
+        methodResult = '';
+    } else {
+        methodResult = func.apply(mClass, args);
+    }
     let result = {
         pageName: pageName,
         result: {
@@ -125,7 +131,7 @@ function isNull(prop) {
 }
 
 function setState(pageName, obj) {
-    console.log('JS:setState()_before'+pageName+'-'+obj);
+    console.log('JS:setState()_before' + pageName + '-' + obj);
     let p = {};
     p['funcName'] = 'setState';
     p['pageName'] = pageName;
@@ -133,7 +139,7 @@ function setState(pageName, obj) {
     obj();
     p['args'] = null;
     let map = JSON.stringify(p);
-    console.log('JS:setState()'+map);
+    console.log('JS:setState()' + map);
     invokeFlutterCommonChannel(map);
 }
 
