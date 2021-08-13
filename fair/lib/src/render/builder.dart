@@ -68,7 +68,10 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       assert(mapper != null, '$name is not registered!');
       if (name == 'Sugar.mapEach') {
         return _buildSugarMapEach(mapper, map, methodMap, context);
+      } else if (name == 'Sugar.map') {
+        return _buildSugarMap(mapper, map, methodMap, context);
       }
+
       var source = map['mapEach'];
       if (source != null && source is List) {
         var children = Domain(source).forEach(($, _) {
@@ -263,6 +266,32 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     };
     return mapEach.call(params);
   }
+
+  List<Widget> _buildSugarMap(
+      Function mapEach, Map map, Map methodMap, BuildContext context) {
+    var source = pa0(map);
+    var children = [];
+    if (source is String) {
+      var r = proxyMirror.evaluate(context, bound, source);
+      if (r.data != null) {
+        source = r.data;
+      }
+    }
+    if (!(source is List)) {
+      throw Exception('Sugar.mapEach has no valid source array');
+    }
+
+    if (source != null && source is List) {
+      children = Domain(source).forEach(($, _) {
+        return convert(context, map['na']['builder'], methodMap, domain: $);
+      });
+    }
+    var params = {
+      'pa': [source, children]
+    };
+    return mapEach.call(params);
+  }
+
 
   bool _isFuncExp(String exp){
     return FunctionExpression().hitTest(exp, '');

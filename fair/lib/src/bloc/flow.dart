@@ -12,13 +12,16 @@ import '../type.dart';
 FairWidgetBinding provider = () {
   return {
     'Sugar.map': (props) {
-      var source = pa(props);
-      assert(source is List, '$source should be array');
-      var builder = props['builder'];
-
-      var d = (source as List).map((s) => builder);
-
-      return (d.asIteratorOf<Widget>() ?? d).toList();
+      // var source = pa(props);
+      // assert(source is List, '$source should be array');
+      // var builder = props['builder'];
+      //
+      // var d = (source as List).map((s) => builder);
+      //
+      // return (d.asIteratorOf<Widget>() ?? d).toList();
+      var items = pa1(props);
+      assert(items is List, 'failed to generate list of Sugar.map');
+      return ((items as List).asIteratorOf<Widget>() ?? items).toList();
     },
     'Sugar.mapEach': (props) {
       var items = pa1(props);

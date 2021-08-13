@@ -43,7 +43,7 @@ GLOBAL['#FairKey#'] = (function (__initProps__) {
                 // await Future.delayed(
                 // Duration({seconds: 3}), function dummy() {
                     console.log('JS:_onRefresh');
-                    list.insertAll(0, List.generate(5, (i) => `refresh Item ${i}`));
+                    list.insertAll(0, List.generate(2, (i) => `refresh Item ${i}`));
                     setState('#FairKey#', function dummy() {});
                 // }//);
             }
