@@ -41,13 +41,13 @@ mixin AppState {
     _mFairHandler.register(state);
     var delegate = state.delegate;
     delegate.setRunTime(runtime);
-    await delegate.bindAll({});
+    // await delegate.bindAll({});
     bindData.putIfAbsent(
       state.state2key,
       () => BindingData(
         modules,
         functions: delegate.bindFunction(),
-        delegateValues: delegate.bindValue(),
+        values: delegate.bindValue(),
       ),
     );
     return Future.value(null);
