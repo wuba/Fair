@@ -35,6 +35,10 @@ class FairNet extends IFairPlugin {
     }
     var pageName = req['pageName'];
     var args = req['args'];
+    if (isDart) {
+      args = req;
+    }
+
     var url = args['url'];
     var callId = args['callId'];
     var successCallback = args['success'];
@@ -86,12 +90,14 @@ class FairNet extends IFairPlugin {
     }
   }
 
-  Future<Response<dynamic>> _post(String path, {Map<String, dynamic> queryParameters}) async {
+  Future<Response<dynamic>> _post(String path,
+      {Map<String, dynamic> queryParameters}) async {
     var resp = await _getDio().post(path, queryParameters: queryParameters);
     return Future.value(resp);
   }
 
-  Future<Response<dynamic>> _get(String path, {Map<String, dynamic> queryParameters}) async {
+  Future<Response<dynamic>> _get(String path,
+      {Map<String, dynamic> queryParameters}) async {
     var resp = await _getDio().get(path, queryParameters: queryParameters);
     return Future.value(resp);
   }
