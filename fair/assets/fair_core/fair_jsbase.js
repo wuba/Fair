@@ -6,27 +6,22 @@ function inherit(cls, sup) {
     cls.prototype.constructor = cls;
     cls.prototype.$superSubstitution = cls.prototype.__proto__;
 }
-
+Object.assign(Object.prototype, {
+    __op_idx__: function(key) {
+        console.log('kkkkkkkk'+key);
+        return this[key];
+    },
+});
 function convertObjectLiteralToSetOrMap(obj) {
-  let isSet = Object.prototype.toString.call(obj) == "[object Array]";
+  let isSet = Object.prototype.toString.call(obj) == '[object Array]';
   if (!isSet) {
-    function convertToMap(obj_) {
-      const t = Object.prototype.toString.call(obj_);
-      if (t == "[object Array]") {
-        return obj_.map((item) => convertToMap(item));
-      } else if (t == "[object Object]") {
-        let keys = Object.getOwnPropertyNames(obj_);
-        let res = new Map();
-        keys.forEach((k) => res.set(k, convertToMap(obj_[k])));
-        return res;
-      } else {
-        return obj_;
-      }
-    }
-    return convertToMap(obj);
+    let keys = Object.getOwnPropertyNames(obj);
+    let res = new Map();
+    keys.forEach(k => res.set(k, obj[k]));
+    return res;
   } else {
     let res = new Set();
-    obj.forEach((item) => res.add(item));
+    obj.forEach(item => res.add(item));
     return res;
   }
 }

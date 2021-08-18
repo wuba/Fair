@@ -25,6 +25,7 @@ class _PicNetDemoPageStateful extends State {
       'pageName': '#FairKey#',
       'method': 'GET',
       'url': 'https://www.wanandroid.com/banner/json',
+      'data': {'order_id': 1234, 'content': 'test','aa':['hello','world']},
       'success': (resp) {
         if (resp == null) {
           return;

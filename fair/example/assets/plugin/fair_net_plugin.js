@@ -2,13 +2,16 @@
 //会在基础js加载之后加载
 let callBack = {};
 let callBackId = 0;
+
+
 let FairNet = function () {
     return {
         request: function (resp) {
             let respMap = {};
-            for (let [k, v] of resp) {
-                respMap[k] = v;
-            }
+//            for (let [k, v] of resp) {
+//                respMap[k] = v;
+//            }
+            respMap=mapOrSetToObject(resp);
             let id = 'FairNet$' + (++callBackId);
             let requestParameter = {};
             requestParameter['className'] = "FairNet#request";
@@ -18,12 +21,13 @@ let FairNet = function () {
             requestParameter['pageName'] = respMap['pageName'];
             requestParameter['args'] = respMap;
             let map = JSON.stringify(requestParameter);
+//            let map =JSON.stringify(toJson(requestParameter));
             console.log('FairNet请求参数：' + map);
             invokeFlutterCommonChannel(map, (resultStr) => {
                 console.log('FairNet请求结果：' + resultStr);
                 let responseMap = JSON.parse(resultStr);
                 console.log('FairNet请求结果1：' + responseMap);
-               let data = responseMap['data']
+                let data = responseMap['data']
                 responseMap['data'] = data.data;
                 let id = responseMap['callId']
                 console.log('FairNet请求结果2：' + id);

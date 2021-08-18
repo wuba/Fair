@@ -142,6 +142,36 @@ function setState(pageName, obj) {
     console.log('JS:setState()' + map);
     invokeFlutterCommonChannel(map);
 }
+function mapOrSetToObject(arg) {
+
+    if (Object.prototype.toString.call(arg) === '[object Map]') {
+        let obj1 = {}
+        for (let [k, v] of arg) {
+            obj1[k] = mapOrSetToObject(v);
+        }
+        return obj1;
+    }
+
+    if (Object.prototype.toString.call(arg) === '[object Array]') {
+        let obj2 = [];
+        for (let k of arg) {
+            obj2.push(mapOrSetToObject(k));
+        }
+        return obj2;
+    }
+
+    if (Object.prototype.toString.call(arg) === '[object Object]') {
+        let keys = Object.getOwnPropertyNames(arg);
+        let obj3 = {};
+        for (let key of keys) {
+            let value = arg[key];
+            obj3[key] = mapOrSetToObject(value);
+        }
+        return obj3;
+    }
+
+    return arg;
+}
 
 const invokeFlutterCommonChannel = (invokeData, callback) => {
     console.log("invokeData" + invokeData)
