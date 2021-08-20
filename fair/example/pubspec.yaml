@@ -26,7 +26,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^1.4.0
   fair_compiler:
-    path: ../../fair_compiler
+    path: ../../compiler
 
 # Switch to another stable flutter version
 #dependency_overrides:
