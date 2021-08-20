@@ -40,6 +40,9 @@ class FairPluginDispatcher {
   }
 
   static void registerPlugins(Map<String, IFairPlugin> plugins) {
+    if (plugins == null || plugins.isEmpty) {
+      return;
+    }
     pluginMap.addAll(plugins);
   }
 }

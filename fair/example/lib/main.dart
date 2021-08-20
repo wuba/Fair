@@ -31,13 +31,10 @@ void main() {
 }
 
 dynamic _getParams(BuildContext context, String key) =>
-    (ModalRoute.of(context).settings.arguments is Map)
-        ? (ModalRoute.of(context).settings.arguments as Map)[key]
-        : null;
+    (ModalRoute.of(context).settings.arguments is Map) ? (ModalRoute.of(context).settings.arguments as Map)[key] : null;
 
 dynamic _getData(BuildContext context, String name) {
-  var data =
-      Map.from((ModalRoute.of(context).settings.arguments as Map)['data']);
+  var data = Map.from((ModalRoute.of(context).settings.arguments as Map)['data']);
   data.addAll({'pageName': name});
   return data;
 }
@@ -52,14 +49,12 @@ dynamic _getApp() => FairApp(
       child: MaterialApp(
         home: LogicHomePage(),
         routes: {
-          'native_page': (context) => SampleLogicPage2Page(_getData(context, _getParams(context, 'name'))), // 测试Fair跳转原生使用
+          'native_page': (context) => SampleLogicPage2Page(_getData(context, _getParams(context, 'name'))),
+          // 测试Fair跳转原生使用
           'fair_page': (context) => FairWidget(
-                  name: _getParams(context, 'name'),
-                  path: _getParams(context, 'path'),
-                  data: {
-                    'fairProps': jsonEncode(
-                        _getData(context, _getParams(context, 'name')))
-                  }),
+              name: _getParams(context, 'name'),
+              path: _getParams(context, 'path'),
+              data: {'fairProps': jsonEncode(_getData(context, _getParams(context, 'name')))}),
         },
       ),
     );
