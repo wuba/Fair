@@ -1,7 +1,5 @@
-import 'package:device_info/device_info.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_libs_app/colors.dart';
 
 @FairPatch()
 class FairDeviceInfoWidget extends StatefulWidget {
@@ -16,7 +14,10 @@ class FairDeviceInfoWidget extends StatefulWidget {
 }
 
 class _FairDeviceInfoWidgetState extends State<FairDeviceInfoWidget> {
-  // @FairWell('_deviceInfo')
+  @FairProps()
+  var fairProps;
+
+  @FairWell('_deviceInfo')
   String _deviceInfo = "";
   // @FairWell('_textAlign')
   // TextAlign _textAlign = TextAlign.center;
@@ -27,12 +28,12 @@ class _FairDeviceInfoWidgetState extends State<FairDeviceInfoWidget> {
     _getDeviceInfo();
   }
 
-  // @FairWell('_getDeviceInfo')
+  @FairWell('_getDeviceInfo')
   Future<void> _getDeviceInfo() async {
 
   }
 
-  // @FairWell('_pop')
+  @FairWell('_pop')
   void _pop(){}
 
   @override

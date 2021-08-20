@@ -33,7 +33,7 @@ class DeviceInfoDelegate extends CommonDelegate{
   @override
   void initState() {
     super.initState();
-    _getDeviceInfo();
+    // _getDeviceInfo();
   }
 
   @override
