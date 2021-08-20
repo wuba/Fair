@@ -5,7 +5,7 @@
  */
 
 import 'package:fair/fair.dart';
-import 'package:fair_example/src/page/plugins/net/fair_plugin.dart';
+import 'package:fair_example/src/page/plugins/net/fair_net_plugin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,22 +18,25 @@ class PicNetDemoPage extends StatefulWidget {
 }
 
 class _PicNetDemoPageStateful extends State {
-
-  PicData _picData = PicData();
+  final _picData = PicData();
 
   void onClick() {
+    var order_id=10;
     FairNet().request({
       'pageName': '#FairKey#',
       'method': 'GET',
       'url': 'https://www.wanandroid.com/banner/json',
+      'data': {'order_id': order_id, 'content': 'test','aa':['hello','world']},
       'success': (resp) {
         if (resp == null) {
           return;
         }
-        List data = resp['data'];
+        var data = resp['data'];
         String u = data[0]['imagePath'];
         _picData.picUrl = u;
         _picData.title = data[0]['title'];
+        setState(() {
+        });
       }
     });
   }
@@ -57,7 +60,7 @@ class _PicNetDemoPageStateful extends State {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: Icon(Icons.arrow_forward_outlined),
         onPressed: onClick,
       ),
     );
@@ -65,8 +68,7 @@ class _PicNetDemoPageStateful extends State {
 }
 
 class PicData extends Object {
-  String picUrl =
-      'https://www.youxinpai.com/public/home/widget/services/4s/img/img_4s_4_0943ac1.jpg';
+  String picUrl = 'https://www.youxinpai.com/public/home/widget/services/4s/img/img_4s_4_0943ac1.jpg';
   String title = '';
   String content = '';
 }

@@ -108,7 +108,6 @@ class FairApp extends InheritedWidget with AppState {
 
   static void runApplication(Widget app, {Map<String, IFairPlugin> plugins}) {
     // WidgetsFlutterBinding.ensureInitialized();
-    //todo 是否可以通过注解的方式注册
     FairPluginDispatcher.registerPlugins(plugins);
     Runtime().loadCoreJs().then((value) => runApp(app));
   }

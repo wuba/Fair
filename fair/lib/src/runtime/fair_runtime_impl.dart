@@ -5,6 +5,7 @@
  */
 
 import 'dart:convert';
+import 'package:fair/fair.dart';
 import 'package:flutter/services.dart';
 import 'dart:ffi'; // For FFI
 import 'dart:io'; // For Platform.isX
@@ -64,8 +65,7 @@ class Runtime implements IRuntime {
   }
 
   @override
-  Future<dynamic> addScript(
-      String pageName, String script, dynamic props) async {
+  Future<dynamic> addScript(String pageName, String script, dynamic props) async {
     var scriptSource = await rootBundle.loadString(script);
     var fairProps;
     if (props != null && props['fairProps'] != null) {
@@ -73,15 +73,11 @@ class Runtime implements IRuntime {
     } else {
       fairProps = '{}';
     }
-    scriptSource =
-        scriptSource.replaceFirst(new RegExp(r'#FairProps#'), fairProps);
-    scriptSource = scriptSource.replaceAll(new RegExp(r'#FairKey#'), pageName);
+    scriptSource = scriptSource.replaceFirst(RegExp(r'#FairProps#'), fairProps);
+    scriptSource = scriptSource.replaceAll(RegExp(r'#FairKey#'), pageName);
     var map = <dynamic, dynamic>{};
     map[FairMessage.PATH] = scriptSource;
     map[FairMessage.PAGE_NAME] = pageName;
-    //添加base js
-    // await loadCoreJs();
-
     return _channel.loadJS(jsonEncode(map), null);
   }
 
@@ -91,8 +87,7 @@ class Runtime implements IRuntime {
     map[FairMessage.LOAD_JS] = script;
     var msg = FairMessage(pageName, FairMessage.EVALUATE, map);
     var from = msg.from();
-    var reply = Utf8.fromUtf8(
-        _channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from))));
+    var reply = Utf8.fromUtf8(_channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from))));
     return Future.value(reply);
   }
 
@@ -102,40 +97,36 @@ class Runtime implements IRuntime {
     map[FairMessage.LOAD_JS] = script;
     var msg = FairMessage(pageName, FairMessage.VARIABLE, map);
     var from = msg.from();
-    final Map<String, dynamic> reMap = jsonDecode(Utf8.fromUtf8(
-        _channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from)))));
+    final Map<String, dynamic> reMap =
+        jsonDecode(Utf8.fromUtf8(_channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from)))));
     return reMap;
   }
 
   @override
-  Future<String> invokeMethod(
-      String pageName, String funcName, List<dynamic> parameters) {
+  Future<String> invokeMethod(String pageName, String funcName, List<dynamic> parameters) {
     var map = <dynamic, dynamic>{};
     map[FairMessage.FUNC_NAME] = funcName;
     map[FairMessage.ARGS] = parameters;
     var msg = FairMessage(pageName, FairMessage.METHOD, map);
     var from = msg.from();
     var reply = _channel.sendCommonMessage(jsonEncode(from));
-    // reply.then((value) => print('来自Native端的消息invokeMethod${value}'));
+
 
     return Future.value(reply);
   }
 
   @override
-  String invokeMethodSync(
-      String pageName, String funcName, List<dynamic> parameters) {
+  String invokeMethodSync(String pageName, String funcName, List<dynamic> parameters) {
     var map = <dynamic, dynamic>{};
     map[FairMessage.FUNC_NAME] = funcName;
     map[FairMessage.ARGS] = parameters;
     var msg = FairMessage(pageName, FairMessage.METHOD, map);
     var from = msg.from();
-    return Utf8.fromUtf8(
-        _channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from))));
+    return Utf8.fromUtf8(_channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from))));
   }
 
   @override
-  Future<String> variables(
-      String pageName, Map<dynamic, dynamic> variableNames) {
+  Future<String> variables(String pageName, Map<dynamic, dynamic> variableNames) {
     var msg = FairMessage(pageName, FairMessage.VARIABLE, variableNames);
     var reply = _channel.sendCommonMessage(jsonEncode(msg.from()));
     return Future.value(reply);
@@ -145,8 +136,7 @@ class Runtime implements IRuntime {
   String variablesSync(String pageName, Map<dynamic, dynamic> variableNames) {
     var msg = FairMessage(pageName, FairMessage.VARIABLE, variableNames);
     var from = msg.from();
-    return Utf8.fromUtf8(
-        _channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from))));
+    return Utf8.fromUtf8(_channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from))));
   }
 
   @override
@@ -161,22 +151,16 @@ class Runtime implements IRuntime {
   }
 
   /*
-   * 加载用户的基础配置 //todo 单线程模型修改是否会出现值不同步问题
+   * 加载用户的基础配置
    */
   Future<dynamic> loadCoreJs() async {
-    //如果没有加载过js
     var map = <dynamic, dynamic>{};
     if (!loadBaseJsConstant[0]) {
-      /*
-       * 用户配置的脚本，里面包含core_js以及用户的拓展
-       */
       var baseJsSource = '';
-
       /*
        * 读取基础配置内容
        */
-      var coreConfigJson = await rootBundle
-          .loadString('packages/fair/assets/fair_home.json');
+      var coreConfigJson = await rootBundle.loadString('packages/fair/assets/fair_home.json');
       var coreConfig = jsonDecode(coreConfigJson)['coreJs'];
       Iterable<String> coreKeys = coreConfig.keys;
       for (var key in coreKeys) {
@@ -188,9 +172,8 @@ class Runtime implements IRuntime {
        * 例如用户配置的插件，或者用户的其它拓展等，该配置json名称固定
        */
       var pluginJsSource = ' ';
-      try{
-        var customConfigJson =
-        await rootBundle.loadString('assets/fair_basic_config.json');
+      try {
+        var customConfigJson = await rootBundle.loadString('assets/fair_basic_config.json');
         var customConfig = jsonDecode(customConfigJson);
         //加载用户自定义的plugin
         Map plugins = customConfig['plugin'];
@@ -198,12 +181,14 @@ class Runtime implements IRuntime {
         if (plugins != null) {
           Iterable<String> keys = plugins.keys;
           for (var k in keys) {
-            pluginJsSource =
-                pluginJsSource + ' ; ' + await rootBundle.loadString(plugins[k]);
+            pluginJsSource = pluginJsSource + ' ; ' + await rootBundle.loadString(plugins[k]);
           }
         }
-      }catch(e){
-        print('##没有配置fair_basic_config.json文件,请检查文件是否配置或者名称是否正确##');
+      } catch (e) {
+        //用户可能会自定义js拓展，但是不需要使用dart的功能
+        if (FairPluginDispatcher.pluginMap.isNotEmpty) {
+          print('##没有配置fair_basic_config.json文件,请检查文件是否配置或者名称是否正确##');
+        }
       }
       loadBaseJsConstant[0] = true;
       map[FairMessage.PATH] = baseJsSource + ' ; ' + pluginJsSource;

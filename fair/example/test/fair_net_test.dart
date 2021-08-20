@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:fair_example/src/page/plugins/net/fair_plugin.dart';
+import 'package:fair_example/src/page/plugins/net/fair_net_plugin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

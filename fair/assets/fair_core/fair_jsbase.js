@@ -6,7 +6,12 @@ function inherit(cls, sup) {
     cls.prototype.constructor = cls;
     cls.prototype.$superSubstitution = cls.prototype.__proto__;
 }
-
+Object.assign(Object.prototype, {
+    __op_idx__: function(key) {
+        console.log('kkkkkkkk'+key);
+        return this[key];
+    },
+});
 function convertObjectLiteralToSetOrMap(obj) {
   let isSet = Object.prototype.toString.call(obj) == '[object Array]';
   if (!isSet) {
