@@ -21,11 +21,12 @@ class _PicNetDemoPageStateful extends State {
   final _picData = PicData();
 
   void onClick() {
+    var order_id=10;
     FairNet().request({
       'pageName': '#FairKey#',
       'method': 'GET',
       'url': 'https://www.wanandroid.com/banner/json',
-      'data': {'order_id': 1234, 'content': 'test','aa':['hello','world']},
+      'data': {'order_id': order_id, 'content': 'test','aa':['hello','world']},
       'success': (resp) {
         if (resp == null) {
           return;
