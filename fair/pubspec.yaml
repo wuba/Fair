@@ -1,6 +1,6 @@
 name: fair
 description: Flutter Fair is a package used to update widget tree dynamically.
-version: 0.3.0
+version: 2.0.0
 homepage: https://fair.58.com/
 
 environment:
@@ -13,11 +13,11 @@ dependencies:
 
 #  fair_annotation: ^0.2.0
   fair_annotation:
-    path: ../fair_annotation
+    path: ../annotation
 
 #  fair_version: ^0.2.0
   fair_version:
-    path: ../fair_version/flutter_1_22_4
+    path: ../version/flutter_1_22_4
 
   flat_buffers: ^1.12.0
   url_launcher: ^5.7.2

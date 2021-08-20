@@ -9,14 +9,13 @@ build/
 faircyarn.lock
 yarn-error.log
 node_modules/
-fairc
 yarn.lock
 yarn.error
 example/pubspec.lock
 fair/example/ios/Podfile.lock
 fair/pubspec.lock
 example/ios/Podfile.lock
-fair_compiler/test
+compiler/test
 doc/.vuepress/public/api
 doc/.vuepress/public/project/
 doc/.vuepress/dist/

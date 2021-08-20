@@ -36,12 +36,12 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^1.4.0
   fair_compiler:
-    path: ../../fair_compiler
+    path: ../../compiler
 
 # Switch to another stable flutter version
 dependency_overrides:
   fair_version:
-    path: ../../fair_version/flutter_1_22_4
+    path: ../../version/flutter_1_22_4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

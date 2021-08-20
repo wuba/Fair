@@ -23,7 +23,7 @@ dependencies:
   pedantic: ^1.8.0
 #  fair_annotation: ^0.2.0
   fair_annotation:
-    path: ../fair_annotation
+    path: ../annotation
   http: ^0.12.2
 
 dev_dependencies:

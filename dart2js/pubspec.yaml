@@ -1,0 +1,9 @@
+name: dartToJs
+description: Convert individual dart file to js.
+# version: 1.0.0
+
+environment:
+  sdk: '>=1.22.4 <3.0.0'
+dependencies:
+  analyzer: ^0.38.5
+  path: ^1.5.0

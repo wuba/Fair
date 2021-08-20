@@ -39,11 +39,11 @@ dev_dependencies:
   build_runner: ^1.4.0
   #  fair_compiler: ^0.2.0
   fair_compiler:
-    path: /Users/liuchao/Documents/dev/github/fair/fair_compiler
+    path: /Users/liuchao/Documents/dev/github/fair/compiler
 
 dependency_overrides:
   fair_version:
-    path: /Users/liuchao/Documents/dev/github/fair/fair_version/flutter_1_22_4
+    path: /Users/liuchao/Documents/dev/github/fair/version/flutter_1_22_4
 
 
 flutter:
