@@ -12,7 +12,7 @@ import 'package:fair_example/src/page/logic-page/sample_logic_page.dart';
 import 'package:fair_example/src/page/logic-page2page/sample_logic_page2page.dart';
 import 'package:fair_example/src/page/plugins/net/pic/net_demo_pic_fair.dart';
 import 'package:fair_example/src/page/plugins/sample_plugin.dart';
-import 'package:fair_example/src/page/sugers/sugers_home_page.dart';
+import 'package:fair_example/src/page/sugars/sugars_home_page.dart';
 import 'package:flutter/material.dart';
 
 class LogicHomePage extends StatelessWidget {

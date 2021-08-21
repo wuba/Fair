@@ -148,7 +148,7 @@ class IfEqualBoolPage
 第五步：调用展示
 
     Navigator.pushNamed(context, 'fair_page',
-                  arguments: {'name': 'ifEqualBool', 'path': 'assets/bundle/lib_src_page_sugers_ifequalbool_page.fair.json', 'data': {'pageName': 'ifEqualBool'，'count': 58}});
+                  arguments: {'name': 'ifEqualBool', 'path': 'assets/bundle/lib_src_page_sugars_ifequalbool_page.fair.json', 'data': {'pageName': 'ifEqualBool'，'count': 58}});
 
 
 

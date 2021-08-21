@@ -193,7 +193,7 @@ packages:
   fair:
     dependency: "direct main"
     description:
-      path: "/Users/liuchao/Documents/dev/github/fair/fair"
+      path: "../../fair"
       relative: false
     source: path
     version: "0.3.0"
@@ -207,14 +207,14 @@ packages:
   fair_compiler:
     dependency: "direct dev"
     description:
-      path: "/Users/liuchao/Documents/dev/github/fair/fair_compiler"
+      path: "../../compiler"
       relative: false
     source: path
     version: "0.3.0+1"
   fair_version:
     dependency: "direct overridden"
     description:
-      path: "/Users/liuchao/Documents/dev/github/fair/fair_version/flutter_1_22_4"
+      path: "../../version/flutter_1_22_4"
       relative: false
     source: path
     version: "0.2.0"

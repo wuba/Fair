@@ -1257,11 +1257,11 @@ var p = () => {
             return (props['block']) as Route;
           },
       'Navigator.defaultRouteName': Navigator.defaultRouteName,
-      'Navigator.pushNamed': (props) => Navigator.pushNamed(
-            props['pa'][0],
-            props['pa'][1],
-            arguments: props['arguments'],
-          ),
+      // 'Navigator.pushNamed': (props) => Navigator.pushNamed(
+      //       props['pa'][0],
+      //       props['pa'][1],
+      //       arguments: props['arguments'],
+      //     ),
       'Navigator.restorablePushNamed': (props) => Navigator.restorablePushNamed(
             props['pa'][0],
             props['pa'][1],
@@ -1281,12 +1281,12 @@ var p = () => {
             result: props['result'],
             arguments: props['arguments'],
           ),
-      'Navigator.popAndPushNamed': (props) => Navigator.popAndPushNamed(
-            props['pa'][0],
-            props['pa'][1],
-            result: props['result'],
-            arguments: props['arguments'],
-          ),
+      // 'Navigator.popAndPushNamed': (props) => Navigator.popAndPushNamed(
+      //       props['pa'][0],
+      //       props['pa'][1],
+      //       result: props['result'],
+      //       arguments: props['arguments'],
+      //     ),
       'Navigator.restorablePopAndPushNamed': (props) =>
           Navigator.restorablePopAndPushNamed(
             props['pa'][0],

@@ -301,7 +301,7 @@ class _PropValueBuilder extends _BindValueBuilder {
   }
 }
 
-class _FunctionBuilder extends _BindValueBuilder<String> {
+class _FunctionBuilder extends _BindValueBuilder {
   final Iterable<RegExpMatch> matches;
 
   _FunctionBuilder(
@@ -318,8 +318,8 @@ class _FunctionBuilder extends _BindValueBuilder<String> {
   }
 
   @override
-  String get value {
-    var extract = data;
+  dynamic get value {
+    var extract;
     matches
         .map((e) => {
       '0': binding?.runFunctionOf(e.group(0).substring(2, e.group(0).length - 1)),
@@ -328,7 +328,9 @@ class _FunctionBuilder extends _BindValueBuilder<String> {
         .forEach((e) {
       var first = e['0'] is ValueNotifier ? e['0'].value : e['0'];
       if (first != null) {
-        extract = extract.replaceFirst(e['1'], '$first');
+        extract = first; // extract.replaceFirst(e['1'], '$first');
+      } else {
+        extract = data;
       }
     });
     return extract;
