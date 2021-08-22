@@ -37,7 +37,7 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 
 | Flutter版本              | Dart版本    | CI |
 | ------------------------ | ----------- |----------- |
-| Flutter 2.0.6           | Dart 2.12.3 | ![v1.22.5](https://github.com/wuba/fair/workflows/build/badge.svg)|
+| Flutter 2.0.6           | Dart 2.12.3 | ![v2.0.6](https://github.com/wuba/fair/workflows/build/badge.svg)|
 | Flutter 1.22.6           | Dart 2.10.5 | ![v1.22.5](https://github.com/wuba/fair/workflows/build/badge.svg)|
 | Flutter 1.22.4           | Dart 2.10.4 | ![v1.22.5](https://github.com/wuba/fair/workflows/1224/badge.svg)|
 | Flutter 1.20.4           | Dart 2.9.2  | ![v1.20.4](https://github.com/wuba/fair/workflows/1204/badge.svg)|
@@ -78,9 +78,9 @@ samples
 更多接入操作请参考 [https://fair.58.com/](https://fair.58.com/)
 
 * fair ![https://pub.dev/packages/fair](https://img.shields.io/pub/v/fair.svg)
-* fair_compiler ![https://pub.dev/packages/fair_compiler](https://img.shields.io/pub/v/fair_compiler.svg)
-* fair_annotation ![https://pub.dev/packages/fair_annotation](https://img.shields.io/pub/v/fair_annotation.svg)
-* fair_version ![https://pub.dev/packages/fair_version](https://img.shields.io/pub/v/fair_version.svg)
+* compiler ![https://pub.dev/packages/fair_compiler](https://img.shields.io/pub/v/fair_compiler.svg)
+* annotation ![https://pub.dev/packages/fair_annotation](https://img.shields.io/pub/v/fair_annotation.svg)
+* version ![https://pub.dev/packages/fair_version](https://img.shields.io/pub/v/fair_version.svg)
 
 ## 📎相关介绍
 * [Flutter动态化框架Fair文档上线&开源倒计时](https://juejin.cn/post/6901600898603024391)

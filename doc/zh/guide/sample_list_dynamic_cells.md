@@ -5,8 +5,7 @@
     例如：面对API简单控制展示无法满足的情况下，对一块内容做整体UI调整时，可以通过隐藏原有内容，替换成动态的Cell来实现目标。
 
 ## 预览效果
-
-![listCell](./assets/smaple_list_dynamic_cell.jpg)
+<img src="./assets/smaple_list_dynamic_cell.jpg" width = "402" height = "673" alt="listCell" align=center />
 
 ## 集成方式
 
