@@ -13,8 +13,8 @@
 
 ---
 
-Fair是为Flutter设计的，UI&模板动态化框架，用于动态更新Widget Tree。
-Flutter Fair is a new package used to update widget tree dynamically.
+Fair是为Flutter设计的动态化框架，通过Fair Compiler工具对原生Dart源文件的自动转化，使项目获得动态更新Widget Tree和State的能力。
+Fair is a dynamic framework designed for Flutter, which enables projects to dynamically update Widget Tree and State through the automatic conversion of native Dart source files through the Fair Compiler tool.
 
 > 在线文档：[https://fair.58.com/](https://fair.58.com/)
 
@@ -37,6 +37,7 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 
 | Flutter版本              | Dart版本    | CI |
 | ------------------------ | ----------- |----------- |
+| Flutter 2.0.6           | Dart 2.12.3 | ![v2.0.6](https://github.com/wuba/fair/workflows/build/badge.svg)|
 | Flutter 1.22.6           | Dart 2.10.5 | ![v1.22.5](https://github.com/wuba/fair/workflows/build/badge.svg)|
 | Flutter 1.22.4           | Dart 2.10.4 | ![v1.22.5](https://github.com/wuba/fair/workflows/1224/badge.svg)|
 | Flutter 1.20.4           | Dart 2.9.2  | ![v1.20.4](https://github.com/wuba/fair/workflows/1204/badge.svg)|
@@ -47,7 +48,7 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 # Switch to another stable flutter version
 #dependency_overrides:
 #  fair_version:
-#    path: ../../fair_version/flutter_1_22_6
+#    path: ../../fair_version/flutter_2_0_6
 
 ```
 > https://flutter.dev/docs/development/tools/sdk/releases?tab=macos
@@ -77,9 +78,9 @@ samples
 更多接入操作请参考 [https://fair.58.com/](https://fair.58.com/)
 
 * fair ![https://pub.dev/packages/fair](https://img.shields.io/pub/v/fair.svg)
-* fair_compiler ![https://pub.dev/packages/fair_compiler](https://img.shields.io/pub/v/fair_compiler.svg)
-* fair_annotation ![https://pub.dev/packages/fair_annotation](https://img.shields.io/pub/v/fair_annotation.svg)
-* fair_version ![https://pub.dev/packages/fair_version](https://img.shields.io/pub/v/fair_version.svg)
+* compiler ![https://pub.dev/packages/fair_compiler](https://img.shields.io/pub/v/fair_compiler.svg)
+* annotation ![https://pub.dev/packages/fair_annotation](https://img.shields.io/pub/v/fair_annotation.svg)
+* version ![https://pub.dev/packages/fair_version](https://img.shields.io/pub/v/fair_version.svg)
 
 ## 📎相关介绍
 * [Flutter动态化框架Fair文档上线&开源倒计时](https://juejin.cn/post/6901600898603024391)
@@ -112,6 +113,7 @@ samples
   * 支持第三方插件在逻辑运算中的扩展 ✅
   * 支持布局build方法的子方法拆封 ✅
   * 支持布局和逻辑的混编 ✅
+  * 转换工具开源 ✅
     
 ## ⚠️Unsupported Features
 由于dart语法解析工作量奇大，会有部分语法和特殊使用方式的限制。
@@ -136,21 +138,25 @@ samples
 ## 🧯FAQ
 **自查步骤（新手必读）**
 1. 核对flutter版本与readme说明，确认该版本已被Fair支持
-2. 核查fair_version分支版本于flutter一致，且等同于第一步版本号
+2. 核查version分支版本于flutter一致，且等同于第一步版本号
 2. 如果尚未看过[文档](https://fair.58.com)，请先运行自带的sample，能跑起来再接入app
 3. 遇到编译错误，请查看终端日志，过滤fair关键词
 4. 到github提issue，或gitter。留档/解决，并提供flutter环境信息`flutter doctor --verbose`
 ---
 
+* 如何调试fairc 和 dart2js？
+
+在compiler build工具，内部使用的是fairc和dart2js的AOT版本。打包AOT请使用dart compile aot-snapshot **.dart
+
 * 为什么没有bin产物？
 
-bin为可选的flatbuffer产物，本机如果需要，请安装[flatc](http://google.github.io/flatbuffers/flatbuffers_guide_building.html)
+bin为可选的flatbuffer产物，fair 2期开源了 fairc和dart2js编译转换工具。
 
-* 执行flutter pub run build_runner build后没有产物
+* 执行flutter pub run build_runner build后没有产物？
 
 请根据适配要求，核查flutter，dart版本
 
-* 执行flutter pub run build_runner build后，提示编译错误信息
+* 执行flutter pub run build_runner build后，提示编译错误信息？
 
 根据错误日志，有几种情况：1.原代码中存在逻辑表达式，语法解析不通过，尝试剥离逻辑为module；2.`.dart_tool`文件权限问题，请删除后重试
 

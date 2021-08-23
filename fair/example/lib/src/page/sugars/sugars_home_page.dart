@@ -6,11 +6,11 @@
 
 import 'package:fair_example/src/page/logic-page/sample_logic_page.dart';
 import 'package:fair_example/src/page/logic-page2page/sample_logic_page2page.dart';
-import 'package:fair_example/src/page/sugers/ifequal_page.dart';
-import 'package:fair_example/src/page/sugers/ifequalbool_page.dart';
-import 'package:fair_example/src/page/sugers/ifrange_page.dart';
-import 'package:fair_example/src/page/sugers/map_page.dart';
-import 'package:fair_example/src/page/sugers/mapeach_page.dart';
+import 'package:fair_example/src/page/sugars/ifequal_page.dart';
+import 'package:fair_example/src/page/sugars/ifequalbool_page.dart';
+import 'package:fair_example/src/page/sugars/ifrange_page.dart';
+import 'package:fair_example/src/page/sugars/map_page.dart';
+import 'package:fair_example/src/page/sugars/mapeach_page.dart';
 import 'package:flutter/material.dart';
 
 class SugerListPage extends StatelessWidget {
@@ -25,7 +25,7 @@ class SugerListPage extends StatelessWidget {
           children: <Widget>[
             addItem('Sugar.ifEqual', () {
               Navigator.pushNamed(context, 'fair_page',
-                  arguments: {'name': 'ifEqual', 'path': 'assets/bundle/lib_src_page_sugers_ifequal_page.fair.json', 'data': {'pageName': 'ifEqual'}});
+                  arguments: {'name': 'ifEqual', 'path': 'assets/bundle/lib_src_page_sugars_ifequal_page.fair.json', 'data': {'pageName': 'ifEqual'}});
 
               // 原生界面
               // Navigator.push(
@@ -44,7 +44,7 @@ class SugerListPage extends StatelessWidget {
               //           IfEqualBoolPage({'pageName': 'ifEqualBool'}),
               //     ));
               Navigator.pushNamed(context, 'fair_page',
-                  arguments: {'name': 'ifEqualBool', 'path': 'assets/bundle/lib_src_page_sugers_ifequalbool_page.fair.json', 'data': {'pageName': 'ifEqualBool'}});
+                  arguments: {'name': 'ifEqualBool', 'path': 'assets/bundle/lib_src_page_sugars_ifequalbool_page.fair.json', 'data': {'pageName': 'ifEqualBool'}});
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('Sugar.ifRange', () {
@@ -55,7 +55,7 @@ class SugerListPage extends StatelessWidget {
               //       builder: (context) => IfRangePage({'pageName': 'ifRange'}),
               //     ));
               Navigator.pushNamed(context, 'fair_page',
-                  arguments: {'name': 'ifRange', 'path': 'assets/bundle/lib_src_page_sugers_ifrange_page.fair.json', 'data': {'pageName': 'ifRange'}});
+                  arguments: {'name': 'ifRange', 'path': 'assets/bundle/lib_src_page_sugars_ifrange_page.fair.json', 'data': {'pageName': 'ifRange'}});
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('Sugar.mapEach', () {
@@ -66,7 +66,7 @@ class SugerListPage extends StatelessWidget {
               //       builder: (context) => MapEachPage({'pageName': 'mapEach'}),
               //     ));
               Navigator.pushNamed(context, 'fair_page',
-                  arguments: {'name': 'mapeach', 'path': 'assets/bundle/lib_src_page_sugers_mapeach_page.fair.json', 'data': {'pageName': 'mapeach'}});
+                  arguments: {'name': 'mapeach', 'path': 'assets/bundle/lib_src_page_sugars_mapeach_page.fair.json', 'data': {'pageName': 'mapeach'}});
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('Sugar.map', () {
@@ -77,7 +77,7 @@ class SugerListPage extends StatelessWidget {
               //       builder: (context) => MapPage({'pageName': 'map'}),
               //     ));
               Navigator.pushNamed(context, 'fair_page',
-                  arguments: {'name': 'map', 'path': 'assets/bundle/lib_src_page_sugers_map_page.fair.json', 'data': {'pageName': 'map'}});
+                  arguments: {'name': 'map', 'path': 'assets/bundle/lib_src_page_sugars_map_page.fair.json', 'data': {'pageName': 'map'}});
             }),
           ],
         ));

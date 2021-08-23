@@ -41,7 +41,7 @@ class BindingData {
     if (_functions[funcName] == null) {
       var result = _functions['runtimeInvokeMethodSync'](funcName);
       var value = jsonDecode(result);
-      return ValueNotifier(value['result']['result']);
+      return value['result']['result'];
     } else {
       return _functions[funcName];
     }

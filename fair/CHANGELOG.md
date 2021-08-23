@@ -1,3 +1,8 @@
+## [2.0.0]
+* Bug fix of fair_version widgets
+* Add support of flutter 2.0.6
+* Add support of logical dynamics
+
 ## [0.3.0]
 * Bug fix of fair_version widgets
 * Add support of flutter 1.22.6
