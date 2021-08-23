@@ -131,9 +131,10 @@ samples
 
 | 微信                         | 美事（内部）                 |
 | ---------------------------- | ---------------------------- |
-| ![wechat](https://fair.58.com/assets/img/wechat.a8ffe3f0.png) | ![meishi](https://fair.58.com/assets/img/meishi.5a7cba60.jpg) |
+| ![wechat](./weixin-assistant.jpeg) | ![meishi](https://fair.58.com/assets/img/meishi.5a7cba60.jpg) |
 
-> 如微信码过期，可以找管理员(请务必备注flutter fair，否则不予通过)：do_not_let_me_know
+> 微信入群：请先添加58技术小秘书为好友，备注fair，小秘书邀请进群。
+
 
 ## 🧯FAQ
 **自查步骤（新手必读）**
