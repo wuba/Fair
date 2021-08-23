@@ -4,12 +4,15 @@
  * found in the LICENSE file.
  */
 
+import 'dart:ui';
+
 import 'package:fair/fair.dart';
 
 import 'theme.dart';
 
 class MyHomePageDelegate extends FairDelegate {
   int _counter = 0;
+  bool _check = false;
 
   void _incrementCounter() {
     setState(() {
@@ -17,10 +20,13 @@ class MyHomePageDelegate extends FairDelegate {
     });
   }
 
+
   @override
   Map<String, PropertyValue> bindValue() {
     var value = super.bindValue();
     value['_counter'] = () => _counter;
+    value['_color'] = () => const Color(0xffff0000);
+    value['_check']= () => _check;
     return value;
   }
 
@@ -29,6 +35,7 @@ class MyHomePageDelegate extends FairDelegate {
     var fun = super.bindFunction();
     fun['_incrementCounter'] = _incrementCounter;
     fun['ThemeStyle.headline4'] = (props) => ThemeStyle.headline4(context);
+    //fun['AJKColors.ajkPrimaryColor'] = () => AJKColors.ajkPrimaryColor;
     return fun;
   }
 }

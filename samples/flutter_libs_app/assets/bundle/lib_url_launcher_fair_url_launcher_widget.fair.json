@@ -1,0 +1,378 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "leading": {
+          "className": "GestureDetector",
+          "na": {
+            "child": {
+              "className": "Icon",
+              "pa": [
+                "#(Icons.arrow_back)"
+              ],
+              "na": {
+                "size": 20
+              }
+            },
+            "onTap": "#(_pop)"
+          }
+        },
+        "centerTitle": true,
+        "title": {
+          "className": "Text",
+          "pa": [
+            "$(widget.title)"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "Row",
+      "na": {
+        "mainAxisSize": "#(MainAxisSize.max)",
+        "mainAxisAlignment": "#(MainAxisAlignment.center)",
+        "children": [
+          {
+            "className": "Column",
+            "na": {
+              "crossAxisAlignment": "#(CrossAxisAlignment.center)",
+              "mainAxisSize": "#(MainAxisSize.max)",
+              "mainAxisAlignment": "#(MainAxisAlignment.center)",
+              "children": [
+                {
+                  "className": "Container",
+                  "na": {
+                    "width": 300,
+                    "child": {
+                      "className": "TextField",
+                      "na": {
+                        "controller": "#(_editingController)",
+                        "maxLines": 1,
+                        "minLines": 1
+                      }
+                    }
+                  }
+                },
+                {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.only",
+                      "na": {
+                        "top": 20
+                      }
+                    },
+                    "child": {
+                      "className": "GestureDetector",
+                      "na": {
+                        "child": {
+                          "className": "Container",
+                          "na": {
+                            "width": 300,
+                            "padding": {
+                              "className": "EdgeInsets.symmetric",
+                              "na": {
+                                "vertical": 10
+                              }
+                            },
+                            "decoration": {
+                              "className": "BoxDecoration",
+                              "na": {
+                                "borderRadius": {
+                                  "className": "BorderRadius.circular",
+                                  "pa": [
+                                    10
+                                  ]
+                                },
+                                "color": {
+                                  "className": "Color",
+                                  "pa": [
+                                    "0xFF1882F1"
+                                  ]
+                                }
+                              }
+                            },
+                            "child": {
+                              "className": "Text",
+                              "pa": [
+                                "根据输入跳转"
+                              ],
+                              "na": {
+                                "textAlign": "#(_textAlign)",
+                                "style": {
+                                  "className": "TextStyle",
+                                  "na": {
+                                    "fontSize": 16,
+                                    "color": "#(Colors.white)"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "onTap": "#(_launchByInput)"
+                      }
+                    }
+                  }
+                },
+                {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.only",
+                      "na": {
+                        "top": 20
+                      }
+                    },
+                    "child": {
+                      "className": "GestureDetector",
+                      "na": {
+                        "child": {
+                          "className": "Container",
+                          "na": {
+                            "width": 300,
+                            "padding": {
+                              "className": "EdgeInsets.symmetric",
+                              "na": {
+                                "vertical": 10
+                              }
+                            },
+                            "decoration": {
+                              "className": "BoxDecoration",
+                              "na": {
+                                "borderRadius": {
+                                  "className": "BorderRadius.circular",
+                                  "pa": [
+                                    10
+                                  ]
+                                },
+                                "color": {
+                                  "className": "Color",
+                                  "pa": [
+                                    "0xFF1882F1"
+                                  ]
+                                }
+                              }
+                            },
+                            "child": {
+                              "className": "Text",
+                              "pa": [
+                                "跳转网络链接"
+                              ],
+                              "na": {
+                                "textAlign": "#(_textAlign)",
+                                "style": {
+                                  "className": "TextStyle",
+                                  "na": {
+                                    "fontSize": 16,
+                                    "color": "#(Colors.white)"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "onTap": "#(_launch)"
+                      }
+                    }
+                  }
+                },
+                {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.only",
+                      "na": {
+                        "top": 20
+                      }
+                    },
+                    "child": {
+                      "className": "GestureDetector",
+                      "na": {
+                        "child": {
+                          "className": "Container",
+                          "na": {
+                            "width": 300,
+                            "padding": {
+                              "className": "EdgeInsets.symmetric",
+                              "na": {
+                                "vertical": 10
+                              }
+                            },
+                            "decoration": {
+                              "className": "BoxDecoration",
+                              "na": {
+                                "borderRadius": {
+                                  "className": "BorderRadius.circular",
+                                  "pa": [
+                                    10
+                                  ]
+                                },
+                                "color": {
+                                  "className": "Color",
+                                  "pa": [
+                                    "0xFF1882F1"
+                                  ]
+                                }
+                              }
+                            },
+                            "child": {
+                              "className": "Text",
+                              "pa": [
+                                "发送email"
+                              ],
+                              "na": {
+                                "textAlign": "#(_textAlign)",
+                                "style": {
+                                  "className": "TextStyle",
+                                  "na": {
+                                    "fontSize": 16,
+                                    "color": "#(Colors.white)"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "onTap": "#(_email)"
+                      }
+                    }
+                  }
+                },
+                {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.only",
+                      "na": {
+                        "top": 20
+                      }
+                    },
+                    "child": {
+                      "className": "GestureDetector",
+                      "na": {
+                        "child": {
+                          "className": "Container",
+                          "na": {
+                            "width": 300,
+                            "padding": {
+                              "className": "EdgeInsets.symmetric",
+                              "na": {
+                                "vertical": 10
+                              }
+                            },
+                            "decoration": {
+                              "className": "BoxDecoration",
+                              "na": {
+                                "borderRadius": {
+                                  "className": "BorderRadius.circular",
+                                  "pa": [
+                                    10
+                                  ]
+                                },
+                                "color": {
+                                  "className": "Color",
+                                  "pa": [
+                                    "0xFF1882F1"
+                                  ]
+                                }
+                              }
+                            },
+                            "child": {
+                              "className": "Text",
+                              "pa": [
+                                "打电话"
+                              ],
+                              "na": {
+                                "textAlign": "#(_textAlign)",
+                                "style": {
+                                  "className": "TextStyle",
+                                  "na": {
+                                    "fontSize": 16,
+                                    "color": "#(Colors.white)"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "onTap": "#(_tel)"
+                      }
+                    }
+                  }
+                },
+                {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.only",
+                      "na": {
+                        "top": 20
+                      }
+                    },
+                    "child": {
+                      "className": "GestureDetector",
+                      "na": {
+                        "child": {
+                          "className": "Container",
+                          "na": {
+                            "width": 300,
+                            "padding": {
+                              "className": "EdgeInsets.symmetric",
+                              "na": {
+                                "vertical": 10
+                              }
+                            },
+                            "decoration": {
+                              "className": "BoxDecoration",
+                              "na": {
+                                "borderRadius": {
+                                  "className": "BorderRadius.circular",
+                                  "pa": [
+                                    10
+                                  ]
+                                },
+                                "color": {
+                                  "className": "Color",
+                                  "pa": [
+                                    "0xFF1882F1"
+                                  ]
+                                }
+                              }
+                            },
+                            "child": {
+                              "className": "Text",
+                              "pa": [
+                                "发送短信"
+                              ],
+                              "na": {
+                                "textAlign": "#(_textAlign)",
+                                "style": {
+                                  "className": "TextStyle",
+                                  "na": {
+                                    "fontSize": 16,
+                                    "color": "#(Colors.white)"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "onTap": "#(_sms)"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {
+    "createState": "%(_UrlLauncherExampleWidgetState)"
+  }
+}

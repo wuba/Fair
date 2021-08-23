@@ -1,0 +1,7 @@
+builders:
+  ast_node_map_builder:
+    import: 'package:fairc/fairdsl/fair_ast_check_gen.dart'
+    builder_factories: ['AstNodeMapBuilder']
+    build_extensions: { '.dart': ['.g.dart'] }
+    auto_apply: root_package
+    build_to: source

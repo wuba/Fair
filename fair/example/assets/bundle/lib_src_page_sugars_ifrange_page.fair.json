@@ -1,0 +1,107 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "%(getTitle)"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "Center",
+      "na": {
+        "child": {
+          "className": "Column",
+          "na": {
+            "mainAxisAlignment": "#(MainAxisAlignment.center)",
+            "children": [
+              {
+                "className": "Sugar.ifRange",
+                "pa": [
+                  "^(_count)",
+                  "^(_list)"
+                ],
+                "na": {
+                  "falseValue": {
+                    "className": "Image.asset",
+                    "pa": [
+                      "assets/image/logo.png"
+                    ]
+                  },
+                  "trueValue": {
+                    "className": "Image.asset",
+                    "pa": [
+                      "assets/image/logo2.png"
+                    ]
+                  }
+                }
+              },
+              {
+                "className": "Padding",
+                "na": {
+                  "padding": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "top": 20
+                    }
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "#(_count = $_count)"
+                    ]
+                  }
+                }
+              },
+              {
+                "className": "Padding",
+                "na": {
+                  "padding": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "top": 20
+                    }
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "_count in  2, 4, 6, 8, 10,  update image !"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "floatingActionButton": {
+      "className": "Row",
+      "na": {
+        "mainAxisAlignment": "#(MainAxisAlignment.end)",
+        "children": [
+          {
+            "className": "FloatingActionButton",
+            "na": {
+              "child": {
+                "className": "Icon",
+                "pa": [
+                  "#(Icons.threesixty)"
+                ]
+              },
+              "onPressed": "@(onTapText)"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {
+    "createState": "%(_State)"
+  }
+}

@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
     "doc:dev": "vuepress dev doc",
-    "doc:build": "vuepress build doc"
+    "doc:build": "vuepress build -d ./doc_server/public doc"
   },
   "devDependencies": {
     "vuepress": "^1.7.1"

@@ -10,30 +10,28 @@
 import 'dart:typed_data' show Uint8List;
 import 'package:flat_buffers/flat_buffers.dart' as fb;
 
+
 class WidgetData {
   WidgetData._(this._bc, this._bcOffset);
   factory WidgetData(List<int> bytes) {
-    var rootRef = fb.BufferContext.fromBytes(bytes);
+    fb.BufferContext rootRef = new fb.BufferContext.fromBytes(bytes);
     return reader.read(rootRef, 0);
   }
 
-  static const fb.Reader<WidgetData> reader = _WidgetDataReader();
+  static const fb.Reader<WidgetData> reader = const _WidgetDataReader();
 
   final fb.BufferContext _bc;
   final int _bcOffset;
 
-  String get className =>
-      const fb.StringReader().vTableGet(_bc, _bcOffset, 4, null);
-  List<int> get data => const fb.ListReader<int>(fb.Uint8Reader())
-      .vTableGet(_bc, _bcOffset, 6, null);
-  List<int> get na => const fb.ListReader<int>(fb.Uint8Reader())
-      .vTableGet(_bc, _bcOffset, 8, null);
-  List<int> get pa => const fb.ListReader<int>(fb.Uint8Reader())
-      .vTableGet(_bc, _bcOffset, 10, null);
+  String get className => const fb.StringReader().vTableGet(_bc, _bcOffset, 4, null);
+  List<int> get data => const fb.ListReader<int>(const fb.Uint8Reader()).vTableGet(_bc, _bcOffset, 6, null);
+  List<int> get na => const fb.ListReader<int>(const fb.Uint8Reader()).vTableGet(_bc, _bcOffset, 8, null);
+  List<int> get pa => const fb.ListReader<int>(const fb.Uint8Reader()).vTableGet(_bc, _bcOffset, 10, null);
+  List<int> get methodMap => const fb.ListReader<int>(const fb.Uint8Reader()).vTableGet(_bc, _bcOffset, 12, null);
 
   @override
   String toString() {
-    return 'WidgetData{className: $className, data: $data, na: $na, pa: $pa}';
+    return 'WidgetData{className: $className, data: $data, na: $na, pa: $pa, methodMap: $methodMap}';
   }
 }
 
@@ -42,7 +40,7 @@ class _WidgetDataReader extends fb.TableReader<WidgetData> {
 
   @override
   WidgetData createObject(fb.BufferContext bc, int offset) =>
-      WidgetData._(bc, offset);
+      new WidgetData._(bc, offset);
 }
 
 class WidgetDataBuilder {
@@ -60,19 +58,20 @@ class WidgetDataBuilder {
     fbBuilder.addOffset(0, offset);
     return fbBuilder.offset;
   }
-
   int addDataOffset(int offset) {
     fbBuilder.addOffset(1, offset);
     return fbBuilder.offset;
   }
-
   int addNaOffset(int offset) {
     fbBuilder.addOffset(2, offset);
     return fbBuilder.offset;
   }
-
   int addPaOffset(int offset) {
     fbBuilder.addOffset(3, offset);
+    return fbBuilder.offset;
+  }
+  int addMethodMapOffset(int offset) {
+    fbBuilder.addOffset(4, offset);
     return fbBuilder.offset;
   }
 
@@ -86,28 +85,39 @@ class WidgetDataObjectBuilder extends fb.ObjectBuilder {
   final List<int> _data;
   final List<int> _na;
   final List<int> _pa;
+  final List<int> _methodMap;
 
   WidgetDataObjectBuilder({
     String className,
     List<int> data,
     List<int> na,
     List<int> pa,
-  })  : _className = className,
+    List<int> methodMap,
+  })
+      : _className = className,
         _data = data,
         _na = na,
-        _pa = pa;
+        _pa = pa,
+        _methodMap = methodMap;
 
   /// Finish building, and store into the [fbBuilder].
   @override
-  int finish(fb.Builder fbBuilder) {
+  int finish(
+      fb.Builder fbBuilder) {
     assert(fbBuilder != null);
-    final classNameOffset = fbBuilder.writeString(_className);
-    final dataOffset =
-        _data?.isNotEmpty == true ? fbBuilder.writeListUint8(_data) : null;
-    final naOffset =
-        _na?.isNotEmpty == true ? fbBuilder.writeListUint8(_na) : null;
-    final paOffset =
-        _pa?.isNotEmpty == true ? fbBuilder.writeListUint8(_pa) : null;
+    final int classNameOffset = fbBuilder.writeString(_className);
+    final int dataOffset = _data?.isNotEmpty == true
+        ? fbBuilder.writeListUint8(_data)
+        : null;
+    final int naOffset = _na?.isNotEmpty == true
+        ? fbBuilder.writeListUint8(_na)
+        : null;
+    final int paOffset = _pa?.isNotEmpty == true
+        ? fbBuilder.writeListUint8(_pa)
+        : null;
+    final int methodMapOffset = _methodMap?.isNotEmpty == true
+        ? fbBuilder.writeListUint8(_methodMap)
+        : null;
 
     fbBuilder.startTable();
     if (classNameOffset != null) {
@@ -122,14 +132,18 @@ class WidgetDataObjectBuilder extends fb.ObjectBuilder {
     if (paOffset != null) {
       fbBuilder.addOffset(3, paOffset);
     }
+    if (methodMapOffset != null) {
+      fbBuilder.addOffset(4, methodMapOffset);
+    }
     return fbBuilder.endTable();
   }
 
   /// Convenience method to serialize to byte list.
   @override
   Uint8List toBytes([String fileIdentifier]) {
-    var fbBuilder = fb.Builder();
-    var offset = finish(fbBuilder);
+    fb.Builder fbBuilder = new fb.Builder();
+    int offset = finish(fbBuilder);
     return fbBuilder.finish(offset, fileIdentifier);
   }
 }
+

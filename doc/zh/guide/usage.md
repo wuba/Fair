@@ -6,24 +6,26 @@
 ```yaml
 # 添加 Fair 依赖
 dependencies:
-  fair: ^0.2.0
+  fair: ^2.0.0
 # 添加编译器依赖
 dev_dependencies:
   build_runner: ^1.4.0
-  fair_compiler: ^0.2.0
+  fair_compiler:
+    path: ../../compiler
 ```
 
 * fair ![https://pub.dev/packages/fair](https://img.shields.io/pub/v/fair.svg)
-* fair_compiler ![https://pub.dev/packages/fair_compiler](https://img.shields.io/pub/v/fair_compiler.svg)
-* fair_annotation ![https://pub.dev/packages/fair_annotation](https://img.shields.io/pub/v/fair_annotation.svg)
-* fair_version ![https://pub.dev/packages/fair_version](https://img.shields.io/pub/v/fair_version.svg)
+* compiler ![https://pub.dev/packages/fair_compiler](https://img.shields.io/pub/v/fair_compiler.svg)
+* annotation ![https://pub.dev/packages/fair_annotation](https://img.shields.io/pub/v/fair_annotation.svg)
+* version ![https://pub.dev/packages/fair_version](https://img.shields.io/pub/v/fair_version.svg)
 
-为了方便接入&体验Fair框架，请确认你的Flutter运行环境，Fair基于Flutter 1.20.4开发,目前已适配至1.22.x, **推荐使用v1.22.5体验**。
+为了方便接入&体验Fair框架，请确认你的Flutter运行环境，Fair基于Flutter 1.22.4开发,目前已适配至2.0.6, **推荐使用v1.22.4体验**。
 
 后续将继续支持最新稳定版本。目前支持版本（如遇问题，Issue反馈）：
 
 | Flutter版本              | Dart版本    |
 | ------------------------ | ----------- |
+| Flutter 2.0.6    | Dart 2.12.3 |
 | Flutter 1.22.4/1.22.5    | Dart 2.10.4 |
 | Flutter 1.20.4           | Dart 2.9.2  |
 | Flutter 1.17.3           | Dart 2.8.4  |
@@ -31,7 +33,7 @@ dev_dependencies:
 
 > [https://flutter.dev/docs/development/tools/sdk/releases?tab=macos](https://flutter.dev/docs/development/tools/sdk/releases?tab=macos)
 
-通过切换fair_version版本进行版本兼容。例如，将本机切换为flutter 1.12.13后，Fair需要同步切换
+通过切换fair_version版本进行版本兼容。例如，将本机切换为flutter 1.22.4后，Fair需要同步切换
 
 ```yaml
 # Switch to another stable flutter version
@@ -40,7 +42,7 @@ dependency_overrides:
     git:
       url: https://github.com/wuba/fair.git
       ref: main
-      path: fair_version/flutter_1_12_13
+      path: fair_version/flutter_1_22_4
 ```
 
 ## Fair接入
@@ -53,12 +55,17 @@ dependency_overrides:
 
 ```dart
 void main() {
-  runApp(
-    FairApp(
-      child: MaterialApp(home: App())
-    ),
+  WidgetsFlutterBinding.ensureInitialized();
+
+  FairApp.runApplication(
+    _getApp(),
+    plugins: {
+      'FairNet': FairNet(),
+    },
   );
 }
+
+
 ```
 
 

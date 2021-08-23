@@ -110,6 +110,43 @@
               "child": {
                 "className": "Icon",
                 "pa": [
+                  "#(Icons.list)"
+                ]
+              },
+              "heroTag": "open_dynamic_cell",
+              "backgroundColor": "#(Colors.pink)",
+              "onPressed": {
+                "className": "Navigator.pushNamed",
+                "pa": [
+                  "context",
+                  "sample_list_with_dynamic_cell_page"
+                ]
+              }
+            }
+          },
+          {
+            "className": "Padding",
+            "na": {
+              "padding": {
+                "className": "EdgeInsets.only",
+                "na": {
+                  "left": 20,
+                  "right": {
+                    "className": "Sugar.paddingTop",
+                    "pa": [
+                      "context"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "className": "FloatingActionButton",
+            "na": {
+              "child": {
+                "className": "Icon",
+                "pa": [
                   "#(Icons.add)"
                 ]
               },

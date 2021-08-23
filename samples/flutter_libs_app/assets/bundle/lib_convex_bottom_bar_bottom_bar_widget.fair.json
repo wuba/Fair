@@ -1,0 +1,56 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "#(widget.title)"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "Center",
+      "na": {
+        "child": {
+          "className": "Text",
+          "pa": [
+            "example for bottom bar"
+          ]
+        }
+      }
+    },
+    "bottomNavigationBar": {
+      "className": "ConvexAppBar",
+      "na": {
+        "style": "#(TabStyle.react)",
+        "items": [
+          {
+            "className": "TabItem",
+            "na": {
+              "icon": "#(Icons.list)"
+            }
+          },
+          {
+            "className": "TabItem",
+            "na": {
+              "icon": "#(Icons.calendar_today)"
+            }
+          },
+          {
+            "className": "TabItem",
+            "na": {
+              "icon": "#(Icons.assessment)"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {
+    "createState": "%(_ConvexBottomBarWidgetState)"
+  }
+}
