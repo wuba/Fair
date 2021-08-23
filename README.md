@@ -131,7 +131,7 @@ samples
 
 | 微信                         | 美事（内部）                 |
 | ---------------------------- | ---------------------------- |
-| ![wechat](./weixin-assistant.jpeg) | ![meishi](https://fair.58.com/assets/img/meishi.5a7cba60.jpg) |
+| ![wechat](./weixin.jpeg) | ![meishi](./meishi.jpeg) |
 
 > 微信入群：请先添加58技术小秘书为好友，备注fair，小秘书邀请进群。
 

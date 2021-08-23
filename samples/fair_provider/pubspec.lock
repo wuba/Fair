@@ -207,7 +207,7 @@ packages:
   fair_version:
     dependency: "direct overridden"
     description:
-      path: "../../version/flutter_1_22_4"
+      path: "../../flutter_version/flutter_1_22_4"
       relative: false
     source: path
     version: "0.2.0"
