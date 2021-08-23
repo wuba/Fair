@@ -1,7 +1,0 @@
-table WidgetData {
-  className:string;
-  data:[ubyte](flexbuffer);
-  na:[ubyte](flexbuffer);
-  pa:[ubyte](flexbuffer);
-}
-root_type WidgetData;

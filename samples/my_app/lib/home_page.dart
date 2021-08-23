@@ -5,6 +5,7 @@
  */
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/src/rotate.dart';
 
 import 'theme.dart';
 @FairPatch()
@@ -17,14 +18,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  @FairWell('_counter')
   int _counter = 0;
 
-  @FairWell('_incrementCounter')
   void _incrementCounter() {
+    _counter= _counter+1;
     setState(() {
-      _counter++;
+
     });
+
   }
 
   @override
@@ -39,11 +40,22 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'You have pushed the button this many times:',
+              style:  TextStyle(fontSize: 16, color: Colors.black),
+
             ),
             Text(
               '$_counter',
               style: ThemeStyle.headline4(context),
+
             ),
+            RotateAnimatedTextKit(
+                text: ["AWESOME", "OPTIMISTIC", "DIFFERENT"],
+                textStyle: TextStyle(fontSize: 40.0, fontFamily: "Horizon"),
+                textAlign: TextAlign.start,
+                isRepeatingAnimation: true,
+                alignment: Alignment.centerRight
+              // or Alignment.topLeft )
+            )
           ],
         ),
       ),
@@ -54,4 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
+
 }

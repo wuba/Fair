@@ -4,6 +4,8 @@
  * found in the LICENSE file.
  */
 
+import 'dart:io';
+
 import 'package:fair_version/fair_version.dart';
 import 'package:flutter/widgets.dart';
 
@@ -66,5 +68,6 @@ FairWidgetBinding provider = () {
         },
     'SimpleTextItemBuilder': (props) => (text) => Text(text),
     'double.infinity': double.infinity,
+    'File': (props) => File(props['pa'][0]),
   };
 };

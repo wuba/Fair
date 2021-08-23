@@ -15,6 +15,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.39.17"
+  animated_text_kit:
+    dependency: "direct dev"
+    description:
+      name: animated_text_kit
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.1"
   archive:
     dependency: transitive
     description:
@@ -63,7 +70,7 @@ packages:
       name: build_daemon
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.7"
   build_resolvers:
     dependency: transitive
     description:
@@ -140,7 +147,7 @@ packages:
       name: code_builder
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.5.0"
+    version: "3.7.0"
   collection:
     dependency: transitive
     description:
@@ -186,30 +193,30 @@ packages:
   fair:
     dependency: "direct main"
     description:
-      name: fair
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.2.0"
+      path: "../../fair"
+      relative: true
+    source: path
+    version: "0.3.0"
   fair_annotation:
     dependency: transitive
     description:
-      name: fair_annotation
-      url: "https://pub.flutter-io.cn"
-    source: hosted
+      path: "../../fair_annotation"
+      relative: true
+    source: path
     version: "0.2.0"
   fair_compiler:
     dependency: "direct dev"
     description:
-      name: fair_compiler
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.2.0"
+      path: "../../fair_compiler"
+      relative: true
+    source: path
+    version: "0.3.0+1"
   fair_version:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: fair_version
-      url: "https://pub.flutter-io.cn"
-    source: hosted
+      path: "../../fair_version/flutter_1_22_4"
+      relative: true
+    source: path
     version: "0.2.0"
   fake_async:
     dependency: transitive
@@ -218,6 +225,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.2.0-nullsafety.1"
+  ffi:
+    dependency: transitive
+    description:
+      name: ffi
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.3"
   file:
     dependency: transitive
     description:
@@ -309,7 +323,7 @@ packages:
       name: io
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.3.4"
+    version: "0.3.5"
   js:
     dependency: transitive
     description:
@@ -428,7 +442,7 @@ packages:
       name: pubspec_parse
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.1.7"
+    version: "0.1.8"
   quiver:
     dependency: transitive
     description:
@@ -449,7 +463,7 @@ packages:
       name: shelf_web_socket
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.2.3"
+    version: "0.2.4+1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -559,7 +573,7 @@ packages:
       name: url_launcher_web
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.1.5+1"
+    version: "0.1.5+3"
   url_launcher_windows:
     dependency: transitive
     description:
@@ -587,7 +601,7 @@ packages:
       name: web_socket_channel
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   yaml:
     dependency: transitive
     description:

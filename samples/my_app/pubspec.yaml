@@ -35,14 +35,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: ^1.4.0
+  animated_text_kit: 3.0.1
   fair_compiler:
-    path: ../../fair_compiler
+    path: ../../compiler
 
 # Switch to another stable flutter version
-#dependency_overrides:
-#  fair_version:
-#    path: ../../fair_version/flutter_1_22_6
-
+dependency_overrides:
+  fair_version:
+    path: ../../flutter_version/flutter_1_22_4
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -57,6 +57,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/bundle/
+    - assets/
+    - assets/basic/
+    - assets/plugin/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
