@@ -95,7 +95,7 @@ class _State extends State<IfEqualBoolPage> {
 }
 ```
 
-![](./assets/sample_logic_page.jpg)
+<img src="./assets/sample_logic_page.jpg" width = "402" height = "673" alt="listCell" align=center />
 
 
 ## 2. 动态化展示

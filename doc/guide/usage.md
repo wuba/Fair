@@ -25,6 +25,7 @@ Please check the runtime environment on your computer. Fair is based on Flutter 
 
 | Flutter Version          | Dart Version|
 | ------------------------ | ----------- |
+| Flutter 2.0.6   | Dart 2.12.3 |
 | Flutter 1.22.4/1.22.5    | Dart 2.10.4 |
 | Flutter 1.20.4           | Dart 2.9.2  |
 | Flutter 1.17.3           | Dart 2.8.4  |
@@ -41,7 +42,7 @@ dependency_overrides:
     git:
       url: https://github.com/wuba/fair.git
       ref: main
-      path: fair_version/flutter_1_12_13
+      path: fair_version/flutter_1_22_4
 ```
 
 ## Using Fair

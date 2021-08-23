@@ -87,6 +87,7 @@ module.exports = {
                   children: [
                     'zh/guide/',
                     'zh/guide/usage.md',
+                    'zh/guide/development_environment.md',
                     'zh/guide/simple-demo.md',
                     'zh/guide/counting-demo.md',
                   ]
