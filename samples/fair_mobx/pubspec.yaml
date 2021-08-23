@@ -36,7 +36,7 @@ dev_dependencies:
 
 dependency_overrides:
   fair_version:
-    path: ../../version/flutter_1_22_4
+    path: ../../flutter_version/flutter_1_22_4
 
 
 flutter:

@@ -42,7 +42,7 @@ dev_dependencies:
 # Switch to another stable flutter version
 dependency_overrides:
   fair_version:
-    path: ../../version/flutter_1_17_3
+    path: ../../flutter_version/flutter_1_17_3
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
