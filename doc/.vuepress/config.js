@@ -22,13 +22,13 @@ module.exports = {
         label: 'English',
         ariaLabel: 'Languages',
         nav: [
-          {
-            text: 'Sample',
-            ariaLabel: 'Sample Menu',
-            items: [
-              { text: 'Hello Fair', link: '/project/hello_fair/', target:'_blank'}
-            ]
-           }
+          // {
+          //   text: 'Sample',
+          //   ariaLabel: 'Sample Menu',
+          //   items: [
+          //     { text: 'Hello Fair', link: '/project/hello_fair/', target:'_blank'}
+          //   ]
+          //  }
         ],
         sidebar: [
                 {
@@ -72,13 +72,13 @@ module.exports = {
         selectText: '选择语言',
         label: '简体中文',
         nav: [
-          {
-            text: 'Sample样例',
-            ariaLabel: 'Sample Menu',
-            items: [
-              { text: 'Hello Fair', link: '/project/hello_fair/', target:'_blank'}
-            ]
-           }
+          // {
+          //   text: 'Sample样例',
+          //   ariaLabel: 'Sample Menu',
+          //   items: [
+          //     { text: 'Hello Fair', link: '/project/hello_fair/', target:'_blank'}
+          //   ]
+          //  }
         ],
         sidebar: [
                 {
@@ -104,6 +104,7 @@ module.exports = {
                     'zh/guide/sample_page2page.md',
                     'zh/guide/sample_list_dynamic_cells.md',
                     'zh/guide/sample_list_dynamic.md',
+                    'zh/guide/sample_custom_plugin.md',
                   ]
                 },
             		{

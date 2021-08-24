@@ -1,4 +1,4 @@
-# Flutter Fair: A new package used to update widget tree dynamically
+# Flutter Fair: A new package used to update widget dynamically
 
 ![fair logo](https://cdn-images-1.medium.com/max/1600/1*uzMOc9unz1cAuMh0ZwWCVQ.png)
 
