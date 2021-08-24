@@ -3,12 +3,12 @@ module.exports = {
     '/': {
       lang: 'en-US',
       title: 'Flutter Fair',
-      description: 'A Flutter package used to update widget tree dynamically'
+      description: 'A Flutter package used to update widget dynamically'
     },
     '/zh/': {
       lang: 'zh-CN',
       title: 'Flutter Fair',
-      description: 'Fair是为Flutter设计的，UI&模板动态化框架'
+      description: 'Fair是为Flutter设计的动态化框架'
     }
   },
   markdown: {
