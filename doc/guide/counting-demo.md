@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ## Fair改造
 
-#### 改造原始界面
+#### 改造原始界面（添加@FairPatch()，后续通过Fair Compiler工具编译，可生成目标动态文件）
 
 ```dart
 @FairPatch()

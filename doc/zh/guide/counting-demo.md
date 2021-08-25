@@ -86,64 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ## Fair改造
 
-### main.dart
-
-#### 修改main方法和引用
-
-```dart
-import 'dart:convert';
-import 'package:fair/fair.dart';
-import 'package:flutter/material.dart';
-
-void main() {
-    WidgetsFlutterBinding.ensureInitialized();
-
-    FairApp.runApplication(
-        _getApp(),
-        plugins: {},
-    );
-    // runApp(MyApp());
-}
-```
-
-#### 对接原方法
-
-```dart
-
-dynamic _getApp() => FairApp(
-  modules: {},
-  delegate: {},
-  child: MyApp(),
-);
-
-```
-
-#### 替换Home入口
-
-```dart
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-            title: 'Flutter Demo',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-              visualDensity: VisualDensity.adaptivePlatformDensity,
-            ),
-            // home: MyHomePage(data: {'title': 'Flutter Demo Home Page'}));
-            home: FairWidget(
-                    name: '58 Fair',
-                    path: 'assets/bundle/lib_main.fair.json',
-                    data: {
-                      'fairProps': jsonEncode({'title': '58 Fair'})
-                    }));
-  }
-}
-
-```
-
-#### 改造原始界面
+#### 改造原始界面（添加@FairPatch()，后续通过Fair Compiler工具编译，可生成目标动态文件）
 ```dart
 @FairPatch()
 class MyHomePage extends StatefulWidget {
@@ -218,3 +161,62 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 ```
+
+### main.dart
+
+#### 修改main方法和引用
+
+```dart
+import 'dart:convert';
+import 'package:fair/fair.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    FairApp.runApplication(
+        _getApp(),
+        plugins: {},
+    );
+    // runApp(MyApp());
+}
+```
+
+#### 对接原方法
+
+```dart
+
+dynamic _getApp() => FairApp(
+  modules: {},
+  delegate: {},
+  child: MyApp(),
+);
+
+```
+
+#### 替换Home入口
+
+```dart
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            // home: MyHomePage(data: {'title': 'Flutter Demo Home Page'}));
+            home: FairWidget(
+                    name: '58 Fair',
+                    path: 'assets/bundle/lib_main.fair.json',
+                    data: {
+                      'fairProps': jsonEncode({'title': '58 Fair'})
+                    }));
+  }
+}
+
+```
+
+

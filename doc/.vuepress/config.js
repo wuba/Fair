@@ -114,7 +114,8 @@ module.exports = {
             			  'zh/article/fair_design.md',
             			  'zh/article/widget_update.md',
             			  'zh/article/build_runner.md',
-            			  'zh/article/performance.md'
+            			  'zh/article/performance.md',
+                    'zh/article/unsupported.md',
             			]
             		},
               ]
