@@ -64,10 +64,10 @@ flutter pub run build_runner build
 
 最后绑定自动生成的代码。
 ```dart
-import 'src/generated.fair.dart' as g;
+import 'src/generated.fair.dart';
 
 FairApp(
-  generated: g.p(),
+  generated: AppGeneratedModule(),
 ));
 ```
 
@@ -80,7 +80,7 @@ FairApp(
 例如我们为convex_bottom_bar生成组件表：
 
 ```
-@FairBinding(resource: 'package:convex_bottom_bar/src/bar.dart',)
+@FairBinding(packages: 'package:convex_bottom_bar/src/bar.dart',)
 class VideoCard extends StatelessWidget {
 }
 ```
