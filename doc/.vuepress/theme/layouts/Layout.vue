@@ -1,6 +1,6 @@
 <template>
   <div>
-  <header style="position:fixed;left:0;top:0;width:100%;font-size:14px;line-height:40px;text-align:center;background-color:rgb(217,70,88);color:#ffffff;">
+  <header style="position:fixed;left:0;top:0;width:100%;font-size:14px;line-height:40px;text-align:center;background-color:rgb(217,70,88);color:#ffffff;z-index:20;">
   Fair 2.0 release！ <a style="color:#4ea2f1" href="./guide/whats_new">What’s new</a>
   </header>
   <ParentLayout>
@@ -10,6 +10,20 @@
 <style>
   .navbar {
     top: 40px;
+  }
+
+  .sidebar {
+    top: 5rem;
+  }
+  
+  @media (max-width: 719px) {
+    .sidebar {
+      top: 3rem;
+    }
+  }
+
+  .theme-default-content.content__default {
+    padding-top: 4rem;
   }
 </style>
 <script>
