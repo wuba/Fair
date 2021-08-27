@@ -1,13 +1,15 @@
 <template>
   <div>
-  <header style="position:fixed;left:0;top:0;width:100%;font-size:14px;line-height:24px;text-align:center;background-color:rgb(255,229,100);color:#6b5900;">公告栏</header>
+  <header style="position:fixed;left:0;top:0;width:100%;font-size:14px;line-height:40px;text-align:center;background-color:rgb(217,70,88);color:#ffffff;">
+  Fair 2.0 release！ <a style="color:#4ea2f1" href="./guide/whats_new">What’s new</a>
+  </header>
   <ParentLayout>
   </ParentLayout>
   </div>
 </template>
 <style>
   .navbar {
-    top: 24px;
+    top: 40px;
   }
 </style>
 <script>
