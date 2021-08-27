@@ -36,4 +36,4 @@ fair
                     ├── permission // 权限插件
                     └── pick-image // 图片选择
 ```
-详见[](./sample_custom_plugin "郭斌勇的主页")
+[查看更多](./sample_custom_plugin)

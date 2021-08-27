@@ -38,4 +38,4 @@ fair
                     ├── permission // Permission plug-in
                     └── pick-image // Pick image plug-in
 ```
-[Learn More](sample_custom_plugin)
+[Learn More](./sample_custom_plugin)
