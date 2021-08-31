@@ -1,5 +1,5 @@
 <template>
-  <ParentLayout>
+  <ParentLayout sidebarItems="sidebarItems">
       <template #bottom>
           <footer class="cp_footer">Copyright © 2020 58.com | Powered by The Fair Authors</footer>
       </template>
@@ -23,6 +23,7 @@ import ParentLayout from '@parent-theme/components/Page.vue'
 export default {
   components: {
     ParentLayout,
-  }
+  },
+  props: ['sidebarItems']
 }
 </script>
