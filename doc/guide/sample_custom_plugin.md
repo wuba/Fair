@@ -1,4 +1,4 @@
-# 用户自定义拓展功能
+# Support custom Plugins 
 
 # 开始
 

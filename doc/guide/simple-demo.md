@@ -1,4 +1,4 @@
-# 从零开始写一个Demo
+# Write your first Fair Widget
 
 在Fair接入完成后，我们需要一个bundle才能更显示动态页面，那么怎么编写bundle呢？
 

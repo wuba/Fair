@@ -1,4 +1,4 @@
-# 原生列表内，支持动态Cell
+# ListView.builder with dynamic cells
 
 ## 使用场景
     在原生列表中，当我们需要对一个卡片或者一块内容做动态的展示时使用。

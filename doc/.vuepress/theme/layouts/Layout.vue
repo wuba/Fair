@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     whatIsNewUrl: function() {
-      return (this.$lang == 'zh-CN' ? '/zh' : '') + '/guide/whats_new.html';
+      return (this.$lang == 'zh-CN' ? '/zh' : '') + '/article/whats_new.html';
     }
   }
 }

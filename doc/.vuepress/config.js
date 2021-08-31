@@ -59,6 +59,7 @@ module.exports = {
             			title: 'Resource',
             			collapsable: false,
             			children: [
+            			  'article/whats_new.md',
             			  'article/fair_design.md',
             			  'article/widget_update.md',
             			  'article/build_runner.md',
@@ -111,11 +112,12 @@ module.exports = {
             			title: '资料',
             			collapsable: false,
             			children: [
+                          'zh/article/whats_new.md',
             			  'zh/article/fair_design.md',
             			  'zh/article/widget_update.md',
             			  'zh/article/build_runner.md',
             			  'zh/article/performance.md',
-                    'zh/article/unsupported.md',
+                          'zh/article/unsupported.md',
             			]
             		},
               ]

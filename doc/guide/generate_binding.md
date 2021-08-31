@@ -1,4 +1,4 @@
-# 编写组件映射表
+# How to add widgets
 
 通过编写组件映射表，Fair可以支持更多的Widget，既可以是Flutter框架的，也可以是三方组件。
 
