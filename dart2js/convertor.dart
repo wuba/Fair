@@ -438,6 +438,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
   static var FairPropsAttribute = 'FairProps';
   static var InitPropsName = '__initProps__';
   var baseFilePath = '';
+  var moduleSequence = 1;
 
   var classDeclarationData = ClassDeclarationData();
   var allStates = <ClassDeclarationData>[];
@@ -556,46 +557,96 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
     return null;
   }
 
+  void generateDependencies(List<Tuple<String, bool>> imports, List<String> result) {
+    if (imports.isEmpty) {
+      return;
+    }
+    
+    var dependencySequences = reserveSequence(imports.length);
+    var index = 0;
+    imports.forEach((element) {
+          var absPath = resolvePath(p.dirname(baseFilePath), element.k1);
+          print('absPath = $absPath');
+          var partJsGenerator = PartJsCodeGenerator();
+          partJsGenerator.parse(absPath);
+          var selfDependencySequences = <int>[];
+          if (partJsGenerator.importLocalFiles.isNotEmpty) {
+            selfDependencySequences = reserveSequence(partJsGenerator.importLocalFiles.length, true);
+            generateDependencies(partJsGenerator.importLocalFiles, result);
+          }
+          var classDeclarationVisitor1 = ClassDeclarationVisitor(element.k2);
+          classDeclarationVisitor1.parseByFile(absPath);
+          result.add('''
+          defineModule(${dependencySequences[index]}, function(__mod__) {
+            with (__mod__.imports) {
+              ${classDeclarationVisitor1.genJsCode()}
+            }
+            ${classDeclarationVisitor1.classes.map((e) => '__mod__.exports.${e.className} = ${e.className};').join('\r\n')}
+          }, [${selfDependencySequences.join(',')}]);
+          ''');
+          index++;
+        });
+  }
+
+  reserveSequence(int num, [bool skip = false]) {
+    var result = new List<int>.generate(num, (index) => moduleSequence + index);
+    if (!skip) {
+      moduleSequence += num;
+    }
+    return result;
+  }
+
   String genJsCode() {
-    var classes = [];
+    var dependencySequences = <int>[];
+    var dependencyClasses = <String>[];
     try {
-      // 解析依赖的bean类型
       var partJsGenerator = PartJsCodeGenerator();
       partJsGenerator.parse(baseFilePath);
-      if (partJsGenerator.importBeans.isNotEmpty) {
-        partJsGenerator.importBeans.forEach((element) {
-          var absPath = resolvePath(p.dirname(baseFilePath), element);
-          var classDeclarationVisitor1 = ClassDeclarationVisitor(true);
-          classes.add(classDeclarationVisitor1..parseByFile(absPath));
-        });
+      // parse local file dependencies
+      // import as? - supported
+      // import show / hide - not supported
+      // conditional export - not supported
+      if (partJsGenerator.importLocalFiles.isNotEmpty) {
+        dependencySequences = reserveSequence(partJsGenerator.importLocalFiles.length, true);
+        generateDependencies(partJsGenerator.importLocalFiles, dependencyClasses);
       }
     } catch (exception) {
       print(exception);
     }
-    if (allInnerDataClasses.isNotEmpty) {
-      classes.addAll(allInnerDataClasses);
-    }
     classDeclarationData.outputTemplateType = ClassOutputTemplateType.raw;
     return '''
-    GLOBAL['#FairKey#'] = (function($InitPropsName) {
+    GLOBAL['#FairPageName#'] = (function($InitPropsName) {
       const __global__ = this;
-      ${classes.map((c) => c.genJsCode()).join('\r\n')}
-      ${classDeclarationData.genJsCode()};
-      return ${classDeclarationData.className}();
+      ${dependencyClasses.join('\r\n')}
+      return runCallback(function() {
+        with(this) {
+          return ${classDeclarationData.genJsCode()};
+        }
+      }, [${dependencySequences.join(',')}]);
     })(convertObjectLiteralToSetOrMap(JSON.parse('#FairProps#')));
     ''';
   }
 }
 
+class Tuple<K1, K2> {
+  K1 k1;
+  K2 k2;
+  Tuple(this.k1, this.k2);
+
+}
+
 class PartJsCodeGenerator extends SimpleAstVisitor<PartJsCodeGenerator> {
-  List<String> importBeans = [];
+  List<Tuple<String, bool>> importLocalFiles = <Tuple<String, bool>>[];
   var BeanDir = '/bean/';
+  var PackagePrefix = new RegExp('(dart|package):');
 
   @override
   PartJsCodeGenerator visitImportDirective(ImportDirective node) {
     var libraryPath = node.uri.stringValue;
     if (libraryPath.contains(BeanDir)) {
-      importBeans.add(libraryPath);
+      importLocalFiles.add(Tuple(libraryPath, true));
+    } else if (!libraryPath.startsWith(PackagePrefix)) {
+      importLocalFiles.add(Tuple(libraryPath, false));
     }
     return null;
   }
@@ -606,90 +657,6 @@ class PartJsCodeGenerator extends SimpleAstVisitor<PartJsCodeGenerator> {
         path: file.absolute.uri.normalizePath().path,
         featureSet: FeatureSet.fromEnableFlags([]));
     result.unit.visitChildren(this);
-  }
-}
-
-class PartOfJsCodeGenerator extends RecursiveAstVisitor<PartOfJsCodeGenerator> {
-  static var FairPropsAttribute = 'FairProps';
-  static var InitPropsName = '__initProps__';
-  var classDeclarationData = ClassDeclarationData();
-  List<ClassDeclarationVisitor> classes = [];
-  var partFilePath = '';
-  var parsingFilePath = '';
-
-  PartOfJsCodeGenerator(this.parsingFilePath);
-
-  @override
-  PartOfJsCodeGenerator visitFunctionDeclaration(FunctionDeclaration node) {
-    classDeclarationData.methods.add(
-        MethodDeclarationData(node.name.toString(), node.toString(), false));
-    return null;
-  }
-
-  @override
-  PartOfJsCodeGenerator visitPartOfDirective(PartOfDirective node) {
-    partFilePath =
-        resolvePath(p.dirname(parsingFilePath), node.uri.stringValue);
-    return null;
-  }
-
-  @override
-  PartOfJsCodeGenerator visitClassDeclaration(ClassDeclaration node) {
-    var classDeclarationVisitor2 = ClassDeclarationVisitor();
-    classes.add(classDeclarationVisitor2..parseByString(node.toString()));
-    return null;
-  }
-
-  @override
-  PartOfJsCodeGenerator visitTopLevelVariableDeclaration(
-      TopLevelVariableDeclaration node) {
-    if (node.metadata
-        .any((element) => element.name.toString() == FairPropsAttribute)) {
-      if (node.variables.variables.length != 1) {
-        throw 'Error';
-      }
-      var variable = node.variables.variables.single;
-      classDeclarationData.fields.add(FieldDeclarationData(
-          variable.name.toString(),
-          variable.initializer != null
-              ? convertExpression(variable.initializer.toString())
-              : InitPropsName));
-    } else {
-      node.variables.variables.forEach((element) {
-        classDeclarationData.fields.add(FieldDeclarationData(
-            element.name.toString(),
-            element.initializer != null
-                ? convertExpression(element.initializer.toString())
-                : null));
-      });
-    }
-    return super.visitTopLevelVariableDeclaration(node);
-  }
-
-  String genJsCode() {
-    try {
-      // 解析依赖的bean类型
-      var partJsGenerator = PartJsCodeGenerator();
-      partJsGenerator.parse(partFilePath);
-      if (partJsGenerator.importBeans.isNotEmpty) {
-        partJsGenerator.importBeans.forEach((element) {
-          var absPath = resolvePath(p.dirname(partFilePath), element);
-          var classDeclarationVisitor1 = ClassDeclarationVisitor(true);
-          classes.add(classDeclarationVisitor1..parseByFile(absPath));
-        });
-      }
-    } catch (exception) {
-      print(exception);
-    }
-
-    classDeclarationData.outputTemplateType = ClassOutputTemplateType.pageState;
-    return '''
-    GLOBAL['#FairPageName#'] = (function($InitPropsName) {
-      const __global__ = this;
-      ${classes.map((c) => c.genJsCode()).join('\r\n')}
-      return ${classDeclarationData.genJsCode()};
-    })(convertObjectLiteralToSetOrMap(JSON.parse('#FairProps#')));
-    ''';
   }
 }
 
@@ -1873,15 +1840,4 @@ String uglify(String str) {
     }
   }
   return buf.toString();
-}
-
-String convertPartFile(String filePath, [bool isCompressed = false]) {
-  var file = File(filePath);
-  var result = parseFile(
-      path: file.absolute.uri.normalizePath().path,
-      featureSet: FeatureSet.fromEnableFlags([]));
-  var visitor = PartOfJsCodeGenerator(file.absolute.uri.normalizePath().path);
-  result.unit.visitChildren(visitor);
-
-  return isCompressed ? uglify(visitor.genJsCode()) : visitor.genJsCode();
 }
