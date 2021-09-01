@@ -29,7 +29,7 @@ dev_dependencies:
     path: ../../compiler
 
 # Switch to another stable flutter version
-# dependency_overrides:
+#dependency_overrides:
 #   fair_version:
 #     path: ../../flutter_version/flutter_2_0_6
 

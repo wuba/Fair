@@ -1,4 +1,4 @@
-# Bundle资源
+# Bundle creation and usage
 
 现在我们已经了解了模板资源的语法和格式，接下来介绍如何从dart源码直接生成bundle文件。
 

@@ -51,4 +51,4 @@ Fair附带了一些社区demo转为fair动态化形式，工程位于samples目�
 
 | 微信                         | 美事（内部）                 |
 | ---------------------------- | ---------------------------- |
-| ![wechat](./assets/wechat.png) | ![meishi](./assets/meishi.jpg) |
+| ![wechat](./assets/weixin.jpeg) | ![meishi](./assets/meishi.jpeg) |

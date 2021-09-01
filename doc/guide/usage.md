@@ -13,18 +13,20 @@ dependencies:
 # add compiler dependency
 dev_dependencies:
   build_runner: ^1.4.0
-  fair_compiler: ^0.2.0
+  fair_compiler:
+    path: ../../compiler
 ```
 
 * fair ![https://pub.dev/packages/fair](https://img.shields.io/pub/v/fair.svg)
-* fair_compiler ![https://pub.dev/packages/fair_compiler](https://img.shields.io/pub/v/fair_compiler.svg)
-* fair_annotation ![https://pub.dev/packages/fair_annotation](https://img.shields.io/pub/v/fair_annotation.svg)
-* fair_version ![https://pub.dev/packages/fair_version](https://img.shields.io/pub/v/fair_version.svg)
+* compiler ![https://pub.dev/packages/fair_compiler](https://img.shields.io/pub/v/fair_compiler.svg)
+* annotation ![https://pub.dev/packages/fair_annotation](https://img.shields.io/pub/v/fair_annotation.svg)
+* flutter_version ![https://pub.dev/packages/fair_version](https://img.shields.io/pub/v/fair_version.svg)
 
 Please check the runtime environment on your computer. Fair is based on Flutter 1.20.4 & 1.22.4 .The latest stable flutter version will continue to be supported in the future. Currently supported versions are listed bellow (If you encounter problems, issue feedback):
 
 | Flutter Version          | Dart Version|
 | ------------------------ | ----------- |
+| Flutter 2.0.6   | Dart 2.12.3 |
 | Flutter 1.22.4/1.22.5    | Dart 2.10.4 |
 | Flutter 1.20.4           | Dart 2.9.2  |
 | Flutter 1.17.3           | Dart 2.8.4  |
@@ -32,7 +34,7 @@ Please check the runtime environment on your computer. Fair is based on Flutter 
 
 > [https://flutter.dev/docs/development/tools/sdk/releases?tab=macos](https://flutter.dev/docs/development/tools/sdk/releases?tab=macos)
 
-To compact with Flutter, you need to get right fair version. For example, when you checkout the flutter version 1.12.13, fair needs to switch synchronously.
+To compact with Flutter, you need to get right flutter version. For example, when you checkout the flutter version 1.12.13, fair needs to switch synchronously.
 
 ```yaml
 # Switch to another stable flutter version
@@ -41,7 +43,7 @@ dependency_overrides:
     git:
       url: https://github.com/wuba/fair.git
       ref: main
-      path: fair_version/flutter_1_12_13
+      path: fair_version/flutter_1_22_4
 ```
 
 ## Using Fair

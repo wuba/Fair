@@ -3,12 +3,12 @@ module.exports = {
     '/': {
       lang: 'en-US',
       title: 'Flutter Fair',
-      description: 'A Flutter package used to update widget tree dynamically'
+      description: 'A Flutter package used to update widget dynamically'
     },
     '/zh/': {
       lang: 'zh-CN',
       title: 'Flutter Fair',
-      description: 'Fair是为Flutter设计的，UI&模板动态化框架'
+      description: 'Fair是为Flutter设计的动态化框架'
     }
   },
   markdown: {
@@ -22,13 +22,13 @@ module.exports = {
         label: 'English',
         ariaLabel: 'Languages',
         nav: [
-          {
-            text: 'Sample',
-            ariaLabel: 'Sample Menu',
-            items: [
-              { text: 'Hello Fair', link: '/project/hello_fair/', target:'_blank'}
-            ]
-           }
+          // {
+          //   text: 'Sample',
+          //   ariaLabel: 'Sample Menu',
+          //   items: [
+          //     { text: 'Hello Fair', link: '/project/hello_fair/', target:'_blank'}
+          //   ]
+          //  }
         ],
         sidebar: [
                 {
@@ -59,6 +59,7 @@ module.exports = {
             			title: 'Resource',
             			collapsable: false,
             			children: [
+            			  'article/whats_new.md',
             			  'article/fair_design.md',
             			  'article/widget_update.md',
             			  'article/build_runner.md',
@@ -72,13 +73,13 @@ module.exports = {
         selectText: '选择语言',
         label: '简体中文',
         nav: [
-          {
-            text: 'Sample样例',
-            ariaLabel: 'Sample Menu',
-            items: [
-              { text: 'Hello Fair', link: '/project/hello_fair/', target:'_blank'}
-            ]
-           }
+          // {
+          //   text: 'Sample样例',
+          //   ariaLabel: 'Sample Menu',
+          //   items: [
+          //     { text: 'Hello Fair', link: '/project/hello_fair/', target:'_blank'}
+          //   ]
+          //  }
         ],
         sidebar: [
                 {
@@ -87,6 +88,7 @@ module.exports = {
                   children: [
                     'zh/guide/',
                     'zh/guide/usage.md',
+                    'zh/guide/development_environment.md',
                     'zh/guide/simple-demo.md',
                     'zh/guide/counting-demo.md',
                   ]
@@ -103,16 +105,19 @@ module.exports = {
                     'zh/guide/sample_page2page.md',
                     'zh/guide/sample_list_dynamic_cells.md',
                     'zh/guide/sample_list_dynamic.md',
+                    'zh/guide/sample_custom_plugin.md',
                   ]
                 },
             		{
             			title: '资料',
             			collapsable: false,
             			children: [
+                          'zh/article/whats_new.md',
             			  'zh/article/fair_design.md',
             			  'zh/article/widget_update.md',
             			  'zh/article/build_runner.md',
-            			  'zh/article/performance.md'
+            			  'zh/article/performance.md',
+                          'zh/article/unsupported.md',
             			]
             		},
               ]
