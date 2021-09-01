@@ -620,7 +620,8 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
       ${dependencyClasses.join('\r\n')}
       return runCallback(function() {
         with(this) {
-          return ${classDeclarationData.genJsCode()};
+          ${classDeclarationData.genJsCode()};
+          return ${classDeclarationData.className}();
         }
       }, [${dependencySequences.join(',')}]);
     })(convertObjectLiteralToSetOrMap(JSON.parse('#FairProps#')));
