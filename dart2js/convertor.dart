@@ -566,7 +566,6 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
     var index = 0;
     imports.forEach((element) {
           var absPath = resolvePath(p.dirname(baseFilePath), element.k1);
-          print('absPath = $absPath');
           var partJsGenerator = PartJsCodeGenerator();
           partJsGenerator.parse(absPath);
           var selfDependencySequences = <int>[];
