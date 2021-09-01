@@ -557,7 +557,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
     return null;
   }
 
-  void generateDependencies(List<Tuple<String, bool>> imports, List<String> result) {
+  void generateDependencies(List<Tuple<String, bool, String>> imports, List<String> result) {
     if (imports.isEmpty) {
       return;
     }
@@ -568,9 +568,16 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
           var absPath = resolvePath(p.dirname(baseFilePath), element.k1);
           var partJsGenerator = PartJsCodeGenerator();
           partJsGenerator.parse(absPath);
-          var selfDependencySequences = <int>[];
+          var selfDependencySequences = <String>[];
           if (partJsGenerator.importLocalFiles.isNotEmpty) {
             selfDependencySequences = reserveSequence(partJsGenerator.importLocalFiles.length, true);
+            var index = 0;
+            partJsGenerator.importLocalFiles.forEach((element) {
+              if (element.k3 != null && element.k3.isNotEmpty) {
+                selfDependencySequences[index] = '[${dependencySequences[index]},\'${element.k3}\']';
+              }
+              index++;
+            });
             generateDependencies(partJsGenerator.importLocalFiles, result);
           }
           var classDeclarationVisitor1 = ClassDeclarationVisitor(element.k2);
@@ -587,8 +594,8 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
         });
   }
 
-  reserveSequence(int num, [bool skip = false]) {
-    var result = new List<int>.generate(num, (index) => moduleSequence + index);
+  List<String> reserveSequence(int num, [bool skip = false]) {
+    var result = new List<int>.generate(num, (index) => moduleSequence + index).map((item) => item.toString()).toList();
     if (!skip) {
       moduleSequence += num;
     }
@@ -596,7 +603,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
   }
 
   String genJsCode() {
-    var dependencySequences = <int>[];
+    var dependencySequences = <String>[];
     var dependencyClasses = <String>[];
     try {
       var partJsGenerator = PartJsCodeGenerator();
@@ -607,6 +614,13 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
       // conditional export - not supported
       if (partJsGenerator.importLocalFiles.isNotEmpty) {
         dependencySequences = reserveSequence(partJsGenerator.importLocalFiles.length, true);
+        var index = 0;
+        partJsGenerator.importLocalFiles.forEach((element) {
+          if (element.k3 != null && element.k3.isNotEmpty) {
+            dependencySequences[index] = '[${dependencySequences[index]},\'${element.k3}\']';
+          }
+          index++;
+        });
         generateDependencies(partJsGenerator.importLocalFiles, dependencyClasses);
       }
     } catch (exception) {
@@ -628,15 +642,15 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
   }
 }
 
-class Tuple<K1, K2> {
+class Tuple<K1, K2, K3> {
   K1 k1;
   K2 k2;
-  Tuple(this.k1, this.k2);
-
+  K3 k3;
+  Tuple(this.k1, this.k2, this.k3);
 }
 
 class PartJsCodeGenerator extends SimpleAstVisitor<PartJsCodeGenerator> {
-  List<Tuple<String, bool>> importLocalFiles = <Tuple<String, bool>>[];
+  List<Tuple<String, bool, String>> importLocalFiles = <Tuple<String, bool, String>>[];
   var BeanDir = '/bean/';
   var PackagePrefix = new RegExp('(dart|package):');
 
@@ -644,9 +658,9 @@ class PartJsCodeGenerator extends SimpleAstVisitor<PartJsCodeGenerator> {
   PartJsCodeGenerator visitImportDirective(ImportDirective node) {
     var libraryPath = node.uri.stringValue;
     if (libraryPath.contains(BeanDir)) {
-      importLocalFiles.add(Tuple(libraryPath, true));
+      importLocalFiles.add(Tuple(libraryPath, true, node.prefix?.toSource()));
     } else if (!libraryPath.startsWith(PackagePrefix)) {
-      importLocalFiles.add(Tuple(libraryPath, false));
+      importLocalFiles.add(Tuple(libraryPath, false, node.prefix?.toSource()));
     }
     return null;
   }
