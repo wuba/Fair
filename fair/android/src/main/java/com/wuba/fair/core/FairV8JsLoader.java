@@ -97,6 +97,7 @@ public class FairV8JsLoader extends FairJsLoader {
         v8Console.registerJavaMethod(console, "log", "log", new Class[]{Object[].class});
         v8Console.registerJavaMethod(console, "error", "error", new Class[]{Object[].class});
         v8Console.registerJavaMethod(console, "warn", "warn", new Class[]{Object[].class});
+
     }
 
     @Override

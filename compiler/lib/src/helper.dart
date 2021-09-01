@@ -81,27 +81,30 @@ mixin FairCompiler {
   Future<R> compile(BuildStep buildStep, List<String> arguments) async {
     var content = '';
     var error = '';
+    dynamic result;
     if (LocalProcessManager().canRun(command)) {
       // final fair = (await _bin(buildStep))?.absolute?.path;
-      // 本地联调，可以先配置环境
-      // final fair = '/Users/anjuke/haijun/Anjuke-Flutter/fairc/lib/fairc.dart';
-      // if (fair != null) {
-      // final result = Process.runSync(command, [fair, ...arguments]);
       await _syncFbs(buildStep);
-      var whichCommand = await Process.run('which', ['dart']);
-      var strBin = whichCommand.stdout.toString();
-      var dirEndIndex = strBin.lastIndexOf(Platform.pathSeparator);
-      var binDir = strBin.substring(0, dirEndIndex);
+      // 本地联调，可以先配置环境
+      final fair = '/Users/anjuke/haijun/Anjuke-Flutter/fair-new/dart2dsl/lib/fairc.dart';
+      if (fair != null) {
+      result = Process.runSync(command, [fair, ...arguments]);
+    }
 
-      var aotParentPath = Directory.current.parent.parent.path;
-      var aotPathResult =
-          await Process.run('find', [aotParentPath, "-name", 'fairc.aot']);
-      var aotPathStr = aotPathResult.stdout.toString();
-      var transferPath = aotPathStr.split('\r')[0].split('\n')[0];
-      print('\u001b[33m [Fair Dart2JS] fairc.aot => ${transferPath} \u001b[0m');
-
-      final result = Process.runSync(
-          path.join('$binDir', 'dartaotruntime'), [transferPath, ...arguments]);
+      // var whichCommand = await Process.run('which', ['dart']);
+      // var strBin = whichCommand.stdout.toString();
+      // var dirEndIndex = strBin.lastIndexOf(Platform.pathSeparator);
+      // var binDir = strBin.substring(0, dirEndIndex);
+      //
+      // var aotParentPath = Directory.current.parent.parent.path;
+      // var aotPathResult =
+      //     await Process.run('find', [aotParentPath, "-name", 'fairc.aot']);
+      // var aotPathStr = aotPathResult.stdout.toString();
+      // var transferPath = aotPathStr.split('\r')[0].split('\n')[0];
+      // print('\u001b[33m [Fair Dart2JS] fairc.aot => ${transferPath} \u001b[0m');
+      //
+      // final result = Process.runSync(
+      //     path.join('$binDir', 'dartaotruntime'), [transferPath, ...arguments]);
       print(result);
 
       var output = result.stdout.toString();
