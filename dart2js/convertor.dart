@@ -640,8 +640,8 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
     GLOBAL['#FairPageName#'] = (function($InitPropsName) {
       const __global__ = this;
       ${dependencyClasses.join('\r\n')}
-      return runCallback(function() {
-        with(this) {
+      return runCallback(function(__mod__) {
+        with(__mod__.imports) {
           ${classDeclarationData.genJsCode()};
           return ${classDeclarationData.className}();
         }

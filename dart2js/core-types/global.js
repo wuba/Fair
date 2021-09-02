@@ -18,36 +18,34 @@ function defineModule(modId, func, deps) {
     run: function (mod) {
       if (!this.inited) {
         this.deps.forEach((d) =>
-          runModule(
-            typeof d == "number"
-              ? runModule(d, { exports: imports })
-              : runModule(d[0], { exports: imports }, d[1])
-          )
+          typeof d == "number"
+            ? runModule(d, { exports: imports })
+            : runModule(d[0], { exports: imports }, d[1])
         );
         this.inited = true;
       }
-      this.init.call({ imports, exports: mod.exports });
+      this.init.call(__global__, { imports, exports: mod.exports });
     },
   };
 }
 
 function runModule(id, mod, alias) {
   if (alias) {
-    mod.exports.alias = {};
-    __modules__[id].run({ exports: mod.exports.alias });
+    mod.exports[alias] = {};
+    __modules__[id].run({ exports: mod.exports[alias] });
   } else {
     __modules__[id].run(mod);
   }
 }
 
 function runCallback(func, deps) {
-  const thiz = {};
+  const imports = {};
   deps.map((d) =>
     typeof d == "number"
-      ? runModule(d, { exports: thiz })
-      : runModule(d[0], { exports: thiz }, d[1])
+      ? runModule(d, { exports: imports })
+      : runModule(d[0], { exports: imports }, d[1])
   );
-  return func.call(thiz);
+  return func.call(__global__, { imports });
 }
 
 function inherit(cls, sup) {
