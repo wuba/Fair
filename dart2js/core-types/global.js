@@ -42,7 +42,11 @@ function runModule(id, mod, alias) {
 
 function runCallback(func, deps) {
   const thiz = {};
-  deps.map((d) => d.run({exports: thiz}));
+  deps.map((d) =>
+    typeof d == "number"
+      ? runModule(d, { exports: thiz })
+      : runModule(d[0], { exports: thiz }, d[1])
+  );
   return func.call(thiz);
 }
 

@@ -557,7 +557,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
     return null;
   }
 
-  void generateDependencies(List<Tuple<String, bool, String>> imports, List<String> result) {
+  void generateDependencies(String refererPath, List<Tuple<String, bool, String>> imports, List<String> result) {
     if (imports.isEmpty) {
       return;
     }
@@ -565,7 +565,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
     var dependencySequences = reserveSequence(imports.length);
     var index = 0;
     imports.forEach((element) {
-          var absPath = resolvePath(p.dirname(baseFilePath), element.k1);
+          var absPath = resolvePath(p.dirname(refererPath), element.k1);
           var partJsGenerator = PartJsCodeGenerator();
           partJsGenerator.parse(absPath);
           var selfDependencySequences = <String>[];
@@ -578,7 +578,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
               }
               index++;
             });
-            generateDependencies(partJsGenerator.importLocalFiles, result);
+            generateDependencies(absPath, partJsGenerator.importLocalFiles, result);
           }
           var classDeclarationVisitor1 = ClassDeclarationVisitor(element.k2);
           classDeclarationVisitor1.parseByFile(absPath);
@@ -594,9 +594,9 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
         });
   }
 
-  List<String> reserveSequence(int num, [bool skip = false]) {
+  List<String> reserveSequence(int num, [bool keepSequence = false]) {
     var result = new List<int>.generate(num, (index) => moduleSequence + index).map((item) => item.toString()).toList();
-    if (!skip) {
+    if (!keepSequence) {
       moduleSequence += num;
     }
     return result;
@@ -621,7 +621,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
           }
           index++;
         });
-        generateDependencies(partJsGenerator.importLocalFiles, dependencyClasses);
+        generateDependencies(baseFilePath, partJsGenerator.importLocalFiles, dependencyClasses);
       }
     } catch (exception) {
       print(exception);
@@ -650,6 +650,7 @@ class Tuple<K1, K2, K3> {
 }
 
 class PartJsCodeGenerator extends SimpleAstVisitor<PartJsCodeGenerator> {
+  // libPath, isDataBean, moduleAlias
   List<Tuple<String, bool, String>> importLocalFiles = <Tuple<String, bool, String>>[];
   var BeanDir = '/bean/';
   var PackagePrefix = new RegExp('(dart|package):');
