@@ -2474,7 +2474,6 @@ this.g3 = xx;
 }
 
 bool testcaseImport() {
-  print(dirname(Platform.script.path) + '/__test_data__/page1/page1.dart');
   return compare('testcaseImport', convertWidgetStateFile(dirname(Platform.script.path) + '/__test_data__/page1/page1.dart'), '''
   GLOBAL['#FairPageName#'] = (function(__initProps__) {
       const __global__ = this;

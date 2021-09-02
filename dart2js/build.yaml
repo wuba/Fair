@@ -1,0 +1,5 @@
+targets:
+  $default:
+    source:
+      exclude:
+        - __test_data__/**
