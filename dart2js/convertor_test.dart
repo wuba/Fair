@@ -2477,7 +2477,7 @@ bool testcaseImport() {
   return compare('testcaseImport', convertWidgetStateFile(dirname(Platform.script.path) + '/__test_data__/page1/page1.dart'), '''
   GLOBAL['#FairPageName#'] = (function(__initProps__) {
       const __global__ = this;
-                defineModule(3, function(__mod__) {
+                defineModule(5, function(__mod__) {
             with (__mod__.imports) {
                       function Two() {          
                     const inner = Two.__inner__;
@@ -2526,7 +2526,7 @@ bool testcaseImport() {
             __mod__.exports.Two = Two;
           }, []);
           
-          defineModule(4, function(__mod__) {
+          defineModule(3, function(__mod__) {
             with (__mod__.imports) {
                       function Three() {          
                     const inner = Three.__inner__;
@@ -2560,6 +2560,8 @@ bool testcaseImport() {
             with (__arg_ctx__) {
           print(value);
     
+    b.Two.bar(value);
+    
     }
     
       }
@@ -2573,7 +2575,7 @@ bool testcaseImport() {
         
             }
             __mod__.exports.Three = Three;
-          }, []);
+          }, [[5,'b']]);
           
           defineModule(2, function(__mod__) {
             with (__mod__.imports) {
@@ -2607,7 +2609,7 @@ bool testcaseImport() {
       
             with (__thiz__) {
             with (__arg_ctx__) {
-          Two.bar(value);
+          c.Two.bar(value);
     
     Three.bark(value);
     
@@ -2624,7 +2626,7 @@ bool testcaseImport() {
         
             }
             __mod__.exports.One = One;
-          }, [3,4]);
+          }, [3,[5,'c']]);
           
           defineModule(1, function(__mod__) {
             with (__mod__.imports) {
