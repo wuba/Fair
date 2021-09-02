@@ -2677,8 +2677,8 @@ bool testcaseImport() {
             __mod__.exports.CustomFunc = CustomFunc;
           }, [2]);
           
-      return runCallback(function() {
-        with(this) {
+      return runCallback(function(__mod__) {
+        with(__mod__.imports) {
                   function _Page2PageState() {          
                     const inner = _Page2PageState.__inner__;
           if (this == __global__) {
