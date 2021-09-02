@@ -439,6 +439,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
   static var InitPropsName = '__initProps__';
   var baseFilePath = '';
   var moduleSequence = 1;
+  Map<String, String> dependencyCache = {}; // module path / module sequence
 
   var classDeclarationData = ClassDeclarationData();
   var allStates = <ClassDeclarationData>[];
@@ -566,19 +567,27 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
     var index = 0;
     imports.forEach((element) {
           var absPath = resolvePath(p.dirname(refererPath), element.k1);
+          if (dependencyCache.containsKey(absPath)) {
+            return;
+          }
+          dependencyCache[absPath] = dependencySequences[index];
           var partJsGenerator = PartJsCodeGenerator();
           partJsGenerator.parse(absPath);
           var selfDependencySequences = <String>[];
           if (partJsGenerator.importLocalFiles.isNotEmpty) {
-            selfDependencySequences = reserveSequence(partJsGenerator.importLocalFiles.length, true);
-            var index = 0;
-            partJsGenerator.importLocalFiles.forEach((element) {
-              if (element.k3 != null && element.k3.isNotEmpty) {
-                selfDependencySequences[index] = '[${dependencySequences[index]},\'${element.k3}\']';
-              }
-              index++;
-            });
             generateDependencies(absPath, partJsGenerator.importLocalFiles, result);
+            selfDependencySequences = reserveSequence(partJsGenerator.importLocalFiles.length, true);
+            var index1 = 0;
+            partJsGenerator.importLocalFiles.forEach((element) {
+              var tempDependencyPath = resolvePath(p.dirname(absPath), element.k1);
+              if (dependencyCache.containsKey(tempDependencyPath)) {
+                selfDependencySequences[index1] = dependencyCache[tempDependencyPath].toString();
+              }
+              if (element.k3 != null && element.k3.isNotEmpty) {
+                selfDependencySequences[index1] = '[${selfDependencySequences[index1]},\'${element.k3}\']';
+              }
+              index1++;
+            });
           }
           var classDeclarationVisitor1 = ClassDeclarationVisitor(element.k2);
           classDeclarationVisitor1.parseByFile(absPath);

@@ -1,9 +1,9 @@
-import '../2.dart';
 import '../dir3/3.dart';
+import '../2.dart' as c;
 
 class One {
   static void foo(String value) {
-    Two.bar(value);
+    c.Two.bar(value);
     Three.bark(value);
   }
 }
