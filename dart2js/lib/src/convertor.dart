@@ -642,6 +642,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
       ${dependencyClasses.join('\r\n')}
       return runCallback(function(__mod__) {
         with(__mod__.imports) {
+          ${allInnerDataClasses.map((e) => e.genJsCode()).join('\r\n')}
           ${classDeclarationData.genJsCode()};
           return ${classDeclarationData.className}();
         }
