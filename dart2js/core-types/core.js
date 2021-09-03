@@ -10,6 +10,7 @@ if (!this.global) {
 const __modules__ = {};
 function defineModule(modId, func, deps) {
   const imports = {};
+  const __global__ = this;
   __modules__[modId] = {
     init: func,
     inited: false,
@@ -39,6 +40,7 @@ function runModule(id, mod, alias) {
 
 function runCallback(func, deps) {
   const imports = {};
+  const __global__ = this;
   deps.map((d) =>
     typeof d == "number"
       ? runModule(d, { exports: imports })
