@@ -4,7 +4,7 @@
  * found in the LICENSE file.
  */
 import 'dart:async';
-import 'convertor.dart' show convertWidgetStateFile;
+import './src/convertor.dart' show convertWidgetStateFile;
 
 Future<String> convertFile(String input, [bool compress = false]) async {
   return convertWidgetStateFile(input, compress);
