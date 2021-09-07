@@ -4,6 +4,8 @@
  * found in the LICENSE file.
  */
 import 'convertor.dart';
+import 'dart:io' show Platform;
+import 'package:path/path.dart' show dirname;
 
 bool compare(String testcaseName, String actual, String expected) {
   if (actual.isEmpty && expected.isEmpty) {
@@ -2471,7 +2473,299 @@ this.g3 = xx;
   ''');
 }
 
+bool testcaseImport() {
+  return compare('testcaseImport', convertWidgetStateFile(dirname(Platform.script.path) + '/__test_data__/page1/page1.dart'), '''
+  GLOBAL['#FairKey#'] = (function(__initProps__) {
+      const __global__ = this;
+                defineModule(5, function(__mod__) {
+            with (__mod__.imports) {
+                      function Two() {          
+                    const inner = Two.__inner__;
+          if (this == __global__) {
+            return new Two({__args__: arguments});
+          } else {
+            const args = arguments.length > 0 ? arguments[0].__args__ || arguments : [];
+            inner.apply(this, args);
+            Two.prototype.ctor.apply(this, args);
+            return this;
+          }
+        
+        }
+        Two.__inner__ = function inner() {
+          
+          
+        };
+        Two.prototype = {
+          
+          
+        };
+                  Two.prototype.ctor = function() {
+            Object.prototype.ctor.call(this);
+          };
+        
+        Two.bar = function bar(value) { 
+            const __thiz__ = this;
+      const __arg_ctx__ = {value,};
+      
+            with (__thiz__) {
+            with (__arg_ctx__) {
+          print(value);
+    
+    }
+    
+      }
+      
+      
+    
+    };
+        
+        
+        
+        
+            }
+            __mod__.exports.Two = Two;
+          }, []);
+          
+          defineModule(3, function(__mod__) {
+            with (__mod__.imports) {
+                      function Three() {          
+                    const inner = Three.__inner__;
+          if (this == __global__) {
+            return new Three({__args__: arguments});
+          } else {
+            const args = arguments.length > 0 ? arguments[0].__args__ || arguments : [];
+            inner.apply(this, args);
+            Three.prototype.ctor.apply(this, args);
+            return this;
+          }
+        
+        }
+        Three.__inner__ = function inner() {
+          
+          
+        };
+        Three.prototype = {
+          
+          
+        };
+                  Three.prototype.ctor = function() {
+            Object.prototype.ctor.call(this);
+          };
+        
+        Three.bark = function bark(value) { 
+            const __thiz__ = this;
+      const __arg_ctx__ = {value,};
+      
+            with (__thiz__) {
+            with (__arg_ctx__) {
+          print(value);
+    
+    b.Two.bar(value);
+    
+    }
+    
+      }
+      
+      
+    
+    };
+        
+        
+        
+        
+            }
+            __mod__.exports.Three = Three;
+          }, [[5,'b']]);
+          
+          defineModule(2, function(__mod__) {
+            with (__mod__.imports) {
+                      function One() {          
+                    const inner = One.__inner__;
+          if (this == __global__) {
+            return new One({__args__: arguments});
+          } else {
+            const args = arguments.length > 0 ? arguments[0].__args__ || arguments : [];
+            inner.apply(this, args);
+            One.prototype.ctor.apply(this, args);
+            return this;
+          }
+        
+        }
+        One.__inner__ = function inner() {
+          
+          
+        };
+        One.prototype = {
+          
+          
+        };
+                  One.prototype.ctor = function() {
+            Object.prototype.ctor.call(this);
+          };
+        
+        One.foo = function foo(value) { 
+            const __thiz__ = this;
+      const __arg_ctx__ = {value,};
+      
+            with (__thiz__) {
+            with (__arg_ctx__) {
+          c.Two.bar(value);
+    
+    Three.bark(value);
+    
+    }
+    
+      }
+      
+      
+    
+    };
+        
+        
+        
+        
+            }
+            __mod__.exports.One = One;
+          }, [3,[5,'c']]);
+          
+          defineModule(1, function(__mod__) {
+            with (__mod__.imports) {
+                      function CustomFunc() {          
+                    const inner = CustomFunc.__inner__;
+          if (this == __global__) {
+            return new CustomFunc({__args__: arguments});
+          } else {
+            const args = arguments.length > 0 ? arguments[0].__args__ || arguments : [];
+            inner.apply(this, args);
+            CustomFunc.prototype.ctor.apply(this, args);
+            return this;
+          }
+        
+        }
+        CustomFunc.__inner__ = function inner() {
+          
+          
+        };
+        CustomFunc.prototype = {
+          
+          
+        };
+                  CustomFunc.prototype.ctor = function() {
+            Object.prototype.ctor.call(this);
+          };
+        
+        CustomFunc.excute = function excute(value) { 
+            const __thiz__ = this;
+      const __arg_ctx__ = {value,};
+      
+            with (__thiz__) {
+            with (__arg_ctx__) {
+          One.foo(value);
+    
+    }
+    
+      }
+      
+      
+    
+    };
+        
+        
+        
+        
+            }
+            __mod__.exports.CustomFunc = CustomFunc;
+          }, [2]);
+          
+      return runCallback(function(__mod__) {
+        with(__mod__.imports) {
+                  function _Page2PageState() {          
+                    const inner = _Page2PageState.__inner__;
+          if (this == __global__) {
+            return new _Page2PageState({__args__: arguments});
+          } else {
+            const args = arguments.length > 0 ? arguments[0].__args__ || arguments : [];
+            inner.apply(this, args);
+            _Page2PageState.prototype.ctor.apply(this, args);
+            return this;
+          }
+        
+        }
+        _Page2PageState.__inner__ = function inner() {
+          
+          this.fairProps = __initProps__;this._count = null;this._name = null;
+        };
+        _Page2PageState.prototype = {
+          onTapText: function onTapText() { 
+            const __thiz__ = this;
+      
+      
+            with (__thiz__) {
+        _count = _count+1;
+    setState('#FairKey#',function dummy() { 
+      
+    });
+    
+      }
+      
+      
+    
+    },onLoad: function onLoad() { 
+            const __thiz__ = this;
+      
+      
+            with (__thiz__) {
+        _name = fairProps.__op_idx__('pageName');
+_count = fairProps.__op_idx__('_count');
+      }
+      
+      
+    
+    },initState: function initState() { 
+            const __thiz__ = this;
+      
+      
+            with (__thiz__) {
+        
+fairProps = widget._props;
+    onLoad();
+    
+      }
+      
+      
+    
+    },onCustomFunc: function onCustomFunc() { 
+            const __thiz__ = this;
+      
+      
+            with (__thiz__) {
+            a.CustomFunc.excute(_count.toString());
+    
+      }
+      
+      
+    
+    },
+          
+        };
+                  _Page2PageState.prototype.ctor = function() {
+            Object.prototype.ctor.call(this);
+          };
+        
+        
+        
+        
+        
+        ;
+          return _Page2PageState();
+        }
+      }, [[1,'a']]);
+    })(convertObjectLiteralToSetOrMap(JSON.parse('#FairProps#')));
+  ''');
+}
+
 void main() {
+
   print('Executing testcases...');
   var arr = [
     testcaseFor1,
@@ -2537,6 +2831,7 @@ void main() {
     testcaseMap,
     testcaseMap1,
     testcaseList,
+    testcaseImport,
   ];
   var failedCount = 0;
   arr.forEach((func) {

@@ -7,7 +7,7 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
-import 'custom_func.dart';
+import 'custom_func.dart' as a;
 
 @FairPatch()
 class SampleLogicPage2Page extends StatefulWidget {
@@ -46,7 +46,7 @@ class _Page2PageState extends State<SampleLogicPage2Page> {
   }
 
   void onCustomFunc() {
-    CustomFunc.excute(_count.toString());
+    a.CustomFunc.excute(_count.toString());
   }
 
 
