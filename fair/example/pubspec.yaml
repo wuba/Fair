@@ -29,9 +29,9 @@ dev_dependencies:
     path: ../../compiler
 
 # Switch to another stable flutter version
-dependency_overrides:
-   fair_version:
-     path: ../../flutter_version/flutter_2_0_6
+#dependency_overrides:
+#   fair_version:
+#     path: ../../flutter_version/flutter_2_0_6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
