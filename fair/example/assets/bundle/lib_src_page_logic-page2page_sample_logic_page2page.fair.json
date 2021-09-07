@@ -63,7 +63,7 @@
                 ]
               },
               "heroTag": "add",
-              "onPressed": "@(onCustomFunc)"
+              "onPressed": "@(onTapText)"
             }
           },
           {
@@ -80,12 +80,11 @@
                 "className": "Navigator.pushNamed",
                 "pa": [
                   "^(context)",
-                  "fair_page"
+                  "native_page"
                 ],
                 "na": {
                   "arguments": {
-                    "name": "动态界面&传值",
-                    "path": "assets/bundle/lib_src_page_logic-page2page_sample_logic_page2page.fair.json",
+                    "name": "原生",
                     "data": {
                       "_count": 58
                     }

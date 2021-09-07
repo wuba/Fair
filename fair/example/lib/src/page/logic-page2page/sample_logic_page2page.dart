@@ -7,8 +7,6 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
-import 'custom_func.dart';
-
 @FairPatch()
 class SampleLogicPage2Page extends StatefulWidget {
   var _props;
@@ -45,11 +43,6 @@ class _Page2PageState extends State<SampleLogicPage2Page> {
     onLoad();
   }
 
-  void onCustomFunc() {
-    CustomFunc.excute(_count.toString());
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +67,7 @@ class _Page2PageState extends State<SampleLogicPage2Page> {
           FloatingActionButton(
             child: Icon(Icons.add),
             heroTag: 'add',
-            onPressed: onCustomFunc,
+            onPressed: onTapText,
           ),
           FloatingActionButton(
             child: Icon(Icons.open_in_new),
