@@ -237,25 +237,6 @@
                   {
                     "className": "TextSpan",
                     "na": {
-                      "text": "%(_generatePrice)",
-                      "style": {
-                        "className": "TextStyle",
-                        "na": {
-                          "fontSize": 18,
-                          "color": {
-                            "className": "Color",
-                            "pa": [
-                              "0xFFFF0000"
-                            ]
-                          },
-                          "wordSpacing": 0
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "className": "TextSpan",
-                    "na": {
                       "text": "万",
                       "style": {
                         "className": "TextStyle",

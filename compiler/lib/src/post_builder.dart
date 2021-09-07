@@ -12,7 +12,7 @@ import 'package:archive/archive.dart';
 import 'package:build/build.dart';
 import 'package:crypto/crypto.dart' show md5;
 import 'package:path/path.dart' as path;
-
+import 'package:dartToJs/index.dart' as dart2js;
 import 'helper.dart' show FlatCompiler;
 
 class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
@@ -42,38 +42,17 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
   Iterable<String> get inputExtensions => ['.bundle.json'];
 
   void dart2JS(String input, String jsName) async {
-    var result = await Process.run('which', ['dart']);
-    var bin = StringBuffer();
-    bin.write(result.stdout);
-    var strBin = bin.toString();
-    var dirEndIndex = strBin.lastIndexOf(Platform.pathSeparator);
-    var binDir = strBin.substring(0, dirEndIndex);
     var partPath = path.join(
         Directory.current.path, input.replaceFirst('.bundle.json', '.dart'));
     print('\u001b[33m [Fair Dart2JS] partPath => ${partPath} \u001b[0m');
     if (File(partPath).existsSync()) {
-      // var aotParentPath = Directory.current.parent.parent.path;
-      // var aotPathResult =
-      //     await Process.run('find', [aotParentPath, "-name", 'entry.aot']);
-      // var aotPathStr = aotPathResult.stdout.toString();
-      // var transferPath = aotPathStr.split('\n')[0].split('\r')[0];
-
-      // print('\u001b[33m [Fair Dart2JS] entry.aot => ${transferPath} \u001b[0m');
-      // print(
-      //     '\u001b[33m [Fair Dart2JS] dartaotruntime path => ${binDir}/dartaotruntime \u001b[0m');
-      // print('\u001b[33m [Fair Dart2JS] jsName => ${jsName} \u001b[0m');
-      // try {
-        // result = await Process.run(path.join('$binDir', 'dartaotruntime'),
-        //     [transferPath, '--compress', partPath]);
-        final fair = '/Users/anjuke/haijun/Anjuke-Flutter/fair-new/dart2js/entry.dart';
-        if (fair != null) {
-          final result = Process.runSync('dart', [fair,'--compress', partPath]);
-          File(jsName)
-            ..writeAsStringSync(result.stdout.toString());
-        }
-      // } catch (e) {
-      //   print('[Fair Dart2JS] e => ${e}');
-      // }
+      try {
+        var result = await dart2js.convertFile(partPath, true);
+        File(jsName)
+          ..writeAsStringSync(result);
+      } catch (e) {
+        print('[Fair Dart2JS] e => ${e}');
+      }
     }
   }
 

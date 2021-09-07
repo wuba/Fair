@@ -1,17 +1,63 @@
-let global = this;
-function inherit(cls, sup) {
-    var oldProto = cls.prototype;
-    cls.prototype = Object.create(Object.create(sup.prototype));
-    Object.assign(cls.prototype, oldProto);
-    cls.prototype.constructor = cls;
-    cls.prototype.$superSubstitution = cls.prototype.__proto__;
+/*
+ * Copyright (C) 2005-present, 58.com.  All rights reserved.
+ * Use of this source code is governed by a BSD type license that can be
+ * found in the LICENSE file.
+ */
+if (!this.global) {
+  this.global = this; // iOS下JSCore没有注入global作为全局变量
 }
-Object.assign(Object.prototype, {
-    __op_idx__: function(key) {
-        console.log('kkkkkkkk'+key);
-        return this[key];
+
+const __modules__ = {};
+function defineModule(modId, func, deps) {
+  const imports = {};
+  const __global__ = this;
+  __modules__[modId] = {
+    init: func,
+    inited: false,
+    deps,
+    run: function (mod) {
+      if (!this.inited) {
+        this.deps.forEach((d) =>
+          typeof d == "number"
+            ? runModule(d, { exports: imports })
+            : runModule(d[0], { exports: imports }, d[1])
+        );
+        this.inited = true;
+      }
+      this.init.call(__global__, { imports, exports: mod.exports });
     },
-});
+  };
+}
+
+function runModule(id, mod, alias) {
+  if (alias) {
+    mod.exports[alias] = {};
+    __modules__[id].run({ exports: mod.exports[alias] });
+  } else {
+    __modules__[id].run(mod);
+  }
+}
+
+function runCallback(func, deps) {
+  const imports = {};
+  const __global__ = this;
+  deps.map((d) =>
+    typeof d == "number"
+      ? runModule(d, { exports: imports })
+      : runModule(d[0], { exports: imports }, d[1])
+  );
+  return func.call(__global__, { imports });
+}
+
+function inherit(cls, sup) {
+  var oldProto = cls.prototype;
+  cls.prototype = Object.create(Object.create(sup.prototype));
+  Object.assign(cls.prototype, oldProto);
+  cls.prototype.constructor = cls;
+  cls.prototype.$superSubstitution = cls.prototype.__proto__;
+}
+
+
 function convertObjectLiteralToSetOrMap(obj) {
   let isSet = Object.prototype.toString.call(obj) == '[object Array]';
   if (!isSet) {
@@ -26,505 +72,564 @@ function convertObjectLiteralToSetOrMap(obj) {
   }
 }
 
-Object.prototype.ctor = function(){};
-Object.__inner__ = function(){};
+Object.prototype.ctor = function () {};
+Object.__inner__ = function () {};
 
-;(function(){
-const __global__ = this;
+(function () {
+  const __global__ = global;
 
-function Duration() {
+  function Duration() {
     const inner = Duration.__inner__;
     if (this == __global__) {
-        return new Duration({ __args__: arguments });
+      return new Duration({ __args__: arguments });
     } else {
-        const args = arguments.length > 0 ? arguments[0].__args__ || arguments : [];
-        inner.apply(this, args);
-        Duration.prototype.ctor.apply(this, args);
-        return this;
+      const args =
+        arguments.length > 0 ? arguments[0].__args__ || arguments : [];
+      inner.apply(this, args);
+      Duration.prototype.ctor.apply(this, args);
+      return this;
     }
-}
+  }
 
-Duration.__inner__ = function inner() {
+  Duration.__inner__ = function inner() {
     Object.defineProperties(this, {
-        inDays: {
-            get: () => (this._duration / Duration.microsecondsPerDay)>>0,
-        },
-        inHours: {
-            get: () => (this._duration / Duration.microsecondsPerHour) >> 0,
-        },
-        inMinutes: {
-            get: () => (this._duration / Duration.microsecondsPerMinute) >> 0,
-        },
-        inSeconds: {
-            get: () => (this._duration / Duration.microsecondsPerSecond) >> 0,
-        },
-        inMilliseconds: {
-            get: () => (this._duration / Duration.microsecondsPerMillisecond) >> 0,
-        },
-        inMicroseconds: {
-            get: () => this._duration,
-        },
-        hashCode: {
-            get: () => this._duration.hashCode,
-        },
-        isNegative: {
-            get: () => this._duration < 0,
-        }
+      inDays: {
+        get: () => (this._duration / Duration.microsecondsPerDay) >> 0,
+      },
+      inHours: {
+        get: () => (this._duration / Duration.microsecondsPerHour) >> 0,
+      },
+      inMinutes: {
+        get: () => (this._duration / Duration.microsecondsPerMinute) >> 0,
+      },
+      inSeconds: {
+        get: () => (this._duration / Duration.microsecondsPerSecond) >> 0,
+      },
+      inMilliseconds: {
+        get: () => (this._duration / Duration.microsecondsPerMillisecond) >> 0,
+      },
+      inMicroseconds: {
+        get: () => this._duration,
+      },
+      hashCode: {
+        get: () => this._duration.hashCode,
+      },
+      isNegative: {
+        get: () => this._duration < 0,
+      },
     });
     this._duration = null;
-};
+  };
 
-Duration.prototype = {
-    ctor: function ({ days = 0, hours = 0, minutes = 0, seconds = 0, milliseconds = 0, microseconds = 0 } = {}) {
-        const __thiz__ = this;
-        const __arg_ctx__ = {days, hours, minutes, seconds, milliseconds, microseconds};
-        with (Duration) {
-            with (__thiz__) {
-                with (__arg_ctx__) {
-                    Duration._microseconds.call(__thiz__, microsecondsPerDay * days +
-                        microsecondsPerHour * hours +
-                        microsecondsPerMinute * minutes +
-                        microsecondsPerSecond * seconds +
-                        microsecondsPerMillisecond * milliseconds +
-                        microseconds);
-                }
-            }
+  Duration.prototype = {
+    ctor: function ({
+      days = 0,
+      hours = 0,
+      minutes = 0,
+      seconds = 0,
+      milliseconds = 0,
+      microseconds = 0,
+    } = {}) {
+      const __thiz__ = this;
+      const __arg_ctx__ = {
+        days,
+        hours,
+        minutes,
+        seconds,
+        milliseconds,
+        microseconds,
+      };
+      with (Duration) {
+        with (__thiz__) {
+          with (__arg_ctx__) {
+            Duration._microseconds.call(
+              __thiz__,
+              microsecondsPerDay * days +
+                microsecondsPerHour * hours +
+                microsecondsPerMinute * minutes +
+                microsecondsPerSecond * seconds +
+                microsecondsPerMillisecond * milliseconds +
+                microseconds
+            );
+          }
         }
+      }
     },
-    __op_add__: function(other) {
-        return Duration._microseconds(this._duration + other._duration);
+    __op_add__: function (other) {
+      return Duration._microseconds(this._duration + other._duration);
     },
-    __op_minus__: function(other) {
-        return Duration._microseconds(this._duration - other._duration);
+    __op_minus__: function (other) {
+      return Duration._microseconds(this._duration - other._duration);
     },
-    __op_multi__: function(factor) {
-        return Duration._microseconds(Math.round(this._duration * factor));
+    __op_multi__: function (factor) {
+      return Duration._microseconds(Math.round(this._duration * factor));
     },
     __op_idivide__: function (quotient) {
-        return Duration._microseconds((this._duration / quotient)>>0);
+      return Duration._microseconds((this._duration / quotient) >> 0);
     },
-    __op_lt__: function (other) { return this._duration < other._duration; },
-    __op_gt__: function (other) { return this._duration < other._duration; },
-    __op_lte__: function (other) { return this._duration <= other._duration; },
-    __op_gte__: function (other) { return this._duration >= other._duration; } ,
-    __op_eq__: function (other) { return other && this._duration == other._duration; },
-    __op_ngt__: function () { return Duration._microseconds(-this._duration) },
-    compareTo: function (other) { return this._duration.compareTo(other._duration); },
-    toString: function() {
-        function sixDigits(n) {
-            if (n >= 100000) return `${n}`;
-            if (n >= 10000) return `0${n}`;
-            if (n >= 1000) return `00${n}`;
-            if (n >= 100) return `000${n}`;
-            if (n >= 10) return `0000${n}`;
-            return `00000${n}`;
-        }
-
-        function twoDigits(n) {
-            if (n >= 10) return `${n}`;
-            return `0${n}`;
-        }
-
-        let __thiz__ = this;
-        with (Duration) {
-            with (__thiz__) {
-                if (inMicroseconds < 0) {
-                    return `-${this.__op_ngt__()}`;
-                }
-                let twoDigitMinutes =
-                    twoDigits(inMinutes % minutesPerHour);
-                let twoDigitSeconds =
-                    twoDigits(inSeconds % secondsPerMinute);
-                let sixDigitUs =
-                    sixDigits(inMicroseconds % microsecondsPerSecond);
-                return `${inHours}:${twoDigitMinutes}:${twoDigitSeconds}.${sixDigitUs}`;
-            }
-        }
+    __op_lt__: function (other) {
+      return this._duration < other._duration;
     },
-    abs: function () { return Duration._microseconds(this._duration.abs()); }
-};
+    __op_gt__: function (other) {
+      return this._duration < other._duration;
+    },
+    __op_lte__: function (other) {
+      return this._duration <= other._duration;
+    },
+    __op_gte__: function (other) {
+      return this._duration >= other._duration;
+    },
+    __op_eq__: function (other) {
+      return other && this._duration == other._duration;
+    },
+    __op_ngt__: function () {
+      return Duration._microseconds(-this._duration);
+    },
+    compareTo: function (other) {
+      return this._duration.compareTo(other._duration);
+    },
+    toString: function () {
+      function sixDigits(n) {
+        if (n >= 100000) return `${n}`;
+        if (n >= 10000) return `0${n}`;
+        if (n >= 1000) return `00${n}`;
+        if (n >= 100) return `000${n}`;
+        if (n >= 10) return `0000${n}`;
+        return `00000${n}`;
+      }
 
-const staticFields = {
+      function twoDigits(n) {
+        if (n >= 10) return `${n}`;
+        return `0${n}`;
+      }
+
+      let __thiz__ = this;
+      with (Duration) {
+        with (__thiz__) {
+          if (inMicroseconds < 0) {
+            return `-${this.__op_ngt__()}`;
+          }
+          let twoDigitMinutes = twoDigits(inMinutes % minutesPerHour);
+          let twoDigitSeconds = twoDigits(inSeconds % secondsPerMinute);
+          let sixDigitUs = sixDigits(inMicroseconds % microsecondsPerSecond);
+          return `${inHours}:${twoDigitMinutes}:${twoDigitSeconds}.${sixDigitUs}`;
+        }
+      }
+    },
+    abs: function () {
+      return Duration._microseconds(this._duration.abs());
+    },
+  };
+
+  const staticFields = {
     microsecondsPerMillisecond: 1000,
     millisecondsPerSecond: 1000,
     secondsPerMinute: 60,
     minutesPerHour: 60,
     hoursPerDay: 24,
-};
-Duration._microseconds = function (arg1) {
-    const res = (this instanceof Duration) ? this : new Duration();
+  };
+  Duration._microseconds = function (arg1) {
+    const res = this instanceof Duration ? this : new Duration();
     res._duration = arg1;
     return res;
-}
-Object.assign(Duration, staticFields);
-Duration.microsecondsPerSecond = Duration.microsecondsPerMillisecond * Duration.millisecondsPerSecond;
-Duration.microsecondsPerMinute = Duration.microsecondsPerSecond * Duration.secondsPerMinute;
-Duration.microsecondsPerHour = Duration.microsecondsPerMinute * Duration.minutesPerHour;
-Duration.microsecondsPerDay = Duration.microsecondsPerHour * Duration.hoursPerDay;
+  };
+  Object.assign(Duration, staticFields);
+  Duration.microsecondsPerSecond =
+    Duration.microsecondsPerMillisecond * Duration.millisecondsPerSecond;
+  Duration.microsecondsPerMinute =
+    Duration.microsecondsPerSecond * Duration.secondsPerMinute;
+  Duration.microsecondsPerHour =
+    Duration.microsecondsPerMinute * Duration.minutesPerHour;
+  Duration.microsecondsPerDay =
+    Duration.microsecondsPerHour * Duration.hoursPerDay;
 
-Duration.millisecondsPerMinute = Duration.millisecondsPerSecond * Duration.secondsPerMinute;
-Duration.millisecondsPerHour = Duration.millisecondsPerMinute * Duration.minutesPerHour;
-Duration.millisecondsPerDay = Duration.millisecondsPerHour * Duration.hoursPerDay;
-Duration.secondsPerHour = Duration.secondsPerMinute * Duration.minutesPerHour;
-Duration.secondsPerDay = Duration.secondsPerHour * Duration.hoursPerDay;
-Duration.minutesPerDay = Duration.minutesPerHour * Duration.hoursPerDay;
-Duration.zero = Duration({seconds: 0});
+  Duration.millisecondsPerMinute =
+    Duration.millisecondsPerSecond * Duration.secondsPerMinute;
+  Duration.millisecondsPerHour =
+    Duration.millisecondsPerMinute * Duration.minutesPerHour;
+  Duration.millisecondsPerDay =
+    Duration.millisecondsPerHour * Duration.hoursPerDay;
+  Duration.secondsPerHour = Duration.secondsPerMinute * Duration.minutesPerHour;
+  Duration.secondsPerDay = Duration.secondsPerHour * Duration.hoursPerDay;
+  Duration.minutesPerDay = Duration.minutesPerHour * Duration.hoursPerDay;
+  Duration.zero = Duration({ seconds: 0 });
 
-global.Duration = Duration;})()
-;(function(){
-function Iterable() {}
+  global.Duration = Duration;
+})();
+(function () {
+  function Iterable() {}
 
-Iterable.prototype = Object.create({
-    followedBy: function(other) {
+  Iterable.prototype = Object.create(
+    {
+      followedBy: function (other) {
         return this.concat(other);
-    },
-    where: function(test) {
+      },
+      where: function (test) {
         return this.filter(test);
-    },
-    whereType: function() {
-        throw 'Not Implemented: whereType';
-    },
-    expand: function(f) {
+      },
+      whereType: function () {
+        throw "Not Implemented: whereType";
+      },
+      expand: function (f) {
         let res = [];
-        this.map(f).forEach(elem => {
-            res.addAll(elem);
+        this.map(f).forEach((elem) => {
+          res.addAll(elem);
         });
         return res;
-    },
-    contains: function(element) {
+      },
+      contains: function (element) {
         return this.includes(element);
-    },
-    // map / forEach / reduce / every
-    // join 默认参数为空字串，而不是,
-    fold: function (initialValue, combine) {
+      },
+      // map / forEach / reduce / every
+      // join 默认参数为空字串，而不是,
+      fold: function (initialValue, combine) {
         return this.reduce(combine, initialValue);
-    },
-    any: function(test) {
+      },
+      any: function (test) {
         return this.some(test);
-    },
-    toList: function ({ growable = true} = {}) {
+      },
+      toList: function ({ growable = true } = {}) {
         return this;
-    },
-    toSet: function() {
-        throw 'Not Implemented: toSet';
-    },
-    take: function(count) {
+      },
+      toSet: function () {
+        throw "Not Implemented: toSet";
+      },
+      take: function (count) {
         return this.slice(0, count);
-    },
-    takeWhile: function(test) {
+      },
+      takeWhile: function (test) {
         let res = [];
         for (let i = 0; i < this.length; i++) {
-            if (test(this[i])) {
-                res.push(this[i]);
-            } else {
-                break;
-            }
+          if (test(this[i])) {
+            res.push(this[i]);
+          } else {
+            break;
+          }
         }
         return res;
-    },
-    skip: function(count) {
+      },
+      skip: function (count) {
         return this.slice(count);
-    },
-    skipWhile: function(test) {
+      },
+      skipWhile: function (test) {
         let res = [];
         for (let i = 0; i < this.length; i++) {
-            if (!test(this[i])) {
-                res = this.slice(i);
-                break;
-            }
+          if (!test(this[i])) {
+            res = this.slice(i);
+            break;
+          }
         }
         return res;
-    },
-    firstWhere: function(test, {orElse} = {}) {
+      },
+      firstWhere: function (test, { orElse } = {}) {
         let res = this.find(test);
         if (!res) {
-            if (orElse) {
-                return orElse();
-            } else {
-                throw 'StateError';
-            }
+          if (orElse) {
+            return orElse();
+          } else {
+            throw "StateError";
+          }
         } else {
-            return res;
+          return res;
         }
-    },
-    lastWhere: function (test, { orElse } = {}) {
+      },
+      lastWhere: function (test, { orElse } = {}) {
         for (let i = this.length - 1; i >= 0; i--) {
-            if (test(this[i])) {
-                return this[i];
-            }
+          if (test(this[i])) {
+            return this[i];
+          }
         }
         if (orElse) {
-            return orElse();
+          return orElse();
         } else {
-            throw 'StateError';
+          throw "StateError";
         }
-    },
-    singleWhere: function (test, { orElse } = {}) {
+      },
+      singleWhere: function (test, { orElse } = {}) {
         let res = this.filter(test);
         if (res && res.length == 1) {
-            return res[0];
+          return res[0];
         } else {
-            if (orElse) {
-                return orElse();
-            } else {
-                throw 'StateError';
-            }
+          if (orElse) {
+            return orElse();
+          } else {
+            throw "StateError";
+          }
         }
-    },
-    elementAt: function(index) {
+      },
+      elementAt: function (index) {
         if (index < 0 || index >= this.length) {
-            throw 'Error';
+          throw "Error";
         }
         return this[index];
+      },
+      toString: function () {
+        throw "NotImplemented: toString";
+      },
     },
-    toString: function() {
-        throw 'NotImplemented: toString';
-    }
-}, {
-    single: {
-        get: function() {
-            if (this.length == 1) {
-                return this[0];
-            } else {
-                throw 'StateError';
-            }
-        }
-    },
-    isEmpty: {
-        get: function() {
-            return !this.length;
-        }
-    },
-    isNotEmpty: {
+    {
+      single: {
         get: function () {
-            return !this.isEmpty;
-        }
-    },
+          if (this.length == 1) {
+            return this[0];
+          } else {
+            throw "StateError";
+          }
+        },
+      },
+      isEmpty: {
+        get: function () {
+          return !this.length;
+        },
+      },
+      isNotEmpty: {
+        get: function () {
+          return !this.isEmpty;
+        },
+      },
+    }
+  );
 
-});
-
-global.Iterable = Iterable;})()
-;(function(){
-const __global__ = global;
-function DateTime() {
+  global.Iterable = Iterable;
+})();
+(function () {
+  const __global__ = global;
+  function DateTime() {
     const inner = DateTime.__inner__;
     if (this == __global__) {
-        return new DateTime({ __args__: arguments });
+      return new DateTime({ __args__: arguments });
     } else {
-        const args = arguments.length > 0 ? arguments[0].__args__ || arguments : [];
-        inner.apply(this, args);
-        DateTime.prototype.ctor.apply(this, args);
-        return this;
+      const args =
+        arguments.length > 0 ? arguments[0].__args__ || arguments : [];
+      inner.apply(this, args);
+      DateTime.prototype.ctor.apply(this, args);
+      return this;
     }
-}
-DateTime.__inner__ = function inner() {
+  }
+  DateTime.__inner__ = function inner() {
     Object.defineProperties(this, {
-        millisecondsSinceEpoch: {
-            get: function() {
-                return +this.__date__;
-            },
+      millisecondsSinceEpoch: {
+        get: function () {
+          return +this.__date__;
         },
-        microsecondsSinceEpoch: {
-            get: function () {
-                return this.millisecondsSinceEpoch * 1000;
-            },
+      },
+      microsecondsSinceEpoch: {
+        get: function () {
+          return this.millisecondsSinceEpoch * 1000;
         },
-        timeZoneName: {
-            get: function () {
-                throw 'Not Implemented: timeZoneName';
-            },
+      },
+      timeZoneName: {
+        get: function () {
+          throw "Not Implemented: timeZoneName";
         },
-        timeZoneOffset: {
-            get: function () {
-                return this.__date__.getTimezoneOffset();
-            },
+      },
+      timeZoneOffset: {
+        get: function () {
+          return this.__date__.getTimezoneOffset();
         },
-        year: {
-            get: function () {
-                return this.__date__.getFullYear();
-            },
+      },
+      year: {
+        get: function () {
+          return this.__date__.getFullYear();
         },
-        month: {
-            get: function () {
-                return this.__date__.getMonth() + 1;
-            },
+      },
+      month: {
+        get: function () {
+          return this.__date__.getMonth() + 1;
         },
-        day: {
-            get: function () {
-                return this.__date__.getDate();
-            },
+      },
+      day: {
+        get: function () {
+          return this.__date__.getDate();
         },
-        hour: {
-            get: function () {
-                return this.__date__.getHours();
-            },
+      },
+      hour: {
+        get: function () {
+          return this.__date__.getHours();
         },
-        minute: {
-            get: function () {
-                return this.__date__.getMinutes();
-            },
+      },
+      minute: {
+        get: function () {
+          return this.__date__.getMinutes();
         },
-        second: {
-            get: function () {
-                return this.__date__.getSeconds();
-            },
+      },
+      second: {
+        get: function () {
+          return this.__date__.getSeconds();
         },
-        millisecond: {
-            get: function () {
-                return this.__date__.getMilliseconds();
-            },
+      },
+      millisecond: {
+        get: function () {
+          return this.__date__.getMilliseconds();
         },
-        microsecond: {
-            get: function () {
-                return 0; // TODO: not supported
-            },
+      },
+      microsecond: {
+        get: function () {
+          return 0; // TODO: not supported
         },
-        weekday: {
-            get: function () {
-                let res = this.__date__.getDay();
-                return !res ? DateTime.sunday : res;
-            },
+      },
+      weekday: {
+        get: function () {
+          let res = this.__date__.getDay();
+          return !res ? DateTime.sunday : res;
         },
-        hashCode: {
-            get: function () {
-                const val = +this.__date__;
-                return (val ^ (val >> 30)) & 0x3FFFFFFF;
-            },
+      },
+      hashCode: {
+        get: function () {
+          const val = +this.__date__;
+          return (val ^ (val >> 30)) & 0x3fffffff;
         },
+      },
     });
     this.isUtc = null;
 
     this.__date__ = null;
-};
+  };
 
-function _fourDigits(n) {
+  function _fourDigits(n) {
     let absN = Math.abs(n);
     let sign = n < 0 ? "-" : "";
     if (absN >= 1000) return `${n}`;
     if (absN >= 100) return `${sign}0${absN}`;
     if (absN >= 10) return `${sign}00${absN}`;
     return `${sign}000${absN}`;
-}
+  }
 
-function _sixDigits(n) {
+  function _sixDigits(n) {
     let absN = Math.abs(n);
     let sign = n < 0 ? "-" : "+";
     if (absN >= 100000) return `${sign}${absN}`;
     return `${sign}0${absN}`;
-}
+  }
 
-function _threeDigits(n) {
+  function _threeDigits(n) {
     if (n >= 100) return `${n}`;
     if (n >= 10) return `0${n}`;
     return `00${n}`;
-}
+  }
 
-function _twoDigits(n) {
+  function _twoDigits(n) {
     if (n >= 10) return `${n}`;
     return `0${n}`;
-}
+  }
 
-DateTime.prototype = {
-    ctor: function(year, month = 1, day = 1, hour = 0, minute = 0, second = 0, millisecond = 0, microsecond = 0) {
-        this.__date__ = new Date(year, month - 1, day, hour, minute, second, millisecond);
-        this.isUtc = false;
+  DateTime.prototype = {
+    ctor: function (
+      year,
+      month = 1,
+      day = 1,
+      hour = 0,
+      minute = 0,
+      second = 0,
+      millisecond = 0,
+      microsecond = 0
+    ) {
+      this.__date__ = new Date(
+        year,
+        month - 1,
+        day,
+        hour,
+        minute,
+        second,
+        millisecond
+      );
+      this.isUtc = false;
     },
-    __op_eq__: function(other) {
-
-    },
+    __op_eq__: function (other) {},
     isBefore: function (other) {
-        return this.__date__ < other.__date__;
+      return this.__date__ < other.__date__;
     },
     isAfter: function (other) {
-        return this.__date__ > other.__date__;
+      return this.__date__ > other.__date__;
     },
     isAtSameMomentAs: function (other) {
-        return this.__date__ == other.__date__;
+      return this.__date__ == other.__date__;
     },
-    compareTo: function(other) {
-        if (this.isBefore(other)) {
-            return -1;
-        } else if (this.isAfter(other)) {
-            return 1;
-        } else {
-            return 0;
-        }
+    compareTo: function (other) {
+      if (this.isBefore(other)) {
+        return -1;
+      } else if (this.isAfter(other)) {
+        return 1;
+      } else {
+        return 0;
+      }
     },
     toLocal: function () {
-        const res = new DateTime();
-        if (!this.isUtc) {
-            res.__date__ = this.__date__;
-        } else {
-            // TODO: 默认本地为中国时区
-            res.__date__ = new Date(this.__date__ + (8 * 3600 * 1000));
-        }
-        return res;
+      const res = new DateTime();
+      if (!this.isUtc) {
+        res.__date__ = this.__date__;
+      } else {
+        // TODO: 默认本地为中国时区
+        res.__date__ = new Date(this.__date__ + 8 * 3600 * 1000);
+      }
+      return res;
     },
-    toUtc: function() {
-        const res = new DateTime();
-        res.isUtc = true;
-        if (this.isUtc) {
-            res.__date__ = this.__date__;
-        } else {
-            // TODO: 默认本地为中国时区
-            res.__date__ = new Date(this.__date__ - (8 * 3600 * 1000));
-        }
-        return res;
+    toUtc: function () {
+      const res = new DateTime();
+      res.isUtc = true;
+      if (this.isUtc) {
+        res.__date__ = this.__date__;
+      } else {
+        // TODO: 默认本地为中国时区
+        res.__date__ = new Date(this.__date__ - 8 * 3600 * 1000);
+      }
+      return res;
     },
     toString: function () {
-        const __thiz__ = this;
-        with(__thiz__) {
-            let y = _fourDigits(year);
-            let d = _twoDigits(day);
-            let m = _twoDigits(month);
-            let h = _twoDigits(hour);
-            let min = _twoDigits(minute);
-            let sec = _twoDigits(second);
-            let ms = _threeDigits(millisecond);
-            let us = microsecond == 0 ? "" : _threeDigits(microsecond);
-            if (isUtc) {
-                return `${y}-${m}-${d} ${h}:${min}:${sec}.${ms}${us}Z`;
-            } else {
-                return `${y}-${m}-${d} ${h}:${min}:${sec}.${ms}${us}`;
-            }
+      const __thiz__ = this;
+      with (__thiz__) {
+        let y = _fourDigits(year);
+        let d = _twoDigits(day);
+        let m = _twoDigits(month);
+        let h = _twoDigits(hour);
+        let min = _twoDigits(minute);
+        let sec = _twoDigits(second);
+        let ms = _threeDigits(millisecond);
+        let us = microsecond == 0 ? "" : _threeDigits(microsecond);
+        if (isUtc) {
+          return `${y}-${m}-${d} ${h}:${min}:${sec}.${ms}${us}Z`;
+        } else {
+          return `${y}-${m}-${d} ${h}:${min}:${sec}.${ms}${us}`;
         }
+      }
     },
-    toIso8601String: function() {
-        const __thiz__ = this;
-        with (__thiz__) {
-            let y =
-                (year >= -9999 && year <= 9999) ? _fourDigits(year) : _sixDigits(year);
-            let m = _twoDigits(month);
-            let d = _twoDigits(day);
-            let h = _twoDigits(hour);
-            let min = _twoDigits(minute);
-            let sec = _twoDigits(second);
-            let ms = _threeDigits(millisecond);
-            let us = microsecond == 0 ? "" : _threeDigits(microsecond);
-            if (isUtc) {
-                return `${y}-${m}-${d}T${h}:${min}:${sec}.${ms}${us}Z`;
-            } else {
-                return `${y}-${m}-${d}T${h}:${min}:${sec}.${ms}${us}`;
-            }
+    toIso8601String: function () {
+      const __thiz__ = this;
+      with (__thiz__) {
+        let y =
+          year >= -9999 && year <= 9999 ? _fourDigits(year) : _sixDigits(year);
+        let m = _twoDigits(month);
+        let d = _twoDigits(day);
+        let h = _twoDigits(hour);
+        let min = _twoDigits(minute);
+        let sec = _twoDigits(second);
+        let ms = _threeDigits(millisecond);
+        let us = microsecond == 0 ? "" : _threeDigits(microsecond);
+        if (isUtc) {
+          return `${y}-${m}-${d}T${h}:${min}:${sec}.${ms}${us}Z`;
+        } else {
+          return `${y}-${m}-${d}T${h}:${min}:${sec}.${ms}${us}`;
         }
+      }
     },
     add: function (duration) {
-        var res = new DateTime();
-        res.__date__ = new Date(+this.__date__.valueOf() + duration.inMilliseconds);
-        return res;
+      var res = new DateTime();
+      res.__date__ = new Date(
+        +this.__date__.valueOf() + duration.inMilliseconds
+      );
+      return res;
     },
-    subtract: function(duration) {
-        var res = new DateTime();
-        res.__date__ = new Date(this.__date__ - duration.inMilliseconds);
-        return res;
+    subtract: function (duration) {
+      var res = new DateTime();
+      res.__date__ = new Date(this.__date__ - duration.inMilliseconds);
+      return res;
     },
-    difference: function(other) {
-        return Duration({ milliseconds: this.__date__ - other.__date__});
+    difference: function (other) {
+      return Duration({ milliseconds: this.__date__ - other.__date__ });
     },
+  };
 
-}
-
-Object.assign(DateTime, {
+  Object.assign(DateTime, {
     monday: 1,
     tuesday: 2,
     wednesday: 3,
@@ -547,706 +652,750 @@ Object.assign(DateTime, {
     november: 11,
     december: 12,
     monthsPerYear: 12,
-});
+  });
 
-DateTime.utc = function (year, month = 1, day = 1, hour = 0, minute = 0, second = 0, millisecond = 0, microsecond = 0) {
-    this.__date__ = new Date(year, month - 1, day, hour, minute, second, millisecond);
+  DateTime.utc = function (
+    year,
+    month = 1,
+    day = 1,
+    hour = 0,
+    minute = 0,
+    second = 0,
+    millisecond = 0,
+    microsecond = 0
+  ) {
+    this.__date__ = new Date(
+      year,
+      month - 1,
+      day,
+      hour,
+      minute,
+      second,
+      millisecond
+    );
     this.isUtc = true;
-};
+  };
 
-DateTime.now = function() {
+  DateTime.now = function () {
     var res = new DateTime();
     res.__date__ = new Date();
     return res;
-}
+  };
 
-DateTime.parse = function (formattedString) {
-    var re = /^([+-]?\d{4,6})-?(\d\d)-?(\d\d)(?:[ T](\d\d)(?::?(\d\d)(?::?(\d\d)(?:[.,](\d+))?)?)?( ?[zZ]| ?([-+])(\d\d)(?::?(\d\d))?)?)?$/;
+  DateTime.parse = function (formattedString) {
+    var re =
+      /^([+-]?\d{4,6})-?(\d\d)-?(\d\d)(?:[ T](\d\d)(?::?(\d\d)(?::?(\d\d)(?:[.,](\d+))?)?)?( ?[zZ]| ?([-+])(\d\d)(?::?(\d\d))?)?)?$/;
     var match = formattedString.match(re);
     if (match != null) {
-        function parseIntOrZero(matched) {
-            if (matched == null) return 0;
-            return int.parse(matched);
-        }
+      function parseIntOrZero(matched) {
+        if (matched == null) return 0;
+        return int.parse(matched);
+      }
 
-        // Parses fractional second digits of '.(\d+)' into the combined
-        // microseconds. We only use the first 6 digits because of DateTime
-        // precision of 999 milliseconds and 999 microseconds.
-        function parseMilliAndMicroseconds(matched) {
-            if (matched == null) return 0;
-            let length = matched.length;
-            assert(length >= 1);
-            let result = 0;
-            for (let i = 0; i < 6; i++) {
-                result *= 10;
-                if (i < matched.length) {
-                    result += matched.codePointAt(i) ^ 0x30;
-                }
-            }
-            return result;
+      // Parses fractional second digits of '.(\d+)' into the combined
+      // microseconds. We only use the first 6 digits because of DateTime
+      // precision of 999 milliseconds and 999 microseconds.
+      function parseMilliAndMicroseconds(matched) {
+        if (matched == null) return 0;
+        let length = matched.length;
+        assert(length >= 1);
+        let result = 0;
+        for (let i = 0; i < 6; i++) {
+          result *= 10;
+          if (i < matched.length) {
+            result += matched.codePointAt(i) ^ 0x30;
+          }
         }
+        return result;
+      }
 
-        let years = int.parse(match[1]);
-        let month = int.parse(match[2]);
-        let day = int.parse(match[3]);
-        let hour = parseIntOrZero(match[4]);
-        let minute = parseIntOrZero(match[5]);
-        let second = parseIntOrZero(match[6]);
-        let milliAndMicroseconds = parseMilliAndMicroseconds(match[7]);
-        let millisecond =
-            (milliAndMicroseconds / Duration.microsecondsPerMillisecond) >> 0;
-        let microsecond = milliAndMicroseconds % Duration.microsecondsPerMillisecond;
-        let isUtc = false;
-        if (match[8] != null) {
-            // timezone part
-            isUtc = true;
-            let tzSign = match[9];
-            if (tzSign != null) {
-                // timezone other than 'Z' and 'z'.
-                let sign = (tzSign == '-') ? -1 : 1;
-                let hourDifference = int.parse(match[10]);
-                let minuteDifference = parseIntOrZero(match[11]);
-                minuteDifference += 60 * hourDifference;
-                minute -= sign * minuteDifference;
-            }
+      let years = int.parse(match[1]);
+      let month = int.parse(match[2]);
+      let day = int.parse(match[3]);
+      let hour = parseIntOrZero(match[4]);
+      let minute = parseIntOrZero(match[5]);
+      let second = parseIntOrZero(match[6]);
+      let milliAndMicroseconds = parseMilliAndMicroseconds(match[7]);
+      let millisecond =
+        (milliAndMicroseconds / Duration.microsecondsPerMillisecond) >> 0;
+      let microsecond =
+        milliAndMicroseconds % Duration.microsecondsPerMillisecond;
+      let isUtc = false;
+      if (match[8] != null) {
+        // timezone part
+        isUtc = true;
+        let tzSign = match[9];
+        if (tzSign != null) {
+          // timezone other than 'Z' and 'z'.
+          let sign = tzSign == "-" ? -1 : 1;
+          let hourDifference = int.parse(match[10]);
+          let minuteDifference = parseIntOrZero(match[11]);
+          minuteDifference += 60 * hourDifference;
+          minute -= sign * minuteDifference;
         }
-        let res = DateTime(years, month, day, hour, minute, second, millisecond, microsecond);
-        res.isUtc = isUtc;
-        return res;
+      }
+      let res = DateTime(
+        years,
+        month,
+        day,
+        hour,
+        minute,
+        second,
+        millisecond,
+        microsecond
+      );
+      res.isUtc = isUtc;
+      return res;
     } else {
-        throw "Invalid date format" + formattedString;
+      throw "Invalid date format" + formattedString;
     }
-}
+  };
 
-DateTime.tryParse = function (formattedString) {
+  DateTime.tryParse = function (formattedString) {
     try {
-        return DateTime.parse(formattedString);
+      return DateTime.parse(formattedString);
     } catch {
-        return null;
+      return null;
     }
-}
+  };
 
-DateTime.fromMillisecondsSinceEpoch = function (millisecondsSinceEpoch, {isUtc = false} = {}) {
+  DateTime.fromMillisecondsSinceEpoch = function (
+    millisecondsSinceEpoch,
+    { isUtc = false } = {}
+  ) {
     var res = new DateTime();
     res.__date__ = new Date(millisecondsSinceEpoch);
     res.isUtc = isUtc;
-}
+  };
 
-DateTime.fromMicrosecondsSinceEpoch = function (microsecondsSinceEpoch, { isUtc = false } = {}) {
-    return DateTime.fromMillisecondsSinceEpoch((microsecondsSinceEpoch / 1000) >> 0, isUtc);
-}
+  DateTime.fromMicrosecondsSinceEpoch = function (
+    microsecondsSinceEpoch,
+    { isUtc = false } = {}
+  ) {
+    return DateTime.fromMillisecondsSinceEpoch(
+      (microsecondsSinceEpoch / 1000) >> 0,
+      isUtc
+    );
+  };
 
-global.DateTime = DateTime;})()
-;(function(){
-// 仅支持list与list对象的交互
-// 不支持
-// 自定义Iterable对象
-// 不可变list
+  global.DateTime = DateTime;
+})();
+(function () {
+  // 仅支持list与list对象的交互
+  // 不支持
+  // 自定义Iterable对象
+  // 不可变list
 
-let oldProto = Array.prototype;
-oldProto.__proto__ = Iterable.prototype;
-Array.prototype = Object.create(oldProto);
-Object.assign(Array.prototype, {
+  let oldProto = Array.prototype;
+  oldProto.__proto__ = Iterable.prototype;
+  Array.prototype = Object.create(oldProto);
+  Object.assign(Array.prototype, {
     cast: function () {
-        return this;
+      return this;
     },
     __op_idx__: function (index) {
-        return this[index];
+      return this[index];
     },
     __op_idxeq__: function (index, value) {
-        this[index] = value;
+      this[index] = value;
     },
     add: function (value) {
-        this.push(value);
+      this.push(value);
     },
     addAll: function (iterable) {
-        iterable.forEach(item => this.push(item));
+      iterable.forEach((item) => this.push(item));
     },
     shuffle: function (random) {
-        throw 'Not Implemented: shuffle';
+      throw "Not Implemented: shuffle";
     },
     // indexOf / lastIndexOf / length
     indexWhere: function (test, start = 0) {
-        for (let i = start; i < this.length; i++) {
-            if (test(this[i])) {
-                return i;
-            }
+      for (let i = start; i < this.length; i++) {
+        if (test(this[i])) {
+          return i;
         }
-        return -1;
+      }
+      return -1;
     },
     lastIndexWhere: function (test, start) {
-        if (start === undefined) {
-            start = this.length - 1;
+      if (start === undefined) {
+        start = this.length - 1;
+      }
+      for (let i = start; i >= 0; i++) {
+        if (test(this[i])) {
+          return i;
         }
-        for (let i = start; i >= 0; i++) {
-            if (test(this[i])) {
-                return i;
-            }
-        }
-        return -1;
+      }
+      return -1;
     },
     clear: function () {
-        this.length = 0;
+      this.length = 0;
     },
     insert: function (index, element) {
-        this.splice(index, 0, element);
+      this.splice(index, 0, element);
     },
     insertAll: function (index, iterable) {
-        let args = [index, 0].concat(iterable);
-        this.splice.apply(this, args);
+      let args = [index, 0].concat(iterable);
+      this.splice.apply(this, args);
     },
     setAll: function (index, iterable) {
-        if (index < 0 || index > this.length ||
-            index + iterable.length > this.length) {
-            throw 'error';
-        }
-        for (let i = index, j = 0; i < this.length && j < iterable.length; i++, j++) {
-            this[i] = iterable[j];
-        }
+      if (
+        index < 0 ||
+        index > this.length ||
+        index + iterable.length > this.length
+      ) {
+        throw "error";
+      }
+      for (
+        let i = index, j = 0;
+        i < this.length && j < iterable.length;
+        i++, j++
+      ) {
+        this[i] = iterable[j];
+      }
     },
     remove: function (value) {
-        let idx = this.indexOf(value);
-        if (idx > -1) {
-            this.splice(idx, 1);
-            return true;
-        } else {
-            return false;
-        }
+      let idx = this.indexOf(value);
+      if (idx > -1) {
+        this.splice(idx, 1);
+        return true;
+      } else {
+        return false;
+      }
     },
     removeAt: function (index) {
-        this.splice(index, 1);
+      this.splice(index, 1);
     },
     removeLast: function () {
-        this.length = this.length - 1;
+      this.length = this.length - 1;
     },
     removeWhere: function (test) {
-        let i = 0;
-        while (i < this.length) {
-            if (test(this[i])) {
-                this.splice(i, 1);
-            } else {
-                i++;
-            }
+      let i = 0;
+      while (i < this.length) {
+        if (test(this[i])) {
+          this.splice(i, 1);
+        } else {
+          i++;
         }
+      }
     },
     retainWhere: function (test) {
-        let i = 0;
-        while (i < this.length) {
-            if (!test(this[i])) {
-                this.splice(i, 1);
-            } else {
-                i++;
-            }
+      let i = 0;
+      while (i < this.length) {
+        if (!test(this[i])) {
+          this.splice(i, 1);
+        } else {
+          i++;
         }
+      }
     },
     __op_add__: function (other) {
-        return this.concat(other);
+      return this.concat(other);
     },
     sublist: function (start, end) {
-        return this.slice(start, end);
+      return this.slice(start, end);
     },
     getRange: function (start, end) {
-        return this.slice(start, end);
+      return this.slice(start, end);
     },
     setRange: function (start, end, iterable, skipCount = 0) {
-        if (start < 0 || start >= this.length ||
-            end < 0 || end >= this.length ||
-            start >= end) {
-                throw 'error';
-            }
-        let length = end - start;
-        if (skipCount + length >= iterable.length) {
-            throw 'error';
-        }
+      if (
+        start < 0 ||
+        start >= this.length ||
+        end < 0 ||
+        end >= this.length ||
+        start >= end
+      ) {
+        throw "error";
+      }
+      let length = end - start;
+      if (skipCount + length >= iterable.length) {
+        throw "error";
+      }
 
-        for (let i = end - 1, j = skipCount + length - 1; i >= start; i--, j--) {
-            this[i] = iterable[j];
-        }
+      for (let i = end - 1, j = skipCount + length - 1; i >= start; i--, j--) {
+        this[i] = iterable[j];
+      }
     },
     removeRange: function (start, end) {
-        if (start < 0 || start >= this.length ||
-            end < 0 || end >= this.length ||
-            start >= end) {
-            throw 'error';
-        }
-        while (start < end) {
-            this.splice(start, 1);
-            end--;
-        }
+      if (
+        start < 0 ||
+        start >= this.length ||
+        end < 0 ||
+        end >= this.length ||
+        start >= end
+      ) {
+        throw "error";
+      }
+      while (start < end) {
+        this.splice(start, 1);
+        end--;
+      }
     },
     fillRange: function (start, end, fillValue) {
-        if (start < 0 || start >= this.length ||
-            end < 0 || end >= this.length) {
-            throw 'error';
-        }
-        while (start < end) {
-            this[start] = fillValue || null;
-            start++;
-        }
+      if (start < 0 || start >= this.length || end < 0 || end >= this.length) {
+        throw "error";
+      }
+      while (start < end) {
+        this[start] = fillValue || null;
+        start++;
+      }
     },
     replaceRange: function (start, end, replacement) {
-        if (start < 0 || start >= this.length ||
-            end < 0 || end >= this.length ||
-            start >= end) {
-            throw 'error';
-        }
-        this.removeRange(start, end);
-        this.insertAll(start, replacement);
+      if (
+        start < 0 ||
+        start >= this.length ||
+        end < 0 ||
+        end >= this.length ||
+        start >= end
+      ) {
+        throw "error";
+      }
+      this.removeRange(start, end);
+      this.insertAll(start, replacement);
     },
     asMap: function () {
-        let res = {};
-        for (let i = 0; i < this.length; i++) {
-            res[i] = this[i];
-        }
-        return res;
-    }
-});
+      let res = {};
+      for (let i = 0; i < this.length; i++) {
+        res[i] = this[i];
+      }
+      return res;
+    },
+  });
 
-Object.defineProperties(Array.prototype, {
+  Object.defineProperties(Array.prototype, {
     // length
     first: {
-        set: function (value) {
-            this[0] = value;
-        },
-        get: function () {
-            return this[0];
-        },
+      set: function (value) {
+        this[0] = value;
+      },
+      get: function () {
+        return this[0];
+      },
     },
     last: {
-        set: function (value) {
-            this[this.length - 1] = value;
-        },
-        get: function () {
-            return this[this.length - 1];
-        },
+      set: function (value) {
+        this[this.length - 1] = value;
+      },
+      get: function () {
+        return this[this.length - 1];
+      },
     },
     reversed: {
-        get: function() {
-            return this.slice(0).reverse();
-        }
+      get: function () {
+        return this.slice(0).reverse();
+      },
     },
+  });
 
-});
-
-Array.filled = function (length, fill, { growable = false} = {}) {
+  Array.filled = function (length, fill, { growable = false } = {}) {
     let res = new Array(length);
     for (let i = 0; i < length; i++) {
-        res[i] = fill;
+      res[i] = fill;
     }
     return res;
-};
+  };
 
-Array.empty = function ({ growable = false } = {}) {
+  Array.empty = function ({ growable = false } = {}) {
     return [];
-};
+  };
 
-Array.from = function (elements, { growable = true } = {}) {
+  Array.from = function (elements, { growable = true } = {}) {
     return elements.slice(0);
-};
+  };
 
-Array.of = function (elements, { growable = true } = {}) {
+  Array.of = function (elements, { growable = true } = {}) {
     return elements.slice(0);
-};
+  };
 
-Array.generate = function (length, generator, { growable = true } = {}) {
+  Array.generate = function (length, generator, { growable = true } = {}) {
     let res = new Array(length);
     for (let i = 0; i < length; i++) {
-        res[i] = generator(i);
+      res[i] = generator(i);
     }
     return res;
-};
+  };
 
-Array.unmodifiable = function (elements) {
+  Array.unmodifiable = function (elements) {
     return elements.slice(0);
-};
+  };
 
-Array.castFrom = function(source) {
+  Array.castFrom = function (source) {
     return source;
-};
+  };
 
-Array.copyRange = function(target, at, source, start, end) {
+  Array.copyRange = function (target, at, source, start, end) {
     if (!start) {
-        start = 0;
+      start = 0;
     }
     if (end === undefined) {
-        end = source.length;
+      end = source.length;
     }
     let length = end - start;
     if (target.length < at + length) {
-        throw `Not big enough to hold ${length} elements at position ${at}`;
+      throw `Not big enough to hold ${length} elements at position ${at}`;
     }
-    for (let i = length; --i >= 0;) {
-        target[at + i] = source[start + i];
+    for (let i = length; --i >= 0; ) {
+      target[at + i] = source[start + i];
     }
-};
+  };
 
-Array.writeIterable = function (target, at, source) {
+  Array.writeIterable = function (target, at, source) {
     target.setAll(at, source);
-};
+  };
 
+  global.List = Array;
+})();
+(function () {
+  const __global__ = global;
 
-
-global.List = Array;})()
-;(function(){
-const __global__ = global;
-
-function MapEntry() {
+  function MapEntry() {
     const inner = MapEntry.__inner__;
     if (this == __global__) {
-        return new MapEntry({ __args__: arguments });
+      return new MapEntry({ __args__: arguments });
     } else {
-        const args = arguments.length > 0 ? arguments[0].__args__ || arguments : [];
-        inner.apply(this, args);
-        MapEntry.prototype.ctor.apply(this, args);
-        return this;
+      const args =
+        arguments.length > 0 ? arguments[0].__args__ || arguments : [];
+      inner.apply(this, args);
+      MapEntry.prototype.ctor.apply(this, args);
+      return this;
     }
-}
+  }
 
-MapEntry.__inner__ = function inner() {
+  MapEntry.__inner__ = function inner() {
     this.key = null;
     this.value = null;
-};
+  };
 
-MapEntry.prototype = {
-    ctor: function(key, value) {
-        this.key = key;
-        this.value = value;
+  MapEntry.prototype = {
+    ctor: function (key, value) {
+      this.key = key;
+      this.value = value;
     },
-    toString: function() {
-        return `MapEntry(${key.toString()}: ${value.toString()})`;
-    }
-};
-global.MapEntry = MapEntry;
+    toString: function () {
+      return `MapEntry(${key.toString()}: ${value.toString()})`;
+    },
+  };
+  global.MapEntry = MapEntry;
 
-var oldMapPrototype = {
+  var oldMapPrototype = {
     entries: Map.prototype.entries,
     keys: Map.prototype.keys,
     values: Map.prototype.values,
-};
-Object.defineProperties(Map.prototype, {
+  };
+  Object.defineProperties(Map.prototype, {
     entries: {
-        get: function () {
-            return Array.from(oldMapPrototype.entries.call(this)).map(item => MapEntry(item[0], item[1]));
-        },
+      get: function () {
+        return Array.nativeFrom(oldMapPrototype.entries.call(this)).map(
+          (item) => MapEntry(item[0], item[1])
+        );
+      },
     },
     keys: {
-        get: function () {
-            return Array.from(oldMapPrototype.keys.call(this));
-        },
+      get: function () {
+        return Array.nativeFrom(oldMapPrototype.keys.call(this));
+      },
     },
     values: {
-        get: function () {
-            return Array.from(oldMapPrototype.values.call(this));
-        },
+      get: function () {
+        return Array.nativeFrom(oldMapPrototype.values.call(this));
+      },
     },
     length: {
-        get: function () {
-            return this.size;
-        },
+      get: function () {
+        return this.size;
+      },
     },
     isEmpty: {
-        get: function () {
-            return !this.size;
-        },
+      get: function () {
+        return !this.size;
+      },
     },
     isNotEmpty: {
-        get: function () {
-            return !this.isEmpty;
-        },
-    }
-});
-
-Object.assign(Map.prototype, {
-    cast: function() {
-        return this;
+      get: function () {
+        return !this.isEmpty;
+      },
     },
-    __op_idx__: function(key) {
-        return this.get(key);
+  });
+
+  Object.assign(Map.prototype, {
+    cast: function () {
+      return this;
+    },
+    __op_idx__: function (key) {
+      return this.get(key);
     },
     __op_idxeq__: function (key, value) {
-        this.set(key, value);
+      this.set(key, value);
     },
-    containsValue: function(value) {
-        return this.values.includes(value);
+    containsValue: function (value) {
+      return this.values.includes(value);
     },
-    containsKey: function(value) {
-        return this.has(value);
+    containsKey: function (value) {
+      return this.has(value);
     },
-    map: function(convert) {
-        var res = new Map();
-        this.forEach((key, value) => {
-            var entry = convert(key, value);
-            res.set(entry.key, entry.value);
-        })
-        return res;
+    map: function (convert) {
+      var res = new Map();
+      this.forEach((key, value) => {
+        var entry = convert(key, value);
+        res.set(entry.key, entry.value);
+      });
+      return res;
     },
     addEntries: function (newEntries) {
-        for (let i = 0; i < newEntries.length; i++) {
-            this.set(newEntries[i].key, newEntries[i].value);
-        }
+      for (let i = 0; i < newEntries.length; i++) {
+        this.set(newEntries[i].key, newEntries[i].value);
+      }
     },
-    update: function(key, update, {ifAbsent}={}) {
-        var newVal = null;
-        if (this.has(key)) {
-            newVal = update(this.get(key));
-            this.set(key, newVal);
+    update: function (key, update, { ifAbsent } = {}) {
+      var newVal = null;
+      if (this.has(key)) {
+        newVal = update(this.get(key));
+        this.set(key, newVal);
+      } else {
+        if (ifAbsent) {
+          newVal = ifAbsent();
+          this.set(key, newVal);
         } else {
-            if (ifAbsent) {
-                newVal = ifAbsent();
-                this.set(key, newVal);
-            } else {
-                throw 'Error';
-            }
+          throw "Error";
         }
-        return newVal;
+      }
+      return newVal;
     },
     updateAll: function (update) {
-        this.keys.forEach(k => {
-            this.set(k, update(k, this.get(k)));
-        });
+      this.keys.forEach((k) => {
+        this.set(k, update(k, this.get(k)));
+      });
     },
-    removeWhere: function(test) {
-        var i = 0;
-        var keys = this.keys.slice(0);
-        while ( i < this.size) {
-            if (test(keys[i], this.get(keys[i]))) {
-                this.delete(keys[i]);
-                keys.splice(i, 1);
-            } else {
-                i++;
-            }
+    removeWhere: function (test) {
+      var i = 0;
+      var keys = this.keys.slice(0);
+      while (i < this.size) {
+        if (test(keys[i], this.get(keys[i]))) {
+          this.delete(keys[i]);
+          keys.splice(i, 1);
+        } else {
+          i++;
         }
+      }
     },
-    putIfAbsent: function(key, ifAbsent) {
-        if (!this.has(key)) {
-            this.set(key, ifAbsent());
-        }
-        return this.get(key);
+    putIfAbsent: function (key, ifAbsent) {
+      if (!this.has(key)) {
+        this.set(key, ifAbsent());
+      }
+      return this.get(key);
     },
-    addAll: function(other) {
-        let __thiz__ = this;
-        other.forEach((key, value) => {
-            __thiz__.set(key, value);
-        });
+    addAll: function (other) {
+      let __thiz__ = this;
+      other.forEach((key, value) => {
+        __thiz__.set(key, value);
+      });
     },
-    remove: function(key) {
-        if (this.has(key)) {
-            var res = this.get(key);
-            this.delete(key);
-            return res;
-        }
-        return null;
+    remove: function (key) {
+      if (this.has(key)) {
+        var res = this.get(key);
+        this.delete(key);
+        return res;
+      }
+      return null;
     },
     // clear
 
-    forEach: function(action) {
-        this.entries.forEach(e => action(e.key, e.value));
-    }
-});
+    forEach: function (action) {
+      this.entries.forEach((e) => action(e.key, e.value));
+    },
+  });
 
-Map.from = function(other) {
+  Map.from = function (other) {
     var res = new Map();
     other.forEach((key, value) => res.set(key, value));
     return res;
-};
+  };
 
-Map.of = function(other) {
+  Map.of = function (other) {
     return Map.from(other);
-};
+  };
 
-Map.unmodifiable = function(other) {
+  Map.unmodifiable = function (other) {
     return Map.from(other);
-};
+  };
 
-Map.identity = function() {
-    throw 'Not Implemented: identity';
-};
+  Map.identity = function () {
+    throw "Not Implemented: identity";
+  };
 
-Map.fromIterable = function(arg1, arg2) {
+  Map.fromIterable = function (arg1, arg2) {
     if (args2.length) {
-        let keys = arg1;
-        let values = arg2;
-        if (keys.length != values.length) {
-            throw 'Error';
-        }
-        let res = new Map();
-        for (let i = 0; i < keys.length; i++) {
-            res.set(keys[i], values[i]);
-        }
-        return res;
+      let keys = arg1;
+      let values = arg2;
+      if (keys.length != values.length) {
+        throw "Error";
+      }
+      let res = new Map();
+      for (let i = 0; i < keys.length; i++) {
+        res.set(keys[i], values[i]);
+      }
+      return res;
     } else {
-        let iterable = arg1;
-        let obj = arg2;
-        let res = new Map();
-        for (let i = 0; i < iterable.length; i++) {
-            res.set(obj.key(iterable[i]), obj.value(iterable[i]));
-        }
-        return res;
+      let iterable = arg1;
+      let obj = arg2;
+      let res = new Map();
+      for (let i = 0; i < iterable.length; i++) {
+        res.set(obj.key(iterable[i]), obj.value(iterable[i]));
+      }
+      return res;
     }
-};
+  };
 
-Map.fromEntries = function(entries) {
+  Map.fromEntries = function (entries) {
     var res = new Map();
     for (let i = 0; i < entries.length; i++) {
-        res.set(entries[i].key, entries[i].value);
+      res.set(entries[i].key, entries[i].value);
     }
     return res;
-};
+  };
 
-Map.castFrom = function(source) {
+  Map.castFrom = function (source) {
     return source;
-};
-
-})()
-;(function(){
-
-Set.prototype.__proto__ = Iterable.prototype;
-Object.assign(Set.prototype, {
-    cast: function() {
-        return this;
+  };
+})();
+(function () {
+  Set.prototype.__proto__ = Iterable.prototype;
+  Object.assign(Set.prototype, {
+    cast: function () {
+      return this;
     },
     contains: function (value) {
-        return this.has(value);
+      return this.has(value);
     },
     // add / clear
-    addAll: function(elements) {
-        elements.toList().forEach(elem => this.add(elem));
+    addAll: function (elements) {
+      elements.toList().forEach((elem) => this.add(elem));
     },
-    remove: function(value) {
-        return this.delete(value);
+    remove: function (value) {
+      return this.delete(value);
     },
-    lookup: function(object) {
-        if (this.has(object)) {
-            return object;
+    lookup: function (object) {
+      if (this.has(object)) {
+        return object;
+      }
+      return null;
+    },
+    removeAll: function (elements) {
+      elements.toList().forEach((elem) => this.delete(elem));
+    },
+    retainAll: function (elements) {
+      let values = Array.nativeFrom(this.values());
+      for (let v of values) {
+        if (!elements.contains(v)) {
+          this.delete(v);
         }
-        return null;
-    },
-    removeAll: function(elements) {
-        elements.toList().forEach(elem => this.delete(elem));
-    },
-    retainAll: function(elements) {
-        let values = Array.nativeFrom(this.values());
-        for (let v of values) {
-            if (!elements.contains(v)) {
-                this.delete(v);
-            }
-        }
+      }
     },
     removeWhere: function (test) {
-        let values = Array.nativeFrom(this.values());
-        for (let v of values) {
-            if (test(v)) {
-                this.delete(v);
-            }
+      let values = Array.nativeFrom(this.values());
+      for (let v of values) {
+        if (test(v)) {
+          this.delete(v);
         }
+      }
     },
     retainWhere: function (test) {
-        let values = Array.nativeFrom(this.values());
-        for (let v of values) {
-            if (!test(v)) {
-                this.delete(v);
-            }
+      let values = Array.nativeFrom(this.values());
+      for (let v of values) {
+        if (!test(v)) {
+          this.delete(v);
         }
+      }
     },
     containsAll: function (other) {
-        let arr = other.toList();
-        for (let v of arr) {
-            if (!this.has(v)) {
-                return false;
-            }
+      let arr = other.toList();
+      for (let v of arr) {
+        if (!this.has(v)) {
+          return false;
         }
-        return true;
+      }
+      return true;
     },
     intersection: function (other) {
-        let res = new Set();
-        for (let v of other) {
-            if (this.has(v)) {
-                res.add(v);
-            }
+      let res = new Set();
+      for (let v of other) {
+        if (this.has(v)) {
+          res.add(v);
         }
-        return res;
+      }
+      return res;
     },
     union: function (other) {
-        let res = new Set();
-        res.addAll(this);
-        res.addAll(other);
-        return res;
+      let res = new Set();
+      res.addAll(this);
+      res.addAll(other);
+      return res;
     },
     difference: function (other) {
-        let res = new Set();
-        for (let v of this) {
-            if (!other.has(v)) {
-                res.add(v);
-            }
+      let res = new Set();
+      for (let v of this) {
+        if (!other.has(v)) {
+          res.add(v);
         }
-        return res;
+      }
+      return res;
     },
-    toSet: function() {
-        let res = new Set();
-        res.addAll(this);
-        return res;
-    }
-});
+    toSet: function () {
+      let res = new Set();
+      res.addAll(this);
+      return res;
+    },
+  });
 
-Object.defineProperties(Set.prototype, {
+  Object.defineProperties(Set.prototype, {
     iterator: {
-        get: function() {
-            throw 'Not Implemented: iterator';
-        }
+      get: function () {
+        throw "Not Implemented: iterator";
+      },
     },
     __iterable__: {
-        get: function() {
-            return Array.nativeFrom(this.values());
-        }
+      get: function () {
+        return Array.nativeFrom(this.values());
+      },
     },
     length: {
-        get: function() {
-            return this.size;
-        }
-    }
-});
+      get: function () {
+        return this.size;
+      },
+    },
+  });
 
-Set.identify = function() {
+  Set.identify = function () {};
 
-};
+  Set.from = function () {};
 
-Set.from = function () {
+  Set.of = function () {};
 
-};
+  Set.unmodifiable = function () {};
 
-Set.of = function () {
-
-};
-
-Set.unmodifiable = function () {
-
-};
-
-Set.castFrom = function () {
-
-};})()
-;(function(){
-
-
-Object.defineProperties(Number.prototype, {
+  Set.castFrom = function () {};
+})();
+(function () {
+  Object.defineProperties(Number.prototype, {
     // bitLength: {
 
     // },
     isEven: {
-        get: function(){
-            return this%2 == 0 ? true:false
-        }
+      get: function () {
+        return this % 2 == 0 ? true : false;
+      },
     },
     isOdd: {
-        get: function(){
-            return this%2 == 0 ? false:true
-        }
+      get: function () {
+        return this % 2 == 0 ? false : true;
+      },
     },
     sign: {
-        get: function(){
-            // 符号 正数1、负数-1和0
-            return this!=0 ? Math.abs(this) != this ? -1 : 1 : 0
-        }
+      get: function () {
+        // 符号 正数1、负数-1和0
+        return this != 0 ? (Math.abs(this) != this ? -1 : 1) : 0;
+      },
     },
     // hashCode: {
     //     get: function(){
@@ -1254,285 +1403,304 @@ Object.defineProperties(Number.prototype, {
     //     }
     // },
     isFinite: {
-        get: function(){
-            // 是否有限
-            return isFinite(this)
-        }
+      get: function () {
+        // 是否有限
+        return isFinite(this);
+      },
     },
     isInfinite: {
-        get: function(){
-            // 是否无穷
-            return !isFinite(this)
-        }
+      get: function () {
+        // 是否无穷
+        return !isFinite(this);
+      },
     },
     isNaN: {
-        get: function(){
-            // 是否NaN
-            return isNaN(this)
-        }
+      get: function () {
+        // 是否NaN
+        return isNaN(this);
+      },
     },
     isNegative: {
-        get: function(){
-            // 是否为负数
-            return this<0 ? true:false
-        }
+      get: function () {
+        // 是否为负数
+        return this < 0 ? true : false;
+      },
     },
     runtimeType: {
-        get: function(){
-            // 运行时的类型 ？？ 待定
-            return typeof this
-        }
-    }
-})
+      get: function () {
+        // 运行时的类型 ？？ 待定
+        return typeof this;
+      },
+    },
+  });
 
-Number.prototype.abs = function() {
-    return Math.abs(this)
-}
-Number.prototype.ceil = function() {
-    return Math.ceil(this)
-}
-Number.prototype.ceilToDouble = function() {
-    return (Math.ceil(this)).toFixed(1)
-}
-Number.prototype.clamp = function(lowerLimit, upperLimit) {
-    return this < lowerLimit ? lowerLimit : this > upperLimit ? upperLimit : Number(this);
-}
-Number.prototype.compareTo = function(other) {
-    return this < other ? -1 : 1
-}
-Number.prototype.floor = function() {
+  Number.prototype.abs = function () {
+    return Math.abs(this);
+  };
+  Number.prototype.ceil = function () {
+    return Math.ceil(this);
+  };
+  Number.prototype.ceilToDouble = function () {
+    return Math.ceil(this).toFixed(1);
+  };
+  Number.prototype.clamp = function (lowerLimit, upperLimit) {
+    return this < lowerLimit
+      ? lowerLimit
+      : this > upperLimit
+      ? upperLimit
+      : Number(this);
+  };
+  Number.prototype.compareTo = function (other) {
+    return this < other ? -1 : 1;
+  };
+  Number.prototype.floor = function () {
     // 向下取整
-    return Math.floor(this)
-}
-Number.prototype.floorToDouble = function() {
+    return Math.floor(this);
+  };
+  Number.prototype.floorToDouble = function () {
     // 向下取整转浮点
-    return (Math.floor(this)).toFixed(1)
-}
-Number.prototype.remainder = function(other) {
+    return Math.floor(this).toFixed(1);
+  };
+  Number.prototype.remainder = function (other) {
     // 取余
-    return this%other
-}
-Number.prototype.round = function() {
+    return this % other;
+  };
+  Number.prototype.round = function () {
     // 四舍五入
-    return Math.round(this)
-}
-Number.prototype.roundToDouble = function() {
+    return Math.round(this);
+  };
+  Number.prototype.roundToDouble = function () {
     // 四舍五入转浮点
-    return (Math.round(this)).toFixed(1)
-}
-Number.prototype.toDouble = function() {
+    return Math.round(this).toFixed(1);
+  };
+  Number.prototype.toDouble = function () {
     // 转浮点
-    return this != Math.floor(this) ? Number(this) : this.toFixed(1)
-}
-Number.prototype.toInt = function() {
+    return this != Math.floor(this) ? Number(this) : this.toFixed(1);
+  };
+  Number.prototype.toInt = function () {
     // 取整数部分
-    return parseInt(this)
-}
-Number.prototype.toStringAsExponential = function(n) {
+    return parseInt(this);
+  };
+  Number.prototype.toStringAsExponential = function (n) {
     // 返回几次幂值的字符串(科学记数法)
-    return this.toExponential(n)
-}
-Number.prototype.toStringAsFixed = function(n) {
+    return this.toExponential(n);
+  };
+  Number.prototype.toStringAsFixed = function (n) {
     // 保留n位小数
-    return this.toFixed(n)
-}
-Number.prototype.toStringAsPrecision = function(n) {
+    return this.toFixed(n);
+  };
+  Number.prototype.toStringAsPrecision = function (n) {
     // 保留几位小数后精确结果的字符串
-    return this.toPrecision(n)
-}
-Number.prototype.truncate = function() {
+    return this.toPrecision(n);
+  };
+  Number.prototype.truncate = function () {
     // 取整
-    return  parseInt(this)
-}
-Number.prototype.truncateToDouble = function() {
+    return parseInt(this);
+  };
+  Number.prototype.truncateToDouble = function () {
     // 取整返回浮点型
-    return parseInt(this).toFixed(1)
-}
+    return parseInt(this).toFixed(1);
+  };
 
-// 定义原始类型方法
-Number.parse = function(source){
+  // 定义原始类型方法
+  Number.parse = function (source) {
     // 只转整数，小数报错
-    if( parseInt(source) == source ){
-        return parseInt(source);
+    if (parseInt(source) == source) {
+      return parseInt(source);
+    } else {
+      throw "FormatException: Invalid radix-10 number";
     }
-    else{
-        throw 'FormatException: Invalid radix-10 number';
+  };
+  Number.tryParse = function (source) {
+    if (parseInt(source) == source) {
+      return parseInt(source);
+    } else {
+      return null;
     }
-}
-Number.tryParse = function(source){
-    if( parseInt(source) == source ){
-        return parseInt(source);
-    }
-    else{
-        return null;
-    }
-}
-global.Number = Number;
-})()
-;(function(){
-const __global__ = global;
-const NativeRegExp = global.RegExp;
+  };
+  global.Number = Number;
+})();
+(function () {
+  const __global__ = global;
+  const NativeRegExp = global.RegExp;
 
-function RegExp() {
+  function RegExp() {
     const inner = RegExp.__inner__;
     if (this == __global__) {
-        return new RegExp({ __args__: arguments });
+      return new RegExp({ __args__: arguments });
     } else {
-        const args = arguments.length > 0 ? arguments[0].__args__ || arguments : [];
-        inner.apply(this, args);
-        RegExp.prototype.ctor.apply(this, args);
-        return this;
+      const args =
+        arguments.length > 0 ? arguments[0].__args__ || arguments : [];
+      inner.apply(this, args);
+      RegExp.prototype.ctor.apply(this, args);
+      return this;
     }
-}
+  }
 
-RegExp.__inner__ = function inner() {
+  RegExp.__inner__ = function inner() {
     Object.defineProperties(this, {
-        pattern: {
-            get: function () {
-                return this.__regex__.source;
-            },
+      pattern: {
+        get: function () {
+          return this.__regex__.source;
         },
-        isMultiLine: {
-            get: function () {
-                return this.__regex__.multiline;
-            },
+      },
+      isMultiLine: {
+        get: function () {
+          return this.__regex__.multiline;
         },
-        isCaseSensitive: {
-            get: function () {
-                return this.__regex__.ignoreCase;
-            },
+      },
+      isCaseSensitive: {
+        get: function () {
+          return this.__regex__.ignoreCase;
         },
-        isUnicode: {
-            get: function () {
-                return this.__regex__.unicode;
-            },
+      },
+      isUnicode: {
+        get: function () {
+          return this.__regex__.unicode;
         },
-        isDotAll: {
-            get: function () {
-                return this.__regex__.dotAll;
-            },
+      },
+      isDotAll: {
+        get: function () {
+          return this.__regex__.dotAll;
         },
+      },
     });
 
     this.__regex__ = null;
-};
+  };
 
-RegExp.prototype = {
-    ctor: function (source, { multiLine = false, caseSensitive = true, unicode = false, dotAll = false} = {}) {
-        let flag = 'g';
-        if (multiLine) {
-            flag += 'm';
-        }
-        if (!caseSensitive) {
-            flag += 'i';
-        }
-        if (unicode) {
-            flag += 'u';
-        }
-        if (dotAll) {
-            flag += 's';
-        }
-        this.__regex__ = new NativeRegExp(source, flag);
+  RegExp.prototype = {
+    ctor: function (
+      source,
+      {
+        multiLine = false,
+        caseSensitive = true,
+        unicode = false,
+        dotAll = false,
+      } = {}
+    ) {
+      let flag = "g";
+      if (multiLine) {
+        flag += "m";
+      }
+      if (!caseSensitive) {
+        flag += "i";
+      }
+      if (unicode) {
+        flag += "u";
+      }
+      if (dotAll) {
+        flag += "s";
+      }
+      this.__regex__ = new NativeRegExp(source, flag);
     },
-    allMatches: function(string, start = 0) {
-        this.__regex__.lastIndex = start;
-        let matches = [];
-        let m = this.__firstMatch__(string);
-        while (m) {
-            matches.push(m);
-            m = this.__firstMatch__(string);
-        }
-        this.__regex__.lastIndex = 0;
-        return (!matches.length) ? null : matches;
+    allMatches: function (string, start = 0) {
+      this.__regex__.lastIndex = start;
+      let matches = [];
+      let m = this.__firstMatch__(string);
+      while (m) {
+        matches.push(m);
+        m = this.__firstMatch__(string);
+      }
+      this.__regex__.lastIndex = 0;
+      return !matches.length ? null : matches;
     },
-    matchAsPrefix: function(string, start = 0) {
-        this.__regex__.lastIndex = start;
-        var res = this.__firstMatch__(string);
-        this.__regex__.lastIndex = 0;
-        return res;
+    matchAsPrefix: function (string, start = 0) {
+      this.__regex__.lastIndex = start;
+      var res = this.__firstMatch__(string);
+      this.__regex__.lastIndex = 0;
+      return res;
     },
     firstMatch: function (input) {
-        this.__regex__.lastIndex = 0;
-        let res = this.__firstMatch__(input);
-        this.__regex__.lastIndex = 0;
-        return res;
+      this.__regex__.lastIndex = 0;
+      let res = this.__firstMatch__(input);
+      this.__regex__.lastIndex = 0;
+      return res;
     },
     __firstMatch__: function (input) {
-        let res = this.__regex__.exec(input);
-        if (!res || !res.length) {
-            return null;
-        }
-        let start = res.index;
-        let end = start + res[0].length;
-        let groups = Array.prototype.slice.call(res, 0, res.length);
-        let groupNames = res.groups ? Object.getOwnPropertyNames(res.groups) : [];
-        let namedGroups = res.groups;
-        return RegExpMatch(input, this, start, end, groups, groupNames, namedGroups);
+      let res = this.__regex__.exec(input);
+      if (!res || !res.length) {
+        return null;
+      }
+      let start = res.index;
+      let end = start + res[0].length;
+      let groups = Array.prototype.slice.call(res, 0, res.length);
+      let groupNames = res.groups ? Object.getOwnPropertyNames(res.groups) : [];
+      let namedGroups = res.groups;
+      return RegExpMatch(
+        input,
+        this,
+        start,
+        end,
+        groups,
+        groupNames,
+        namedGroups
+      );
     },
-    hasMatch: function(input) {
-        let res = this.__regex__.test(input);
-        this.__regex__.lastIndex = 0;
-        return res;
+    hasMatch: function (input) {
+      let res = this.__regex__.test(input);
+      this.__regex__.lastIndex = 0;
+      return res;
     },
-    stringMatch: function(input) {
-        let res = this.__regex__.exec(input);
-        if (!res || !res.length) {
-            return null;
-        }
-        this.__regex__.lastIndex = 0;
-        return res[0];
+    stringMatch: function (input) {
+      let res = this.__regex__.exec(input);
+      if (!res || !res.length) {
+        return null;
+      }
+      this.__regex__.lastIndex = 0;
+      return res[0];
     },
+  };
 
-};
+  RegExp.escape = function (text) {
+    return text.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+  };
 
-RegExp.escape = function (text) {
-    return text.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-};
-
-function RegExpMatch() {
+  function RegExpMatch() {
     const inner = RegExpMatch.__inner__;
     if (this == __global__) {
-        return new RegExpMatch({ __args__: arguments });
+      return new RegExpMatch({ __args__: arguments });
     } else {
-        const args = arguments.length > 0 ? arguments[0].__args__ || arguments : [];
-        inner.apply(this, args);
-        RegExpMatch.prototype.ctor.apply(this, args);
-        return this;
+      const args =
+        arguments.length > 0 ? arguments[0].__args__ || arguments : [];
+      inner.apply(this, args);
+      RegExpMatch.prototype.ctor.apply(this, args);
+      return this;
     }
-}
+  }
 
-RegExpMatch.__inner__ = function inner() {
+  RegExpMatch.__inner__ = function inner() {
     Object.defineProperties(this, {
-        start: {
-            get: function() {
-                return this._start;
-            }
+      start: {
+        get: function () {
+          return this._start;
         },
-        end: {
-            get: function () {
-                return this._end;
-            }
+      },
+      end: {
+        get: function () {
+          return this._end;
         },
-        groupNames: {
-            get: function () {
-                return this._groupNames;
-            },
+      },
+      groupNames: {
+        get: function () {
+          return this._groupNames;
         },
-        groupCount: {
-            get: function () {
-                return Math.max(this._groups.length - 1, 0);
-            }
+      },
+      groupCount: {
+        get: function () {
+          return Math.max(this._groups.length - 1, 0);
         },
-        input: {
-            get: function () {
-                return this._input;
-            }
+      },
+      input: {
+        get: function () {
+          return this._input;
         },
-        pattern: {
-            get: function () {
-                return this._pattern;
-            },
+      },
+      pattern: {
+        get: function () {
+          return this._pattern;
         },
+      },
     });
     this._start = null;
     this._end = null;
@@ -1541,45 +1709,53 @@ RegExpMatch.__inner__ = function inner() {
     this._groups = {};
     this._groupNames = [];
     this._namedGroups = {};
-};
-RegExpMatch.prototype = {
-    ctor: function (input, pattern, start, end, groups, groupNames, namedGroups) {
-        this._start = start;
-        this._end = end;
-        this._input = input;
-        this._pattern = pattern;
-        this._groups = groups;
-        this._groupNames = groupNames;
-        this._namedGroups = namedGroups;
+  };
+  RegExpMatch.prototype = {
+    ctor: function (
+      input,
+      pattern,
+      start,
+      end,
+      groups,
+      groupNames,
+      namedGroups
+    ) {
+      this._start = start;
+      this._end = end;
+      this._input = input;
+      this._pattern = pattern;
+      this._groups = groups;
+      this._groupNames = groupNames;
+      this._namedGroups = namedGroups;
     },
 
-    group: function(group) {
-        return this._groups[group];
+    group: function (group) {
+      return this._groups[group];
     },
-    __op_idx__: function(group) {
-        return this.group(group);
+    __op_idx__: function (group) {
+      return this.group(group);
     },
     groups: function (groupIndices) {
-        return groupIndices.map(idx => this._groups[idx]);
+      return groupIndices.map((idx) => this._groups[idx]);
     },
-    namedGroup: function(name) {
-        return this._namedGroups[name];
+    namedGroup: function (name) {
+      return this._namedGroups[name];
     },
-};
+  };
 
-global.RegExp = RegExp;})()
-;(function(){
-
-Object.defineProperties(String.prototype, {
+  global.RegExp = RegExp;
+})();
+(function () {
+  Object.defineProperties(String.prototype, {
     codeUnits: {
-        get: function(){
-            var codeArr = [];
-            var strArr = this.split('');
-            for( var i = 0; i < strArr.length; i++ ){
-                codeArr.push(this.charCodeAt(i))
-            }
-            return codeArr
+      get: function () {
+        var codeArr = [];
+        var strArr = this.split("");
+        for (var i = 0; i < strArr.length; i++) {
+          codeArr.push(this.charCodeAt(i));
         }
+        return codeArr;
+      },
     },
     // hashCode: {
     //     get: function(){
@@ -1587,14 +1763,14 @@ Object.defineProperties(String.prototype, {
     //     }
     // },
     isEmpty: {
-        get: function(){
-            return !this.length
-        }
+      get: function () {
+        return !this.length;
+      },
     },
     isNotEmpty: {
-        get: function(){
-            return this.length
-        }
+      get: function () {
+        return this.length;
+      },
     },
     // runes: {
     //     get: function(){
@@ -1602,134 +1778,121 @@ Object.defineProperties(String.prototype, {
     //     }
     // },
     runtimeType: {
-        get: function(){
-
-        }
+      get: function () {},
     },
-})
+  });
 
-// String.prototype.allMatches = function(reg) {
+  // String.prototype.allMatches = function(reg) {
 
-// }
-String.prototype.codeUnitAt = function(i) {
+  // }
+  String.prototype.codeUnitAt = function (i) {
     // 返回索引处的ascii
-    return this.charCodeAt(i)
-}
+    return this.charCodeAt(i);
+  };
 
-String.prototype.compareTo = function(other) {
+  String.prototype.compareTo = function (other) {
     // 依次对比指定索引字段在ascii中字符串值比较大小 0相等 1大于 -1小于
-    for( var i = 0; i < this.length; i++ ){
-        if( this.charCodeAt(i) != other.charCodeAt(i) ){
-            return this.charCodeAt(i)>other.charCodeAt(i) ? 1 : -1
+    for (var i = 0; i < this.length; i++) {
+      if (this.charCodeAt(i) != other.charCodeAt(i)) {
+        return this.charCodeAt(i) > other.charCodeAt(i) ? 1 : -1;
+      } else {
+        if (i == this.length - 1 && i == other.length - 1) {
+          return 0;
+        } else if (i == this.length - 1 && i != other.length - 1) {
+          return -1;
+        } else if (i != this.length - 1 && i == other.length - 1) {
+          return 1;
         }
-        else{
-            if( i == this.length-1 && i == other.length-1 ){
-                return 0
-            }else if( i == this.length-1 && i != other.length-1 ){
-                return -1
-            }
-            else if(i != this.length-1 && i == other.length-1 ){
-                return 1
-            }
-            continue;
-        }
+        continue;
+      }
     }
-}
+  };
 
-String.prototype.contains = function(other) {
+  String.prototype.contains = function (other) {
     // 是否包含
-    return this.includes(other)
-}
+    return this.includes(other);
+  };
 
-// String.prototype.matchAsPrefix = function(string) {
+  // String.prototype.matchAsPrefix = function(string) {
 
-// }
+  // }
 
-String.prototype.padLeft = function(width) {
+  String.prototype.padLeft = function (width) {
     // 传入长度，从左侧填充空格
-    return this.padStart(width,' ')
-}
-String.prototype.padRight = function(width) {
+    return this.padStart(width, " ");
+  };
+  String.prototype.padRight = function (width) {
     // 传入长度，从右侧填充空格
-    return this.padEnd(width,' ')
-}
-String.prototype.replaceAllMapped = function(from, replaceFn ) {
+    return this.padEnd(width, " ");
+  };
+  String.prototype.replaceAllMapped = function (from, replaceFn) {
     // 可传方法返回值替换指定字符串
-    return this.replaceAll(from, replaceFn)
-}
-String.prototype.replaceFirst = function(from, replace ) {
+    return this.replaceAll(from, replaceFn);
+  };
+  String.prototype.replaceFirst = function (from, replace) {
     // 替换第一个
-    return this.replace(from, replace)
-}
-String.prototype.replaceFirstMapped = function(from, replaceFn ) {
+    return this.replace(from, replace);
+  };
+  String.prototype.replaceFirstMapped = function (from, replaceFn) {
     // 替换第一个，可传function
-    return this.replace(from, replaceFn)
-}
-String.prototype.replaceRange = function( start, end, replacement ) {
+    return this.replace(from, replaceFn);
+  };
+  String.prototype.replaceRange = function (start, end, replacement) {
     // 指定起始位置替换
-    return this.substr(0,start)+replacement+this.substr(end,this.length)
-}
-String.prototype.splitMapJoin = function( pattern, onMatch, onNonMatch ) {
+    return this.substr(0, start) + replacement + this.substr(end, this.length);
+  };
+  String.prototype.splitMapJoin = function (pattern, onMatch, onNonMatch) {
     // 查询指定字符，用onMatch的返回值替换“，”用onNonMatch的返回值替换其他
-    if( this.split(pattern).length == 1 ){
-        return onNonMatch() ? onNonMatch() : this
-    }else {
-        var splitArrLen = this.split(pattern).length;
-        var array = new Array(splitArrLen).fill(onNonMatch());
-        return array.join(onMatch())
-
+    if (this.split(pattern).length == 1) {
+      return onNonMatch() ? onNonMatch() : this;
+    } else {
+      var splitArrLen = this.split(pattern).length;
+      var array = new Array(splitArrLen).fill(onNonMatch());
+      return array.join(onMatch());
     }
-}
-global.String = String;
-})()
-;(function(){
+  };
+  global.String = String;
+})();
+(function () {
+  BigInt.one = 1;
+  BigInt.two = 2;
+  BigInt.zero = 0;
 
-BigInt.one = 1;
-BigInt.two = 2;
-BigInt.zero = 0;
-
-BigInt.from = function(num) {
+  BigInt.from = function (num) {
     // 取整数部分
     return parseInt(num);
-}
+  };
 
-BigInt.parse = function(str) {
+  BigInt.parse = function (str) {
     // 只接受数字字符串，小数会报错
-    if( str.indexOf('.') == -1 && !isNaN(Number(str)) ){
-        return BigInt(str);
+    if (str.indexOf(".") == -1 && !isNaN(Number(str))) {
+      return BigInt(str);
+    } else {
+      throw "FormatException: Could not parse BigInt";
     }
-    else{
-        throw 'FormatException: Could not parse BigInt';
-    }
-}
+  };
 
-BigInt.tryParse = function(str) {
+  BigInt.tryParse = function (str) {
     // 只接受数字字符串，小数会报错
-    if( str.indexOf('.') == -1 && !isNaN(Number(str)) ){
-        return BigInt(str);
+    if (str.indexOf(".") == -1 && !isNaN(Number(str))) {
+      return BigInt(str);
+    } else {
+      return null;
     }
-    else{
-        return null;
-    }
-}
-global.BigInt = BigInt;
-})()
-;(function(){
+  };
+  global.BigInt = BigInt;
+})();
+(function () {
+  const NativeSymbol = global.Symbol;
 
-const NativeSymbol = global.Symbol;
-
-
-function Symbol(name){
+  function Symbol(name) {
     // 不能返回Symbol自身会无限调用，只能返回字符串，但是Symbol(name)!=Symbol(name).toString()
-    return NativeSymbol(name).toString()
-}
+    return NativeSymbol(name).toString();
+  }
 
-Symbol.empty = 'Symbol("")';
-Symbol.unaryMinus = 'Symbol("unary-")';
+  Symbol.empty = 'Symbol("")';
+  Symbol.unaryMinus = 'Symbol("unary-")';
 
-global.NativeSymbol = NativeSymbol;
-global.Symbol = Symbol;
-
-
-
-   })()
+  global.NativeSymbol = NativeSymbol;
+  global.Symbol = Symbol;
+})();

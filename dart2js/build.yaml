@@ -1,5 +1,5 @@
-targets:
-  $default:
-    source:
-      exclude:
-        - __test_data__/**
+#targets:
+#  $default:
+#    source:
+#      exclude:
+#        - __test_data__/**
