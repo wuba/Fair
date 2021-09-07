@@ -352,11 +352,11 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   //变量声明列表
   Map _buildVariableDeclarationList(Map typeAnnotation,
       List<Map> declarations,List<Map> annotations,String source) => {
-        'type': 'VariableDeclarationList',
-        'typeAnnotation': typeAnnotation,
-        'declarations': declarations,
-        'annotations' : annotations,
-        'source':source
+    'type': 'VariableDeclarationList',
+    'typeAnnotation': typeAnnotation,
+    'declarations': declarations,
+    'annotations' : annotations,
+    'source':source
   };
 
   //标识符定义
@@ -408,15 +408,15 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   Map _buildMethodDeclaration(
       Map id, Map parameters, Map typeParameters, Map body, Map returnType,List<Map> annotations,String source,
       {bool isAsync = false}) => {
-        'type': 'MethodDeclaration',
-        'id': id,
-        'parameters': parameters,
-        'typeParameters': typeParameters,
-        'body': body,
-        'isAsync': isAsync,
-        'returnType': returnType,
-        'annotations' : annotations,
-        'source':source
+    'type': 'MethodDeclaration',
+    'id': id,
+    'parameters': parameters,
+    'typeParameters': typeParameters,
+    'body': body,
+    'isAsync': isAsync,
+    'returnType': returnType,
+    'annotations' : annotations,
+    'source':source
   };
 
   Map _buildNamedExpression(Map id, Map expression) => {
@@ -432,21 +432,21 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   };
 
   Map _buildMethodInvocation(Map callee, Map typeArguments, Map argumentList) => {
-        'type': 'MethodInvocation',
-        'callee': callee,
-        'typeArguments': typeArguments,
-        'argumentList': argumentList,
+    'type': 'MethodInvocation',
+    'callee': callee,
+    'typeArguments': typeArguments,
+    'argumentList': argumentList,
   };
 
   Map _buildClassDeclaration(Map id, Map superClause, Map implementsClause,
       Map mixinClause, List<Map> metadata, List<Map> body) => {
-        'type': 'ClassDeclaration',
-        'id': id,
-        'superClause': superClause,
-        'implementsClause': implementsClause,
-        'mixinClause': mixinClause,
-        'metadata': metadata,
-        'body': body,
+    'type': 'ClassDeclaration',
+    'id': id,
+    'superClause': superClause,
+    'implementsClause': implementsClause,
+    'mixinClause': mixinClause,
+    'metadata': metadata,
+    'body': body,
   };
 
   Map _buildArgumentList(List<Map> argumentList) => {'type': 'ArgumentList', 'argumentList': argumentList};
@@ -513,9 +513,9 @@ Future<Map> generateAstMap(String path) async {
         var compilationUnit = parseResult.unit;
         //遍历AST
         var astData = compilationUnit.accept(CustomAstVisitor());
-        stdout.writeln('################gen_ast_begin######################');
-        stdout.writeln(jsonEncode(astData));
-        stdout.writeln('################gen_ast_end######################');
+        // stdout.writeln('################gen_ast_begin######################');
+        // stdout.writeln(jsonEncode(astData));
+        // stdout.writeln('################gen_ast_end######################');
         return Future.value(astData);
       } catch (e) {
         stdout.writeln('Visit dart ast error: ${e.toString()}');

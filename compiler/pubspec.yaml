@@ -17,7 +17,7 @@ dependencies:
   archive: ^2.0.0
   intl: ^0.16.1
   path: ^1.6.4
-  analyzer: ^0.39.14
+  analyzer: ^0.41.2
   dart_style: ^1.3.6
   glob: ^1.2.0
   pedantic: ^1.8.0
@@ -25,6 +25,8 @@ dependencies:
   fair_annotation:
     path: ../annotation
   http: ^0.12.2
+  fairc:
+    path: ../dart2dsl
 
 dev_dependencies:
   test: ^1.6.0
