@@ -25,10 +25,10 @@ class FairDslContex {
 
 String fairDsl(Map rootAst) {
   var fairDslContex = _prepareVariableAnnotation(rootAst);
-  var proxy = _genProxy(rootAst, fairDslContex);
-  stdout.writeln('################gen_proxy_begin######################');
-  stdout.writeln(proxy);
-  stdout.writeln('################gen_proxy_end######################');
+  // var proxy = _genProxy(rootAst, fairDslContex);
+  // stdout.writeln('################gen_proxy_begin######################');
+  // stdout.writeln(proxy);
+  // stdout.writeln('################gen_proxy_end######################');
   var map = _parseRootAst(rootAst, fairDslContex);
   var encoder = JsonEncoder.withIndent('  ');
   return encoder.convert(map);
@@ -110,7 +110,7 @@ String _genProxy(Map rootAst, FairDslContex fairDslContex) {
     if (value is VariableDeclarationList) {
       variableAnnotation += value.sourceCode + '\n';
       property +=
-          '''pros['${value.declarationList.first.name}'] =() => ${value.declarationList.first.name};\n''';
+      '''pros['${value.declarationList.first.name}'] =() => ${value.declarationList.first.name};\n''';
     }
   });
 
@@ -120,7 +120,7 @@ String _genProxy(Map rootAst, FairDslContex fairDslContex) {
         func += ''' functions['${value.name}'] = ${value.name};\n''';
       } else if (value.returnType.name == 'Widget') {
         component +=
-            '''plugins['${value.name}'] = (props) => ${value.name};\n ''';
+        '''plugins['${value.name}'] = (props) => ${value.name};\n ''';
       } else {
         property += '''pros['${value.name}'] = ${value.name};\n''';
       }
@@ -238,7 +238,7 @@ dynamic _buildWidgetDsl(
       return "%(${methodInvocationExpression.callee.asIdentifier.name})";
     } else {
       dslMap.putIfAbsent('className',
-          () => methodInvocationExpression.callee.asIdentifier.name);
+              () => methodInvocationExpression.callee.asIdentifier.name);
     }
   } else if (methodInvocationExpression.callee.isMemberExpression) {
     //方法类
@@ -246,8 +246,8 @@ dynamic _buildWidgetDsl(
     var memberExpression = methodInvocationExpression.callee.asMemberExpression;
     dslMap.putIfAbsent(
         'className',
-        () =>
-            memberExpression.object.asIdentifier.name +
+            () =>
+        memberExpression.object.asIdentifier.name +
             '.' +
             memberExpression.property);
   } else {
@@ -302,7 +302,7 @@ dynamic _buildValueExpression(
   if (valueExpression.isIdentifier) {
     //映射变量声明
     if (fairDslContex.variableAnnotation
-            .containsKey(valueExpression.asIdentifier.name) ||
+        .containsKey(valueExpression.asIdentifier.name) ||
         fairDslContex.methodAnnotation
             .containsKey(valueExpression.asIdentifier.name)) {
       naPaValue = '#(' + valueExpression.asIdentifier.name + ')';

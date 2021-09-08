@@ -162,7 +162,7 @@ bin为可选的flatbuffer产物，fair 2期开源了 fairc和dart2js编译转换
 根据错误日志，有几种情况：1.原代码中存在逻辑表达式，语法解析不通过，尝试剥离逻辑为module；2.`.dart_tool`文件权限问题，请删除后重试
 
 ## LICENSE
-Fair项目基于[BSD协议](LICENSE)开源。我们使用的更多依赖库详见pubspec.yaml
+Fair项目基于[BSD协议](LICENSE)开源。我们使用的更多依赖库详见pubspec.yaml 
 
 > 感谢UXD的**Kaibin**老师提供设计支持
 
