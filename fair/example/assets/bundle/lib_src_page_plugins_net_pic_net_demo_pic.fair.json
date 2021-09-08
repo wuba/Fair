@@ -55,7 +55,7 @@
         "child": {
           "className": "Icon",
           "pa": [
-            "#(Icons.add)"
+            "#(Icons.arrow_forward_outlined)"
           ]
         },
         "onPressed": "@(onClick)"

@@ -86,6 +86,14 @@ public class FairV8JsLoader extends FairJsLoader {
             });
 
         }, FairConstant.JS_INVOKE_FLUTTER_CHANNEL);
+
+        //print打印比较频繁，特殊处理
+        getV8().registerJavaMethod((receiver, parameters) -> {
+            String msg = parameters.get(0).toString();
+            FairLogger.d(msg);
+            return null;
+        }, FairConstant.JS_PRINT_METHOD);
+
     }
 
     @Override
@@ -97,6 +105,7 @@ public class FairV8JsLoader extends FairJsLoader {
         v8Console.registerJavaMethod(console, "log", "log", new Class[]{Object[].class});
         v8Console.registerJavaMethod(console, "error", "error", new Class[]{Object[].class});
         v8Console.registerJavaMethod(console, "warn", "warn", new Class[]{Object[].class});
+
     }
 
     @Override
