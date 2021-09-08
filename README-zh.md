@@ -13,9 +13,9 @@
 
 ---
 
-Fair是为Flutter设计的动态化框架，通过Fair Compiler工具对原生Dart源文件的自动转化，使项目获得动态更新Widget Tree和State的能力。
+Fair是为Flutter设计的动态化框架，通过Fair Compiler工具对原生Dart源文件的自动转化，使项目获得动态更新Widget的能力。
 
-Fair is a dynamic framework designed for Flutter, which enables projects to dynamically update Widget Tree and State through the automatic conversion of native Dart source files through the Fair Compiler tool.
+Fair is a dynamic framework designed for Flutter, which enables projects to dynamically update Widget through the automatic conversion of native Dart source files through the Fair Compiler tool.
 
 > 在线文档：[https://fair.58.com/](https://fair.58.com/)
 
@@ -86,6 +86,9 @@ samples
 ## 📎相关介绍
 * [Flutter动态化框架Fair文档上线&开源倒计时](https://juejin.cn/post/6901600898603024391)
 * [Flutter动态化框架Fair的设计与思考](https://juejin.cn/post/6896655572910014478)
+* [Fair 2.0 逻辑动态化开源了！](https://mp.weixin.qq.com/s/HtrA2DExSeY9VvtDlTch3w)
+* [Fair逻辑动态化架构设计与实现](https://mp.weixin.qq.com/s/Xq5BAa6G8vtgP2SePbj-OQ)
+* [Fair逻辑动态化通信实现](https://mp.weixin.qq.com/s/8G5rEXc0ZatBGSXrZXc-4A)
 
 ## 🕰2020&2021 Roadmap
 
@@ -125,7 +128,8 @@ samples
 * 类的继承不支持 
 查阅更多不支持内容，请移步至[![Gitter](https://badges.gitter.im/flutter_fair/community.svg)](https://gitter.im/flutter_fair/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-
+## Contributors
+刘阳、王海君、林乐洋、卜杰、罗正龙、柯超、单鹏涛、李昊、谢雄亮、赵倩、陈有余、刘超、孙哲
 
 ## 🔧Contributing
 通过[Issue](https://github.com/wuba/fair/issues)提交问题，贡献代码走Pull Request，管理员将对代码进行审核。
@@ -147,10 +151,6 @@ samples
 3. 遇到编译错误，请查看终端日志，过滤fair关键词
 4. 到github提issue，或gitter。留档/解决，并提供flutter环境信息`flutter doctor --verbose`
 ---
-
-* 如何调试fairc 和 dart2js？
-
-在compiler build工具，内部使用的是fairc和dart2js的AOT版本。打包AOT请使用dart compile aot-snapshot **.dart
 
 * 为什么没有bin产物？
 
