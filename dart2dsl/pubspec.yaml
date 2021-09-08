@@ -8,7 +8,7 @@ environment:
 executables:
   fairc:
 dependencies:
-  analyzer: ^0.40.6
+  analyzer: ^0.41.2
 
 
 dev_dependencies:
@@ -16,4 +16,3 @@ dev_dependencies:
   test: ^1.6.0
   source_gen: ^0.9.7+1
   build_runner: ^1.4.0
-

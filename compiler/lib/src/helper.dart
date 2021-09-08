@@ -7,13 +7,11 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:archive/archive.dart';
 import 'package:build/build.dart';
-import 'package:crypto/crypto.dart' show md5;
-import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:process/process.dart';
+import 'package:fairc/fairc.dart' as dart2dsl;
 
 mixin FlatCompiler {
   final command = 'flatc';
@@ -25,7 +23,7 @@ mixin FlatCompiler {
     var error = '';
     if (LocalProcessManager().canRun(command)) {
       _fbs ??= await File(
-              path.join('.dart_tool', 'build', 'fairc', 'fair_bundle.fbs'))
+          path.join('.dart_tool', 'build', 'fairc', 'fair_bundle.fbs'))
           .create(recursive: true);
 
       final result = Process.runSync(command, [
@@ -65,8 +63,8 @@ mixin FairCompiler {
     final dir = path.join('.dart_tool', 'build', 'fairc');
     Directory(dir).createSync(recursive: true);
     var fbs =
-        await File(path.join('.dart_tool', 'build', 'fairc', 'fair_bundle.fbs'))
-            .create(recursive: true);
+    await File(path.join('.dart_tool', 'build', 'fairc', 'fair_bundle.fbs'))
+        .create(recursive: true);
     await fbs.writeAsBytes(await buildStep.readAsBytes(
         AssetId.resolve('package:fair_compiler/src/fair_bundle.fbs')));
     return fbs;
@@ -74,7 +72,7 @@ mixin FairCompiler {
 
   Future<File> get temp async {
     return File(path.join('.dart_tool', 'build', 'fairc',
-            DateTime.now().toString().hashCode.toString()))
+        DateTime.now().toString().hashCode.toString()))
         .create(recursive: true);
   }
 
@@ -82,47 +80,26 @@ mixin FairCompiler {
     var content = '';
     var error = '';
     if (LocalProcessManager().canRun(command)) {
-      // final fair = (await _bin(buildStep))?.absolute?.path;
-      // 本地联调，可以先配置环境
-      // final fair = '/Users/anjuke/haijun/Anjuke-Flutter/fairc/lib/fairc.dart';
-      // if (fair != null) {
-      // final result = Process.runSync(command, [fair, ...arguments]);
       await _syncFbs(buildStep);
-      var whichCommand = await Process.run('which', ['dart']);
-      var strBin = whichCommand.stdout.toString();
-      var dirEndIndex = strBin.lastIndexOf(Platform.pathSeparator);
-      var binDir = strBin.substring(0, dirEndIndex);
-
-      var aotParentPath = Directory.current.parent.parent.path;
-      var aotPathResult =
-          await Process.run('find', [aotParentPath, "-name", 'fairc.aot']);
-      var aotPathStr = aotPathResult.stdout.toString();
-      var transferPath = aotPathStr.split('\r')[0].split('\n')[0];
-      print('\u001b[33m [Fair Dart2JS] fairc.aot => ${transferPath} \u001b[0m');
-
-      final result = Process.runSync(
-          path.join('$binDir', 'dartaotruntime'), [transferPath, ...arguments]);
-      print(result);
-
-      var output = result.stdout.toString();
-      if (output != null && output.isNotEmpty) {
-        final startIndex = output.indexOf(_startTag);
-        final endIndex = output.indexOf(_endTag);
-        if (startIndex != -1 && endIndex != -1) {
-          content = output.substring(startIndex + _startTag.length, endIndex);
+      try {
+        final output = await dart2dsl.dart2dsl(arguments);
+        if (output != null && output is String && output.isNotEmpty) {
+          final startIndex = output.indexOf(_startTag);
+          final endIndex = output.indexOf(_endTag);
+          if (startIndex != -1 && endIndex != -1) {
+            content = output.substring(startIndex + _startTag.length, endIndex);
+          }
         }
-      }
-      if (content.isEmpty) {
+      } catch (e) {
         var errorLog = await File(path.join('build', 'fair', 'log',
-                '${DateFormat('yyyy-MM-dd_HH:mm:sss').format(DateTime.now())}.txt'))
+            '${DateFormat('yyyy-MM-dd_HH:mm:sss').format(DateTime.now())}.txt'))
             .create(recursive: true);
         var f = await errorLog.open(mode: FileMode.append);
-        await f.writeString(output);
-        await f.writeString(result.stderr);
+        await f.writeString('${e.toString()}\n');
         error = 'No content is generated: ${errorLog.path}';
         print('[Fair] $error');
       }
-      // }
+
     } else {
       error = '[Fair] Please checkout the flutter & dart version';
       print(error);

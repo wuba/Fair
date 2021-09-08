@@ -25,6 +25,8 @@ dependencies:
   fair_annotation:
     path: ../annotation
   http: ^0.12.2
+  fairc:
+    path: ../dart2dsl
   dartToJs:
     path: ../dart2js
 
