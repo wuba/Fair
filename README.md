@@ -47,3 +47,6 @@ FairWidget(
 
 ## Documentation
 For more details, please refer to [https://fair.58.com](https://fair.58.com)
+
+## Support
+The simplest way to show us your support is by giving the project a star.
