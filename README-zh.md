@@ -169,3 +169,5 @@ Fair项目基于[BSD协议](LICENSE)开源。我们使用的更多依赖库详�
 
 > 感谢UXD的**Kaibin**老师提供设计支持
 
+## Support
+给点亮Star是对Fair团队最大的支持，感谢
