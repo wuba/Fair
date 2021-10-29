@@ -22,7 +22,6 @@ dependencies:
   flat_buffers: ^1.12.0
   url_launcher: ^5.7.2
   http: ^0.12.2
-  ffi: ^1.0.0
 
 dev_dependencies:
   flutter_test:

@@ -5,10 +5,9 @@
  */
 
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:fair/fair.dart';
 import 'package:flutter/services.dart';
-import 'package:ffi/ffi.dart';
+import 'package:fair_version/fair_version.dart';
 import 'fair_message_channel.dart';
 import 'fair_runtime_declaration.dart';
 
@@ -63,8 +62,7 @@ class Runtime implements IRuntime {
   }
 
   @override
-  Future<dynamic> addScript(
-      String pageName, String script, dynamic props) async {
+  Future<dynamic> addScript(String pageName, String script, dynamic props) async {
     var scriptSource = await rootBundle.loadString(script);
     var fairProps;
     if (props != null && props['fairProps'] != null) {
@@ -86,9 +84,7 @@ class Runtime implements IRuntime {
     map[FairMessage.LOAD_JS] = script;
     var msg = FairMessage(pageName, FairMessage.EVALUATE, map);
     var from = msg.from();
-    Pointer<Utf8> nativeUtf8 =
-        _channel.sendCommonMessageSync((jsonEncode(from)).toNativeUtf8());
-    var reply = nativeUtf8.toDartString();
+    var reply = FairUtf8.fromUtf8(_channel.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from))));
     return Future.value(reply);
   }
 
@@ -98,15 +94,13 @@ class Runtime implements IRuntime {
     map[FairMessage.LOAD_JS] = script;
     var msg = FairMessage(pageName, FairMessage.VARIABLE, map);
     var from = msg.from();
-    Pointer<Utf8> nativeUtf8 =
-        _channel.sendCommonMessageSync((jsonEncode(from)).toNativeUtf8());
-    final Map<String, dynamic> reMap = jsonDecode(nativeUtf8.toDartString());
+    final Map<String, dynamic> reMap =
+    jsonDecode(FairUtf8.fromUtf8(_channel.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from)))));
     return reMap;
   }
 
   @override
-  Future<String> invokeMethod(
-      String pageName, String funcName, List<dynamic> parameters) {
+  Future<String> invokeMethod(String pageName, String funcName, List<dynamic> parameters) {
     var map = <dynamic, dynamic>{};
     map[FairMessage.FUNC_NAME] = funcName;
     map[FairMessage.ARGS] = parameters;
@@ -114,25 +108,22 @@ class Runtime implements IRuntime {
     var from = msg.from();
     var reply = _channel.sendCommonMessage(jsonEncode(from));
 
+
     return Future.value(reply);
   }
 
   @override
-  String invokeMethodSync(
-      String pageName, String funcName, List<dynamic> parameters) {
+  String invokeMethodSync(String pageName, String funcName, List<dynamic> parameters) {
     var map = <dynamic, dynamic>{};
     map[FairMessage.FUNC_NAME] = funcName;
     map[FairMessage.ARGS] = parameters;
     var msg = FairMessage(pageName, FairMessage.METHOD, map);
     var from = msg.from();
-    Pointer<Utf8> nativeUtf8 =
-        _channel.sendCommonMessageSync(jsonEncode(from).toNativeUtf8());
-    return nativeUtf8.toDartString();
+    return FairUtf8.fromUtf8(_channel.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from))));
   }
 
   @override
-  Future<String> variables(
-      String pageName, Map<dynamic, dynamic> variableNames) {
+  Future<String> variables(String pageName, Map<dynamic, dynamic> variableNames) {
     var msg = FairMessage(pageName, FairMessage.VARIABLE, variableNames);
     var reply = _channel.sendCommonMessage(jsonEncode(msg.from()));
     return Future.value(reply);
@@ -142,9 +133,7 @@ class Runtime implements IRuntime {
   String variablesSync(String pageName, Map<dynamic, dynamic> variableNames) {
     var msg = FairMessage(pageName, FairMessage.VARIABLE, variableNames);
     var from = msg.from();
-    Pointer<Utf8> nativeUtf8 =
-        _channel.sendCommonMessageSync(jsonEncode(from).toNativeUtf8());
-    return nativeUtf8.toDartString();
+    return FairUtf8.fromUtf8(_channel.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from))));
   }
 
   @override
@@ -168,8 +157,7 @@ class Runtime implements IRuntime {
       /*
        * 读取基础配置内容
        */
-      var coreConfigJson =
-          await rootBundle.loadString('packages/fair/assets/fair_home.json');
+      var coreConfigJson = await rootBundle.loadString('packages/fair/assets/fair_home.json');
       var coreConfig = jsonDecode(coreConfigJson)['coreJs'];
       Iterable<String> coreKeys = coreConfig.keys;
       for (var key in coreKeys) {
@@ -182,8 +170,7 @@ class Runtime implements IRuntime {
        */
       var pluginJsSource = ' ';
       try {
-        var customConfigJson =
-            await rootBundle.loadString('assets/fair_basic_config.json');
+        var customConfigJson = await rootBundle.loadString('assets/fair_basic_config.json');
         var customConfig = jsonDecode(customConfigJson);
         //加载用户自定义的plugin
         Map plugins = customConfig['plugin'];
@@ -191,9 +178,7 @@ class Runtime implements IRuntime {
         if (plugins != null) {
           Iterable<String> keys = plugins.keys;
           for (var k in keys) {
-            pluginJsSource = pluginJsSource +
-                ' ; ' +
-                await rootBundle.loadString(plugins[k]);
+            pluginJsSource = pluginJsSource + ' ; ' + await rootBundle.loadString(plugins[k]);
           }
         }
       } catch (e) {
