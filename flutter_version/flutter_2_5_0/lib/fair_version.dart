@@ -5,7 +5,7 @@
  */
 
 export 'src/widgets/all.dart';
-export 'src/widgets/utils.dart';
 export 'src/widgets/version.dart';
+export 'src/widgets/utils.dart';
 export 'src/widgets/module.dart';
 export 'src/fair_utf8.dart';

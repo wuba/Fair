@@ -7,10 +7,7 @@
 import 'dart:convert';
 import 'package:fair/fair.dart';
 import 'package:flutter/services.dart';
-import 'dart:ffi'; // For FFI
-import 'dart:io'; // For Platform.isX
-import 'package:ffi/ffi.dart';
-
+import 'package:fair_version/fair_version.dart';
 import 'fair_message_channel.dart';
 import 'fair_runtime_declaration.dart';
 
@@ -87,7 +84,7 @@ class Runtime implements IRuntime {
     map[FairMessage.LOAD_JS] = script;
     var msg = FairMessage(pageName, FairMessage.EVALUATE, map);
     var from = msg.from();
-    var reply = Utf8.fromUtf8(_channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from))));
+    var reply = FairUtf8.fromUtf8(_channel.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from))));
     return Future.value(reply);
   }
 
@@ -98,7 +95,7 @@ class Runtime implements IRuntime {
     var msg = FairMessage(pageName, FairMessage.VARIABLE, map);
     var from = msg.from();
     final Map<String, dynamic> reMap =
-        jsonDecode(Utf8.fromUtf8(_channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from)))));
+    jsonDecode(FairUtf8.fromUtf8(_channel.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from)))));
     return reMap;
   }
 
@@ -122,7 +119,7 @@ class Runtime implements IRuntime {
     map[FairMessage.ARGS] = parameters;
     var msg = FairMessage(pageName, FairMessage.METHOD, map);
     var from = msg.from();
-    return Utf8.fromUtf8(_channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from))));
+    return FairUtf8.fromUtf8(_channel.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from))));
   }
 
   @override
@@ -136,7 +133,7 @@ class Runtime implements IRuntime {
   String variablesSync(String pageName, Map<dynamic, dynamic> variableNames) {
     var msg = FairMessage(pageName, FairMessage.VARIABLE, variableNames);
     var from = msg.from();
-    return Utf8.fromUtf8(_channel.sendCommonMessageSync(Utf8.toUtf8(jsonEncode(from))));
+    return FairUtf8.fromUtf8(_channel.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from))));
   }
 
   @override

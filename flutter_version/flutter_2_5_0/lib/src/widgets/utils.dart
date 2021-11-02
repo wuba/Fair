@@ -4,8 +4,9 @@
  * found in the LICENSE file.
  */
 
-export 'src/widgets/all.dart';
-export 'src/widgets/utils.dart';
-export 'src/widgets/version.dart';
-export 'src/widgets/module.dart';
-export 'src/fair_utf8.dart';
+List<T> as<T>(List children) {
+  if (children == null || children.isEmpty) {
+    return children;
+  }
+  return children.map((e) => e as T).toList();
+}

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+##################################################################
+##
+##  Import package
+##
+##
+##  Author: Chaobin Wu
+##  Email : chaobinwu89@gmail.com
+##
+#################################################################
+die() {
+  echo "$*"
+  exit 1
+}
+# fix import of $$p.dart
+sed -i '' '11 i\
+import "dart:math" as math;' "lib/src/widgets/\$\$p.dart"
+# fix import of $$w.dart
+sed -i '' '14 i\
+part "../part/w.part.dart";' "lib/src/widgets/\$\$w.dart"

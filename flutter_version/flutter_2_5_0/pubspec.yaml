@@ -1,5 +1,5 @@
 name: fair_version
-description: Fair binding for Flutter v1.22.4
+description: Fair binding for Flutter v2.5.0
 version: 0.2.0
 homepage: https://fair.58.com/
 
@@ -10,9 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  ffi: ^0.1.3
-  flutter_redux: ^0.6.0
-
+  ffi: ^1.0.0
 
 dev_dependencies:
   flutter_test:
