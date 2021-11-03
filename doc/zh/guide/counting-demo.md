@@ -1,9 +1,7 @@
 # Counting计数器
 学习很多语言的时候都有hello world，在Flutter里面他的Hello World是个counting计数器。下面我们把这个计数器转换为Flutter Fair。
 
-相对于前面的写一个红色小块，计数器demo引入了状态State的变更，为了支持状态/局部刷新，需要配套引入state proxy代理对象。
-
-counting工程是模板工程，只需要利用flutter create就可以创建。不同版本可能会略有差异，但是差不太多。核心内容如下
+counting工程是模板工程，只需要利用flutter create就可以创建。不同版本可能会略有差异，但是差不太多。核心内容如下：
 * 一个文本标签，展示计数值
 * 一个按钮，更新计数
 
@@ -88,64 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ## Fair改造
 
-### main.dart
-
-#### 修改main方法和引用
-
-```dart
-import 'dart:convert';
-import 'package:fair/fair.dart';
-import 'package:flutter/material.dart';
-
-void main() {
-    WidgetsFlutterBinding.ensureInitialized();
-
-    FairApp.runApplication(
-        _getApp(),
-        plugins: {},
-    );
-    // runApp(MyApp());
-}
-```
-
-#### 对接原方法
-
-```dart
-
-dynamic _getApp() => FairApp(
-  modules: {},
-  delegate: {},
-  child: MyApp(),
-);
-
-```
-
-#### 替换Home入口
-
-```dart
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-            title: 'Flutter Demo',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-              visualDensity: VisualDensity.adaptivePlatformDensity,
-            ),
-            // home: MyHomePage(data: {'title': 'Flutter Demo Home Page'}));
-            home: FairWidget(
-                    name: '58 Fair',
-                    path: 'assets/bundle/lib_main.fair.json',
-                    data: {
-                      'fairProps': jsonEncode({'title': '58 Fair'})
-                    }));
-  }
-}
-
-```
-
-#### 改造原始界面
+#### 改造原始界面（添加@FairPatch()，后续通过Fair Compiler工具编译，可生成目标动态文件）
 ```dart
 @FairPatch()
 class MyHomePage extends StatefulWidget {
@@ -220,3 +161,62 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 ```
+
+### main.dart
+
+#### 修改main方法和引用
+
+```dart
+import 'dart:convert';
+import 'package:fair/fair.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    FairApp.runApplication(
+        _getApp(),
+        plugins: {},
+    );
+    // runApp(MyApp());
+}
+```
+
+#### 对接原方法
+
+```dart
+
+dynamic _getApp() => FairApp(
+  modules: {},
+  delegate: {},
+  child: MyApp(),
+);
+
+```
+
+#### 替换Home入口
+
+```dart
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            // home: MyHomePage(data: {'title': 'Flutter Demo Home Page'}));
+            home: FairWidget(
+                    name: '58 Fair',
+                    path: 'assets/bundle/lib_main.fair.json',
+                    data: {
+                      'fairProps': jsonEncode({'title': '58 Fair'})
+                    }));
+  }
+}
+
+```
+
+

@@ -95,7 +95,7 @@ class _State extends State<IfEqualBoolPage> {
 }
 ```
 
-![](./assets/sample_logic_page.jpg)
+<img src="./assets/sample_logic_page.jpg" width = "402" height = "673" alt="listCell" align=center />
 
 
 ## 2. 动态化展示
@@ -125,13 +125,13 @@ class IfEqualBoolPage
 * .fair.metadata 格式为元数据，标记了源码与产物的关联信息
 * .fair.js 格式为逻辑转换为JS后的产物
 
-![bundle](./assets/demo-redbox-2.png)
+![bundle](./assets/demo-3.jpg)
 
 第三步：复制产物并使用
 
 现在我们可以把资源拷贝出来，放到assets下（别忘了先在yaml中配置assets目录/路径）
 
-![demo-redbox-3](./assets/demo-redbox-3.png)
+![demo-redbox-3](./assets/demo-4.jpg)
 
 第四步：预埋入口
 
@@ -156,7 +156,7 @@ class IfEqualBoolPage
 
 | Flutter源码效果                              | Fair 动态效果                                |
 | -------------------------------------------- | -------------------------------------------- |
-| ![demo-redbox-4](./assets/demo-redbox-1.png) | ![demo-redbox-4](./assets/demo-redbox-4.png) |
+| ![demo-redbox-4](./assets/demo-1.jpeg) | ![demo-redbox-4](./assets/demo-2.jpeg) |
 
 ## 3. 让功能复杂一些
 
@@ -238,11 +238,6 @@ class _State extends State<IfEqualBoolPage> {
 
 编写完代码后，重新生成bundle，app加载新的资源即可。
 
-
-
-| 第一版效果                                   | Fair 动态效果                                |
-| -------------------------------------------- | -------------------------------------------- |
-| ![demo-redbox-4](./assets/demo-redbox-4.png) | ![demo-redbox-4](./assets/demo-redbox-5.png) |
 
 如果你有服务器，可以把资源托管上去，比如
 

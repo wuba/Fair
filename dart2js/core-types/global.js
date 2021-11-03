@@ -8,6 +8,48 @@ if (!this.global) {
   this.global = this; // iOS下JSCore没有注入global作为全局变量
 }
 
+const __modules__ = {};
+function defineModule(modId, func, deps) {
+  const imports = {};
+  const __global__ = this;
+  __modules__[modId] = {
+    init: func,
+    inited: false,
+    deps,
+    run: function (mod) {
+      if (!this.inited) {
+        this.deps.forEach((d) =>
+          typeof d == "number"
+            ? runModule(d, { exports: imports })
+            : runModule(d[0], { exports: imports }, d[1])
+        );
+        this.inited = true;
+      }
+      this.init.call(__global__, { imports, exports: mod.exports });
+    },
+  };
+}
+
+function runModule(id, mod, alias) {
+  if (alias) {
+    mod.exports[alias] = {};
+    __modules__[id].run({ exports: mod.exports[alias] });
+  } else {
+    __modules__[id].run(mod);
+  }
+}
+
+function runCallback(func, deps) {
+  const imports = {};
+  const __global__ = this;
+  deps.map((d) =>
+    typeof d == "number"
+      ? runModule(d, { exports: imports })
+      : runModule(d[0], { exports: imports }, d[1])
+  );
+  return func.call(__global__, { imports });
+}
+
 function inherit(cls, sup) {
   var oldProto = cls.prototype;
   cls.prototype = Object.create(Object.create(sup.prototype));

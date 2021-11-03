@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  ffi: ^0.1.3
 
 dev_dependencies:
   flutter_test:

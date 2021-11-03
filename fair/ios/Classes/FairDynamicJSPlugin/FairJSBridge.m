@@ -223,8 +223,14 @@ FairSingletonM(FairJSBridge)
         /**
          * 以 block 形式关联 JavaScript function
          */
-        // 打印日志
+        // 打印日志 - JS
         _context[@"console"][@"log"] = ^(JSValue *value)
+        {
+            FairLog(@"%@", value);
+        };
+
+        // 打印日志 - Dart
+        _context[@"print"] = ^(JSValue *value)
         {
             FairLog(@"%@", value);
         };

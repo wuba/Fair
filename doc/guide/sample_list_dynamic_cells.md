@@ -1,12 +1,11 @@
-# 原生列表内，支持动态Cell
+# ListView.builder with dynamic cells
 
 ## 使用场景
     在原生列表中，当我们需要对一个卡片或者一块内容做动态的展示时使用。
     例如：面对API简单控制展示无法满足的情况下，对一块内容做整体UI调整时，可以通过隐藏原有内容，替换成动态的Cell来实现目标。
 
 ## 预览效果
-
-![listCell](./assets/smaple_list_dynamic_cell.jpg)
+<img src="./assets/smaple_list_dynamic_cell.jpg" width = "402" height = "673" alt="listCell" align=center />
 
 ## 集成方式
 

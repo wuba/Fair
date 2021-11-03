@@ -1,9 +1,7 @@
-# Counting计数器
+# Counting Sample
 学习很多语言的时候都有hello world，在Flutter里面他的Hello World是个counting计数器。下面我们把这个计数器转换为Flutter Fair。
 
-相对于前面的写一个红色小块，计数器demo引入了状态State的变更，为了支持状态/局部刷新，需要配套引入state proxy代理对象。
-
-counting工程是模板工程，只需要利用flutter create就可以创建。不同版本可能会略有差异，但是差不太多。核心内容如下
+counting工程是模板工程，只需要利用flutter create就可以创建。不同版本可能会略有差异，但是差不太多。核心内容如下：
 * 一个文本标签，展示计数值
 * 一个按钮，更新计数
 
@@ -87,81 +85,57 @@ class _MyHomePageState extends State<MyHomePage> {
 ```
 
 ## Fair改造
-为了生存代码，我们将main.dart拆分独立文件；
-* main.dart runApp入口
-* app.dart 从main剥离出app部分
-* proxy.dart 新增
 
-### main.dart
+#### 改造原始界面（添加@FairPatch()，后续通过Fair Compiler工具编译，可生成目标动态文件）
 
-替换MyHomePage的引用，改为对FairWidget的引用
-```dart {2,6,18-22}
-import 'package:demo/proxy.dart';
-import 'package:fair/fair.dart';
-import 'package:flutter/material.dart';
-
-void main() {
-  runApp(FairApp(child: MyApp(), profile: true));
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: FairWidget(
-        name: 'counting',
-        path: 'assets/bundle/lib_app.fair.bin',
-        data: {'widget.title': 'Flutter Demo Home Page'},
-        stateProxy: CountingStateProxy(),
-      ),
-      // home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-```
-
-### app.dart
-改造后的app既可以直接运行，也可以作为基础生成fair产物。
-```dart {1,13,15,18,25}
-import 'package:fair/fair.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
+```dart
+@FairPatch()
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  
+  MyHomePage({Key key, this.data}) : super(key: key) {
+    title = data['title'];
+  }
+
+  String title;
+  dynamic data;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-@FairPatch()
 class _MyHomePageState extends State<MyHomePage> {
-  @FairWell('_counter')
-  int _counter = 0;
+  
+  // 定义与JS侧传递的参数，只能传递一个Map类型
+  @FairProps()
+  var fairProps;
 
-  @FairWell('_incrementCounter')
+  int _counter = 0;
+  var _title;
+
+  // JS生命周期方法--在JS加载完成自动调用
+  void onLoad() {
+    _title = fairProps['title'];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // 此处fairProps需要在onLoad 外部赋值，JS中会自动赋值
+    fairProps = widget.data;
+    onLoad();
+  }
+
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
   }
 
-  @FairWell('themeStyle')
-  TextStyle themeStyle() {
-    return Theme.of(context).textTheme.headline4;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(_title),
       ),
       body: Center(
         child: Column(
@@ -172,7 +146,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: themeStyle(),
+              // 暂不支持 style: Theme.of(context).textTheme.headline4,
+              // 可替换成:
+              style: TextStyle(fontSize: 40, color: Color(0xffeb4237), wordSpacing: 0),
             ),
           ],
         ),
@@ -187,33 +163,59 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 ```
 
-### proxy.dart
-代理对象，负责状态绑定
+### main.dart
+
+#### 修改main方法和引用
+
 ```dart
+import 'dart:convert';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
-class CountingStateProxy extends FairStateProxy {
-  ValueNotifier<int> _counter;
+void main() {
+    WidgetsFlutterBinding.ensureInitialized();
 
-  void _incrementCounter() {
-    _counter.value++;
-  }
+    FairApp.runApplication(
+        _getApp(),
+        plugins: {},
+    );
+    // runApp(MyApp());
+}
+```
 
+#### 对接原方法
+
+```dart
+
+dynamic _getApp() => FairApp(
+  modules: {},
+  delegate: {},
+  child: MyApp(),
+);
+
+```
+
+#### 替换Home入口
+
+```dart
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
-  Map<String, FairBlocBuilder> property() {
-    var props = super.property();
-    _counter ??= ValueNotifier(0);
-    props['_counter'] = () => _counter;
-    props['themeStyle'] = () => Theme.of(context).textTheme.headline4;
-    return props;
-  }
-
-  @override
-  Map<String, dynamic> func() {
-    var func = super.func();
-    func['_incrementCounter'] = _incrementCounter;
-    return func;
+  Widget build(BuildContext context) {
+    return MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            // home: MyHomePage(data: {'title': 'Flutter Demo Home Page'}));
+            home: FairWidget(
+                    name: '58 Fair',
+                    path: 'assets/bundle/lib_main.fair.json',
+                    data: {
+                      'fairProps': jsonEncode({'title': '58 Fair'})
+                    }));
   }
 }
+
 ```

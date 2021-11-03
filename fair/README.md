@@ -9,7 +9,7 @@
 </p>
 
 # Flutter Fair
-Fair is a lightweight package for Flutter, which can be used to update widget tree dynamically. This package is still at an early stage.
+Fair is a lightweight package for Flutter, which can be used to update widget dynamically. This package is still at an early stage.
 
 We create Fair so we can dispatch UI changes to users as bundle(s), the way similar to React Native. With Flutter Fair integrated, you can publish your UI pages without waiting for the next release date of your App. Fair provides standard widget, it can be used as a new dynamic page or as part of existing Flutter page.
 

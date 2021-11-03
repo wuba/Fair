@@ -1,11 +1,10 @@
-# 支持动态逻辑运算的界面
+# Dynamic UI
 
 ## 使用场景
     支持对一个界面中，基础类型和自定义类型（未继承Flutter组件）的动态化，区别于delegate的预埋变量和方法，逻辑动态化可以自动完成变量和方法分绑定和调用。
 
 ## 预览效果
-
-![listCell](./assets/sample_logic_page.jpg)
+<img src="./assets/sample_logic_page.jpg" width = "402" height = "673" alt="listCell" align=center />
 
 ## 集成方式
 ### 1、State 内定义变量（支持基础类型和纯自定义类型；同Flutter原生开发）
