@@ -6,15 +6,18 @@
 
 Add Fair as a dependency int the *pubspec.yaml* file.
 
+It is recommended to download [fair](https://github.com/wuba/fair) to the local and dependencies on the relative path. Assuming that the fair project and your own project are in the same folder:
+
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: ^0.2.0
+  fair:
+    path: ../fair/fair
 # add compiler dependency
 dev_dependencies:
   build_runner: ^1.4.0
   fair_compiler:
-    path: ../../compiler
+    path: ../fair/compiler
 ```
 
 * fair ![https://pub.dev/packages/fair](https://img.shields.io/pub/v/fair.svg)
@@ -26,6 +29,7 @@ Please check the runtime environment on your computer. Fair is based on Flutter 
 
 | Flutter Version          | Dart Version|
 | ------------------------ | ----------- |
+| Flutter 2.5.0    | Dart 2.14.0 |
 | Flutter 2.0.6   | Dart 2.12.3 |
 | Flutter 1.22.4/1.22.5    | Dart 2.10.4 |
 | Flutter 1.20.4           | Dart 2.9.2  |

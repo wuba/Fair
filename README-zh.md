@@ -38,6 +38,7 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 
 | Flutter版本              | Dart版本    | CI |
 | ------------------------ | ----------- |----------- |
+| Flutter 2.5.0           | Dart 2.14.0 | ![v2.5.0](https://github.com/wuba/fair/workflows/build/badge.svg)|
 | Flutter 2.0.6           | Dart 2.12.3 | ![v2.0.6](https://github.com/wuba/fair/workflows/build/badge.svg)|
 | Flutter 1.22.6           | Dart 2.10.5 | ![v1.22.5](https://github.com/wuba/fair/workflows/build/badge.svg)|
 | Flutter 1.22.4           | Dart 2.10.4 | ![v1.22.5](https://github.com/wuba/fair/workflows/1224/badge.svg)|
@@ -49,7 +50,7 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 # Switch to another stable flutter version
 #dependency_overrides:
 #  fair_version:
-#    path: ../../fair_version/flutter_2_0_6
+#    path: ../fair/flutter_version/flutter_2_5_0
 
 ```
 > https://flutter.dev/docs/development/tools/sdk/releases?tab=macos
@@ -89,6 +90,11 @@ samples
 * [Fair 2.0 逻辑动态化开源了！](https://mp.weixin.qq.com/s/HtrA2DExSeY9VvtDlTch3w)
 * [Fair逻辑动态化架构设计与实现](https://mp.weixin.qq.com/s/Xq5BAa6G8vtgP2SePbj-OQ)
 * [Fair逻辑动态化通信实现](https://mp.weixin.qq.com/s/8G5rEXc0ZatBGSXrZXc-4A)
+* [Fair下发产物-布局DSL生成原理](https://mp.weixin.qq.com/s/oSsSlYPTATZGzYpX7S9o5Q)
+* [Fair 逻辑语法糖设计与实现](https://mp.weixin.qq.com/s/dlQ7Uv7u7VI-xSstmJXcwQ)
+* [Fair热更新设计与实现](https://mp.weixin.qq.com/s/X3JBDNnqrsejxEwxSQ9-wg)
+* [Fair在安居拍房App中的实践](https://mp.weixin.qq.com/s/0J3nJTuoJrWxjy2p0ks0JQ)
+* [Flutter 动态化项目评测](https://mp.weixin.qq.com/s/Vc6YJfLgV93PyB8u_dry2A)
 
 ## 🕰2020&2021 Roadmap
 
@@ -149,7 +155,8 @@ samples
 2. 核查version分支版本于flutter一致，且等同于第一步版本号
 2. 如果尚未看过[文档](https://fair.58.com)，请先运行自带的sample，能跑起来再接入app
 3. 遇到编译错误，请查看终端日志，过滤fair关键词
-4. 到github提issue，或gitter。留档/解决，并提供flutter环境信息`flutter doctor --verbose`
+4. 使用动态化组件的过程中，不建议格式化生成的Javascript文件，格式化工具可能会修改文件内容，导致执行报错
+5. 到github提issue，或gitter。留档/解决，并提供flutter环境信息`flutter doctor --verbose`
 ---
 
 * 为什么没有bin产物？
