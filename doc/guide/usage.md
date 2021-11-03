@@ -6,7 +6,7 @@
 
 Add Fair as a dependency int the *pubspec.yaml* file.
 
-It is recommended to download [fair](https://github.com/wuba/fair) to the local and directly dependencies on the local package. Assuming that the fair project and your own project are in the same folder:
+It is recommended to download [fair](https://github.com/wuba/fair) to the local and dependencies on the relative path. Assuming that the fair project and your own project are in the same folder:
 
 ```yaml
 # add Fair dependency

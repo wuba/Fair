@@ -3,7 +3,7 @@
 ## 添加依赖
 通过yaml添加依赖配置
 
-推荐将 [fair](https://github.com/wuba/fair) 下载到本地，直接依赖本地的包。假设 fair 项目和您自己的项目位于同一个文件夹下面：
+推荐将 [fair](https://github.com/wuba/fair) 下载到本地，通过 path 相对路径进行依赖。假设 fair 项目和您自己的项目位于同一个文件夹下面：
 
 ```yaml
 # 添加 Fair 依赖
