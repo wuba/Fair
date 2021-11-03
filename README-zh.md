@@ -149,7 +149,8 @@ samples
 2. 核查version分支版本于flutter一致，且等同于第一步版本号
 2. 如果尚未看过[文档](https://fair.58.com)，请先运行自带的sample，能跑起来再接入app
 3. 遇到编译错误，请查看终端日志，过滤fair关键词
-4. 到github提issue，或gitter。留档/解决，并提供flutter环境信息`flutter doctor --verbose`
+4. 使用动态化组件的过程中，不建议格式化生成的Javascript文件，格式化工具可能会修改文件内容，导致执行报错
+5. 到github提issue，或gitter。留档/解决，并提供flutter环境信息`flutter doctor --verbose`
 ---
 
 * 为什么没有bin产物？

@@ -3,15 +3,18 @@
 ## 添加依赖
 通过yaml添加依赖配置
 
+推荐将 [fair](https://github.com/wuba/fair) 下载到本地，直接依赖本地的包。假设 fair 项目和您自己的项目位于同一个文件夹下面：
+
 ```yaml
 # 添加 Fair 依赖
 dependencies:
-  fair: ^2.0.0
+  fair:
+    path: ../fair/fair
 # 添加编译器依赖
 dev_dependencies:
   build_runner: ^1.4.0
   fair_compiler:
-    path: ../../compiler
+    path: ../fair/compiler
 ```
 
 * fair ![https://pub.dev/packages/fair](https://img.shields.io/pub/v/fair.svg)

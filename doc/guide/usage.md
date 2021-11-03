@@ -6,15 +6,18 @@
 
 Add Fair as a dependency int the *pubspec.yaml* file.
 
+It is recommended to download [fair](https://github.com/wuba/fair) to the local and directly dependencies on the local package. Assuming that the fair project and your own project are in the same folder:
+
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: ^0.2.0
+  fair:
+    path: ../fair/fair
 # add compiler dependency
 dev_dependencies:
   build_runner: ^1.4.0
   fair_compiler:
-    path: ../../compiler
+    path: ../fair/compiler
 ```
 
 * fair ![https://pub.dev/packages/fair](https://img.shields.io/pub/v/fair.svg)
