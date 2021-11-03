@@ -28,6 +28,7 @@ dev_dependencies:
 
 | Flutter版本              | Dart版本    |
 | ------------------------ | ----------- |
+| Flutter 2.5.0    | Dart 2.14.0 |
 | Flutter 2.0.6    | Dart 2.12.3 |
 | Flutter 1.22.4/1.22.5    | Dart 2.10.4 |
 | Flutter 1.20.4           | Dart 2.9.2  |

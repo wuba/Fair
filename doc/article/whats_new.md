@@ -1,3 +1,7 @@
+## Flutter 2.2.0 support
+1. Fair 2.2.0 version adds support for Flutter 2.5.0 version;
+2. Fixed some bugs.
+
 # What’s new in Fair 2.0
 The Fair 2.0 version adds support for logic dynamics and the Flutter 2.0 version. The logic dynamics support includes Fair Compiler tool support for Dart2JS, and third-party plug-in (network, permission, image selection) custom extension interface support.
 
