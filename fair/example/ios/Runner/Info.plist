@@ -55,5 +55,17 @@
 此应用程序需要访问照片库
 
 此app需要访问您的相册库</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>此应用程序需要访问相册库
+
+此应用程序需要访问照片库
+
+此app需要访问您的相册库</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>此应用程序需要访问相册库
+
+此应用程序需要访问照片库
+
+此app需要访问您的相册库</string>
 </dict>
 </plist>
