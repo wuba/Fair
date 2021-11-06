@@ -40,7 +40,7 @@ class AstNodeMapGenerator extends GeneratorForAnnotation<AstNodeCheck> {
       return null;
     }
     for(var body in bodyList){
-      if(body.isClassDeclaration && body.asClassDeclaration.name =='MyAstVisitor')
+      if(body.isClassDeclaration && body.asClassDeclaration.name =='CustomAstVisitor')
       {
         if((body.asClassDeclaration.body?.length??0)>0){
 
