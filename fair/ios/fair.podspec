@@ -18,11 +18,14 @@ A new Flutter plugin.
   s.dependency 'Flutter'
   s.platform = :ios, '8.0'
 
-  # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
-
-
-  s.preserve_paths = 'FairDynamicFlutter/Products/FairDynamicFlutter.framework'
+  # s.preserve_paths = 'FairDynamicFlutter/Products/FairDynamicFlutter.framework'
   s.vendored_frameworks = 'FairDynamicFlutter/Products/FairDynamicFlutter.framework'
+  s.xcconfig = { 
+    'OTHER_LDFLAGS' => '-ObjC'
+  }
+  s.pod_target_xcconfig = { 'VALID_ARCHS' => 'x86_64 armv7 arm64 arm64e armv7s' }
+  s.requires_arc = true
+  #指定Pod为静态库模式
+  s.static_framework      = true
 
 end
