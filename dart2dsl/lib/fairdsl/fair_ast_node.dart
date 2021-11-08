@@ -1024,7 +1024,7 @@ class VariableExpression extends AstNode {
       List<String> expressions = ast['expression'].toString().split(' ');
       var expression = ast['expression'];
       if (expressions != null && expressions.length > 0) {
-        expression = expressions[1];
+        expression = expressions[0];
       }
       return VariableExpression(expression, ast: ast);
     }
