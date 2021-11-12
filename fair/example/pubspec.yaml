@@ -31,8 +31,23 @@ dev_dependencies:
 # Switch to another stable flutter version
 #dependency_overrides:
 #   fair_version:
-#     path: ../../flutter_version/flutter_2_0_6
-
+#     path: ../../flutter_version/flutter_2_5_0
+#   analyzer: 2.7.0
+#   glob: 2.0.2
+#   crypto: 3.0.1
+#   process: 4.2.4
+#   dart_style: ^2.0.0
+#   file: ^6.1.2
+#   build_resolvers: ^2.0.4
+#   build: 2.1.1
+#   build_config: 1.0.0
+#   build_runner_core: 7.2.2
+#   timing: ^1.0.0
+#   graphs: ^2.1.0
+#   build_runner: ^2.1.5
+#   http_parser: ^4.0.0
+#   args: ^2.3.0
+#   source_gen: ^1.1.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

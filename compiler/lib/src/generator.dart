@@ -142,7 +142,7 @@ class BindingGenerator extends GeneratorForAnnotation<FairBinding> {
       if (line.startsWith('import') && !line.contains(':')) {
         var asset = line.replaceFirst('import', '').replaceAll('\'', '').replaceAll(';', '').trim();
         try {
-          var lAssetId = AssetId.resolve(asset,from: assetId);
+          var lAssetId = AssetId.resolve(Uri.parse(asset),from: assetId);
           line = 'import \'package:${assetId.package}${lAssetId.path.replaceFirst('lib', '')}\';';
         } catch (e) {
           print(e);

@@ -66,7 +66,7 @@ mixin FairCompiler {
     await File(path.join('.dart_tool', 'build', 'fairc', 'fair_bundle.fbs'))
         .create(recursive: true);
     await fbs.writeAsBytes(await buildStep.readAsBytes(
-        AssetId.resolve('package:fair_compiler/src/fair_bundle.fbs')));
+        AssetId.resolve(Uri.parse('package:fair_compiler/src/fair_bundle.fbs'))));
     return fbs;
   }
 
