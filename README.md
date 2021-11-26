@@ -21,17 +21,32 @@ We create Fair so we can dispatch any pages changes to users as bundle(s), the w
 
 ## Quick Start
 Use Flutter Fair require few steps. Add dependency inside `pubspec.yaml`.
+
+Download fair project source code,then dependencies on relative paths,If fair project and your project are in the same directory:
+
 ```yaml
 dependencies:
-  fair: ^2.0.0
+  fair:
+    path: ../fair/fair
+
+dev_dependencies:
+  build_runner: ^1.4.0
+  fair_compiler:
+    path: ../fair/compiler
+
+dependency_overrides:
+  fair_version:
+    path: ../fair/flutter_version/flutter_2_0_6
 ```
 
 Wrap your app with FairApp Widget.
 ```dart
 void main() {
-  runApp(
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  FairApp.runApplication(
     FairApp(
-      child: MaterialApp(home: App())
+      child: MyApp(),
     ),
   );
 }
