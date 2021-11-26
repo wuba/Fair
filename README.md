@@ -33,7 +33,8 @@ dev_dependencies:
   build_runner: ^1.4.0
   fair_compiler:
     path: ../fair/compiler
-
+ 
+// Switch "fair_version" according to the local Flutter SDK version
 dependency_overrides:
   fair_version:
     path: ../fair/flutter_version/flutter_2_0_6
