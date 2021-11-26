@@ -22,7 +22,7 @@ We create Fair so we can dispatch any pages changes to users as bundle(s), the w
 ## Quick Start
 Use Flutter Fair require few steps. Add dependency inside `pubspec.yaml`.
 
-Download fair project source code,then dependencies on relative paths,If fair project and your project are in the same directory:
+Recommend to download the fair project source code, then dependencies on relative paths, If fair project and your project are in the same directory:
 
 ```yaml
 dependencies:
