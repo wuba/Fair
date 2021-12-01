@@ -17,6 +17,8 @@ Fair是为Flutter设计的动态化框架，通过Fair Compiler工具对原生Da
 
 Fair is a dynamic framework designed for Flutter, which enables projects to dynamically update Widget through the automatic conversion of native Dart source files through the Fair Compiler tool.
 
+**Fair 的接入和使用，建议大家阅读在线文档:**
+
 > 在线文档：[https://fair.58.com/](https://fair.58.com/)
 
 ![](fair/what-is-fair.png)
