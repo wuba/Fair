@@ -47,13 +47,14 @@ var baseAPI = [
 
 String get outputPrefix => 'sdk';
 
-Future<void> parseSdkFile(String sdkName, String filePath, String output) async {
+Future<void> parseSdkFile(
+    String sdkName, String filePath, String output) async {
   await _generateSdkFile(sdkName, filePath, output);
 }
 
-Future<void> saveIntoFile(String result, String outputDir, String fileName) async {
-  var file = File('$outputDir/$fileName')
-    ..createSync(recursive: true);
+Future<void> saveIntoFile(
+    String result, String outputDir, String fileName) async {
+  var file = File('$outputDir/$fileName')..createSync(recursive: true);
   await file.writeAsString(result);
   await Process.start('dartfmt', ['-w', '$outputDir']);
 }
@@ -290,13 +291,14 @@ Future<String> _generateWidget(
     }
   ''');
 
-
   buffer.write('''
   @override
   Map<String, bool> mapping() {
       return const {
   ''');
-  c.forEach((element) => element.components.forEach((e) {buffer.write('\'${e.name}\': ${e.isWidget},\n'); }));
+  c.forEach((element) => element.components.forEach((e) {
+        buffer.write('\'${e.name}\': ${e.isWidget},\n');
+      }));
   buffer.write('''
       };
       }
@@ -305,10 +307,11 @@ Future<String> _generateWidget(
   return buffer.toString();
 }
 
-Future<void> _generateSdkFile(String sdkName, String filePath, String output) async {
+Future<void> _generateSdkFile(
+    String sdkName, String filePath, String output) async {
   var collection = AnalysisContextCollection(includedPaths: [filePath]);
   var context = collection.contextFor(filePath);
-  var c =  await processFile(context, filePath, analysisExports: true);
+  var c = await processFile(context, filePath, analysisExports: true);
   if (c == null) return '';
   var isCupertino = c.isCupertino;
   var buffer = StringBuffer('''
@@ -316,7 +319,7 @@ Future<void> _generateSdkFile(String sdkName, String filePath, String output) as
   ''');
   var fileName = basename(filePath);
   var clzName = fileName.replaceAll('.dart', '');
-  if(sdkName?.isNotEmpty != true){
+  if (sdkName?.isNotEmpty != true) {
     sdkName = clzName;
   }
   buffer.write('''
@@ -325,7 +328,7 @@ Future<void> _generateSdkFile(String sdkName, String filePath, String output) as
 
   var lines = c.lines.toList();
   lines.sort(
-          (a, b) => a.startsWith('import') ? -1 : (b.startsWith('import') ? 1 : 0));
+      (a, b) => a.startsWith('import') ? -1 : (b.startsWith('import') ? 1 : 0));
   lines.forEach((element) => buffer.write('$element\n'));
   var body = c.body;
   buffer.write('''
@@ -344,12 +347,14 @@ Future<ComponentParts> processFile(AnalysisContext context, String path,
   var element = result.element;
   var elementsList = <CompilationUnitElement>[element];
   //analysis exports file
-  if(analysisExports){
+  if (analysisExports) {
     //Most of SDK entrance files export other files.
     //We need analysis all of them when we are compiling.
     var exports = result.element.enclosingElement.exports;
-    if(exports != null){
-      var exportsUnits = exports?.map((e) => e.exportedLibrary.definingCompilationUnit)?.toList();
+    if (exports != null) {
+      var exportsUnits = exports
+          ?.map((e) => e.exportedLibrary.definingCompilationUnit)
+          ?.toList();
       elementsList.addAll(exportsUnits);
     }
   }
@@ -376,8 +381,7 @@ Future<ComponentParts> processFile(AnalysisContext context, String path,
       if (element.parameters != null && element.parameters.isNotEmpty) {
         hasNamedConstructor = true;
       }
-      defaultCache =
-          _writeMethod(buffer, element.name, element, defaultCache);
+      defaultCache = _writeMethod(buffer, element.name, element, defaultCache);
     });
     e.functionParameters.forEach((element) {
       _writeFunctionParameter(
@@ -400,8 +404,7 @@ Future<ComponentParts> processFile(AnalysisContext context, String path,
     }
 
     e.staticMethods?.forEach((element) {
-      defaultCache =
-          _writeMethod(buffer, element.name, element, defaultCache);
+      defaultCache = _writeMethod(buffer, element.name, element, defaultCache);
     });
   });
   if (!hasConstructor && exposedAPI != null && exposedAPI.isEmpty) return null;
@@ -411,9 +414,10 @@ Future<ComponentParts> processFile(AnalysisContext context, String path,
               e.name,
               e.constructor != null && e.constructor.isNotEmpty
                   ? e.constructor[0].isWidget
-                  : ((e.fields?.isNotEmpty == true && e.fields.elementAt(0)?.isWidget==true)
-                  || (e.staticMethods?.isNotEmpty == true && e.staticMethods.elementAt(0)?.isWidget==true)
-              ),
+                  : ((e.fields?.isNotEmpty == true &&
+                          e.fields.elementAt(0)?.isWidget == true) ||
+                      (e.staticMethods?.isNotEmpty == true &&
+                          e.staticMethods.elementAt(0)?.isWidget == true)),
             ))
         ?.toList(growable: false),
     buffer.toString(),
@@ -472,16 +476,16 @@ Map<String, dynamic> _writeMethod(StringBuffer buffer, String name,
       var cName = '';
       if (isList) {
         if (p.displayName != null && p.displayName.contains('<')) {
-          cName = '<'+p.displayName.split('<')[1].split('>')[0]+'>';
+          cName = '<' + p.displayName.split('<')[1].split('>')[0] + '>';
         }
       }
 
       if (p.defaultValueCode != null) {
-        if(isDouble){
+        if (isDouble) {
           prop = 'props[\'${p.name}\']?.toDouble() ?? ${p.defaultValueCode},';
-        }else if(isList){
+        } else if (isList) {
           prop = 'as${cName}(props[\'${p.name}\']) ?? ${p.defaultValueCode},';
-        }else{
+        } else {
           prop = 'props[\'${p.name}\'] ?? ${p.defaultValueCode},';
         }
 
@@ -489,15 +493,17 @@ Map<String, dynamic> _writeMethod(StringBuffer buffer, String name,
       } else if (defaultCache[p.name] != null) {
         prop = isDouble
             ? 'props[\'${p.name}\']?.toDouble() ?? ${defaultCache[p.name]},'
-            : isList? 'as${cName}(props[\'${p.name}\']) ?? ${defaultCache[p.name]},'
-            : 'props[\'${p.name}\'] ?? ${defaultCache[p.name]},';
+            : isList
+                ? 'as${cName}(props[\'${p.name}\']) ?? ${defaultCache[p.name]},'
+                : 'props[\'${p.name}\'] ?? ${defaultCache[p.name]},';
         print(
             '💕 using cached default value  ${element.name} ${p.name}=> ${defaultCache[p.name]}');
       } else {
         prop = isDouble
             ? 'props[\'${p.name}\']?.toDouble(),'
-            : isList? 'as${cName}(props[\'${p.name}\']),'
-            : 'props[\'${p.name}\'],';
+            : isList
+                ? 'as${cName}(props[\'${p.name}\']),'
+                : 'props[\'${p.name}\'],';
       }
       var namedDeclare = '${p.name}: $prop';
       var positionDeclare =
@@ -605,7 +611,6 @@ abstract class Exposed {
 }
 
 class Constructor extends Method {
-
   Constructor(String name, {List<Parameter> parameters, bool isWidget})
       : super(name, parameters: parameters, isWidget: isWidget);
 
@@ -619,8 +624,7 @@ class Method extends Exposed {
   final List<Parameter> parameters;
   final bool isWidget;
 
-  Method(String name, {this.parameters, this.isWidget = true})
-      : super(name);
+  Method(String name, {this.parameters, this.isWidget = true}) : super(name);
 
   @override
   String toString() {
@@ -661,6 +665,7 @@ class Parameter {
   final String type;
   final bool isNamed;
   final bool isOptional;
+
   //暂时为了转化List
   final String displayName;
   final String defaultValueCode;
@@ -694,8 +699,39 @@ bool _invalidElement(Element element) {
 ///
 /// We need to compile all of constructions when compile the SDK files.
 ///
-List<ClassExposed> _visit(CompilationUnitElement unitElement,[bool isSdk = false]) {
+List<ClassExposed> _visit(CompilationUnitElement unitElement,
+    [bool isSdk = false]) {
   var exposed = <ClassExposed>[];
+  // 获取类的常量列表
+  var topLevelVariables = unitElement.topLevelVariables;
+
+  String getParameterDefaultValue(ParameterElement e) {
+    if (e.defaultValueCode == null || !e.defaultValueCode.startsWith('_')) {
+      return e.defaultValueCode;
+    }
+
+    var TopLevelVariableElement = topLevelVariables
+        .where((element) => element.name == e.defaultValueCode)
+        .first;
+    var value = TopLevelVariableElement?.computeConstantValue();
+    if (value == null) {
+      return null;
+    }
+    if (value.type.isDartCoreBool) {
+      return value.toBoolValue().toString();
+    }
+    if (value.type.isDartCoreInt) {
+      return value.toIntValue().toString();
+    }
+    if (value.type.isDartCoreObject) {
+      return value.toStringValue();
+    }
+    if (value.type.isDartCoreDouble) {
+      return value.toDoubleValue().toString();
+    }
+    return null;
+  }
+
   // 枚举与class不同
   var apis = [...unitElement.types, ...unitElement.enums];
   for (var classElement in apis) {
@@ -730,7 +766,6 @@ List<ClassExposed> _visit(CompilationUnitElement unitElement,[bool isSdk = false
           // params
           var parameters = <Parameter>[];
           if ((constructorElement?.parameters?.isNotEmpty) ?? false) {
-
             constructorElement.parameters.forEach((e) {
               parameters.add(Parameter(
                 type: e.type.name,
@@ -738,7 +773,7 @@ List<ClassExposed> _visit(CompilationUnitElement unitElement,[bool isSdk = false
                 displayName: e.type.displayName,
                 isNamed: e.isNamed,
                 isOptional: e.isOptional,
-                defaultValueCode: e.defaultValueCode,
+                defaultValueCode: getParameterDefaultValue(e),
               ));
 
               if (e.type.name == null && e.type is FunctionType) {
@@ -749,7 +784,7 @@ List<ClassExposed> _visit(CompilationUnitElement unitElement,[bool isSdk = false
                           name: e.name,
                           isNamed: e.isNamed,
                           isOptional: e.isOptional,
-                          defaultValueCode: e.defaultValueCode,
+                          defaultValueCode: getParameterDefaultValue(e),
                         ))
                     .toList(growable: false);
 
@@ -785,8 +820,8 @@ List<ClassExposed> _visit(CompilationUnitElement unitElement,[bool isSdk = false
     }
 
     var staticMethods = <Method>[];
-    for (var methodElement in classElement.methods){
-      String name ;
+    for (var methodElement in classElement.methods) {
+      String name;
       if (!_invalidElement(methodElement) && methodElement.isStatic) {
         name = '${classElement.name}.${methodElement.name}';
         print(' 👉$name');
@@ -794,21 +829,23 @@ List<ClassExposed> _visit(CompilationUnitElement unitElement,[bool isSdk = false
         continue;
       }
       List<Parameter> parameters;
-      if (methodElement.parameters.isNotEmpty){
+      if (methodElement.parameters.isNotEmpty) {
         parameters = methodElement.parameters
             .map((e) => Parameter(
-          type: e.type.name,
-          name: e.name,
-          isNamed: e.isNamed,
-          isOptional: e.isOptional,
-          defaultValueCode: e.defaultValueCode
-        )).toList(growable: false);
+                type: e.type.name,
+                name: e.name,
+                isNamed: e.isNamed,
+                isOptional: e.isOptional,
+                defaultValueCode: getParameterDefaultValue(e)))
+            .toList(growable: false);
       }
-      staticMethods.add(
-        Method(name, parameters: parameters, isWidget: isWidget));
+      staticMethods
+          .add(Method(name, parameters: parameters, isWidget: isWidget));
     }
 
-    if (constructors.isNotEmpty || fields.isNotEmpty || staticMethods.isNotEmpty) {
+    if (constructors.isNotEmpty ||
+        fields.isNotEmpty ||
+        staticMethods.isNotEmpty) {
       exposed.add(ClassExposed(
         classElement.name,
         constructor: constructors,
