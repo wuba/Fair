@@ -125,7 +125,7 @@ class BindingGenerator extends GeneratorForAnnotation<FairBinding> {
   Future<File> _transitSource(
       BuildStep buildStep, AssetId assetId, String dir) async {
     var annotatedSource = await File(path.join(dir, assetId.package,
-        assetId.changeExtension('.fair.dart').path.replaceAll('/', '_')))
+        assetId.changeExtension('.fair.dart').path))
         .create(recursive: true);
 
     var source = await _replaceRelativeImport(await buildStep.readAsString(assetId), assetId);
