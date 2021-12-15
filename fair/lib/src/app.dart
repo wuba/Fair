@@ -8,6 +8,7 @@ import 'package:fair/fair.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'internal/flexbuffer/fair_js_decoder_http_decoder.dart';
 import 'state.dart';
 import 'type.dart';
 
@@ -48,6 +49,8 @@ class FairApp extends InheritedWidget with AppState {
   /// Provide custom bundle loader
   final BundleLoader bundleProvider;
 
+  final HttpDecoder httpDecoder;
+
   /// Turns on a little "Fair" banner in checked mode to indicate
   /// that the app is using Fair SDK. This is on by default (in
   /// checked mode), to turn it off, set the constructor argument to
@@ -79,6 +82,7 @@ class FairApp extends InheritedWidget with AppState {
     Map<String, FairDelegateBuilder> delegate,
     Map<String, FairModuleBuilder> modules,
     GeneratedModule generated,
+    this.httpDecoder,
   })  : placeholderBuilder = placeholder ?? _defaultHolder,
         super(key: key, child: child) {
     setup(profile, delegate, generated, modules);
