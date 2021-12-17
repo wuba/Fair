@@ -9,6 +9,7 @@ import 'dart:io';
 
 import 'package:analyzer/dart/analysis/analysis_context.dart';
 import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
+import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:path/path.dart';
@@ -340,7 +341,7 @@ Future<void> _generateSdkFile(String sdkName, String filePath, String output) as
 Future<ComponentParts> processFile(AnalysisContext context, String path,
     {bool analysisExports = false}) async {
   var session = context.currentSession;
-  var result = await session.getUnitElement(path);
+  UnitElementResult result = await session.getUnitElement(path);
   var element = result.element;
   var elementsList = <CompilationUnitElement>[element];
   //analysis exports file
@@ -562,21 +563,21 @@ bool _matchType(InterfaceType type, List<String> widgets,
 }
 
 bool _tryInternalCheck(InterfaceType type, List<String> widgets, classElement) {
-  try {
-    if (type.superclass != null &&
-        type.superclass.name == 'Object' &&
-        classElement is ClassElementImpl &&
-        classElement.linkedNode is ClassDeclarationImpl) {
-      var superName = (classElement.linkedNode as ClassDeclarationImpl)
-          .extendsClause
-          .superclass
-          .name
-          .name;
-      return widgets.indexWhere((element) => element == superName) != -1;
-    }
-  } catch (e) {
-    print(e);
-  }
+  // try {
+  //   if (type.superclass != null &&
+  //       type.superclass.name == 'Object' &&
+  //       classElement is ClassElementImpl &&
+  //       classElement.linkedNode is ClassDeclarationImpl) {
+  //     var superName = (classElement.linkedNode as ClassDeclarationImpl)
+  //         .extendsClause
+  //         .superclass
+  //         .name
+  //         .name;
+  //     return widgets.indexWhere((element) => element == superName) != -1;
+  //   }
+  // } catch (e) {
+  //   print(e);
+  // }
   return false;
 }
 
@@ -742,28 +743,28 @@ List<ClassExposed> _visit(CompilationUnitElement unitElement,[bool isSdk = false
               ));
 
               if (e.type.name == null && e.type is FunctionType) {
-                var parameters = (e.type as FunctionType)
-                    .parameters
-                    .map((e) => Parameter(
-                          type: e.type.name ?? _parseFunctionName(e),
-                          name: e.name,
-                          isNamed: e.isNamed,
-                          isOptional: e.isOptional,
-                          defaultValueCode: e.defaultValueCode,
-                        ))
-                    .toList(growable: false);
+                // var parameters = (e.type as FunctionType)
+                //     .parameters
+                //     .map((e) => Parameter(
+                //           type: e.type.name ?? _parseFunctionName(e),
+                //           name: e.name,
+                //           isNamed: e.isNamed,
+                //           isOptional: e.isOptional,
+                //           defaultValueCode: e.defaultValueCode,
+                //         ))
+                //     .toList(growable: false);
 
-                functionParameters.add(FunctionParameter(e.name,
-                    className: name,
-                    parameters: parameters,
-                    returnType:
-                        (e.type as FunctionType).returnType.name ?? 'void',
-                    typeArgument: ((e.type as FunctionType)
-                                ?.typeArguments
-                                ?.isNotEmpty ??
-                            false)
-                        ? (e.type as FunctionType)?.typeArguments?.first?.name
-                        : null));
+                // functionParameters.add(FunctionParameter(e.name,
+                //     className: name,
+                //     parameters: parameters,
+                //     returnType:
+                //         (e.type as FunctionType).returnType.name ?? 'void',
+                //     typeArgument: ((e.type as FunctionType)
+                //                 ?.typeArguments
+                //                 ?.isNotEmpty ??
+                //             false)
+                //         ? (e.type as FunctionType)?.typeArguments?.first?.name
+                //         : null));
               }
             });
           }
@@ -821,8 +822,8 @@ List<ClassExposed> _visit(CompilationUnitElement unitElement,[bool isSdk = false
   return exposed;
 }
 
-String _parseFunctionName(ParameterElement e) {
-  var element = (e.type.element as ElementImpl);
-  var alias = (element.linkedNode.parent as TypeAliasImpl);
-  return alias.name.toString();
-}
+// String _parseFunctionName(ParameterElement e) {
+//   var element = (e.type.element as ElementImpl);
+//   var alias = (element.linkedNode.parent as TypeAliasImpl);
+//   return alias.name.toString();
+// }
