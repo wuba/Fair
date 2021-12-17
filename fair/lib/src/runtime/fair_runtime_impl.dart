@@ -62,8 +62,8 @@ class Runtime implements IRuntime {
   }
 
   @override
-  Future<dynamic> addScript(String pageName, String script, dynamic props) async {
-    var scriptSource = await rootBundle.loadString(script);
+  Future<dynamic> addScript(String pageName, String scriptSource, dynamic props) async {
+    // var scriptSource = await rootBundle.loadString(script);
     var fairProps;
     if (props != null && props['fairProps'] != null) {
       fairProps = props['fairProps'];

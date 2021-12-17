@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 
 import 'app.dart';
 import 'experiment/sugar.dart';
+import 'internal/flexbuffer/fair_js_decoder.dart';
 import 'internal/global_state.dart';
 import 'loader.dart';
 import 'runtime/fair_runtime_impl.dart';
@@ -121,14 +122,19 @@ class FairState extends State<FairWidget>
     super.didChangeDependencies();
     _fairApp ??= FairApp.of(context);
     //加载js的文件地址
-    var js = widget.path.substring(0, widget.path?.lastIndexOf('.')) + '.js';
-    _fairApp.runtime.addScript(state2key, js, widget.data).then((value) {
-      //结果回调，native端加载js成功之后，开始注册相关函数,可以做相关通讯
-      (_fairApp ??= FairApp.of(context))?.register(this)?.then((value) {
-        delegate?.didChangeDependencies();
-        _reload();
-      });
-    });
+    _resolveFairRes(
+        _fairApp, FairJSFairJSDecoderHelper.transformPath(widget.path));
+  }
+
+  Future<dynamic> _resolveFairRes(FairApp _mFairApp, String jsPath) async {
+    var resolveJS =
+        await FairJSDecoder(decoder: _mFairApp.httpDecoder).decode(jsPath);
+    await Future.wait([
+      _mFairApp.runtime.addScript(state2key, resolveJS, widget.data),
+      _mFairApp.register(this)
+    ]);
+    delegate?.didChangeDependencies();
+    _reload();
   }
 
   @override
