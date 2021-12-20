@@ -8,6 +8,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:build/build.dart';
+import 'package:fair_compiler/src/fair_asset.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:process/process.dart';
@@ -66,7 +67,8 @@ mixin FairCompiler {
     await File(path.join('.dart_tool', 'build', 'fairc', 'fair_bundle.fbs'))
         .create(recursive: true);
     await fbs.writeAsBytes(await buildStep.readAsBytes(
-        AssetId.resolve('package:fair_compiler/src/fair_bundle.fbs')));
+        FairAssetId.resolve('package:fair_compiler/src/fair_bundle.fbs')));
+
     return fbs;
   }
 

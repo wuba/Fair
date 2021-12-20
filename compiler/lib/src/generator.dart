@@ -12,6 +12,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:fair_annotation/fair_annotation.dart';
+import 'package:fair_compiler/src/fair_asset.dart';
 import 'package:glob/glob.dart';
 import 'package:path/path.dart' as path;
 import 'package:source_gen/source_gen.dart';
@@ -79,7 +80,7 @@ class BindingGenerator extends GeneratorForAnnotation<FairBinding> {
         var str = element
             .toString()
             .substring(0, element.toString().indexOf('\/') + 1);
-        var assetId = AssetId.resolve(element);
+        var assetId = FairAssetId.resolve(element);
         await _transitSource(buildStep, assetId, dir).then((value) {
           var elements = [];
           value.readAsLinesSync().forEach((element) {
@@ -100,7 +101,7 @@ class BindingGenerator extends GeneratorForAnnotation<FairBinding> {
             list.where((p) => p.startsWith('package:') && p.endsWith('.dart')),
             (element) async {
           buffer.writeln(element);
-          var assetId = AssetId.resolve(element);
+          var assetId = FairAssetId.resolve(element);
           await _transitSource(buildStep, assetId, dir);
         });
       }
@@ -142,7 +143,7 @@ class BindingGenerator extends GeneratorForAnnotation<FairBinding> {
       if (line.startsWith('import') && !line.contains(':')) {
         var asset = line.replaceFirst('import', '').replaceAll('\'', '').replaceAll(';', '').trim();
         try {
-          var lAssetId = AssetId.resolve(asset,from: assetId);
+          var lAssetId = FairAssetId.resolve(asset,from: assetId);
           line = 'import \'package:${assetId.package}${lAssetId.path.replaceFirst('lib', '')}\';';
         } catch (e) {
           print(e);
