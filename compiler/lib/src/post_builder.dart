@@ -36,6 +36,10 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
     var zipDesPath =
         path.join(Directory.current.path, 'build', 'fair', 'fair_patch.zip');
     _zip(Directory(zipSrcPath), File(zipDesPath));
+
+    //copy bundle file to asset bundle dir
+    var assetPath = path.join(Directory.current.path, 'assets', 'bundle');
+    _copy2Asset(Directory(assetPath), Directory(zipSrcPath));
   }
 
   @override
@@ -94,11 +98,40 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
       }
       if (entity.path.endsWith('.js') || entity.path.endsWith('.json')) {
         final file = entity as File;
-        var filename = file.path.split('/').last;
+        var filename = file.path.split(path.separator).last;
         final List<int> bytes = file.readAsBytesSync();
         archive.addFile(ArchiveFile(filename, bytes.length, bytes));
       }
     }
     zipFile.writeAsBytesSync(ZipEncoder().encode(archive), flush: false);
+  }
+
+  /// copy file to asset bundle dir
+  void _copy2Asset(Directory assetDir, Directory srcDir) {
+    print('assetDir:' + assetDir.path + ' srcDir: ' + srcDir.path);
+    if (!srcDir.existsSync() || srcDir.listSync().isEmpty) {
+      print('[Fair] _copy2Asset srcDir is not exits');
+    }
+
+    if (assetDir.existsSync()) {
+      assetDir.deleteSync(recursive: true);
+    }
+    assetDir.create(recursive: true);
+
+    for (var entity in srcDir.listSync(recursive: false)) {
+      if (entity is! File) {
+         continue;
+      }
+      if (entity.path.endsWith('.js') || entity.path.endsWith('.json')
+      || entity.path.endsWith('.bin')) {
+        final file = entity as File;
+        var fileName = file.path.split(path.separator).last;
+        var decodeFile = path.join(assetDir.path, fileName);
+        print('decodeFile:' + decodeFile + ' assetDir.path:' + assetDir.path + ' fileName:' + fileName);
+        final List<int> bytes = file.readAsBytesSync();
+        File(decodeFile)..createSync(recursive: true)..writeAsBytesSync(bytes);
+      }
+    }
+
   }
 }
