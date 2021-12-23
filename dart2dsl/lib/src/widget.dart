@@ -365,7 +365,7 @@ Future<ComponentParts> processFile(AnalysisContext context, String path,
   var isCupertino = path.contains('/cupertino/');
 
   var buffer = StringBuffer();
-  var clzName = basename(path).replaceAll('.dart', '');
+  var clzName = basename(path).replaceAll('.dart', '').replaceAll('.fair', '');
   var imports = transformer.getImports(clzName);
   var lines = transformer.getLines(clzName, isCupertino);
   // constructor api

@@ -759,7 +759,7 @@ class FunctionDeclarationNode {
       ${!isGenerativeConstructor ? '' : '$className.$innerName.call($thisAlias);'}
       ${withClassAsNeeded('''
       with ($thisAlias) {
-        ${withArgumentObjAsNeeded(isGenerativeConstructor ? '(function() {${body.toSource()}).call($thisAlias);' : body.toSource())}
+        ${withArgumentObjAsNeeded(isGenerativeConstructor ? '(function() {${body.toSource()}}).call($thisAlias);' : body.toSource())}
       }
       ''')}
       ${!isGenerativeConstructor ? '' : 'return $thisAlias;'}
