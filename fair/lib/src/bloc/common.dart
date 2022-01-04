@@ -18,7 +18,7 @@ import '../widget.dart';
 FairWidgetBinding provider = () {
   return {
     'FairWidget': (props) => FairWidget(
-          name: props['type'],
+          name: props['name'],
           path: props['path'],
           data: props['data'],
         ),
