@@ -11,6 +11,7 @@ import 'dart:io';
 import 'package:fair/src/runtime/plugin/plugin_dispatcher.dart';
 import 'package:ffi/ffi.dart';
 import 'package:flutter/services.dart';
+import 'package:fair_version/fair_version.dart';
 
 typedef VoidMsgCallback = void Function();
 typedef StringMsgCallback = String Function(String msg);
@@ -83,5 +84,5 @@ class FairMessageChannel {
   }
 
   dynamic sendCommonMessageSync(dynamic msg) =>
-      invokeJSCommonFuncSync.call(msg);
+      FairUtf8.fromUtf8(invokeJSCommonFuncSync.call(FairUtf8.toUtf8(msg)));
 }
