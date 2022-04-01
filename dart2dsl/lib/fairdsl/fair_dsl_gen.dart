@@ -244,12 +244,22 @@ dynamic _buildWidgetDsl(
     //方法类
 
     var memberExpression = methodInvocationExpression.callee.asMemberExpression;
-    dslMap.putIfAbsent(
-        'className',
-            () =>
-        memberExpression.object.asIdentifier.name +
-            '.' +
-            memberExpression.property);
+    try {
+      dslMap.putIfAbsent(
+              'className',
+                  () =>
+              memberExpression.object.asIdentifier.name +
+                  '.' +
+                  memberExpression.property);
+    } catch (e) {
+      // dslMap.putIfAbsent(
+      //     'className',
+      //         () =>
+      //     'Sugar' +
+      //         '.' +
+      //         'map');
+      print(e);
+    }
   } else {
     return null;
   }

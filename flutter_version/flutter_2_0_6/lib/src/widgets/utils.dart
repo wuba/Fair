@@ -4,9 +4,9 @@
  * found in the LICENSE file.
  */
 
-List<T> as<T>(List children) {
+List<T> as<T>(List<T>? children) {
   if (children == null || children.isEmpty) {
-    return children;
+    return [];
   }
-  return children.map((e) => e as T).toList();
+  return children.map((e) => e).toList();
 }

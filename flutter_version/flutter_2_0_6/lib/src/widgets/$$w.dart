@@ -988,7 +988,7 @@ var p = () => {
             semanticLabel: props['semanticLabel'],
             textDirection: props['textDirection'],
           ),
-      'AnnotatedRegion': (props) => AnnotatedRegion(
+      'AnnotatedRegion': (props) => AnnotatedRegion<Object>(
             key: props['key'],
             child: props['child'],
             value: props['value'],
