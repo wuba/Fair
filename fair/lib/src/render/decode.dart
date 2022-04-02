@@ -27,10 +27,10 @@ class _DataSource {
 class Decoder {
   final FairBundle _loader = FairBundle();
   final FairDecoder _decoder = FairDecoder();
-  final String page;
-  final Map<String, dynamic> dataSource;
-  final String url;
-  _DataSource _source;
+  final String? page;
+  final Map<String, dynamic>? dataSource;
+  final String? url;
+  _DataSource? _source;
 
   Decoder(this.page, {this.dataSource, this.url});
 

@@ -33,16 +33,16 @@ import 'type.dart';
 class FairWidget extends StatefulWidget {
   /// Unique widget name. If this name is registered with [FairApp.widget], the [path] can be omitted.
   /// If the same bundle is reuse with different data the name should appended with suffix, eg: $name-$data.hashcode
-  final String name;
+  final String? name;
 
   /// Bundle path asset|url.
   /// Also see:
   ///
   /// * [name], unique name binds to this FairWidget
-  final String path;
+  final String? path;
 
   /// Optional, data source relate to this FairWidget.
-  final Map<String, dynamic> data;
+  final Map<String, dynamic>? data;
 
   /// Optional, provide the loading widget before real content is ready.
   /// Will use the placeholder configured with [FairApp] if it's not provided.
@@ -50,19 +50,19 @@ class FairWidget extends StatefulWidget {
   /// Also see:
   ///
   /// * [FairApp.placeholderBuilder], global placeholder for [FairApp]
-  final WidgetBuilder holder;
+  final WidgetBuilder? holder;
 
   /// Optional delegate for the fair bundle
   /// Also see:
   ///
   /// * delegate of [FairApp]
-  final FairDelegate delegate;
+  final FairDelegate? delegate;
 
   /// Work with [AutomaticKeepAliveClientMixin], usually for TabBar
-  final bool wantKeepAlive;
+  final bool? wantKeepAlive;
 
   FairWidget({
-    Key key,
+    Key? key,
     this.name,
     this.path,
     this.data,
@@ -99,13 +99,13 @@ class FairWidget extends StatefulWidget {
 class FairState extends State<FairWidget>
     with Loader, AutomaticKeepAliveClientMixin<FairWidget>
     implements FairMessageCallback<String> {
-  Widget _child;
-  FairApp _fairApp;
-  String bundleType;
-  String state2key;
+  Widget? _child;
+  FairApp? _fairApp;
+  String? bundleType;
+  String? state2key;
 
   // None nullable
-  FairDelegate delegate;
+  FairDelegate? delegate;
 
   @override
   void initState() {
@@ -113,8 +113,8 @@ class FairState extends State<FairWidget>
     state2key = GlobalState.id(widget.name);
     delegate = widget.delegate ??
         GlobalState.of(widget.name).call(context, widget.data);
-    delegate._bindState(this);
-    delegate.initState();
+    delegate!._bindState(this);
+    delegate!.initState();
   }
 
   @override
@@ -123,10 +123,10 @@ class FairState extends State<FairWidget>
     _fairApp ??= FairApp.of(context);
     //加载js的文件地址
     _resolveFairRes(
-        _fairApp, FairJSFairJSDecoderHelper.transformPath(widget.path));
+        _fairApp!, FairJSFairJSDecoderHelper.transformPath(widget.path));
   }
 
-  Future<dynamic> _resolveFairRes(FairApp _mFairApp, String jsPath) async {
+  Future<dynamic> _resolveFairRes(FairApp _mFairApp, String? jsPath) async {
     var resolveJS =
         await FairJSDecoder(decoder: _mFairApp.httpDecoder).decode(jsPath);
     await Future.wait([

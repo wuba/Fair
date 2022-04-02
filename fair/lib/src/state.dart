@@ -27,11 +27,11 @@ mixin AppState {
 
   void setup(
     bool profile,
-    Map<String, FairDelegateBuilder> builder,
-    GeneratedModule generated,
-    Map<String, FairModuleBuilder> module,
+    Map<String, FairDelegateBuilder>? builder,
+    GeneratedModule? generated,
+    Map<String, FairModuleBuilder>? module,
   ) {
-    modules.addAll(module);
+    modules.addAll(module??{});
     GlobalState.instance().init(profile, builder);
     _proxy.addGeneratedBinding(generated);
   }
@@ -40,14 +40,14 @@ mixin AppState {
     log('register state: ${state.state2key}');
     _mFairHandler.register(state);
     var delegate = state.delegate;
-    delegate.setRunTime(runtime);
+    delegate?.setRunTime(runtime);
     // await delegate.bindAll({});
     bindData.putIfAbsent(
-      state.state2key,
+      state.state2key??'',
       () => BindingData(
         modules,
-        functions: delegate.bindFunction(),
-        values: delegate.bindValue(),
+        functions: delegate?.bindFunction(),
+        values: delegate?.bindValue(),
       ),
     );
     return Future.value(null);

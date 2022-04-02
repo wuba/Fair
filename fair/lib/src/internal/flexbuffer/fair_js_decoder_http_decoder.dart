@@ -14,7 +14,7 @@ import 'package:http/http.dart';
 abstract class HttpDecoder {
   Future<dynamic> encode();
 
-  Future<dynamic> decode(String url);
+  Future<dynamic> decode(String? url);
 }
 
 String _toString(Uint8List data) {

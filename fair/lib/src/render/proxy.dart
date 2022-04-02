@@ -26,7 +26,7 @@ class ProxyMirror with P {
   ];
   final _generatedMapping = <String, bool>{};
 
-  void addGeneratedBinding(GeneratedModule generated) {
+  void addGeneratedBinding(GeneratedModule? generated) {
     if (generated == null) {
       return;
     }

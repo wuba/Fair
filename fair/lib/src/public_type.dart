@@ -16,7 +16,7 @@ typedef FairRouteBuilder = void Function(BuildContext context, String routeName,
 
 /// state delegate builder
 typedef FairDelegateBuilder = FairDelegate Function(
-    BuildContext context, Map<String, dynamic> data);
+    BuildContext context, Map<String, dynamic>? data);
 typedef FairModuleBuilder = FairModule Function();
 typedef PropertyValue<T> = T Function();
 

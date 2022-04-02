@@ -13,7 +13,7 @@ import 'package:ffi/ffi.dart';
 import 'package:flutter/services.dart';
 
 typedef VoidMsgCallback = void Function();
-typedef StringMsgCallback = String Function(String msg);
+typedef StringMsgCallback = String? Function(String? msg);
 
 final DynamicLibrary dl = Platform.isAndroid
     ? DynamicLibrary.open('libfairflutter.so')
@@ -28,8 +28,8 @@ class FairMessageChannel {
           'invokeJSCommonFuncSync')
       .asFunction();
 
-  BasicMessageChannel<String> _commonChannel;
-  MethodChannel _methodChannel;
+  BasicMessageChannel<String>? _commonChannel;
+  MethodChannel? _methodChannel;
 
   factory FairMessageChannel() {
     return _msg;
@@ -46,10 +46,10 @@ class FairMessageChannel {
         BasicMessageChannel(COMMON_MESSAGE_CHANNEL, StringCodec());
     _methodChannel ??= MethodChannel(JS_LOADER);
 
-    _commonChannel.setMessageHandler((String message) async {
+    _commonChannel!.setMessageHandler((String? message) async {
       print('来自native端的消息：$message');
       //js 异步调用dart中的相关方法
-      var data = json.decode(message);
+      var data = json.decode(message??'');
       var funcName = data['funcName']?.toString();
 
       if (funcName == 'invokePlugin') {
@@ -61,25 +61,25 @@ class FairMessageChannel {
       return 'reply from dart';
     });
 
-    _methodChannel.setMethodCallHandler((call) async {});
+    _methodChannel!.setMethodCallHandler((call) async {});
   }
 
-  StringMsgCallback _callback;
+  StringMsgCallback? _callback;
 
   void setMessageHandler(StringMsgCallback callback) {
     _callback = callback;
   }
 
-  Future<dynamic> loadJS(String args, StringMsgCallback callback) {
-    return _methodChannel.invokeMethod('loadMainJs', args);
+  Future<dynamic> loadJS(String args, StringMsgCallback? callback) {
+    return _methodChannel!.invokeMethod('loadMainJs', args);
   }
 
-  Future<dynamic> release(String args, VoidMsgCallback callback) {
-    return _methodChannel.invokeMethod('releaseMainJs', args);
+  Future<dynamic> release(String args, VoidMsgCallback? callback) {
+    return _methodChannel!.invokeMethod('releaseMainJs', args);
   }
 
-  Future<String> sendCommonMessage(dynamic msg) async {
-    return _commonChannel.send(msg);
+  Future<String?> sendCommonMessage(dynamic msg) async {
+    return _commonChannel!.send(msg);
   }
 
   dynamic sendCommonMessageSync(dynamic msg) =>
