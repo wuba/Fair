@@ -27,8 +27,8 @@ const BYTES_LIMIT = 10 * 1024;
 const STRING_LIMIT = 10 * 1024 / 8;
 
 class FairDecoder {
-  _FlexDecode _flexDecode;
-  _JsonDecode _jsonDecode;
+  _FlexDecode? _flexDecode;
+  _JsonDecode? _jsonDecode;
 
   /// Decode stream/string as bundle map
   ///
@@ -36,11 +36,15 @@ class FairDecoder {
   /// [bin] if format is binary, [stream] can only be Uint8List
   Future<Map> decode(dynamic stream, bool bin) {
     assert(
-        (bin == true && stream is Uint8List) ||
-            (bin == false && (stream is Uint8List || stream is String)),
-        'stream should be Uint8List or String');
-    _DecodeInterface d =
-        bin ? (_flexDecode ??= _FlexDecode()) : (_jsonDecode ??= _JsonDecode());
+        (bin == true && stream is Uint8List) || (bin == false && (stream is Uint8List || stream is String)), 'stream should be Uint8List or String');
+    _DecodeInterface d;
+    if (bin) {
+      _flexDecode ??= _FlexDecode();
+      d = _flexDecode!;
+    } else {
+      _jsonDecode ??= _JsonDecode();
+      d = _jsonDecode!;
+    }
     return d.decode(stream);
   }
 }

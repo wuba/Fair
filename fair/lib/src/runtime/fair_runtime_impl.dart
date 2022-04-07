@@ -33,7 +33,7 @@ class Runtime implements IRuntime {
     _channel ??= FairMessageChannel();
     //接收setState()的信息
     _channel!.setMessageHandler((message) {
-      var data = json.decode(message??'');
+      var data = json.decode(message ?? '');
       var className = data['pageName'];
       var call = _callBacks[className];
       call?.call(message);
@@ -94,22 +94,19 @@ class Runtime implements IRuntime {
     map[FairMessage.LOAD_JS] = script;
     var msg = FairMessage(pageName, FairMessage.VARIABLE, map);
     var from = msg.from();
-    final Map<String, String> reMap =
-    jsonDecode(FairUtf8.fromUtf8(_channel!.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from)))));
+    final Map<String, String> reMap = jsonDecode(FairUtf8.fromUtf8(_channel!.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from)))));
     return reMap;
   }
 
   @override
-  Future<String> invokeMethod(String pageName, String funcName, List<dynamic>? parameters) {
+  Future<String> invokeMethod(String pageName, String funcName, List<dynamic>? parameters) async {
     var map = <dynamic, dynamic>{};
     map[FairMessage.FUNC_NAME] = funcName;
     map[FairMessage.ARGS] = parameters;
     var msg = FairMessage(pageName, FairMessage.METHOD, map);
     var from = msg.from();
     var reply = _channel!.sendCommonMessage(jsonEncode(from));
-
-
-    return Future.value(reply);
+    return await reply ?? '';
   }
 
   @override
@@ -123,10 +120,10 @@ class Runtime implements IRuntime {
   }
 
   @override
-  Future<String> variables(String pageName, Map<dynamic, dynamic> variableNames) {
+  Future<String> variables(String pageName, Map<dynamic, dynamic> variableNames) async{
     var msg = FairMessage(pageName, FairMessage.VARIABLE, variableNames);
     var reply = _channel!.sendCommonMessage(jsonEncode(msg.from()));
-    return Future.value(reply);
+    return await reply ?? '';
   }
 
   @override
@@ -173,7 +170,7 @@ class Runtime implements IRuntime {
         var customConfigJson = await rootBundle.loadString('assets/fair_basic_config.json');
         var customConfig = jsonDecode(customConfigJson);
         //加载用户自定义的plugin
-        Map<String,dynamic>? plugins = customConfig['plugin'];
+        Map<String, dynamic>? plugins = customConfig['plugin'];
 
         if (plugins != null) {
           var keys = plugins.keys;

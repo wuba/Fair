@@ -69,13 +69,10 @@ class FairWidget extends StatefulWidget {
     this.holder,
     this.delegate,
     this.wantKeepAlive = false,
-  })  : assert(!(name == null && path == null),
-            'FairWidget require a global registered `name` or bundle `path`'),
+  })  : assert(!(name == null && path == null), 'FairWidget require a global registered `name` or bundle `path`'),
         assert(() {
           if (data == null) return true;
-          if (!(data is Map &&
-              data.values
-                  .every((e) => e is int || e is double || e is String))) {
+          if (!(data is Map && data.values.every((e) => e is int || e is double || e is String))) {
             log('data must be a map of primary value such as int, double or String. Object reference can be broken!');
           }
           return true;
@@ -96,25 +93,22 @@ class FairWidget extends StatefulWidget {
   }
 }
 
-class FairState extends State<FairWidget>
-    with Loader, AutomaticKeepAliveClientMixin<FairWidget>
-    implements FairMessageCallback<String> {
+class FairState extends State<FairWidget> with Loader, AutomaticKeepAliveClientMixin<FairWidget> implements FairMessageCallback<String> {
   Widget? _child;
   FairApp? _fairApp;
   String? bundleType;
-  String? state2key;
+  late String state2key;
 
   // None nullable
-  FairDelegate? delegate;
+  late FairDelegate delegate;
 
   @override
   void initState() {
     super.initState();
     state2key = GlobalState.id(widget.name);
-    delegate = widget.delegate ??
-        GlobalState.of(widget.name).call(context, widget.data);
-    delegate!._bindState(this);
-    delegate!.initState();
+    delegate = widget.delegate ?? GlobalState.of(widget.name).call(context, widget.data);
+    delegate._bindState(this);
+    delegate.initState();
   }
 
   @override
@@ -122,34 +116,27 @@ class FairState extends State<FairWidget>
     super.didChangeDependencies();
     _fairApp ??= FairApp.of(context);
     //加载js的文件地址
-    _resolveFairRes(
-        _fairApp!, FairJSFairJSDecoderHelper.transformPath(widget.path));
+    _resolveFairRes(_fairApp!, FairJSFairJSDecoderHelper.transformPath(widget.path));
   }
 
   Future<dynamic> _resolveFairRes(FairApp _mFairApp, String? jsPath) async {
-    var resolveJS =
-        await FairJSDecoder(decoder: _mFairApp.httpDecoder).decode(jsPath);
-    await Future.wait([
-      _mFairApp.runtime.addScript(state2key, resolveJS, widget.data),
-      _mFairApp.register(this)
-    ]);
-    delegate?.didChangeDependencies();
+    var resolveJS = await FairJSDecoder(decoder: _mFairApp.httpDecoder).decode(jsPath);
+    await Future.wait([_mFairApp.runtime.addScript(state2key, resolveJS, widget.data), _mFairApp.register(this)]);
+    delegate.didChangeDependencies();
     _reload();
   }
 
   @override
   void didUpdateWidget(covariant FairWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-    delegate?.didUpdateWidget(oldWidget);
+    delegate.didUpdateWidget(oldWidget);
   }
 
   void _reload() {
     var name = state2key;
-    var path = widget.path ?? _fairApp.pathOfBundle(widget.name);
-    bundleType = widget.path != null && widget.path.startsWith('http')
-        ? 'Http'
-        : 'Asset';
-    parse(context, page: name, url: path, data: widget.data).then((value) {
+    var path = widget.path ?? _fairApp!.pathOfBundle(widget.name??'');
+    bundleType = widget.path != null && widget.path?.startsWith('http')==true ? 'Http' : 'Asset';
+    parse(context, page: name, url: path, data: widget.data??{}).then((value) {
       if (mounted && value != null) {
         setState(() => _child = value);
       }
@@ -160,22 +147,22 @@ class FairState extends State<FairWidget>
   Widget build(BuildContext context) {
     super.build(context);
     assert(_fairApp != null, 'FairWidget must be descendant of FairApp');
-    var builder = widget.holder ?? _fairApp.placeholderBuilder;
-    var result = _child ?? builder(context);
-    if (!kReleaseMode && _fairApp.debugShowFairBanner) {
-      result = _CheckedModeBanner(bundleType, child: result);
+    var builder = widget.holder ?? _fairApp?.placeholderBuilder;
+    var result = _child ?? builder?.call(context);
+    if (!kReleaseMode && _fairApp!.debugShowFairBanner) {
+      result = _CheckedModeBanner(bundleType??'', child: result??Container());
     }
-    return result;
+    return result??Container();
   }
 
   @override
-  bool get wantKeepAlive => widget.wantKeepAlive;
+  bool get wantKeepAlive => widget.wantKeepAlive??false;
 
   @override
   void dispose() {
     super.dispose();
     _fairApp?.unregister(this);
-    delegate?.dispose();
+    delegate.dispose();
   }
 
   // String get state2key =>
@@ -192,12 +179,12 @@ class FairState extends State<FairWidget>
 
 /// Delegate for business logic. The delegate share similar life-circle with [State].
 class FairDelegate extends RuntimeFairDelegate {
-  FairState _state;
-  String _key;
+  FairState? _state;
+ late String _key;
 
-  void _bindState(FairState state) {
+  void _bindState(FairState? state) {
     assert(state != null, 'FairState should not be null');
-    _state = state;
+    _state = state!;
     _key = state.state2key;
   }
 
@@ -205,14 +192,15 @@ class FairDelegate extends RuntimeFairDelegate {
   /// Usually this can cost several milliseconds depend on the complexity of DSL.
   @override
   void setState(VoidCallback fn) {
-    if (_state == null || !_state.mounted) return;
+    if (_state == null || !_state!.mounted) return;
     // ignore: invalid_use_of_protected_member
-    _state.setState(fn);
-    _state._reload();
+    _state?.setState(fn);
+    _state?._reload();
   }
 
+  @override
   BuildContext get context {
-    return _state.context;
+    return _state!.context;
   }
 
   @override
@@ -257,8 +245,7 @@ class FairDelegate extends RuntimeFairDelegate {
 /// Does nothing in release mode.
 class _CheckedModeBanner extends StatelessWidget {
   /// Creates a const checked banner.
-  const _CheckedModeBanner(this.appendix, {Key key, @required this.child})
-      : super(key: key);
+  const _CheckedModeBanner(this.appendix, {Key? key, required this.child}) : super(key: key);
 
   /// The widget to show behind the banner.
   ///
@@ -271,11 +258,11 @@ class _CheckedModeBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var result = Banner(
-      child: child,
       message: 'Fair $appendix',
       textDirection: TextDirection.ltr,
       location: BannerLocation.topStart,
       color: appendix == 'Http' ? Colors.green : Colors.orange,
+      child: child,
     );
     return result;
   }

@@ -28,7 +28,7 @@ class FairMessageChannel {
           'invokeJSCommonFuncSync')
       .asFunction();
 
-  BasicMessageChannel<String>? _commonChannel;
+  BasicMessageChannel<String?>? _commonChannel;
   MethodChannel? _methodChannel;
 
   factory FairMessageChannel() {
@@ -43,7 +43,7 @@ class FairMessageChannel {
 
   void _initMessageChannel() {
     _commonChannel ??=
-        BasicMessageChannel(COMMON_MESSAGE_CHANNEL, StringCodec());
+        BasicMessageChannel<String?>(COMMON_MESSAGE_CHANNEL, StringCodec());
     _methodChannel ??= MethodChannel(JS_LOADER);
 
     _commonChannel!.setMessageHandler((String? message) async {

@@ -5,5 +5,5 @@ description: Convert individual dart file to js.
 environment:
   sdk: ">=2.12.0 <3.0.0"
 dependencies:
-  analyzer: ^2.1.0
-  path: ^1.8.1
+  analyzer: ^1.5.0
+  path: ^1.8.0

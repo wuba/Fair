@@ -42,22 +42,22 @@ class ProxyMirror with P {
   bool hasComponent(String key) => _provider.binding.containsKey(key);
 
   @override
-  dynamic componentOf(String key) => _provider.loadTag(key);
+  dynamic componentOf(String? key) => _provider.loadTag(key);
 
-  bool isWidget(String key) {
+  bool isWidget(String? key) {
     final internal = widgetNames.containsKey(key);
-    return internal ? widgetNames[key] : _generatedMapping[key];
+    return internal ? widgetNames[key]! : _generatedMapping[key]!;
   }
 
   W<dynamic> evaluate(
-      BuildContext context, BindingData bindingData, String text) {
+      BuildContext context, BindingData? bindingData, String text) {
     var pre = '';
     for (var exp in _expressions) {
       if (!exp.hitTest(text, pre)) {
         continue;
       }
       var result = exp.onEvaluate(this, bindingData, text, pre);
-      pre = result.exp;
+      pre = result.exp??'';
       if (result.valid) {
         return W<dynamic>(result.data, result.needBinding);
       }

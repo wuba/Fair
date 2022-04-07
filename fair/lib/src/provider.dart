@@ -20,7 +20,7 @@ class BindingProvider with $BindingImpl {
   };
   var _loadedIndex = 0;
 
-  dynamic loadTag(String tag) {
+  dynamic loadTag(String? tag) {
     var result = _binding[tag];
     if (result != null) {
       return result;

@@ -11,6 +11,7 @@ import 'dart:math';
 import 'package:archive/archive.dart';
 import 'package:build/build.dart';
 import 'package:crypto/crypto.dart' show md5;
+import 'package:fair_compiler/src/state_transfer.dart';
 import 'package:path/path.dart' as path;
 import 'package:dartToJs/index.dart' as dart2js;
 import 'helper.dart' show FlatCompiler;
@@ -18,7 +19,7 @@ import 'helper.dart' show FlatCompiler;
 class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
   @override
   FutureOr<void> build(PostProcessBuildStep buildStep) async {
-    final dir = path.join('build', 'fair');
+    final dir = path.join('build','fair');
     Directory(dir).createSync(recursive: true);
     final bundleName =
         path.join(dir, buildStep.inputId.path.replaceAll(inputExtensions.first, '.fair.json').replaceAll('/', '_').replaceAll('\\', '_'));
@@ -31,6 +32,8 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
     var zipSrcPath = path.join(Directory.current.path, 'build', 'fair');
     var zipDesPath = path.join(Directory.current.path, 'build', 'fair', 'fair_patch.zip');
     _zip(Directory(zipSrcPath), File(zipDesPath));
+
+   await stateTransfer();
   }
 
   @override

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 /// 注意：开发中，暂时不可用。。。
 /// dart - js通讯
 const FairBasicMessageChannel_name = 'com.fair/FairBasicMessageChannel';
-BasicMessageChannel<String>? _commonChannel;
+BasicMessageChannel<String?>? _commonChannel;
 
 const channels = <String, FairBasicMessageChannel>{};
 
@@ -42,7 +42,7 @@ class FairBasicMessageChannel {
   }
 
   static void _init() {
-    _commonChannel ??= BasicMessageChannel(FairBasicMessageChannel_name, StringCodec());
+    _commonChannel ??= BasicMessageChannel<String?>(FairBasicMessageChannel_name, StringCodec());
   }
 
   /*

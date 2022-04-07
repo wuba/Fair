@@ -44,7 +44,7 @@ FairWidgetBinding provider = () {
     'Navigator.pushNamed': (props) => () {
           // ignore p0 => context string
           var context = $(props);
-          var route = FairApp.of(context).routeBuilder;
+          var route = FairApp.of(context)?.routeBuilder;
           if (route != null) {
             route(context, pa1(props), arguments: props['arguments']);
             return null;
@@ -56,7 +56,7 @@ FairWidgetBinding provider = () {
         },
     'Navigator.popAndPushNamed': (props) => () {
           var context = $(props);
-          var route = FairApp.of(context).routeBuilder;
+          var route = FairApp.of(context)?.routeBuilder;
           if (route != null) {
             route(context, pa0(props), arguments: props['arguments']);
             return null;
