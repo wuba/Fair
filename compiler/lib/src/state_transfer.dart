@@ -29,9 +29,9 @@ Future<void> stateTransfer() async {
   print('[fair] Files is coping to targetPath...');
   await sourceFile.list(recursive: true).forEach((element) {
     //copy 文件夹中的所有文件
-    var pathList = element.path.split('/');
+    var pathList = element.path.split(Platform.pathSeparator);
     var subList = pathList.sublist(pathList.indexOf('fair') + 1);
-    var targetPath = '${toolProject.absolute.path}/${joinAll(subList)}';
+    var targetPath = '${toolProject.absolute.path}${Platform.pathSeparator}${joinAll(subList)}';
     var targetFile = File(targetPath);
     var sourceFile = File(element.path);
     //判断当前路径是否是文件

@@ -5,13 +5,13 @@
  */
 
 class LouPanDetail {
-  int id;
-  int number;
-  int goodsId;
-  int type;
-  String imgUrl;
-  List<GoodsDesc> goodsDesc;
-  bool isSelected;
+  int? id;
+  int? number;
+  int? goodsId;
+  int? type;
+  String? imgUrl;
+  List<GoodsDesc?>? goodsDesc;
+  bool? isSelected;
 
   LouPanDetail({this.id, this.number, this.type, this.goodsId, this.imgUrl, this.goodsDesc, this.isSelected = true});
 
@@ -41,8 +41,8 @@ class LouPanDetail {
 }
 
 class GoodsDesc {
-  String boldText;
-  String normalText;
+  String? boldText;
+  String? normalText;
 
   GoodsDesc({this.boldText, this.normalText});
 

@@ -13,7 +13,7 @@ class ShowFairAlertModule extends FairVoidCallbackModule {
   ShowFairAlertModule() : super(tagName);
 
   @override
-  VoidCallback onCreateComponent(BuildContext ctx, Map<String, dynamic> props) {
+  VoidCallback onCreateComponent(BuildContext ctx, Map<String, dynamic>? props) {
     return () => showFairAboutDialog(ctx);
   }
 }

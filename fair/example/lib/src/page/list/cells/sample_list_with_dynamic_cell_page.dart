@@ -20,7 +20,7 @@ class DynamicCellPage extends StatefulWidget {
 }
 
 class _State extends State<DynamicCellPage> {
-  DemoList _response;
+ late DemoList _response;
 
   @override
   void initState() {
@@ -44,19 +44,19 @@ class _State extends State<DynamicCellPage> {
             color: Colors.white,
             child: ListView.builder(
                 padding: EdgeInsets.only(left: 20, right: 20),
-                itemCount: _response.list.length,
+                itemCount: _response.list?.length??0,
                 itemBuilder: (BuildContext context, int position) {
-                  return getItem(_response.list[position]);
+                  return getItem(_response.list![position]);
                 })));
   }
 
   Widget getItem(var item) {
     if (item.type == 'fair') {
-      List goodsList = List<GoodsDesc>();
+      var goodsList = <GoodsDesc?>[];
       goodsList.add(GoodsDesc(boldText: '汤臣一品', normalText: ''));
       goodsList.add(GoodsDesc(boldText: '', normalText: '上海浦东新区陆家嘴'));
       goodsList.add(GoodsDesc(boldText: '90000', normalText: '万'));
-      LouPanDetail louPanDetail = LouPanDetail(
+      var louPanDetail = LouPanDetail(
           id: 1,
           number: 100 * 20,
           type: 0,

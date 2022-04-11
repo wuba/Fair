@@ -120,7 +120,12 @@ class FairState extends State<FairWidget> with Loader, AutomaticKeepAliveClientM
   }
 
   Future<dynamic> _resolveFairRes(FairApp _mFairApp, String? jsPath) async {
-    var resolveJS = await FairJSDecoder(decoder: _mFairApp.httpDecoder).decode(jsPath);
+    var resolveJS='';
+    try {
+      resolveJS = await FairJSDecoder(decoder: _mFairApp.httpDecoder).decode(jsPath);
+    } catch (e) {
+      print(e);
+    }
     await Future.wait([_mFairApp.runtime.addScript(state2key, resolveJS, widget.data), _mFairApp.register(this)]);
     delegate.didChangeDependencies();
     _reload();

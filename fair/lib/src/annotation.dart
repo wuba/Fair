@@ -4,4 +4,4 @@
  * found in the LICENSE file.
  */
 
-// export 'package:fair_annotation/fair_annotation.dart';
+export 'package:fair_annotation/fair_annotation.dart';

@@ -50,7 +50,7 @@ class SampleWanAndroidPageSrcState extends State<SampleWanAndroidPageSrc> {
   }
 
   Widget getItem(var id) {
-    List goodsList = <GoodsDesc>[];
+    var goodsList = <GoodsDesc?>[];
     goodsList.add(
         GoodsDesc(boldText: '${resultMap[id]['title']}-> $id', normalText: ''));
     goodsList.add(GoodsDesc(boldText: '', normalText: '上海浦东新区陆家嘴'));
