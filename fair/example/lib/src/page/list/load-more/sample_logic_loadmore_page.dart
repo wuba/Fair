@@ -118,6 +118,7 @@ class JRListState extends State<JRListWidget> {
         child: RefreshIndicator(
             //下拉刷新
             displacement: 10.0,
+            onRefresh: _onRefresh,
             child: Sugar.ifEqualBool(listIsEmpty(),
                 trueValue: Center(
                   child: CircularProgressIndicator(), //没有数据就转圈
@@ -125,8 +126,7 @@ class JRListState extends State<JRListWidget> {
                 falseValue: ListView.builder(
                     controller: _scrollController,
                     itemCount: _itemCount(),
-                    itemBuilder: _itemBuilder)),
-            onRefresh: _onRefresh),
+                    itemBuilder: _itemBuilder))),
       ),
     );
   }

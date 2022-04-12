@@ -88,7 +88,7 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
       }
       if (entity.path.endsWith('.js') || entity.path.endsWith('.json')) {
         final file = entity;
-        var filename = file.path.split('/').last;
+        var filename = file.path.split(Platform.pathSeparator).last;
         final List<int> bytes = file.readAsBytesSync();
         archive.addFile(ArchiveFile(filename, bytes.length, bytes));
       }

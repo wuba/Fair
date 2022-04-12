@@ -177,18 +177,11 @@ class ClassDeclarationData {
           methods.where((element) => !(element.isStatic)).forEach((element) {
             memberMethodsLiterval += '${element.name}: ${convertFunctionFromData(element, this)},';
           });
-          var staticFieldsLiteral = fields
-              .where((element) => element.isStatic)
-              .map((e) => '$className.${e.name} = (function() { with ($className) { return ${e.initVal ?? 'null'}; } })();')
-              .join('\r\n');
-          var staticMethodsLiteral = methods
-              .where((element) => element.isStatic)
-              .map((e) => '$className.${e.name} = ${convertFunctionFromData(e, this)};')
-              .join('\r\n');
-          var defaultContructorIsFactory =
-              methods.firstWhereOrNull((element) => element.isFactory == true && element.name == factoryConstructorAlias, orElse: () => null) != null;
-          var autoGenDefaultConstructor =
-              methods.firstWhereOrNull((element) => !element.isStatic && element.name == constructorAlias, orElse: () => null) == null;
+          var staticFieldsLiteral =
+              fields.where((element) => element.isStatic).map((e) => '$className.${e.name} = (function() { with ($className) { return ${e.initVal ?? 'null'}; } })();').join('\r\n');
+          var staticMethodsLiteral = methods.where((element) => element.isStatic).map((e) => '$className.${e.name} = ${convertFunctionFromData(e, this)};').join('\r\n');
+          var defaultContructorIsFactory = methods.firstWhereOrNull((element) => element.isFactory == true && element.name == factoryConstructorAlias, orElse: () => null) != null;
+          var autoGenDefaultConstructor = methods.firstWhereOrNull((element) => !element.isStatic && element.name == constructorAlias, orElse: () => null) == null;
           var defaultConstructor = '''
           $className.prototype.$constructorAlias = function() {
             ${parentClass != null && parentClass!.isNotEmpty ? parentClass : 'Object'}.prototype.$constructorAlias.call(this);
@@ -306,9 +299,8 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
     node.members.forEach((element) {
       if (element is FieldDeclaration) {
         var fieldDeclaration = element.fields.variables.first.toString().split('=');
-        classDeclarationData.fields.add(
-            FieldDeclarationData(fieldDeclaration[0].trim(), fieldDeclaration.length == 2 ? convertExpression(fieldDeclaration[1].trim()) : null)
-              ..isStatic = element.isStatic);
+        classDeclarationData.fields
+            .add(FieldDeclarationData(fieldDeclaration[0].trim(), fieldDeclaration.length == 2 ? convertExpression(fieldDeclaration[1].trim()) : null)..isStatic = element.isStatic);
       } else if (element is MethodDeclaration) {
         if (isDataBean && ['fromJson', 'toJson'].contains(element.name.name)) {
           return;
@@ -318,9 +310,7 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
         var excludeMethods = ['build'];
         if (!excludeMethods.contains(element.name.name)) {
           classDeclarationData.methods.add(MethodDeclarationData(
-              element.name.name,
-              '${element.returnType.toString()} ${element.name.name}${element.parameters.toString()}${element.body.toString()}',
-              element.body is ExpressionFunctionBody)
+              element.name.name, '${element.returnType.toString()} ${element.name.name}${element.parameters.toString()}${element.body.toString()}', element.body is ExpressionFunctionBody)
             ..isStatic = element.isStatic);
         }
         // }
@@ -334,8 +324,7 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
           constructorBody = '{}';
         }
         constructorBody = '$constructorAlias${element.parameters.toString()}$constructorBody';
-        var methodDeclaration =
-            MethodDeclarationData(element.name?.name ?? constructorAlias, constructorBody, element.body is ExpressionFunctionBody);
+        var methodDeclaration = MethodDeclarationData(element.name?.name ?? constructorAlias, constructorBody, element.body is ExpressionFunctionBody);
         if (element.factoryKeyword?.stringValue == 'factory') {
           methodDeclaration.isFactory = true;
           methodDeclaration.name = (element.name == null) ? factoryConstructorAlias : element.name!.name;
@@ -363,8 +352,7 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
           if (initializer is SuperConstructorInvocation) {
             callSuperConstructorImplicitly = true;
             var params = initializer.argumentList.arguments.map((e) => e.toString()).join(',');
-            methodDeclaration.abtractedInitializer
-                .add('${classDeclarationData.parentClass}.prototype.$constructorAlias.call($thisAlias${params.isEmpty ? '' : ',$params'});');
+            methodDeclaration.abtractedInitializer.add('${classDeclarationData.parentClass}.prototype.$constructorAlias.call($thisAlias${params.isEmpty ? '' : ',$params'});');
           } else if (initializer is ConstructorFieldInitializer) {
             methodDeclaration.abtractedInitializer.add('this.${initializer.fieldName} = ${convertExpression(initializer.expression.toString())};');
           } else if (initializer is RedirectingConstructorInvocation) {
@@ -432,8 +420,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
         // if (fairWellExp.allMatches(element.metadata.first.toString()).isNotEmpty) {
         var excludeMethods = ['build'];
         if (!excludeMethods.contains(element.name.toString()) && element.returnType.toString() != 'Widget') {
-          tempClassDeclaration.methods
-              .add(MethodDeclarationData(element.name.toString(), element.toString(), element.body is ExpressionFunctionBody));
+          tempClassDeclaration.methods.add(MethodDeclarationData(element.name.toString(), element.toString(), element.body is ExpressionFunctionBody));
         }
         // }
       }
@@ -476,8 +463,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
       if (node.extendsClause != null) {
         switch (node.extendsClause!.superclass.toString()) {
           case statefulWidgetClassName:
-            var member =
-                node.members.firstWhereOrNull((element) => element is MethodDeclaration && element.name.toString() == 'createState', orElse: () => null);
+            var member = node.members.firstWhereOrNull((element) => element is MethodDeclaration && element.name.toString() == 'createState', orElse: () => null);
             if (member != null) {
               var expectedStateClassName = ((member as MethodDeclaration).returnType as TypeName).name.name;
               if (expectedStateClassName == 'State') {
@@ -537,7 +523,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
           index1++;
         });
       }
-      var classDeclarationVisitor1 = ClassDeclarationVisitor(element.k2??false);
+      var classDeclarationVisitor1 = ClassDeclarationVisitor(element.k2 ?? false);
       classDeclarationVisitor1.parseByFile(absPath);
       result.add('''
           defineModule(${dependencySequences[index]}, function(__mod__) {
@@ -627,7 +613,7 @@ class PartJsCodeGenerator extends SimpleAstVisitor<PartJsCodeGenerator> {
 
   void parse(String filePath) {
     var file = File(filePath);
-    var result = parseFile(path: file.absolute.uri.normalizePath().path, featureSet: FeatureSet.fromEnableFlags([]));
+    var result = parseFile(path: Platform.isWindows ? filePath : file.absolute.uri.normalizePath().path, featureSet: FeatureSet.fromEnableFlags([]));
     result.unit.visitChildren(this);
   }
 }
@@ -775,7 +761,7 @@ class GenericStatementNode extends StatementNode {
 
   @override
   String toSource() {
-    return code??'';
+    return code ?? '';
   }
 }
 
@@ -1035,7 +1021,7 @@ class PropertyAccessStatementNode extends MemberAccessStatementNode {
   String toSource() {
     var finalThiz = thiz != null && thiz!.trim() == superSubstitution ? 'this' : thiz;
     return '''
-    ${finalThiz?.isNotEmpty==true ? finalThiz! + '.' : ''}$fieldName${setVal == null ? '' : '=' + (setVal??'') + ';'}
+    ${finalThiz?.isNotEmpty == true ? finalThiz! + '.' : ''}$fieldName${setVal == null ? '' : '=' + (setVal ?? '') + ';'}
     ''';
   }
 }
@@ -1046,7 +1032,7 @@ class ReturnStatementNode extends StatementNode {
   @override
   String toSource() {
     return '''
-    return $expr${!(expr?.endsWith(';')??false) ? ';' : ''}
+    return $expr${!(expr?.endsWith(';') ?? false) ? ';' : ''}
     ''';
   }
 }
@@ -1492,15 +1478,14 @@ String handleStringTemplate(SingleStringLiteral node) {
 }
 
 void handleChainIfStatement(IfStatement? node, IfStatementNode? gnNode) {
-  gnNode?.condition = convertExpression(node?.condition.toString()??'');
-  gnNode?.thenBody = node?.thenStatement is Block ? convertBlock(node?.thenStatement.toString()??'') : convertExpression(node?.thenStatement.toString()??'');
+  gnNode?.condition = convertExpression(node?.condition.toString() ?? '');
+  gnNode?.thenBody = node?.thenStatement is Block ? convertBlock(node?.thenStatement.toString() ?? '') : convertExpression(node?.thenStatement.toString() ?? '');
   if (node?.elseStatement != null) {
     if (node?.elseStatement is IfStatement) {
       gnNode?.elseBody = IfStatementNode();
       handleChainIfStatement(node?.elseStatement as IfStatement?, gnNode?.elseBody);
     } else {
-      gnNode?.lastElseBody =
-          node?.elseStatement is Block ? convertBlock(node?.elseStatement.toString()??'') : convertExpression(node?.elseStatement.toString()??'');
+      gnNode?.lastElseBody = node?.elseStatement is Block ? convertBlock(node?.elseStatement.toString() ?? '') : convertExpression(node?.elseStatement.toString() ?? '');
     }
   }
 }
@@ -1551,7 +1536,7 @@ String convertBlock(String code) {
 
   var generator = SimpleFunctionGenerator();
   res.unit.visitChildren(generator);
-  return generator.func?.body.toSource()??'';
+  return generator.func?.body.toSource() ?? '';
 }
 
 String convertArrayFuncExpression(FunctionExpression code) {
@@ -1575,26 +1560,26 @@ String convertFunctionExpression(String code) {
 }
 
 String convertFunctionFromData(MethodDeclarationData? data, [ClassDeclarationData? ctx]) {
-  var res = parseString(content: data?.body??'');
-  var generator = SimpleFunctionGenerator(isArrowFunc: data?.isArrow??false, renamedParameters: data?.renamedParameters, parentClass: ctx?.parentClass);
+  var res = parseString(content: data?.body ?? '');
+  var generator = SimpleFunctionGenerator(isArrowFunc: data?.isArrow ?? false, renamedParameters: data?.renamedParameters, parentClass: ctx?.parentClass);
   generator.func
     ?..withContext = true
-    ..classHasStaticFields = (ctx?.fields.any((element) => element.isStatic)??false) ||
-        (ctx?.methods.any((element) => element.isStatic && !element.isFactory && !element.isGenerativeConstructor)??false)
-    ..isStatic = data?.isStatic??false;
+    ..classHasStaticFields =
+        (ctx?.fields.any((element) => element.isStatic) ?? false) || (ctx?.methods.any((element) => element.isStatic && !element.isFactory && !element.isGenerativeConstructor) ?? false)
+    ..isStatic = data?.isStatic ?? false;
   res.unit.visitChildren(generator);
 
   if (ctx != null) {
     generator.func?.className = ctx.className;
     generator.func
-      ?..isGenerativeConstructor = data?.isGenerativeConstructor??false
-      ..isRedirectConstructor = data?.isRedirectConstructor??false;
+      ?..isGenerativeConstructor = data?.isGenerativeConstructor ?? false
+      ..isRedirectConstructor = data?.isRedirectConstructor ?? false;
   }
 
   if (data?.abtractedInitializer != null && data!.abtractedInitializer.isNotEmpty) {
     generator.func?.body.statements.insert(0, GenericStatementNode(data.abtractedInitializer.join('\r\n')));
   }
-  return generator.func?.toSource()??'';
+  return generator.func?.toSource() ?? '';
 }
 
 String convertFunction(String code, {bool isArrow = false, bool isClassMethod = false, bool classHasStaticFields = false}) {
@@ -1604,7 +1589,7 @@ String convertFunction(String code, {bool isArrow = false, bool isClassMethod = 
   generator.func
     ?..withContext = isClassMethod
     ..classHasStaticFields = classHasStaticFields;
-  return generator.func?.toSource()??'';
+  return generator.func?.toSource() ?? '';
 }
 
 //
@@ -1645,7 +1630,7 @@ String convertFunction(String code, {bool isArrow = false, bool isClassMethod = 
 //
 String convertWidgetStateFile(String filePath, [bool isCompressed = false]) {
   var file = File(filePath);
-  var stateFilePath = file.absolute.uri.normalizePath().path;
+  var stateFilePath = Platform.isWindows ? filePath : file.absolute.uri.normalizePath().path;
   var result = parseFile(path: stateFilePath, featureSet: FeatureSet.fromEnableFlags([]));
   var visitor = WidgetStateGenerator(stateFilePath);
   result.unit.visitChildren(visitor);

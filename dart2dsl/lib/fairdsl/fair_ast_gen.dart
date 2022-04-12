@@ -512,8 +512,8 @@ Future<Map> generateAstMap(String path) async {
         //遍历AST
         var astData = compilationUnit.accept(CustomAstVisitor());
 
-        var encode = json.encode(astData);
-        print(encode);
+        // var encode = json.encode(astData);
+        // print(encode);
         // stdout.writeln('################gen_ast_begin######################');
         // stdout.writeln(jsonEncode(astData));
         // stdout.writeln('################gen_ast_end######################');

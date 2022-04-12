@@ -122,7 +122,7 @@ Future dart2dsl(List<String> arguments) async {
   }
 }
 
-String _appendResult(String data) {
+String _appendResult(String? data) {
   var result = StringBuffer();
   if (data != null && data.isNotEmpty) {
     final startTag =
