@@ -75,8 +75,7 @@ var p = () => {
           ),
       'ExpansionPanelList': (props) => ExpansionPanelList(
             key: props['key'],
-            children: as<ExpansionPanel>(props['children']) ??
-                const <ExpansionPanel>[],
+            children: as<ExpansionPanel>(props['children']),
             expansionCallback: props['expansionCallback'],
             animationDuration:
                 props['animationDuration'] ?? kThemeAnimationDuration,
@@ -85,8 +84,7 @@ var p = () => {
           ),
       'ExpansionPanelList.radio': (props) => ExpansionPanelList.radio(
             key: props['key'],
-            children: as<ExpansionPanel>(props['children']) ??
-                const <ExpansionPanelRadio>[],
+            children: as<ExpansionPanel>(props['children']),
             expansionCallback: props['expansionCallback'],
             animationDuration:
                 props['animationDuration'] ?? kThemeAnimationDuration,
@@ -5892,7 +5890,7 @@ var p = () => {
             onGenerateInitialRoutes: props['onGenerateInitialRoutes'],
             onUnknownRoute: props['onUnknownRoute'],
             navigatorObservers:
-                as(props['navigatorObservers']) ?? const <NavigatorObserver>[],
+                as(props['navigatorObservers']),
             builder: props['builder'],
             title: props['title'] ?? '',
             onGenerateTitle: props['onGenerateTitle'],
@@ -6096,8 +6094,7 @@ var p = () => {
             centerTitle: props['centerTitle'],
             titlePadding: props['titlePadding'],
             collapseMode: props['collapseMode'] ?? CollapseMode.parallax,
-            stretchModes: as<StretchMode>(props['stretchModes']) ??
-                const <StretchMode>[StretchMode.zoomBackground],
+            stretchModes: as<StretchMode>(props['stretchModes']),
           ),
       'FlexibleSpaceBar.createSettings': (props) =>
           FlexibleSpaceBar.createSettings(
@@ -6247,8 +6244,7 @@ var p = () => {
             mainAxis: props['mainAxis'] ?? Axis.vertical,
             elevation: props['elevation'] ?? 2,
             hasDividers: props['hasDividers'] ?? false,
-            children: as<MergeableMaterialItem>(props['children']) ??
-                const <MergeableMaterialItem>[],
+            children: as<MergeableMaterialItem>(props['children']),
             dividerColor: props['dividerColor'],
           ),
       'ChipTheme.of': (props) => ChipTheme.of(
@@ -6406,7 +6402,6 @@ var p = () => {
             subtitle: props['subtitle'],
             backgroundColor: props['backgroundColor'],
             onExpansionChanged: props['onExpansionChanged'],
-            children: as(props['children']) ?? const <Widget>[],
             trailing: props['trailing'],
             initiallyExpanded: props['initiallyExpanded'] ?? false,
             maintainState: props['maintainState'] ?? false,
@@ -6415,6 +6410,7 @@ var p = () => {
             expandedAlignment: props['expandedAlignment'],
             childrenPadding: props['childrenPadding'],
             collapsedBackgroundColor: props['collapsedBackgroundColor'],
+            children: as<Widget>(props['children']),
           ),
       'ListTileTheme.merge': (props) => ListTileTheme.merge(
             key: props['key'],
@@ -8177,7 +8173,7 @@ var p = () => {
             layoutBehavior: props['layoutBehavior'],
             overflowDirection: props['overflowDirection'],
             overflowButtonSpacing: props['overflowButtonSpacing']?.toDouble(),
-            children: as(props['children']) ?? const <Widget>[],
+            children: as<Widget>(props['children']),
           ),
       'AppBarTheme.of': (props) => AppBarTheme.of(
             props['pa'][0],

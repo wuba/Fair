@@ -175,7 +175,13 @@ class FairState extends State<FairWidget> with Loader, AutomaticKeepAliveClientM
 
   @override
   void call(String t) {
-    delegate.notifyValue(jsonDecode(t));
+    var params={};
+    try {
+      params= jsonDecode(t);
+    } catch (e) {
+      print(e);
+    }
+    delegate.notifyValue(params);
   }
 
   @override
