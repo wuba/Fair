@@ -934,7 +934,7 @@ String? addCommaAsNeeded(String? statement) {
   if (statement?.endsWith(';') == true) {
     return statement;
   }
-  return statement ?? '' + ';';
+  return (statement ?? '') + ';';
 }
 
 String removeCommaAsNeeded(String statement) {
@@ -1021,7 +1021,7 @@ class PropertyAccessStatementNode extends MemberAccessStatementNode {
   String toSource() {
     var finalThiz = thiz != null && thiz!.trim() == superSubstitution ? 'this' : thiz;
     return '''
-    ${finalThiz?.isNotEmpty == true ? finalThiz! + '.' : ''}$fieldName${setVal == null ? '' : '=' + (setVal ?? '') + ';'}
+    ${finalThiz?.isNotEmpty == true ? finalThiz! + '.' : ''}$fieldName${setVal == null ? '' : '=' + setVal! + ';'}
     ''';
   }
 }
