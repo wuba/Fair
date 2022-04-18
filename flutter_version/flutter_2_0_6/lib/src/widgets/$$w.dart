@@ -304,7 +304,7 @@ var p = () => {
                 props['overflowDirection'] ?? VerticalDirection.down,
             textDirection: props['textDirection'],
             clipBehavior: props['clipBehavior'] ?? Clip.none,
-            children: as<Widget>(props['children']) ?? const <Widget>[],
+            children: as<Widget>(props['children']),
           ),
       'OverflowBarAlignment': {
         'values': OverflowBarAlignment.values,
@@ -471,7 +471,7 @@ var p = () => {
             cacheExtentStyle:
                 props['cacheExtentStyle'] ?? CacheExtentStyle.pixel,
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-            slivers: as<Widget>(props['slivers']) ?? const <Widget>[],
+            slivers: as<Widget>(props['slivers']),
           ),
       'Viewport.getDefaultCrossAxisDirection': (props) =>
           Viewport.getDefaultCrossAxisDirection(
@@ -484,7 +484,7 @@ var p = () => {
             crossAxisDirection: props['crossAxisDirection'],
             offset: props['offset'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-            slivers: as<Widget>(props['slivers']) ?? const <Widget>[],
+            slivers: as<Widget>(props['slivers']),
           ),
       'SizeChangedLayoutNotifier': (props) => SizeChangedLayoutNotifier(
             key: props['key'],
@@ -655,12 +655,12 @@ var p = () => {
             physics: props['physics'],
             pageSnapping: props['pageSnapping'] ?? true,
             onPageChanged: props['onPageChanged'],
-            children: as<Widget>(props['children']) ?? const <Widget>[],
             dragStartBehavior:
                 props['dragStartBehavior'] ?? DragStartBehavior.start,
             allowImplicitScrolling: props['allowImplicitScrolling'] ?? false,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
+            children: as<Widget>(props['children']),
           ),
       'PageView.builder': (props) => PageView.builder(
             key: props['key'],
@@ -776,7 +776,7 @@ var p = () => {
           },
       'Table': (props) => Table(
             key: props['key'],
-            children: as<TableRow>(props['children']) ?? const <TableRow>[],
+            children: as<TableRow>(props['children']),
             columnWidths: props['columnWidths'],
             defaultColumnWidth:
                 props['defaultColumnWidth'] ?? const FlexColumnWidth(1.0),
@@ -988,7 +988,7 @@ var p = () => {
             semanticLabel: props['semanticLabel'],
             textDirection: props['textDirection'],
           ),
-      'AnnotatedRegion': (props) => AnnotatedRegion(
+      'AnnotatedRegion': (props) => AnnotatedRegion<Object>(
             key: props['key'],
             child: props['child'],
             value: props['value'],
@@ -1219,7 +1219,7 @@ var p = () => {
           ),
       'Navigator': (props) => Navigator(
             key: props['key'],
-            pages: as<Page>(props['pages']) ?? const <Page<dynamic>>[],
+            pages: as<Page>(props['pages']),
             onPopPage: props['onPopPage'],
             initialRoute: props['initialRoute'],
             onGenerateInitialRoutes: props['onGenerateInitialRoutes'] ??
@@ -1230,8 +1230,7 @@ var p = () => {
                 const DefaultTransitionDelegate<dynamic>(),
             reportsRouteUpdateToEngine:
                 props['reportsRouteUpdateToEngine'] ?? false,
-            observers: as<NavigatorObserver>(props['observers']) ??
-                const <NavigatorObserver>[],
+            observers: as<NavigatorObserver>(props['observers']),
             restorationScopeId: props['restorationScopeId'],
           ),
       'Navigator#onPopPage': (props) => (
@@ -1480,7 +1479,7 @@ var p = () => {
             anchor: props['anchor']?.toDouble() ?? 0.0,
             offset: props['offset'],
             center: props['center'],
-            slivers: as<Widget>(props['slivers']) ?? const <Widget>[],
+            slivers: as<Widget>(props['slivers']),
             handle: props['handle'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
           ),
@@ -2117,7 +2116,7 @@ var p = () => {
       'CustomMultiChildLayout': (props) => CustomMultiChildLayout(
             key: props['key'],
             delegate: props['delegate'],
-            children: as<Widget>(props['children']) ?? const <Widget>[],
+            children: as<Widget>(props['children']),
           ),
       'SizedBox': (props) => SizedBox(
             key: props['key'],
@@ -2218,7 +2217,7 @@ var p = () => {
             key: props['key'],
             mainAxis: props['mainAxis'] ?? Axis.vertical,
             reverse: props['reverse'] ?? false,
-            children: as<Widget>(props['children']) ?? const <Widget>[],
+            children: as<Widget>(props['children']),
           ),
       'Stack': (props) => Stack(
             key: props['key'],
@@ -2227,7 +2226,7 @@ var p = () => {
             fit: props['fit'] ?? StackFit.loose,
             overflow: props['overflow'] ?? Overflow.clip,
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-            children: as<Widget>(props['children']) ?? const <Widget>[],
+            children: as<Widget>(props['children']),
           ),
       'IndexedStack': (props) => IndexedStack(
             key: props['key'],
@@ -2235,7 +2234,7 @@ var p = () => {
             textDirection: props['textDirection'],
             sizing: props['sizing'] ?? StackFit.loose,
             index: props['index'] ?? 0,
-            children: as<Widget>(props['children']) ?? const <Widget>[],
+            children: as<Widget>(props['children']),
           ),
       'Positioned': (props) => Positioned(
             key: props['key'],
@@ -2299,7 +2298,7 @@ var p = () => {
                 props['verticalDirection'] ?? VerticalDirection.down,
             textBaseline: props['textBaseline'],
             clipBehavior: props['clipBehavior'] ?? Clip.none,
-            children: as<Widget>(props['children']) ?? const <Widget>[],
+            children: as<Widget>(props['children']),
           ),
       'Row': (props) => Row(
             key: props['key'],
@@ -2312,7 +2311,7 @@ var p = () => {
             verticalDirection:
                 props['verticalDirection'] ?? VerticalDirection.down,
             textBaseline: props['textBaseline'],
-            children: as<Widget>(props['children']) ?? const <Widget>[],
+            children: as<Widget>(props['children']),
           ),
       'Column': (props) => Column(
             key: props['key'],
@@ -2325,7 +2324,7 @@ var p = () => {
             verticalDirection:
                 props['verticalDirection'] ?? VerticalDirection.down,
             textBaseline: props['textBaseline'],
-            children: as<Widget>(props['children']) ?? const <Widget>[],
+            children: as<Widget>(props['children']),
           ),
       'Flexible': (props) => Flexible(
             key: props['key'],
@@ -2351,19 +2350,19 @@ var p = () => {
             verticalDirection:
                 props['verticalDirection'] ?? VerticalDirection.down,
             clipBehavior: props['clipBehavior'] ?? Clip.none,
-            children: as<Widget>(props['children']) ?? const <Widget>[],
+            children: as<Widget>(props['children']),
           ),
       'Flow': (props) => Flow(
             key: props['key'],
             delegate: props['delegate'],
-            children: as<Widget>(props['children']) ?? const <Widget>[],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
+            children: as<Widget>(props['children']),
           ),
       'Flow.unwrapped': (props) => Flow.unwrapped(
             key: props['key'],
             delegate: props['delegate'],
-            children: as<Widget>(props['children']) ?? const <Widget>[],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
+            children: as<Widget>(props['children']),
           ),
       'RichText': (props) => RichText(
             key: props['key'],
@@ -2866,7 +2865,7 @@ var p = () => {
             center: props['center'],
             anchor: props['anchor']?.toDouble() ?? 0.0,
             cacheExtent: props['cacheExtent']?.toDouble(),
-            slivers: as<Widget>(props['slivers']) ?? const <Widget>[],
+            slivers: as<Widget>(props['slivers']),
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
                 props['dragStartBehavior'] ?? DragStartBehavior.start,
@@ -2889,7 +2888,6 @@ var p = () => {
             addRepaintBoundaries: props['addRepaintBoundaries'] ?? true,
             addSemanticIndexes: props['addSemanticIndexes'] ?? true,
             cacheExtent: props['cacheExtent']?.toDouble(),
-            children: as<Widget>(props['children']) ?? const <Widget>[],
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
                 props['dragStartBehavior'] ?? DragStartBehavior.start,
@@ -2897,6 +2895,7 @@ var p = () => {
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
+            children: as<Widget>(props['children']),
           ),
       'ListView.builder': (props) => ListView.builder(
             key: props['key'],
@@ -2997,7 +2996,6 @@ var p = () => {
             addRepaintBoundaries: props['addRepaintBoundaries'] ?? true,
             addSemanticIndexes: props['addSemanticIndexes'] ?? true,
             cacheExtent: props['cacheExtent']?.toDouble(),
-            children: as<Widget>(props['children']) ?? const <Widget>[],
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
                 props['dragStartBehavior'] ?? DragStartBehavior.start,
@@ -3005,6 +3003,7 @@ var p = () => {
             keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
+            children: as<Widget>(props['children']),
           ),
       'GridView.builder': (props) => GridView.builder(
             key: props['key'],
@@ -3067,7 +3066,6 @@ var p = () => {
             addRepaintBoundaries: props['addRepaintBoundaries'] ?? true,
             addSemanticIndexes: props['addSemanticIndexes'] ?? true,
             cacheExtent: props['cacheExtent']?.toDouble(),
-            children: as<Widget>(props['children']) ?? const <Widget>[],
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
                 props['dragStartBehavior'] ?? DragStartBehavior.start,
@@ -3075,6 +3073,7 @@ var p = () => {
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
+            children: as<Widget>(props['children']),
           ),
       'GridView.extent': (props) => GridView.extent(
             key: props['key'],
@@ -3093,7 +3092,6 @@ var p = () => {
             addRepaintBoundaries: props['addRepaintBoundaries'] ?? true,
             addSemanticIndexes: props['addSemanticIndexes'] ?? true,
             cacheExtent: props['cacheExtent']?.toDouble(),
-            children: as<Widget>(props['children']) ?? const <Widget>[],
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
                 props['dragStartBehavior'] ?? DragStartBehavior.start,
@@ -3101,6 +3099,7 @@ var p = () => {
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
+            children: as<Widget>(props['children']),
           ),
       'GridView.builder#itemBuilder': (props) => (
             BuildContext context,
@@ -3131,8 +3130,7 @@ var p = () => {
       },
       'Overlay': (props) => Overlay(
             key: props['key'],
-            initialEntries: as<OverlayEntry>(props['initialEntries']) ??
-                const <OverlayEntry>[],
+            initialEntries: as<OverlayEntry>(props['initialEntries']),
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
           ),
       'Overlay.of': (props) => Overlay.of(
@@ -3196,8 +3194,7 @@ var p = () => {
             onGenerateInitialRoutes: props['onGenerateInitialRoutes'],
             onUnknownRoute: props['onUnknownRoute'],
             navigatorObservers:
-                as<NavigatorObserver>(props['navigatorObservers']) ??
-                    const <NavigatorObserver>[],
+                as<NavigatorObserver>(props['navigatorObservers']),
             initialRoute: props['initialRoute'],
             pageRouteBuilder: props['pageRouteBuilder'],
             home: props['home'],
@@ -3502,7 +3499,7 @@ var p = () => {
             mainAxisSpacing: props['mainAxisSpacing']?.toDouble() ?? 0.0,
             crossAxisSpacing: props['crossAxisSpacing']?.toDouble() ?? 0.0,
             childAspectRatio: props['childAspectRatio']?.toDouble() ?? 1.0,
-            children: as<Widget>(props['children']) ?? const <Widget>[],
+            children: as<Widget>(props['children']),
           ),
       'SliverGrid.extent': (props) => SliverGrid.extent(
             key: props['key'],
@@ -3510,7 +3507,7 @@ var p = () => {
             mainAxisSpacing: props['mainAxisSpacing']?.toDouble() ?? 0.0,
             crossAxisSpacing: props['crossAxisSpacing']?.toDouble() ?? 0.0,
             childAspectRatio: props['childAspectRatio']?.toDouble() ?? 1.0,
-            children: as<Widget>(props['children']) ?? const <Widget>[],
+            children: as<Widget>(props['children']),
           ),
       'SliverOpacity': (props) => SliverOpacity(
             key: props['key'],

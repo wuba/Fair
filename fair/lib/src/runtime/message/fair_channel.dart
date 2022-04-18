@@ -4,19 +4,19 @@ import 'package:flutter/services.dart';
 /// 注意：开发中，暂时不可用。。。
 /// dart - js通讯
 const FairBasicMessageChannel_name = 'com.fair/FairBasicMessageChannel';
-BasicMessageChannel<String> _commonChannel;
+BasicMessageChannel<String?>? _commonChannel;
 
 const channels = <String, FairBasicMessageChannel>{};
 
 class FairBasicMessageChannel {
-  final String name;
-  Future<String> Function(String message) _handler;
+  final String? name;
+  Future<String> Function(String message)? _handler;
 
   FairBasicMessageChannel(this.name) {
-    if (channels == null) {
-      throw StateError('初始化失败，请确实是否调用setupMessageChannel()');
-    }
-    channels.putIfAbsent(name, () => this);
+    // if (channels == null) {
+    //   throw StateError('初始化失败，请确实是否调用setupMessageChannel()');
+    // }
+    channels.putIfAbsent(name??'', () => this);
   }
 
   ///发送消息到dart并接收js返回的消息
@@ -25,7 +25,7 @@ class FairBasicMessageChannel {
       'name': name,
       'args': message,
     };
-    var result = await _commonChannel.send(jsonEncode(sendMessageMap));
+    var result = await _commonChannel?.send(jsonEncode(sendMessageMap))??'';
     return result;
   }
 
@@ -34,7 +34,7 @@ class FairBasicMessageChannel {
     _handler = handler;
   }
 
-  Future<String> Function(String message) get messageHandler => _handler;
+  Future<String> Function(String message)? get messageHandler => _handler;
 
   static void setupMessageChannel() {
     _init();
@@ -42,22 +42,22 @@ class FairBasicMessageChannel {
   }
 
   static void _init() {
-    _commonChannel ??= BasicMessageChannel(FairBasicMessageChannel_name, StringCodec());
+    _commonChannel ??= BasicMessageChannel<String?>(FairBasicMessageChannel_name, StringCodec());
   }
 
   /*
    * 注册消息回调，接收native端返回的消息，然后对消息进行分发处理
    */
   static void _registerChannel() {
-    _commonChannel.setMessageHandler((msg) async {
-      var jsMsg = jsonDecode(msg);
+    _commonChannel?.setMessageHandler((msg) async {
+      var jsMsg = jsonDecode(msg??'');
       var args = jsMsg['args'];
       var targetChannel = channels.remove('name');
       if (targetChannel == null) {
         throw StateError('目标channel不存在，请检查是否注册');
       }
 
-      var replyFromDart = await targetChannel?.messageHandler?.call(args);
+      var replyFromDart = await targetChannel.messageHandler?.call(args);
       var resultMap = {
         'name': targetChannel,
         'args': replyFromDart,

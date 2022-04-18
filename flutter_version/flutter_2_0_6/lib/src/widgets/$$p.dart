@@ -237,6 +237,9 @@ var p = () => {
             props['pa'][1],
             props['pa'][2]?.toDouble(),
           ),
+      'LinearGradient': (props) => LinearGradient(
+             colors: as<Color>(props["colors"]),
+          ),
       'RadialGradient.lerp': (props) => RadialGradient.lerp(
             props['pa'][0],
             props['pa'][1],

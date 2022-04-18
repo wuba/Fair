@@ -25,15 +25,15 @@ class Runtime implements IRuntime {
     return _runtime;
   }
 
-  FairMessageChannel _channel;
+  FairMessageChannel? _channel;
 
   Runtime._internal() {
     init(true);
 
     _channel ??= FairMessageChannel();
     //接收setState()的信息
-    _channel.setMessageHandler((message) {
-      var data = json.decode(message);
+    _channel!.setMessageHandler((message) {
+      var data = json.decode(message ?? '');
       var className = data['pageName'];
       var call = _callBacks[className];
       call?.call(message);
@@ -45,11 +45,11 @@ class Runtime implements IRuntime {
   void init(bool isDebug) {}
 
   @override
-  void release(String pageName) {
+  void release(String? pageName) {
     var map = <dynamic, dynamic>{};
     map[FairMessage.FUNC_NAME] = FairMessage.RELEASE_JS;
     var msg = FairMessage(pageName, FairMessage.METHOD, map);
-    _channel.release(jsonEncode(msg.from()), null);
+    _channel?.release(jsonEncode(msg.from()), null);
   }
 
   @override
@@ -58,7 +58,7 @@ class Runtime implements IRuntime {
   }
 
   FairMessageChannel getChannel() {
-    return _channel;
+    return _channel!;
   }
 
   @override
@@ -75,7 +75,7 @@ class Runtime implements IRuntime {
     var map = <dynamic, dynamic>{};
     map[FairMessage.PATH] = scriptSource;
     map[FairMessage.PAGE_NAME] = pageName;
-    return _channel.loadJS(jsonEncode(map), null);
+    return _channel!.loadJS(jsonEncode(map), null);
   }
 
   @override
@@ -84,7 +84,7 @@ class Runtime implements IRuntime {
     map[FairMessage.LOAD_JS] = script;
     var msg = FairMessage(pageName, FairMessage.EVALUATE, map);
     var from = msg.from();
-    var reply = FairUtf8.fromUtf8(_channel.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from))));
+    var reply = FairUtf8.fromUtf8(_channel!.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from))));
     return Future.value(reply);
   }
 
@@ -94,46 +94,43 @@ class Runtime implements IRuntime {
     map[FairMessage.LOAD_JS] = script;
     var msg = FairMessage(pageName, FairMessage.VARIABLE, map);
     var from = msg.from();
-    final Map<String, dynamic> reMap =
-    jsonDecode(FairUtf8.fromUtf8(_channel.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from)))));
+    final Map<String, String> reMap = jsonDecode(FairUtf8.fromUtf8(_channel!.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from)))));
     return reMap;
   }
 
   @override
-  Future<String> invokeMethod(String pageName, String funcName, List<dynamic> parameters) {
+  Future<String> invokeMethod(String pageName, String funcName, List<dynamic>? parameters) async {
     var map = <dynamic, dynamic>{};
     map[FairMessage.FUNC_NAME] = funcName;
     map[FairMessage.ARGS] = parameters;
     var msg = FairMessage(pageName, FairMessage.METHOD, map);
     var from = msg.from();
-    var reply = _channel.sendCommonMessage(jsonEncode(from));
-
-
-    return Future.value(reply);
+    var reply = _channel!.sendCommonMessage(jsonEncode(from));
+    return await reply ?? '';
   }
 
   @override
-  String invokeMethodSync(String pageName, String funcName, List<dynamic> parameters) {
+  String invokeMethodSync(String pageName, String funcName, List<dynamic>? parameters) {
     var map = <dynamic, dynamic>{};
     map[FairMessage.FUNC_NAME] = funcName;
     map[FairMessage.ARGS] = parameters;
     var msg = FairMessage(pageName, FairMessage.METHOD, map);
     var from = msg.from();
-    return FairUtf8.fromUtf8(_channel.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from))));
+    return FairUtf8.fromUtf8(_channel!.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from))));
   }
 
   @override
-  Future<String> variables(String pageName, Map<dynamic, dynamic> variableNames) {
+  Future<String> variables(String pageName, Map<dynamic, dynamic> variableNames) async{
     var msg = FairMessage(pageName, FairMessage.VARIABLE, variableNames);
-    var reply = _channel.sendCommonMessage(jsonEncode(msg.from()));
-    return Future.value(reply);
+    var reply = _channel!.sendCommonMessage(jsonEncode(msg.from()));
+    return await reply ?? '';
   }
 
   @override
   String variablesSync(String pageName, Map<dynamic, dynamic> variableNames) {
     var msg = FairMessage(pageName, FairMessage.VARIABLE, variableNames);
     var from = msg.from();
-    return FairUtf8.fromUtf8(_channel.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from))));
+    return FairUtf8.fromUtf8(_channel!.sendCommonMessageSync(FairUtf8.toUtf8(jsonEncode(from))));
   }
 
   @override
@@ -173,10 +170,10 @@ class Runtime implements IRuntime {
         var customConfigJson = await rootBundle.loadString('assets/fair_basic_config.json');
         var customConfig = jsonDecode(customConfigJson);
         //加载用户自定义的plugin
-        Map plugins = customConfig['plugin'];
+        Map<String, dynamic>? plugins = customConfig['plugin'];
 
         if (plugins != null) {
-          Iterable<String> keys = plugins.keys;
+          var keys = plugins.keys;
           for (var k in keys) {
             pluginJsSource = pluginJsSource + ' ; ' + await rootBundle.loadString(plugins[k]);
           }
@@ -195,6 +192,6 @@ class Runtime implements IRuntime {
     if (map.isEmpty) {
       return Future.value(null);
     }
-    return _channel.loadJS(jsonEncode(map), null);
+    return _channel!.loadJS(jsonEncode(map), null);
   }
 }

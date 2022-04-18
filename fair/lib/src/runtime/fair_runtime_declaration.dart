@@ -20,10 +20,10 @@ class FairMessage {
   FairMessage(this.pageName, this.type, this.args);
 
   /// 页面名称
-  String pageName;
+  String? pageName;
 
   ///type调用类型 variable,method等
-  String type;
+  String? type;
 
   //存放不同类型的数据
   dynamic args;

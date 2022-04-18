@@ -5,8 +5,8 @@
  */
 
 class Domain<E> {
-  final List<E> source;
-  final Domain parent;
+  final List<E>? source;
+  final Domain? parent;
   int index = 0;
 
   Domain(this.source, {this.parent});
@@ -23,13 +23,13 @@ class Domain<E> {
   String bindValue(String exp) {
     // TODO mapEach
     if (exp == 'item') {
-      return exp.replaceAll('item', '${source[index]}');
+      return exp.replaceAll('item', '${source?[index]}');
     }
     if (exp == 'index') {
       return exp.replaceAll('item', '$index');
     }
     var processed = exp.substring(2, exp.length - 1);
-    processed = processed.replaceAll('\$item', '${source[index]}');
+    processed = processed.replaceAll('\$item', '${source?[index]}');
     processed = processed.replaceAll('\$index', '$index');
     return processed;
   }
@@ -37,8 +37,8 @@ class Domain<E> {
   List forEach(dynamic Function(Domain $, E element) f) {
     index = 0;
     var result = <dynamic>[];
-    for (var i = 0; i < source.length; i++) {
-      result.add(f(this, source[index]));
+    for (var i = 0; i < (source?.length??0); i++) {
+      result.add(f(this, source![index]));
       index++;
     }
     return result;

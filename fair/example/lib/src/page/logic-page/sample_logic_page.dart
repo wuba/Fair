@@ -26,14 +26,14 @@ class _State extends State<SampleLogicPage> {
   @FairProps()
   var fairProps;
 
-  DemoList _demoList = DemoList(list: List.empty(), total: 0);
+  final DemoList _demoList = DemoList(list: List.empty(), total: 0);
 
   String getTitle() {
     return fairProps['pageName'];
   }
 
   void onTapText() {
-    _demoList.total = _demoList.total + 1;
+    _demoList.total = _demoList.total! + 1;
     setState(() {});
   }
 
@@ -69,8 +69,8 @@ class _State extends State<SampleLogicPage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            child: Icon(Icons.add),
             onPressed: onTapText,
+            child: Icon(Icons.add),
           )
         ],
       ),

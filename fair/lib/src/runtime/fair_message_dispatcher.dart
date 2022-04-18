@@ -23,8 +23,8 @@ class FairHandler {
 
   FairHandler(this._runtime) {
     //接收native发送过来的消息，实际上是js发送的消息，通过native端透传过来
-    _runtime.getChannel().setMessageHandler((String message) {
-      var data = json.decode(message);
+    _runtime.getChannel().setMessageHandler((String? message) {
+      var data = json.decode(message ?? '');
       var funcName = data['funcName']?.toString();
       var pageName = data['pageName'];
       var args = data['args'];

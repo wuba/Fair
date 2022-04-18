@@ -15,26 +15,26 @@ class BitWidthUtil {
     return 1 << self.index;
   }
 
-  static BitWidth width(num value) {
-    if (value.toInt() == value) {
-      var v = value.toInt().abs();
+  static BitWidth width(num? value) {
+    if (value?.toInt() == value) {
+      var v = value?.toInt().abs()??0;
       if (v >> 7 == 0) return BitWidth.width8;
       if (v >> 15 == 0) return BitWidth.width16;
       if (v >> 31 == 0) return BitWidth.width32;
       return BitWidth.width64;
     }
-    return value == _toF32(value) ? BitWidth.width32 : BitWidth.width64;
+    return value == _toF32(value?.toDouble()) ? BitWidth.width32 : BitWidth.width64;
   }
 
-  static BitWidth uwidth(num value) {
-    if (value.toInt() == value) {
-      var v = value.toInt().abs();
+  static BitWidth uwidth(num? value) {
+    if (value?.toInt() == value) {
+      var v = value?.toInt().abs()??0;
       if (v >> 8 == 0) return BitWidth.width8;
       if (v >> 16 == 0) return BitWidth.width16;
       if (v >> 32 == 0) return BitWidth.width32;
       return BitWidth.width64;
     }
-    return value == _toF32(value) ? BitWidth.width32 : BitWidth.width64;
+    return value == _toF32(value?.toDouble()) ? BitWidth.width32 : BitWidth.width64;
   }
 
   static BitWidth fromByteWidth(int value) {
@@ -57,9 +57,9 @@ class BitWidthUtil {
     return (~bufSize + 1) & (scalarSize - 1);
   }
 
-  static double _toF32(double value) {
+  static double _toF32(double? value) {
     var bdata = ByteData(4);
-    bdata.setFloat32(0, value);
+    bdata.setFloat32(0, value??0.0);
     return bdata.getFloat32(0);
   }
 
@@ -106,9 +106,9 @@ enum ValueType {
 }
 
 class ValueTypeUtils {
-  static int toInt(ValueType self) {
+  static int toInt(ValueType? self) {
     if (self == ValueType.VectorBool) return 36;
-    return self.index;
+    return self?.index??0;
   }
 
   static ValueType fromInt(int value) {
@@ -120,12 +120,12 @@ class ValueTypeUtils {
     return self == ValueType.Bool || toInt(self) <= toInt(ValueType.Float);
   }
 
-  static bool isNumber(ValueType self) {
+  static bool isNumber(ValueType? self) {
     return toInt(self) >= toInt(ValueType.Int) &&
         toInt(self) <= toInt(ValueType.Float);
   }
 
-  static bool isIndirectNumber(ValueType self) {
+  static bool isIndirectNumber(ValueType? self) {
     return toInt(self) >= toInt(ValueType.IndirectInt) &&
         toInt(self) <= toInt(ValueType.IndirectFloat);
   }
@@ -136,19 +136,19 @@ class ValueTypeUtils {
             toInt(self) <= toInt(ValueType.String));
   }
 
-  static bool isTypedVector(ValueType self) {
+  static bool isTypedVector(ValueType? self) {
     return self == ValueType.VectorBool ||
         (toInt(self) >= toInt(ValueType.VectorInt) &&
             // ignore: deprecated_member_use_from_same_package
             toInt(self) <= toInt(ValueType.VectorString));
   }
 
-  static bool isFixedTypedVector(ValueType self) {
+  static bool isFixedTypedVector(ValueType? self) {
     return (toInt(self) >= toInt(ValueType.VectorInt2) &&
         toInt(self) <= toInt(ValueType.VectorFloat4));
   }
 
-  static bool isAVector(ValueType self) {
+  static bool isAVector(ValueType? self) {
     return (isTypedVector(self) ||
         isFixedTypedVector(self) ||
         self == ValueType.Vector);

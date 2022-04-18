@@ -12,7 +12,7 @@ class FairPatch {
 /// Annotation to generate a library binding
 class FairBinding {
   /// Package resource url , such as `package:convex_bottom_bar/convex_bottom_bar.dart`
-  final List<String> packages;
+  final List<String>? packages;
 
   /// Utils should not have constructor
   final bool ignoreConstructor;

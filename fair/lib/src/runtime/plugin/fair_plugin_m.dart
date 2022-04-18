@@ -7,7 +7,7 @@
 import 'package:fair/fair.dart';
 
 class FairMethod {
-  void call(String className, String methodName, {Map args}) {
+  void call(String className, String methodName, {Map? args}) {
     var fairReq = {
       'isDart': true,
       'className': '$className#$methodName',

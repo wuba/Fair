@@ -31,28 +31,28 @@ class AstNodeMapGenerator extends GeneratorForAnnotation<AstNodeCheck> {
       'ConstructorDeclarationImpl':'ConstructorDeclarationImpl',
       'InterpolationStringImpl':'InterpolationStringImpl',
     };
-    if (!rootExpression.isProgram) {
+    if (!(rootExpression?.isProgram??false)) {
       return null;
     }
-    var bodyList = rootExpression.asProgram.body;
+    var bodyList = rootExpression?.asProgram.body;
     if ((bodyList?.length??0) == 0)
     {
       return null;
     }
-    for(var body in bodyList){
-      if(body.isClassDeclaration && body.asClassDeclaration.name =='CustomAstVisitor')
+    for(var body in bodyList!){
+      if(body?.isClassDeclaration==true && body?.asClassDeclaration.name =='CustomAstVisitor')
       {
-        if((body.asClassDeclaration.body?.length??0)>0){
+        if((body?.asClassDeclaration.body?.length??0)>0){
 
-          for(var visitDeclaration in body.asClassDeclaration.body){
+          for(var visitDeclaration in body!.asClassDeclaration.body!){
 
-            if(visitDeclaration.isMethodDeclaration && visitDeclaration.asMethodDeclaration.name.startsWith('visit')){
+            if(visitDeclaration?.isMethodDeclaration==true && visitDeclaration?.asMethodDeclaration.name?.startsWith('visit')==true){
 
-              var parameters = visitDeclaration.asMethodDeclaration.parameterList;
+              var parameters = visitDeclaration?.asMethodDeclaration.parameterList;
               if(parameters != null && parameters.isNotEmpty){
 
-                var nodeName = parameters.first.paramType.name;
-                supportNode.putIfAbsent(nodeName+'Impl', () => visitDeclaration.asMethodDeclaration.name);
+                var nodeName = parameters.first?.paramType?.name??'';
+                supportNode.putIfAbsent(nodeName+'Impl', () => visitDeclaration?.asMethodDeclaration.name??'');
               }
 
             }

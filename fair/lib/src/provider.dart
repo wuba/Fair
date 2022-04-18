@@ -20,7 +20,7 @@ class BindingProvider with $BindingImpl {
   };
   var _loadedIndex = 0;
 
-  dynamic loadTag(String tag) {
+  dynamic loadTag(String? tag) {
     var result = _binding[tag];
     if (result != null) {
       return result;
@@ -42,7 +42,7 @@ class BindingProvider with $BindingImpl {
 
   Map<String, dynamic> get binding => _binding;
 
-  bool preload(List<String> tags) {
+  bool preload(List<String>? tags) {
     tags?.forEach((element) {
       log('[Fair] preload $element...');
       loadTag(element);

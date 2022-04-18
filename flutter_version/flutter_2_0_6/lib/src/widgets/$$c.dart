@@ -2,7 +2,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
-import '';
 import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 import 'utils.dart';
 part "../part/c.part.dart";
@@ -1575,7 +1574,7 @@ var p = () => {
             onGenerateInitialRoutes: props['onGenerateInitialRoutes'],
             onUnknownRoute: props['onUnknownRoute'],
             navigatorObservers:
-                as(props['navigatorObservers']) ?? const <NavigatorObserver>[],
+                as(props['navigatorObservers']),
             builder: props['builder'],
             title: props['title'] ?? '',
             onGenerateTitle: props['onGenerateTitle'],
@@ -2230,14 +2229,14 @@ var p = () => {
             onGenerateRoute: props['onGenerateRoute'],
             onUnknownRoute: props['onUnknownRoute'],
             navigatorObservers:
-                as(props['navigatorObservers']) ?? const <NavigatorObserver>[],
+                as(props['navigatorObservers']),
             restorationScopeId: props['restorationScopeId'],
           ),
       'CupertinoAlertDialog': (props) => CupertinoAlertDialog(
             key: props['key'],
             title: props['title'],
             content: props['content'],
-            actions: as(props['actions']) ?? const <Widget>[],
+            actions: as(props['actions']),
             scrollController: props['scrollController'],
             actionScrollController: props['actionScrollController'],
             insetAnimationDuration: props['insetAnimationDuration'] ??

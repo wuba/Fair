@@ -16,7 +16,7 @@ typedef FairRouteBuilder = void Function(BuildContext context, String routeName,
 
 /// state delegate builder
 typedef FairDelegateBuilder = FairDelegate Function(
-    BuildContext context, Map<String, dynamic> data);
+    BuildContext context, Map<String, dynamic>? data);
 typedef FairModuleBuilder = FairModule Function();
 typedef PropertyValue<T> = T Function();
 
@@ -26,8 +26,8 @@ abstract class BundleLoader {
   /// http url, both should stands for valid json resource.
   /// The `cache` argument indicate cache implementation.
   /// The `h` contains framework relative headers.
-  Future<Map> onLoad(String path, FairDecoder decoder,
-      {bool cache = true, Map<String, String> h});
+  Future<Map?> onLoad(String? path, FairDecoder decoder,
+      {bool cache = true, Map<String, String>? h});
 }
 
 /// Get context instance
