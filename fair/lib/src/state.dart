@@ -43,7 +43,7 @@ mixin AppState {
     delegate.setRunTime(runtime);
     // await delegate.bindAll({});
     bindData.putIfAbsent(
-      state.state2key??'',
+      state.state2key,
       () => BindingData(
         modules,
         functions: delegate.bindFunction(),

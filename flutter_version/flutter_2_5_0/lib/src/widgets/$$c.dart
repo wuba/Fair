@@ -9,8 +9,7 @@ const CupertinoDynamicColor _kThumbColor = CupertinoDynamicColor.withBrightness(
   color: Color(0xFFFFFFFF),
   darkColor: Color(0xFF636366),
 );
-const EdgeInsetsGeometry _kHorizontalItemPadding =
-    EdgeInsets.symmetric(vertical: 2, horizontal: 3);
+const EdgeInsetsGeometry _kHorizontalItemPadding = EdgeInsets.symmetric(vertical: 2, horizontal: 3);
 const double kMinInteractiveDimensionCupertino = 44.0;
 const Color _kDefaultTabBarInactiveColor = CupertinoColors.inactiveGray;
 const Color _kDefaultTabBarBorderColor = CupertinoDynamicColor.withBrightness(
@@ -80,8 +79,8 @@ var p = () => {
             key: props['key'],
             anchorAbove: props['anchorAbove'],
             anchorBelow: props['anchorBelow'],
-            children: as(props['children']),
-            toolbarBuilder: props['toolbarBuilder'] ,// ?? _defaultToolbarBuilder,
+            toolbarBuilder: props['toolbarBuilder'],
+            children: as<Widget>(props['children'])!, // ?? _defaultToolbarBuilder,
           ),
       'CupertinoTextSelectionToolbar#toolbarBuilder': (props) => (
             dynamic context,
@@ -91,14 +90,12 @@ var p = () => {
           ) {
             return (props['block']) as dynamic;
           },
-      'CupertinoTextSelectionToolbarButton': (props) =>
-          CupertinoTextSelectionToolbarButton(
+      'CupertinoTextSelectionToolbarButton': (props) => CupertinoTextSelectionToolbarButton(
             key: props['key'],
             onPressed: props['onPressed'],
             child: props['child'],
           ),
-      'CupertinoTextSelectionToolbarButton.text': (props) =>
-          CupertinoTextSelectionToolbarButton.text(
+      'CupertinoTextSelectionToolbarButton.text': (props) => CupertinoTextSelectionToolbarButton.text(
             key: props['key'],
             onPressed: props['onPressed'],
             text: props['text'],
@@ -153,10 +150,8 @@ var p = () => {
         'secondarySystemBackground': CupertinoColors.secondarySystemBackground,
         'tertiarySystemBackground': CupertinoColors.tertiarySystemBackground,
         'systemGroupedBackground': CupertinoColors.systemGroupedBackground,
-        'secondarySystemGroupedBackground':
-            CupertinoColors.secondarySystemGroupedBackground,
-        'tertiarySystemGroupedBackground':
-            CupertinoColors.tertiarySystemGroupedBackground,
+        'secondarySystemGroupedBackground': CupertinoColors.secondarySystemGroupedBackground,
+        'tertiarySystemGroupedBackground': CupertinoColors.tertiarySystemGroupedBackground,
         'separator': CupertinoColors.separator,
         'opaqueSeparator': CupertinoColors.opaqueSeparator,
         'link': CupertinoColors.link,
@@ -165,21 +160,18 @@ var p = () => {
             props['pa'][0],
             props['pa'][1],
           ),
-      'CupertinoDynamicColor.maybeResolve': (props) =>
-          CupertinoDynamicColor.maybeResolve(
+      'CupertinoDynamicColor.maybeResolve': (props) => CupertinoDynamicColor.maybeResolve(
             props['pa'][0],
             props['pa'][1],
           ),
-      'CupertinoSlidingSegmentedControl': (props) =>
-          CupertinoSlidingSegmentedControl(
+      'CupertinoSlidingSegmentedControl': (props) => CupertinoSlidingSegmentedControl(
             key: props['key'],
             children: props['children'],
             onValueChanged: props['onValueChanged'],
             groupValue: props['groupValue'],
             thumbColor: props['thumbColor'] ?? _kThumbColor,
             padding: props['padding'] ?? _kHorizontalItemPadding,
-            backgroundColor:
-                props['backgroundColor'] ?? CupertinoColors.tertiarySystemFill,
+            backgroundColor: props['backgroundColor'] ?? CupertinoColors.tertiarySystemFill,
           ),
       'CupertinoSearchTextField': (props) => CupertinoSearchTextField(
             key: props['key'],
@@ -192,18 +184,13 @@ var p = () => {
             decoration: props['decoration'],
             backgroundColor: props['backgroundColor'],
             borderRadius: props['borderRadius'],
-            padding: props['padding'] ??
-                const EdgeInsetsDirectional.fromSTEB(3.8, 8, 5, 8),
+            padding: props['padding'] ?? const EdgeInsetsDirectional.fromSTEB(3.8, 8, 5, 8),
             itemColor: props['itemColor'] ?? CupertinoColors.secondaryLabel,
             itemSize: props['itemSize']?.toDouble() ?? 20.0,
-            prefixInsets: props['prefixInsets'] ??
-                const EdgeInsetsDirectional.fromSTEB(6, 0, 0, 4),
-            prefixIcon:
-                props['prefixIcon'] ?? const Icon(CupertinoIcons.search),
-            suffixInsets: props['suffixInsets'] ??
-                const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 2),
-            suffixIcon: props['suffixIcon'] ??
-                const Icon(CupertinoIcons.xmark_circle_fill),
+            prefixInsets: props['prefixInsets'] ?? const EdgeInsetsDirectional.fromSTEB(6, 0, 0, 4),
+            prefixIcon: props['prefixIcon'] ?? const Icon(CupertinoIcons.search),
+            suffixInsets: props['suffixInsets'] ?? const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 2),
+            suffixIcon: props['suffixIcon'] ?? const Icon(CupertinoIcons.xmark_circle_fill),
             suffixMode: props['suffixMode'] ?? OverlayVisibilityMode.editing,
             onSuffixTap: props['onSuffixTap'],
             restorationId: props['restorationId'],
@@ -218,13 +205,10 @@ var p = () => {
             child: props['child'],
             padding: props['padding'],
             color: props['color'],
-            disabledColor:
-                props['disabledColor'] ?? CupertinoColors.quaternarySystemFill,
-            minSize: props['minSize']?.toDouble() ??
-                kMinInteractiveDimensionCupertino,
+            disabledColor: props['disabledColor'] ?? CupertinoColors.quaternarySystemFill,
+            minSize: props['minSize']?.toDouble() ?? kMinInteractiveDimensionCupertino,
             pressedOpacity: props['pressedOpacity']?.toDouble() ?? 0.4,
-            borderRadius: props['borderRadius'] ??
-                const BorderRadius.all(Radius.circular(8.0)),
+            borderRadius: props['borderRadius'] ?? const BorderRadius.all(Radius.circular(8.0)),
             alignment: props['alignment'] ?? Alignment.center,
             onPressed: props['onPressed'],
           ),
@@ -232,13 +216,10 @@ var p = () => {
             key: props['key'],
             child: props['child'],
             padding: props['padding'],
-            disabledColor:
-                props['disabledColor'] ?? CupertinoColors.quaternarySystemFill,
-            minSize: props['minSize']?.toDouble() ??
-                kMinInteractiveDimensionCupertino,
+            disabledColor: props['disabledColor'] ?? CupertinoColors.quaternarySystemFill,
+            minSize: props['minSize']?.toDouble() ?? kMinInteractiveDimensionCupertino,
             pressedOpacity: props['pressedOpacity']?.toDouble() ?? 0.4,
-            borderRadius: props['borderRadius'] ??
-                const BorderRadius.all(Radius.circular(8.0)),
+            borderRadius: props['borderRadius'] ?? const BorderRadius.all(Radius.circular(8.0)),
             alignment: props['alignment'] ?? Alignment.center,
             onPressed: props['onPressed'],
           ),
@@ -250,21 +231,18 @@ var p = () => {
             routes: props['routes'],
             onGenerateRoute: props['onGenerateRoute'],
             onUnknownRoute: props['onUnknownRoute'],
-            navigatorObservers:
-                as(props['navigatorObservers']) ?? const <NavigatorObserver>[],
+            navigatorObservers: as<NavigatorObserver>(props['navigatorObservers']) ?? const <NavigatorObserver>[],
             restorationScopeId: props['restorationScopeId'],
           ),
       'CupertinoAlertDialog': (props) => CupertinoAlertDialog(
             key: props['key'],
             title: props['title'],
             content: props['content'],
-            actions: as(props['actions']) ?? const <Widget>[],
+            actions: as<Widget>(props['actions']) ?? const <Widget>[],
             scrollController: props['scrollController'],
             actionScrollController: props['actionScrollController'],
-            insetAnimationDuration: props['insetAnimationDuration'] ??
-                const Duration(milliseconds: 100),
-            insetAnimationCurve:
-                props['insetAnimationCurve'] ?? Curves.decelerate,
+            insetAnimationDuration: props['insetAnimationDuration'] ?? const Duration(milliseconds: 100),
+            insetAnimationCurve: props['insetAnimationCurve'] ?? Curves.decelerate,
           ),
       'CupertinoPopupSurface': (props) => CupertinoPopupSurface(
             key: props['key'],
@@ -297,20 +275,14 @@ var p = () => {
           ),
       'CupertinoTabBar': (props) => CupertinoTabBar(
             key: props['key'],
-            items: as(props['items']),
+            items: as<BottomNavigationBarItem>(props['items'])!,
             onTap: props['onTap'],
             currentIndex: props['currentIndex'] ?? 0,
             backgroundColor: props['backgroundColor'],
             activeColor: props['activeColor'],
-            inactiveColor:
-                props['inactiveColor'] ?? _kDefaultTabBarInactiveColor,
+            inactiveColor: props['inactiveColor'] ?? _kDefaultTabBarInactiveColor,
             iconSize: props['iconSize']?.toDouble() ?? 30.0,
-            border: props['border'] ??
-                const Border(
-                    top: BorderSide(
-                        color: _kDefaultTabBarBorderColor,
-                        width: 0.0,
-                        style: BorderStyle.solid)),
+            border: props['border'] ?? const Border(top: BorderSide(color: _kDefaultTabBarBorderColor, width: 0.0, style: BorderStyle.solid)),
           ),
       'CupertinoDatePicker': (props) => CupertinoDatePicker(
             key: props['key'],
@@ -329,8 +301,7 @@ var p = () => {
       'CupertinoTimerPicker': (props) => CupertinoTimerPicker(
             key: props['key'],
             mode: props['mode'] ?? CupertinoTimerPickerMode.hms,
-            initialTimerDuration:
-                props['initialTimerDuration'] ?? Duration.zero,
+            initialTimerDuration: props['initialTimerDuration'] ?? Duration.zero,
             minuteInterval: props['minuteInterval'] ?? 1,
             secondInterval: props['secondInterval'] ?? 1,
             alignment: props['alignment'] ?? Alignment.center,
@@ -351,12 +322,8 @@ var p = () => {
       },
       'CupertinoSliverRefreshControl': (props) => CupertinoSliverRefreshControl(
             key: props['key'],
-            refreshTriggerPullDistance:
-                props['refreshTriggerPullDistance']?.toDouble() ??
-                    _defaultRefreshTriggerPullDistance,
-            refreshIndicatorExtent:
-                props['refreshIndicatorExtent']?.toDouble() ??
-                    _defaultRefreshIndicatorExtent,
+            refreshTriggerPullDistance: props['refreshTriggerPullDistance']?.toDouble() ?? _defaultRefreshTriggerPullDistance,
+            refreshIndicatorExtent: props['refreshIndicatorExtent']?.toDouble() ?? _defaultRefreshIndicatorExtent,
             builder: props['builder'] ?? buildRefreshIndicator,
             onRefresh: props['onRefresh'],
           ),
@@ -372,8 +339,7 @@ var p = () => {
       'CupertinoSliverRefreshControl#onRefresh': (props) => () {
             return (props['block']) as Future;
           },
-      'CupertinoSliverRefreshControl.buildRefreshIndicator': (props) =>
-          CupertinoSliverRefreshControl.buildRefreshIndicator(
+      'CupertinoSliverRefreshControl.buildRefreshIndicator': (props) => CupertinoSliverRefreshControl.buildRefreshIndicator(
             props['pa'][0],
             props['pa'][1],
             props['pa'][2]?.toDouble(),
@@ -390,8 +356,7 @@ var p = () => {
       },
       'CupertinoPicker': (props) => CupertinoPicker(
             key: props['key'],
-            diameterRatio:
-                props['diameterRatio']?.toDouble() ?? _kDefaultDiameterRatio,
+            diameterRatio: props['diameterRatio']?.toDouble() ?? _kDefaultDiameterRatio,
             backgroundColor: props['backgroundColor'],
             offAxisFraction: props['offAxisFraction']?.toDouble() ?? 0.0,
             useMagnifier: props['useMagnifier'] ?? false,
@@ -400,15 +365,13 @@ var p = () => {
             squeeze: props['squeeze']?.toDouble() ?? _kSqueeze,
             itemExtent: props['itemExtent']?.toDouble(),
             onSelectedItemChanged: props['onSelectedItemChanged'],
-            children: as(props['children']),
-            selectionOverlay: props['selectionOverlay'] ??
-                const CupertinoPickerDefaultSelectionOverlay(),
+            selectionOverlay: props['selectionOverlay'] ?? const CupertinoPickerDefaultSelectionOverlay(),
             looping: props['looping'] ?? false,
+            children: as<Widget>(props['children'])!,
           ),
       'CupertinoPicker.builder': (props) => CupertinoPicker.builder(
             key: props['key'],
-            diameterRatio:
-                props['diameterRatio']?.toDouble() ?? _kDefaultDiameterRatio,
+            diameterRatio: props['diameterRatio']?.toDouble() ?? _kDefaultDiameterRatio,
             backgroundColor: props['backgroundColor'],
             offAxisFraction: props['offAxisFraction']?.toDouble() ?? 0.0,
             useMagnifier: props['useMagnifier'] ?? false,
@@ -419,20 +382,17 @@ var p = () => {
             onSelectedItemChanged: props['onSelectedItemChanged'],
             itemBuilder: props['itemBuilder'],
             childCount: props['childCount'],
-            selectionOverlay: props['selectionOverlay'] ??
-                const CupertinoPickerDefaultSelectionOverlay(),
+            selectionOverlay: props['selectionOverlay'] ?? const CupertinoPickerDefaultSelectionOverlay(),
           ),
-      'CupertinoPickerDefaultSelectionOverlay': (props) =>
-          CupertinoPickerDefaultSelectionOverlay(
+      'CupertinoPickerDefaultSelectionOverlay': (props) => CupertinoPickerDefaultSelectionOverlay(
             key: props['key'],
-            background:
-                props['background'] ?? CupertinoColors.tertiarySystemFill,
+            background: props['background'] ?? CupertinoColors.tertiarySystemFill,
             capLeftEdge: props['capLeftEdge'] ?? true,
             capRightEdge: props['capRightEdge'] ?? true,
           ),
       'CupertinoContextMenu': (props) => CupertinoContextMenu(
             key: props['key'],
-            actions: as(props['actions']),
+            actions: as<Widget>(props['actions'])!,
             child: props['child'],
             previewBuilder: props['previewBuilder'],
           ),
@@ -450,8 +410,7 @@ var p = () => {
             child: props['child'],
             linearTransition: props['linearTransition'],
           ),
-      'CupertinoFullscreenDialogTransition': (props) =>
-          CupertinoFullscreenDialogTransition(
+      'CupertinoFullscreenDialogTransition': (props) => CupertinoFullscreenDialogTransition(
             key: props['key'],
             primaryRouteAnimation: props['primaryRouteAnimation'],
             secondaryRouteAnimation: props['secondaryRouteAnimation'],
@@ -467,8 +426,7 @@ var p = () => {
             animating: props['animating'] ?? true,
             radius: props['radius']?.toDouble() ?? _kDefaultIndicatorRadius,
           ),
-      'CupertinoActivityIndicator.partiallyRevealed': (props) =>
-          CupertinoActivityIndicator.partiallyRevealed(
+      'CupertinoActivityIndicator.partiallyRevealed': (props) => CupertinoActivityIndicator.partiallyRevealed(
             key: props['key'],
             radius: props['radius']?.toDouble() ?? _kDefaultIndicatorRadius,
             progress: props['progress']?.toDouble() ?? 1.0,
@@ -480,20 +438,15 @@ var p = () => {
             decoration: props['decoration'] ?? _kDefaultRoundedBorderDecoration,
             padding: props['padding'] ?? const EdgeInsets.all(6.0),
             placeholder: props['placeholder'],
-            placeholderStyle: props['placeholderStyle'] ??
-                const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    color: CupertinoColors.placeholderText),
+            placeholderStyle: props['placeholderStyle'] ?? const TextStyle(fontWeight: FontWeight.w400, color: CupertinoColors.placeholderText),
             prefix: props['prefix'],
             prefixMode: props['prefixMode'] ?? OverlayVisibilityMode.always,
             suffix: props['suffix'],
             suffixMode: props['suffixMode'] ?? OverlayVisibilityMode.always,
-            clearButtonMode:
-                props['clearButtonMode'] ?? OverlayVisibilityMode.never,
+            clearButtonMode: props['clearButtonMode'] ?? OverlayVisibilityMode.never,
             keyboardType: props['keyboardType'],
             textInputAction: props['textInputAction'],
-            textCapitalization:
-                props['textCapitalization'] ?? TextCapitalization.none,
+            textCapitalization: props['textCapitalization'] ?? TextCapitalization.none,
             style: props['style'],
             strutStyle: props['strutStyle'],
             textAlign: props['textAlign'] ?? TextAlign.start,
@@ -524,24 +477,19 @@ var p = () => {
             cursorHeight: props['cursorHeight']?.toDouble(),
             cursorRadius: props['cursorRadius'] ?? const Radius.circular(2.0),
             cursorColor: props['cursorColor'],
-            selectionHeightStyle:
-                props['selectionHeightStyle'] ?? ui.BoxHeightStyle.tight,
-            selectionWidthStyle:
-                props['selectionWidthStyle'] ?? ui.BoxWidthStyle.tight,
+            selectionHeightStyle: props['selectionHeightStyle'] ?? ui.BoxHeightStyle.tight,
+            selectionWidthStyle: props['selectionWidthStyle'] ?? ui.BoxWidthStyle.tight,
             keyboardAppearance: props['keyboardAppearance'],
             scrollPadding: props['scrollPadding'] ?? const EdgeInsets.all(20.0),
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
-            enableInteractiveSelection:
-                props['enableInteractiveSelection'] ?? true,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
+            enableInteractiveSelection: props['enableInteractiveSelection'] ?? true,
             selectionControls: props['selectionControls'],
             onTap: props['onTap'],
             scrollController: props['scrollController'],
             scrollPhysics: props['scrollPhysics'],
             autofillHints: props['autofillHints'],
             restorationId: props['restorationId'],
-            enableIMEPersonalizedLearning:
-                props['enableIMEPersonalizedLearning'] ?? true,
+            enableIMEPersonalizedLearning: props['enableIMEPersonalizedLearning'] ?? true,
           ),
       'CupertinoTextField.borderless': (props) => CupertinoTextField.borderless(
             key: props['key'],
@@ -550,18 +498,16 @@ var p = () => {
             decoration: props['decoration'] ?? _kDefaultRoundedBorderDecoration,
             padding: props['padding'] ?? const EdgeInsets.all(6.0),
             placeholder: props['placeholder'],
-            placeholderStyle:
-                props['placeholderStyle'], // ?? _kDefaultPlaceholderStyle,
+            placeholderStyle: props['placeholderStyle'],
+            // ?? _kDefaultPlaceholderStyle,
             prefix: props['prefix'],
             prefixMode: props['prefixMode'] ?? OverlayVisibilityMode.always,
             suffix: props['suffix'],
             suffixMode: props['suffixMode'] ?? OverlayVisibilityMode.always,
-            clearButtonMode:
-                props['clearButtonMode'] ?? OverlayVisibilityMode.never,
+            clearButtonMode: props['clearButtonMode'] ?? OverlayVisibilityMode.never,
             keyboardType: props['keyboardType'],
             textInputAction: props['textInputAction'],
-            textCapitalization:
-                props['textCapitalization'] ?? TextCapitalization.none,
+            textCapitalization: props['textCapitalization'] ?? TextCapitalization.none,
             style: props['style'],
             strutStyle: props['strutStyle'],
             textAlign: props['textAlign'] ?? TextAlign.start,
@@ -592,24 +538,19 @@ var p = () => {
             cursorHeight: props['cursorHeight']?.toDouble(),
             cursorRadius: props['cursorRadius'] ?? const Radius.circular(2.0),
             cursorColor: props['cursorColor'],
-            selectionHeightStyle:
-                props['selectionHeightStyle'] ?? ui.BoxHeightStyle.tight,
-            selectionWidthStyle:
-                props['selectionWidthStyle'] ?? ui.BoxWidthStyle.tight,
+            selectionHeightStyle: props['selectionHeightStyle'] ?? ui.BoxHeightStyle.tight,
+            selectionWidthStyle: props['selectionWidthStyle'] ?? ui.BoxWidthStyle.tight,
             keyboardAppearance: props['keyboardAppearance'],
             scrollPadding: props['scrollPadding'] ?? const EdgeInsets.all(20.0),
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
-            enableInteractiveSelection:
-                props['enableInteractiveSelection'] ?? true,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
+            enableInteractiveSelection: props['enableInteractiveSelection'] ?? true,
             selectionControls: props['selectionControls'],
             onTap: props['onTap'],
             scrollController: props['scrollController'],
             scrollPhysics: props['scrollPhysics'],
             autofillHints: props['autofillHints'],
             restorationId: props['restorationId'],
-            enableIMEPersonalizedLearning:
-                props['enableIMEPersonalizedLearning'] ?? true,
+            enableIMEPersonalizedLearning: props['enableIMEPersonalizedLearning'] ?? true,
           ),
       'OverlayVisibilityMode': {
         'values': OverlayVisibilityMode.values,
@@ -630,12 +571,10 @@ var p = () => {
             data: props['data'],
             child: props['child'],
           ),
-      'CupertinoUserInterfaceLevel.of': (props) =>
-          CupertinoUserInterfaceLevel.of(
+      'CupertinoUserInterfaceLevel.of': (props) => CupertinoUserInterfaceLevel.of(
             props['pa'][0],
           ),
-      'CupertinoUserInterfaceLevel.maybeOf': (props) =>
-          CupertinoUserInterfaceLevel.maybeOf(
+      'CupertinoUserInterfaceLevel.maybeOf': (props) => CupertinoUserInterfaceLevel.maybeOf(
             props['pa'][0],
           ),
       'CupertinoUserInterfaceLevelData': {
@@ -645,26 +584,24 @@ var p = () => {
       },
       'CupertinoFormSection': (props) => CupertinoFormSection(
             key: props['key'],
-            children: as(props['children']),
             header: props['header'],
             footer: props['footer'],
             margin: props['margin'] ?? EdgeInsets.zero,
-            backgroundColor: props['backgroundColor'] ??
-                CupertinoColors.systemGroupedBackground,
+            backgroundColor: props['backgroundColor'] ?? CupertinoColors.systemGroupedBackground,
             decoration: props['decoration'],
             clipBehavior: props['clipBehavior'] ?? Clip.none,
+            children: as<Widget>(props['children'])!,
           ),
-      'CupertinoFormSection.insetGrouped': (props) =>
-          CupertinoFormSection.insetGrouped(
+      'CupertinoFormSection.insetGrouped': (props) => CupertinoFormSection.insetGrouped(
             key: props['key'],
-            children: as(props['children']),
             header: props['header'],
             footer: props['footer'],
-            margin: props['margin'], // ?? _kDefaultInsetGroupedRowsMargin,
-            backgroundColor: props['backgroundColor'] ??
-                CupertinoColors.systemGroupedBackground,
+            margin: props['margin'],
+            // ?? _kDefaultInsetGroupedRowsMargin,
+            backgroundColor: props['backgroundColor'] ?? CupertinoColors.systemGroupedBackground,
             decoration: props['decoration'],
             clipBehavior: props['clipBehavior'] ?? Clip.none,
+            children: as<Widget>(props['children'])!,
           ),
       'CupertinoContextMenuAction': (props) => CupertinoContextMenuAction(
             key: props['key'],
@@ -681,16 +618,13 @@ var p = () => {
             activeColor: props['activeColor'],
             trackColor: props['trackColor'],
             thumbColor: props['thumbColor'],
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
           ),
       'CupertinoScrollbar': {
         'defaultThickness': CupertinoScrollbar.defaultThickness,
-        'defaultThicknessWhileDragging':
-            CupertinoScrollbar.defaultThicknessWhileDragging,
+        'defaultThicknessWhileDragging': CupertinoScrollbar.defaultThicknessWhileDragging,
         'defaultRadius': CupertinoScrollbar.defaultRadius,
-        'defaultRadiusWhileDragging':
-            CupertinoScrollbar.defaultRadiusWhileDragging,
+        'defaultRadiusWhileDragging': CupertinoScrollbar.defaultRadiusWhileDragging,
       },
       'CupertinoApp': (props) => CupertinoApp(
             key: props['key'],
@@ -702,8 +636,7 @@ var p = () => {
             onGenerateRoute: props['onGenerateRoute'],
             onGenerateInitialRoutes: props['onGenerateInitialRoutes'],
             onUnknownRoute: props['onUnknownRoute'],
-            navigatorObservers:
-                as(props['navigatorObservers']) ?? const <NavigatorObserver>[],
+            navigatorObservers: as<NavigatorObserver>(props['navigatorObservers']) ?? const <NavigatorObserver>[],
             builder: props['builder'],
             title: props['title'] ?? '',
             onGenerateTitle: props['onGenerateTitle'],
@@ -712,16 +645,12 @@ var p = () => {
             localizationsDelegates: props['localizationsDelegates'],
             localeListResolutionCallback: props['localeListResolutionCallback'],
             localeResolutionCallback: props['localeResolutionCallback'],
-            supportedLocales:
-                props['supportedLocales'] ?? const <Locale>[Locale('en', 'US')],
+            supportedLocales: props['supportedLocales'] ?? const <Locale>[Locale('en', 'US')],
             showPerformanceOverlay: props['showPerformanceOverlay'] ?? false,
-            checkerboardRasterCacheImages:
-                props['checkerboardRasterCacheImages'] ?? false,
-            checkerboardOffscreenLayers:
-                props['checkerboardOffscreenLayers'] ?? false,
+            checkerboardRasterCacheImages: props['checkerboardRasterCacheImages'] ?? false,
+            checkerboardOffscreenLayers: props['checkerboardOffscreenLayers'] ?? false,
             showSemanticsDebugger: props['showSemanticsDebugger'] ?? false,
-            debugShowCheckedModeBanner:
-                props['debugShowCheckedModeBanner'] ?? true,
+            debugShowCheckedModeBanner: props['debugShowCheckedModeBanner'] ?? true,
             shortcuts: props['shortcuts'],
             actions: props['actions'],
             restorationScopeId: props['restorationScopeId'],
@@ -743,24 +672,19 @@ var p = () => {
             localizationsDelegates: props['localizationsDelegates'],
             localeListResolutionCallback: props['localeListResolutionCallback'],
             localeResolutionCallback: props['localeResolutionCallback'],
-            supportedLocales:
-                props['supportedLocales'] ?? const <Locale>[Locale('en', 'US')],
+            supportedLocales: props['supportedLocales'] ?? const <Locale>[Locale('en', 'US')],
             showPerformanceOverlay: props['showPerformanceOverlay'] ?? false,
-            checkerboardRasterCacheImages:
-                props['checkerboardRasterCacheImages'] ?? false,
-            checkerboardOffscreenLayers:
-                props['checkerboardOffscreenLayers'] ?? false,
+            checkerboardRasterCacheImages: props['checkerboardRasterCacheImages'] ?? false,
+            checkerboardOffscreenLayers: props['checkerboardOffscreenLayers'] ?? false,
             showSemanticsDebugger: props['showSemanticsDebugger'] ?? false,
-            debugShowCheckedModeBanner:
-                props['debugShowCheckedModeBanner'] ?? true,
+            debugShowCheckedModeBanner: props['debugShowCheckedModeBanner'] ?? true,
             shortcuts: props['shortcuts'],
             actions: props['actions'],
             restorationScopeId: props['restorationScopeId'],
             scrollBehavior: props['scrollBehavior'],
             useInheritedMediaQuery: props['useInheritedMediaQuery'] ?? false,
           ),
-      'CupertinoApp.createCupertinoHeroController': (props) =>
-          CupertinoApp.createCupertinoHeroController(),
+      'CupertinoApp.createCupertinoHeroController': (props) => CupertinoApp.createCupertinoHeroController(),
       'CupertinoIcons': {
         'iconFont': CupertinoIcons.iconFont,
         'iconFontPackage': CupertinoIcons.iconFontPackage,
@@ -910,8 +834,7 @@ var p = () => {
         'ant_circle': CupertinoIcons.ant_circle,
         'ant_circle_fill': CupertinoIcons.ant_circle_fill,
         'ant_fill': CupertinoIcons.ant_fill,
-        'antenna_radiowaves_left_right':
-            CupertinoIcons.antenna_radiowaves_left_right,
+        'antenna_radiowaves_left_right': CupertinoIcons.antenna_radiowaves_left_right,
         'app': CupertinoIcons.app,
         'app_badge': CupertinoIcons.app_badge,
         'app_badge_fill': CupertinoIcons.app_badge_fill,
@@ -920,20 +843,16 @@ var p = () => {
         'archivebox_fill': CupertinoIcons.archivebox_fill,
         'arrow_2_circlepath': CupertinoIcons.arrow_2_circlepath,
         'arrow_2_circlepath_circle': CupertinoIcons.arrow_2_circlepath_circle,
-        'arrow_2_circlepath_circle_fill':
-            CupertinoIcons.arrow_2_circlepath_circle_fill,
+        'arrow_2_circlepath_circle_fill': CupertinoIcons.arrow_2_circlepath_circle_fill,
         'arrow_2_squarepath': CupertinoIcons.arrow_2_squarepath,
         'arrow_3_trianglepath': CupertinoIcons.arrow_3_trianglepath,
         'arrow_branch': CupertinoIcons.arrow_branch,
         'arrow_clockwise': CupertinoIcons.arrow_clockwise,
         'arrow_clockwise_circle': CupertinoIcons.arrow_clockwise_circle,
-        'arrow_clockwise_circle_fill':
-            CupertinoIcons.arrow_clockwise_circle_fill,
+        'arrow_clockwise_circle_fill': CupertinoIcons.arrow_clockwise_circle_fill,
         'arrow_counterclockwise': CupertinoIcons.arrow_counterclockwise,
-        'arrow_counterclockwise_circle':
-            CupertinoIcons.arrow_counterclockwise_circle,
-        'arrow_counterclockwise_circle_fill':
-            CupertinoIcons.arrow_counterclockwise_circle_fill,
+        'arrow_counterclockwise_circle': CupertinoIcons.arrow_counterclockwise_circle,
+        'arrow_counterclockwise_circle_fill': CupertinoIcons.arrow_counterclockwise_circle_fill,
         'arrow_down': CupertinoIcons.arrow_down,
         'arrow_down_circle': CupertinoIcons.arrow_down_circle,
         'arrow_down_circle_fill': CupertinoIcons.arrow_down_circle_fill,
@@ -941,20 +860,15 @@ var p = () => {
         'arrow_down_doc_fill': CupertinoIcons.arrow_down_doc_fill,
         'arrow_down_left': CupertinoIcons.arrow_down_left,
         'arrow_down_left_circle': CupertinoIcons.arrow_down_left_circle,
-        'arrow_down_left_circle_fill':
-            CupertinoIcons.arrow_down_left_circle_fill,
+        'arrow_down_left_circle_fill': CupertinoIcons.arrow_down_left_circle_fill,
         'arrow_down_left_square': CupertinoIcons.arrow_down_left_square,
-        'arrow_down_left_square_fill':
-            CupertinoIcons.arrow_down_left_square_fill,
+        'arrow_down_left_square_fill': CupertinoIcons.arrow_down_left_square_fill,
         'arrow_down_right': CupertinoIcons.arrow_down_right,
-        'arrow_down_right_arrow_up_left':
-            CupertinoIcons.arrow_down_right_arrow_up_left,
+        'arrow_down_right_arrow_up_left': CupertinoIcons.arrow_down_right_arrow_up_left,
         'arrow_down_right_circle': CupertinoIcons.arrow_down_right_circle,
-        'arrow_down_right_circle_fill':
-            CupertinoIcons.arrow_down_right_circle_fill,
+        'arrow_down_right_circle_fill': CupertinoIcons.arrow_down_right_circle_fill,
         'arrow_down_right_square': CupertinoIcons.arrow_down_right_square,
-        'arrow_down_right_square_fill':
-            CupertinoIcons.arrow_down_right_square_fill,
+        'arrow_down_right_square_fill': CupertinoIcons.arrow_down_right_square_fill,
         'arrow_down_square': CupertinoIcons.arrow_down_square,
         'arrow_down_square_fill': CupertinoIcons.arrow_down_square_fill,
         'arrow_down_to_line': CupertinoIcons.arrow_down_to_line,
@@ -964,11 +878,9 @@ var p = () => {
         'arrow_left_circle_fill': CupertinoIcons.arrow_left_circle_fill,
         'arrow_left_right': CupertinoIcons.arrow_left_right,
         'arrow_left_right_circle': CupertinoIcons.arrow_left_right_circle,
-        'arrow_left_right_circle_fill':
-            CupertinoIcons.arrow_left_right_circle_fill,
+        'arrow_left_right_circle_fill': CupertinoIcons.arrow_left_right_circle_fill,
         'arrow_left_right_square': CupertinoIcons.arrow_left_right_square,
-        'arrow_left_right_square_fill':
-            CupertinoIcons.arrow_left_right_square_fill,
+        'arrow_left_right_square_fill': CupertinoIcons.arrow_left_right_square_fill,
         'arrow_left_square': CupertinoIcons.arrow_left_square,
         'arrow_left_square_fill': CupertinoIcons.arrow_left_square_fill,
         'arrow_left_to_line': CupertinoIcons.arrow_left_to_line,
@@ -976,14 +888,10 @@ var p = () => {
         'arrow_merge': CupertinoIcons.arrow_merge,
         'arrow_right': CupertinoIcons.arrow_right,
         'arrow_right_arrow_left': CupertinoIcons.arrow_right_arrow_left,
-        'arrow_right_arrow_left_circle':
-            CupertinoIcons.arrow_right_arrow_left_circle,
-        'arrow_right_arrow_left_circle_fill':
-            CupertinoIcons.arrow_right_arrow_left_circle_fill,
-        'arrow_right_arrow_left_square':
-            CupertinoIcons.arrow_right_arrow_left_square,
-        'arrow_right_arrow_left_square_fill':
-            CupertinoIcons.arrow_right_arrow_left_square_fill,
+        'arrow_right_arrow_left_circle': CupertinoIcons.arrow_right_arrow_left_circle,
+        'arrow_right_arrow_left_circle_fill': CupertinoIcons.arrow_right_arrow_left_circle_fill,
+        'arrow_right_arrow_left_square': CupertinoIcons.arrow_right_arrow_left_square,
+        'arrow_right_arrow_left_square_fill': CupertinoIcons.arrow_right_arrow_left_square_fill,
         'arrow_right_circle': CupertinoIcons.arrow_right_circle,
         'arrow_right_circle_fill': CupertinoIcons.arrow_right_circle_fill,
         'arrow_right_square': CupertinoIcons.arrow_right_square,
@@ -1002,11 +910,9 @@ var p = () => {
         'arrow_up': CupertinoIcons.arrow_up,
         'arrow_up_arrow_down': CupertinoIcons.arrow_up_arrow_down,
         'arrow_up_arrow_down_circle': CupertinoIcons.arrow_up_arrow_down_circle,
-        'arrow_up_arrow_down_circle_fill':
-            CupertinoIcons.arrow_up_arrow_down_circle_fill,
+        'arrow_up_arrow_down_circle_fill': CupertinoIcons.arrow_up_arrow_down_circle_fill,
         'arrow_up_arrow_down_square': CupertinoIcons.arrow_up_arrow_down_square,
-        'arrow_up_arrow_down_square_fill':
-            CupertinoIcons.arrow_up_arrow_down_square_fill,
+        'arrow_up_arrow_down_square_fill': CupertinoIcons.arrow_up_arrow_down_square_fill,
         'arrow_up_bin': CupertinoIcons.arrow_up_bin,
         'arrow_up_bin_fill': CupertinoIcons.arrow_up_bin_fill,
         'arrow_up_circle': CupertinoIcons.arrow_up_circle,
@@ -1019,8 +925,7 @@ var p = () => {
         'arrow_up_down_square': CupertinoIcons.arrow_up_down_square,
         'arrow_up_down_square_fill': CupertinoIcons.arrow_up_down_square_fill,
         'arrow_up_left': CupertinoIcons.arrow_up_left,
-        'arrow_up_left_arrow_down_right':
-            CupertinoIcons.arrow_up_left_arrow_down_right,
+        'arrow_up_left_arrow_down_right': CupertinoIcons.arrow_up_left_arrow_down_right,
         'arrow_up_left_circle': CupertinoIcons.arrow_up_left_circle,
         'arrow_up_left_circle_fill': CupertinoIcons.arrow_up_left_circle_fill,
         'arrow_up_left_square': CupertinoIcons.arrow_up_left_square,
@@ -1029,8 +934,7 @@ var p = () => {
         'arrow_up_right_circle': CupertinoIcons.arrow_up_right_circle,
         'arrow_up_right_circle_fill': CupertinoIcons.arrow_up_right_circle_fill,
         'arrow_up_right_diamond': CupertinoIcons.arrow_up_right_diamond,
-        'arrow_up_right_diamond_fill':
-            CupertinoIcons.arrow_up_right_diamond_fill,
+        'arrow_up_right_diamond_fill': CupertinoIcons.arrow_up_right_diamond_fill,
         'arrow_up_right_square': CupertinoIcons.arrow_up_right_square,
         'arrow_up_right_square_fill': CupertinoIcons.arrow_up_right_square_fill,
         'arrow_up_square': CupertinoIcons.arrow_up_square,
@@ -1039,25 +943,19 @@ var p = () => {
         'arrow_up_to_line_alt': CupertinoIcons.arrow_up_to_line_alt,
         'arrow_uturn_down': CupertinoIcons.arrow_uturn_down,
         'arrow_uturn_down_circle': CupertinoIcons.arrow_uturn_down_circle,
-        'arrow_uturn_down_circle_fill':
-            CupertinoIcons.arrow_uturn_down_circle_fill,
+        'arrow_uturn_down_circle_fill': CupertinoIcons.arrow_uturn_down_circle_fill,
         'arrow_uturn_down_square': CupertinoIcons.arrow_uturn_down_square,
-        'arrow_uturn_down_square_fill':
-            CupertinoIcons.arrow_uturn_down_square_fill,
+        'arrow_uturn_down_square_fill': CupertinoIcons.arrow_uturn_down_square_fill,
         'arrow_uturn_left': CupertinoIcons.arrow_uturn_left,
         'arrow_uturn_left_circle': CupertinoIcons.arrow_uturn_left_circle,
-        'arrow_uturn_left_circle_fill':
-            CupertinoIcons.arrow_uturn_left_circle_fill,
+        'arrow_uturn_left_circle_fill': CupertinoIcons.arrow_uturn_left_circle_fill,
         'arrow_uturn_left_square': CupertinoIcons.arrow_uturn_left_square,
-        'arrow_uturn_left_square_fill':
-            CupertinoIcons.arrow_uturn_left_square_fill,
+        'arrow_uturn_left_square_fill': CupertinoIcons.arrow_uturn_left_square_fill,
         'arrow_uturn_right': CupertinoIcons.arrow_uturn_right,
         'arrow_uturn_right_circle': CupertinoIcons.arrow_uturn_right_circle,
-        'arrow_uturn_right_circle_fill':
-            CupertinoIcons.arrow_uturn_right_circle_fill,
+        'arrow_uturn_right_circle_fill': CupertinoIcons.arrow_uturn_right_circle_fill,
         'arrow_uturn_right_square': CupertinoIcons.arrow_uturn_right_square,
-        'arrow_uturn_right_square_fill':
-            CupertinoIcons.arrow_uturn_right_square_fill,
+        'arrow_uturn_right_square_fill': CupertinoIcons.arrow_uturn_right_square_fill,
         'arrow_uturn_up': CupertinoIcons.arrow_uturn_up,
         'arrow_uturn_up_circle': CupertinoIcons.arrow_uturn_up_circle,
         'arrow_uturn_up_circle_fill': CupertinoIcons.arrow_uturn_up_circle_fill,
@@ -1065,53 +963,38 @@ var p = () => {
         'arrow_uturn_up_square_fill': CupertinoIcons.arrow_uturn_up_square_fill,
         'arrowshape_turn_up_left': CupertinoIcons.arrowshape_turn_up_left,
         'arrowshape_turn_up_left_2': CupertinoIcons.arrowshape_turn_up_left_2,
-        'arrowshape_turn_up_left_2_fill':
-            CupertinoIcons.arrowshape_turn_up_left_2_fill,
-        'arrowshape_turn_up_left_circle':
-            CupertinoIcons.arrowshape_turn_up_left_circle,
-        'arrowshape_turn_up_left_circle_fill':
-            CupertinoIcons.arrowshape_turn_up_left_circle_fill,
-        'arrowshape_turn_up_left_fill':
-            CupertinoIcons.arrowshape_turn_up_left_fill,
+        'arrowshape_turn_up_left_2_fill': CupertinoIcons.arrowshape_turn_up_left_2_fill,
+        'arrowshape_turn_up_left_circle': CupertinoIcons.arrowshape_turn_up_left_circle,
+        'arrowshape_turn_up_left_circle_fill': CupertinoIcons.arrowshape_turn_up_left_circle_fill,
+        'arrowshape_turn_up_left_fill': CupertinoIcons.arrowshape_turn_up_left_fill,
         'arrowshape_turn_up_right': CupertinoIcons.arrowshape_turn_up_right,
-        'arrowshape_turn_up_right_circle':
-            CupertinoIcons.arrowshape_turn_up_right_circle,
-        'arrowshape_turn_up_right_circle_fill':
-            CupertinoIcons.arrowshape_turn_up_right_circle_fill,
-        'arrowshape_turn_up_right_fill':
-            CupertinoIcons.arrowshape_turn_up_right_fill,
+        'arrowshape_turn_up_right_circle': CupertinoIcons.arrowshape_turn_up_right_circle,
+        'arrowshape_turn_up_right_circle_fill': CupertinoIcons.arrowshape_turn_up_right_circle_fill,
+        'arrowshape_turn_up_right_fill': CupertinoIcons.arrowshape_turn_up_right_fill,
         'arrowtriangle_down': CupertinoIcons.arrowtriangle_down,
         'arrowtriangle_down_circle': CupertinoIcons.arrowtriangle_down_circle,
-        'arrowtriangle_down_circle_fill':
-            CupertinoIcons.arrowtriangle_down_circle_fill,
+        'arrowtriangle_down_circle_fill': CupertinoIcons.arrowtriangle_down_circle_fill,
         'arrowtriangle_down_fill': CupertinoIcons.arrowtriangle_down_fill,
         'arrowtriangle_down_square': CupertinoIcons.arrowtriangle_down_square,
-        'arrowtriangle_down_square_fill':
-            CupertinoIcons.arrowtriangle_down_square_fill,
+        'arrowtriangle_down_square_fill': CupertinoIcons.arrowtriangle_down_square_fill,
         'arrowtriangle_left': CupertinoIcons.arrowtriangle_left,
         'arrowtriangle_left_circle': CupertinoIcons.arrowtriangle_left_circle,
-        'arrowtriangle_left_circle_fill':
-            CupertinoIcons.arrowtriangle_left_circle_fill,
+        'arrowtriangle_left_circle_fill': CupertinoIcons.arrowtriangle_left_circle_fill,
         'arrowtriangle_left_fill': CupertinoIcons.arrowtriangle_left_fill,
         'arrowtriangle_left_square': CupertinoIcons.arrowtriangle_left_square,
-        'arrowtriangle_left_square_fill':
-            CupertinoIcons.arrowtriangle_left_square_fill,
+        'arrowtriangle_left_square_fill': CupertinoIcons.arrowtriangle_left_square_fill,
         'arrowtriangle_right': CupertinoIcons.arrowtriangle_right,
         'arrowtriangle_right_circle': CupertinoIcons.arrowtriangle_right_circle,
-        'arrowtriangle_right_circle_fill':
-            CupertinoIcons.arrowtriangle_right_circle_fill,
+        'arrowtriangle_right_circle_fill': CupertinoIcons.arrowtriangle_right_circle_fill,
         'arrowtriangle_right_fill': CupertinoIcons.arrowtriangle_right_fill,
         'arrowtriangle_right_square': CupertinoIcons.arrowtriangle_right_square,
-        'arrowtriangle_right_square_fill':
-            CupertinoIcons.arrowtriangle_right_square_fill,
+        'arrowtriangle_right_square_fill': CupertinoIcons.arrowtriangle_right_square_fill,
         'arrowtriangle_up': CupertinoIcons.arrowtriangle_up,
         'arrowtriangle_up_circle': CupertinoIcons.arrowtriangle_up_circle,
-        'arrowtriangle_up_circle_fill':
-            CupertinoIcons.arrowtriangle_up_circle_fill,
+        'arrowtriangle_up_circle_fill': CupertinoIcons.arrowtriangle_up_circle_fill,
         'arrowtriangle_up_fill': CupertinoIcons.arrowtriangle_up_fill,
         'arrowtriangle_up_square': CupertinoIcons.arrowtriangle_up_square,
-        'arrowtriangle_up_square_fill':
-            CupertinoIcons.arrowtriangle_up_square_fill,
+        'arrowtriangle_up_square_fill': CupertinoIcons.arrowtriangle_up_square_fill,
         'asterisk_circle': CupertinoIcons.asterisk_circle,
         'asterisk_circle_fill': CupertinoIcons.asterisk_circle_fill,
         'at': CupertinoIcons.at,
@@ -1125,8 +1008,7 @@ var p = () => {
         'backward_end_alt_fill': CupertinoIcons.backward_end_alt_fill,
         'backward_end_fill': CupertinoIcons.backward_end_fill,
         'backward_fill': CupertinoIcons.backward_fill,
-        'badge_plus_radiowaves_right':
-            CupertinoIcons.badge_plus_radiowaves_right,
+        'badge_plus_radiowaves_right': CupertinoIcons.badge_plus_radiowaves_right,
         'bag': CupertinoIcons.bag,
         'bag_badge_minus': CupertinoIcons.bag_badge_minus,
         'bag_badge_plus': CupertinoIcons.bag_badge_plus,
@@ -1164,8 +1046,7 @@ var p = () => {
         'bolt_fill': CupertinoIcons.bolt_fill,
         'bolt_horizontal': CupertinoIcons.bolt_horizontal,
         'bolt_horizontal_circle': CupertinoIcons.bolt_horizontal_circle,
-        'bolt_horizontal_circle_fill':
-            CupertinoIcons.bolt_horizontal_circle_fill,
+        'bolt_horizontal_circle_fill': CupertinoIcons.bolt_horizontal_circle_fill,
         'bolt_horizontal_fill': CupertinoIcons.bolt_horizontal_fill,
         'bolt_slash': CupertinoIcons.bolt_slash,
         'bolt_slash_fill': CupertinoIcons.bolt_slash_fill,
@@ -1177,8 +1058,7 @@ var p = () => {
         'briefcase_fill': CupertinoIcons.briefcase_fill,
         'bubble_left': CupertinoIcons.bubble_left,
         'bubble_left_bubble_right': CupertinoIcons.bubble_left_bubble_right,
-        'bubble_left_bubble_right_fill':
-            CupertinoIcons.bubble_left_bubble_right_fill,
+        'bubble_left_bubble_right_fill': CupertinoIcons.bubble_left_bubble_right_fill,
         'bubble_left_fill': CupertinoIcons.bubble_left_fill,
         'bubble_middle_bottom': CupertinoIcons.bubble_middle_bottom,
         'bubble_middle_bottom_fill': CupertinoIcons.bubble_middle_bottom_fill,
@@ -1262,8 +1142,7 @@ var p = () => {
         'chevron_left_2': CupertinoIcons.chevron_left_2,
         'chevron_left_circle': CupertinoIcons.chevron_left_circle,
         'chevron_left_circle_fill': CupertinoIcons.chevron_left_circle_fill,
-        'chevron_left_slash_chevron_right':
-            CupertinoIcons.chevron_left_slash_chevron_right,
+        'chevron_left_slash_chevron_right': CupertinoIcons.chevron_left_slash_chevron_right,
         'chevron_left_square': CupertinoIcons.chevron_left_square,
         'chevron_left_square_fill': CupertinoIcons.chevron_left_square_fill,
         'chevron_right': CupertinoIcons.chevron_right,
@@ -1397,8 +1276,7 @@ var p = () => {
         'ellipsis_circle_fill': CupertinoIcons.ellipsis_circle_fill,
         'ellipsis_vertical': CupertinoIcons.ellipsis_vertical,
         'ellipsis_vertical_circle': CupertinoIcons.ellipsis_vertical_circle,
-        'ellipsis_vertical_circle_fill':
-            CupertinoIcons.ellipsis_vertical_circle_fill,
+        'ellipsis_vertical_circle_fill': CupertinoIcons.ellipsis_vertical_circle_fill,
         'envelope': CupertinoIcons.envelope,
         'envelope_badge': CupertinoIcons.envelope_badge,
         'envelope_badge_fill': CupertinoIcons.envelope_badge_fill,
@@ -1415,23 +1293,17 @@ var p = () => {
         'escape': CupertinoIcons.escape,
         'exclamationmark': CupertinoIcons.exclamationmark,
         'exclamationmark_bubble': CupertinoIcons.exclamationmark_bubble,
-        'exclamationmark_bubble_fill':
-            CupertinoIcons.exclamationmark_bubble_fill,
+        'exclamationmark_bubble_fill': CupertinoIcons.exclamationmark_bubble_fill,
         'exclamationmark_circle': CupertinoIcons.exclamationmark_circle,
-        'exclamationmark_circle_fill':
-            CupertinoIcons.exclamationmark_circle_fill,
+        'exclamationmark_circle_fill': CupertinoIcons.exclamationmark_circle_fill,
         'exclamationmark_octagon': CupertinoIcons.exclamationmark_octagon,
-        'exclamationmark_octagon_fill':
-            CupertinoIcons.exclamationmark_octagon_fill,
+        'exclamationmark_octagon_fill': CupertinoIcons.exclamationmark_octagon_fill,
         'exclamationmark_shield': CupertinoIcons.exclamationmark_shield,
-        'exclamationmark_shield_fill':
-            CupertinoIcons.exclamationmark_shield_fill,
+        'exclamationmark_shield_fill': CupertinoIcons.exclamationmark_shield_fill,
         'exclamationmark_square': CupertinoIcons.exclamationmark_square,
-        'exclamationmark_square_fill':
-            CupertinoIcons.exclamationmark_square_fill,
+        'exclamationmark_square_fill': CupertinoIcons.exclamationmark_square_fill,
         'exclamationmark_triangle': CupertinoIcons.exclamationmark_triangle,
-        'exclamationmark_triangle_fill':
-            CupertinoIcons.exclamationmark_triangle_fill,
+        'exclamationmark_triangle_fill': CupertinoIcons.exclamationmark_triangle_fill,
         'eye_fill': CupertinoIcons.eye_fill,
         'eye_slash': CupertinoIcons.eye_slash,
         'eye_slash_fill': CupertinoIcons.eye_slash_fill,
@@ -1461,8 +1333,7 @@ var p = () => {
         'folder_circle_fill': CupertinoIcons.folder_circle_fill,
         'folder_fill': CupertinoIcons.folder_fill,
         'folder_fill_badge_minus': CupertinoIcons.folder_fill_badge_minus,
-        'folder_fill_badge_person_crop':
-            CupertinoIcons.folder_fill_badge_person_crop,
+        'folder_fill_badge_person_crop': CupertinoIcons.folder_fill_badge_person_crop,
         'folder_fill_badge_plus': CupertinoIcons.folder_fill_badge_plus,
         'forward_end': CupertinoIcons.forward_end,
         'forward_end_alt': CupertinoIcons.forward_end_alt,
@@ -1561,8 +1432,7 @@ var p = () => {
         'info_circle_fill': CupertinoIcons.info_circle_fill,
         'italic': CupertinoIcons.italic,
         'keyboard': CupertinoIcons.keyboard,
-        'keyboard_chevron_compact_down':
-            CupertinoIcons.keyboard_chevron_compact_down,
+        'keyboard_chevron_compact_down': CupertinoIcons.keyboard_chevron_compact_down,
         'largecircle_fill_circle': CupertinoIcons.largecircle_fill_circle,
         'lasso': CupertinoIcons.lasso,
         'layers': CupertinoIcons.layers,
@@ -1583,16 +1453,13 @@ var p = () => {
         'lightbulb_slash_fill': CupertinoIcons.lightbulb_slash_fill,
         'line_horizontal_3': CupertinoIcons.line_horizontal_3,
         'line_horizontal_3_decrease': CupertinoIcons.line_horizontal_3_decrease,
-        'line_horizontal_3_decrease_circle':
-            CupertinoIcons.line_horizontal_3_decrease_circle,
-        'line_horizontal_3_decrease_circle_fill':
-            CupertinoIcons.line_horizontal_3_decrease_circle_fill,
+        'line_horizontal_3_decrease_circle': CupertinoIcons.line_horizontal_3_decrease_circle,
+        'line_horizontal_3_decrease_circle_fill': CupertinoIcons.line_horizontal_3_decrease_circle_fill,
         'link': CupertinoIcons.link,
         'link_circle': CupertinoIcons.link_circle,
         'link_circle_fill': CupertinoIcons.link_circle_fill,
         'list_bullet': CupertinoIcons.list_bullet,
-        'list_bullet_below_rectangle':
-            CupertinoIcons.list_bullet_below_rectangle,
+        'list_bullet_below_rectangle': CupertinoIcons.list_bullet_below_rectangle,
         'list_bullet_indent': CupertinoIcons.list_bullet_indent,
         'list_dash': CupertinoIcons.list_dash,
         'list_number': CupertinoIcons.list_number,
@@ -1720,27 +1587,17 @@ var p = () => {
         'person_circle': CupertinoIcons.person_circle,
         'person_circle_fill': CupertinoIcons.person_circle_fill,
         'person_crop_circle': CupertinoIcons.person_crop_circle,
-        'person_crop_circle_badge_checkmark':
-            CupertinoIcons.person_crop_circle_badge_checkmark,
-        'person_crop_circle_badge_exclam':
-            CupertinoIcons.person_crop_circle_badge_exclam,
-        'person_crop_circle_badge_minus':
-            CupertinoIcons.person_crop_circle_badge_minus,
-        'person_crop_circle_badge_plus':
-            CupertinoIcons.person_crop_circle_badge_plus,
-        'person_crop_circle_badge_xmark':
-            CupertinoIcons.person_crop_circle_badge_xmark,
+        'person_crop_circle_badge_checkmark': CupertinoIcons.person_crop_circle_badge_checkmark,
+        'person_crop_circle_badge_exclam': CupertinoIcons.person_crop_circle_badge_exclam,
+        'person_crop_circle_badge_minus': CupertinoIcons.person_crop_circle_badge_minus,
+        'person_crop_circle_badge_plus': CupertinoIcons.person_crop_circle_badge_plus,
+        'person_crop_circle_badge_xmark': CupertinoIcons.person_crop_circle_badge_xmark,
         'person_crop_circle_fill': CupertinoIcons.person_crop_circle_fill,
-        'person_crop_circle_fill_badge_checkmark':
-            CupertinoIcons.person_crop_circle_fill_badge_checkmark,
-        'person_crop_circle_fill_badge_exclam':
-            CupertinoIcons.person_crop_circle_fill_badge_exclam,
-        'person_crop_circle_fill_badge_minus':
-            CupertinoIcons.person_crop_circle_fill_badge_minus,
-        'person_crop_circle_fill_badge_plus':
-            CupertinoIcons.person_crop_circle_fill_badge_plus,
-        'person_crop_circle_fill_badge_xmark':
-            CupertinoIcons.person_crop_circle_fill_badge_xmark,
+        'person_crop_circle_fill_badge_checkmark': CupertinoIcons.person_crop_circle_fill_badge_checkmark,
+        'person_crop_circle_fill_badge_exclam': CupertinoIcons.person_crop_circle_fill_badge_exclam,
+        'person_crop_circle_fill_badge_minus': CupertinoIcons.person_crop_circle_fill_badge_minus,
+        'person_crop_circle_fill_badge_plus': CupertinoIcons.person_crop_circle_fill_badge_plus,
+        'person_crop_circle_fill_badge_xmark': CupertinoIcons.person_crop_circle_fill_badge_xmark,
         'person_crop_rectangle': CupertinoIcons.person_crop_rectangle,
         'person_crop_rectangle_fill': CupertinoIcons.person_crop_rectangle_fill,
         'person_crop_square': CupertinoIcons.person_crop_square,
@@ -1765,8 +1622,7 @@ var p = () => {
         'phone_fill_badge_plus': CupertinoIcons.phone_fill_badge_plus,
         'photo': CupertinoIcons.photo,
         'photo_fill': CupertinoIcons.photo_fill,
-        'photo_fill_on_rectangle_fill':
-            CupertinoIcons.photo_fill_on_rectangle_fill,
+        'photo_fill_on_rectangle_fill': CupertinoIcons.photo_fill_on_rectangle_fill,
         'photo_on_rectangle': CupertinoIcons.photo_on_rectangle,
         'piano': CupertinoIcons.piano,
         'pin': CupertinoIcons.pin,
@@ -1792,15 +1648,12 @@ var p = () => {
         'plus_circle_fill': CupertinoIcons.plus_circle_fill,
         'plus_rectangle': CupertinoIcons.plus_rectangle,
         'plus_rectangle_fill': CupertinoIcons.plus_rectangle_fill,
-        'plus_rectangle_fill_on_rectangle_fill':
-            CupertinoIcons.plus_rectangle_fill_on_rectangle_fill,
-        'plus_rectangle_on_rectangle':
-            CupertinoIcons.plus_rectangle_on_rectangle,
+        'plus_rectangle_fill_on_rectangle_fill': CupertinoIcons.plus_rectangle_fill_on_rectangle_fill,
+        'plus_rectangle_on_rectangle': CupertinoIcons.plus_rectangle_on_rectangle,
         'plus_slash_minus': CupertinoIcons.plus_slash_minus,
         'plus_square': CupertinoIcons.plus_square,
         'plus_square_fill': CupertinoIcons.plus_square_fill,
-        'plus_square_fill_on_square_fill':
-            CupertinoIcons.plus_square_fill_on_square_fill,
+        'plus_square_fill_on_square_fill': CupertinoIcons.plus_square_fill_on_square_fill,
         'plus_square_on_square': CupertinoIcons.plus_square_on_square,
         'plusminus': CupertinoIcons.plusminus,
         'plusminus_circle': CupertinoIcons.plusminus_circle,
@@ -1830,24 +1683,18 @@ var p = () => {
         'rectangle': CupertinoIcons.rectangle,
         'rectangle_3_offgrid': CupertinoIcons.rectangle_3_offgrid,
         'rectangle_3_offgrid_fill': CupertinoIcons.rectangle_3_offgrid_fill,
-        'rectangle_arrow_up_right_arrow_down_left':
-            CupertinoIcons.rectangle_arrow_up_right_arrow_down_left,
-        'rectangle_arrow_up_right_arrow_down_left_slash':
-            CupertinoIcons.rectangle_arrow_up_right_arrow_down_left_slash,
+        'rectangle_arrow_up_right_arrow_down_left': CupertinoIcons.rectangle_arrow_up_right_arrow_down_left,
+        'rectangle_arrow_up_right_arrow_down_left_slash': CupertinoIcons.rectangle_arrow_up_right_arrow_down_left_slash,
         'rectangle_badge_checkmark': CupertinoIcons.rectangle_badge_checkmark,
         'rectangle_badge_xmark': CupertinoIcons.rectangle_badge_xmark,
-        'rectangle_compress_vertical':
-            CupertinoIcons.rectangle_compress_vertical,
+        'rectangle_compress_vertical': CupertinoIcons.rectangle_compress_vertical,
         'rectangle_dock': CupertinoIcons.rectangle_dock,
         'rectangle_expand_vertical': CupertinoIcons.rectangle_expand_vertical,
         'rectangle_fill': CupertinoIcons.rectangle_fill,
-        'rectangle_fill_badge_checkmark':
-            CupertinoIcons.rectangle_fill_badge_checkmark,
+        'rectangle_fill_badge_checkmark': CupertinoIcons.rectangle_fill_badge_checkmark,
         'rectangle_fill_badge_xmark': CupertinoIcons.rectangle_fill_badge_xmark,
-        'rectangle_fill_on_rectangle_angled_fill':
-            CupertinoIcons.rectangle_fill_on_rectangle_angled_fill,
-        'rectangle_fill_on_rectangle_fill':
-            CupertinoIcons.rectangle_fill_on_rectangle_fill,
+        'rectangle_fill_on_rectangle_angled_fill': CupertinoIcons.rectangle_fill_on_rectangle_angled_fill,
+        'rectangle_fill_on_rectangle_fill': CupertinoIcons.rectangle_fill_on_rectangle_fill,
         'rectangle_grid_1x2': CupertinoIcons.rectangle_grid_1x2,
         'rectangle_grid_1x2_fill': CupertinoIcons.rectangle_grid_1x2_fill,
         'rectangle_grid_2x2': CupertinoIcons.rectangle_grid_2x2,
@@ -1855,30 +1702,22 @@ var p = () => {
         'rectangle_grid_3x2': CupertinoIcons.rectangle_grid_3x2,
         'rectangle_grid_3x2_fill': CupertinoIcons.rectangle_grid_3x2_fill,
         'rectangle_on_rectangle': CupertinoIcons.rectangle_on_rectangle,
-        'rectangle_on_rectangle_angled':
-            CupertinoIcons.rectangle_on_rectangle_angled,
+        'rectangle_on_rectangle_angled': CupertinoIcons.rectangle_on_rectangle_angled,
         'rectangle_paperclip': CupertinoIcons.rectangle_paperclip,
         'rectangle_split_3x1': CupertinoIcons.rectangle_split_3x1,
         'rectangle_split_3x1_fill': CupertinoIcons.rectangle_split_3x1_fill,
         'rectangle_split_3x3': CupertinoIcons.rectangle_split_3x3,
         'rectangle_split_3x3_fill': CupertinoIcons.rectangle_split_3x3_fill,
         'rectangle_stack': CupertinoIcons.rectangle_stack,
-        'rectangle_stack_badge_minus':
-            CupertinoIcons.rectangle_stack_badge_minus,
-        'rectangle_stack_badge_person_crop':
-            CupertinoIcons.rectangle_stack_badge_person_crop,
+        'rectangle_stack_badge_minus': CupertinoIcons.rectangle_stack_badge_minus,
+        'rectangle_stack_badge_person_crop': CupertinoIcons.rectangle_stack_badge_person_crop,
         'rectangle_stack_badge_plus': CupertinoIcons.rectangle_stack_badge_plus,
         'rectangle_stack_fill': CupertinoIcons.rectangle_stack_fill,
-        'rectangle_stack_fill_badge_minus':
-            CupertinoIcons.rectangle_stack_fill_badge_minus,
-        'rectangle_stack_fill_badge_person_crop':
-            CupertinoIcons.rectangle_stack_fill_badge_person_crop,
-        'rectangle_stack_fill_badge_plus':
-            CupertinoIcons.rectangle_stack_fill_badge_plus,
-        'rectangle_stack_person_crop':
-            CupertinoIcons.rectangle_stack_person_crop,
-        'rectangle_stack_person_crop_fill':
-            CupertinoIcons.rectangle_stack_person_crop_fill,
+        'rectangle_stack_fill_badge_minus': CupertinoIcons.rectangle_stack_fill_badge_minus,
+        'rectangle_stack_fill_badge_person_crop': CupertinoIcons.rectangle_stack_fill_badge_person_crop,
+        'rectangle_stack_fill_badge_plus': CupertinoIcons.rectangle_stack_fill_badge_plus,
+        'rectangle_stack_person_crop': CupertinoIcons.rectangle_stack_person_crop,
+        'rectangle_stack_person_crop_fill': CupertinoIcons.rectangle_stack_person_crop_fill,
         'repeat': CupertinoIcons.repeat,
         'repeat_1': CupertinoIcons.repeat_1,
         'resize': CupertinoIcons.resize,
@@ -1915,14 +1754,12 @@ var p = () => {
         'slash_circle': CupertinoIcons.slash_circle,
         'slash_circle_fill': CupertinoIcons.slash_circle_fill,
         'slider_horizontal_3': CupertinoIcons.slider_horizontal_3,
-        'slider_horizontal_below_rectangle':
-            CupertinoIcons.slider_horizontal_below_rectangle,
+        'slider_horizontal_below_rectangle': CupertinoIcons.slider_horizontal_below_rectangle,
         'slowmo': CupertinoIcons.slowmo,
         'smallcircle_circle': CupertinoIcons.smallcircle_circle,
         'smallcircle_circle_fill': CupertinoIcons.smallcircle_circle_fill,
         'smallcircle_fill_circle': CupertinoIcons.smallcircle_fill_circle,
-        'smallcircle_fill_circle_fill':
-            CupertinoIcons.smallcircle_fill_circle_fill,
+        'smallcircle_fill_circle_fill': CupertinoIcons.smallcircle_fill_circle_fill,
         'smiley': CupertinoIcons.smiley,
         'smiley_fill': CupertinoIcons.smiley_fill,
         'smoke': CupertinoIcons.smoke,
@@ -1957,10 +1794,8 @@ var p = () => {
         'square': CupertinoIcons.square,
         'square_arrow_down': CupertinoIcons.square_arrow_down,
         'square_arrow_down_fill': CupertinoIcons.square_arrow_down_fill,
-        'square_arrow_down_on_square':
-            CupertinoIcons.square_arrow_down_on_square,
-        'square_arrow_down_on_square_fill':
-            CupertinoIcons.square_arrow_down_on_square_fill,
+        'square_arrow_down_on_square': CupertinoIcons.square_arrow_down_on_square,
+        'square_arrow_down_on_square_fill': CupertinoIcons.square_arrow_down_on_square_fill,
         'square_arrow_left': CupertinoIcons.square_arrow_left,
         'square_arrow_left_fill': CupertinoIcons.square_arrow_left_fill,
         'square_arrow_right': CupertinoIcons.square_arrow_right,
@@ -1968,17 +1803,14 @@ var p = () => {
         'square_arrow_up': CupertinoIcons.square_arrow_up,
         'square_arrow_up_fill': CupertinoIcons.square_arrow_up_fill,
         'square_arrow_up_on_square': CupertinoIcons.square_arrow_up_on_square,
-        'square_arrow_up_on_square_fill':
-            CupertinoIcons.square_arrow_up_on_square_fill,
+        'square_arrow_up_on_square_fill': CupertinoIcons.square_arrow_up_on_square_fill,
         'square_favorites': CupertinoIcons.square_favorites,
         'square_favorites_alt': CupertinoIcons.square_favorites_alt,
         'square_favorites_alt_fill': CupertinoIcons.square_favorites_alt_fill,
         'square_favorites_fill': CupertinoIcons.square_favorites_fill,
         'square_fill': CupertinoIcons.square_fill,
-        'square_fill_line_vertical_square':
-            CupertinoIcons.square_fill_line_vertical_square,
-        'square_fill_line_vertical_square_fill':
-            CupertinoIcons.square_fill_line_vertical_square_fill,
+        'square_fill_line_vertical_square': CupertinoIcons.square_fill_line_vertical_square,
+        'square_fill_line_vertical_square_fill': CupertinoIcons.square_fill_line_vertical_square_fill,
         'square_fill_on_circle_fill': CupertinoIcons.square_fill_on_circle_fill,
         'square_fill_on_square_fill': CupertinoIcons.square_fill_on_square_fill,
         'square_grid_2x2': CupertinoIcons.square_grid_2x2,
@@ -1987,10 +1819,8 @@ var p = () => {
         'square_grid_3x2_fill': CupertinoIcons.square_grid_3x2_fill,
         'square_grid_4x3_fill': CupertinoIcons.square_grid_4x3_fill,
         'square_lefthalf_fill': CupertinoIcons.square_lefthalf_fill,
-        'square_line_vertical_square':
-            CupertinoIcons.square_line_vertical_square,
-        'square_line_vertical_square_fill':
-            CupertinoIcons.square_line_vertical_square_fill,
+        'square_line_vertical_square': CupertinoIcons.square_line_vertical_square,
+        'square_line_vertical_square_fill': CupertinoIcons.square_line_vertical_square_fill,
         'square_list': CupertinoIcons.square_list,
         'square_list_fill': CupertinoIcons.square_list_fill,
         'square_on_circle': CupertinoIcons.square_on_circle,
@@ -2005,16 +1835,13 @@ var p = () => {
         'square_split_2x2': CupertinoIcons.square_split_2x2,
         'square_split_2x2_fill': CupertinoIcons.square_split_2x2_fill,
         'square_stack': CupertinoIcons.square_stack,
-        'square_stack_3d_down_dottedline':
-            CupertinoIcons.square_stack_3d_down_dottedline,
+        'square_stack_3d_down_dottedline': CupertinoIcons.square_stack_3d_down_dottedline,
         'square_stack_3d_down_right': CupertinoIcons.square_stack_3d_down_right,
-        'square_stack_3d_down_right_fill':
-            CupertinoIcons.square_stack_3d_down_right_fill,
+        'square_stack_3d_down_right_fill': CupertinoIcons.square_stack_3d_down_right_fill,
         'square_stack_3d_up': CupertinoIcons.square_stack_3d_up,
         'square_stack_3d_up_fill': CupertinoIcons.square_stack_3d_up_fill,
         'square_stack_3d_up_slash': CupertinoIcons.square_stack_3d_up_slash,
-        'square_stack_3d_up_slash_fill':
-            CupertinoIcons.square_stack_3d_up_slash_fill,
+        'square_stack_3d_up_slash_fill': CupertinoIcons.square_stack_3d_up_slash_fill,
         'square_stack_fill': CupertinoIcons.square_stack_fill,
         'squares_below_rectangle': CupertinoIcons.squares_below_rectangle,
         'star': CupertinoIcons.star,
@@ -2084,8 +1911,7 @@ var p = () => {
         'textformat': CupertinoIcons.textformat,
         'textformat_123': CupertinoIcons.textformat_123,
         'textformat_abc': CupertinoIcons.textformat_abc,
-        'textformat_abc_dottedunderline':
-            CupertinoIcons.textformat_abc_dottedunderline,
+        'textformat_abc_dottedunderline': CupertinoIcons.textformat_abc_dottedunderline,
         'textformat_alt': CupertinoIcons.textformat_alt,
         'textformat_size': CupertinoIcons.textformat_size,
         'textformat_subscript': CupertinoIcons.textformat_subscript,
@@ -2188,8 +2014,7 @@ var p = () => {
       'CupertinoNavigationBar': (props) => CupertinoNavigationBar(
             key: props['key'],
             leading: props['leading'],
-            automaticallyImplyLeading:
-                props['automaticallyImplyLeading'] ?? true,
+            automaticallyImplyLeading: props['automaticallyImplyLeading'] ?? true,
             automaticallyImplyMiddle: props['automaticallyImplyMiddle'] ?? true,
             previousPageTitle: props['previousPageTitle'],
             middle: props['middle'],
@@ -2205,8 +2030,7 @@ var p = () => {
             key: props['key'],
             largeTitle: props['largeTitle'],
             leading: props['leading'],
-            automaticallyImplyLeading:
-                props['automaticallyImplyLeading'] ?? true,
+            automaticallyImplyLeading: props['automaticallyImplyLeading'] ?? true,
             automaticallyImplyTitle: props['automaticallyImplyTitle'] ?? true,
             previousPageTitle: props['previousPageTitle'],
             middle: props['middle'],
@@ -2219,8 +2043,7 @@ var p = () => {
             heroTag: props['heroTag'] ?? _defaultHeroTag,
             stretch: props['stretch'] ?? false,
           ),
-      'CupertinoNavigationBarBackButton': (props) =>
-          CupertinoNavigationBarBackButton(
+      'CupertinoNavigationBarBackButton': (props) => CupertinoNavigationBarBackButton(
             key: props['key'],
             color: props['color'],
             previousPageTitle: props['previousPageTitle'],
@@ -2237,15 +2060,13 @@ var p = () => {
       'CupertinoTheme.brightnessOf': (props) => CupertinoTheme.brightnessOf(
             props['pa'][0],
           ),
-      'CupertinoTheme.maybeBrightnessOf': (props) =>
-          CupertinoTheme.maybeBrightnessOf(
+      'CupertinoTheme.maybeBrightnessOf': (props) => CupertinoTheme.maybeBrightnessOf(
             props['pa'][0],
           ),
       'DefaultCupertinoLocalizations': {
         'delegate': DefaultCupertinoLocalizations.delegate,
       },
-      'DefaultCupertinoLocalizations.load': (props) =>
-          DefaultCupertinoLocalizations.load(
+      'DefaultCupertinoLocalizations.load': (props) => DefaultCupertinoLocalizations.load(
             props['pa'][0],
           ),
       'DatePickerDateTimeOrder': {
