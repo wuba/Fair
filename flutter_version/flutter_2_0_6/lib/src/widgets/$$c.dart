@@ -62,7 +62,6 @@ const BoxDecoration _kDefaultRoundedBorderDecoration = BoxDecoration(
 var p = () => {
       'CupertinoFormSection': (props) => CupertinoFormSection(
             key: props['key'],
-            children: as(props['children']),
             header: props['header'],
             footer: props['footer'],
             margin: props['margin'] ?? EdgeInsets.zero,
@@ -70,11 +69,11 @@ var p = () => {
                 CupertinoColors.systemGroupedBackground,
             decoration: props['decoration'],
             clipBehavior: props['clipBehavior'] ?? Clip.none,
+            children: as(props['children'])!,
           ),
       'CupertinoFormSection.insetGrouped': (props) =>
           CupertinoFormSection.insetGrouped(
             key: props['key'],
-            children: as(props['children']),
             header: props['header'],
             footer: props['footer'],
             margin: props['margin'] ?? _kDefaultInsetGroupedRowsMargin,
@@ -82,6 +81,7 @@ var p = () => {
                 CupertinoColors.systemGroupedBackground,
             decoration: props['decoration'],
             clipBehavior: props['clipBehavior'] ?? Clip.none,
+            children: as(props['children'])!,
           ),
       'CupertinoTheme': (props) => CupertinoTheme(
             key: props['key'],
@@ -1574,7 +1574,7 @@ var p = () => {
             onGenerateInitialRoutes: props['onGenerateInitialRoutes'],
             onUnknownRoute: props['onUnknownRoute'],
             navigatorObservers:
-                as(props['navigatorObservers']),
+                as(props['navigatorObservers']) ?? const <NavigatorObserver>[],
             builder: props['builder'],
             title: props['title'] ?? '',
             onGenerateTitle: props['onGenerateTitle'],
@@ -1743,7 +1743,7 @@ var p = () => {
           ),
       'CupertinoContextMenu': (props) => CupertinoContextMenu(
             key: props['key'],
-            actions: as(props['actions']),
+            actions: as(props['actions'])!,
             child: props['child'],
             previewBuilder: props['previewBuilder'],
           ),
@@ -1766,10 +1766,10 @@ var p = () => {
             squeeze: props['squeeze']?.toDouble() ?? _kSqueeze,
             itemExtent: props['itemExtent']?.toDouble(),
             onSelectedItemChanged: props['onSelectedItemChanged'],
-            children: as(props['children']),
             selectionOverlay: props['selectionOverlay'] ??
                 const CupertinoPickerDefaultSelectionOverlay(),
             looping: props['looping'] ?? false,
+            children: as(props['children'])!,
           ),
       'CupertinoPicker.builder': (props) => CupertinoPicker.builder(
             key: props['key'],
@@ -1873,7 +1873,7 @@ var p = () => {
       },
       'CupertinoTabBar': (props) => CupertinoTabBar(
             key: props['key'],
-            items: as(props['items']),
+            items: as(props['items'])!,
             onTap: props['onTap'],
             currentIndex: props['currentIndex'] ?? 0,
             backgroundColor: props['backgroundColor'],
@@ -2062,8 +2062,8 @@ var p = () => {
             key: props['key'],
             anchorAbove: props['anchorAbove'],
             anchorBelow: props['anchorBelow'],
-            children: as(props['children']),
-            toolbarBuilder: props['toolbarBuilder'] //?? _defaultToolbarBuilder,
+            toolbarBuilder: props['toolbarBuilder'] ,
+            children: as(props['children'])!,//?? _defaultToolbarBuilder,
           ),
       'CupertinoTextSelectionToolbar#toolbarBuilder': (props) => (
             dynamic context,
@@ -2229,14 +2229,14 @@ var p = () => {
             onGenerateRoute: props['onGenerateRoute'],
             onUnknownRoute: props['onUnknownRoute'],
             navigatorObservers:
-                as(props['navigatorObservers']),
+                as(props['navigatorObservers']) ?? const <NavigatorObserver>[],
             restorationScopeId: props['restorationScopeId'],
           ),
       'CupertinoAlertDialog': (props) => CupertinoAlertDialog(
             key: props['key'],
             title: props['title'],
             content: props['content'],
-            actions: as(props['actions']),
+            actions: as(props['actions'])?? const <Widget>[],
             scrollController: props['scrollController'],
             actionScrollController: props['actionScrollController'],
             insetAnimationDuration: props['insetAnimationDuration'] ??

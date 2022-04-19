@@ -215,7 +215,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }
       children.add(item);
     });
-    if (children?.every((element) => element is Widget) == true){
+    if (children.every((element) => element is Widget) == true){
       return children.asIteratorOf<Widget>()?.toList() ?? children;
     }
     return children;
