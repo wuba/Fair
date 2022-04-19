@@ -285,7 +285,7 @@ class Reference {
   /// cache the return value in a local variable.
   int get _indirect {
     final step = _readUInt(_offset, _parentWidth);
-    return (_offset ?? 0) - step;
+    return _offset - step;
   }
 
   int _readInt(int offset, BitWidth width) {

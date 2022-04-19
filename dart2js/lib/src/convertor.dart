@@ -184,7 +184,7 @@ class ClassDeclarationData {
           var autoGenDefaultConstructor = methods.firstWhereOrNull((element) => !element.isStatic && element.name == constructorAlias, orElse: () => null) == null;
           var defaultConstructor = '''
           $className.prototype.$constructorAlias = function() {
-            ${parentClass != null && parentClass!.isNotEmpty ? parentClass : 'Object'}.prototype.$constructorAlias.call(this);
+            ${(parentClass != null && parentClass!.isNotEmpty) ? parentClass : 'Object'}.prototype.$constructorAlias.call(this);
           };
         ''';
           var instanceConstruction = !defaultContructorIsFactory
@@ -247,7 +247,7 @@ class ClassDeclarationData {
           });
           var methodsLiterval = '';
           methods.forEach((element) {
-            methodsLiterval += '${element?.name}: ${convertFunctionFromData(element, this)},';
+            methodsLiterval += '${element.name}: ${convertFunctionFromData(element, this)},';
           });
           tpl = '''
         {
