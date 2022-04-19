@@ -35,7 +35,8 @@ class BundleGenerator extends GeneratorForAnnotation<FairPatch>
     }
     print('[Fair] Compile ${buildStep.inputId.path} into bundle...');
 
-    /// Get the value of the module parameter in the FairPatch annotation
+    /// Get the value of the module parameter in the FairPatch annotation.
+    /// If module is not set, or the value of module is an empty string, the default value is 'lib'
     var module = annotation.peek('module');
     if (module != null) {
       if (module.stringValue != '') {
@@ -44,7 +45,6 @@ class BundleGenerator extends GeneratorForAnnotation<FairPatch>
         moduleName = 'lib';
       }
       ModuleNameHelper().modules[path.withoutExtension(buildStep.inputId.path)] = moduleName;
-      print('输入------：${path.withoutExtension(buildStep.inputId.path)}，$moduleName');
     }
 
     final tmp = await temp;

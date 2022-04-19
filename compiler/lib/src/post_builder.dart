@@ -22,6 +22,9 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
     final dir = path.join('build','fair');
     Directory(dir).createSync(recursive: true);
 
+    /// Get the module value of the bundle file,
+    /// the module value will be used as the prefix of the bundle file name.
+    /// Example：'home_recommend.fair.json'
     var moduleNameKey = buildStep.inputId.path.replaceAll('.bundle.json', '');
     var moduleNameValue = ModuleNameHelper().modules[moduleNameKey];
 

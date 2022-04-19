@@ -128,6 +128,7 @@ class R {
   }
 }
 
+/// Use Map to save the module value of all bundle files.
 class ModuleNameHelper {
   var modules = {};
 
