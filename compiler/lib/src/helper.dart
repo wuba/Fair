@@ -127,3 +127,13 @@ class R {
     return R._(false, null, message);
   }
 }
+
+class ModuleNameHelper {
+  var modules = {};
+
+  static final ModuleNameHelper _singleton = ModuleNameHelper._internal();
+
+  factory ModuleNameHelper() => _singleton;
+
+  ModuleNameHelper._internal();
+}

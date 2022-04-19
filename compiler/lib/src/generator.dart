@@ -22,6 +22,7 @@ import 'helper.dart';
 class BundleGenerator extends GeneratorForAnnotation<FairPatch>
     with FairCompiler {
   final _elements = <String, Element>{};
+  late String moduleName;
 
   @override
   Future<String?> generateForAnnotatedElement(
@@ -33,6 +34,19 @@ class BundleGenerator extends GeneratorForAnnotation<FairPatch>
       );
     }
     print('[Fair] Compile ${buildStep.inputId.path} into bundle...');
+
+    /// Get the value of the module parameter in the FairPatch annotation
+    var module = annotation.peek('module');
+    if (module != null) {
+      if (module.stringValue != '') {
+        moduleName = module.stringValue;
+      } else {
+        moduleName = 'lib';
+      }
+      ModuleNameHelper().modules[path.withoutExtension(buildStep.inputId.path)] = moduleName;
+      print('输入------：${path.withoutExtension(buildStep.inputId.path)}，$moduleName');
+    }
+
     final tmp = await temp;
     tmp.writeAsBytesSync(await buildStep.readAsBytes(buildStep.inputId));
     var r = await compile(buildStep, ['-f', tmp.absolute.path]);
