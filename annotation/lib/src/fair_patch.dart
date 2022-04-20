@@ -6,7 +6,11 @@
 
 /// Annotation for Fair compiler, this indicate the top Widget need to generate as bundle resource
 class FairPatch {
-  const FairPatch();
+  /// Optional,Set the module for the currently generated bundle.
+  /// bundle files in the same module can be downloaded as a set of resources.
+  final String module;
+
+  const FairPatch({this.module = 'lib'});
 }
 
 /// Annotation to generate a library binding
