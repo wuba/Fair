@@ -3,7 +3,8 @@
  * Use of this source code is governed by a BSD type license that can be
  * found in the LICENSE file.
  */
-part of '../widgets/\$\$c.dart';
+
+import 'package:flutter/cupertino.dart';
 
 const defaultThickness = CupertinoScrollbar.defaultThickness;
 const defaultThicknessWhileDragging =

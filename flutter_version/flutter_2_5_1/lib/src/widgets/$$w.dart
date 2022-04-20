@@ -9,10 +9,10 @@ import 'utils.dart';
 const Color _kColor = Color(0xA0B71C1C);
 const double _kHeight = 12.0; // height of banner
 const TextStyle _kTextStyle = TextStyle(
-  color: Color(0xFFFFFFFF),
-  fontSize: _kHeight * 0.85,
-  fontWeight: FontWeight.w900,
-  height: 1.0,
+      color: Color(0xFFFFFFFF),
+      fontSize: _kHeight * 0.85,
+      fontWeight: FontWeight.w900,
+      height: 1.0,
 );
 
 const double kMiddleSpacing = 16.0;
@@ -21,7 +21,7 @@ var p = () => {
             child: props['child'],
             container: props['container'],
             debugShortDescription: props['debugShortDescription'],
-          ),
+      ),
       'WidgetsFlutterBinding.ensureInitialized': (props) =>
           WidgetsFlutterBinding.ensureInitialized(),
       'AnimatedCrossFade': (props) => AnimatedCrossFade(
@@ -35,26 +35,26 @@ var p = () => {
             crossFadeState: props['crossFadeState'],
             duration: props['duration'],
             reverseDuration: props['reverseDuration'],
-          ),
+      ),
       'AnimatedCrossFade#layoutBuilder': (props) => (
-            Widget topChild,
-            dynamic topChildKey,
-            Widget bottomChild,
-            dynamic bottomChildKey,
+          Widget topChild,
+          dynamic topChildKey,
+          Widget bottomChild,
+          dynamic bottomChildKey,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'AnimatedCrossFade.defaultLayoutBuilder': (props) =>
           AnimatedCrossFade.defaultLayoutBuilder(
-            props['pa'][0],
-            props['pa'][1],
-            props['pa'][2],
-            props['pa'][3],
+                props['pa'][0],
+                props['pa'][1],
+                props['pa'][2],
+                props['pa'][3],
           ),
       'CrossFadeState': {
-        'values': CrossFadeState.values,
-        'showFirst': CrossFadeState.showFirst,
-        'showSecond': CrossFadeState.showSecond,
+            'values': CrossFadeState.values,
+            'showFirst': CrossFadeState.showFirst,
+            'showSecond': CrossFadeState.showSecond,
       },
       'SingleChildScrollView': (props) => SingleChildScrollView(
             key: props['key'],
@@ -66,54 +66,54 @@ var p = () => {
             controller: props['controller'],
             child: props['child'],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
             restorationId: props['restorationId'],
             keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
                 ScrollViewKeyboardDismissBehavior.manual,
-          ),
+      ),
       'SliverFillViewport': (props) => SliverFillViewport(
             key: props['key'],
             delegate: props['delegate'],
             viewportFraction: props['viewportFraction']?.toDouble() ?? 1.0,
             padEnds: props['padEnds'] ?? true,
-          ),
+      ),
       'SliverFillRemaining': (props) => SliverFillRemaining(
             key: props['key'],
             child: props['child'],
             hasScrollBody: props['hasScrollBody'] ?? true,
             fillOverscroll: props['fillOverscroll'] ?? false,
-          ),
+      ),
       'DefaultWidgetsLocalizations': {
-        'delegate': DefaultWidgetsLocalizations.delegate,
+            'delegate': DefaultWidgetsLocalizations.delegate,
       },
       'DefaultWidgetsLocalizations.load': (props) =>
           DefaultWidgetsLocalizations.load(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'Localizations': (props) => Localizations(
             key: props['key'],
             locale: props['locale'],
-            delegates: as<LocalizationsDelegate>(props['delegates']),
+            delegates: as<LocalizationsDelegate>(props['delegates'])!,
             child: props['child'],
-          ),
+      ),
       'Localizations.override': (props) => Localizations.override(
             key: props['key'],
             context: props['context'],
             locale: props['locale'],
             delegates: as<LocalizationsDelegate>(props['delegates']),
             child: props['child'],
-          ),
+      ),
       'Localizations.localeOf': (props) => Localizations.localeOf(
             props['pa'][0],
-          ),
+      ),
       'Localizations.maybeLocaleOf': (props) => Localizations.maybeLocaleOf(
             props['pa'][0],
-          ),
+      ),
       'Localizations.of': (props) => Localizations.of(
             props['pa'][0],
             props['pa'][1],
-          ),
+      ),
       'CustomScrollView': (props) => CustomScrollView(
             key: props['key'],
             scrollDirection: props['scrollDirection'] ?? Axis.vertical,
@@ -129,12 +129,12 @@ var p = () => {
             slivers: as<Widget>(props['slivers']) ?? const <Widget>[],
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'ListView': (props) => ListView(
             key: props['key'],
             scrollDirection: props['scrollDirection'] ?? Axis.vertical,
@@ -153,12 +153,12 @@ var p = () => {
             children: as<Widget>(props['children']) ?? const <Widget>[],
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'ListView.builder': (props) => ListView.builder(
             key: props['key'],
             scrollDirection: props['scrollDirection'] ?? Axis.vertical,
@@ -178,12 +178,12 @@ var p = () => {
             cacheExtent: props['cacheExtent']?.toDouble(),
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'ListView.separated': (props) => ListView.separated(
             key: props['key'],
             scrollDirection: props['scrollDirection'] ?? Axis.vertical,
@@ -201,12 +201,12 @@ var p = () => {
             addSemanticIndexes: props['addSemanticIndexes'] ?? true,
             cacheExtent: props['cacheExtent']?.toDouble(),
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'ListView.custom': (props) => ListView.custom(
             key: props['key'],
             scrollDirection: props['scrollDirection'] ?? Axis.vertical,
@@ -222,30 +222,30 @@ var p = () => {
             cacheExtent: props['cacheExtent']?.toDouble(),
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'ListView.builder#itemBuilder': (props) => (
-            BuildContext context,
-            int index,
+          BuildContext context,
+          int index,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'ListView.separated#itemBuilder': (props) => (
-            BuildContext context,
-            int index,
+          BuildContext context,
+          int index,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'ListView.separated#separatorBuilder': (props) => (
-            BuildContext context,
-            int index,
+          BuildContext context,
+          int index,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'GridView': (props) => GridView(
             key: props['key'],
             scrollDirection: props['scrollDirection'] ?? Axis.vertical,
@@ -263,12 +263,12 @@ var p = () => {
             children: as<Widget>(props['children']) ?? const <Widget>[],
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
             keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
-          ),
+      ),
       'GridView.builder': (props) => GridView.builder(
             key: props['key'],
             scrollDirection: props['scrollDirection'] ?? Axis.vertical,
@@ -287,12 +287,12 @@ var p = () => {
             cacheExtent: props['cacheExtent']?.toDouble(),
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'GridView.custom': (props) => GridView.custom(
             key: props['key'],
             scrollDirection: props['scrollDirection'] ?? Axis.vertical,
@@ -307,12 +307,12 @@ var p = () => {
             cacheExtent: props['cacheExtent']?.toDouble(),
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'GridView.count': (props) => GridView.count(
             key: props['key'],
             scrollDirection: props['scrollDirection'] ?? Axis.vertical,
@@ -333,12 +333,12 @@ var p = () => {
             children: as<Widget>(props['children']) ?? const <Widget>[],
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'GridView.extent': (props) => GridView.extent(
             key: props['key'],
             scrollDirection: props['scrollDirection'] ?? Axis.vertical,
@@ -359,27 +359,27 @@ var p = () => {
             children: as<Widget>(props['children']) ?? const <Widget>[],
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'GridView.builder#itemBuilder': (props) => (
-            BuildContext context,
-            int index,
+          BuildContext context,
+          int index,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'ScrollViewKeyboardDismissBehavior': {
-        'values': ScrollViewKeyboardDismissBehavior.values,
-        'manual': ScrollViewKeyboardDismissBehavior.manual,
-        'onDrag': ScrollViewKeyboardDismissBehavior.onDrag,
+            'values': ScrollViewKeyboardDismissBehavior.values,
+            'manual': ScrollViewKeyboardDismissBehavior.manual,
+            'onDrag': ScrollViewKeyboardDismissBehavior.onDrag,
       },
       'Spacer': (props) => Spacer(
             key: props['key'],
             flex: props['flex'] ?? 1,
-          ),
+      ),
       'RawKeyboardListener': (props) => RawKeyboardListener(
             key: props['key'],
             focusNode: props['focusNode'],
@@ -387,9 +387,9 @@ var p = () => {
             includeSemantics: props['includeSemantics'] ?? true,
             onKey: props['onKey'],
             child: props['child'],
-          ),
+      ),
       'BouncingScrollSimulation': {
-        'maxSpringTransferVelocity':
+            'maxSpringTransferVelocity':
             BouncingScrollSimulation.maxSpringTransferVelocity,
       },
       'Overlay': (props) => Overlay(
@@ -397,70 +397,70 @@ var p = () => {
             initialEntries: as<OverlayEntry>(props['initialEntries']) ??
                 const <OverlayEntry>[],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'Overlay.of': (props) => Overlay.of(
             props['pa'][0],
             rootOverlay: props['rootOverlay'] ?? false,
             debugRequiredFor: props['debugRequiredFor'],
-          ),
+      ),
       'RawAutocomplete': (props) => RawAutocomplete(
             key: props['key'],
             optionsViewBuilder: props['optionsViewBuilder'],
             optionsBuilder: props['optionsBuilder'],
             displayStringForOption:
-                props['displayStringForOption'], // ?? defaultStringForOption,
+            props['displayStringForOption'], // ?? defaultStringForOption,
             fieldViewBuilder: props['fieldViewBuilder'],
             focusNode: props['focusNode'],
             onSelected: props['onSelected'],
             textEditingController: props['textEditingController'],
             initialValue: props['initialValue'],
-          ),
+      ),
       'RawAutocomplete#optionsViewBuilder': <T>(props) => (
-            BuildContext context,
-            AutocompleteOnSelected onSelected,
-            Iterable options,
+          BuildContext context,
+          AutocompleteOnSelected onSelected,
+          Iterable options,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'RawAutocomplete#optionsBuilder': <T>(props) => (
-            dynamic textEditingValue,
+          dynamic textEditingValue,
           ) {
             return (props['block']) as Iterable;
-          },
+      },
       'RawAutocomplete#displayStringForOption': <T>(props) => (
-            T option,
+          T option,
           ) {
             return (props['block']) as String;
-          },
+      },
       'RawAutocomplete#fieldViewBuilder': (props) => (
-            BuildContext context,
-            TextEditingController textEditingController,
-            FocusNode focusNode,
-            dynamic onFieldSubmitted,
+          BuildContext context,
+          TextEditingController textEditingController,
+          FocusNode focusNode,
+          dynamic onFieldSubmitted,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'RawAutocomplete#onSelected': <T>(props) => (
-            T option,
+          T option,
           ) {
             return (props['block']);
-          },
+      },
       'RawAutocomplete.onFieldSubmitted': (props) =>
           RawAutocomplete.onFieldSubmitted(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'RawAutocomplete.defaultStringForOption': (props) =>
           RawAutocomplete.defaultStringForOption(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'AutocompleteHighlightedOption': (props) => AutocompleteHighlightedOption(
             key: props['key'],
             highlightIndexNotifier: props['highlightIndexNotifier'],
             child: props['child'],
-          ),
+      ),
       'AutocompleteHighlightedOption.of': (props) =>
           AutocompleteHighlightedOption.of(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'WidgetsApp': (props) => WidgetsApp(
             key: props['key'],
@@ -469,8 +469,8 @@ var p = () => {
             onGenerateInitialRoutes: props['onGenerateInitialRoutes'],
             onUnknownRoute: props['onUnknownRoute'],
             navigatorObservers:
-                as<NavigatorObserver>(props['navigatorObservers']) ??
-                    const <NavigatorObserver>[],
+            as<NavigatorObserver>(props['navigatorObservers']) ??
+                const <NavigatorObserver>[],
             initialRoute: props['initialRoute'],
             pageRouteBuilder: props['pageRouteBuilder'],
             home: props['home'],
@@ -485,23 +485,23 @@ var p = () => {
             localeListResolutionCallback: props['localeListResolutionCallback'],
             localeResolutionCallback: props['localeResolutionCallback'],
             supportedLocales:
-                props['supportedLocales'] ?? const <Locale>[Locale('en', 'US')],
+            props['supportedLocales'] ?? const <Locale>[Locale('en', 'US')],
             showPerformanceOverlay: props['showPerformanceOverlay'] ?? false,
             checkerboardRasterCacheImages:
-                props['checkerboardRasterCacheImages'] ?? false,
+            props['checkerboardRasterCacheImages'] ?? false,
             checkerboardOffscreenLayers:
-                props['checkerboardOffscreenLayers'] ?? false,
+            props['checkerboardOffscreenLayers'] ?? false,
             showSemanticsDebugger: props['showSemanticsDebugger'] ?? false,
             debugShowWidgetInspector:
-                props['debugShowWidgetInspector'] ?? false,
+            props['debugShowWidgetInspector'] ?? false,
             debugShowCheckedModeBanner:
-                props['debugShowCheckedModeBanner'] ?? true,
+            props['debugShowCheckedModeBanner'] ?? true,
             inspectorSelectButtonBuilder: props['inspectorSelectButtonBuilder'],
             shortcuts: props['shortcuts'],
             actions: props['actions'],
             restorationScopeId: props['restorationScopeId'],
             useInheritedMediaQuery: props['useInheritedMediaQuery'] ?? false,
-          ),
+      ),
       'WidgetsApp.router': (props) => WidgetsApp.router(
             key: props['key'],
             routeInformationProvider: props['routeInformationProvider'],
@@ -518,159 +518,159 @@ var p = () => {
             localeListResolutionCallback: props['localeListResolutionCallback'],
             localeResolutionCallback: props['localeResolutionCallback'],
             supportedLocales:
-                props['supportedLocales'] ?? const <Locale>[Locale('en', 'US')],
+            props['supportedLocales'] ?? const <Locale>[Locale('en', 'US')],
             showPerformanceOverlay: props['showPerformanceOverlay'] ?? false,
             checkerboardRasterCacheImages:
-                props['checkerboardRasterCacheImages'] ?? false,
+            props['checkerboardRasterCacheImages'] ?? false,
             checkerboardOffscreenLayers:
-                props['checkerboardOffscreenLayers'] ?? false,
+            props['checkerboardOffscreenLayers'] ?? false,
             showSemanticsDebugger: props['showSemanticsDebugger'] ?? false,
             debugShowWidgetInspector:
-                props['debugShowWidgetInspector'] ?? false,
+            props['debugShowWidgetInspector'] ?? false,
             debugShowCheckedModeBanner:
-                props['debugShowCheckedModeBanner'] ?? true,
+            props['debugShowCheckedModeBanner'] ?? true,
             inspectorSelectButtonBuilder: props['inspectorSelectButtonBuilder'],
             shortcuts: props['shortcuts'],
             actions: props['actions'],
             restorationScopeId: props['restorationScopeId'],
             useInheritedMediaQuery: props['useInheritedMediaQuery'] ?? false,
-          ),
+      ),
       'WidgetsApp#onGenerateRoute': (props) => (
-            RouteSettings settings,
+          RouteSettings settings,
           ) {
             return (props['block']) as Route;
-          },
+      },
       'WidgetsApp#onGenerateInitialRoutes': (props) => (
-            String initialRoute,
+          String initialRoute,
           ) {
             return (props['block']) as List;
-          },
+      },
       'WidgetsApp#onUnknownRoute': (props) => (
-            RouteSettings settings,
+          RouteSettings settings,
           ) {
             return (props['block']) as Route;
-          },
+      },
       'WidgetsApp#pageRouteBuilder': (props) => (
-            RouteSettings settings,
-            WidgetBuilder builder,
+          RouteSettings settings,
+          WidgetBuilder builder,
           ) {
             return (props['block']) as PageRoute;
-          },
+      },
       'WidgetsApp#builder': (props) => (
-            BuildContext context,
-            Widget child,
+          BuildContext context,
+          Widget child,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'WidgetsApp#onGenerateTitle': (props) => (
-            BuildContext context,
+          BuildContext context,
           ) {
             return (props['block']) as String;
-          },
+      },
       'WidgetsApp#localeListResolutionCallback': (props) => (
-            List locales,
-            Iterable supportedLocales,
+          List locales,
+          Iterable supportedLocales,
           ) {
             return (props['block']) as dynamic;
-          },
+      },
       'WidgetsApp#localeResolutionCallback': (props) => (
-            dynamic locale,
-            Iterable supportedLocales,
+          dynamic locale,
+          Iterable supportedLocales,
           ) {
             return (props['block']) as dynamic;
-          },
+      },
       'WidgetsApp#inspectorSelectButtonBuilder': (props) => (
-            BuildContext context,
-            dynamic onPressed,
+          BuildContext context,
+          dynamic onPressed,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'WidgetsApp.router#builder': (props) => (
-            BuildContext context,
-            Widget child,
+          BuildContext context,
+          Widget child,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'WidgetsApp.router#onGenerateTitle': (props) => (
-            BuildContext context,
+          BuildContext context,
           ) {
             return (props['block']) as String;
-          },
+      },
       'WidgetsApp.router#localeListResolutionCallback': (props) => (
-            List locales,
-            Iterable supportedLocales,
+          List locales,
+          Iterable supportedLocales,
           ) {
             return (props['block']) as dynamic;
-          },
+      },
       'WidgetsApp.router#localeResolutionCallback': (props) => (
-            dynamic locale,
-            Iterable supportedLocales,
+          dynamic locale,
+          Iterable supportedLocales,
           ) {
             return (props['block']) as dynamic;
-          },
+      },
       'WidgetsApp.router#inspectorSelectButtonBuilder': (props) => (
-            BuildContext context,
-            dynamic onPressed,
+          BuildContext context,
+          dynamic onPressed,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'AndroidView': (props) => AndroidView(
             key: props['key'],
             viewType: props['viewType'],
             onPlatformViewCreated: props['onPlatformViewCreated'],
             hitTestBehavior:
-                props['hitTestBehavior'] ?? PlatformViewHitTestBehavior.opaque,
+            props['hitTestBehavior'] ?? PlatformViewHitTestBehavior.opaque,
             layoutDirection: props['layoutDirection'],
             gestureRecognizers: props['gestureRecognizers'],
             creationParams: props['creationParams'],
             creationParamsCodec: props['creationParamsCodec'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'UiKitView': (props) => UiKitView(
             key: props['key'],
             viewType: props['viewType'],
             onPlatformViewCreated: props['onPlatformViewCreated'],
             hitTestBehavior:
-                props['hitTestBehavior'] ?? PlatformViewHitTestBehavior.opaque,
+            props['hitTestBehavior'] ?? PlatformViewHitTestBehavior.opaque,
             layoutDirection: props['layoutDirection'],
             creationParams: props['creationParams'],
             creationParamsCodec: props['creationParamsCodec'],
             gestureRecognizers: props['gestureRecognizers'],
-          ),
+      ),
       'HtmlElementView': (props) => HtmlElementView(
             key: props['key'],
             viewType: props['viewType'],
             onPlatformViewCreated: props['onPlatformViewCreated'],
-          ),
+      ),
       'PlatformViewLink': (props) => PlatformViewLink(
             key: props['key'],
             surfaceFactory: props['surfaceFactory'],
             onCreatePlatformView: props['onCreatePlatformView'],
             viewType: props['viewType'],
-          ),
+      ),
       'PlatformViewLink#surfaceFactory': (props) => (
-            BuildContext context,
-            dynamic controller,
+          BuildContext context,
+          dynamic controller,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'PlatformViewLink#onCreatePlatformView': (props) => (
-            PlatformViewCreationParams params,
+          PlatformViewCreationParams params,
           ) {
             return (props['block']) as dynamic;
-          },
+      },
       'PlatformViewSurface': (props) => PlatformViewSurface(
             key: props['key'],
             controller: props['controller'],
             hitTestBehavior: props['hitTestBehavior'],
             gestureRecognizers: props['gestureRecognizers'],
-          ),
+      ),
       'AndroidViewSurface': (props) => AndroidViewSurface(
             key: props['key'],
             controller: props['controller'],
             hitTestBehavior: props['hitTestBehavior'],
             gestureRecognizers: props['gestureRecognizers'],
-          ),
+      ),
       'RawScrollbar': (props) => RawScrollbar(
             key: props['key'],
             child: props['child'],
@@ -680,7 +680,7 @@ var p = () => {
             thickness: props['thickness']?.toDouble(),
             thumbColor: props['thumbColor'],
             minThumbLength:
-                props['minThumbLength']?.toDouble(), // ?? _kMinThumbExtent,
+            props['minThumbLength']?.toDouble(), // ?? _kMinThumbExtent,
             minOverscrollLength: props['minOverscrollLength']?.toDouble(),
             fadeDuration: props['fadeDuration'], // ?? _kScrollbarFadeDuration,
             timeToFade: props['timeToFade'], // ?? _kScrollbarTimeToFade,
@@ -691,18 +691,18 @@ var p = () => {
             scrollbarOrientation: props['scrollbarOrientation'],
             mainAxisMargin: props['mainAxisMargin']?.toDouble() ?? 0.0,
             crossAxisMargin: props['crossAxisMargin']?.toDouble() ?? 0.0,
-          ),
+      ),
       'RawScrollbar#notificationPredicate': (props) => (
-            ScrollNotification notification,
+          ScrollNotification notification,
           ) {
             return (props['block']) as bool;
-          },
+      },
       'ScrollbarOrientation': {
-        'values': ScrollbarOrientation.values,
-        'left': ScrollbarOrientation.left,
-        'right': ScrollbarOrientation.right,
-        'top': ScrollbarOrientation.top,
-        'bottom': ScrollbarOrientation.bottom,
+            'values': ScrollbarOrientation.values,
+            'left': ScrollbarOrientation.left,
+            'right': ScrollbarOrientation.right,
+            'top': ScrollbarOrientation.top,
+            'bottom': ScrollbarOrientation.bottom,
       },
       'SafeArea': (props) => SafeArea(
             key: props['key'],
@@ -712,9 +712,9 @@ var p = () => {
             bottom: props['bottom'] ?? true,
             minimum: props['minimum'] ?? EdgeInsets.zero,
             maintainBottomViewPadding:
-                props['maintainBottomViewPadding'] ?? false,
+            props['maintainBottomViewPadding'] ?? false,
             child: props['child'],
-          ),
+      ),
       'SliverSafeArea': (props) => SliverSafeArea(
             key: props['key'],
             left: props['left'] ?? true,
@@ -723,15 +723,15 @@ var p = () => {
             bottom: props['bottom'] ?? true,
             minimum: props['minimum'] ?? EdgeInsets.zero,
             sliver: props['sliver'],
-          ),
+      ),
       'WillPopScope': (props) => WillPopScope(
             key: props['key'],
             child: props['child'],
             onWillPop: props['onWillPop'],
-          ),
+      ),
       'WillPopScope#onWillPop': (props) => () {
             return (props['block']) as Future;
-          },
+      },
       'Dismissible': (props) => Dismissible(
             key: props['key'],
             child: props['child'],
@@ -742,50 +742,50 @@ var p = () => {
             onDismissed: props['onDismissed'],
             direction: props['direction'] ?? DismissDirection.horizontal,
             resizeDuration:
-                props['resizeDuration'] ?? const Duration(milliseconds: 300),
+            props['resizeDuration'] ?? const Duration(milliseconds: 300),
             dismissThresholds: props['dismissThresholds'] ??
                 const <DismissDirection, double>{},
             movementDuration:
-                props['movementDuration'] ?? const Duration(milliseconds: 200),
+            props['movementDuration'] ?? const Duration(milliseconds: 200),
             crossAxisEndOffset: props['crossAxisEndOffset']?.toDouble() ?? 0.0,
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             behavior: props['behavior'] ?? HitTestBehavior.opaque,
-          ),
+      ),
       'Dismissible#confirmDismiss': (props) => (
-            DismissDirection direction,
+          DismissDirection direction,
           ) {
             return (props['block']) as Future;
-          },
+      },
       'Dismissible#onDismissed': (props) => (
-            DismissDirection direction,
+          DismissDirection direction,
           ) {
             return (props['block']);
-          },
+      },
       'DismissDirection': {
-        'values': DismissDirection.values,
-        'vertical': DismissDirection.vertical,
-        'horizontal': DismissDirection.horizontal,
-        'endToStart': DismissDirection.endToStart,
-        'startToEnd': DismissDirection.startToEnd,
-        'up': DismissDirection.up,
-        'down': DismissDirection.down,
-        'none': DismissDirection.none,
+            'values': DismissDirection.values,
+            'vertical': DismissDirection.vertical,
+            'horizontal': DismissDirection.horizontal,
+            'endToStart': DismissDirection.endToStart,
+            'startToEnd': DismissDirection.startToEnd,
+            'up': DismissDirection.up,
+            'down': DismissDirection.down,
+            'none': DismissDirection.none,
       },
       'SliverList': (props) => SliverList(
             key: props['key'],
             delegate: props['delegate'],
-          ),
+      ),
       'SliverFixedExtentList': (props) => SliverFixedExtentList(
             key: props['key'],
             delegate: props['delegate'],
             itemExtent: props['itemExtent']?.toDouble(),
-          ),
+      ),
       'SliverGrid': (props) => SliverGrid(
             key: props['key'],
             delegate: props['delegate'],
             gridDelegate: props['gridDelegate'],
-          ),
+      ),
       'SliverGrid.count': (props) => SliverGrid.count(
             key: props['key'],
             crossAxisCount: props['crossAxisCount'],
@@ -793,7 +793,7 @@ var p = () => {
             crossAxisSpacing: props['crossAxisSpacing']?.toDouble() ?? 0.0,
             childAspectRatio: props['childAspectRatio']?.toDouble() ?? 1.0,
             children: as<Widget>(props['children']) ?? const <Widget>[],
-          ),
+      ),
       'SliverGrid.extent': (props) => SliverGrid.extent(
             key: props['key'],
             maxCrossAxisExtent: props['maxCrossAxisExtent']?.toDouble(),
@@ -801,29 +801,29 @@ var p = () => {
             crossAxisSpacing: props['crossAxisSpacing']?.toDouble() ?? 0.0,
             childAspectRatio: props['childAspectRatio']?.toDouble() ?? 1.0,
             children: as<Widget>(props['children']) ?? const <Widget>[],
-          ),
+      ),
       'SliverOpacity': (props) => SliverOpacity(
             key: props['key'],
             opacity: props['opacity']?.toDouble(),
             alwaysIncludeSemantics: props['alwaysIncludeSemantics'] ?? false,
             sliver: props['sliver'],
-          ),
+      ),
       'SliverIgnorePointer': (props) => SliverIgnorePointer(
             key: props['key'],
             ignoring: props['ignoring'] ?? true,
             ignoringSemantics: props['ignoringSemantics'],
             sliver: props['sliver'],
-          ),
+      ),
       'SliverOffstage': (props) => SliverOffstage(
             key: props['key'],
             offstage: props['offstage'] ?? true,
             sliver: props['sliver'],
-          ),
+      ),
       'KeepAlive': (props) => KeepAlive(
             key: props['key'],
             keepAlive: props['keepAlive'],
             child: props['child'],
-          ),
+      ),
       'ListWheelScrollView': (props) => ListWheelScrollView(
             key: props['key'],
             controller: props['controller'],
@@ -836,40 +836,40 @@ var p = () => {
             useMagnifier: props['useMagnifier'] ?? false,
             magnification: props['magnification']?.toDouble() ?? 1.0,
             overAndUnderCenterOpacity:
-                props['overAndUnderCenterOpacity']?.toDouble() ?? 1.0,
+            props['overAndUnderCenterOpacity']?.toDouble() ?? 1.0,
             itemExtent: props['itemExtent']?.toDouble(),
             squeeze: props['squeeze']?.toDouble() ?? 1.0,
             onSelectedItemChanged: props['onSelectedItemChanged'],
             renderChildrenOutsideViewport:
-                props['renderChildrenOutsideViewport'] ?? false,
+            props['renderChildrenOutsideViewport'] ?? false,
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
             restorationId: props['restorationId'],
             scrollBehavior: props['scrollBehavior'],
-            children: as<Widget>(props['children']),
-          ),
+            children: as<Widget>(props['children'])!,
+      ),
       'ListWheelScrollView.useDelegate': (props) =>
           ListWheelScrollView.useDelegate(
-            key: props['key'],
-            controller: props['controller'],
-            physics: props['physics'],
-            diameterRatio: props['diameterRatio']?.toDouble() ??
-                RenderListWheelViewport.defaultDiameterRatio,
-            perspective: props['perspective']?.toDouble() ??
-                RenderListWheelViewport.defaultPerspective,
-            offAxisFraction: props['offAxisFraction']?.toDouble() ?? 0.0,
-            useMagnifier: props['useMagnifier'] ?? false,
-            magnification: props['magnification']?.toDouble() ?? 1.0,
-            overAndUnderCenterOpacity:
+                key: props['key'],
+                controller: props['controller'],
+                physics: props['physics'],
+                diameterRatio: props['diameterRatio']?.toDouble() ??
+                    RenderListWheelViewport.defaultDiameterRatio,
+                perspective: props['perspective']?.toDouble() ??
+                    RenderListWheelViewport.defaultPerspective,
+                offAxisFraction: props['offAxisFraction']?.toDouble() ?? 0.0,
+                useMagnifier: props['useMagnifier'] ?? false,
+                magnification: props['magnification']?.toDouble() ?? 1.0,
+                overAndUnderCenterOpacity:
                 props['overAndUnderCenterOpacity']?.toDouble() ?? 1.0,
-            itemExtent: props['itemExtent']?.toDouble(),
-            squeeze: props['squeeze']?.toDouble() ?? 1.0,
-            onSelectedItemChanged: props['onSelectedItemChanged'],
-            renderChildrenOutsideViewport:
+                itemExtent: props['itemExtent']?.toDouble(),
+                squeeze: props['squeeze']?.toDouble() ?? 1.0,
+                onSelectedItemChanged: props['onSelectedItemChanged'],
+                renderChildrenOutsideViewport:
                 props['renderChildrenOutsideViewport'] ?? false,
-            clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-            restorationId: props['restorationId'],
-            scrollBehavior: props['scrollBehavior'],
-            childDelegate: props['childDelegate'],
+                clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
+                restorationId: props['restorationId'],
+                scrollBehavior: props['scrollBehavior'],
+                childDelegate: props['childDelegate'],
           ),
       'ListWheelViewport': (props) => ListWheelViewport(
             key: props['key'],
@@ -881,36 +881,36 @@ var p = () => {
             useMagnifier: props['useMagnifier'] ?? false,
             magnification: props['magnification']?.toDouble() ?? 1.0,
             overAndUnderCenterOpacity:
-                props['overAndUnderCenterOpacity']?.toDouble() ?? 1.0,
+            props['overAndUnderCenterOpacity']?.toDouble() ?? 1.0,
             itemExtent: props['itemExtent']?.toDouble(),
             squeeze: props['squeeze']?.toDouble() ?? 1.0,
             renderChildrenOutsideViewport:
-                props['renderChildrenOutsideViewport'] ?? false,
+            props['renderChildrenOutsideViewport'] ?? false,
             offset: props['offset'],
             childDelegate: props['childDelegate'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'ScrollDragController': {
-        'momentumRetainStationaryDurationThreshold':
+            'momentumRetainStationaryDurationThreshold':
             ScrollDragController.momentumRetainStationaryDurationThreshold,
-        'momentumRetainVelocityThresholdFactor':
+            'momentumRetainVelocityThresholdFactor':
             ScrollDragController.momentumRetainVelocityThresholdFactor,
-        'motionStoppedDurationThreshold':
+            'motionStoppedDurationThreshold':
             ScrollDragController.motionStoppedDurationThreshold,
       },
       'AutofillGroup': (props) => AutofillGroup(
             key: props['key'],
             child: props['child'],
             onDisposeAction:
-                props['onDisposeAction'] ?? AutofillContextAction.commit,
-          ),
+            props['onDisposeAction'] ?? AutofillContextAction.commit,
+      ),
       'AutofillGroup.of': (props) => AutofillGroup.of(
             props['pa'][0],
-          ),
+      ),
       'AutofillContextAction': {
-        'values': AutofillContextAction.values,
-        'commit': AutofillContextAction.commit,
-        'cancel': AutofillContextAction.cancel,
+            'values': AutofillContextAction.values,
+            'commit': AutofillContextAction.commit,
+            'cancel': AutofillContextAction.cancel,
       },
       'InteractiveViewer': (props) => InteractiveViewer(
             key: props['key'],
@@ -927,7 +927,7 @@ var p = () => {
             scaleEnabled: props['scaleEnabled'] ?? true,
             transformationController: props['transformationController'],
             child: props['child'],
-          ),
+      ),
       'InteractiveViewer.builder': (props) => InteractiveViewer.builder(
             key: props['key'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
@@ -942,28 +942,28 @@ var p = () => {
             scaleEnabled: props['scaleEnabled'] ?? true,
             transformationController: props['transformationController'],
             builder: props['builder'],
-          ),
+      ),
       'InteractiveViewer.builder#builder': (props) => (
-            BuildContext context,
-            dynamic viewport,
+          BuildContext context,
+          dynamic viewport,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'ModalBarrier': (props) => ModalBarrier(
             key: props['key'],
             color: props['color'],
             dismissible: props['dismissible'] ?? true,
             semanticsLabel: props['semanticsLabel'],
             barrierSemanticsDismissible:
-                props['barrierSemanticsDismissible'] ?? true,
-          ),
+            props['barrierSemanticsDismissible'] ?? true,
+      ),
       'AnimatedModalBarrier': (props) => AnimatedModalBarrier(
             key: props['key'],
             color: props['color'],
             dismissible: props['dismissible'] ?? true,
             semanticsLabel: props['semanticsLabel'],
             barrierSemanticsDismissible: props['barrierSemanticsDismissible'],
-          ),
+      ),
       'Focus': (props) => Focus(
             key: props['key'],
             child: props['child'],
@@ -977,30 +977,30 @@ var p = () => {
             descendantsAreFocusable: props['descendantsAreFocusable'] ?? true,
             skipTraversal: props['skipTraversal'],
             includeSemantics: props['includeSemantics'] ?? true,
-          ),
+      ),
       'Focus#onKey': (props) => (
-            FocusNode node,
-            dynamic event,
+          FocusNode node,
+          dynamic event,
           ) {
             return (props['block']) as KeyEventResult;
-          },
+      },
       'Focus#onKeyEvent': (props) => (
-            FocusNode node,
-            dynamic event,
+          FocusNode node,
+          dynamic event,
           ) {
             return (props['block']) as KeyEventResult;
-          },
+      },
       'Focus.of': (props) => Focus.of(
             props['pa'][0],
             scopeOk: props['scopeOk'] ?? false,
-          ),
+      ),
       'Focus.maybeOf': (props) => Focus.maybeOf(
             props['pa'][0],
             scopeOk: props['scopeOk'] ?? false,
-          ),
+      ),
       'Focus.isAt': (props) => Focus.isAt(
             props['pa'][0],
-          ),
+      ),
       'FocusScope': (props) => FocusScope(
             key: props['key'],
             node: props['node'],
@@ -1012,27 +1012,27 @@ var p = () => {
             onKeyEvent: props['onKeyEvent'],
             onKey: props['onKey'],
             debugLabel: props['debugLabel'],
-          ),
+      ),
       'FocusScope#onKeyEvent': (props) => (
-            FocusNode node,
-            dynamic event,
+          FocusNode node,
+          dynamic event,
           ) {
             return (props['block']) as KeyEventResult;
-          },
+      },
       'FocusScope#onKey': (props) => (
-            FocusNode node,
-            dynamic event,
+          FocusNode node,
+          dynamic event,
           ) {
             return (props['block']) as KeyEventResult;
-          },
+      },
       'FocusScope.of': (props) => FocusScope.of(
             props['pa'][0],
-          ),
+      ),
       'ExcludeFocus': (props) => ExcludeFocus(
             key: props['key'],
             excluding: props['excluding'] ?? true,
             child: props['child'],
-          ),
+      ),
       'FadeInImage': (props) => FadeInImage(
             key: props['key'],
             placeholder: props['placeholder'],
@@ -1042,10 +1042,10 @@ var p = () => {
             excludeFromSemantics: props['excludeFromSemantics'] ?? false,
             imageSemanticLabel: props['imageSemanticLabel'],
             fadeOutDuration:
-                props['fadeOutDuration'] ?? const Duration(milliseconds: 300),
+            props['fadeOutDuration'] ?? const Duration(milliseconds: 300),
             fadeOutCurve: props['fadeOutCurve'] ?? Curves.easeOut,
             fadeInDuration:
-                props['fadeInDuration'] ?? const Duration(milliseconds: 700),
+            props['fadeInDuration'] ?? const Duration(milliseconds: 700),
             fadeInCurve: props['fadeInCurve'] ?? Curves.easeIn,
             width: props['width']?.toDouble(),
             height: props['height']?.toDouble(),
@@ -1053,7 +1053,7 @@ var p = () => {
             alignment: props['alignment'] ?? Alignment.center,
             repeat: props['repeat'] ?? ImageRepeat.noRepeat,
             matchTextDirection: props['matchTextDirection'] ?? false,
-          ),
+      ),
       'FadeInImage.memoryNetwork': (props) => FadeInImage.memoryNetwork(
             key: props['key'],
             placeholder: props['placeholder'],
@@ -1065,10 +1065,10 @@ var p = () => {
             excludeFromSemantics: props['excludeFromSemantics'] ?? false,
             imageSemanticLabel: props['imageSemanticLabel'],
             fadeOutDuration:
-                props['fadeOutDuration'] ?? const Duration(milliseconds: 300),
+            props['fadeOutDuration'] ?? const Duration(milliseconds: 300),
             fadeOutCurve: props['fadeOutCurve'] ?? Curves.easeOut,
             fadeInDuration:
-                props['fadeInDuration'] ?? const Duration(milliseconds: 700),
+            props['fadeInDuration'] ?? const Duration(milliseconds: 700),
             fadeInCurve: props['fadeInCurve'] ?? Curves.easeIn,
             width: props['width']?.toDouble(),
             height: props['height']?.toDouble(),
@@ -1080,7 +1080,7 @@ var p = () => {
             placeholderCacheHeight: props['placeholderCacheHeight'],
             imageCacheWidth: props['imageCacheWidth'],
             imageCacheHeight: props['imageCacheHeight'],
-          ),
+      ),
       'FadeInImage.assetNetwork': (props) => FadeInImage.assetNetwork(
             key: props['key'],
             placeholder: props['placeholder'],
@@ -1093,10 +1093,10 @@ var p = () => {
             excludeFromSemantics: props['excludeFromSemantics'] ?? false,
             imageSemanticLabel: props['imageSemanticLabel'],
             fadeOutDuration:
-                props['fadeOutDuration'] ?? const Duration(milliseconds: 300),
+            props['fadeOutDuration'] ?? const Duration(milliseconds: 300),
             fadeOutCurve: props['fadeOutCurve'] ?? Curves.easeOut,
             fadeInDuration:
-                props['fadeInDuration'] ?? const Duration(milliseconds: 700),
+            props['fadeInDuration'] ?? const Duration(milliseconds: 700),
             fadeInCurve: props['fadeInCurve'] ?? Curves.easeIn,
             width: props['width']?.toDouble(),
             height: props['height']?.toDouble(),
@@ -1108,67 +1108,67 @@ var p = () => {
             placeholderCacheHeight: props['placeholderCacheHeight'],
             imageCacheWidth: props['imageCacheWidth'],
             imageCacheHeight: props['imageCacheHeight'],
-          ),
+      ),
       'FadeInImage#placeholderErrorBuilder': (props) => (
-            BuildContext context,
-            Object error,
-            StackTrace stackTrace,
+          BuildContext context,
+          Object error,
+          StackTrace stackTrace,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'FadeInImage#imageErrorBuilder': (props) => (
-            BuildContext context,
-            Object error,
-            StackTrace stackTrace,
+          BuildContext context,
+          Object error,
+          StackTrace stackTrace,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'FadeInImage.memoryNetwork#placeholderErrorBuilder': (props) => (
-            BuildContext context,
-            Object error,
-            StackTrace stackTrace,
+          BuildContext context,
+          Object error,
+          StackTrace stackTrace,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'FadeInImage.memoryNetwork#imageErrorBuilder': (props) => (
-            BuildContext context,
-            Object error,
-            StackTrace stackTrace,
+          BuildContext context,
+          Object error,
+          StackTrace stackTrace,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'FadeInImage.assetNetwork#placeholderErrorBuilder': (props) => (
-            BuildContext context,
-            Object error,
-            StackTrace stackTrace,
+          BuildContext context,
+          Object error,
+          StackTrace stackTrace,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'FadeInImage.assetNetwork#imageErrorBuilder': (props) => (
-            BuildContext context,
-            Object error,
-            StackTrace stackTrace,
+          BuildContext context,
+          Object error,
+          StackTrace stackTrace,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'OverflowBar': (props) => OverflowBar(
             key: props['key'],
             spacing: props['spacing']?.toDouble() ?? 0.0,
             alignment: props['alignment'],
             overflowSpacing: props['overflowSpacing']?.toDouble() ?? 0.0,
             overflowAlignment:
-                props['overflowAlignment'] ?? OverflowBarAlignment.start,
+            props['overflowAlignment'] ?? OverflowBarAlignment.start,
             overflowDirection:
-                props['overflowDirection'] ?? VerticalDirection.down,
+            props['overflowDirection'] ?? VerticalDirection.down,
             textDirection: props['textDirection'],
             clipBehavior: props['clipBehavior'] ?? Clip.none,
             children: as<Widget>(props['children']) ?? const <Widget>[],
-          ),
+      ),
       'OverflowBarAlignment': {
-        'values': OverflowBarAlignment.values,
-        'start': OverflowBarAlignment.start,
-        'end': OverflowBarAlignment.end,
-        'center': OverflowBarAlignment.center,
+            'values': OverflowBarAlignment.values,
+            'start': OverflowBarAlignment.start,
+            'end': OverflowBarAlignment.end,
+            'center': OverflowBarAlignment.center,
       },
       'AnimatedList': (props) => AnimatedList(
             key: props['key'],
@@ -1182,66 +1182,66 @@ var p = () => {
             shrinkWrap: props['shrinkWrap'] ?? false,
             padding: props['padding'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'AnimatedList#itemBuilder': (props) => (
-            BuildContext context,
-            int index,
-            dynamic animation,
+          BuildContext context,
+          int index,
+          dynamic animation,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'AnimatedList.of': (props) => AnimatedList.of(
             props['pa'][0],
-          ),
+      ),
       'AnimatedList.maybeOf': (props) => AnimatedList.maybeOf(
             props['pa'][0],
-          ),
+      ),
       'SliverAnimatedList': (props) => SliverAnimatedList(
             key: props['key'],
             itemBuilder: props['itemBuilder'],
             initialItemCount: props['initialItemCount'] ?? 0,
-          ),
+      ),
       'SliverAnimatedList#itemBuilder': (props) => (
-            BuildContext context,
-            int index,
-            dynamic animation,
+          BuildContext context,
+          int index,
+          dynamic animation,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'SliverAnimatedList.of': (props) => SliverAnimatedList.of(
             props['pa'][0],
-          ),
+      ),
       'SliverAnimatedList.maybeOf': (props) => SliverAnimatedList.maybeOf(
             props['pa'][0],
-          ),
+      ),
       'RestorationScope': (props) => RestorationScope(
             key: props['key'],
             restorationId: props['restorationId'],
             child: props['child'],
-          ),
+      ),
       'RestorationScope.of': (props) => RestorationScope.of(
             props['pa'][0],
-          ),
+      ),
       'UnmanagedRestorationScope': (props) => UnmanagedRestorationScope(
             key: props['key'],
             bucket: props['bucket'],
             child: props['child'],
-          ),
+      ),
       'RootRestorationScope': (props) => RootRestorationScope(
             key: props['key'],
             restorationId: props['restorationId'],
             child: props['child'],
-          ),
+      ),
       'TickerMode': (props) => TickerMode(
             key: props['key'],
             enabled: props['enabled'],
             child: props['child'],
-          ),
+      ),
       'TickerMode.of': (props) => TickerMode.of(
             props['pa'][0],
-          ),
+      ),
       'TextSelectionOverlay': {
-        'fadeDuration': TextSelectionOverlay.fadeDuration,
+            'fadeDuration': TextSelectionOverlay.fadeDuration,
       },
       'TextSelectionGestureDetector': (props) => TextSelectionGestureDetector(
             key: props['key'],
@@ -1261,24 +1261,24 @@ var p = () => {
             onDragSelectionEnd: props['onDragSelectionEnd'],
             behavior: props['behavior'],
             child: props['child'],
-          ),
+      ),
       'TextSelectionGestureDetector#onDragSelectionUpdate': (props) => (
-            dynamic startDetails,
-            dynamic updateDetails,
+          dynamic startDetails,
+          dynamic updateDetails,
           ) {
             return (props['block']);
-          },
+      },
       'TextSelectionHandleType': {
-        'values': TextSelectionHandleType.values,
-        'left': TextSelectionHandleType.left,
-        'right': TextSelectionHandleType.right,
-        'collapsed': TextSelectionHandleType.collapsed,
+            'values': TextSelectionHandleType.values,
+            'left': TextSelectionHandleType.left,
+            'right': TextSelectionHandleType.right,
+            'collapsed': TextSelectionHandleType.collapsed,
       },
       'ClipboardStatus': {
-        'values': ClipboardStatus.values,
-        'pasteable': ClipboardStatus.pasteable,
-        'unknown': ClipboardStatus.unknown,
-        'notPasteable': ClipboardStatus.notPasteable,
+            'values': ClipboardStatus.values,
+            'pasteable': ClipboardStatus.pasteable,
+            'unknown': ClipboardStatus.unknown,
+            'notPasteable': ClipboardStatus.notPasteable,
       },
       'SemanticsDebugger': (props) => SemanticsDebugger(
             key: props['key'],
@@ -1286,39 +1286,39 @@ var p = () => {
             labelStyle: props['labelStyle'] ??
                 const TextStyle(
                     color: Color(0xFF000000), fontSize: 10.0, height: 0.8),
-          ),
+      ),
       'IconTheme': (props) => IconTheme(
             key: props['key'],
             data: props['data'],
             child: props['child'],
-          ),
+      ),
       'IconTheme.merge': (props) => IconTheme.merge(
             key: props['key'],
             data: props['data'],
             child: props['child'],
-          ),
+      ),
       'IconTheme.of': (props) => IconTheme.of(
             props['pa'][0],
-          ),
+      ),
       'ScrollConfiguration': (props) => ScrollConfiguration(
             key: props['key'],
             behavior: props['behavior'],
             child: props['child'],
-          ),
+      ),
       'ScrollConfiguration.of': (props) => ScrollConfiguration.of(
             props['pa'][0],
-          ),
+      ),
       'ErrorWidget': (props) => ErrorWidget(
             props['pa'][0],
-          ),
+      ),
       'ErrorWidget.withDetails': (props) => ErrorWidget.withDetails(
             message: props['message'] ?? '',
             error: props['error'],
-          ),
+      ),
       'AutomaticKeepAlive': (props) => AutomaticKeepAlive(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'Viewport': (props) => Viewport(
             key: props['key'],
             axisDirection: props['axisDirection'] ?? AxisDirection.down,
@@ -1328,14 +1328,14 @@ var p = () => {
             center: props['center'],
             cacheExtent: props['cacheExtent']?.toDouble(),
             cacheExtentStyle:
-                props['cacheExtentStyle'] ?? CacheExtentStyle.pixel,
+            props['cacheExtentStyle'] ?? CacheExtentStyle.pixel,
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
             slivers: as<Widget>(props['slivers']) ?? const <Widget>[],
-          ),
+      ),
       'Viewport.getDefaultCrossAxisDirection': (props) =>
           Viewport.getDefaultCrossAxisDirection(
-            props['pa'][0],
-            props['pa'][1],
+                props['pa'][0],
+                props['pa'][1],
           ),
       'ShrinkWrappingViewport': (props) => ShrinkWrappingViewport(
             key: props['key'],
@@ -1344,11 +1344,11 @@ var p = () => {
             offset: props['offset'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
             slivers: as<Widget>(props['slivers']) ?? const <Widget>[],
-          ),
+      ),
       'SizeChangedLayoutNotifier': (props) => SizeChangedLayoutNotifier(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'Hero': (props) => Hero(
             key: props['key'],
             tag: props['tag'],
@@ -1356,40 +1356,40 @@ var p = () => {
             flightShuttleBuilder: props['flightShuttleBuilder'],
             placeholderBuilder: props['placeholderBuilder'],
             transitionOnUserGestures:
-                props['transitionOnUserGestures'] ?? false,
+            props['transitionOnUserGestures'] ?? false,
             child: props['child'],
-          ),
+      ),
       'Hero#createRectTween': (props) => (
-            dynamic begin,
-            dynamic end,
+          dynamic begin,
+          dynamic end,
           ) {
             return (props['block']) as dynamic;
-          },
+      },
       'Hero#flightShuttleBuilder': (props) => (
-            BuildContext flightContext,
-            dynamic animation,
-            HeroFlightDirection flightDirection,
-            BuildContext fromHeroContext,
-            BuildContext toHeroContext,
+          BuildContext flightContext,
+          dynamic animation,
+          HeroFlightDirection flightDirection,
+          BuildContext fromHeroContext,
+          BuildContext toHeroContext,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'Hero#placeholderBuilder': (props) => (
-            BuildContext context,
-            dynamic heroSize,
-            Widget child,
+          BuildContext context,
+          dynamic heroSize,
+          Widget child,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'HeroMode': (props) => HeroMode(
             key: props['key'],
             child: props['child'],
             enabled: props['enabled'] ?? true,
-          ),
+      ),
       'HeroFlightDirection': {
-        'values': HeroFlightDirection.values,
-        'push': HeroFlightDirection.push,
-        'pop': HeroFlightDirection.pop,
+            'values': HeroFlightDirection.values,
+            'push': HeroFlightDirection.push,
+            'pop': HeroFlightDirection.pop,
       },
       'GlowingOverscrollIndicator': (props) => GlowingOverscrollIndicator(
             key: props['key'],
@@ -1400,12 +1400,12 @@ var p = () => {
             notificationPredicate: props['notificationPredicate'] ??
                 defaultScrollNotificationPredicate,
             child: props['child'],
-          ),
+      ),
       'GlowingOverscrollIndicator#notificationPredicate': (props) => (
-            ScrollNotification notification,
+          ScrollNotification notification,
           ) {
             return (props['block']) as bool;
-          },
+      },
       'Draggable': (props) => Draggable(
             key: props['key'],
             child: props['child'],
@@ -1424,34 +1424,34 @@ var p = () => {
             onDragEnd: props['onDragEnd'],
             onDragCompleted: props['onDragCompleted'],
             ignoringFeedbackSemantics:
-                props['ignoringFeedbackSemantics'] ?? true,
+            props['ignoringFeedbackSemantics'] ?? true,
             rootOverlay: props['rootOverlay'] ?? false,
             hitTestBehavior:
-                props['hitTestBehavior'] ?? HitTestBehavior.deferToChild,
-          ),
+            props['hitTestBehavior'] ?? HitTestBehavior.deferToChild,
+      ),
       'Draggable#dragAnchorStrategy': (props) => (
-            Draggable draggable,
-            BuildContext context,
-            dynamic position,
+          Draggable draggable,
+          BuildContext context,
+          dynamic position,
           ) {
             return (props['block']) as dynamic;
-          },
+      },
       'Draggable#onDragUpdate': (props) => (
-            dynamic details,
+          dynamic details,
           ) {
             return (props['block']);
-          },
+      },
       'Draggable#onDraggableCanceled': (props) => (
-            dynamic velocity,
-            dynamic offset,
+          dynamic velocity,
+          dynamic offset,
           ) {
             return (props['block']);
-          },
+      },
       'Draggable#onDragEnd': (props) => (
-            DraggableDetails details,
+          DraggableDetails details,
           ) {
             return (props['block']);
-          },
+      },
       'LongPressDraggable': (props) => LongPressDraggable(
             key: props['key'],
             child: props['child'],
@@ -1470,32 +1470,32 @@ var p = () => {
             onDragCompleted: props['onDragCompleted'],
             hapticFeedbackOnStart: props['hapticFeedbackOnStart'] ?? true,
             ignoringFeedbackSemantics:
-                props['ignoringFeedbackSemantics'] ?? true,
+            props['ignoringFeedbackSemantics'] ?? true,
             delay: props['delay'] ?? kLongPressTimeout,
-          ),
+      ),
       'LongPressDraggable#dragAnchorStrategy': (props) => (
-            Draggable draggable,
-            BuildContext context,
-            dynamic position,
+          Draggable draggable,
+          BuildContext context,
+          dynamic position,
           ) {
             return (props['block']) as dynamic;
-          },
+      },
       'LongPressDraggable#onDragUpdate': (props) => (
-            dynamic details,
+          dynamic details,
           ) {
             return (props['block']);
-          },
+      },
       'LongPressDraggable#onDraggableCanceled': (props) => (
-            dynamic velocity,
-            dynamic offset,
+          dynamic velocity,
+          dynamic offset,
           ) {
             return (props['block']);
-          },
+      },
       'LongPressDraggable#onDragEnd': (props) => (
-            DraggableDetails details,
+          DraggableDetails details,
           ) {
             return (props['block']);
-          },
+      },
       'DragTarget': (props) => DragTarget(
             key: props['key'],
             builder: props['builder'],
@@ -1505,52 +1505,52 @@ var p = () => {
             onLeave: props['onLeave'],
             onMove: props['onMove'],
             hitTestBehavior:
-                props['hitTestBehavior'] ?? HitTestBehavior.translucent,
-          ),
+            props['hitTestBehavior'] ?? HitTestBehavior.translucent,
+      ),
       'DragTarget#builder': <T>(props) => (
-            BuildContext context,
-            List candidateData,
-            List rejectedData,
+          BuildContext context,
+          List candidateData,
+          List rejectedData,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'DragTarget#onWillAccept': <T>(props) => (
-            T data,
+          T data,
           ) {
             return (props['block']) as bool;
-          },
+      },
       'DragTarget#onAccept': <T>(props) => (
-            T data,
+          T data,
           ) {
             return (props['block']);
-          },
+      },
       'DragTarget#onAcceptWithDetails': <T>(props) => (
-            DragTargetDetails details,
+          DragTargetDetails details,
           ) {
             return (props['block']);
-          },
+      },
       'DragTarget#onLeave': <T>(props) => (
-            T data,
+          T data,
           ) {
             return (props['block']);
-          },
+      },
       'DragTarget#onMove': <T>(props) => (
-            DragTargetDetails details,
+          DragTargetDetails details,
           ) {
             return (props['block']);
-          },
+      },
       'ScrollNotificationObserver': (props) => ScrollNotificationObserver(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'ScrollNotificationObserver.of': (props) => ScrollNotificationObserver.of(
             props['pa'][0],
-          ),
+      ),
       'ImageFiltered': (props) => ImageFiltered(
             key: props['key'],
             imageFilter: props['imageFilter'],
             child: props['child'],
-          ),
+      ),
       'KeyboardListener': (props) => KeyboardListener(
             key: props['key'],
             focusNode: props['focusNode'],
@@ -1558,25 +1558,25 @@ var p = () => {
             includeSemantics: props['includeSemantics'] ?? true,
             onKeyEvent: props['onKeyEvent'],
             child: props['child'],
-          ),
+      ),
       'Shortcuts': (props) => Shortcuts(
             key: props['key'],
             manager: props['manager'],
             shortcuts: props['shortcuts'],
             child: props['child'],
             debugLabel: props['debugLabel'],
-          ),
+      ),
       'Shortcuts.of': (props) => Shortcuts.of(
             props['pa'][0],
-          ),
+      ),
       'Shortcuts.maybeOf': (props) => Shortcuts.maybeOf(
             props['pa'][0],
-          ),
+      ),
       'CallbackShortcuts': (props) => CallbackShortcuts(
             key: props['key'],
             bindings: props['bindings'],
             child: props['child'],
-          ),
+      ),
       'PageView': (props) => PageView(
             key: props['key'],
             scrollDirection: props['scrollDirection'] ?? Axis.horizontal,
@@ -1587,13 +1587,13 @@ var p = () => {
             onPageChanged: props['onPageChanged'],
             children: as<Widget>(props['children']) ?? const <Widget>[],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             allowImplicitScrolling: props['allowImplicitScrolling'] ?? false,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
             scrollBehavior: props['scrollBehavior'],
             padEnds: props['padEnds'] ?? true,
-          ),
+      ),
       'PageView.builder': (props) => PageView.builder(
             key: props['key'],
             scrollDirection: props['scrollDirection'] ?? Axis.horizontal,
@@ -1605,13 +1605,13 @@ var p = () => {
             itemBuilder: props['itemBuilder'],
             itemCount: props['itemCount'],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             allowImplicitScrolling: props['allowImplicitScrolling'] ?? false,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
             scrollBehavior: props['scrollBehavior'],
             padEnds: props['padEnds'] ?? true,
-          ),
+      ),
       'PageView.custom': (props) => PageView.custom(
             key: props['key'],
             scrollDirection: props['scrollDirection'] ?? Axis.horizontal,
@@ -1622,29 +1622,29 @@ var p = () => {
             onPageChanged: props['onPageChanged'],
             childrenDelegate: props['childrenDelegate'],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             allowImplicitScrolling: props['allowImplicitScrolling'] ?? false,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
             scrollBehavior: props['scrollBehavior'],
             padEnds: props['padEnds'] ?? true,
-          ),
+      ),
       'PageView.builder#itemBuilder': (props) => (
-            BuildContext context,
-            int index,
+          BuildContext context,
+          int index,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'NotificationListener': (props) => NotificationListener(
             key: props['key'],
             child: props['child'],
             onNotification: props['onNotification'],
-          ),
+      ),
       'NotificationListener#onNotification': <T>(props) => (
-            T notification,
+          T notification,
           ) {
             return (props['block']) as bool;
-          },
+      },
       'Banner': (props) => Banner(
             key: props['key'],
             child: props['child'],
@@ -1654,24 +1654,24 @@ var p = () => {
             layoutDirection: props['layoutDirection'],
             color: props['color'] ?? _kColor,
             textStyle: props['textStyle'] ?? _kTextStyle,
-          ),
+      ),
       'CheckedModeBanner': (props) => CheckedModeBanner(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'BannerLocation': {
-        'values': BannerLocation.values,
-        'topStart': BannerLocation.topStart,
-        'topEnd': BannerLocation.topEnd,
-        'bottomStart': BannerLocation.bottomStart,
-        'bottomEnd': BannerLocation.bottomEnd,
+            'values': BannerLocation.values,
+            'topStart': BannerLocation.topStart,
+            'topEnd': BannerLocation.topEnd,
+            'bottomStart': BannerLocation.bottomStart,
+            'bottomEnd': BannerLocation.bottomEnd,
       },
-      'AnnotatedRegion': (props) => AnnotatedRegion(
+      'AnnotatedRegion': (props) => AnnotatedRegion<Object>(
             key: props['key'],
             child: props['child'],
             value: props['value'],
             sized: props['sized'] ?? true,
-          ),
+      ),
       'AnimatedSize': (props) => AnimatedSize(
             key: props['key'],
             child: props['child'],
@@ -1681,7 +1681,7 @@ var p = () => {
             reverseDuration: props['reverseDuration'],
             vsync: props['vsync'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'GridPaper': (props) => GridPaper(
             key: props['key'],
             color: props['color'] ?? const Color(0x7FC3E8F3),
@@ -1689,7 +1689,7 @@ var p = () => {
             divisions: props['divisions'] ?? 2,
             subdivisions: props['subdivisions'] ?? 5,
             child: props['child'],
-          ),
+      ),
       'TweenAnimationBuilder': (props) => TweenAnimationBuilder(
             key: props['key'],
             tween: props['tween'],
@@ -1698,82 +1698,82 @@ var p = () => {
             builder: props['builder'],
             onEnd: props['onEnd'],
             child: props['child'],
-          ),
+      ),
       'TweenAnimationBuilder#builder': <T>(props) => (
-            BuildContext context,
-            T value,
-            Widget child,
+          BuildContext context,
+          T value,
+          Widget child,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'DefaultTextEditingShortcuts': (props) => DefaultTextEditingShortcuts(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'SlideTransition': (props) => SlideTransition(
             key: props['key'],
             position: props['position'],
             transformHitTests: props['transformHitTests'] ?? true,
             textDirection: props['textDirection'],
             child: props['child'],
-          ),
+      ),
       'ScaleTransition': (props) => ScaleTransition(
             key: props['key'],
             scale: props['scale'],
             alignment: props['alignment'] ?? Alignment.center,
             filterQuality: props['filterQuality'],
             child: props['child'],
-          ),
+      ),
       'RotationTransition': (props) => RotationTransition(
             key: props['key'],
             turns: props['turns'],
             alignment: props['alignment'] ?? Alignment.center,
             filterQuality: props['filterQuality'],
             child: props['child'],
-          ),
+      ),
       'SizeTransition': (props) => SizeTransition(
             key: props['key'],
             axis: props['axis'] ?? Axis.vertical,
             sizeFactor: props['sizeFactor'],
             axisAlignment: props['axisAlignment']?.toDouble() ?? 0.0,
             child: props['child'],
-          ),
+      ),
       'FadeTransition': (props) => FadeTransition(
             key: props['key'],
             opacity: props['opacity'],
             alwaysIncludeSemantics: props['alwaysIncludeSemantics'] ?? false,
             child: props['child'],
-          ),
+      ),
       'SliverFadeTransition': (props) => SliverFadeTransition(
             key: props['key'],
             opacity: props['opacity'],
             alwaysIncludeSemantics: props['alwaysIncludeSemantics'] ?? false,
             sliver: props['sliver'],
-          ),
+      ),
       'PositionedTransition': (props) => PositionedTransition(
             key: props['key'],
             rect: props['rect'],
             child: props['child'],
-          ),
+      ),
       'RelativePositionedTransition': (props) => RelativePositionedTransition(
             key: props['key'],
             rect: props['rect'],
             size: props['size'],
             child: props['child'],
-          ),
+      ),
       'DecoratedBoxTransition': (props) => DecoratedBoxTransition(
             key: props['key'],
             decoration: props['decoration'],
             position: props['position'] ?? DecorationPosition.background,
             child: props['child'],
-          ),
+      ),
       'AlignTransition': (props) => AlignTransition(
             key: props['key'],
             alignment: props['alignment'],
             child: props['child'],
             widthFactor: props['widthFactor']?.toDouble(),
             heightFactor: props['heightFactor']?.toDouble(),
-          ),
+      ),
       'DefaultTextStyleTransition': (props) => DefaultTextStyleTransition(
             key: props['key'],
             style: props['style'],
@@ -1782,33 +1782,33 @@ var p = () => {
             softWrap: props['softWrap'] ?? true,
             overflow: props['overflow'] ?? TextOverflow.clip,
             maxLines: props['maxLines'],
-          ),
+      ),
       'AnimatedBuilder': (props) => AnimatedBuilder(
             key: props['key'],
             animation: props['animation'],
             builder: props['builder'],
             child: props['child'],
-          ),
+      ),
       'AnimatedBuilder#builder': (props) => (
-            BuildContext context,
-            Widget child,
+          BuildContext context,
+          Widget child,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'SliverPersistentHeader': (props) => SliverPersistentHeader(
             key: props['key'],
             delegate: props['delegate'],
             pinned: props['pinned'] ?? false,
             floating: props['floating'] ?? false,
-          ),
+      ),
       'PageStorage': (props) => PageStorage(
             key: props['key'],
             bucket: props['bucket'],
             child: props['child'],
-          ),
+      ),
       'PageStorage.of': (props) => PageStorage.of(
             props['pa'][0],
-          ),
+      ),
       'Router': (props) => Router(
             key: props['key'],
             routeInformationProvider: props['routeInformationProvider'],
@@ -1816,65 +1816,65 @@ var p = () => {
             routerDelegate: props['routerDelegate'],
             backButtonDispatcher: props['backButtonDispatcher'],
             restorationScopeId: props['restorationScopeId'],
-          ),
+      ),
       'Router.of': (props) => Router.of(
             props['pa'][0],
-          ),
+      ),
       'Router.maybeOf': (props) => Router.maybeOf(
             props['pa'][0],
-          ),
+      ),
       'Router.navigate': (props) => Router.navigate(
             props['pa'][0],
             props['pa'][1],
-          ),
+      ),
       'Router.neglect': (props) => Router.neglect(
             props['pa'][0],
             props['pa'][1],
-          ),
+      ),
       'BackButtonListener': (props) => BackButtonListener(
             key: props['key'],
             child: props['child'],
             onBackButtonPressed: props['onBackButtonPressed'],
-          ),
+      ),
       'FocusTrap': (props) => FocusTrap(
             focusScopeNode: props['focusScopeNode'],
             child: props['child'],
             key: props['key'],
-          ),
+      ),
       'FocusTrapArea': (props) => FocusTrapArea(
             focusNode: props['focusNode'],
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'Directionality': (props) => Directionality(
             key: props['key'],
             textDirection: props['textDirection'],
             child: props['child'],
-          ),
+      ),
       'Directionality.of': (props) => Directionality.of(
             props['pa'][0],
-          ),
+      ),
       'Directionality.maybeOf': (props) => Directionality.maybeOf(
             props['pa'][0],
-          ),
+      ),
       'Opacity': (props) => Opacity(
             key: props['key'],
             opacity: props['opacity']?.toDouble(),
             alwaysIncludeSemantics: props['alwaysIncludeSemantics'] ?? false,
             child: props['child'],
-          ),
+      ),
       'ShaderMask': (props) => ShaderMask(
             key: props['key'],
             shaderCallback: props['shaderCallback'],
             blendMode: props['blendMode'] ?? BlendMode.modulate,
             child: props['child'],
-          ),
+      ),
       'BackdropFilter': (props) => BackdropFilter(
             key: props['key'],
             filter: props['filter'],
             child: props['child'],
             blendMode: props['blendMode'] ?? BlendMode.srcOver,
-          ),
+      ),
       'CustomPaint': (props) => CustomPaint(
             key: props['key'],
             painter: props['painter'],
@@ -1883,38 +1883,38 @@ var p = () => {
             isComplex: props['isComplex'] ?? false,
             willChange: props['willChange'] ?? false,
             child: props['child'],
-          ),
+      ),
       'ClipRect': (props) => ClipRect(
             key: props['key'],
             clipper: props['clipper'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
             child: props['child'],
-          ),
+      ),
       'ClipRRect': (props) => ClipRRect(
             key: props['key'],
             borderRadius: props['borderRadius'] ?? BorderRadius.zero,
             clipper: props['clipper'],
             clipBehavior: props['clipBehavior'] ?? Clip.antiAlias,
             child: props['child'],
-          ),
+      ),
       'ClipOval': (props) => ClipOval(
             key: props['key'],
             clipper: props['clipper'],
             clipBehavior: props['clipBehavior'] ?? Clip.antiAlias,
             child: props['child'],
-          ),
+      ),
       'ClipPath': (props) => ClipPath(
             key: props['key'],
             clipper: props['clipper'],
             clipBehavior: props['clipBehavior'] ?? Clip.antiAlias,
             child: props['child'],
-          ),
+      ),
       'ClipPath.shape': (props) => ClipPath.shape(
             key: props['key'],
             shape: props['shape'],
             clipBehavior: props['clipBehavior'] ?? Clip.antiAlias,
             child: props['child'],
-          ),
+      ),
       'PhysicalModel': (props) => PhysicalModel(
             key: props['key'],
             shape: props['shape'] ?? BoxShape.rectangle,
@@ -1924,7 +1924,7 @@ var p = () => {
             color: props['color'],
             shadowColor: props['shadowColor'] ?? const Color(0xFF000000),
             child: props['child'],
-          ),
+      ),
       'PhysicalShape': (props) => PhysicalShape(
             key: props['key'],
             clipper: props['clipper'],
@@ -1933,7 +1933,7 @@ var p = () => {
             color: props['color'],
             shadowColor: props['shadowColor'] ?? const Color(0xFF000000),
             child: props['child'],
-          ),
+      ),
       'Transform': (props) => Transform(
             key: props['key'],
             transform: props['transform'],
@@ -1942,7 +1942,7 @@ var p = () => {
             transformHitTests: props['transformHitTests'] ?? true,
             filterQuality: props['filterQuality'],
             child: props['child'],
-          ),
+      ),
       'Transform.rotate': (props) => Transform.rotate(
             key: props['key'],
             angle: props['angle']?.toDouble(),
@@ -1951,14 +1951,14 @@ var p = () => {
             transformHitTests: props['transformHitTests'] ?? true,
             filterQuality: props['filterQuality'],
             child: props['child'],
-          ),
+      ),
       'Transform.translate': (props) => Transform.translate(
             key: props['key'],
             offset: props['offset'],
             transformHitTests: props['transformHitTests'] ?? true,
             filterQuality: props['filterQuality'],
             child: props['child'],
-          ),
+      ),
       'Transform.scale': (props) => Transform.scale(
             key: props['key'],
             scale: props['scale']?.toDouble(),
@@ -1967,12 +1967,12 @@ var p = () => {
             transformHitTests: props['transformHitTests'] ?? true,
             filterQuality: props['filterQuality'],
             child: props['child'],
-          ),
+      ),
       'CompositedTransformTarget': (props) => CompositedTransformTarget(
             key: props['key'],
             link: props['link'],
             child: props['child'],
-          ),
+      ),
       'CompositedTransformFollower': (props) => CompositedTransformFollower(
             key: props['key'],
             link: props['link'],
@@ -1981,87 +1981,87 @@ var p = () => {
             targetAnchor: props['targetAnchor'] ?? Alignment.topLeft,
             followerAnchor: props['followerAnchor'] ?? Alignment.topLeft,
             child: props['child'],
-          ),
+      ),
       'FittedBox': (props) => FittedBox(
             key: props['key'],
             fit: props['fit'] ?? BoxFit.contain,
             alignment: props['alignment'] ?? Alignment.center,
             clipBehavior: props['clipBehavior'] ?? Clip.none,
             child: props['child'],
-          ),
+      ),
       'FractionalTranslation': (props) => FractionalTranslation(
             key: props['key'],
             translation: props['translation'],
             transformHitTests: props['transformHitTests'] ?? true,
             child: props['child'],
-          ),
+      ),
       'RotatedBox': (props) => RotatedBox(
             key: props['key'],
             quarterTurns: props['quarterTurns'],
             child: props['child'],
-          ),
+      ),
       'Padding': (props) => Padding(
             key: props['key'],
             padding: props['padding'],
             child: props['child'],
-          ),
+      ),
       'Align': (props) => Align(
             key: props['key'],
             alignment: props['alignment'] ?? Alignment.center,
             widthFactor: props['widthFactor']?.toDouble(),
             heightFactor: props['heightFactor']?.toDouble(),
             child: props['child'],
-          ),
+      ),
       'Center': (props) => Center(
             key: props['key'],
             widthFactor: props['widthFactor']?.toDouble(),
             heightFactor: props['heightFactor']?.toDouble(),
             child: props['child'],
-          ),
+      ),
       'CustomSingleChildLayout': (props) => CustomSingleChildLayout(
             key: props['key'],
             delegate: props['delegate'],
             child: props['child'],
-          ),
+      ),
       'LayoutId': (props) => LayoutId(
             key: props['key'],
             id: props['id'],
             child: props['child'],
-          ),
+      ),
       'CustomMultiChildLayout': (props) => CustomMultiChildLayout(
             key: props['key'],
             delegate: props['delegate'],
             children: as<Widget>(props['children']) ?? const <Widget>[],
-          ),
+      ),
       'SizedBox': (props) => SizedBox(
             key: props['key'],
             width: props['width']?.toDouble(),
             height: props['height']?.toDouble(),
             child: props['child'],
-          ),
+      ),
       'SizedBox.expand': (props) => SizedBox.expand(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'SizedBox.shrink': (props) => SizedBox.shrink(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'SizedBox.fromSize': (props) => SizedBox.fromSize(
             key: props['key'],
             child: props['child'],
             size: props['size'],
-          ),
+      ),
       'SizedBox.square': (props) => SizedBox.square(
             key: props['key'],
             child: props['child'],
             dimension: props['dimension']?.toDouble(),
-          ),
+      ),
       'ConstrainedBox': (props) => ConstrainedBox(
             key: props['key'],
             constraints: props['constraints'],
             child: props['child'],
-          ),
+      ),
       'ConstraintsTransformBox': (props) => ConstraintsTransformBox(
             key: props['key'],
             child: props['child'],
@@ -2070,34 +2070,34 @@ var p = () => {
             constraintsTransform: props['constraintsTransform'],
             clipBehavior: props['clipBehavior'] ?? Clip.none,
             debugTransformType: props['debugTransformType'] ?? '',
-          ),
+      ),
       'ConstraintsTransformBox.unmodified': (props) =>
           ConstraintsTransformBox.unmodified(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'ConstraintsTransformBox.unconstrained': (props) =>
           ConstraintsTransformBox.unconstrained(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'ConstraintsTransformBox.widthUnconstrained': (props) =>
           ConstraintsTransformBox.widthUnconstrained(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'ConstraintsTransformBox.heightUnconstrained': (props) =>
           ConstraintsTransformBox.heightUnconstrained(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'ConstraintsTransformBox.maxHeightUnconstrained': (props) =>
           ConstraintsTransformBox.maxHeightUnconstrained(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'ConstraintsTransformBox.maxWidthUnconstrained': (props) =>
           ConstraintsTransformBox.maxWidthUnconstrained(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'ConstraintsTransformBox.maxUnconstrained': (props) =>
           ConstraintsTransformBox.maxUnconstrained(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'UnconstrainedBox': (props) => UnconstrainedBox(
             key: props['key'],
@@ -2106,20 +2106,20 @@ var p = () => {
             alignment: props['alignment'] ?? Alignment.center,
             constrainedAxis: props['constrainedAxis'],
             clipBehavior: props['clipBehavior'] ?? Clip.none,
-          ),
+      ),
       'FractionallySizedBox': (props) => FractionallySizedBox(
             key: props['key'],
             alignment: props['alignment'] ?? Alignment.center,
             widthFactor: props['widthFactor']?.toDouble(),
             heightFactor: props['heightFactor']?.toDouble(),
             child: props['child'],
-          ),
+      ),
       'LimitedBox': (props) => LimitedBox(
             key: props['key'],
             maxWidth: props['maxWidth']?.toDouble() ?? double.infinity,
             maxHeight: props['maxHeight']?.toDouble() ?? double.infinity,
             child: props['child'],
-          ),
+      ),
       'OverflowBox': (props) => OverflowBox(
             key: props['key'],
             alignment: props['alignment'] ?? Alignment.center,
@@ -2128,54 +2128,54 @@ var p = () => {
             minHeight: props['minHeight']?.toDouble(),
             maxHeight: props['maxHeight']?.toDouble(),
             child: props['child'],
-          ),
+      ),
       'SizedOverflowBox': (props) => SizedOverflowBox(
             key: props['key'],
             size: props['size'],
             alignment: props['alignment'] ?? Alignment.center,
             child: props['child'],
-          ),
+      ),
       'Offstage': (props) => Offstage(
             key: props['key'],
             offstage: props['offstage'] ?? true,
             child: props['child'],
-          ),
+      ),
       'AspectRatio': (props) => AspectRatio(
             key: props['key'],
             aspectRatio: props['aspectRatio']?.toDouble(),
             child: props['child'],
-          ),
+      ),
       'IntrinsicWidth': (props) => IntrinsicWidth(
             key: props['key'],
             stepWidth: props['stepWidth']?.toDouble(),
             stepHeight: props['stepHeight']?.toDouble(),
             child: props['child'],
-          ),
+      ),
       'IntrinsicHeight': (props) => IntrinsicHeight(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'Baseline': (props) => Baseline(
             key: props['key'],
             baseline: props['baseline']?.toDouble(),
             baselineType: props['baselineType'],
             child: props['child'],
-          ),
+      ),
       'SliverToBoxAdapter': (props) => SliverToBoxAdapter(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'SliverPadding': (props) => SliverPadding(
             key: props['key'],
             padding: props['padding'],
             sliver: props['sliver'],
-          ),
+      ),
       'ListBody': (props) => ListBody(
             key: props['key'],
             mainAxis: props['mainAxis'] ?? Axis.vertical,
             reverse: props['reverse'] ?? false,
             children: as<Widget>(props['children']) ?? const <Widget>[],
-          ),
+      ),
       'Stack': (props) => Stack(
             key: props['key'],
             alignment: props['alignment'] ?? AlignmentDirectional.topStart,
@@ -2184,7 +2184,7 @@ var p = () => {
             overflow: props['overflow'] ?? Overflow.clip,
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
             children: as<Widget>(props['children']) ?? const <Widget>[],
-          ),
+      ),
       'IndexedStack': (props) => IndexedStack(
             key: props['key'],
             alignment: props['alignment'] ?? AlignmentDirectional.topStart,
@@ -2192,7 +2192,7 @@ var p = () => {
             sizing: props['sizing'] ?? StackFit.loose,
             index: props['index'] ?? 0,
             children: as<Widget>(props['children']) ?? const <Widget>[],
-          ),
+      ),
       'Positioned': (props) => Positioned(
             key: props['key'],
             left: props['left']?.toDouble(),
@@ -2202,17 +2202,17 @@ var p = () => {
             width: props['width']?.toDouble(),
             height: props['height']?.toDouble(),
             child: props['child'],
-          ),
+      ),
       'Positioned.fromRect': (props) => Positioned.fromRect(
             key: props['key'],
             rect: props['rect'],
             child: props['child'],
-          ),
+      ),
       'Positioned.fromRelativeRect': (props) => Positioned.fromRelativeRect(
             key: props['key'],
             rect: props['rect'],
             child: props['child'],
-          ),
+      ),
       'Positioned.fill': (props) => Positioned.fill(
             key: props['key'],
             left: props['left']?.toDouble() ?? 0.0,
@@ -2220,7 +2220,7 @@ var p = () => {
             right: props['right']?.toDouble() ?? 0.0,
             bottom: props['bottom']?.toDouble() ?? 0.0,
             child: props['child'],
-          ),
+      ),
       'Positioned.directional': (props) => Positioned.directional(
             key: props['key'],
             textDirection: props['textDirection'],
@@ -2231,7 +2231,7 @@ var p = () => {
             width: props['width']?.toDouble(),
             height: props['height']?.toDouble(),
             child: props['child'],
-          ),
+      ),
       'PositionedDirectional': (props) => PositionedDirectional(
             key: props['key'],
             start: props['start']?.toDouble(),
@@ -2241,59 +2241,59 @@ var p = () => {
             width: props['width']?.toDouble(),
             height: props['height']?.toDouble(),
             child: props['child'],
-          ),
+      ),
       'Flex': (props) => Flex(
             key: props['key'],
             direction: props['direction'],
             mainAxisAlignment:
-                props['mainAxisAlignment'] ?? MainAxisAlignment.start,
+            props['mainAxisAlignment'] ?? MainAxisAlignment.start,
             mainAxisSize: props['mainAxisSize'] ?? MainAxisSize.max,
             crossAxisAlignment:
-                props['crossAxisAlignment'] ?? CrossAxisAlignment.center,
+            props['crossAxisAlignment'] ?? CrossAxisAlignment.center,
             textDirection: props['textDirection'],
             verticalDirection:
-                props['verticalDirection'] ?? VerticalDirection.down,
+            props['verticalDirection'] ?? VerticalDirection.down,
             textBaseline: props['textBaseline'],
             clipBehavior: props['clipBehavior'] ?? Clip.none,
             children: as<Widget>(props['children']) ?? const <Widget>[],
-          ),
+      ),
       'Row': (props) => Row(
             key: props['key'],
             mainAxisAlignment:
-                props['mainAxisAlignment'] ?? MainAxisAlignment.start,
+            props['mainAxisAlignment'] ?? MainAxisAlignment.start,
             mainAxisSize: props['mainAxisSize'] ?? MainAxisSize.max,
             crossAxisAlignment:
-                props['crossAxisAlignment'] ?? CrossAxisAlignment.center,
+            props['crossAxisAlignment'] ?? CrossAxisAlignment.center,
             textDirection: props['textDirection'],
             verticalDirection:
-                props['verticalDirection'] ?? VerticalDirection.down,
+            props['verticalDirection'] ?? VerticalDirection.down,
             textBaseline: props['textBaseline'],
             children: as<Widget>(props['children']) ?? const <Widget>[],
-          ),
+      ),
       'Column': (props) => Column(
             key: props['key'],
             mainAxisAlignment:
-                props['mainAxisAlignment'] ?? MainAxisAlignment.start,
+            props['mainAxisAlignment'] ?? MainAxisAlignment.start,
             mainAxisSize: props['mainAxisSize'] ?? MainAxisSize.max,
             crossAxisAlignment:
-                props['crossAxisAlignment'] ?? CrossAxisAlignment.center,
+            props['crossAxisAlignment'] ?? CrossAxisAlignment.center,
             textDirection: props['textDirection'],
             verticalDirection:
-                props['verticalDirection'] ?? VerticalDirection.down,
+            props['verticalDirection'] ?? VerticalDirection.down,
             textBaseline: props['textBaseline'],
             children: as<Widget>(props['children']) ?? const <Widget>[],
-          ),
+      ),
       'Flexible': (props) => Flexible(
             key: props['key'],
             flex: props['flex'] ?? 1,
             fit: props['fit'] ?? FlexFit.loose,
             child: props['child'],
-          ),
+      ),
       'Expanded': (props) => Expanded(
             key: props['key'],
             flex: props['flex'] ?? 1,
             child: props['child'],
-          ),
+      ),
       'Wrap': (props) => Wrap(
             key: props['key'],
             direction: props['direction'] ?? Axis.horizontal,
@@ -2302,25 +2302,25 @@ var p = () => {
             runAlignment: props['runAlignment'] ?? WrapAlignment.start,
             runSpacing: props['runSpacing']?.toDouble() ?? 0.0,
             crossAxisAlignment:
-                props['crossAxisAlignment'] ?? WrapCrossAlignment.start,
+            props['crossAxisAlignment'] ?? WrapCrossAlignment.start,
             textDirection: props['textDirection'],
             verticalDirection:
-                props['verticalDirection'] ?? VerticalDirection.down,
+            props['verticalDirection'] ?? VerticalDirection.down,
             clipBehavior: props['clipBehavior'] ?? Clip.none,
             children: as<Widget>(props['children']) ?? const <Widget>[],
-          ),
+      ),
       'Flow': (props) => Flow(
             key: props['key'],
             delegate: props['delegate'],
             children: as<Widget>(props['children']) ?? const <Widget>[],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'Flow.unwrapped': (props) => Flow.unwrapped(
             key: props['key'],
             delegate: props['delegate'],
             children: as<Widget>(props['children']) ?? const <Widget>[],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'RichText': (props) => RichText(
             key: props['key'],
             text: props['text'],
@@ -2334,7 +2334,7 @@ var p = () => {
             strutStyle: props['strutStyle'],
             textWidthBasis: props['textWidthBasis'] ?? TextWidthBasis.parent,
             textHeightBehavior: props['textHeightBehavior'],
-          ),
+      ),
       'RawImage': (props) => RawImage(
             key: props['key'],
             image: props['image'],
@@ -2353,20 +2353,20 @@ var p = () => {
             invertColors: props['invertColors'] ?? false,
             filterQuality: props['filterQuality'] ?? FilterQuality.low,
             isAntiAlias: props['isAntiAlias'] ?? false,
-          ),
+      ),
       'DefaultAssetBundle': (props) => DefaultAssetBundle(
             key: props['key'],
             bundle: props['bundle'],
             child: props['child'],
-          ),
+      ),
       'DefaultAssetBundle.of': (props) => DefaultAssetBundle.of(
             props['pa'][0],
-          ),
+      ),
       'WidgetToRenderBoxAdapter': (props) => WidgetToRenderBoxAdapter(
             renderBox: props['renderBox'],
             onBuild: props['onBuild'],
             onUnmount: props['onUnmount'],
-          ),
+      ),
       'Listener': (props) => Listener(
             key: props['key'],
             onPointerDown: props['onPointerDown'],
@@ -2377,7 +2377,7 @@ var p = () => {
             onPointerSignal: props['onPointerSignal'],
             behavior: props['behavior'] ?? HitTestBehavior.deferToChild,
             child: props['child'],
-          ),
+      ),
       'MouseRegion': (props) => MouseRegion(
             key: props['key'],
             onEnter: props['onEnter'],
@@ -2386,36 +2386,36 @@ var p = () => {
             cursor: props['cursor'] ?? MouseCursor.defer,
             opaque: props['opaque'] ?? true,
             child: props['child'],
-          ),
+      ),
       'RepaintBoundary': (props) => RepaintBoundary(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'RepaintBoundary.wrap': (props) => RepaintBoundary.wrap(
             props['pa'][0],
             props['pa'][1],
-          ),
+      ),
       'RepaintBoundary.wrapAll': (props) => RepaintBoundary.wrapAll(
             props['pa'][0],
-          ),
+      ),
       'IgnorePointer': (props) => IgnorePointer(
             key: props['key'],
             ignoring: props['ignoring'] ?? true,
             ignoringSemantics: props['ignoringSemantics'],
             child: props['child'],
-          ),
+      ),
       'AbsorbPointer': (props) => AbsorbPointer(
             key: props['key'],
             absorbing: props['absorbing'] ?? true,
             child: props['child'],
             ignoringSemantics: props['ignoringSemantics'],
-          ),
+      ),
       'MetaData': (props) => MetaData(
             key: props['key'],
             metaData: props['metaData'],
             behavior: props['behavior'] ?? HitTestBehavior.deferToChild,
             child: props['child'],
-          ),
+      ),
       'Semantics': (props) => Semantics(
             key: props['key'],
             child: props['child'],
@@ -2473,15 +2473,15 @@ var p = () => {
             onPaste: props['onPaste'],
             onDismiss: props['onDismiss'],
             onMoveCursorForwardByCharacter:
-                props['onMoveCursorForwardByCharacter'],
+            props['onMoveCursorForwardByCharacter'],
             onMoveCursorBackwardByCharacter:
-                props['onMoveCursorBackwardByCharacter'],
+            props['onMoveCursorBackwardByCharacter'],
             onSetSelection: props['onSetSelection'],
             onSetText: props['onSetText'],
             onDidGainAccessibilityFocus: props['onDidGainAccessibilityFocus'],
             onDidLoseAccessibilityFocus: props['onDidLoseAccessibilityFocus'],
             customSemanticsActions: props['customSemanticsActions'],
-          ),
+      ),
       'Semantics.fromProperties': (props) => Semantics.fromProperties(
             key: props['key'],
             child: props['child'],
@@ -2489,63 +2489,63 @@ var p = () => {
             explicitChildNodes: props['explicitChildNodes'] ?? false,
             excludeSemantics: props['excludeSemantics'] ?? false,
             properties: props['properties'],
-          ),
+      ),
       'MergeSemantics': (props) => MergeSemantics(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'BlockSemantics': (props) => BlockSemantics(
             key: props['key'],
             blocking: props['blocking'] ?? true,
             child: props['child'],
-          ),
+      ),
       'ExcludeSemantics': (props) => ExcludeSemantics(
             key: props['key'],
             excluding: props['excluding'] ?? true,
             child: props['child'],
-          ),
+      ),
       'IndexedSemantics': (props) => IndexedSemantics(
             key: props['key'],
             index: props['index'],
             child: props['child'],
-          ),
+      ),
       'KeyedSubtree': (props) => KeyedSubtree(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'KeyedSubtree.wrap': (props) => KeyedSubtree.wrap(
             props['pa'][0],
             props['pa'][1],
-          ),
+      ),
       'KeyedSubtree.ensureUniqueKeysForList': (props) =>
           KeyedSubtree.ensureUniqueKeysForList(
-            props['pa'][0],
-            baseIndex: props['baseIndex'] ?? 0,
+                props['pa'][0],
+                baseIndex: props['baseIndex'] ?? 0,
           ),
       'Builder': (props) => Builder(
             key: props['key'],
             builder: props['builder'],
-          ),
+      ),
       'Builder#builder': (props) => (
-            BuildContext context,
+          BuildContext context,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'StatefulBuilder': (props) => StatefulBuilder(
             key: props['key'],
             builder: props['builder'],
-          ),
+      ),
       'StatefulBuilder#builder': (props) => (
-            BuildContext context,
-            StateSetter setState,
+          BuildContext context,
+          StateSetter setState,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'ColoredBox': (props) => ColoredBox(
             color: props['color'],
             child: props['child'],
             key: props['key'],
-          ),
+      ),
       'GestureDetector': (props) => GestureDetector(
             key: props['key'],
             child: props['child'],
@@ -2575,7 +2575,7 @@ var p = () => {
             onSecondaryLongPress: props['onSecondaryLongPress'],
             onSecondaryLongPressStart: props['onSecondaryLongPressStart'],
             onSecondaryLongPressMoveUpdate:
-                props['onSecondaryLongPressMoveUpdate'],
+            props['onSecondaryLongPressMoveUpdate'],
             onSecondaryLongPressUp: props['onSecondaryLongPressUp'],
             onSecondaryLongPressEnd: props['onSecondaryLongPressEnd'],
             onTertiaryLongPressDown: props['onTertiaryLongPressDown'],
@@ -2583,7 +2583,7 @@ var p = () => {
             onTertiaryLongPress: props['onTertiaryLongPress'],
             onTertiaryLongPressStart: props['onTertiaryLongPressStart'],
             onTertiaryLongPressMoveUpdate:
-                props['onTertiaryLongPressMoveUpdate'],
+            props['onTertiaryLongPressMoveUpdate'],
             onTertiaryLongPressUp: props['onTertiaryLongPressUp'],
             onTertiaryLongPressEnd: props['onTertiaryLongPressEnd'],
             onVerticalDragDown: props['onVerticalDragDown'],
@@ -2611,47 +2611,47 @@ var p = () => {
             behavior: props['behavior'],
             excludeFromSemantics: props['excludeFromSemantics'] ?? false,
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
-          ),
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
+      ),
       'RawGestureDetector': (props) => RawGestureDetector(
             key: props['key'],
             child: props['child'],
             gestures:
-                props['gestures'] ?? const <Type, GestureRecognizerFactory>{},
+            props['gestures'] ?? const <Type, GestureRecognizerFactory>{},
             behavior: props['behavior'],
             excludeFromSemantics: props['excludeFromSemantics'] ?? false,
             semantics: props['semantics'],
-          ),
+      ),
       'StreamBuilder': (props) => StreamBuilder(
             key: props['key'],
             initialData: props['initialData'],
             stream: props['stream'],
             builder: props['builder'],
-          ),
+      ),
       'StreamBuilder#builder': <T>(props) => (
-            BuildContext context,
-            AsyncSnapshot snapshot,
+          BuildContext context,
+          AsyncSnapshot snapshot,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'FutureBuilder': (props) => FutureBuilder(
             key: props['key'],
             future: props['future'],
             initialData: props['initialData'],
             builder: props['builder'],
-          ),
+      ),
       'FutureBuilder#builder': <T>(props) => (
-            BuildContext context,
-            AsyncSnapshot snapshot,
+          BuildContext context,
+          AsyncSnapshot snapshot,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'ConnectionState': {
-        'values': ConnectionState.values,
-        'none': ConnectionState.none,
-        'waiting': ConnectionState.waiting,
-        'active': ConnectionState.active,
-        'done': ConnectionState.done,
+            'values': ConnectionState.values,
+            'none': ConnectionState.none,
+            'waiting': ConnectionState.waiting,
+            'active': ConnectionState.active,
+            'done': ConnectionState.done,
       },
       'DefaultTextStyle': (props) => DefaultTextStyle(
             key: props['key'],
@@ -2663,10 +2663,10 @@ var p = () => {
             textWidthBasis: props['textWidthBasis'] ?? TextWidthBasis.parent,
             textHeightBehavior: props['textHeightBehavior'],
             child: props['child'],
-          ),
+      ),
       'DefaultTextStyle.fallback': (props) => DefaultTextStyle.fallback(
             key: props['key'],
-          ),
+      ),
       'DefaultTextStyle.merge': (props) => DefaultTextStyle.merge(
             key: props['key'],
             style: props['style'],
@@ -2676,18 +2676,18 @@ var p = () => {
             maxLines: props['maxLines'],
             textWidthBasis: props['textWidthBasis'] ?? TextWidthBasis.parent,
             child: props['child'],
-          ),
+      ),
       'DefaultTextStyle.of': (props) => DefaultTextStyle.of(
             props['pa'][0],
-          ),
+      ),
       'DefaultTextHeightBehavior': (props) => DefaultTextHeightBehavior(
             key: props['key'],
             textHeightBehavior: props['textHeightBehavior'],
             child: props['child'],
-          ),
+      ),
       'DefaultTextHeightBehavior.of': (props) => DefaultTextHeightBehavior.of(
             props['pa'][0],
-          ),
+      ),
       'Text': (props) => Text(
             props['pa'][0],
             key: props['key'],
@@ -2703,7 +2703,7 @@ var p = () => {
             semanticsLabel: props['semanticsLabel'],
             textWidthBasis: props['textWidthBasis'],
             textHeightBehavior: props['textHeightBehavior'],
-          ),
+      ),
       'Text.rich': (props) => Text.rich(
             props['pa'][0],
             key: props['key'],
@@ -2719,47 +2719,47 @@ var p = () => {
             semanticsLabel: props['semanticsLabel'],
             textWidthBasis: props['textWidthBasis'],
             textHeightBehavior: props['textHeightBehavior'],
-          ),
+      ),
       'ActionListener': (props) => ActionListener(
             key: props['key'],
             listener: props['listener'],
             action: props['action'],
             child: props['child'],
-          ),
+      ),
       'ActionListener#listener': (props) => (
-            Action action,
+          Action action,
           ) {
             return (props['block']);
-          },
+      },
       'Actions': (props) => Actions(
             key: props['key'],
             dispatcher: props['dispatcher'],
             actions: props['actions'],
             child: props['child'],
-          ),
+      ),
       'Actions.handler': <T extends Intent>(props) => Actions.handler(
             props['pa'][0],
             props['pa'][1] as T,
-          ),
+      ),
       'Actions.find': <T extends Intent>(props) => Actions.find(
             props['pa'][0],
             intent: props['intent'] as T,
-          ),
+      ),
       'Actions.maybeFind': <T extends Intent>(props) => Actions.maybeFind(
             props['pa'][0],
             intent: props['intent'] as T,
-          ),
+      ),
       'Actions.of': (props) => Actions.of(
             props['pa'][0],
-          ),
+      ),
       'Actions.invoke': <T extends Intent>(props) => Actions.invoke(
             props['pa'][0],
             props['pa'][1] as T,
-          ),
+      ),
       'Actions.maybeInvoke': <T extends Intent>(props) => Actions.maybeInvoke(
             props['pa'][0],
             props['pa'][1] as T,
-          ),
+      ),
       'FocusableActionDetector': (props) => FocusableActionDetector(
             key: props['key'],
             enabled: props['enabled'] ?? true,
@@ -2773,7 +2773,7 @@ var p = () => {
             onFocusChange: props['onFocusChange'],
             mouseCursor: props['mouseCursor'] ?? MouseCursor.defer,
             child: props['child'],
-          ),
+      ),
       'Form': (props) => Form(
             key: props['key'],
             child: props['child'],
@@ -2781,13 +2781,13 @@ var p = () => {
             onWillPop: props['onWillPop'],
             onChanged: props['onChanged'],
             autovalidateMode: props['autovalidateMode'],
-          ),
+      ),
       'Form#onWillPop': (props) => () {
             return (props['block']) as Future;
-          },
+      },
       'Form.of': (props) => Form.of(
             props['pa'][0],
-          ),
+      ),
       'FormField': (props) => FormField(
             key: props['key'],
             builder: props['builder'],
@@ -2798,27 +2798,27 @@ var p = () => {
             enabled: props['enabled'] ?? true,
             autovalidateMode: props['autovalidateMode'],
             restorationId: props['restorationId'],
-          ),
+      ),
       'FormField#builder': <T>(props) => (
-            FormFieldState field,
+          FormFieldState field,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'FormField#onSaved': <T>(props) => (
-            T newValue,
+          T newValue,
           ) {
             return (props['block']);
-          },
+      },
       'FormField#validator': <T>(props) => (
-            T value,
+          T value,
           ) {
             return (props['block']) as String;
-          },
+      },
       'AutovalidateMode': {
-        'values': AutovalidateMode.values,
-        'disabled': AutovalidateMode.disabled,
-        'always': AutovalidateMode.always,
-        'onUserInteraction': AutovalidateMode.onUserInteraction,
+            'values': AutovalidateMode.values,
+            'disabled': AutovalidateMode.disabled,
+            'always': AutovalidateMode.always,
+            'onUserInteraction': AutovalidateMode.onUserInteraction,
       },
       'Image': (props) => Image(
             key: props['key'],
@@ -2841,7 +2841,7 @@ var p = () => {
             gaplessPlayback: props['gaplessPlayback'] ?? false,
             isAntiAlias: props['isAntiAlias'] ?? false,
             filterQuality: props['filterQuality'] ?? FilterQuality.low,
-          ),
+      ),
       'Image.network': (props) => Image.network(
             props['pa'][0],
             key: props['key'],
@@ -2867,7 +2867,7 @@ var p = () => {
             headers: props['headers'],
             cacheWidth: props['cacheWidth'],
             cacheHeight: props['cacheHeight'],
-          ),
+      ),
       'Image.file': (props) => Image.file(
             props['pa'][0],
             key: props['key'],
@@ -2891,7 +2891,7 @@ var p = () => {
             filterQuality: props['filterQuality'] ?? FilterQuality.low,
             cacheWidth: props['cacheWidth'],
             cacheHeight: props['cacheHeight'],
-          ),
+      ),
       'Image.asset': (props) => Image.asset(
             props['pa'][0],
             key: props['key'],
@@ -2917,7 +2917,7 @@ var p = () => {
             filterQuality: props['filterQuality'] ?? FilterQuality.low,
             cacheWidth: props['cacheWidth'],
             cacheHeight: props['cacheHeight'],
-          ),
+      ),
       'Image.memory': (props) => Image.memory(
             props['pa'][0],
             key: props['key'],
@@ -2941,107 +2941,107 @@ var p = () => {
             filterQuality: props['filterQuality'] ?? FilterQuality.low,
             cacheWidth: props['cacheWidth'],
             cacheHeight: props['cacheHeight'],
-          ),
+      ),
       'Image#frameBuilder': (props) => (
-            BuildContext context,
-            Widget child,
-            int frame,
-            bool wasSynchronouslyLoaded,
+          BuildContext context,
+          Widget child,
+          int frame,
+          bool wasSynchronouslyLoaded,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'Image#loadingBuilder': (props) => (
-            BuildContext context,
-            Widget child,
-            dynamic loadingProgress,
+          BuildContext context,
+          Widget child,
+          dynamic loadingProgress,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'Image#errorBuilder': (props) => (
-            BuildContext context,
-            Object error,
-            StackTrace stackTrace,
+          BuildContext context,
+          Object error,
+          StackTrace stackTrace,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'Image.network#frameBuilder': (props) => (
-            BuildContext context,
-            Widget child,
-            int frame,
-            bool wasSynchronouslyLoaded,
+          BuildContext context,
+          Widget child,
+          int frame,
+          bool wasSynchronouslyLoaded,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'Image.network#loadingBuilder': (props) => (
-            BuildContext context,
-            Widget child,
-            dynamic loadingProgress,
+          BuildContext context,
+          Widget child,
+          dynamic loadingProgress,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'Image.network#errorBuilder': (props) => (
-            BuildContext context,
-            Object error,
-            StackTrace stackTrace,
+          BuildContext context,
+          Object error,
+          StackTrace stackTrace,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'Image.file#frameBuilder': (props) => (
-            BuildContext context,
-            Widget child,
-            int frame,
-            bool wasSynchronouslyLoaded,
+          BuildContext context,
+          Widget child,
+          int frame,
+          bool wasSynchronouslyLoaded,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'Image.file#errorBuilder': (props) => (
-            BuildContext context,
-            Object error,
-            StackTrace stackTrace,
+          BuildContext context,
+          Object error,
+          StackTrace stackTrace,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'Image.asset#frameBuilder': (props) => (
-            BuildContext context,
-            Widget child,
-            int frame,
-            bool wasSynchronouslyLoaded,
+          BuildContext context,
+          Widget child,
+          int frame,
+          bool wasSynchronouslyLoaded,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'Image.asset#errorBuilder': (props) => (
-            BuildContext context,
-            Object error,
-            StackTrace stackTrace,
+          BuildContext context,
+          Object error,
+          StackTrace stackTrace,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'Image.memory#frameBuilder': (props) => (
-            BuildContext context,
-            Widget child,
-            int frame,
-            bool wasSynchronouslyLoaded,
+          BuildContext context,
+          Widget child,
+          int frame,
+          bool wasSynchronouslyLoaded,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'Image.memory#errorBuilder': (props) => (
-            BuildContext context,
-            Object error,
-            StackTrace stackTrace,
+          BuildContext context,
+          Object error,
+          StackTrace stackTrace,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'IconThemeData.lerp': (props) => IconThemeData.lerp(
             props['pa'][0],
             props['pa'][1],
             props['pa'][2]?.toDouble(),
-          ),
+      ),
       'Texture': (props) => Texture(
             key: props['key'],
             textureId: props['textureId'],
             freeze: props['freeze'] ?? false,
             filterQuality: props['filterQuality'] ?? FilterQuality.low,
-          ),
+      ),
       'NestedScrollView': (props) => NestedScrollView(
             key: props['key'],
             controller: props['controller'],
@@ -3051,32 +3051,32 @@ var p = () => {
             headerSliverBuilder: props['headerSliverBuilder'],
             body: props['body'],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             floatHeaderSlivers: props['floatHeaderSlivers'] ?? false,
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
             restorationId: props['restorationId'],
             scrollBehavior: props['scrollBehavior'],
-          ),
+      ),
       'NestedScrollView#headerSliverBuilder': (props) => (
-            BuildContext context,
-            bool innerBoxIsScrolled,
+          BuildContext context,
+          bool innerBoxIsScrolled,
           ) {
             return (props['block']) as List;
-          },
+      },
       'NestedScrollView.sliverOverlapAbsorberHandleFor': (props) =>
           NestedScrollView.sliverOverlapAbsorberHandleFor(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'SliverOverlapAbsorber': (props) => SliverOverlapAbsorber(
             key: props['key'],
             handle: props['handle'],
             sliver: props['sliver'],
-          ),
+      ),
       'SliverOverlapInjector': (props) => SliverOverlapInjector(
             key: props['key'],
             handle: props['handle'],
             sliver: props['sliver'],
-          ),
+      ),
       'NestedScrollViewViewport': (props) => NestedScrollViewViewport(
             key: props['key'],
             axisDirection: props['axisDirection'] ?? AxisDirection.down,
@@ -3087,7 +3087,7 @@ var p = () => {
             slivers: as<Widget>(props['slivers']) ?? const <Widget>[],
             handle: props['handle'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'NavigationToolbar': (props) => NavigationToolbar(
             key: props['key'],
             leading: props['leading'],
@@ -3095,12 +3095,12 @@ var p = () => {
             trailing: props['trailing'],
             centerMiddle: props['centerMiddle'] ?? true,
             middleSpacing: props['middleSpacing']?.toDouble() ?? kMiddleSpacing,
-          ),
+      ),
       'NavigationToolbar.kMiddleSpacing': NavigationToolbar.kMiddleSpacing,
       'DefaultTextEditingActions': (props) => DefaultTextEditingActions(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'ReorderableList': (props) => ReorderableList(
             key: props['key'],
             itemBuilder: props['itemBuilder'],
@@ -3119,37 +3119,37 @@ var p = () => {
             anchor: props['anchor']?.toDouble() ?? 0.0,
             cacheExtent: props['cacheExtent']?.toDouble(),
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
-          ),
+      ),
       'ReorderableList#itemBuilder': (props) => (
-            BuildContext context,
-            int index,
+          BuildContext context,
+          int index,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'ReorderableList#onReorder': (props) => (
-            int oldIndex,
-            int newIndex,
+          int oldIndex,
+          int newIndex,
           ) {
             return (props['block']);
-          },
+      },
       'ReorderableList#proxyDecorator': (props) => (
-            Widget child,
-            int index,
-            dynamic animation,
+          Widget child,
+          int index,
+          dynamic animation,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'ReorderableList.of': (props) => ReorderableList.of(
             props['pa'][0],
-          ),
+      ),
       'ReorderableList.maybeOf': (props) => ReorderableList.maybeOf(
             props['pa'][0],
-          ),
+      ),
       'SliverReorderableList': (props) => SliverReorderableList(
             key: props['key'],
             itemBuilder: props['itemBuilder'],
@@ -3158,67 +3158,67 @@ var p = () => {
             itemExtent: props['itemExtent']?.toDouble(),
             prototypeItem: props['prototypeItem'],
             proxyDecorator: props['proxyDecorator'],
-          ),
+      ),
       'SliverReorderableList#itemBuilder': (props) => (
-            BuildContext context,
-            int index,
+          BuildContext context,
+          int index,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'SliverReorderableList#onReorder': (props) => (
-            int oldIndex,
-            int newIndex,
+          int oldIndex,
+          int newIndex,
           ) {
             return (props['block']);
-          },
+      },
       'SliverReorderableList#proxyDecorator': (props) => (
-            Widget child,
-            int index,
-            dynamic animation,
+          Widget child,
+          int index,
+          dynamic animation,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'SliverReorderableList.of': (props) => SliverReorderableList.of(
             props['pa'][0],
-          ),
+      ),
       'SliverReorderableList.maybeOf': (props) => SliverReorderableList.maybeOf(
             props['pa'][0],
-          ),
+      ),
       'ReorderableDragStartListener': (props) => ReorderableDragStartListener(
             key: props['key'],
             child: props['child'],
             index: props['index'],
             enabled: props['enabled'] ?? true,
-          ),
+      ),
       'ReorderableDelayedDragStartListener': (props) =>
           ReorderableDelayedDragStartListener(
-            key: props['key'],
-            child: props['child'],
-            index: props['index'],
-            enabled: props['enabled'] ?? true,
+                key: props['key'],
+                child: props['child'],
+                index: props['index'],
+                enabled: props['enabled'] ?? true,
           ),
       'SliverLayoutBuilder': (props) => SliverLayoutBuilder(
             key: props['key'],
             builder: props['builder'],
-          ),
+      ),
       'SliverLayoutBuilder#builder': (props) => (
-            BuildContext context,
-            dynamic constraints,
+          BuildContext context,
+          dynamic constraints,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'HeroControllerScope': (props) => HeroControllerScope(
             key: props['key'],
             controller: props['controller'],
             child: props['child'],
-          ),
+      ),
       'HeroControllerScope.none': (props) => HeroControllerScope.none(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'HeroControllerScope.of': (props) => HeroControllerScope.of(
             props['pa'][0],
-          ),
+      ),
       'Navigator': (props) => Navigator(
             key: props['key'],
             pages: as<Page>(props['pages']) ?? const <Page<dynamic>>[],
@@ -3231,33 +3231,33 @@ var p = () => {
             transitionDelegate: props['transitionDelegate'] ??
                 const DefaultTransitionDelegate<dynamic>(),
             reportsRouteUpdateToEngine:
-                props['reportsRouteUpdateToEngine'] ?? false,
+            props['reportsRouteUpdateToEngine'] ?? false,
             observers: as<NavigatorObserver>(props['observers']) ??
                 const <NavigatorObserver>[],
             restorationScopeId: props['restorationScopeId'],
-          ),
+      ),
       'Navigator#onPopPage': (props) => (
-            Route route,
-            dynamic result,
+          Route route,
+          dynamic result,
           ) {
             return (props['block']) as bool;
-          },
+      },
       'Navigator#onGenerateInitialRoutes': (props) => (
-            NavigatorState navigator,
-            String initialRoute,
+          NavigatorState navigator,
+          String initialRoute,
           ) {
             return (props['block']) as List;
-          },
+      },
       'Navigator#onGenerateRoute': (props) => (
-            RouteSettings settings,
+          RouteSettings settings,
           ) {
             return (props['block']) as Route;
-          },
+      },
       'Navigator#onUnknownRoute': (props) => (
-            RouteSettings settings,
+          RouteSettings settings,
           ) {
             return (props['block']) as Route;
-          },
+      },
       'Navigator.defaultRouteName': Navigator.defaultRouteName,
       // 'Navigator.pushNamed': (props) => Navigator.pushNamed(
       //       props['pa'][0],
@@ -3268,169 +3268,169 @@ var p = () => {
             props['pa'][0],
             props['pa'][1],
             arguments: props['arguments'],
-          ),
+      ),
       'Navigator.pushReplacementNamed': (props) =>
           Navigator.pushReplacementNamed(
-            props['pa'][0],
-            props['pa'][1],
-            result: props['result'],
-            arguments: props['arguments'],
+                props['pa'][0],
+                props['pa'][1],
+                result: props['result'],
+                arguments: props['arguments'],
           ),
       'Navigator.restorablePushReplacementNamed': (props) =>
           Navigator.restorablePushReplacementNamed(
-            props['pa'][0],
-            props['pa'][1],
-            result: props['result'],
-            arguments: props['arguments'],
+                props['pa'][0],
+                props['pa'][1],
+                result: props['result'],
+                arguments: props['arguments'],
           ),
       'Navigator.popAndPushNamed': (props) => Navigator.popAndPushNamed(
             props['pa'][0],
             props['pa'][1],
             result: props['result'],
             arguments: props['arguments'],
-          ),
+      ),
       'Navigator.restorablePopAndPushNamed': (props) =>
           Navigator.restorablePopAndPushNamed(
-            props['pa'][0],
-            props['pa'][1],
-            result: props['result'],
-            arguments: props['arguments'],
+                props['pa'][0],
+                props['pa'][1],
+                result: props['result'],
+                arguments: props['arguments'],
           ),
       'Navigator.pushNamedAndRemoveUntil': (props) =>
           Navigator.pushNamedAndRemoveUntil(
-            props['pa'][0],
-            props['pa'][1],
-            props['pa'][2],
-            arguments: props['arguments'],
+                props['pa'][0],
+                props['pa'][1],
+                props['pa'][2],
+                arguments: props['arguments'],
           ),
       'Navigator.restorablePushNamedAndRemoveUntil': (props) =>
           Navigator.restorablePushNamedAndRemoveUntil(
-            props['pa'][0],
-            props['pa'][1],
-            props['pa'][2],
-            arguments: props['arguments'],
+                props['pa'][0],
+                props['pa'][1],
+                props['pa'][2],
+                arguments: props['arguments'],
           ),
       'Navigator.push': (props) => Navigator.push(
             props['pa'][0],
             props['pa'][1],
-          ),
+      ),
       'Navigator.restorablePush': (props) => Navigator.restorablePush(
             props['pa'][0],
             props['pa'][1],
             arguments: props['arguments'],
-          ),
+      ),
       'Navigator.pushReplacement': (props) => Navigator.pushReplacement(
             props['pa'][0],
             props['pa'][1],
             result: props['result'],
-          ),
+      ),
       'Navigator.restorablePushReplacement': (props) =>
           Navigator.restorablePushReplacement(
-            props['pa'][0],
-            props['pa'][1],
-            result: props['result'],
-            arguments: props['arguments'],
+                props['pa'][0],
+                props['pa'][1],
+                result: props['result'],
+                arguments: props['arguments'],
           ),
       'Navigator.pushAndRemoveUntil': (props) => Navigator.pushAndRemoveUntil(
             props['pa'][0],
             props['pa'][1],
             props['pa'][2],
-          ),
+      ),
       'Navigator.restorablePushAndRemoveUntil': (props) =>
           Navigator.restorablePushAndRemoveUntil(
-            props['pa'][0],
-            props['pa'][1],
-            props['pa'][2],
-            arguments: props['arguments'],
+                props['pa'][0],
+                props['pa'][1],
+                props['pa'][2],
+                arguments: props['arguments'],
           ),
       'Navigator.replace': (props) => Navigator.replace(
             props['pa'][0],
             oldRoute: props['oldRoute'],
             newRoute: props['newRoute'],
-          ),
+      ),
       'Navigator.restorableReplace': (props) => Navigator.restorableReplace(
             props['pa'][0],
             oldRoute: props['oldRoute'],
             newRouteBuilder: props['newRouteBuilder'],
             arguments: props['arguments'],
-          ),
+      ),
       'Navigator.replaceRouteBelow': (props) => Navigator.replaceRouteBelow(
             props['pa'][0],
             anchorRoute: props['anchorRoute'],
             newRoute: props['newRoute'],
-          ),
+      ),
       'Navigator.restorableReplaceRouteBelow': (props) =>
           Navigator.restorableReplaceRouteBelow(
-            props['pa'][0],
-            anchorRoute: props['anchorRoute'],
-            newRouteBuilder: props['newRouteBuilder'],
-            arguments: props['arguments'],
+                props['pa'][0],
+                anchorRoute: props['anchorRoute'],
+                newRouteBuilder: props['newRouteBuilder'],
+                arguments: props['arguments'],
           ),
       'Navigator.canPop': (props) => Navigator.canPop(
             props['pa'][0],
-          ),
+      ),
       'Navigator.maybePop': (props) => Navigator.maybePop(
             props['pa'][0],
             props['pa'][1],
-          ),
+      ),
       'Navigator.pop': (props) => Navigator.pop(
             props['pa'][0],
             props['pa'][1],
-          ),
+      ),
       'Navigator.popUntil': (props) => Navigator.popUntil(
             props['pa'][0],
             props['pa'][1],
-          ),
+      ),
       'Navigator.removeRoute': (props) => Navigator.removeRoute(
             props['pa'][0],
             props['pa'][1],
-          ),
+      ),
       'Navigator.removeRouteBelow': (props) => Navigator.removeRouteBelow(
             props['pa'][0],
             props['pa'][1],
-          ),
+      ),
       'Navigator.of': (props) => Navigator.of(
             props['pa'][0],
             rootNavigator: props['rootNavigator'] ?? false,
-          ),
+      ),
       'Navigator.maybeOf': (props) => Navigator.maybeOf(
             props['pa'][0],
             rootNavigator: props['rootNavigator'] ?? false,
-          ),
+      ),
       'Navigator.defaultGenerateInitialRoutes': (props) =>
           Navigator.defaultGenerateInitialRoutes(
-            props['pa'][0],
-            props['pa'][1],
+                props['pa'][0],
+                props['pa'][1],
           ),
       'RoutePopDisposition': {
-        'values': RoutePopDisposition.values,
-        'pop': RoutePopDisposition.pop,
-        'doNotPop': RoutePopDisposition.doNotPop,
-        'bubble': RoutePopDisposition.bubble,
+            'values': RoutePopDisposition.values,
+            'pop': RoutePopDisposition.pop,
+            'doNotPop': RoutePopDisposition.doNotPop,
+            'bubble': RoutePopDisposition.bubble,
       },
       'PreferredSize': (props) => PreferredSize(
             key: props['key'],
             child: props['child'],
             preferredSize: props['preferredSize'],
-          ),
+      ),
       'ValueListenableBuilder': (props) => ValueListenableBuilder(
             key: props['key'],
             valueListenable: props['valueListenable'],
             builder: props['builder'],
             child: props['child'],
-          ),
+      ),
       'ValueListenableBuilder#builder': <T>(props) => (
-            BuildContext context,
-            T value,
-            Widget child,
+          BuildContext context,
+          T value,
+          Widget child,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'MediaQuery': (props) => MediaQuery(
             key: props['key'],
             data: props['data'],
             child: props['child'],
-          ),
+      ),
       'MediaQuery.removePadding': (props) => MediaQuery.removePadding(
             key: props['key'],
             context: props['context'],
@@ -3439,7 +3439,7 @@ var p = () => {
             removeRight: props['removeRight'] ?? false,
             removeBottom: props['removeBottom'] ?? false,
             child: props['child'],
-          ),
+      ),
       'MediaQuery.removeViewInsets': (props) => MediaQuery.removeViewInsets(
             key: props['key'],
             context: props['context'],
@@ -3448,7 +3448,7 @@ var p = () => {
             removeRight: props['removeRight'] ?? false,
             removeBottom: props['removeBottom'] ?? false,
             child: props['child'],
-          ),
+      ),
       'MediaQuery.removeViewPadding': (props) => MediaQuery.removeViewPadding(
             key: props['key'],
             context: props['context'],
@@ -3457,39 +3457,39 @@ var p = () => {
             removeRight: props['removeRight'] ?? false,
             removeBottom: props['removeBottom'] ?? false,
             child: props['child'],
-          ),
+      ),
       'MediaQuery.fromWindow': (props) => MediaQuery.fromWindow(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'MediaQuery.of': (props) => MediaQuery.of(
             props['pa'][0],
-          ),
+      ),
       'MediaQuery.maybeOf': (props) => MediaQuery.maybeOf(
             props['pa'][0],
-          ),
+      ),
       'MediaQuery.textScaleFactorOf': (props) => MediaQuery.textScaleFactorOf(
             props['pa'][0],
-          ),
+      ),
       'MediaQuery.platformBrightnessOf': (props) =>
           MediaQuery.platformBrightnessOf(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'MediaQuery.highContrastOf': (props) => MediaQuery.highContrastOf(
             props['pa'][0],
-          ),
+      ),
       'MediaQuery.boldTextOverride': (props) => MediaQuery.boldTextOverride(
             props['pa'][0],
-          ),
+      ),
       'Orientation': {
-        'values': Orientation.values,
-        'portrait': Orientation.portrait,
-        'landscape': Orientation.landscape,
+            'values': Orientation.values,
+            'portrait': Orientation.portrait,
+            'landscape': Orientation.landscape,
       },
       'NavigationMode': {
-        'values': NavigationMode.values,
-        'traditional': NavigationMode.traditional,
-        'directional': NavigationMode.directional,
+            'values': NavigationMode.values,
+            'traditional': NavigationMode.traditional,
+            'directional': NavigationMode.directional,
       },
       'DraggableScrollableSheet': (props) => DraggableScrollableSheet(
             key: props['key'],
@@ -3498,27 +3498,27 @@ var p = () => {
             maxChildSize: props['maxChildSize']?.toDouble() ?? 1.0,
             expand: props['expand'] ?? true,
             builder: props['builder'],
-          ),
+      ),
       'DraggableScrollableSheet#builder': (props) => (
-            BuildContext context,
-            ScrollController scrollController,
+          BuildContext context,
+          ScrollController scrollController,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'DraggableScrollableActuator': (props) => DraggableScrollableActuator(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'DraggableScrollableActuator.reset': (props) =>
           DraggableScrollableActuator.reset(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'DecoratedBox': (props) => DecoratedBox(
             key: props['key'],
             decoration: props['decoration'],
             position: props['position'] ?? DecorationPosition.background,
             child: props['child'],
-          ),
+      ),
       'Container': (props) => Container(
             key: props['key'],
             alignment: props['alignment'],
@@ -3534,7 +3534,7 @@ var p = () => {
             transformAlignment: props['transformAlignment'],
             child: props['child'],
             clipBehavior: props['clipBehavior'] ?? Clip.none,
-          ),
+      ),
       'EditableText': (props) => EditableText(
             key: props['key'],
             controller: props['controller'],
@@ -3568,7 +3568,7 @@ var p = () => {
             keyboardType: props['keyboardType'],
             textInputAction: props['textInputAction'],
             textCapitalization:
-                props['textCapitalization'] ?? TextCapitalization.none,
+            props['textCapitalization'] ?? TextCapitalization.none,
             onChanged: props['onChanged'],
             onEditingComplete: props['onEditingComplete'],
             onSubmitted: props['onSubmitted'],
@@ -3585,15 +3585,15 @@ var p = () => {
             cursorOffset: props['cursorOffset'],
             paintCursorAboveText: props['paintCursorAboveText'] ?? false,
             selectionHeightStyle:
-                props['selectionHeightStyle'] ?? ui.BoxHeightStyle.tight,
+            props['selectionHeightStyle'] ?? ui.BoxHeightStyle.tight,
             selectionWidthStyle:
-                props['selectionWidthStyle'] ?? ui.BoxWidthStyle.tight,
+            props['selectionWidthStyle'] ?? ui.BoxWidthStyle.tight,
             scrollPadding: props['scrollPadding'] ?? const EdgeInsets.all(20.0),
             keyboardAppearance: props['keyboardAppearance'] ?? Brightness.light,
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             enableInteractiveSelection:
-                props['enableInteractiveSelection'] ?? true,
+            props['enableInteractiveSelection'] ?? true,
             scrollController: props['scrollController'],
             scrollPhysics: props['scrollPhysics'],
             autocorrectionTextRectColor: props['autocorrectionTextRectColor'],
@@ -3605,27 +3605,27 @@ var p = () => {
             restorationId: props['restorationId'],
             scrollBehavior: props['scrollBehavior'],
             enableIMEPersonalizedLearning:
-                props['enableIMEPersonalizedLearning'] ?? true,
-          ),
+            props['enableIMEPersonalizedLearning'] ?? true,
+      ),
       'EditableText#onAppPrivateCommand': (props) => (
-            String,
-            Map,
+          String,
+          Map,
           ) {
             return (props['block']);
-          },
+      },
       'EditableText#onSelectionChanged': (props) => (
-            dynamic selection,
-            dynamic cause,
+          dynamic selection,
+          dynamic cause,
           ) {
             return (props['block']);
-          },
+      },
       'Placeholder': (props) => Placeholder(
             key: props['key'],
             color: props['color'] ?? const Color(0xFF455A64),
             strokeWidth: props['strokeWidth']?.toDouble() ?? 2.0,
             fallbackWidth: props['fallbackWidth']?.toDouble() ?? 400.0,
             fallbackHeight: props['fallbackHeight']?.toDouble() ?? 400.0,
-          ),
+      ),
       'Icon': (props) => Icon(
             props['pa'][0],
             key: props['key'],
@@ -3633,7 +3633,7 @@ var p = () => {
             color: props['color'],
             semanticLabel: props['semanticLabel'],
             textDirection: props['textDirection'],
-          ),
+      ),
       'Visibility': (props) => Visibility(
             key: props['key'],
             child: props['child'],
@@ -3644,19 +3644,19 @@ var p = () => {
             maintainSize: props['maintainSize'] ?? false,
             maintainSemantics: props['maintainSemantics'] ?? false,
             maintainInteractivity: props['maintainInteractivity'] ?? false,
-          ),
+      ),
       'SliverVisibility': (props) => SliverVisibility(
             key: props['key'],
             sliver: props['sliver'],
             replacementSliver:
-                props['replacementSliver'] ?? const SliverToBoxAdapter(),
+            props['replacementSliver'] ?? const SliverToBoxAdapter(),
             visible: props['visible'] ?? true,
             maintainState: props['maintainState'] ?? false,
             maintainAnimation: props['maintainAnimation'] ?? false,
             maintainSize: props['maintainSize'] ?? false,
             maintainSemantics: props['maintainSemantics'] ?? false,
             maintainInteractivity: props['maintainInteractivity'] ?? false,
-          ),
+      ),
       'AnimatedContainer': (props) => AnimatedContainer(
             key: props['key'],
             alignment: props['alignment'],
@@ -3675,7 +3675,7 @@ var p = () => {
             curve: props['curve'] ?? Curves.linear,
             duration: props['duration'],
             onEnd: props['onEnd'],
-          ),
+      ),
       'AnimatedPadding': (props) => AnimatedPadding(
             key: props['key'],
             padding: props['padding'],
@@ -3683,7 +3683,7 @@ var p = () => {
             curve: props['curve'] ?? Curves.linear,
             duration: props['duration'],
             onEnd: props['onEnd'],
-          ),
+      ),
       'AnimatedAlign': (props) => AnimatedAlign(
             key: props['key'],
             alignment: props['alignment'],
@@ -3693,7 +3693,7 @@ var p = () => {
             curve: props['curve'] ?? Curves.linear,
             duration: props['duration'],
             onEnd: props['onEnd'],
-          ),
+      ),
       'AnimatedPositioned': (props) => AnimatedPositioned(
             key: props['key'],
             child: props['child'],
@@ -3706,7 +3706,7 @@ var p = () => {
             curve: props['curve'] ?? Curves.linear,
             duration: props['duration'],
             onEnd: props['onEnd'],
-          ),
+      ),
       'AnimatedPositioned.fromRect': (props) => AnimatedPositioned.fromRect(
             key: props['key'],
             child: props['child'],
@@ -3714,7 +3714,7 @@ var p = () => {
             curve: props['curve'] ?? Curves.linear,
             duration: props['duration'],
             onEnd: props['onEnd'],
-          ),
+      ),
       'AnimatedPositionedDirectional': (props) => AnimatedPositionedDirectional(
             key: props['key'],
             child: props['child'],
@@ -3727,7 +3727,7 @@ var p = () => {
             curve: props['curve'] ?? Curves.linear,
             duration: props['duration'],
             onEnd: props['onEnd'],
-          ),
+      ),
       'AnimatedScale': (props) => AnimatedScale(
             key: props['key'],
             child: props['child'],
@@ -3737,7 +3737,7 @@ var p = () => {
             curve: props['curve'] ?? Curves.linear,
             duration: props['duration'],
             onEnd: props['onEnd'],
-          ),
+      ),
       'AnimatedRotation': (props) => AnimatedRotation(
             key: props['key'],
             child: props['child'],
@@ -3747,7 +3747,7 @@ var p = () => {
             curve: props['curve'] ?? Curves.linear,
             duration: props['duration'],
             onEnd: props['onEnd'],
-          ),
+      ),
       'AnimatedSlide': (props) => AnimatedSlide(
             key: props['key'],
             child: props['child'],
@@ -3755,7 +3755,7 @@ var p = () => {
             curve: props['curve'] ?? Curves.linear,
             duration: props['duration'],
             onEnd: props['onEnd'],
-          ),
+      ),
       'AnimatedOpacity': (props) => AnimatedOpacity(
             key: props['key'],
             child: props['child'],
@@ -3764,7 +3764,7 @@ var p = () => {
             duration: props['duration'],
             onEnd: props['onEnd'],
             alwaysIncludeSemantics: props['alwaysIncludeSemantics'] ?? false,
-          ),
+      ),
       'SliverAnimatedOpacity': (props) => SliverAnimatedOpacity(
             key: props['key'],
             sliver: props['sliver'],
@@ -3773,7 +3773,7 @@ var p = () => {
             duration: props['duration'],
             onEnd: props['onEnd'],
             alwaysIncludeSemantics: props['alwaysIncludeSemantics'] ?? false,
-          ),
+      ),
       'AnimatedDefaultTextStyle': (props) => AnimatedDefaultTextStyle(
             key: props['key'],
             child: props['child'],
@@ -3787,7 +3787,7 @@ var p = () => {
             curve: props['curve'] ?? Curves.linear,
             duration: props['duration'],
             onEnd: props['onEnd'],
-          ),
+      ),
       'AnimatedPhysicalModel': (props) => AnimatedPhysicalModel(
             key: props['key'],
             child: props['child'],
@@ -3802,29 +3802,29 @@ var p = () => {
             curve: props['curve'] ?? Curves.linear,
             duration: props['duration'],
             onEnd: props['onEnd'],
-          ),
+      ),
       'Table': (props) => Table(
             key: props['key'],
             children: as<TableRow>(props['children']) ?? const <TableRow>[],
             columnWidths: props['columnWidths'],
             defaultColumnWidth:
-                props['defaultColumnWidth'] ?? const FlexColumnWidth(1.0),
+            props['defaultColumnWidth'] ?? const FlexColumnWidth(1.0),
             textDirection: props['textDirection'],
             border: props['border'],
             defaultVerticalAlignment: props['defaultVerticalAlignment'] ??
                 TableCellVerticalAlignment.top,
             textBaseline: props['textBaseline'],
-          ),
+      ),
       'TableCell': (props) => TableCell(
             key: props['key'],
             verticalAlignment: props['verticalAlignment'],
             child: props['child'],
-          ),
+      ),
       'SliverPrototypeExtentList': (props) => SliverPrototypeExtentList(
             key: props['key'],
             delegate: props['delegate'],
             prototypeItem: props['prototypeItem'],
-          ),
+      ),
       'AnimatedSwitcher': (props) => AnimatedSwitcher(
             key: props['key'],
             child: props['child'],
@@ -3834,102 +3834,102 @@ var p = () => {
             switchOutCurve: props['switchOutCurve'] ?? Curves.linear,
             transitionBuilder: props['transitionBuilder'] ??
                 AnimatedSwitcher.defaultTransitionBuilder,
-          ),
+      ),
       'AnimatedSwitcher#transitionBuilder': (props) => (
-            Widget child,
-            dynamic animation,
+          Widget child,
+          dynamic animation,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'AnimatedSwitcher#layoutBuilder': (props) => (
-            Widget currentChild,
-            List previousChildren,
+          Widget currentChild,
+          List previousChildren,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'AnimatedSwitcher.defaultTransitionBuilder': (props) =>
           AnimatedSwitcher.defaultTransitionBuilder(
-            props['pa'][0],
-            props['pa'][1],
+                props['pa'][0],
+                props['pa'][1],
           ),
       'AnimatedSwitcher.defaultLayoutBuilder': (props) =>
           AnimatedSwitcher.defaultLayoutBuilder(
-            props['pa'][0],
-            props['pa'][1],
+                props['pa'][0],
+                props['pa'][1],
           ),
       'Title': (props) => Title(
             key: props['key'],
             title: props['title'] ?? '',
             color: props['color'],
             child: props['child'],
-          ),
+      ),
       'ColorFiltered': (props) => ColorFiltered(
             colorFilter: props['colorFilter'],
             child: props['child'],
             key: props['key'],
-          ),
+      ),
       'FocusTraversalOrder': (props) => FocusTraversalOrder(
             key: props['key'],
             order: props['order'],
             child: props['child'],
-          ),
+      ),
       'FocusTraversalOrder.of': (props) => FocusTraversalOrder.of(
             props['pa'][0],
-          ),
+      ),
       'FocusTraversalOrder.maybeOf': (props) => FocusTraversalOrder.maybeOf(
             props['pa'][0],
-          ),
+      ),
       'FocusTraversalGroup': (props) => FocusTraversalGroup(
             key: props['key'],
             policy: props['policy'],
             descendantsAreFocusable: props['descendantsAreFocusable'] ?? true,
             child: props['child'],
-          ),
+      ),
       'FocusTraversalGroup.of': (props) => FocusTraversalGroup.of(
             props['pa'][0],
-          ),
+      ),
       'FocusTraversalGroup.maybeOf': (props) => FocusTraversalGroup.maybeOf(
             props['pa'][0],
-          ),
+      ),
       'TraversalDirection': {
-        'values': TraversalDirection.values,
-        'up': TraversalDirection.up,
-        'right': TraversalDirection.right,
-        'down': TraversalDirection.down,
-        'left': TraversalDirection.left,
+            'values': TraversalDirection.values,
+            'up': TraversalDirection.up,
+            'right': TraversalDirection.right,
+            'down': TraversalDirection.down,
+            'left': TraversalDirection.left,
       },
       'KeyEventResult': {
-        'values': KeyEventResult.values,
-        'handled': KeyEventResult.handled,
-        'ignored': KeyEventResult.ignored,
-        'skipRemainingHandlers': KeyEventResult.skipRemainingHandlers,
+            'values': KeyEventResult.values,
+            'handled': KeyEventResult.handled,
+            'ignored': KeyEventResult.ignored,
+            'skipRemainingHandlers': KeyEventResult.skipRemainingHandlers,
       },
       'UnfocusDisposition': {
-        'values': UnfocusDisposition.values,
-        'scope': UnfocusDisposition.scope,
-        'previouslyFocusedChild': UnfocusDisposition.previouslyFocusedChild,
+            'values': UnfocusDisposition.values,
+            'scope': UnfocusDisposition.scope,
+            'previouslyFocusedChild': UnfocusDisposition.previouslyFocusedChild,
       },
       'FocusHighlightMode': {
-        'values': FocusHighlightMode.values,
-        'touch': FocusHighlightMode.touch,
-        'traditional': FocusHighlightMode.traditional,
+            'values': FocusHighlightMode.values,
+            'touch': FocusHighlightMode.touch,
+            'traditional': FocusHighlightMode.traditional,
       },
       'FocusHighlightStrategy': {
-        'values': FocusHighlightStrategy.values,
-        'automatic': FocusHighlightStrategy.automatic,
-        'alwaysTouch': FocusHighlightStrategy.alwaysTouch,
-        'alwaysTraditional': FocusHighlightStrategy.alwaysTraditional,
+            'values': FocusHighlightStrategy.values,
+            'automatic': FocusHighlightStrategy.automatic,
+            'alwaysTouch': FocusHighlightStrategy.alwaysTouch,
+            'alwaysTraditional': FocusHighlightStrategy.alwaysTraditional,
       },
       'OrientationBuilder': (props) => OrientationBuilder(
             key: props['key'],
             builder: props['builder'],
-          ),
+      ),
       'OrientationBuilder#builder': (props) => (
-            BuildContext context,
-            Orientation orientation,
+          BuildContext context,
+          Orientation orientation,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'Scrollable': (props) => Scrollable(
             key: props['key'],
             axisDirection: props['axisDirection'] ?? AxisDirection.down,
@@ -3940,27 +3940,27 @@ var p = () => {
             excludeFromSemantics: props['excludeFromSemantics'] ?? false,
             semanticChildCount: props['semanticChildCount'],
             dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            props['dragStartBehavior'] ?? DragStartBehavior.start,
             restorationId: props['restorationId'],
             scrollBehavior: props['scrollBehavior'],
-          ),
+      ),
       'Scrollable#viewportBuilder': (props) => (
-            BuildContext context,
-            dynamic position,
+          BuildContext context,
+          dynamic position,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'Scrollable#incrementCalculator': (props) => (
-            ScrollIncrementDetails details,
+          ScrollIncrementDetails details,
           ) {
             return (props['block']) as double;
-          },
+      },
       'Scrollable.of': (props) => Scrollable.of(
             props['pa'][0],
-          ),
+      ),
       'Scrollable.recommendDeferredLoadingForContext': (props) =>
           Scrollable.recommendDeferredLoadingForContext(
-            props['pa'][0],
+                props['pa'][0],
           ),
       'Scrollable.ensureVisible': (props) => Scrollable.ensureVisible(
             props['pa'][0],
@@ -3969,11 +3969,11 @@ var p = () => {
             curve: props['curve'] ?? Curves.ease,
             alignmentPolicy: props['alignmentPolicy'] ??
                 ScrollPositionAlignmentPolicy.explicit,
-          ),
+      ),
       'ScrollIncrementType': {
-        'values': ScrollIncrementType.values,
-        'line': ScrollIncrementType.line,
-        'page': ScrollIncrementType.page,
+            'values': ScrollIncrementType.values,
+            'line': ScrollIncrementType.line,
+            'page': ScrollIncrementType.page,
       },
       'ImageIcon': (props) => ImageIcon(
             props['pa'][0],
@@ -3981,54 +3981,54 @@ var p = () => {
             size: props['size']?.toDouble(),
             color: props['color'],
             semanticLabel: props['semanticLabel'],
-          ),
+      ),
       'ScrollPositionAlignmentPolicy': {
-        'values': ScrollPositionAlignmentPolicy.values,
-        'explicit': ScrollPositionAlignmentPolicy.explicit,
-        'keepVisibleAtEnd': ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
-        'keepVisibleAtStart': ScrollPositionAlignmentPolicy.keepVisibleAtStart,
+            'values': ScrollPositionAlignmentPolicy.values,
+            'explicit': ScrollPositionAlignmentPolicy.explicit,
+            'keepVisibleAtEnd': ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
+            'keepVisibleAtStart': ScrollPositionAlignmentPolicy.keepVisibleAtStart,
       },
       'LayoutBuilder': (props) => LayoutBuilder(
             key: props['key'],
             builder: props['builder'],
-          ),
+      ),
       'LayoutBuilder#builder': (props) => (
-            BuildContext context,
-            dynamic constraints,
+          BuildContext context,
+          dynamic constraints,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'PrimaryScrollController': (props) => PrimaryScrollController(
             key: props['key'],
             controller: props['controller'],
             child: props['child'],
-          ),
+      ),
       'PrimaryScrollController.none': (props) => PrimaryScrollController.none(
             key: props['key'],
             child: props['child'],
-          ),
+      ),
       'PrimaryScrollController.of': (props) => PrimaryScrollController.of(
             props['pa'][0],
-          ),
+      ),
       'DualTransitionBuilder': (props) => DualTransitionBuilder(
             key: props['key'],
             animation: props['animation'],
             forwardBuilder: props['forwardBuilder'],
             reverseBuilder: props['reverseBuilder'],
             child: props['child'],
-          ),
+      ),
       'DualTransitionBuilder#forwardBuilder': (props) => (
-            BuildContext context,
-            dynamic animation,
-            Widget child,
+          BuildContext context,
+          dynamic animation,
+          Widget child,
           ) {
             return (props['block']) as Widget;
-          },
+      },
       'DualTransitionBuilder#reverseBuilder': (props) => (
-            BuildContext context,
-            dynamic animation,
-            Widget child,
+          BuildContext context,
+          dynamic animation,
+          Widget child,
           ) {
             return (props['block']) as Widget;
-          },
-    };
+      },
+};
