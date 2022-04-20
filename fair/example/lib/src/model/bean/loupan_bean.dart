@@ -16,7 +16,7 @@ class LouPanDetail {
   LouPanDetail({this.id, this.number, this.type, this.goodsId, this.imgUrl, this.goodsDesc, this.isSelected = true});
 
   factory LouPanDetail.fromJson(Map<String, dynamic> json) => LouPanDetail(
-    goodsDesc: (json['goodsDesc'] as List)
+    goodsDesc: (json['goodsDesc'] as List?)
         ?.map((e) =>
     e == null ? null : GoodsDesc.fromJson(e as Map<String, dynamic>))
         ?.toList(),
