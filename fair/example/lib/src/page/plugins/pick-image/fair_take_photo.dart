@@ -80,7 +80,7 @@ class FairPhotoSelector extends IFairPlugin {
   }
 
   Future<String> _onImageButtonPressed(ImageSource source,
-      {BuildContext context}) async {
+      {BuildContext? context}) async {
     final pickedFile = await _getPicker().getImage(
       source: source,
     );
@@ -88,11 +88,11 @@ class FairPhotoSelector extends IFairPlugin {
     return Future.value(pickedFile?.path);
   }
 
-  ImagePicker _picker;
+  ImagePicker? _picker;
 
   ImagePicker _getPicker() {
     _picker ??= ImagePicker();
-    return _picker;
+    return _picker!;
   }
 
   @override

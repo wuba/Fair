@@ -10,6 +10,7 @@ import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/error/error.dart';
+import 'package:dartToJs/src/list_ext.dart';
 import 'package:path/path.dart' as p;
 
 enum ClassOutputTemplateType { raw, pageState }
@@ -112,6 +113,7 @@ class MethodDeclarationData {
   }
 
   bool get isStatic => _isStatic;
+
   set isStatic(bool val) {
     if (!val && (_isFactory || _isGenerativeConstructor)) {
       throw 'invalid value';
@@ -132,6 +134,7 @@ class MethodDeclarationData {
   }
 
   bool get isFactory => _isFactory;
+
   set isFactory(bool val) {
     _isFactory = val;
     if (val) {
@@ -141,24 +144,25 @@ class MethodDeclarationData {
 
   var renamedParameters = HashMap<int, String>();
   var abtractedInitializer = <String>[];
+
   MethodDeclarationData(this.name, this.body, this.isArrow);
 }
 
 class FieldDeclarationData {
-  String name;
-  String initVal;
+  String? name;
+  String? initVal;
   var isStatic = false;
 
   FieldDeclarationData(this.name, this.initVal);
 }
 
 class ClassDeclarationData {
-  var className = '';
+  String? className = '';
   var fields = <FieldDeclarationData>[];
   var methods = <MethodDeclarationData>[];
   var outputTemplateType = ClassOutputTemplateType.raw;
-  var parentClass = '';
-  var isDataBean = false;
+  String? parentClass = '';
+  bool isDataBean = false;
 
   String genJsCode() {
     var tpl = '';
@@ -170,34 +174,17 @@ class ClassDeclarationData {
             fieldsLiterval += 'this.${element.name} = ${element.initVal};';
           });
           var memberMethodsLiterval = '';
-          methods.where((element) => !element.isStatic).forEach((element) {
-            memberMethodsLiterval +=
-                '${element.name}: ${convertFunctionFromData(element, this)},';
+          methods.where((element) => !(element.isStatic)).forEach((element) {
+            memberMethodsLiterval += '${element.name}: ${convertFunctionFromData(element, this)},';
           });
-          var staticFieldsLiteral = fields
-              .where((element) => element.isStatic)
-              .map((e) =>
-                  '$className.${e.name} = (function() { with ($className) { return ${e.initVal ?? 'null'}; } })();')
-              .join('\r\n');
-          var staticMethodsLiteral = methods
-              .where((element) => element.isStatic)
-              .map((e) =>
-                  '$className.${e.name} = ${convertFunctionFromData(e, this)};')
-              .join('\r\n');
-          var defaultContructorIsFactory = methods.firstWhere(
-                  (element) =>
-                      element.isFactory &&
-                      element.name == factoryConstructorAlias,
-                  orElse: () => null) !=
-              null;
-          var autoGenDefaultConstructor = methods.firstWhere(
-                  (element) =>
-                      !element.isStatic && element.name == constructorAlias,
-                  orElse: () => null) ==
-              null;
+          var staticFieldsLiteral =
+              fields.where((element) => element.isStatic).map((e) => '$className.${e.name} = (function() { with ($className) { return ${e.initVal ?? 'null'}; } })();').join('\r\n');
+          var staticMethodsLiteral = methods.where((element) => element.isStatic).map((e) => '$className.${e.name} = ${convertFunctionFromData(e, this)};').join('\r\n');
+          var defaultContructorIsFactory = methods.firstWhereOrNull((element) => element.isFactory == true && element.name == factoryConstructorAlias, orElse: () => null) != null;
+          var autoGenDefaultConstructor = methods.firstWhereOrNull((element) => !element.isStatic && element.name == constructorAlias, orElse: () => null) == null;
           var defaultConstructor = '''
           $className.prototype.$constructorAlias = function() {
-            ${parentClass != null && parentClass.isNotEmpty ? parentClass : 'Object'}.prototype.$constructorAlias.call(this);
+            ${(parentClass != null && parentClass!.isNotEmpty) ? parentClass : 'Object'}.prototype.$constructorAlias.call(this);
           };
         ''';
           var instanceConstruction = !defaultContructorIsFactory
@@ -237,7 +224,7 @@ class ClassDeclarationData {
           $instanceConstruction
         }
         $className.$innerName = function inner() {
-          ${parentClass != null && parentClass.isNotEmpty ? '$parentClass.$innerName.call(this);' : ''}
+          ${parentClass != null && parentClass!.isNotEmpty ? '$parentClass.$innerName.call(this);' : ''}
           $fieldsLiterval
         };
         $className.prototype = {
@@ -248,7 +235,7 @@ class ClassDeclarationData {
         $staticMethodsLiteral
         $staticFieldsLiteral
         ${isDataBean ? beanFromJson : ''}
-        ${parentClass != null && parentClass.isNotEmpty ? 'inherit($className, $parentClass);' : ''}
+        ${parentClass != null && parentClass!.isNotEmpty ? 'inherit($className, $parentClass);' : ''}
         ''';
         }
         break;
@@ -260,8 +247,7 @@ class ClassDeclarationData {
           });
           var methodsLiterval = '';
           methods.forEach((element) {
-            methodsLiterval +=
-                '${element.name}: ${convertFunctionFromData(element, this)},';
+            methodsLiterval += '${element.name}: ${convertFunctionFromData(element, this)},';
           });
           tpl = '''
         {
@@ -296,32 +282,25 @@ class UniqueNameGenerator {
   UniqueNameGenerator._internal();
 }
 
-class ClassDeclarationVisitor
-    extends RecursiveAstVisitor<ClassDeclarationVisitor> {
+class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisitor> {
   List<ClassDeclarationData> classes = [];
   bool isDataBean;
 
   ClassDeclarationVisitor([this.isDataBean = false]);
 
   @override
-  ClassDeclarationVisitor visitClassDeclaration(ClassDeclaration node) {
+  ClassDeclarationVisitor? visitClassDeclaration(ClassDeclaration node) {
     var classDeclarationData = ClassDeclarationData();
     classDeclarationData.isDataBean = isDataBean;
     classDeclarationData.className = node.name.name;
     if (node.extendsClause != null) {
-      classDeclarationData.parentClass =
-          node.extendsClause.superclass.toString();
+      classDeclarationData.parentClass = node.extendsClause!.superclass.toString();
     }
     node.members.forEach((element) {
       if (element is FieldDeclaration) {
-        var fieldDeclaration =
-            element.fields.variables.first.toString().split('=');
-        classDeclarationData.fields.add(FieldDeclarationData(
-            fieldDeclaration[0].trim(),
-            fieldDeclaration.length == 2
-                ? convertExpression(fieldDeclaration[1].trim())
-                : null)
-          ..isStatic = element.isStatic);
+        var fieldDeclaration = element.fields.variables.first.toString().split('=');
+        classDeclarationData.fields
+            .add(FieldDeclarationData(fieldDeclaration[0].trim(), fieldDeclaration.length == 2 ? convertExpression(fieldDeclaration[1].trim()) : null)..isStatic = element.isStatic);
       } else if (element is MethodDeclaration) {
         if (isDataBean && ['fromJson', 'toJson'].contains(element.name.name)) {
           return;
@@ -331,9 +310,7 @@ class ClassDeclarationVisitor
         var excludeMethods = ['build'];
         if (!excludeMethods.contains(element.name.name)) {
           classDeclarationData.methods.add(MethodDeclarationData(
-              element.name.name,
-              '${element.returnType.toString()} ${element.name.name}${element.parameters.toString()}${element.body.toString()}',
-              element.body is ExpressionFunctionBody)
+              element.name.name, '${element.returnType.toString()} ${element.name.name}${element.parameters.toString()}${element.body.toString()}', element.body is ExpressionFunctionBody)
             ..isStatic = element.isStatic);
         }
         // }
@@ -346,17 +323,11 @@ class ClassDeclarationVisitor
         if (element.body is EmptyFunctionBody) {
           constructorBody = '{}';
         }
-        constructorBody =
-            '$constructorAlias${element.parameters.toString()}$constructorBody';
-        var methodDeclaration = MethodDeclarationData(
-            element.name?.name ?? constructorAlias,
-            constructorBody,
-            element.body is ExpressionFunctionBody);
+        constructorBody = '$constructorAlias${element.parameters.toString()}$constructorBody';
+        var methodDeclaration = MethodDeclarationData(element.name?.name ?? constructorAlias, constructorBody, element.body is ExpressionFunctionBody);
         if (element.factoryKeyword?.stringValue == 'factory') {
           methodDeclaration.isFactory = true;
-          methodDeclaration.name = (element.name == null)
-              ? factoryConstructorAlias
-              : element.name.name;
+          methodDeclaration.name = (element.name == null) ? factoryConstructorAlias : element.name!.name;
         } else {
           methodDeclaration.isGenerativeConstructor = element.name != null;
         }
@@ -365,49 +336,36 @@ class ClassDeclarationVisitor
             var newParamName = UniqueNameGenerator().next();
             methodDeclaration
               ..renamedParameters[idx] = newParamName
-              ..abtractedInitializer
-                  .add('${element.toString()} = $newParamName;');
+              ..abtractedInitializer.add('${element.toString()} = $newParamName;');
           } else if (element is DefaultFormalParameter) {
             if (element.parameter is FieldFormalParameter) {
               var newParamName = element.parameter.identifier.toString();
               methodDeclaration
                 ..renamedParameters[idx] = newParamName
-                ..abtractedInitializer
-                    .add('${element.parameter.toString()} = $newParamName;');
+                ..abtractedInitializer.add('${element.parameter.toString()} = $newParamName;');
             }
           }
           idx++;
         });
         var callSuperConstructorImplicitly = false;
-        if (element.initializers != null) {
-          element.initializers.forEach((initializer) {
-            if (initializer is SuperConstructorInvocation) {
-              callSuperConstructorImplicitly = true;
-              var params = initializer.argumentList.arguments
-                  .map((e) => e.toString())
-                  .join(',');
-              methodDeclaration.abtractedInitializer.add(
-                  '${classDeclarationData.parentClass}.prototype.$constructorAlias.call($thisAlias${params.isEmpty ? '' : ',$params'});');
-            } else if (initializer is ConstructorFieldInitializer) {
-              methodDeclaration.abtractedInitializer.add(
-                  'this.${initializer.fieldName} = ${convertExpression(initializer.expression.toString())};');
-            } else if (initializer is RedirectingConstructorInvocation) {
-              var params = initializer.argumentList.arguments
-                  .map((e) => convertExpression(e.toString()))
-                  .join(',');
-              methodDeclaration.abtractedInitializer
-                  .add('return new ${element.returnType.name}($params);');
-              methodDeclaration.isRedirectConstructor = true;
-            } else {
-              throw 'Unhandled constructor element ${element.toString()}';
-            }
-          });
-        }
-        if (!callSuperConstructorImplicitly &&
-            !methodDeclaration.isRedirectConstructor &&
-            !methodDeclaration.isFactory) {
+        element.initializers.forEach((initializer) {
+          if (initializer is SuperConstructorInvocation) {
+            callSuperConstructorImplicitly = true;
+            var params = initializer.argumentList.arguments.map((e) => e.toString()).join(',');
+            methodDeclaration.abtractedInitializer.add('${classDeclarationData.parentClass}.prototype.$constructorAlias.call($thisAlias${params.isEmpty ? '' : ',$params'});');
+          } else if (initializer is ConstructorFieldInitializer) {
+            methodDeclaration.abtractedInitializer.add('this.${initializer.fieldName} = ${convertExpression(initializer.expression.toString())};');
+          } else if (initializer is RedirectingConstructorInvocation) {
+            var params = initializer.argumentList.arguments.map((e) => convertExpression(e.toString())).join(',');
+            methodDeclaration.abtractedInitializer.add('return new ${element.returnType.name}($params);');
+            methodDeclaration.isRedirectConstructor = true;
+          } else {
+            throw 'Unhandled constructor element ${element.toString()}';
+          }
+        });
+        if (!callSuperConstructorImplicitly && !methodDeclaration.isRedirectConstructor && !methodDeclaration.isFactory) {
           methodDeclaration.abtractedInitializer.insert(0,
-              '${classDeclarationData.parentClass == null || classDeclarationData.parentClass.isEmpty ? 'Object' : classDeclarationData.parentClass}.prototype.$constructorAlias.call($thisAlias);');
+              '${classDeclarationData.parentClass == null || classDeclarationData.parentClass!.isEmpty ? 'Object' : classDeclarationData.parentClass}.prototype.$constructorAlias.call($thisAlias);');
         }
         classDeclarationData.methods.add(methodDeclaration);
       }
@@ -418,9 +376,7 @@ class ClassDeclarationVisitor
 
   void parseByFile(String filePath) {
     var file = File(filePath);
-    var result = parseFile(
-        path: file.absolute.uri.normalizePath().path,
-        featureSet: FeatureSet.fromEnableFlags([]));
+    var result = parseFile(path: file.absolute.uri.normalizePath().path, featureSet: FeatureSet.fromEnableFlags([]));
     result.unit.visitChildren(this);
   }
 
@@ -442,19 +398,16 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
   Map<String, String> dependencyCache = {}; // module path / module sequence
 
   var classDeclarationData = ClassDeclarationData();
-  var allStates = <ClassDeclarationData>[];
+  var allStates = <ClassDeclarationData?>[];
   var allInnerDataClasses = <ClassDeclarationData>[];
 
   WidgetStateGenerator(this.baseFilePath);
 
-  void goThroughMembers(
-      ClassDeclaration node, ClassDeclarationData tempClassDeclaration) {
+  void goThroughMembers(ClassDeclaration node, ClassDeclarationData tempClassDeclaration) {
     node.members.forEach((element) {
       if (element is FieldDeclaration) {
-        var fieldDeclaration =
-            element.fields.variables.first.toString().split('=');
-        var hasFairPropsAttribute = element.metadata
-            .any((elem) => elem.name.toString() == FairPropsAttribute);
+        var fieldDeclaration = element.fields.variables.first.toString().split('=');
+        var hasFairPropsAttribute = element.metadata.any((elem) => elem.name.toString() == FairPropsAttribute);
         tempClassDeclaration.fields.add(FieldDeclarationData(
             fieldDeclaration[0].trim(),
             fieldDeclaration.length == 2
@@ -466,12 +419,8 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
         // var fairWellExp = RegExp(r"@FairWell\('(.+)'\)");
         // if (fairWellExp.allMatches(element.metadata.first.toString()).isNotEmpty) {
         var excludeMethods = ['build'];
-        if (!excludeMethods.contains(element.name.toString()) &&
-            element.returnType.toString() != 'Widget') {
-          tempClassDeclaration.methods.add(MethodDeclarationData(
-              element.name.toString(),
-              element.toString(),
-              element.body is ExpressionFunctionBody));
+        if (!excludeMethods.contains(element.name.toString()) && element.returnType.toString() != 'Widget') {
+          tempClassDeclaration.methods.add(MethodDeclarationData(element.name.toString(), element.toString(), element.body is ExpressionFunctionBody));
         }
         // }
       }
@@ -480,13 +429,12 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
 
   String findCreateStateReturn(FunctionBody body) {
     if (body is BlockFunctionBody) {
-      ReturnStatement returnStatement = body.block.statements.singleWhere((element) => element is ReturnStatement, orElse: () => null);
+      ReturnStatement? returnStatement = body.block.statements.singleWhereOrNull((element) => element is ReturnStatement, orElse: () => null) as ReturnStatement?;
       assert(returnStatement != null, 'too complicated createState implementation');
-      assert(returnStatement.expression is MethodInvocation, 'too complicated return expression in method createState');
-      return (returnStatement.expression as MethodInvocation).methodName.name;
+      assert(returnStatement?.expression is MethodInvocation, 'too complicated return expression in method createState');
+      return (returnStatement?.expression as MethodInvocation).methodName.name;
     } else if (body is ExpressionFunctionBody) {
-      assert(body.expression is MethodInvocation,
-          'too complicated return expression in method createState');
+      assert(body.expression is MethodInvocation, 'too complicated return expression in method createState');
       return (body.expression as MethodInvocation).methodName.name;
     } else {
       throw 'Unsupported body in method createState';
@@ -494,48 +442,34 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
   }
 
   @override
-  WidgetStateGenerator visitClassDeclaration(ClassDeclaration node) {
+  WidgetStateGenerator? visitClassDeclaration(ClassDeclaration node) {
     var stateExp = RegExp(r'^State(<.+>)?$');
 
     var tempClassDeclaration = ClassDeclarationData();
     tempClassDeclaration.className = node.name.name;
     goThroughMembers(node, tempClassDeclaration);
-    if (node.extendsClause != null &&
-        stateExp
-            .allMatches(node.extendsClause.superclass.toString())
-            .isNotEmpty) {
+    if (node.extendsClause != null && stateExp.allMatches(node.extendsClause!.superclass.toString()).isNotEmpty) {
       allStates.add(tempClassDeclaration);
-      if (classDeclarationData.className != null &&
-          classDeclarationData.className == tempClassDeclaration.className) {
+      if (classDeclarationData.className != null && classDeclarationData.className == tempClassDeclaration.className) {
         classDeclarationData = tempClassDeclaration;
       }
-    } else if (node.extendsClause == null || node.extendsClause.superclass.toString() == 'Object') {
+    } else if (node.extendsClause == null || node.extendsClause!.superclass.toString() == 'Object') {
       allInnerDataClasses.add(tempClassDeclaration);
     }
     var fairPatchAttributeName = 'FairPatch';
     const statefulWidgetClassName = 'StatefulWidget';
     const statelessWidgetClassName = 'StatelessWidget';
-    if (node.metadata != null &&
-        node.metadata.isNotEmpty &&
-        node.metadata
-            .any((item) => item.name.toString() == fairPatchAttributeName)) {
+    if (node.metadata.isNotEmpty && node.metadata.any((item) => item.name.toString() == fairPatchAttributeName)) {
       if (node.extendsClause != null) {
-        switch (node.extendsClause.superclass.toString()) {
+        switch (node.extendsClause!.superclass.toString()) {
           case statefulWidgetClassName:
-            var member = node.members.firstWhere(
-                (element) =>
-                    element is MethodDeclaration &&
-                    element.name.toString() == 'createState',
-                orElse: () => null);
+            var member = node.members.firstWhereOrNull((element) => element is MethodDeclaration && element.name.toString() == 'createState', orElse: () => null);
             if (member != null) {
-              var expectedStateClassName =
-                  ((member as MethodDeclaration).returnType as TypeName).name.name;
+              var expectedStateClassName = ((member as MethodDeclaration).returnType as TypeName).name.name;
               if (expectedStateClassName == 'State') {
-                expectedStateClassName = findCreateStateReturn((member as MethodDeclaration).body);
+                expectedStateClassName = findCreateStateReturn(member.body);
               }
-              var data = allStates.firstWhere(
-                  (element) => element.className == expectedStateClassName,
-                  orElse: () => null);
+              var data = allStates.firstWhere((element) => element?.className == expectedStateClassName, orElse: () => null);
               if (data != null) {
                 classDeclarationData = data;
               } else {
@@ -562,36 +496,36 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
     if (imports.isEmpty) {
       return;
     }
-    
+
     var dependencySequences = reserveSequence(imports.length);
     var index = 0;
     imports.forEach((element) {
-          var absPath = resolvePath(p.dirname(refererPath), element.k1);
-          if (dependencyCache.containsKey(absPath)) {
-            return;
+      var absPath = resolvePath(p.dirname(refererPath), element.k1);
+      if (dependencyCache.containsKey(absPath)) {
+        return;
+      }
+      dependencyCache[absPath] = dependencySequences[index];
+      var partJsGenerator = PartJsCodeGenerator();
+      partJsGenerator.parse(absPath);
+      var selfDependencySequences = <String>[];
+      if (partJsGenerator.importLocalFiles.isNotEmpty) {
+        generateDependencies(absPath, partJsGenerator.importLocalFiles, result);
+        selfDependencySequences = reserveSequence(partJsGenerator.importLocalFiles.length, true);
+        var index1 = 0;
+        partJsGenerator.importLocalFiles.forEach((element) {
+          var tempDependencyPath = resolvePath(p.dirname(absPath), element.k1);
+          if (dependencyCache.containsKey(tempDependencyPath)) {
+            selfDependencySequences[index1] = dependencyCache[tempDependencyPath].toString();
           }
-          dependencyCache[absPath] = dependencySequences[index];
-          var partJsGenerator = PartJsCodeGenerator();
-          partJsGenerator.parse(absPath);
-          var selfDependencySequences = <String>[];
-          if (partJsGenerator.importLocalFiles.isNotEmpty) {
-            generateDependencies(absPath, partJsGenerator.importLocalFiles, result);
-            selfDependencySequences = reserveSequence(partJsGenerator.importLocalFiles.length, true);
-            var index1 = 0;
-            partJsGenerator.importLocalFiles.forEach((element) {
-              var tempDependencyPath = resolvePath(p.dirname(absPath), element.k1);
-              if (dependencyCache.containsKey(tempDependencyPath)) {
-                selfDependencySequences[index1] = dependencyCache[tempDependencyPath].toString();
-              }
-              if (element.k3 != null && element.k3.isNotEmpty) {
-                selfDependencySequences[index1] = '[${selfDependencySequences[index1]},\'${element.k3}\']';
-              }
-              index1++;
-            });
+          if (element.k3 != null && element.k3!.isNotEmpty) {
+            selfDependencySequences[index1] = '[${selfDependencySequences[index1]},\'${element.k3}\']';
           }
-          var classDeclarationVisitor1 = ClassDeclarationVisitor(element.k2);
-          classDeclarationVisitor1.parseByFile(absPath);
-          result.add('''
+          index1++;
+        });
+      }
+      var classDeclarationVisitor1 = ClassDeclarationVisitor(element.k2 ?? false);
+      classDeclarationVisitor1.parseByFile(absPath);
+      result.add('''
           defineModule(${dependencySequences[index]}, function(__mod__) {
             with (__mod__.imports) {
               ${classDeclarationVisitor1.genJsCode()}
@@ -599,8 +533,8 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
             ${classDeclarationVisitor1.classes.map((e) => '__mod__.exports.${e.className} = ${e.className};').join('\r\n')}
           }, [${selfDependencySequences.join(',')}]);
           ''');
-          index++;
-        });
+      index++;
+    });
   }
 
   List<String> reserveSequence(int num, [bool keepSequence = false]) {
@@ -625,7 +559,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
         dependencySequences = reserveSequence(partJsGenerator.importLocalFiles.length, true);
         var index = 0;
         partJsGenerator.importLocalFiles.forEach((element) {
-          if (element.k3 != null && element.k3.isNotEmpty) {
+          if (element.k3 != null && element.k3!.isNotEmpty) {
             dependencySequences[index] = '[${dependencySequences[index]},\'${element.k3}\']';
           }
           index++;
@@ -653,9 +587,10 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
 }
 
 class Tuple<K1, K2, K3> {
-  K1 k1;
-  K2 k2;
-  K3 k3;
+  K1? k1;
+  K2? k2;
+  K3? k3;
+
   Tuple(this.k1, this.k2, this.k3);
 }
 
@@ -666,11 +601,11 @@ class PartJsCodeGenerator extends SimpleAstVisitor<PartJsCodeGenerator> {
   var PackagePrefix = new RegExp('(dart|package):');
 
   @override
-  PartJsCodeGenerator visitImportDirective(ImportDirective node) {
+  PartJsCodeGenerator? visitImportDirective(ImportDirective node) {
     var libraryPath = node.uri.stringValue;
-    if (libraryPath.contains(BeanDir)) {
+    if (libraryPath?.contains(BeanDir) == true) {
       importLocalFiles.add(Tuple(libraryPath, true, node.prefix?.toSource()));
-    } else if (!libraryPath.startsWith(PackagePrefix)) {
+    } else if (!(libraryPath?.startsWith(PackagePrefix) ?? false)) {
       importLocalFiles.add(Tuple(libraryPath, false, node.prefix?.toSource()));
     }
     return null;
@@ -678,16 +613,14 @@ class PartJsCodeGenerator extends SimpleAstVisitor<PartJsCodeGenerator> {
 
   void parse(String filePath) {
     var file = File(filePath);
-    var result = parseFile(
-        path: file.absolute.uri.normalizePath().path,
-        featureSet: FeatureSet.fromEnableFlags([]));
+    var result = parseFile(path: Platform.isWindows ? filePath : file.absolute.uri.normalizePath().path, featureSet: FeatureSet.fromEnableFlags([]));
     result.unit.visitChildren(this);
   }
 }
 
 class FunctionDeclarationNode {
-  String name;
-  String className;
+  String? name;
+  String? className;
   List<List<String>> argumentList = [];
   List<List<String>> namedArgumentList = [];
   List<List<String>> optionalArgumentList = [];
@@ -701,9 +634,7 @@ class FunctionDeclarationNode {
   static final argContext = '__arg_ctx__';
 
   String argumentObj() {
-    if (argumentList.isEmpty &&
-        namedArgumentList.isEmpty &&
-        optionalArgumentList.isEmpty) {
+    if (argumentList.isEmpty && namedArgumentList.isEmpty && optionalArgumentList.isEmpty) {
       return '';
     }
     var res = StringBuffer('{');
@@ -721,9 +652,7 @@ class FunctionDeclarationNode {
   }
 
   String withArgumentObjAsNeeded(String body) {
-    if (argumentList.isEmpty &&
-        namedArgumentList.isEmpty &&
-        optionalArgumentList.isEmpty) {
+    if (argumentList.isEmpty && namedArgumentList.isEmpty && optionalArgumentList.isEmpty) {
       return body;
     }
 
@@ -772,16 +701,14 @@ class FunctionDeclarationNode {
       if (argumentList.isNotEmpty) {
         namedArgs = ',';
       }
-      namedArgs +=
-          '''{${namedArgumentList.map((e) => e[0] + (e.length == 2 ? '=' + e[1] : '')).join(',')}}={}''';
+      namedArgs += '''{${namedArgumentList.map((e) => e[0] + (e.length == 2 ? '=' + e[1] : '')).join(',')}}={}''';
     }
     var optionalArgs = '';
     if (optionalArgumentList.isNotEmpty) {
       if (namedArgumentList.isNotEmpty || argumentList.isNotEmpty) {
         optionalArgs = ',';
       }
-      optionalArgs +=
-          '''${optionalArgumentList.map((e) => e[0] + (e.length == 2 ? '=' + e[1] : '')).join(',')}''';
+      optionalArgs += '''${optionalArgumentList.map((e) => e[0] + (e.length == 2 ? '=' + e[1] : '')).join(',')}''';
     }
 
     var finalBody = withContext ? wrapBodyWithCtx() : body.toSource();
@@ -803,6 +730,7 @@ class ArrowFunctionExpressionNode extends FunctionDeclarationNode {
 
 class FunctionBodyNode {
   List<StatementNode> statements = [];
+
   void push(StatementNode node) {
     statements.add(node);
   }
@@ -825,13 +753,15 @@ class StatementNode {
 
 // 原样输出的语句
 class GenericStatementNode extends StatementNode {
-  String code;
+  String? code;
+
   GenericStatementNode(String code_) {
     code = code_;
   }
+
   @override
   String toSource() {
-    return code;
+    return code ?? '';
   }
 }
 
@@ -839,13 +769,13 @@ class GenericStatementNode extends StatementNode {
 
 // 不支持如下运算符的嵌套：三目运算符、类型测试
 class ConditionalExpressionNode extends StatementNode {
-  GenericStatementNode condition;
-  GenericStatementNode then;
-  GenericStatementNode elseExpr;
+  GenericStatementNode? condition;
+  GenericStatementNode? then;
+  GenericStatementNode? elseExpr;
 
   @override
   String toSource() {
-    return '''${condition.toSource()} ? ${then.toSource()} : ${elseExpr.toSource()}''';
+    return '''${condition?.toSource()} ? ${then?.toSource()} : ${elseExpr?.toSource()}''';
   }
 }
 
@@ -859,42 +789,43 @@ class ParenthesizedExpressionNode extends GenericStatementNode {
 }
 
 class IndexExpressionNode extends StatementNode {
-  GenericStatementNode key;
-  GenericStatementNode target;
+  GenericStatementNode? key;
+  GenericStatementNode? target;
   var isSet = false;
-  GenericStatementNode value;
+  GenericStatementNode? value;
 
   @override
   String toSource() {
     return isSet
-        ? '''${target.toSource()}.${OperatorOverloadSymbol.indexEqual}(${key.toSource()}, ${value.toSource()});'''
-        : '''${target.toSource()}.${OperatorOverloadSymbol.index}(${key.toSource()})''';
+        ? '''${target?.toSource()}.${OperatorOverloadSymbol.indexEqual}(${key?.toSource()}, ${value?.toSource()});'''
+        : '''${target?.toSource()}.${OperatorOverloadSymbol.index}(${key?.toSource()})''';
   }
 }
 
 class BinaryExpressionNode extends StatementNode {
-  String operator;
-  GenericStatementNode left;
-  GenericStatementNode right;
+  String? operator;
+  GenericStatementNode? left;
+  GenericStatementNode? right;
 
   @override
   String toSource() {
-    return '''${left.toSource()}$operator${right.toSource()}''';
+    return '''${left?.toSource()}$operator${right?.toSource()}''';
   }
 }
 
 class PrefixExpressionNode extends StatementNode {
-  String operator;
-  GenericStatementNode operand;
+  String? operator;
+  GenericStatementNode? operand;
 
   @override
   String toSource() {
-    return '''$operator${operand.toSource()}''';
+    return '''$operator${operand?.toSource()}''';
   }
 }
 
 class DeclarationStatmentNode extends StatementNode {
   List<String> variables = [];
+
   @override
   String toSource() {
     return '''
@@ -904,12 +835,12 @@ class DeclarationStatmentNode extends StatementNode {
 }
 
 class WhileStatementNode extends StatementNode {
-  String condition;
-  String body;
+  String? condition;
+  String? body;
 
   @override
   String toSource() {
-    var finalBody = body == null || body.isEmpty
+    var finalBody = body == null || body?.isEmpty == true
         ? ';'
         : '''
     {
@@ -934,20 +865,20 @@ class DoWhileStatementNode extends WhileStatementNode {
 }
 
 class IfStatementNode extends StatementNode {
-  String condition;
-  String thenBody;
-  String lastElseBody;
-  IfStatementNode elseBody;
+  String? condition;
+  String? thenBody;
+  String? lastElseBody;
+  IfStatementNode? elseBody;
 
   @override
   String toSource() {
     var finalElseBody = '';
     if (elseBody != null) {
       finalElseBody = '''
-      else ${elseBody.toSource()}
+      else ${elseBody?.toSource()}
       ''';
     } else if (lastElseBody != null) {
-      finalElseBody = lastElseBody.isEmpty
+      finalElseBody = lastElseBody?.isEmpty == true
           ? ''
           : '''
       else {
@@ -964,9 +895,9 @@ class IfStatementNode extends StatementNode {
 }
 
 class SwitchStatementNode extends StatementNode {
-  GenericStatementNode expr;
-  List<List<String>> cases;
-  String default_;
+  GenericStatementNode? expr;
+  List<List<String>>? cases;
+  String? default_;
 
   String genCase(List<String> case_) {
     return case_.length == 2
@@ -980,7 +911,7 @@ class SwitchStatementNode extends StatementNode {
   }
 
   String genDefault() {
-    return default_ != null && default_.isNotEmpty
+    return default_ != null && default_!.isNotEmpty
         ? '''
     default:
       $default_
@@ -991,19 +922,19 @@ class SwitchStatementNode extends StatementNode {
   @override
   String toSource() {
     return '''
-    switch (${expr.toSource()}) {
-      ${cases != null && cases.isNotEmpty ? cases.map((e) => genCase(e)).join('') : ''}
+    switch (${expr?.toSource()}) {
+      ${cases != null && cases!.isNotEmpty ? cases?.map((e) => genCase(e)).join('') : ''}
       ${genDefault()}
     }
     ''';
   }
 }
 
-String addCommaAsNeeded(String statement) {
-  if (statement.endsWith(';')) {
+String? addCommaAsNeeded(String? statement) {
+  if (statement?.endsWith(';') == true) {
     return statement;
   }
-  return statement + ';';
+  return (statement ?? '') + ';';
 }
 
 String removeCommaAsNeeded(String statement) {
@@ -1015,9 +946,10 @@ String removeCommaAsNeeded(String statement) {
 
 class ForStatementNode extends StatementNode {
   String initExpr = '';
-  String conditionalExpr;
+  String? conditionalExpr;
   String stepExpr = '';
-  String body;
+  String? body;
+
   @override
   String toSource() {
     return '''
@@ -1029,13 +961,14 @@ class ForStatementNode extends StatementNode {
 }
 
 class ForInStatementNode extends StatementNode {
-  String loopVariable;
-  GenericStatementNode iterable;
-  String body;
+  String? loopVariable;
+  GenericStatementNode? iterable;
+  String? body;
+
   @override
   String toSource() {
     return '''
-    for (let $loopVariable in ${iterable.toSource()}) {
+    for (let $loopVariable in ${iterable?.toSource()}) {
       $body
     }
     ''';
@@ -1043,14 +976,15 @@ class ForInStatementNode extends StatementNode {
 }
 
 class MemberAccessStatementNode extends StatementNode {
-  String thiz;
+  String? thiz;
 }
 
 class MethodInvokeStatementNode extends MemberAccessStatementNode {
-  String methodName;
+  String? methodName;
   List<String> unnamedParameters = [];
   List<List<String>> namedParameters = [];
-  String parentClassName;
+  String? parentClassName;
+
   @override
   String toSource() {
     var finalNamedParameters = StringBuffer();
@@ -1059,15 +993,13 @@ class MethodInvokeStatementNode extends MemberAccessStatementNode {
     }
     if (namedParameters.isNotEmpty) {
       finalNamedParameters.write('{');
-      finalNamedParameters
-          .write(namedParameters.map((e) => '''${e[0]}:${e[1]}''').join(','));
+      finalNamedParameters.write(namedParameters.map((e) => '''${e[0]}:${e[1]}''').join(','));
       finalNamedParameters.write('}');
     }
 
-    if (thiz != null && thiz.trim() == superSubstitution) {
-      var params =
-          '${unnamedParameters.join(',')}${finalNamedParameters.toString()}';
-      if (parentClassName.isEmpty) {
+    if (thiz != null && thiz?.trim() == superSubstitution) {
+      var params = '${unnamedParameters.join(',')}${finalNamedParameters.toString()}';
+      if (parentClassName == null || parentClassName!.isEmpty) {
         return '';
       }
       return '$parentClassName.prototype.$methodName.call(this${params.isEmpty ? '' : ',$params'});';
@@ -1076,47 +1008,48 @@ class MethodInvokeStatementNode extends MemberAccessStatementNode {
       unnamedParameters.insert(0, "'$FairKeyPlaceholder'");
     }
     return '''
-    ${thiz != null && thiz.isNotEmpty ? thiz + '.' : ''}$methodName(${unnamedParameters.join(',')}${finalNamedParameters.toString()});
+    ${thiz != null && thiz!.isNotEmpty ? thiz! + '.' : ''}$methodName(${unnamedParameters.join(',')}${finalNamedParameters.toString()});
     ''';
   }
 }
 
 class PropertyAccessStatementNode extends MemberAccessStatementNode {
-  String fieldName;
-  String setVal;
+  String? fieldName;
+  String? setVal;
+
   @override
   String toSource() {
-    var finalThiz =
-        thiz != null && thiz.trim() == superSubstitution ? 'this' : thiz;
+    var finalThiz = thiz != null && thiz!.trim() == superSubstitution ? 'this' : thiz;
     return '''
-    ${finalThiz.isNotEmpty ? finalThiz + '.' : ''}$fieldName${setVal == null ? '' : '=' + setVal + ';'}
+    ${finalThiz?.isNotEmpty == true ? finalThiz! + '.' : ''}$fieldName${setVal == null ? '' : '=' + setVal! + ';'}
     ''';
   }
 }
 
 class ReturnStatementNode extends StatementNode {
-  String expr;
+  String? expr;
 
   @override
   String toSource() {
     return '''
-    return $expr${!expr.endsWith(';') ? ';' : ''}
+    return $expr${!(expr?.endsWith(';') ?? false) ? ';' : ''}
     ''';
   }
 }
 
 class CascadeOperatorStatementNode extends StatementNode {
-  String target;
-  List<MemberAccessStatementNode> cascades;
+  String? target;
+  List<MemberAccessStatementNode>? cascades;
+
   @override
   String toSource() {
     var tempThiz = '__target__';
-    cascades.forEach((element) {
+    cascades?.forEach((element) {
       element.thiz = tempThiz;
     });
     return '''(function() {
       let $tempThiz = $target;
-      ${cascades.map((e) => e.toSource()).join('')}
+      ${cascades?.map((e) => e.toSource()).join('')}
       return $tempThiz;
     })()
     ''';
@@ -1124,29 +1057,29 @@ class CascadeOperatorStatementNode extends StatementNode {
 }
 
 class AwaitStatementNode extends StatementNode {
-  StatementNode expr;
+  StatementNode? expr;
 
   @override
   String toSource() {
-    return '''await ${addCommaAsNeeded(expr.toSource())}''';
+    return '''await ${addCommaAsNeeded(expr?.toSource())}''';
   }
 }
 
 class AssignmentStatementNode extends StatementNode {
-  String leftSide;
+  String? leftSide;
   String operator_ = '=';
-  GenericStatementNode rightSide;
+  GenericStatementNode? rightSide;
 
   @override
   String toSource() {
-    return '$leftSide $operator_ ${addCommaAsNeeded(rightSide.toSource())}';
+    return '$leftSide $operator_ ${addCommaAsNeeded(rightSide?.toSource())}';
   }
 }
 
 /**
- * 
+ *
  * thiz 必然为null
- * 
+ *
  */
 class NewOperatorStatementNode extends MethodInvokeStatementNode {
   @override
@@ -1169,11 +1102,8 @@ class ListLiteralStatementNode extends StatementNode {
       code = '...${convertExpression(e.expression.toString())}';
     } else if (e is IfElement) {
       hasPlaceholder = e.elseElement == null;
-      var elseElem = hasPlaceholder
-          ? elsePlaceholder
-          : convertExpression(e.elseElement.toString());
-      code =
-          '(${convertExpression(e.condition.toString())}) ? ${convertExpression(e.thenElement.toString())} : $elseElem';
+      var elseElem = hasPlaceholder ? elsePlaceholder : convertExpression(e.elseElement.toString());
+      code = '(${convertExpression(e.condition.toString())}) ? ${convertExpression(e.thenElement.toString())} : $elseElem';
     } else {
       code = convertExpression(e.toString());
     }
@@ -1193,31 +1123,28 @@ class ListLiteralStatementNode extends StatementNode {
   }
 }
 
-class SimpleFunctionGenerator
-    extends GeneralizingAstVisitor<SimpleFunctionGenerator> {
-  FunctionDeclarationNode func;
-  String parentClass;
-  HashMap<int, String> renamedParameters;
+class SimpleFunctionGenerator extends GeneralizingAstVisitor<SimpleFunctionGenerator> {
+  FunctionDeclarationNode? func;
+  String? parentClass;
+  HashMap<int, String>? renamedParameters;
 
-  SimpleFunctionGenerator(
-      {bool isArrowFunc = false, this.renamedParameters, this.parentClass}) {
-    func =
-        isArrowFunc ? ArrowFunctionExpressionNode() : FunctionDeclarationNode();
+  SimpleFunctionGenerator({bool isArrowFunc = false, this.renamedParameters, this.parentClass}) {
+    func = isArrowFunc ? ArrowFunctionExpressionNode() : FunctionDeclarationNode();
   }
 
   @override
-  SimpleFunctionGenerator visitFunctionDeclaration(FunctionDeclaration node) {
-    func.name = node.name.toString();
+  SimpleFunctionGenerator? visitFunctionDeclaration(FunctionDeclaration node) {
+    func?.name = node.name.toString();
     return super.visitFunctionDeclaration(node);
   }
 
   @override
-  SimpleFunctionGenerator visitFormalParameterList(FormalParameterList node) {
+  SimpleFunctionGenerator? visitFormalParameterList(FormalParameterList node) {
     var idx = 0;
     node.parameters.forEach((param) {
       var ident = param.identifier.toString();
-      if (renamedParameters != null && renamedParameters.containsKey(idx)) {
-        ident = renamedParameters[idx];
+      if (renamedParameters != null && renamedParameters!.containsKey(idx)) {
+        ident = renamedParameters![idx]!;
       }
       var arg = [ident];
 
@@ -1225,14 +1152,14 @@ class SimpleFunctionGenerator
         if (param is DefaultFormalParameter && (param.defaultValue != null)) {
           arg.add(param.defaultValue.toString());
         }
-        func.namedArgumentList.add(arg);
+        func?.namedArgumentList.add(arg);
       } else if (param.isOptional) {
         if (param is DefaultFormalParameter && (param.defaultValue != null)) {
           arg.add(param.defaultValue.toString());
         }
-        func.optionalArgumentList.add(arg);
+        func?.optionalArgumentList.add(arg);
       } else {
-        func.argumentList.add(arg);
+        func?.argumentList.add(arg);
       }
 
       idx++;
@@ -1241,25 +1168,19 @@ class SimpleFunctionGenerator
   }
 
   @override
-  SimpleFunctionGenerator visitBlockFunctionBody(BlockFunctionBody node) {
-    func.isAsync = node.isAsynchronous;
+  SimpleFunctionGenerator? visitBlockFunctionBody(BlockFunctionBody node) {
+    func?.isAsync = node.isAsynchronous;
     return super.visitBlockFunctionBody(node);
   }
 
-  MethodInvokeStatementNode handleMethodInvocation(
-      MethodInvocation currentNode) {
+  MethodInvokeStatementNode handleMethodInvocation(MethodInvocation currentNode) {
     var gnNode = MethodInvokeStatementNode();
     gnNode.parentClassName = parentClass;
-    gnNode.thiz = currentNode.target != null
-        ? convertExpression(currentNode.target.toString())
-        : '';
+    gnNode.thiz = currentNode.target != null ? convertExpression(currentNode.target.toString()) : '';
     gnNode.methodName = currentNode.methodName.toString();
     currentNode.argumentList.arguments.forEach((arg) {
       if (arg is NamedExpression) {
-        gnNode.namedParameters.add([
-          arg.name.label.toString(),
-          convertExpression(arg.expression.toString())
-        ]);
+        gnNode.namedParameters.add([arg.name.label.toString(), convertExpression(arg.expression.toString())]);
       } else {
         gnNode.unnamedParameters.add(convertExpression(arg.toString()));
       }
@@ -1267,16 +1188,12 @@ class SimpleFunctionGenerator
     return gnNode;
   }
 
-  NewOperatorStatementNode handleCreationCall(
-      InstanceCreationExpression currentNode) {
+  NewOperatorStatementNode handleCreationCall(InstanceCreationExpression currentNode) {
     var gnNode = NewOperatorStatementNode();
     gnNode.methodName = currentNode.constructorName.toString();
     currentNode.argumentList.arguments.forEach((arg) {
       if (arg is NamedExpression) {
-        gnNode.namedParameters.add([
-          arg.name.label.toString(),
-          convertExpression(arg.expression.toString())
-        ]);
+        gnNode.namedParameters.add([arg.name.label.toString(), convertExpression(arg.expression.toString())]);
       } else {
         gnNode.unnamedParameters.add(convertExpression(arg.toString()));
       }
@@ -1285,9 +1202,7 @@ class SimpleFunctionGenerator
   }
 
   String handleFuncitonExpression(FunctionExpression currentNode) {
-    return currentNode.body is ExpressionFunctionBody
-        ? convertArrayFuncExpression(currentNode)
-        : convertFunctionExpression(currentNode.toString());
+    return currentNode.body is ExpressionFunctionBody ? convertArrayFuncExpression(currentNode) : convertFunctionExpression(currentNode.toString());
   }
 
   String handleMapLiteral(SetOrMapLiteral literal) {
@@ -1298,7 +1213,7 @@ class SimpleFunctionGenerator
         var res = StringBuffer('{');
         literal.elements.cast<MapLiteralEntry>().forEach((element) {
           res.write(
-              '[${convertExpression(element.key.toString())}]: ${element.value is MapLiteralEntry ? handleMapLiteral(element.value) : convertExpression(element.value.toString())},');
+              '[${convertExpression(element.key.toString())}]: ${element.value is MapLiteralEntry ? handleMapLiteral(element.value as SetOrMapLiteral) : convertExpression(element.value.toString())},');
         });
         res.write('}');
         return res.toString();
@@ -1314,10 +1229,10 @@ class SimpleFunctionGenerator
   }
 
   @override
-  SimpleFunctionGenerator visitNode(AstNode node) {
+  SimpleFunctionGenerator? visitNode(AstNode node) {
     if (node is ExpressionStatement) {
       if (node.expression is MethodInvocation) {
-        func.body.push(handleMethodInvocation(node.expression));
+        func?.body.push(handleMethodInvocation(node.expression as MethodInvocation));
       } else if (node.expression is PropertyAccess) {
         var gnNode = PropertyAccessStatementNode();
         var currentNode = node.expression as PropertyAccess;
@@ -1325,31 +1240,25 @@ class SimpleFunctionGenerator
           gnNode.thiz = convertExpression(currentNode.target.toString());
         }
         gnNode.fieldName = currentNode.propertyName.toString();
-        func.body.push(gnNode);
+        func?.body.push(gnNode);
       } else if (node.expression is FunctionExpression) {
-        func.body.push(
-            GenericStatementNode(handleFuncitonExpression(node.expression)));
+        func?.body.push(GenericStatementNode(handleFuncitonExpression(node.expression as FunctionExpression)));
       } else if (node.expression is AssignmentExpression) {
         var gnNode = AssignmentStatementNode();
         var currentNode = node.expression as AssignmentExpression;
         if (currentNode.leftHandSide is IndexExpression) {
           var gnNode1 = IndexExpressionNode();
           var currentNode1 = currentNode.leftHandSide as IndexExpression;
-          gnNode1.key = GenericStatementNode(
-              convertExpression(currentNode1.index.toString()));
-          gnNode1.target = GenericStatementNode(
-              convertExpression(currentNode1.target.toString()));
-          gnNode1.value = GenericStatementNode(
-              convertExpression(currentNode.rightHandSide.toString()));
+          gnNode1.key = GenericStatementNode(convertExpression(currentNode1.index.toString()));
+          gnNode1.target = GenericStatementNode(convertExpression(currentNode1.target.toString()));
+          gnNode1.value = GenericStatementNode(convertExpression(currentNode.rightHandSide.toString()));
           gnNode1.isSet = true;
-          func.body.push(gnNode1);
+          func?.body.push(gnNode1);
         } else {
-          gnNode.leftSide =
-              convertExpression(currentNode.leftHandSide.toString());
+          gnNode.leftSide = convertExpression(currentNode.leftHandSide.toString());
           gnNode.operator_ = currentNode.operator.toString();
-          gnNode.rightSide = GenericStatementNode(
-              convertExpression(currentNode.rightHandSide.toString()));
-          func.body.push(gnNode);
+          gnNode.rightSide = GenericStatementNode(convertExpression(currentNode.rightHandSide.toString()));
+          func?.body.push(gnNode);
         }
       } else if (node.expression is CascadeExpression) {
         var gnNode = CascadeOperatorStatementNode();
@@ -1358,233 +1267,183 @@ class SimpleFunctionGenerator
         gnNode.cascades = [];
         currentNode.cascadeSections.forEach((element) {
           if (element is MethodInvocation) {
-            gnNode.cascades.add(handleMethodInvocation(element));
+            gnNode.cascades?.add(handleMethodInvocation(element));
           } else if (element is AssignmentExpression) {
             if (element.leftHandSide is PropertyAccess) {
               var leftSide = element.leftHandSide as PropertyAccess;
               if (leftSide.isCascaded) {
                 var assignmentNode = PropertyAccessStatementNode();
                 assignmentNode.fieldName = leftSide.propertyName.toString();
-                assignmentNode.setVal =
-                    convertExpression(element.rightHandSide.toString());
-                gnNode.cascades.add(assignmentNode);
+                assignmentNode.setVal = convertExpression(element.rightHandSide.toString());
+                gnNode.cascades?.add(assignmentNode);
               } else {
-                throw Exception(
-                    '''Not supported statement(s): ${element.toString()}''');
+                throw Exception('''Not supported statement(s): ${element.toString()}''');
               }
             }
           } else {
-            throw Exception(
-                '''Not supported statement(s): ${element.toString()}''');
+            throw Exception('''Not supported statement(s): ${element.toString()}''');
           }
         });
-        func.body.push(gnNode);
+        func?.body.push(gnNode);
       } else if (node.expression is ConditionalExpression) {
         var gnNode = ConditionalExpressionNode();
         var currentNode = node.expression as ConditionalExpression;
-        gnNode.condition = GenericStatementNode(
-            convertExpression(currentNode.condition.toString()));
-        gnNode.then = GenericStatementNode(
-            convertExpression(currentNode.thenExpression.toString()));
-        gnNode.elseExpr = GenericStatementNode(
-            convertExpression(currentNode.elseExpression.toString()));
-        func.body.push(gnNode);
+        gnNode.condition = GenericStatementNode(convertExpression(currentNode.condition.toString()));
+        gnNode.then = GenericStatementNode(convertExpression(currentNode.thenExpression.toString()));
+        gnNode.elseExpr = GenericStatementNode(convertExpression(currentNode.elseExpression.toString()));
+        func?.body.push(gnNode);
       } else if (node.expression is IndexExpression) {
         var gnNode = IndexExpressionNode();
         var currentNode = node.expression as IndexExpression;
-        gnNode.key = GenericStatementNode(
-            convertExpression(currentNode.index.toString()));
-        gnNode.target = GenericStatementNode(
-            convertExpression(currentNode.target.toString()));
-        func.body.push(gnNode);
+        gnNode.key = GenericStatementNode(convertExpression(currentNode.index.toString()));
+        gnNode.target = GenericStatementNode(convertExpression(currentNode.target.toString()));
+        func?.body.push(gnNode);
       } else if (node.expression is ParenthesizedExpression) {
         var currentNode = node.expression as ParenthesizedExpression;
-        var gnNode = ParenthesizedExpressionNode(
-            convertExpression(currentNode.expression.toString()));
-        func.body.push(gnNode);
+        var gnNode = ParenthesizedExpressionNode(convertExpression(currentNode.expression.toString()));
+        func?.body.push(gnNode);
       } else if (node.expression is BinaryExpression) {
         var currentNode = node.expression as BinaryExpression;
         var gnNode = BinaryExpressionNode();
-        gnNode.left = GenericStatementNode(
-            convertExpression(currentNode.leftOperand.toString()));
-        gnNode.right = GenericStatementNode(
-            convertExpression(currentNode.rightOperand.toString()));
+        gnNode.left = GenericStatementNode(convertExpression(currentNode.leftOperand.toString()));
+        gnNode.right = GenericStatementNode(convertExpression(currentNode.rightOperand.toString()));
         gnNode.operator = currentNode.operator.toString();
-        func.body.push(gnNode);
+        func?.body.push(gnNode);
       } else if (node.expression is PrefixExpression) {
         var currentNode = node.expression as PrefixExpression;
         var gnNode = PrefixExpressionNode();
-        gnNode.operand = GenericStatementNode(
-            convertExpression(currentNode.operand.toString()));
+        gnNode.operand = GenericStatementNode(convertExpression(currentNode.operand.toString()));
         gnNode.operator = currentNode.operator.toString();
-        func.body.push(gnNode);
+        func?.body.push(gnNode);
       } else if (node.expression is IsExpression) {
         var currentNode = node.expression as IsExpression;
-        func.body.push(GenericStatementNode(
-            convertExpression(currentNode.expression.toString())));
+        func?.body.push(GenericStatementNode(convertExpression(currentNode.expression.toString())));
       } else if (node.expression is AsExpression) {
         var currentNode = node.expression as AsExpression;
-        func.body.push(GenericStatementNode(
-            convertExpression(currentNode.expression.toString())));
+        func?.body.push(GenericStatementNode(convertExpression(currentNode.expression.toString())));
       } else if (node.expression is AwaitExpression) {
         var gnNode = AwaitStatementNode();
         var currentNode = node.expression as AwaitExpression;
-        gnNode.expr = GenericStatementNode(
-            convertExpression(currentNode.expression.toString()));
-        func.body.push(gnNode);
+        gnNode.expr = GenericStatementNode(convertExpression(currentNode.expression.toString()));
+        func?.body.push(gnNode);
       } else if (node.expression is SingleStringLiteral) {
-        func.body
-            .push(GenericStatementNode(handleStringTemplate(node.expression)));
+        func?.body.push(GenericStatementNode(handleStringTemplate(node.expression as SingleStringLiteral)));
       } else if (node.expression is InstanceCreationExpression) {
         var gnNode = NewOperatorStatementNode();
-        gnNode = handleCreationCall(node.expression);
-        func.body.push(gnNode);
+        gnNode = handleCreationCall(node.expression as InstanceCreationExpression);
+        func?.body.push(gnNode);
       } else if (node.expression is ListLiteral) {
         var gnNode = ListLiteralStatementNode();
         var currentNode = node.expression as ListLiteral;
         currentNode.elements.forEach((e) => gnNode.addElement(e));
-        func.body.push(gnNode);
+        func?.body.push(gnNode);
       } else {
-        func.body.push(GenericStatementNode(node.toSource()));
+        func?.body.push(GenericStatementNode(node.toSource()));
       }
       return null;
     } else if (node is ExpressionFunctionBody) {
-      func.body.push(
-          GenericStatementNode(convertExpression(node.expression.toString())));
+      func?.body.push(GenericStatementNode(convertExpression(node.expression.toString())));
       return null;
     } else if (node is VariableDeclarationStatement) {
       var gnNode = DeclarationStatmentNode();
       node.variables.variables.forEach((element) {
         if (element.initializer is SingleStringLiteral) {
-          gnNode.variables.add(
-              '''${element.name.toString()} = ${handleStringTemplate(element.initializer)}''');
+          gnNode.variables.add('''${element.name.toString()} = ${handleStringTemplate(element.initializer as SingleStringLiteral)}''');
         } else if (element.initializer is FunctionExpression) {
           var currentNode = (element.initializer as FunctionExpression);
           var initializer = handleFuncitonExpression(currentNode);
           gnNode.variables.add('''${element.name.toString()} = $initializer''');
         } else if (element.initializer is SetOrMapLiteral) {
-          gnNode.variables.add(
-              '''${element.name.toString()} = convertObjectLiteralToSetOrMap(${handleMapLiteral(element.initializer)})''');
+          gnNode.variables.add('''${element.name.toString()} = convertObjectLiteralToSetOrMap(${handleMapLiteral(element.initializer as SetOrMapLiteral)})''');
         } else if (element.initializer is SuperExpression) {
-          gnNode.variables
-              .add('''${element.name.toString()} = $superSubstitution''');
+          gnNode.variables.add('''${element.name.toString()} = $superSubstitution''');
         } else {
           if (element.initializer != null) {
-            gnNode.variables.add(
-                '''${element.name.toString()} = ${convertExpression(element.initializer.toString())}''');
+            gnNode.variables.add('''${element.name.toString()} = ${convertExpression(element.initializer.toString())}''');
           } else {
             gnNode.variables.add('''${element.name.toString()}''');
           }
         }
       });
-      func.body.push(gnNode);
+      func?.body.push(gnNode);
       return null;
     } else if (node is WhileStatement) {
       var gnNode = WhileStatementNode();
       gnNode.condition = convertExpression(node.condition.toString());
-      gnNode.body =
-          node.body is EmptyStatement ? '' : convertBlock(node.body.toString());
-      func.body.push(gnNode);
+      gnNode.body = node.body is EmptyStatement ? '' : convertBlock(node.body.toString());
+      func?.body.push(gnNode);
       return null;
     } else if (node is DoStatement) {
       var gnNode = DoWhileStatementNode();
       gnNode.condition = convertExpression(node.condition.toString());
       gnNode.body = convertBlock(node.body.toString());
-      func.body.push(gnNode);
+      func?.body.push(gnNode);
       return null;
     } else if (node is IfStatement) {
       var gnNode = IfStatementNode();
       handleChainIfStatement(node, gnNode);
-      func.body.push(gnNode);
+      func?.body.push(gnNode);
       return null;
     } else if (node is SwitchStatement) {
       var gnNode = SwitchStatementNode();
-      gnNode.expr =
-          GenericStatementNode(convertExpression(node.expression.toString()));
-      if (node.members != null && node.members.isNotEmpty) {
+      gnNode.expr = GenericStatementNode(convertExpression(node.expression.toString()));
+      if (node.members.isNotEmpty) {
         gnNode.cases = [];
         node.members.forEach((element) {
           if (element is SwitchCase) {
-            if (element.statements == null || element.statements.isEmpty) {
-              gnNode.cases.add([element.expression.toString()]);
+            if (element.statements.isEmpty) {
+              gnNode.cases?.add([element.expression.toString()]);
             } else {
-              gnNode.cases.add([
-                element.expression.toString(),
-                convertStatements(
-                    element.statements.map((e) => e.toString()).join(''))
-              ]);
+              gnNode.cases?.add([element.expression.toString(), convertStatements(element.statements.map((e) => e.toString()).join(''))]);
             }
           } else if (element is SwitchDefault) {
-            gnNode.default_ = convertStatements(
-                element.statements.map((e) => e.toString()).join(''));
+            gnNode.default_ = convertStatements(element.statements.map((e) => e.toString()).join(''));
           } else {
             throw Exception('error: ${element.toString()}');
           }
         });
       }
-      func.body.push(gnNode);
+      func?.body.push(gnNode);
       return null;
     } else if (node is ReturnStatement) {
       var gnNode = ReturnStatementNode();
       gnNode.expr = convertExpression(node.expression.toString());
-      func.body.push(gnNode);
+      func?.body.push(gnNode);
       return null;
     } else if (node is ForStatement) {
       var gnNode = ForStatementNode();
       if (node.forLoopParts is ForPartsWithDeclarations) {
         var forLoopParts = node.forLoopParts as ForPartsWithDeclarations;
-        if (forLoopParts.variables != null) {
-          gnNode.initExpr =
-              convertStatements(forLoopParts.variables.toString() + ';');
-        }
+        gnNode.initExpr = convertStatements(forLoopParts.variables.toString() + ';');
         if (forLoopParts.condition != null) {
-          gnNode.conditionalExpr =
-              convertStatements(forLoopParts.condition.toString() + ';');
+          gnNode.conditionalExpr = convertStatements(forLoopParts.condition.toString() + ';');
         }
-        if (forLoopParts.updaters != null) {
-          gnNode.stepExpr = forLoopParts.updaters
-              .map((e) => convertExpression(e.toString()))
-              .join(',');
-        }
-        gnNode.body = node.body is Block
-            ? convertBlock(node.body.toString())
-            : convertStatements(node.body.toString());
-        func.body.push(gnNode);
+        gnNode.stepExpr = forLoopParts.updaters.map((e) => convertExpression(e.toString())).join(',');
+        gnNode.body = node.body is Block ? convertBlock(node.body.toString()) : convertStatements(node.body.toString());
+        func?.body.push(gnNode);
       } else if (node.forLoopParts is ForPartsWithExpression) {
         var forLoopParts = node.forLoopParts as ForPartsWithExpression;
         if (forLoopParts.condition != null) {
-          gnNode.conditionalExpr =
-              convertStatements(forLoopParts.condition.toString() + ';');
+          gnNode.conditionalExpr = convertStatements(forLoopParts.condition.toString() + ';');
         }
-        if (forLoopParts.updaters != null) {
-          gnNode.stepExpr = forLoopParts.updaters
-              .map((e) => convertExpression(e.toString()))
-              .join(',');
-        }
-        gnNode.body = node.body is Block
-            ? convertBlock(node.body.toString())
-            : convertStatements(node.body.toString());
-        func.body.push(gnNode);
+        gnNode.stepExpr = forLoopParts.updaters.map((e) => convertExpression(e.toString())).join(',');
+        gnNode.body = node.body is Block ? convertBlock(node.body.toString()) : convertStatements(node.body.toString());
+        func?.body.push(gnNode);
       } else if (node.forLoopParts is ForEachPartsWithDeclaration) {
         var forLoopParts = node.forLoopParts as ForEachPartsWithDeclaration;
         var gnForInNode = ForInStatementNode();
-        gnForInNode.loopVariable =
-            forLoopParts.loopVariable.identifier.toString();
-        gnForInNode.iterable = GenericStatementNode(
-            convertExpression(forLoopParts.iterable.toString()));
-        gnForInNode.body = node.body is Block
-            ? convertBlock(node.body.toString())
-            : convertStatements(node.body.toString());
-        func.body.push(gnForInNode);
+        gnForInNode.loopVariable = forLoopParts.loopVariable.identifier.toString();
+        gnForInNode.iterable = GenericStatementNode(convertExpression(forLoopParts.iterable.toString()));
+        gnForInNode.body = node.body is Block ? convertBlock(node.body.toString()) : convertStatements(node.body.toString());
+        func?.body.push(gnForInNode);
       }
 
       return null;
     } else if (node is ContinueStatement || node is BreakStatement) {
-      func.body.push(GenericStatementNode(node.toString()));
+      func?.body.push(GenericStatementNode(node.toString()));
       return null;
     } else if (node is FunctionDeclarationStatement) {
-      func.body.push(GenericStatementNode(
-          convertFunction(node.functionDeclaration.toString())));
+      func?.body.push(GenericStatementNode(convertFunction(node.functionDeclaration.toString())));
       return null;
     }
 
@@ -1613,24 +1472,20 @@ String handleStringTemplate(SingleStringLiteral node) {
   } else {
     throw 'Unsupported string literal: ${node.stringValue}';
   }
-  
+
   res.write(quote);
   return res.toString();
 }
 
-void handleChainIfStatement(IfStatement node, IfStatementNode gnNode) {
-  gnNode.condition = convertExpression(node.condition.toString());
-  gnNode.thenBody = node.thenStatement is Block
-      ? convertBlock(node.thenStatement.toString())
-      : convertExpression(node.thenStatement.toString());
-  if (node.elseStatement != null) {
-    if (node.elseStatement is IfStatement) {
-      gnNode.elseBody = IfStatementNode();
-      handleChainIfStatement(node.elseStatement, gnNode.elseBody);
+void handleChainIfStatement(IfStatement? node, IfStatementNode? gnNode) {
+  gnNode?.condition = convertExpression(node?.condition.toString() ?? '');
+  gnNode?.thenBody = node?.thenStatement is Block ? convertBlock(node?.thenStatement.toString() ?? '') : convertExpression(node?.thenStatement.toString() ?? '');
+  if (node?.elseStatement != null) {
+    if (node?.elseStatement is IfStatement) {
+      gnNode?.elseBody = IfStatementNode();
+      handleChainIfStatement(node?.elseStatement as IfStatement?, gnNode?.elseBody);
     } else {
-      gnNode.lastElseBody = node.elseStatement is Block
-          ? convertBlock(node.elseStatement.toString())
-          : convertExpression(node.elseStatement.toString());
+      gnNode?.lastElseBody = node?.elseStatement is Block ? convertBlock(node?.elseStatement.toString() ?? '') : convertExpression(node?.elseStatement.toString() ?? '');
     }
   }
 }
@@ -1649,8 +1504,7 @@ String convertExpression(String code) {
     start = res.indexOf('=') + 1;
   }
   var end = res.length - 1;
-  while (
-      end >= 0 && RegExp(r'[\s\r\n;]', multiLine: false).hasMatch(res[end])) {
+  while (end >= 0 && RegExp(r'[\s\r\n;]', multiLine: false).hasMatch(res[end])) {
     end--;
   }
   return res.substring(start, end + 1);
@@ -1666,14 +1520,11 @@ String convertStatements(String code) {
 
 bool shouldErrorBeIgnored(List<AnalysisError> errors) {
   var ignoredErrors = ['CONTINUE_OUTSIDE_OF_LOOP', 'BREAK_OUTSIDE_OF_LOOP'];
-  return errors.firstWhere((err) => !ignoredErrors.contains(err.errorCode.name),
-          orElse: () => null) ==
-      null;
+  return errors.firstWhereOrNull((err) => !ignoredErrors.contains(err.errorCode.name), orElse: () => null) == null;
 }
 
 String convertBlock(String code) {
-  var res = parseString(
-      content: '''dummy() async $code''', throwIfDiagnostics: false);
+  var res = parseString(content: '''dummy() async $code''', throwIfDiagnostics: false);
 
   if (res.errors.isNotEmpty) {
     if (shouldErrorBeIgnored(res.errors)) {
@@ -1685,7 +1536,7 @@ String convertBlock(String code) {
 
   var generator = SimpleFunctionGenerator();
   res.unit.visitChildren(generator);
-  return generator.func.body.toSource();
+  return generator.func?.body.toSource() ?? '';
 }
 
 String convertArrayFuncExpression(FunctionExpression code) {
@@ -1693,11 +1544,10 @@ String convertArrayFuncExpression(FunctionExpression code) {
   if (body.functionDefinition.toString() == '=>') {
     var gnNode = ArrowFunctionExpressionNode();
     // TODO: 支持命名参数、可选参数
-    code.parameters.parameters.forEach((element) {
+    code.parameters?.parameters.forEach((element) {
       gnNode.argumentList.add([element.identifier.toString()]);
     });
-    gnNode.body.push(
-        GenericStatementNode(convertExpression(body.expression.toString())));
+    gnNode.body.push(GenericStatementNode(convertExpression(body.expression.toString())));
     return gnNode.toSource();
   } else {
     throw 'error';
@@ -1709,49 +1559,37 @@ String convertFunctionExpression(String code) {
   return convertFunction(code);
 }
 
-String convertFunctionFromData(MethodDeclarationData data,
-    [ClassDeclarationData ctx]) {
-  var res = parseString(content: data.body);
-  var generator = SimpleFunctionGenerator(
-      isArrowFunc: data.isArrow,
-      renamedParameters: data.renamedParameters,
-      parentClass: ctx?.parentClass);
+String convertFunctionFromData(MethodDeclarationData? data, [ClassDeclarationData? ctx]) {
+  var res = parseString(content: data?.body ?? '');
+  var generator = SimpleFunctionGenerator(isArrowFunc: data?.isArrow ?? false, renamedParameters: data?.renamedParameters, parentClass: ctx?.parentClass);
   generator.func
-    ..withContext = true
-    ..classHasStaticFields = ctx.fields.any((element) => element.isStatic) ||
-        ctx.methods.any((element) =>
-            element.isStatic &&
-            !element.isFactory &&
-            !element.isGenerativeConstructor)
-    ..isStatic = data.isStatic;
+    ?..withContext = true
+    ..classHasStaticFields =
+        (ctx?.fields.any((element) => element.isStatic) ?? false) || (ctx?.methods.any((element) => element.isStatic && !element.isFactory && !element.isGenerativeConstructor) ?? false)
+    ..isStatic = data?.isStatic ?? false;
   res.unit.visitChildren(generator);
 
   if (ctx != null) {
-    generator.func.className = ctx.className;
+    generator.func?.className = ctx.className;
     generator.func
-      ..isGenerativeConstructor = data.isGenerativeConstructor
-      ..isRedirectConstructor = data.isRedirectConstructor;
+      ?..isGenerativeConstructor = data?.isGenerativeConstructor ?? false
+      ..isRedirectConstructor = data?.isRedirectConstructor ?? false;
   }
 
-  if (data.abtractedInitializer != null &&
-      data.abtractedInitializer.isNotEmpty) {
-    generator.func.body.statements.insert(
-        0, GenericStatementNode(data.abtractedInitializer.join('\r\n')));
+  if (data?.abtractedInitializer != null && data!.abtractedInitializer.isNotEmpty) {
+    generator.func?.body.statements.insert(0, GenericStatementNode(data.abtractedInitializer.join('\r\n')));
   }
-  return generator.func.toSource();
+  return generator.func?.toSource() ?? '';
 }
 
-String convertFunction(String code,
-    {bool isArrow = false,
-    bool isClassMethod = false,
-    bool classHasStaticFields = false}) {
+String convertFunction(String code, {bool isArrow = false, bool isClassMethod = false, bool classHasStaticFields = false}) {
   var res = parseString(content: code);
   var generator = SimpleFunctionGenerator(isArrowFunc: isArrow);
   res.unit.visitChildren(generator);
   generator.func
-    ..withContext = isClassMethod
+    ?..withContext = isClassMethod
     ..classHasStaticFields = classHasStaticFields;
-  return generator.func.toSource();
+  return generator.func?.toSource() ?? '';
 }
 
 //
@@ -1792,9 +1630,8 @@ String convertFunction(String code,
 //
 String convertWidgetStateFile(String filePath, [bool isCompressed = false]) {
   var file = File(filePath);
-  var stateFilePath = file.absolute.uri.normalizePath().path;
-  var result = parseFile(
-      path: stateFilePath, featureSet: FeatureSet.fromEnableFlags([]));
+  var stateFilePath = Platform.isWindows ? filePath : file.absolute.uri.normalizePath().path;
+  var result = parseFile(path: stateFilePath, featureSet: FeatureSet.fromEnableFlags([]));
   var visitor = WidgetStateGenerator(stateFilePath);
   result.unit.visitChildren(visitor);
 
@@ -1803,8 +1640,7 @@ String convertWidgetStateFile(String filePath, [bool isCompressed = false]) {
 }
 
 String convertClassString(String content, [bool isDataBean = false]) {
-  var result =
-      parseString(content: content, featureSet: FeatureSet.fromEnableFlags([]));
+  var result = parseString(content: content, featureSet: FeatureSet.fromEnableFlags([]));
   var visitor = ClassDeclarationVisitor(isDataBean);
   result.unit.visitChildren(visitor);
 
@@ -1825,13 +1661,11 @@ String uglify(String str) {
   for (var i = 0; i < str.length; i++) {
     if (isInString) {
       writeCh(str[i]);
-      if ((str[i] == '\'' || str[i] == '"' || str[i] == '`') &&
-          (i < 1 || str[i - 1] != '\\')) {
+      if ((str[i] == '\'' || str[i] == '"' || str[i] == '`') && (i < 1 || str[i - 1] != '\\')) {
         isInString = false;
       }
     } else {
-      if ((str[i] == '\'' || str[i] == '"' || str[i] == '`') &&
-          (str[i - 1] != '\\')) {
+      if ((str[i] == '\'' || str[i] == '"' || str[i] == '`') && (str[i - 1] != '\\')) {
         isInString = true;
         writeCh(str[i]);
       } else {

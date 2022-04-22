@@ -72,6 +72,7 @@ class _State extends State<StatefulCell> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: _onItemTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -109,15 +110,14 @@ class _State extends State<StatefulCell> {
           Container(height: 0.5, color: Color(0xFFE7EBEE)),
         ],
       ),
-      onTap: _onItemTap,
     );
   }
 
   Widget _buildIcon() {
     return GestureDetector(
+        onTap: _onImageTap,
         child: Image.network(_loupanIcon(),
-            fit: BoxFit.cover, width: 95.0, height: 84.0),
-        onTap: _onImageTap);
+            fit: BoxFit.cover, width: 95.0, height: 84.0));
   }
 
   Widget _buildLoupan() {

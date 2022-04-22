@@ -35,7 +35,7 @@ class FairPlugin {
       var resp = jsonDecode(value);
       if (resp == null) return;
       var respId = '${resp['id']}';
-      if (_callback[respId] == null || _callback[respId].isEmpty) {
+      if (_callback[respId] == null || _callback[respId]!.isEmpty) {
         return;
       }
       var c = _callback.remove(respId);

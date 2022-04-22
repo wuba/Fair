@@ -38,18 +38,18 @@ import 'type.dart';
 class FairApp extends InheritedWidget with AppState {
   /// Remote or local bundle assets. The key should be unique tag name while
   /// value represent binary resource for layout, such as assets path or url.
-  final Map<String, String> bundleAlias;
+  final Map<String, String>? bundleAlias;
 
   /// Optional, provide the loading widget before real content is ready.
-  final WidgetBuilder placeholderBuilder;
+  final WidgetBuilder? placeholderBuilder;
 
   /// Provide custom router when Fair notify a named route event.
-  final FairRouteBuilder routeBuilder;
+  final FairRouteBuilder? routeBuilder;
 
   /// Provide custom bundle loader
-  final BundleLoader bundleProvider;
+  final BundleLoader? bundleProvider;
 
-  final HttpDecoder httpDecoder;
+  final HttpDecoder? httpDecoder;
 
   /// Turns on a little "Fair" banner in checked mode to indicate
   /// that the app is using Fair SDK. This is on by default (in
@@ -71,31 +71,31 @@ class FairApp extends InheritedWidget with AppState {
   /// * [modules], module is a named component factory, which return a Widget/Function/Model
   /// * [generated], widget annotated with [FairBinding] will be generate as a map.
   FairApp({
-    Key key,
-    @required Widget child,
+    Key? key,
+    required Widget child,
     this.bundleAlias,
     this.routeBuilder,
     this.bundleProvider,
     this.debugShowFairBanner = true,
     bool profile = false,
-    WidgetBuilder placeholder,
-    Map<String, FairDelegateBuilder> delegate,
-    Map<String, FairModuleBuilder> modules,
-    GeneratedModule generated,
+    WidgetBuilder? placeholder,
+    Map<String, FairDelegateBuilder>? delegate,
+    Map<String, FairModuleBuilder>? modules,
+    GeneratedModule? generated,
     this.httpDecoder,
   })  : placeholderBuilder = placeholder ?? _defaultHolder,
         super(key: key, child: child) {
     setup(profile, delegate, generated, modules);
   }
 
-  static FairApp of(BuildContext context, {bool rebuild = false}) {
+  static FairApp? of(BuildContext? context, {bool rebuild = false}) {
     return rebuild
         ? context?.dependOnInheritedWidgetOfExactType<FairApp>()
         : context?.findAncestorWidgetOfExactType<FairApp>();
   }
 
-  String pathOfBundle(String tag) {
-    return bundleAlias != null ? bundleAlias[tag] : null;
+  String? pathOfBundle(String tag) {
+    return bundleAlias != null ? bundleAlias![tag] : null;
   }
 
   @override
@@ -110,7 +110,7 @@ class FairApp extends InheritedWidget with AppState {
         .add(DiagnosticsProperty<Map<String, String>>('bundle', bundleAlias));
   }
 
-  static void runApplication(Widget app, {Map<String, IFairPlugin> plugins}) {
+  static void runApplication(Widget app, {Map<String, IFairPlugin>? plugins}) {
     // WidgetsFlutterBinding.ensureInitialized();
     FairPluginDispatcher.registerPlugins(plugins);
     Runtime().loadCoreJs().then((value) => runApp(app));

@@ -11,7 +11,7 @@ class FairAssetId extends AssetId {
 
   FairAssetId(String package, String path) : super(package, path);
 
-  factory FairAssetId.resolve(String uri, {FairAssetId from}) {
+  factory FairAssetId.resolve(String uri, {FairAssetId? from}) {
     final parsedUri = Uri.parse(uri);
     if (parsedUri.hasScheme) {
       if (parsedUri.scheme == 'package') {

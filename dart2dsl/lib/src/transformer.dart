@@ -5,15 +5,15 @@
  */
 
 abstract class Transformer {
-  List<String> getImports();
+  List<String>? getImports();
 
   String onTransform(String data);
 }
 
 class DefaultTransformer implements Transformer {
-  final List<String> imports;
-  static DefaultTransformer _r;
-  static DefaultTransformer _g;
+  final List<String>? imports;
+  static DefaultTransformer? _r;
+  static DefaultTransformer? _g;
 
   DefaultTransformer(this.imports);
 
@@ -26,16 +26,16 @@ class DefaultTransformer implements Transformer {
   }
 
   @override
-  List<String> getImports() => imports;
+  List<String>? getImports() => imports;
 
   @override
   String onTransform(String data) => data;
 }
 
 class AppendTransformer extends DefaultTransformer {
-  final List<String> lines;
+  final List<String>? lines;
 
-  AppendTransformer({List<String> importList, this.lines}) : super(importList);
+  AppendTransformer({List<String>? importList, this.lines}) : super(importList);
 
   @override
   String onTransform(String data) {
@@ -214,23 +214,23 @@ class TransformProxy {
     'layoutBuilder', // 不常用？
   ];
 
-  List<String> getImports(String className) {
+  List<String>? getImports(String className) {
     return compacts[className]?.getImports();
   }
 
   /// 不支持的属性，执行黑名单跳过
-  bool isPropSupported(String tag) => !blackList.contains(tag);
+  bool isPropSupported(String? tag) => !blackList.contains(tag);
 
   List<String> getLines(String className, bool isCupertino) {
     var lines = <String>[];
     var t = compacts[className];
     if (t is AppendTransformer && t.lines != null) {
-      lines.addAll(t.lines);
+      lines.addAll(t.lines!);
     }
     if (isCupertino) {
       var t = compacts['cupertino_' + className];
       if (t is AppendTransformer && t.lines != null) {
-        lines.addAll(t.lines);
+        lines.addAll(t.lines!);
       }
     }
     return lines;

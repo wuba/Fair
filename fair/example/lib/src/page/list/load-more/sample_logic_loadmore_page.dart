@@ -27,18 +27,18 @@ class JRListState extends State<JRListWidget> {
   @FairProps()
   var fairProps;
 
-  List list = List();
+  List? list = [];
 
 // 监听listview的滑动
-  ScrollController _scrollController;
+  ScrollController? _scrollController;
 
   bool listIsEmpty() {
-    return list == null || list.isEmpty;
+    return list == null || list!.isEmpty;
   }
 
   Future _onLoadMore() async {
     await Future.delayed(Duration(seconds: 2), () {
-      list.addAll(
+      list?.addAll(
           List.generate(Random().nextInt(5) + 5, (i) => 'more Item $i'));
       setState(() {});
     });
@@ -46,7 +46,7 @@ class JRListState extends State<JRListWidget> {
 
   Future<void> _onRefresh() async {
     await Future.delayed(Duration(seconds: 1), () {
-      list.insertAll(
+      list?.insertAll(
           0, List.generate(Random().nextInt(5) + 5, (i) => 'refresh Item $i'));
       setState(() {
 
@@ -56,7 +56,7 @@ class JRListState extends State<JRListWidget> {
 
   void onLoad() {
     Future.delayed(Duration(seconds: 1), () {
-      list.insertAll(
+      list?.insertAll(
           0, List.generate(Random().nextInt(5) + 15, (i) => 'Item $i'));
       setState(() {
       });
@@ -66,19 +66,19 @@ class JRListState extends State<JRListWidget> {
     _scrollController = ScrollController()
       ..addListener(() {
         //判断是否滑到底
-        if (_scrollController.position.pixels ==
-            _scrollController.position.maxScrollExtent) {
+        if (_scrollController!.position.pixels ==
+            _scrollController!.position.maxScrollExtent) {
           _onLoadMore();
         }
       });
   }
 
   void onUnload() {
-    _scrollController.dispose();
+    _scrollController?.dispose();
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    if (index == list.length) {
+    if (index == (list?.length??0)) {
       return Padding(
         padding: const EdgeInsets.all(10.0),
         child: Center(
@@ -87,7 +87,7 @@ class JRListState extends State<JRListWidget> {
       );
     }
     return ListTile(
-      title: Text(list[index]),
+      title: Text(list![index]),
     );
   }
 
@@ -105,7 +105,7 @@ class JRListState extends State<JRListWidget> {
   }
 
   int _itemCount() {
-    return list.length + 1;
+    return list!.length + 1;
   }
 
   @override
@@ -118,6 +118,7 @@ class JRListState extends State<JRListWidget> {
         child: RefreshIndicator(
             //下拉刷新
             displacement: 10.0,
+            onRefresh: _onRefresh,
             child: Sugar.ifEqualBool(listIsEmpty(),
                 trueValue: Center(
                   child: CircularProgressIndicator(), //没有数据就转圈
@@ -125,8 +126,7 @@ class JRListState extends State<JRListWidget> {
                 falseValue: ListView.builder(
                     controller: _scrollController,
                     itemCount: _itemCount(),
-                    itemBuilder: _itemBuilder)),
-            onRefresh: _onRefresh),
+                    itemBuilder: _itemBuilder))),
       ),
     );
   }

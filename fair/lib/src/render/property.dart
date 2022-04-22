@@ -8,11 +8,11 @@ import 'package:flutter/widgets.dart';
 
 class Property {
   static Map<String, dynamic> combined(
-    List<dynamic> pa,
-    Map<String, dynamic> na,
+    List<dynamic>? pa,
+    Map<String, dynamic>? na,
   ) {
     final parameter = <String, dynamic>{};
-    na.forEach((key, value) {
+    na?.forEach((key, value) {
       parameter[key] = value;
     });
     parameter['pa'] = pa;
@@ -20,14 +20,14 @@ class Property {
   }
 
   static Map<String, dynamic> extract({
-    List<dynamic> list,
-    Map<String, dynamic> map,
-    Map<String, dynamic> data,
+    List<dynamic>? list,
+    Map<String, dynamic>? map,
+    Map<String, dynamic>? data,
   }) {
     final na = map ?? data;
-    final pa = list ?? data['pa'];
+    final pa = list ?? data?['pa'];
     final result = <String, dynamic>{};
-    na.forEach((key, value) {
+    na?.forEach((key, value) {
       if (value is ValueNotifier) {
         result[key] = value.value;
       } else {

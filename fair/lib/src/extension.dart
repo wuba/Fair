@@ -13,14 +13,14 @@ extension ListExtension<E> on List {
   }
 
   /// Null is return if any element is not type of [T]
-  List<T> asListOf<T>() {
+  List<T>? asListOf<T>() {
     return every((e) => e is T) ? map((e) => e as T).toList() : null;
   }
 }
 
 extension IterateExtension<E> on Iterable {
   /// Null is return if any element is not type of [T]
-  Iterable<T> asIteratorOf<T>() {
+  Iterable<T>? asIteratorOf<T>() {
     return every((e) => e is T) ? map((e) => e as T) : null;
   }
 }

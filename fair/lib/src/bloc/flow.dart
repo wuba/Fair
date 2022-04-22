@@ -21,12 +21,12 @@ FairWidgetBinding provider = () {
       // return (d.asIteratorOf<Widget>() ?? d).toList();
       var items = pa1(props);
       assert(items is List, 'failed to generate list of Sugar.map');
-      return ((items as List).asIteratorOf<Widget>() ?? items).toList();
+      return (((items as List).asIteratorOf<Widget>() ?? items) as Iterable).toList();
     },
     'Sugar.mapEach': (props) {
       var items = pa1(props);
       assert(items is List, 'failed to generate list of Sugar.map');
-      return ((items as List).asIteratorOf<Widget>() ?? items).toList();
+      return (((items as List).asIteratorOf<Widget>() ?? items) as Iterable).toList();
     },
     'Sugar.ifEqual': (props) {
       var p0 = pa0(props);

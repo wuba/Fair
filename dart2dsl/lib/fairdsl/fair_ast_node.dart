@@ -57,29 +57,29 @@ String astNodeNameValue(AstNodeName nodeName) =>
 
 ///ast node base class
 abstract class AstNode {
-  Map _ast;
-  String _type;
+  Map? _ast;
+  String? _type;
 
-  AstNode({Map ast, String type}) {
+  AstNode({Map? ast, String? type}) {
     _ast = ast;
     if (type != null) {
       _type = type;
     } else {
-      _type = ast['type'];
+      _type = ast?['type'];
     }
   }
 
-  String get type => _type;
+  String? get type => _type;
 
-  Map toAst();
+  Map? toAst();
 }
 
 class Identifier extends AstNode {
   String name;
 
-  Identifier(this.name, {Map ast}) : super(ast: ast);
+  Identifier(this.name, {Map? ast}) : super(ast: ast);
 
-  factory Identifier.fromAst(Map ast) {
+ static Identifier? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.Identifier)) {
       return Identifier(ast['name'], ast: ast);
@@ -88,17 +88,17 @@ class Identifier extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 /// grammar like (prefix.identifier), eg: People.name
 class PrefixedIdentifier extends AstNode {
-  String identifier;
-  String prefix;
+  String? identifier;
+  String? prefix;
 
-  PrefixedIdentifier(this.identifier, this.prefix, {Map ast}) : super(ast: ast);
+  PrefixedIdentifier(this.identifier, this.prefix, {Map? ast}) : super(ast: ast);
 
-  factory PrefixedIdentifier.fromAst(Map ast) {
+  static PrefixedIdentifier? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.PrefixedIdentifier)) {
       return PrefixedIdentifier(Identifier.fromAst(ast['identifier'])?.name,
@@ -109,15 +109,15 @@ class PrefixedIdentifier extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class StringLiteral extends AstNode {
   String value;
 
-  StringLiteral(this.value, {Map ast}) : super(ast: ast);
+  StringLiteral(this.value, {Map? ast}) : super(ast: ast);
 
-  factory StringLiteral.fromAst(Map ast) {
+  static StringLiteral? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.StringLiteral)) {
       return StringLiteral(ast['value'], ast: ast);
@@ -126,15 +126,15 @@ class StringLiteral extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class NumericLiteral extends AstNode {
-  num value;
+  num? value;
 
-  NumericLiteral(this.value, {Map ast}) : super(ast: ast);
+  NumericLiteral(this.value, {Map? ast}) : super(ast: ast);
 
-  factory NumericLiteral.fromAst(Map ast) {
+  static NumericLiteral? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.NumericLiteral)) {
       return NumericLiteral(ast['value'], ast: ast);
@@ -143,15 +143,15 @@ class NumericLiteral extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class BooleanLiteral extends AstNode {
-  bool value;
+  bool? value;
 
-  BooleanLiteral(this.value, {Map ast}) : super(ast: ast);
+  BooleanLiteral(this.value, {Map? ast}) : super(ast: ast);
 
-  factory BooleanLiteral.fromAst(Map ast) {
+  static BooleanLiteral? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.BooleanLiteral)) {
       return BooleanLiteral(ast['value'], ast: ast);
@@ -160,16 +160,16 @@ class BooleanLiteral extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class MapLiteralEntry extends AstNode {
-  String key;
-  Expression value;
+  String? key;
+  Expression? value;
 
-  MapLiteralEntry(this.key, this.value, {Map ast}) : super(ast: ast);
+  MapLiteralEntry(this.key, this.value, {Map? ast}) : super(ast: ast);
 
-  factory MapLiteralEntry.fromAst(Map ast) {
+  static MapLiteralEntry? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.MapLiteralEntry)) {
       return MapLiteralEntry(
@@ -180,25 +180,27 @@ class MapLiteralEntry extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class MapLiteral extends AstNode {
-  Map<String, Expression> elements;
-  List<MapLiteralEntry> listElements;
+  Map<String, Expression?>? elements;
+  List<MapLiteralEntry>? listElements;
 
-  MapLiteral(this.elements, this.listElements, {Map ast}) : super(ast: ast);
+  MapLiteral(this.elements, this.listElements, {Map? ast}) : super(ast: ast);
 
-  factory MapLiteral.fromAst(Map ast) {
+  static MapLiteral? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.SetOrMapLiteral)) {
       var astElements = ast['elements'] as List;
-      var entries = <String, Expression>{};
+      var entries = <String, Expression?>{};
       var lists = <MapLiteralEntry>[];
       for (var e in astElements) {
         var entry = MapLiteralEntry.fromAst(e);
-        entries[entry.key] = entry.value;
-        lists.add(entry);
+        if(entry!=null){
+          entries[entry.key??''] = entry.value;
+          lists.add(entry);
+        }
       }
       return MapLiteral(entries, lists, ast: ast);
     }
@@ -206,21 +208,21 @@ class MapLiteral extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class ListLiteral extends AstNode {
-  List<Expression> elements;
+  List<Expression>? elements;
 
-  ListLiteral(this.elements, {Map ast}) : super(ast: ast);
+  ListLiteral(this.elements, {Map? ast}) : super(ast: ast);
 
-  factory ListLiteral.fromAst(Map ast) {
+  static ListLiteral? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.ListLiteral)) {
-      var astElements = ast['elements'] as List;
+      var astElements = ast['elements'];
       var items = <Expression>[];
 
-      if (astElements != null) {
+      if (astElements is List) {
         for (var e in astElements) {
           var expression = Expression.fromAst(e);
           if (expression != null) {
@@ -234,19 +236,19 @@ class ListLiteral extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class Annotation extends AstNode {
-  String name;
-  List<Expression> argumentList;
+  String? name;
+  List<Expression?>? argumentList;
 
-  Annotation(this.name, this.argumentList, {Map ast}) : super(ast: ast);
+  Annotation(this.name, this.argumentList, {Map? ast}) : super(ast: ast);
 
-  factory Annotation.fromAst(Map ast) {
+  static Annotation? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.Annotation)) {
-      return Annotation(Identifier.fromAst(ast['id']).name,
+      return Annotation(Identifier.fromAst(ast['id'])?.name,
           _parseArgumentList(ast['argumentList']),
           ast: ast);
     }
@@ -254,7 +256,7 @@ class Annotation extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 // ignore: slash_for_doc_comments
@@ -274,32 +276,32 @@ class Annotation extends AstNode {
     },
  */
 class MemberExpression extends AstNode {
-  Expression object;
-  String property;
+  Expression? object;
+  String? property;
 
-  MemberExpression(this.object, this.property, {Map ast}) : super(ast: ast);
+  MemberExpression(this.object, this.property, {Map? ast}) : super(ast: ast);
 
-  factory MemberExpression.fromAst(Map ast) {
+  static MemberExpression? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.MemberExpression)) {
       return MemberExpression(Expression.fromAst(ast['object']),
-          Identifier.fromAst(ast['property']).name,
+          Identifier.fromAst(ast['property'])?.name,
           ast: ast);
     }
     return null;
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class SimpleFormalParameter extends AstNode {
-  TypeName paramType;
-  String name;
+  TypeName? paramType;
+  String? name;
 
-  SimpleFormalParameter(this.paramType, this.name, {Map ast}) : super(ast: ast);
+  SimpleFormalParameter(this.paramType, this.name, {Map? ast}) : super(ast: ast);
 
-  factory SimpleFormalParameter.fromAst(Map ast) {
+  static SimpleFormalParameter? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.SimpleFormalParameter)) {
       return SimpleFormalParameter(
@@ -310,15 +312,15 @@ class SimpleFormalParameter extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class TypeName extends AstNode {
-  String name;
+  String? name;
 
-  TypeName(this.name, {Map ast}) : super(ast: ast);
+  TypeName(this.name, {Map? ast}) : super(ast: ast);
 
-  factory TypeName.fromAst(Map ast) {
+  static TypeName? fromAst(Map? ast) {
     if (ast != null && ast['type'] == 'TypeName') {
       return TypeName(ast['name'], ast: ast);
     }
@@ -326,20 +328,20 @@ class TypeName extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class BlockStatement extends AstNode {
   ///代码块中各表达式
-  List<Expression> body;
+  List<Expression?>? body;
 
-  BlockStatement(this.body, {Map ast}) : super(ast: ast);
+  BlockStatement(this.body, {Map? ast}) : super(ast: ast);
 
-  factory BlockStatement.fromAst(Map ast) {
+  static BlockStatement? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.BlockStatement)) {
       var astBody = ast['body'] as List;
-      var bodies = <Expression>[];
+      var bodies = <Expression?>[];
       for (var arg in astBody) {
         bodies.add(Expression.fromAst(arg));
       }
@@ -349,27 +351,27 @@ class BlockStatement extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class MethodDeclaration extends AstNode {
-  String name;
-  List<SimpleFormalParameter> parameterList;
-  BlockStatement body;
-  bool isAsync;
-  List<Annotation> annotationList;
-  String source;
-  TypeName returnType;
+  String? name;
+  List<SimpleFormalParameter?>? parameterList;
+  BlockStatement? body;
+  bool? isAsync;
+  List<Annotation?>? annotationList;
+  String? source;
+  TypeName? returnType;
 
   MethodDeclaration(this.name, this.parameterList, this.body,
       this.annotationList, this.returnType, this.source,
-      {this.isAsync = false, Map ast})
+      {this.isAsync = false, Map? ast})
       : super(ast: ast);
 
-  factory MethodDeclaration.fromAst(Map ast) {
+  static MethodDeclaration? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.MethodDeclaration)) {
-      var parameters = <SimpleFormalParameter>[];
+      var parameters = <SimpleFormalParameter?>[];
       if (ast['parameters'] != null &&
           ast['parameters']['parameterList'] != null) {
         var astParameters = ast['parameters']['parameterList'] as List;
@@ -378,11 +380,11 @@ class MethodDeclaration extends AstNode {
         }
       }
       var astAnnotations = ast['annotations'] as List;
-      var annotations = <Annotation>[];
+      var annotations = <Annotation?>[];
       for (var ann in astAnnotations) {
         annotations.add(Annotation.fromAst(ann));
       }
-      var name = Identifier.fromAst(ast['id']).name;
+      var name = Identifier.fromAst(ast['id'])?.name;
       FairLogicUnit().addFunction(name);
       return MethodDeclaration(
           name,
@@ -398,20 +400,20 @@ class MethodDeclaration extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class FunctionDeclaration extends AstNode {
   ///函数名称
-  String name;
-  FunctionExpression expression;
+  String? name;
+  FunctionExpression? expression;
 
-  FunctionDeclaration(this.name, this.expression, {Map ast}) : super(ast: ast);
+  FunctionDeclaration(this.name, this.expression, {Map? ast}) : super(ast: ast);
 
-  factory FunctionDeclaration.fromAst(Map ast) {
+  static FunctionDeclaration? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.FunctionDeclaration)) {
-      return FunctionDeclaration(Identifier.fromAst(ast['id']).name,
+      return FunctionDeclaration(Identifier.fromAst(ast['id'])?.name,
           FunctionExpression.fromAst(ast['expression']),
           ast: ast);
     }
@@ -419,21 +421,21 @@ class FunctionDeclaration extends AstNode {
   }
 
   @override
-  Map toAst() {
+  Map? toAst() {
     return _ast;
   }
 }
 
 class MethodInvocation extends AstNode {
-  Expression callee;
-  List<Expression> argumentList;
-  SelectAstClass selectAstClass;
+  Expression? callee;
+  List<Expression?>? argumentList;
+  SelectAstClass? selectAstClass;
 
   MethodInvocation(this.callee, this.argumentList, this.selectAstClass,
-      {Map ast})
+      {Map? ast})
       : super(ast: ast);
 
-  factory MethodInvocation.fromAst(Map ast) {
+  static MethodInvocation? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.MethodInvocation)) {
       return MethodInvocation(
@@ -446,7 +448,7 @@ class MethodInvocation extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 /// *
@@ -456,15 +458,15 @@ class MethodInvocation extends AstNode {
 ///   标签节点
 ///   mainAxisAlignment: MainAxisAlignment.center,
 class NamedExpression extends AstNode {
-  String label;
-  Expression expression;
+  String? label;
+  Expression? expression;
 
-  NamedExpression(this.label, this.expression, {Map ast}) : super(ast: ast);
+  NamedExpression(this.label, this.expression, {Map? ast}) : super(ast: ast);
 
-  factory NamedExpression.fromAst(Map ast) {
+  static NamedExpression? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.NamedExpression)) {
-      return NamedExpression(Identifier.fromAst(ast['id']).name,
+      return NamedExpression(Identifier.fromAst(ast['id'])?.name,
           Expression.fromAst(ast['expression']),
           ast: ast);
     }
@@ -472,23 +474,23 @@ class NamedExpression extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class PrefixExpression extends AstNode {
   ///操作的变量名称
-  String argument;
+  String? argument;
 
   ///操作符
-  String operator;
+  String? operator;
 
   ///是否操作符前置
-  bool prefix;
+  bool? prefix;
 
-  PrefixExpression(this.argument, this.operator, this.prefix, {Map ast})
+  PrefixExpression(this.argument, this.operator, this.prefix, {Map? ast})
       : super(ast: ast);
 
-  factory PrefixExpression.fromAst(Map ast) {
+  static PrefixExpression? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.PrefixExpression)) {
       return PrefixExpression(Identifier.fromAst(ast['argument'])?.name,
@@ -499,19 +501,19 @@ class PrefixExpression extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class VariableDeclarator extends AstNode {
-  String name;
-  Expression init;
+  String? name;
+  Expression? init;
 
-  VariableDeclarator(this.name, this.init, {Map ast}) : super(ast: ast);
+  VariableDeclarator(this.name, this.init, {Map? ast}) : super(ast: ast);
 
-  factory VariableDeclarator.fromAst(Map ast) {
+  static VariableDeclarator? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.VariableDeclarator)) {
-      var name = Identifier.fromAst(ast['id']).name;
+      var name = Identifier.fromAst(ast['id'])?.name;
       FairLogicUnit().addVariable(name);
       return VariableDeclarator(
           name, Expression.fromAst(ast['init']),
@@ -521,31 +523,31 @@ class VariableDeclarator extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class VariableDeclarationList extends AstNode {
-  String typeAnnotation;
-  List<VariableDeclarator> declarationList;
-  List<Annotation> annotationList;
+  String? typeAnnotation;
+  List<VariableDeclarator?>? declarationList;
+  List<Annotation?>? annotationList;
 
-  String sourceCode;
+  String? sourceCode;
 
   VariableDeclarationList(this.typeAnnotation, this.declarationList,
       this.annotationList, this.sourceCode,
-      {Map ast})
+      {Map? ast})
       : super(ast: ast);
 
-  factory VariableDeclarationList.fromAst(Map ast) {
+  static VariableDeclarationList? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.VariableDeclarationList)) {
       var astDeclarations = ast['declarations'] as List;
-      var declarations = <VariableDeclarator>[];
+      var declarations = <VariableDeclarator?>[];
       for (var arg in astDeclarations) {
         declarations.add(VariableDeclarator.fromAst(arg));
       }
       var astAnnotations = ast['annotations'] as List;
-      var annotations = <Annotation>[];
+      var annotations = <Annotation?>[];
       for (var annotation in astAnnotations) {
         annotations.add(Annotation.fromAst(annotation));
       }
@@ -561,20 +563,20 @@ class VariableDeclarationList extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class FieldDeclaration extends AstNode {
-  VariableDeclarationList fields;
-  List<Annotation> metadata;
+  VariableDeclarationList? fields;
+  List<Annotation?>? metadata;
 
-  FieldDeclaration(this.fields, this.metadata, {Map ast}) : super(ast: ast);
+  FieldDeclaration(this.fields, this.metadata, {Map? ast}) : super(ast: ast);
 
-  factory FieldDeclaration.fromAst(Map ast) {
+  static FieldDeclaration? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.FieldDeclaration)) {
-      var astMetadata = ast['metadata'] as List;
-      var metadatas = <Annotation>[];
+      var astMetadata = ast['metadata'] as List?;
+      var metadatas = <Annotation?>[];
       //强制转换有问题
       if (astMetadata != null) {
         for (var arg in astMetadata) {
@@ -590,26 +592,26 @@ class FieldDeclaration extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class FunctionExpression extends AstNode {
   ///函数参数
-  List<SimpleFormalParameter> parameterList;
-  BlockStatement body;
+  List<SimpleFormalParameter?>? parameterList;
+  BlockStatement? body;
 
   ///是否异步函数
-  bool isAsync;
+  bool? isAsync;
 
   FunctionExpression(this.parameterList, this.body,
-      {this.isAsync = false, Map ast})
+      {this.isAsync = false, Map? ast})
       : super(ast: ast);
 
-  factory FunctionExpression.fromAst(Map ast) {
+  static FunctionExpression? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.FunctionExpression)) {
-      var astParameters = ast['parameters']['parameterList'] as List;
-      var parameters = <SimpleFormalParameter>[];
+      var astParameters = ast['parameters']['parameterList'] as List?;
+      var parameters = <SimpleFormalParameter?>[];
       astParameters?.forEach((p) {
         parameters.add(SimpleFormalParameter.fromAst(p));
       });
@@ -621,7 +623,7 @@ class FunctionExpression extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class BinaryExpression extends AstNode {
@@ -643,20 +645,19 @@ class BinaryExpression extends AstNode {
   /// * &
   /// * >>
   ///
-  String operator;
+  String? operator;
 
   ///左操作表达式
-  Expression left;
+  Expression? left;
 
   ///右操作表达式
-  Expression right;
+  Expression? right;
 
-  BinaryExpression(this.operator, this.left, this.right, {Map ast})
+  BinaryExpression(this.operator, this.left, this.right, {Map? ast})
       : super(ast: ast);
 
-  factory BinaryExpression.fromAst(Map ast) {
-    if (ast != null &&
-        ast['type'] == astNodeNameValue(AstNodeName.BinaryExpression)) {
+  static BinaryExpression? fromAst(Map? ast) {
+    if (ast != null && ast['type'] == astNodeNameValue(AstNodeName.BinaryExpression)) {
       return BinaryExpression(ast['operator'], Expression.fromAst(ast['left']),
           Expression.fromAst(ast['right']),
           ast: ast);
@@ -665,18 +666,18 @@ class BinaryExpression extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class AssignmentExpression extends AstNode {
-  String operator;
-  Expression left;
-  Expression right;
+  String? operator;
+  Expression? left;
+  Expression? right;
 
-  AssignmentExpression(this.operator, this.left, this.right, {Map ast})
+  AssignmentExpression(this.operator, this.left, this.right, {Map? ast})
       : super(ast: ast);
 
-  factory AssignmentExpression.fromAst(Map ast) {
+  static AssignmentExpression? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.AssignmentExpression)) {
       return AssignmentExpression(_parseStringValue(ast['operater']),
@@ -687,15 +688,15 @@ class AssignmentExpression extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class AwaitExpression extends AstNode {
-  MethodInvocation expression;
+  MethodInvocation? expression;
 
-  AwaitExpression(this.expression, {Map ast}) : super(ast: ast);
+  AwaitExpression(this.expression, {Map? ast}) : super(ast: ast);
 
-  factory AwaitExpression.fromAst(Map ast) {
+  static AwaitExpression? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.AwaitExpression)) {
       return AwaitExpression(MethodInvocation.fromAst(ast['expression']),
@@ -705,26 +706,26 @@ class AwaitExpression extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class ClassDeclaration extends AstNode {
-  String name;
-  String superClause;
-  List<Expression> body;
+  String? name;
+  String? superClause;
+  List<Expression?>? body;
 
-  ClassDeclaration(this.name, this.superClause, this.body, {Map ast})
+  ClassDeclaration(this.name, this.superClause, this.body, {Map? ast})
       : super(ast: ast);
 
-  factory ClassDeclaration.fromAst(Map ast) {
+  static ClassDeclaration? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.ClassDeclaration)) {
       var astBody = ast['body'] as List;
-      var bodies = <Expression>[];
+      var bodies = <Expression?>[];
       for (var arg in astBody) {
         bodies.add(Expression.fromAst(arg));
       }
-      return ClassDeclaration(Identifier.fromAst(ast['id']).name,
+      return ClassDeclaration(Identifier.fromAst(ast['id'])?.name,
           TypeName.fromAst(ast['superClause'])?.name, bodies,
           ast: ast);
     }
@@ -732,23 +733,23 @@ class ClassDeclaration extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class IfStatement extends AstNode {
   ///判断条件
-  BinaryExpression condition;
+  BinaryExpression? condition;
 
   ///true 执行代码块
-  BlockStatement consequent;
+  BlockStatement? consequent;
 
   ///false 执行代码块
-  BlockStatement alternate;
+  BlockStatement? alternate;
 
-  IfStatement(this.condition, this.consequent, this.alternate, {Map ast})
+  IfStatement(this.condition, this.consequent, this.alternate, {Map? ast})
       : super(ast: ast);
 
-  factory IfStatement.fromAst(Map ast) {
+  static IfStatement? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.IfStatement)) {
       return IfStatement(
@@ -761,16 +762,16 @@ class IfStatement extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class ForStatement extends AstNode {
-  ForLoopParts forLoopParts;
-  BlockStatement body;
+  ForLoopParts? forLoopParts;
+  BlockStatement? body;
 
-  ForStatement(this.forLoopParts, this.body, {Map ast}) : super(ast: ast);
+  ForStatement(this.forLoopParts, this.body, {Map? ast}) : super(ast: ast);
 
-  factory ForStatement.fromAst(Map ast) {
+  static ForStatement? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.ForStatement)) {
       return ForStatement(ForLoopParts.fromAst(ast['forLoopParts']),
@@ -781,7 +782,7 @@ class ForStatement extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class ForLoopParts extends AstNode {
@@ -791,22 +792,22 @@ class ForLoopParts extends AstNode {
       'ForEachPartsWithDeclaration';
 
   ///初始化定义的值
-  VariableDeclarationList variableList;
+  VariableDeclarationList? variableList;
 
   ///初始化赋值的值
-  AssignmentExpression initialization;
+  AssignmentExpression? initialization;
 
   ///循环判断条件
-  BinaryExpression condition;
+  BinaryExpression? condition;
 
   ///循环步进值
-  Expression updater;
+  Expression? updater;
 
   //for...in... 遍历迭代的数据集合变量名称
-  String iterable;
+  String? iterable;
 
   //for...in... 遍历迭代值
-  String loopVariable;
+  String? loopVariable;
 
   ForLoopParts(
       {this.variableList,
@@ -815,10 +816,10 @@ class ForLoopParts extends AstNode {
       this.updater,
       this.iterable,
       this.loopVariable,
-      Map ast})
+      Map? ast})
       : super(ast: ast);
 
-  factory ForLoopParts.fromAst(Map ast) {
+  static ForLoopParts? fromAst(Map? ast) {
     if (ast != null) {
       switch (ast['type']) {
         case forPartsWithDeclarations:
@@ -844,8 +845,8 @@ class ForLoopParts extends AstNode {
 
         case forEachPartsWithDeclaration:
           return ForLoopParts(
-            iterable: Identifier.fromAst(ast['iterable']).name,
-            loopVariable: Identifier.fromAst(ast['loopVariable']['id']).name,
+            iterable: Identifier.fromAst(ast['iterable'])?.name,
+            loopVariable: Identifier.fromAst(ast['loopVariable']['id'])?.name,
           );
       }
     }
@@ -853,20 +854,20 @@ class ForLoopParts extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class SwitchStatement extends AstNode {
-  Expression checkValue;
-  List<SwitchCase> body;
+  Expression? checkValue;
+  List<SwitchCase?>? body;
 
-  SwitchStatement(this.checkValue, this.body, {Map ast}) : super(ast: ast);
+  SwitchStatement(this.checkValue, this.body, {Map? ast}) : super(ast: ast);
 
-  factory SwitchStatement.fromAst(Map ast) {
+  static SwitchStatement? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.SwitchStatement)) {
-      var list = ast['body'] as List;
-      var caseList = <SwitchCase>[];
+      var list = ast['body'] as List?;
+      var caseList = <SwitchCase?>[];
       list?.forEach((s) {
         caseList.add(SwitchCase.fromAst(s));
       });
@@ -877,21 +878,21 @@ class SwitchStatement extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class SwitchCase extends AstNode {
-  Expression condition;
-  List<Expression> statements;
-  bool isDefault;
+  Expression? condition;
+  List<Expression?>? statements;
+  bool? isDefault;
 
-  SwitchCase(this.condition, this.statements, this.isDefault, {Map ast})
+  SwitchCase(this.condition, this.statements, this.isDefault, {Map? ast})
       : super(ast: ast);
 
-  factory SwitchCase.fromAst(Map ast) {
+  static SwitchCase? fromAst(Map? ast) {
     if (ast != null) {
-      var statements = <Expression>[];
-      var list = ast['statements'] as List;
+      var statements = <Expression?>[];
+      var list = ast['statements'] as List?;
       list?.forEach((s) {
         statements.add(Expression.fromAst(s));
       });
@@ -910,15 +911,15 @@ class SwitchCase extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class ReturnStatement extends AstNode {
-  Expression argument;
+  Expression? argument;
 
-  ReturnStatement(this.argument, {Map ast}) : super(ast: ast);
+  ReturnStatement(this.argument, {Map? ast}) : super(ast: ast);
 
-  factory ReturnStatement.fromAst(Map ast) {
+  static ReturnStatement? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.ReturnStatement)) {
       return ReturnStatement(Expression.fromAst(ast['argument']), ast: ast);
@@ -927,19 +928,19 @@ class ReturnStatement extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class PropertyAccess extends AstNode {
-  String name;
-  Expression expression;
+  String? name;
+  Expression? expression;
 
-  PropertyAccess(this.name, this.expression, {Map ast}) : super(ast: ast);
+  PropertyAccess(this.name, this.expression, {Map? ast}) : super(ast: ast);
 
-  factory PropertyAccess.fromAst(Map ast) {
+  static PropertyAccess? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.PropertyAccess)) {
-      return PropertyAccess(Identifier.fromAst(ast['id']).name,
+      return PropertyAccess(Identifier.fromAst(ast['id'])?.name,
           Expression.fromAst(ast['expression']),
           ast: ast);
     }
@@ -947,16 +948,16 @@ class PropertyAccess extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class IndexExpression extends AstNode {
-  Expression target;
-  Expression index;
+  Expression? target;
+  Expression? index;
 
-  IndexExpression(this.target, this.index, {Map ast}) : super(ast: ast);
+  IndexExpression(this.target, this.index, {Map? ast}) : super(ast: ast);
 
-  factory IndexExpression.fromAst(Map ast) {
+  static IndexExpression? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.IndexExpression)) {
       return IndexExpression(
@@ -967,15 +968,15 @@ class IndexExpression extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class InterpolationExpression extends AstNode {
-  String name;
+  String? name;
 
-  InterpolationExpression(this.name, {Map ast}) : super(ast: ast);
+  InterpolationExpression(this.name, {Map? ast}) : super(ast: ast);
 
-  factory InterpolationExpression.fromAst(Map ast) {
+  static InterpolationExpression? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.InterpolationExpression)) {
       var n = Identifier.fromAst(ast['expression']);
@@ -987,21 +988,21 @@ class InterpolationExpression extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class StringInterpolation extends AstNode {
-  List<Expression> elements;
-  String sourceString;
+  List<Expression?>? elements;
+  String? sourceString;
 
-  StringInterpolation(this.elements, this.sourceString, {Map ast})
+  StringInterpolation(this.elements, this.sourceString, {Map? ast})
       : super(ast: ast);
 
-  factory StringInterpolation.fromAst(Map ast) {
+  static StringInterpolation? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.StringInterpolation)) {
-      var elements = <Expression>[];
-      var list = ast['elements'] as List;
+      var elements = <Expression?>[];
+      var list = ast['elements'] as List?;
       list?.forEach((s) {
         elements.add(Expression.fromAst(s));
       });
@@ -1011,19 +1012,19 @@ class StringInterpolation extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class VariableExpression extends AstNode {
-  String expression;
+  String? expression;
 
-  VariableExpression(this.expression, {Map ast}) : super(ast: ast);
+  VariableExpression(this.expression, {Map? ast}) : super(ast: ast);
 
-  factory VariableExpression.fromAst(Map ast) {
+  static VariableExpression? fromAst(Map? ast) {
     if (ast != null) {
-      List<String> expressions = ast['expression'].toString().split(' ');
+      var expressions = ast['expression']?.toString().split(' ');
       var expression = ast['expression'];
-      if (expressions != null && expressions.length > 0) {
+      if (expressions != null && expressions.isNotEmpty) {
         expression = expressions[0];
       }
       return VariableExpression(expression, ast: ast);
@@ -1032,18 +1033,18 @@ class VariableExpression extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 class Program extends AstNode {
-  List<Expression> body;
+  List<Expression?>? body;
 
-  Program(this.body, {Map ast}) : super(ast: ast);
+  Program(this.body, {Map? ast}) : super(ast: ast);
 
-  factory Program.fromAst(Map ast) {
+  static Program? fromAst(Map? ast) {
     if (ast != null && ast['type'] == astNodeNameValue(AstNodeName.Program)) {
       var astBody = ast['body'] as List;
-      var bodies = <Expression>[];
+      var bodies = <Expression?>[];
       for (var arg in astBody) {
         bodies.add(Expression.fromAst(arg));
       }
@@ -1053,50 +1054,50 @@ class Program extends AstNode {
   }
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 }
 
 ///通用 ast node
 class Expression extends AstNode {
-  AstNode _expression;
+  final AstNode? _expression;
 
-  bool isProgram;
-  bool isClassDeclaration;
-  bool isIdentifier;
-  bool isPrefixedIdentifier;
-  bool isStringLiteral;
-  bool isNumericLiteral;
-  bool isBooleanLiteral;
-  bool isListLiteral;
-  bool isMapLiteral;
-  bool isMethodInvocation;
-  bool isMemberExpression;
-  bool isNamedExpression;
-  bool isVariableDeclarationList;
-  bool isBinaryExpression;
-  bool isAssignmentExpression;
-  bool isPropertyAccess;
-  bool isMethodDeclaration;
-  bool isReturnStatement;
-  bool isFieldDeclaration;
-  bool isFunctionExpression;
-  bool isBlockStatement;
-  bool isFunctionDeclaration;
-  bool isAwaitExpression;
-  bool isPrefixExpression;
-  bool isExpressionStatement;
-  bool isIfStatement;
-  bool isForStatement;
-  bool isSwitchStatement;
-  bool isIndexExpression;
-  bool isStringInterpolation;
-  bool isInterpolationExpression;
-  bool isVariableDeclaration;
-  bool isVariableExpression;
-  bool isFuncParam;
+  bool? isProgram;
+  bool? isClassDeclaration;
+  bool? isIdentifier;
+  bool? isPrefixedIdentifier;
+  bool? isStringLiteral;
+  bool? isNumericLiteral;
+  bool? isBooleanLiteral;
+  bool? isListLiteral;
+  bool? isMapLiteral;
+  bool? isMethodInvocation;
+  bool? isMemberExpression;
+  bool? isNamedExpression;
+  bool? isVariableDeclarationList;
+  bool? isBinaryExpression;
+  bool? isAssignmentExpression;
+  bool? isPropertyAccess;
+  bool? isMethodDeclaration;
+  bool? isReturnStatement;
+  bool? isFieldDeclaration;
+  bool? isFunctionExpression;
+  bool? isBlockStatement;
+  bool? isFunctionDeclaration;
+  bool? isAwaitExpression;
+  bool? isPrefixExpression;
+  bool? isExpressionStatement;
+  bool? isIfStatement;
+  bool? isForStatement;
+  bool? isSwitchStatement;
+  bool? isIndexExpression;
+  bool? isStringInterpolation;
+  bool? isInterpolationExpression;
+  bool? isVariableDeclaration;
+  bool? isVariableExpression;
+  bool? isFuncParam;
 
   @override
-  Map toAst() => _ast;
+  Map? toAst() => _ast;
 
   Expression(
     this._expression, {
@@ -1134,10 +1135,10 @@ class Expression extends AstNode {
     this.isVariableDeclaration = false,
     this.isVariableExpression = false,
     this.isFuncParam =false,
-    Map ast,
+    Map? ast,
   }) : super(ast: ast);
 
-  factory Expression.fromAst(Map ast) {
+  static Expression? fromAst(Map? ast) {
     if (ast == null) return null;
     var astType = ast['type'];
     if (astType == astNodeNameValue(AstNodeName.Program)) {
@@ -1311,16 +1312,16 @@ class Expression extends AstNode {
 }
 
 class SelectAstClass {
-  String name;
-  String metadata;
-  String version;
-  String filePath;
-  String classId;
+  String? name;
+  String? metadata;
+  String? version;
+  String? filePath;
+  String? classId;
 
   SelectAstClass(
       {this.name, this.metadata, this.version, this.filePath, this.classId});
 
-  factory SelectAstClass.fromAst(Map ast) {
+  static SelectAstClass? fromAst(Map? ast) {
     if (ast != null) {
       return SelectAstClass(
           name: ast['name'],
@@ -1334,10 +1335,10 @@ class SelectAstClass {
 }
 
 ///解析ArgumentList 字段
-List<Expression> _parseArgumentList(Map ast) {
-  var arguments = <Expression>[];
+List<Expression?> _parseArgumentList(Map? ast) {
+  var arguments = <Expression?>[];
   if (ast != null) {
-    var astArguments = ast['argumentList'] as List;
+    var astArguments = ast['argumentList'] as List?;
     if (astArguments != null) {
       for (var arg in astArguments) {
         arguments.add(Expression.fromAst(arg));
@@ -1389,15 +1390,15 @@ String _parseStringValue(Map ast) {
 //}
 
 ///解析File 对象 ast
-File parseFileObject(MethodInvocation fileMethod) {
+File? parseFileObject(MethodInvocation fileMethod) {
   var callee = fileMethod.callee;
-  if (callee.isIdentifier && callee.asIdentifier.name == 'File') {
+  if (callee?.isIdentifier==true && callee?.asIdentifier.name == 'File') {
     var argumentList = fileMethod.argumentList;
     if (argumentList != null &&
         argumentList.isNotEmpty &&
-        argumentList[0].isStringLiteral) {
-      var path = argumentList[0].asStringLiteral.value;
-      return File(path);
+        argumentList[0]?.isStringLiteral==true) {
+      var path = argumentList[0]?.asStringLiteral.value;
+      return File(path??'');
     }
   }
   return null;

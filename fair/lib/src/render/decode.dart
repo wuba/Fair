@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair/src/render/proxy.dart';
 import 'package:fair/src/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -17,9 +18,9 @@ import '../widgets/version.dart';
 import 'builder.dart';
 
 class _DataSource {
-  final Map layout;
-  final Map data;
-  final Map methodMap;
+  final Map? layout;
+  final Map? data;
+  final Map? methodMap;
 
   _DataSource({this.layout, this.data, this.methodMap});
 }
@@ -27,10 +28,10 @@ class _DataSource {
 class Decoder {
   final FairBundle _loader = FairBundle();
   final FairDecoder _decoder = FairDecoder();
-  final String page;
-  final Map<String, dynamic> dataSource;
-  final String url;
-  _DataSource _source;
+  final String? page;
+  final Map<String, dynamic>? dataSource;
+  final String? url;
+  _DataSource? _source;
 
   Decoder(this.page, {this.dataSource, this.url});
 
@@ -42,15 +43,15 @@ class Decoder {
     var data = <dynamic, dynamic>{};
     var methodMap = <String, dynamic>{};
 
-    var d = jsonBean.remove('data');
-    methodMap = jsonBean['methodMap'];
-    jsonBean.remove('methodMap');
+    var d = jsonBean?.remove('data');
+    methodMap = jsonBean?['methodMap'];
+    jsonBean?.remove('methodMap');
 
     if (d != null) {
       data.addAll(d);
     }
     if (dataSource != null) {
-      data.addAll(dataSource);
+      data.addAll(dataSource!);
     }
     var s = _DataSource(layout: jsonBean, data: data, methodMap: methodMap);
     _source = s;
@@ -60,24 +61,24 @@ class Decoder {
   Widget toWidget(BuildContext context) {
     return trackExecution('[Fair] parse as widget: $page', () {
       var source = _source;
-      var layout = source.layout;
-      var data = source.data;
-      var methodMap = source.methodMap;
-      var widget = _convert(context, layout, methodMap, data: data);
+      var layout = source?.layout;
+      var data = source?.data;
+      var methodMap = source?.methodMap;
+      var widget = _convert(context, layout!, methodMap, data: data);
       return widget;
     });
   }
 
-  Widget _convert(BuildContext context, Map map, Map methodMap, {Map data}) {
+  Widget _convert(BuildContext context, Map map, Map? methodMap, {Map? data}) {
     var app = FairApp.of(context);
-    var bound = app.bindData[page];
+    var bound = app?.bindData[page];
     if (data != null && data.isNotEmpty) {
       log('[Fair] binding data => $data');
-      bound ??= BindingData(app.modules);
+      bound ??= BindingData(app?.modules);
       bound.data = data;
     }
-    var proxy = app.proxy;
-    Widget w = DynamicWidgetBuilder(proxy, page, bound, bundle: url)
+    var proxy = app?.proxy;
+    Widget w = DynamicWidgetBuilder(proxy as ProxyMirror?, page, bound, bundle: url)
             .convert(context, map, methodMap) ??
         WarningWidget(
             name: page, url: url, error: 'tag name not supported yet');

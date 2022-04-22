@@ -46,7 +46,7 @@ class FairNet extends IFairPlugin {
     var completeCallback = args['complete'];
     Map<String, dynamic> reqData = args['data'];
     var method = args['method'];
-    Response<dynamic> response;
+    Response<dynamic>? response;
 
     if (method == null) {
       return Future.value();
@@ -91,13 +91,13 @@ class FairNet extends IFairPlugin {
   }
 
   Future<Response<dynamic>> _post(String path,
-      {Map<String, dynamic> queryParameters}) async {
+      {Map<String, dynamic>? queryParameters}) async {
     var resp = await _getDio().post(path, queryParameters: queryParameters);
     return Future.value(resp);
   }
 
   Future<Response<dynamic>> _get(String path,
-      {Map<String, dynamic> queryParameters}) async {
+      {Map<String, dynamic>? queryParameters}) async {
     var resp = await _getDio().get(path, queryParameters: queryParameters);
     return Future.value(resp);
   }
@@ -109,10 +109,10 @@ class FairNet extends IFairPlugin {
     return functions;
   }
 
-  Dio _dio;
+  Dio? _dio;
 
   Dio _getDio() {
     _dio ??= Dio();
-    return _dio;
+    return _dio!;
   }
 }

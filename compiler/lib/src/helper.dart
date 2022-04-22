@@ -17,7 +17,7 @@ import 'package:fairc/fairc.dart' as dart2dsl;
 mixin FlatCompiler {
   final command = 'flatc';
 
-  File _fbs;
+  File? _fbs;
 
   Future<R> compile(String jsonPath) async {
     var content = '';
@@ -31,7 +31,7 @@ mixin FlatCompiler {
         '-o',
         File(jsonPath).parent.absolute.path,
         '-b',
-        _fbs.absolute.path,
+        _fbs!.absolute.path,
         jsonPath
       ]);
       if (result.exitCode != 0) {
@@ -54,7 +54,7 @@ mixin FlatCompiler {
 }
 
 mixin FairCompiler {
-  static File _fair;
+  static File? _fair;
   final _startTag = '#####################fairc output begin#################';
   final _endTag = '#####################fairc output end#################';
   final command = 'dart';
@@ -114,7 +114,7 @@ mixin FairCompiler {
 
 class R {
   final bool success;
-  final String data;
+  final String? data;
   final String message;
 
   R._(this.success, this.data, this.message);
@@ -126,4 +126,15 @@ class R {
   factory R.fail(String message) {
     return R._(false, null, message);
   }
+}
+
+/// Use Map to save the module value of all bundle files.
+class ModuleNameHelper {
+  var modules = {};
+
+  static final ModuleNameHelper _singleton = ModuleNameHelper._internal();
+
+  factory ModuleNameHelper() => _singleton;
+
+  ModuleNameHelper._internal();
 }
