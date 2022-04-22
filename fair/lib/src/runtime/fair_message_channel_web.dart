@@ -18,7 +18,7 @@ import 'package:js/js_util.dart';
 import 'fair_runtime_declaration.dart';
 
 typedef VoidMsgCallback = void Function();
-typedef StringMsgCallback = String Function(String msg);
+typedef StringMsgCallback = String? Function(String? msg);
 
 class FairMessageChannel {
   factory FairMessageChannel() {
@@ -50,25 +50,27 @@ class FairMessageChannel {
     callback.call(result);
   }
 
-  StringMsgCallback _callback;
+  StringMsgCallback? _callback;
 
   void setMessageHandler(StringMsgCallback callback) {
     _callback = callback;
   }
 
-  Future<dynamic> loadJS(String args, StringMsgCallback callback) {
+  Future<dynamic> loadJS(String args, StringMsgCallback? callback) {
     var map = jsonDecode(args);
     if (map[FairMessage.PAGE_NAME] != 'loadCoreJs') {
       var scriptElement = ScriptElement();
       scriptElement.innerText = map[FairMessage.PATH];
-      document.head.children.add(scriptElement);
+      document.head?.children.add(scriptElement);
     }
     return Future.value(null);
   }
 
-  Future<dynamic> release(String args, VoidMsgCallback callback) {}
+  Future<dynamic> release(String args, VoidMsgCallback? callback) {
+    return Future.value(null);
+  }
 
-  Future<String> sendCommonMessage(dynamic msg) async {
+  Future<String?> sendCommonMessage(dynamic msg) async {
     dynamic reply = sendCommonMessageSync(msg);
     return Future.value(reply);
   }
