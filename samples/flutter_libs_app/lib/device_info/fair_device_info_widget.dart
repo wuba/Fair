@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class FairDeviceInfoWidget extends StatefulWidget {
   final String title;
 
-  FairDeviceInfoWidget({Key key, this.title}) : super(key: key);
+  FairDeviceInfoWidget({required Key key, required this.title}) : super(key: key);
 
   @override
   _FairDeviceInfoWidgetState createState() {

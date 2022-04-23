@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class SignInWithApplePage extends StatefulWidget {
   Map<String, dynamic> params;
-  SignInWithApplePage({Key key, this.params}) : super(key: key);
+  SignInWithApplePage({required Key key,required this.params}) : super(key: key);
 
   @override
   _SignInWithApplePageState createState() {
