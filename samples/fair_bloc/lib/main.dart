@@ -6,6 +6,13 @@ import 'app.dart';
 import 'counter_observer.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = CounterObserver();
-  runApp(FairApp(child: const CounterApp()));
+  FairApp.runApplication(
+    _getApp(),
+    plugins: {
+    },
+  );
 }
+
+dynamic _getApp() => FairApp(child: const CounterApp());
