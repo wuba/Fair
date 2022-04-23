@@ -16,7 +16,7 @@ dependencies:
 
 #  fair_version: ^0.2.0
   fair_version:
-    path: ../flutter_version/flutter_2_0_6
+    path: ../flutter_version/flutter_2_5_0
 
   flat_buffers: ^2.0.5
   url_launcher: ^6.0.10
