@@ -34,7 +34,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.4.0
+  build_runner: ^2.1.2
   animated_text_kit: 2.4.0
   fair_compiler:
     path: ../../compiler
@@ -42,7 +42,7 @@ dev_dependencies:
 # Switch to another stable flutter version
 dependency_overrides:
   fair_version:
-    path: ../../flutter_version/flutter_1_17_3
+    path: ../../flutter_version/flutter_2_0_6
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
