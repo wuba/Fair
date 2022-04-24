@@ -2,8 +2,8 @@ import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
 class UrlLauncherPage extends StatefulWidget {
-  Map<String, dynamic> params;
-  UrlLauncherPage({Key key, this.params}) : super(key: key);
+  Map<String, dynamic>? params;
+  UrlLauncherPage({ Key? key, this.params}) : super(key: key);
 
   @override
   _UrlLauncherPageState createState() {

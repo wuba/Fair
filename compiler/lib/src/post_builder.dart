@@ -14,15 +14,27 @@ import 'package:crypto/crypto.dart' show md5;
 import 'package:fair_compiler/src/state_transfer.dart';
 import 'package:path/path.dart' as path;
 import 'package:dartToJs/index.dart' as dart2js;
-import 'helper.dart' show FlatCompiler;
+import 'helper.dart' show FlatCompiler, ModuleNameHelper;
 
 class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
   @override
   FutureOr<void> build(PostProcessBuildStep buildStep) async {
     final dir = path.join('build','fair');
     Directory(dir).createSync(recursive: true);
-    final bundleName =
-        path.join(dir, buildStep.inputId.path.replaceAll(inputExtensions.first, '.fair.json').replaceAll('/', '_').replaceAll('\\', '_'));
+
+    /// Get the module value of the bundle file,
+    /// the module value will be used as the prefix of the bundle file name.
+    /// Example：'home_recommend.fair.json'
+    var moduleNameKey = buildStep.inputId.path.replaceAll('.bundle.json', '');
+    var moduleNameValue = ModuleNameHelper().modules[moduleNameKey];
+
+    final bundleName = path.join(
+            dir,
+            buildStep.inputId.path
+                .replaceAll(inputExtensions.first, '.fair.json')
+                .replaceAll('lib', moduleNameValue)
+                .replaceAll('/', '_')
+                .replaceAll('\\', '_'));
     final jsName = bundleName.replaceFirst('.json', '.js');
 
     await dart2JS(buildStep.inputId.path, jsName);

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ConvexBottomBarWidget extends StatefulWidget {
   final String title;
 
-  ConvexBottomBarWidget({Key key, this.title}) : super(key: key);
+  ConvexBottomBarWidget({required Key key, required this.title}) : super(key: key);
 
   @override
   _ConvexBottomBarWidgetState createState() {

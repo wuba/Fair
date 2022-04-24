@@ -1474,7 +1474,7 @@ class AppGeneratedModule extends GeneratedModule {
         'trashRestoreAlt': FontAwesomeIcons.trashRestoreAlt,
         'tree': FontAwesomeIcons.tree,
         'trello': FontAwesomeIcons.trello,
-        'tripadvisor': FontAwesomeIcons.tripadvisor,
+        // 'tripadvisor': FontAwesomeIcons.tripadvisor,
         'trophy': FontAwesomeIcons.trophy,
         'truck': FontAwesomeIcons.truck,
         'truckLoading': FontAwesomeIcons.truckLoading,
@@ -1642,7 +1642,7 @@ class AppGeneratedModule extends GeneratedModule {
       },
       'RotateAnimatedTextKit': (props) => RotateAnimatedTextKit(
             key: props['key'],
-            text: as<String>(props['text']),
+            text: (props['text']),//as<String>(props['text'])
             textStyle: props['textStyle'],
             transitionHeight: props['transitionHeight']?.toDouble(),
             pause: props['pause'],
@@ -1670,7 +1670,7 @@ class AppGeneratedModule extends GeneratedModule {
                 props['animationDuration'] ?? const Duration(milliseconds: 270),
             mainAxisAlignment:
                 props['mainAxisAlignment'] ?? MainAxisAlignment.spaceBetween,
-            items: as<BottomNavyBarItem>(props['items']),
+            items: (props['items']),//as<BottomNavyBarItem>(props['items']
             onItemSelected: props['onItemSelected'],
             curve: props['curve'] ?? Curves.linear,
           ),

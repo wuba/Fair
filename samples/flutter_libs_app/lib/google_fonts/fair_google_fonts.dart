@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 var google_fonts_component = {
@@ -14987,7 +14986,7 @@ var google_fonts_component = {
   'GoogleFonts.muktaVaaniTextTheme': (props) => GoogleFonts.muktaVaaniTextTheme(
         props['pa'][0],
       ),
-  'GoogleFonts.muli': (props) => GoogleFonts.muli(
+  'GoogleFonts.muli': (props) => GoogleFonts.mulish(
         textStyle: props['textStyle'],
         color: props['color'],
         backgroundColor: props['backgroundColor'],
@@ -15007,9 +15006,6 @@ var google_fonts_component = {
         decorationColor: props['decorationColor'],
         decorationStyle: props['decorationStyle'],
         decorationThickness: props['decorationThickness']?.toDouble(),
-      ),
-  'GoogleFonts.muliTextTheme': (props) => GoogleFonts.muliTextTheme(
-        props['pa'][0],
       ),
   'GoogleFonts.mysteryQuest': (props) => GoogleFonts.mysteryQuest(
         textStyle: props['textStyle'],

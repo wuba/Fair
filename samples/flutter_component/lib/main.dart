@@ -12,10 +12,12 @@ import 'module.dart';
   'package:bottom_navy_bar/bottom_navy_bar.dart',
   'package:font_awesome_flutter/font_awesome_flutter.dart'])
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(FairApp(
     child: MyApp(),
 
     modules: {
+
       SlidableModule.tagName:() => SlidableModule(),
       //BottomNavyBarModule.tagName:() => BottomNavyBarModule(),
     },

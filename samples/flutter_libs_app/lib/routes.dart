@@ -21,11 +21,10 @@ class FairRouter {
       case RoutePath.bottomBarPage:
         return BottomBarPage();
     }
-    return null;
   };
 
   /// 打开新页面（叠加栈）
-  static Future<T> push<T extends Object>(
+  static Future<T?> push<T extends Object>(
       BuildContext context, RoutePath routePath,
       [dynamic params]) {
     return Navigator.push(context, CupertinoPageRoute(builder: (context) {
