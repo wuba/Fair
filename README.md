@@ -47,7 +47,10 @@ dev_dependencies:
   fair_compiler:
     path: ../fair/compiler
  
-# switch "fair_version" according to the local Flutter SDK version
+# switch "fair_version" according to the local Flutter SDK version.
+# Flutter SDK 2.5.x(2.5.0、2.5.1、2.5.2、2.5.3) -> fair_version: 2.5.0
+# Flutter SDK 2.0.6 -> fair_version: 2.0.6+1
+# Flutter SDK 1.22.6 -> fair_version: 1.22.6
 dependency_overrides:
   fair_version: 2.0.6+1
 ```
