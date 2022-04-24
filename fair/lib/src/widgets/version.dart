@@ -4,4 +4,4 @@
  * found in the LICENSE file.
  */
 
-export 'package:fair_version/fair_version.dart';
+// export 'package:fair_version/fair_version.dart';

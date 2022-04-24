@@ -1,3 +1,6 @@
+## [2.3.0]
+* Add null-safety
+
 ## [0.3.0+1]
 * bug fix
 
