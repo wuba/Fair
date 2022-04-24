@@ -1,9 +1,9 @@
 import 'package:fair/fair.dart';
-import 'package:fair_list_demo/JRList.dart';
 import 'package:fair_list_demo/list_proxy.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(FairApp(
     child: MyApp(),
     delegate:  {

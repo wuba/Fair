@@ -17,10 +17,10 @@ class PackageInfoDelegate extends FairDelegate{
   Future<void> _getPackageInfo() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     setState(() {
-       _appName = packageInfo.appName ?? '没获取到';
-       _packageName = packageInfo.packageName ?? '没获取到';
-       _version = packageInfo.version ?? '没获取到';
-       _buildNumber = packageInfo.buildNumber ?? '没获取到';
+       _appName = packageInfo.appName;
+       _packageName = packageInfo.packageName;
+       _version = packageInfo.version;
+       _buildNumber = packageInfo.buildNumber;
     });
   }
 

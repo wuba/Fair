@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 @FairPatch()
 class GoogleFontsExamplePage extends StatefulWidget {
   String title;
-  GoogleFontsExamplePage({Key key, this.title}) : super(key: key);
+  GoogleFontsExamplePage({required Key key, this.title = ""}) : super(key: key);
 
   @override
   _GoogleFontsExamplePageState createState() {

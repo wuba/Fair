@@ -39,12 +39,12 @@ class DeviceInfoDelegate extends CommonDelegate{
       queryParameters: <String, String>{
         'code': credential.authorizationCode,
         if (credential.givenName != null)
-          'firstName': credential.givenName,
+          'firstName': credential.givenName!,
         if (credential.familyName != null)
-          'lastName': credential.familyName,
+          'lastName': credential.familyName!,
         'useBundleId':
         Platform.isIOS || Platform.isMacOS ? 'true' : 'false',
-        if (credential.state != null) 'state': credential.state,
+        if (credential.state != null) 'state': credential.state!,
       },
     );
 

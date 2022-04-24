@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 @FairPatch()
 class UrlLauncherExampleWidget extends StatefulWidget {
   String title = "";
-  UrlLauncherExampleWidget({Key key, this.title}) : super(key: key);
+  UrlLauncherExampleWidget({required Key key, required this.title}) : super(key: key);
 
   @override
   _UrlLauncherExampleWidgetState createState() {
@@ -13,10 +13,10 @@ class UrlLauncherExampleWidget extends StatefulWidget {
 }
 
 class _UrlLauncherExampleWidgetState extends State<UrlLauncherExampleWidget> {
-  _UrlLauncherExampleWidgetState();
+   _UrlLauncherExampleWidgetState(); //无用注释
 
   @FairWell("_editingController")
-  TextEditingController _editingController;
+  TextEditingController? _editingController;
 
   @FairWell("_textAlign")
   TextAlign _textAlign = TextAlign.center;

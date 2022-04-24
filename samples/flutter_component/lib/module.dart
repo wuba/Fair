@@ -11,7 +11,7 @@ class SlidableModule extends FairModule<SlidableScrollActionPane>{
   SlidableModule() : super(tagName);
 
   @override
-  SlidableScrollActionPane onCreateComponent(BuildContext ctx, Map<String, dynamic> props) {
+  SlidableScrollActionPane onCreateComponent(BuildContext ctx, Map<String, dynamic>? props) {
     return SlidableScrollActionPane();
   }
 
@@ -24,10 +24,10 @@ class BottomNavyBarModule extends FairModule<BottomNavyBarItem>{
   BottomNavyBarModule() : super(tagName);
 
   @override
-  BottomNavyBarItem onCreateComponent(BuildContext ctx, Map<String, dynamic> props) {
+  BottomNavyBarItem onCreateComponent(BuildContext ctx, Map<String, dynamic>? props) {
     return BottomNavyBarItem(
-      title: props['title'],
-      icon: props['icon']
+      title: props?['title'],
+      icon: props?['icon']
     );
   }
 
