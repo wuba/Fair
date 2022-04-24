@@ -40,11 +40,15 @@ class Decoder {
   Future<void> resolve(BuildContext context) async {
     var jsonBean = await _loader.obtain(context).onLoad(url, _decoder,
         cache: true, h: const {'fairVersion': '$fairVersion#$flutterVersion'});
-    var data = <dynamic, dynamic>{};
-    var methodMap = <String, dynamic>{};
+    Map? data = <dynamic, dynamic>{};
+    Map? methodMap = <String, dynamic>{};
 
     var d = jsonBean?.remove('data');
-    methodMap = jsonBean?['methodMap'];
+    try {
+      methodMap = jsonBean?['methodMap'];
+    } catch (e) {
+      print(e);
+    }
     jsonBean?.remove('methodMap');
 
     if (d != null) {
