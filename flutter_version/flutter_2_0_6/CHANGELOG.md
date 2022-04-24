@@ -1,4 +1,4 @@
-## 2.0.6
+## 2.0.6+1
 * Generated from flutter 2.0.6
 
 ## 1.22.6
