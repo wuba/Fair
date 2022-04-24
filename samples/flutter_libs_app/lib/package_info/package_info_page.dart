@@ -2,9 +2,9 @@ import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
 class PackageInfoPage extends StatefulWidget {
-  Map<String, dynamic> params;
+  Map<String, dynamic>? params;
 
-  PackageInfoPage({Key key, this.params}) : super(key: key);
+  PackageInfoPage({Key? key, this.params}) : super(key: key);
 
   @override
   _PackageInfoPageState createState() {

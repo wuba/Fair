@@ -10,7 +10,7 @@ class CustomWidget extends StatelessWidget {
 
   final String title;
 
-  const CustomWidget({Key key,this.title='Test'}) : super(key: key);
+  const CustomWidget({Key? key,this.title='Test'}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -94,7 +94,7 @@ var p = () => {
       'Localizations': (props) => Localizations(
             key: props['key'],
             locale: props['locale'],
-            delegates: as<LocalizationsDelegate>(props['delegates']),
+            delegates: as<LocalizationsDelegate>(props['delegates'])!,
             child: props['child'],
           ),
       'Localizations.override': (props) => Localizations.override(
@@ -845,7 +845,7 @@ var p = () => {
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
             restorationId: props['restorationId'],
             scrollBehavior: props['scrollBehavior'],
-            children: as<Widget>(props['children']),
+            children: as<Widget>(props['children'])!,
           ),
       'ListWheelScrollView.useDelegate': (props) =>
           ListWheelScrollView.useDelegate(
@@ -1666,7 +1666,7 @@ var p = () => {
         'bottomStart': BannerLocation.bottomStart,
         'bottomEnd': BannerLocation.bottomEnd,
       },
-      'AnnotatedRegion': (props) => AnnotatedRegion(
+      'AnnotatedRegion': (props) => AnnotatedRegion<Object>(
             key: props['key'],
             child: props['child'],
             value: props['value'],

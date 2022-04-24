@@ -15,7 +15,7 @@ import 'theme.dart';
 
 @FairPatch()
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, this.title = ""}) : super(key: key);
   final String title;
 
   @override
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             IconButton(
               // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-                icon: FaIcon(FontAwesomeIcons.solidCircle),
+                icon: FaIcon(FontAwesomeIcons.solidCircle), onPressed: () {  },
             ),
             RotateAnimatedTextKit(
                 text: ["AWESOME", "OPTIMISTIC", "DIFFERENT"],
@@ -111,7 +111,9 @@ class _MyHomePageState extends State<MyHomePage> {
 //@FairWell('_getPhotoCheck')
   void _getPhotoCheck() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    _check = prefs.getBool('survey_permission_check1');
+    if(prefs.getBool('survey_permission_check1') != null) {
+      _check = prefs.getBool('survey_permission_check1')!;
+    }
     setState(() {
       _check = _check;
     });

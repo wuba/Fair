@@ -3,17 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:animated_text_kits/src/generated.fair.dart';
 
 import 'delegate.dart';
+import 'home_page.dart';
 
 @FairBinding(packages: ['package:animated_text_kit/src/rotate.dart',])
 void main() {
-  runApp(FairApp(
-    child: MyApp(),
-    delegate: {
-      'home_page': (_, data) => MyHomePageDelegate(),
+  WidgetsFlutterBinding.ensureInitialized();
+  FairApp.runApplication(
+    _getApp(),
+    plugins: {
     },
-    generated: AppGeneratedModule(),
-  ));
+  );
 }
+
+dynamic _getApp() => FairApp(
+  child: MyApp(),
+  delegate: {
+    'home_page': (_, data) => MyHomePageDelegate(),
+  },
+  generated: AppGeneratedModule(),
+);
 
 class MyApp extends StatelessWidget {
   @override

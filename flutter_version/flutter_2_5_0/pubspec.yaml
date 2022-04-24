@@ -4,18 +4,18 @@ version: 2.5.0
 homepage: https://fair.58.com/
 
 environment:
-  sdk: ">=2.10.4 <3.0.0"
-  flutter: ">=1.22.4 <2.0.0"
+  sdk: ">=2.12.0 <3.0.0"
+
 
 dependencies:
   flutter:
     sdk: flutter
-  ffi: ^1.0.0
+  ffi: ^1.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  pedantic: ^1.9.0
+  pedantic: ^1.11.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

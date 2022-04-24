@@ -40,9 +40,11 @@ class MyHomePageDelegate extends FairDelegate {
 
   void _getPhotoCheck() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool check = prefs.getBool('survey_permission_check');
+    bool? check = prefs.getBool('survey_permission_check');
     setState(() {
-      _check = check;
+      if (check != null) {
+        _check = check;
+      }
     });
   }
 
