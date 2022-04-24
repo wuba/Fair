@@ -14,7 +14,7 @@ abstract class FairModule<T> {
 
   bool get isWidget => false;
 
-  T onCreateComponent(BuildContext ctx, Map<String, dynamic> props);
+  T onCreateComponent(BuildContext ctx, Map<String, dynamic>? props);
 
   static dynamic cast(BuildContext context, dynamic module) {
     if (module is FairModule) {

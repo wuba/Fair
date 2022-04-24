@@ -75,8 +75,7 @@ var p = () => {
           ),
       'ExpansionPanelList': (props) => ExpansionPanelList(
             key: props['key'],
-            children: as<ExpansionPanel>(props['children']) ??
-                const <ExpansionPanel>[],
+            children: as<ExpansionPanel>(props['children']) ?? const <ExpansionPanelRadio>[],
             expansionCallback: props['expansionCallback'],
             animationDuration:
                 props['animationDuration'] ?? kThemeAnimationDuration,
@@ -85,8 +84,7 @@ var p = () => {
           ),
       'ExpansionPanelList.radio': (props) => ExpansionPanelList.radio(
             key: props['key'],
-            children: as<ExpansionPanel>(props['children']) ??
-                const <ExpansionPanelRadio>[],
+            children: as<ExpansionPanel>(props['children']) ?? const <ExpansionPanelRadio>[],
             expansionCallback: props['expansionCallback'],
             animationDuration:
                 props['animationDuration'] ?? kThemeAnimationDuration,
@@ -5892,7 +5890,7 @@ var p = () => {
             onGenerateInitialRoutes: props['onGenerateInitialRoutes'],
             onUnknownRoute: props['onUnknownRoute'],
             navigatorObservers:
-                as(props['navigatorObservers']) ?? const <NavigatorObserver>[],
+                as(props['navigatorObservers']) ??  const <NavigatorObserver>[],
             builder: props['builder'],
             title: props['title'] ?? '',
             onGenerateTitle: props['onGenerateTitle'],
@@ -5966,7 +5964,7 @@ var p = () => {
       },
       'BottomNavigationBar': (props) => BottomNavigationBar(
             key: props['key'],
-            items: as(props['items']),
+            items: as(props['items'])!,
             onTap: props['onTap'],
             currentIndex: props['currentIndex'] ?? 0,
             elevation: props['elevation']?.toDouble(),
@@ -5998,8 +5996,7 @@ var p = () => {
           ),
       'ToggleButtons': (props) => ToggleButtons(
             key: props['key'],
-            children: as(props['children']),
-            isSelected: as<bool>(props['isSelected']),
+            isSelected: as<bool>(props['isSelected'])!,
             onPressed: props['onPressed'],
             mouseCursor: props['mouseCursor'],
             textStyle: props['textStyle'],
@@ -6022,6 +6019,7 @@ var p = () => {
             direction: props['direction'] ?? Axis.horizontal,
             verticalDirection:
                 props['verticalDirection'] ?? VerticalDirection.down,
+            children: as<Widget>(props['children'])!,
           ),
       'ToggleButtons#onPressed': (props) => (
             int index,
@@ -6096,8 +6094,7 @@ var p = () => {
             centerTitle: props['centerTitle'],
             titlePadding: props['titlePadding'],
             collapseMode: props['collapseMode'] ?? CollapseMode.parallax,
-            stretchModes: as<StretchMode>(props['stretchModes']) ??
-                const <StretchMode>[StretchMode.zoomBackground],
+            stretchModes: as<StretchMode>(props['stretchModes']) ?? const <StretchMode>[StretchMode.zoomBackground],
           ),
       'FlexibleSpaceBar.createSettings': (props) =>
           FlexibleSpaceBar.createSettings(
@@ -6247,8 +6244,7 @@ var p = () => {
             mainAxis: props['mainAxis'] ?? Axis.vertical,
             elevation: props['elevation'] ?? 2,
             hasDividers: props['hasDividers'] ?? false,
-            children: as<MergeableMaterialItem>(props['children']) ??
-                const <MergeableMaterialItem>[],
+            children: as<MergeableMaterialItem>(props['children']) ?? const <MergeableMaterialItem>[],
             dividerColor: props['dividerColor'],
           ),
       'ChipTheme.of': (props) => ChipTheme.of(
@@ -6406,7 +6402,6 @@ var p = () => {
             subtitle: props['subtitle'],
             backgroundColor: props['backgroundColor'],
             onExpansionChanged: props['onExpansionChanged'],
-            children: as(props['children']) ?? const <Widget>[],
             trailing: props['trailing'],
             initiallyExpanded: props['initiallyExpanded'] ?? false,
             maintainState: props['maintainState'] ?? false,
@@ -6415,6 +6410,7 @@ var p = () => {
             expandedAlignment: props['expandedAlignment'],
             childrenPadding: props['childrenPadding'],
             collapsedBackgroundColor: props['collapsedBackgroundColor'],
+            children: as<Widget>(props['children']) ?? const <Widget>[],
           ),
       'ListTileTheme.merge': (props) => ListTileTheme.merge(
             key: props['key'],
@@ -6706,7 +6702,7 @@ var p = () => {
             key: props['key'],
             header: props['header'],
             actions: as(props['actions']),
-            columns: as<DataColumn>(props['columns']),
+            columns: as<DataColumn>(props['columns'])!,
             sortColumnIndex: props['sortColumnIndex'],
             sortAscending: props['sortAscending'] ?? true,
             onSelectAll: props['onSelectAll'],
@@ -6922,7 +6918,7 @@ var p = () => {
             key: props['key'],
             content: props['content'],
             contentTextStyle: props['contentTextStyle'],
-            actions: as(props['actions']),
+            actions: as<Widget>(props['actions'])!,
             leading: props['leading'],
             backgroundColor: props['backgroundColor'],
             padding: props['padding'],
@@ -7107,7 +7103,7 @@ var p = () => {
           ),
       'TabBar': (props) => TabBar(
             key: props['key'],
-            tabs: as(props['tabs']),
+            tabs: as<Widget>(props['tabs'])!,
             controller: props['controller'],
             isScrollable: props['isScrollable'] ?? false,
             indicatorColor: props['indicatorColor'],
@@ -7132,11 +7128,11 @@ var p = () => {
           ),
       'TabBarView': (props) => TabBarView(
             key: props['key'],
-            children: as(props['children']),
             controller: props['controller'],
             physics: props['physics'],
             dragStartBehavior:
                 props['dragStartBehavior'] ?? DragStartBehavior.start,
+            children: as<Widget>(props['children'])!,
           ),
       'TabPageSelectorIndicator': (props) => TabPageSelectorIndicator(
             key: props['key'],
@@ -7237,7 +7233,7 @@ var p = () => {
           ),
       'Stepper': (props) => Stepper(
             key: props['key'],
-            steps: as<Step>(props['steps']),
+            steps: as<Step>(props['steps'])!,
             physics: props['physics'],
             type: props['type'] ?? StepperType.vertical,
             currentStep: props['currentStep'] ?? 0,
@@ -7425,7 +7421,7 @@ var p = () => {
             extended: props['extended'] ?? false,
             leading: props['leading'],
             trailing: props['trailing'],
-            destinations: as<NavigationRailDestination>(props['destinations']),
+            destinations: as<NavigationRailDestination>(props['destinations'])!,
             selectedIndex: props['selectedIndex'],
             onDestinationSelected: props['onDestinationSelected'],
             elevation: props['elevation']?.toDouble(),
@@ -7462,7 +7458,7 @@ var p = () => {
       },
       'DataTable': (props) => DataTable(
             key: props['key'],
-            columns: as<DataColumn>(props['columns']),
+            columns: as<DataColumn>(props['columns'])!,
             sortColumnIndex: props['sortColumnIndex'],
             sortAscending: props['sortAscending'] ?? true,
             onSelectAll: props['onSelectAll'],
@@ -7478,7 +7474,7 @@ var p = () => {
             showCheckboxColumn: props['showCheckboxColumn'] ?? true,
             showBottomBorder: props['showBottomBorder'] ?? false,
             dividerThickness: props['dividerThickness']?.toDouble(),
-            rows: as<DataRow>(props['rows']),
+            rows: as<DataRow>(props['rows'])!,
           ),
       'PopupMenuThemeData.lerp': (props) => PopupMenuThemeData.lerp(
             props['pa'][0],
@@ -7563,7 +7559,6 @@ var p = () => {
           ),
       'ReorderableListView': (props) => ReorderableListView(
             key: props['key'],
-            children: as(props['children']),
             onReorder: props['onReorder'],
             proxyDecorator: props['proxyDecorator'],
             buildDefaultDragHandles: props['buildDefaultDragHandles'] ?? true,
@@ -7583,6 +7578,7 @@ var p = () => {
                 ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
+            children: as<Widget>(props['children'])!,
           ),
       'ReorderableListView.builder': (props) => ReorderableListView.builder(
             key: props['key'],
@@ -7950,7 +7946,7 @@ var p = () => {
             anchorAbove: props['anchorAbove'],
             anchorBelow: props['anchorBelow'],
             toolbarBuilder: props['toolbarBuilder'] ,//?? _defaultToolbarBuilder,
-            children: as(props['children']),
+            children: as(props['children'])!,
           ),
       'TextSelectionThemeData.lerp': (props) => TextSelectionThemeData.lerp(
             props['pa'][0],
@@ -8177,7 +8173,7 @@ var p = () => {
             layoutBehavior: props['layoutBehavior'],
             overflowDirection: props['overflowDirection'],
             overflowButtonSpacing: props['overflowButtonSpacing']?.toDouble(),
-            children: as(props['children']) ?? const <Widget>[],
+            children: as<Widget>(props['children']) ??const <Widget>[],
           ),
       'AppBarTheme.of': (props) => AppBarTheme.of(
             props['pa'][0],

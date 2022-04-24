@@ -5,18 +5,18 @@
  */
 
 class LouPanDetail {
-  int id;
-  int number;
-  int goodsId;
-  int type;
-  String imgUrl;
-  List<GoodsDesc> goodsDesc;
-  bool isSelected;
+  int? id;
+  int? number;
+  int? goodsId;
+  int? type;
+  String? imgUrl;
+  List<GoodsDesc?>? goodsDesc;
+  bool? isSelected;
 
   LouPanDetail({this.id, this.number, this.type, this.goodsId, this.imgUrl, this.goodsDesc, this.isSelected = true});
 
   factory LouPanDetail.fromJson(Map<String, dynamic> json) => LouPanDetail(
-    goodsDesc: (json['goodsDesc'] as List)
+    goodsDesc: (json['goodsDesc'] as List?)
         ?.map((e) =>
     e == null ? null : GoodsDesc.fromJson(e as Map<String, dynamic>))
         ?.toList(),
@@ -41,8 +41,8 @@ class LouPanDetail {
 }
 
 class GoodsDesc {
-  String boldText;
-  String normalText;
+  String? boldText;
+  String? normalText;
 
   GoodsDesc({this.boldText, this.normalText});
 

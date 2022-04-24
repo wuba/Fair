@@ -96,11 +96,11 @@ Future dart2dsl(List<String> arguments) async {
 
   } else if (kind == 'dart') {
     var dirString = argResults['directory'];
-    Directory dir;
+    Directory? dir;
     if (dirString == null || !(dir = Directory(dirString)).existsSync()) {
       _error('directory is not valid, please pass as absolute path');
     }
-    return _appendResult(await binding.parseDir(dir));
+    return _appendResult(await binding.parseDir(dir!));
   } else if (kind == 'flutter') {
     var dir = argResults['directory'];
     if (dir == null || !(Directory(dir)).existsSync()) {
@@ -122,7 +122,7 @@ Future dart2dsl(List<String> arguments) async {
   }
 }
 
-String _appendResult(String data) {
+String _appendResult(String? data) {
   var result = StringBuffer();
   if (data != null && data.isNotEmpty) {
     final startTag =

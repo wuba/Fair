@@ -39,7 +39,7 @@ class FairPluginDispatcher {
     pluginMap[key] = plugin;
   }
 
-  static void registerPlugins(Map<String, IFairPlugin> plugins) {
+  static void registerPlugins(Map<String, IFairPlugin>? plugins) {
     if (plugins == null || plugins.isEmpty) {
       return;
     }

@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -27,31 +27,31 @@ dependencies:
   fair:
     path: ../../fair
 
-  url_launcher: ^5.6.0
+  url_launcher: ^6.0.20
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.0
+  cupertino_icons: ^1.0.4
 
-  device_info: 1.0.0
-  package_info: ^0.4.3+4
+  device_info: ^2.0.3
+  package_info: ^2.0.2
 
-  google_fonts: ^1.1.2
+  google_fonts: 2.1.1
 
-  convex_bottom_bar: ^2.7.1
+  convex_bottom_bar: ^3.0.0
 
-  sign_in_with_apple: ^2.5.4
+  sign_in_with_apple: ^3.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.4.0
+  build_runner: ^2.0.0
   fair_compiler:
     path: ../../compiler
 
 dependency_overrides:
   fair_version:
-    path: ../../flutter_version/flutter_1_22_4
+    path: ../../flutter_version/flutter_2_5_0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

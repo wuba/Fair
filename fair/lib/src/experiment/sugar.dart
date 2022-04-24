@@ -13,24 +13,24 @@ class Sugar {
   static K ifRange<T, K>(
     T actual,
     List<T> expect, {
-    K trueValue,
-    K falseValue,
+    required K trueValue,
+    required K falseValue,
   }) =>
       expect.contains(actual) ? trueValue : falseValue;
 
   static K ifEqual<T, K>(
     T actual,
     T expect, {
-    K trueValue,
-    K falseValue,
+    required K trueValue,
+    required K falseValue,
   }) =>
       expect == actual ? trueValue : falseValue;
 
   static K ifEqualBool<T, K>(
-      bool state, {
-        K trueValue,
-        K falseValue,
-      }) =>
+    bool state, {
+    required K trueValue,
+    required K falseValue,
+  }) =>
       state ? trueValue : falseValue;
 
   /// Map operation with index
@@ -39,23 +39,19 @@ class Sugar {
   }
 
   /// Map operation without index
-  static List<T> map<T, E>(List<E> data, {T Function(E item) builder}) {
+  static List<T> map<T, E>(List<E> data, {required T Function(E item) builder}) {
     return data.mapEach((index, item) => builder(item));
   }
 
   static Color colorWithOpacity = Colors.grey.withOpacity(0.8);
 
-  static double height(BuildContext context) =>
-      MediaQuery.of(context).size.height;
+  static double height(BuildContext context) => MediaQuery.of(context).size.height;
 
-  static double width(BuildContext context) =>
-      MediaQuery.of(context).size.width;
+  static double width(BuildContext context) => MediaQuery.of(context).size.width;
 
-  static double paddingTop(BuildContext context) =>
-      MediaQuery.of(context).padding.top;
+  static double paddingTop(BuildContext context) => MediaQuery.of(context).padding.top;
 
-  static double paddingBottom(BuildContext context) =>
-      MediaQuery.of(context).padding.bottom;
+  static double paddingBottom(BuildContext context) => MediaQuery.of(context).padding.bottom;
 
   static Null Function() requestFocus(BuildContext context) => () {
         FocusScope.of(context).requestFocus(FocusNode());

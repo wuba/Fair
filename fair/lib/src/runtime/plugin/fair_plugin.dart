@@ -9,7 +9,7 @@ import 'dart:convert';
 abstract class IFairPlugin {
   Future<dynamic> invoke(dynamic par) async {
     var resp =
-        await Function.apply(getRegisterMethods()[getMethodName(par)], [par]);
+        await Function.apply(getRegisterMethods()[getMethodName(par)]!, [par]);
     return Future.value(resp);
   }
 
@@ -21,7 +21,7 @@ abstract class IFairPlugin {
       a = jsonDecode(par);
     }
 
-    var name = a['className']?.toString();
+    var name = a['className']?.toString()??'';
 
     if (name.contains('#')) {
       var list = name.split('#');

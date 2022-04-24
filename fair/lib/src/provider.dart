@@ -4,13 +4,13 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair_version/fair_version.dart';
 import 'package:flutter/foundation.dart';
 
 import 'bloc/common.dart' as common;
 import 'bloc/flow.dart' as flow;
 import 'bloc/geometry.dart' as geometry;
 import 'internal/global_state.dart';
-import 'widgets/all.dart';
 
 class BindingProvider with $BindingImpl {
   final Map<String, dynamic> _binding = {
@@ -20,7 +20,7 @@ class BindingProvider with $BindingImpl {
   };
   var _loadedIndex = 0;
 
-  dynamic loadTag(String tag) {
+  dynamic loadTag(String? tag) {
     var result = _binding[tag];
     if (result != null) {
       return result;
@@ -42,7 +42,7 @@ class BindingProvider with $BindingImpl {
 
   Map<String, dynamic> get binding => _binding;
 
-  bool preload(List<String> tags) {
+  bool preload(List<String>? tags) {
     tags?.forEach((element) {
       log('[Fair] preload $element...');
       loadTag(element);

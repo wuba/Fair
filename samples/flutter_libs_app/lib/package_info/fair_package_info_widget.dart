@@ -5,7 +5,7 @@ import 'package:flutter_libs_app/colors.dart';
 @FairPatch()
 class FairPackageInfoWidget extends StatefulWidget {
   final String title;
-  FairPackageInfoWidget({Key key, this.title}) : super(key: key);
+  FairPackageInfoWidget({required Key key, required this.title}) : super(key: key);
 
   @override
   _FairPackageInfoWidgetState createState() {

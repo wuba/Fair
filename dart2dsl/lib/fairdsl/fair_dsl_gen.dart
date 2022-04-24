@@ -5,7 +5,6 @@
  */
 
 import 'dart:convert';
-import 'dart:io';
 import 'package:fairc/fairdsl/fair_ast_logic_unit.dart';
 
 import 'fair_ast_node.dart';
@@ -34,37 +33,37 @@ String fairDsl(Map rootAst) {
   return encoder.convert(map);
 }
 
-FairDslContex _prepareVariableAnnotation(Map rootAst) {
+FairDslContex? _prepareVariableAnnotation(Map rootAst) {
   var annotationMap = {};
   var methodAnnotationMap = {};
   var rootExpression = Expression.fromAst(rootAst);
-  if (!rootExpression.isProgram) {
+  if (!(rootExpression?.isProgram??false)) {
     return null;
   }
-  var bodyList = rootExpression.asProgram.body;
+  var bodyList = rootExpression?.asProgram.body;
   if ((bodyList?.length ?? 0) == 0) {
     return null;
   }
-  for (var body in bodyList) {
-    if (body.isClassDeclaration) {
-      var classBodyList = body.asClassDeclaration.body;
-      for (var bodyNode in classBodyList) {
+  for (var body in bodyList!) {
+    if (body?.isClassDeclaration==true) {
+      var classBodyList = body!.asClassDeclaration.body;
+      for (var bodyNode in classBodyList!) {
         //只处理变量声明
         var annotaions = [];
-        if (bodyNode.isVariableDeclarationList) {
-          annotaions = bodyNode.asVariableDeclarationList.annotationList;
-        } else if (bodyNode.isMethodDeclaration) {
-          annotaions = bodyNode.asMethodDeclaration.annotationList;
+        if (bodyNode?.isVariableDeclarationList==true) {
+          annotaions = bodyNode!.asVariableDeclarationList.annotationList??[];
+        } else if (bodyNode?.isMethodDeclaration==true) {
+          annotaions = bodyNode?.asMethodDeclaration.annotationList??[];
         }
         for (var annotation in annotaions) {
           if (annotation.name == kFairWellAnnotaion) {
             var arg = annotation.argumentList.first.asStringLiteral;
-            if (bodyNode.isVariableDeclarationList) {
+            if (bodyNode?.isVariableDeclarationList==true) {
               annotationMap.putIfAbsent(
-                  arg.value, () => bodyNode.asVariableDeclarationList);
-            } else if (bodyNode.isMethodDeclaration) {
+                  arg.value, () => bodyNode?.asVariableDeclarationList);
+            } else if (bodyNode?.isMethodDeclaration==true) {
               methodAnnotationMap.putIfAbsent(
-                  arg.value, () => bodyNode.asMethodDeclaration);
+                  arg.value, () => bodyNode?.asMethodDeclaration);
             }
           }
         }
@@ -74,28 +73,28 @@ FairDslContex _prepareVariableAnnotation(Map rootAst) {
   return FairDslContex(annotationMap, methodAnnotationMap);
 }
 
-String _genProxy(Map rootAst, FairDslContex fairDslContex) {
+String? _genProxy(Map rootAst, FairDslContex fairDslContex) {
   var imports = '''
   import 'package:fair/fair.dart';
   import 'package:flutter/foundation.dart';
   import 'package:flutter/material.dart';
   ''';
-  String className;
+  String? className;
   var rootExpression = Expression.fromAst(rootAst);
-  if (!rootExpression.isProgram) {
+  if (!(rootExpression?.isProgram??false)) {
     return null;
   }
-  var bodyList = rootExpression.asProgram.body;
+  var bodyList = rootExpression?.asProgram.body;
   if ((bodyList?.length ?? 0) == 0) {
     return null;
   }
 
   //获取类名
-  for (var body in bodyList) {
-    if (body.isClassDeclaration) {
-      if (body.asClassDeclaration.superClause == 'StatefulWidget' ||
+  for (var body in bodyList!) {
+    if (body?.isClassDeclaration==true) {
+      if (body!.asClassDeclaration.superClause == 'StatefulWidget' ||
           body.asClassDeclaration.superClause == 'StatelessWidget') {
-        className = '\$' + body.asClassDeclaration.name + 'Proxy';
+        className = '\$' + (body.asClassDeclaration.name??'') + 'Proxy';
         break;
       }
     }
@@ -108,23 +107,23 @@ String _genProxy(Map rootAst, FairDslContex fairDslContex) {
   var methodAno = '';
   fairDslContex.variableAnnotation.forEach((key, value) {
     if (value is VariableDeclarationList) {
-      variableAnnotation += value.sourceCode + '\n';
+      variableAnnotation += (value.sourceCode??'') + '\n';
       property +=
-      '''pros['${value.declarationList.first.name}'] =() => ${value.declarationList.first.name};\n''';
+      '''pros['${value.declarationList?.first?.name}'] =() => ${value.declarationList?.first?.name};\n''';
     }
   });
 
   fairDslContex.methodAnnotation.forEach((key, value) {
     if (value is MethodDeclaration) {
-      if (value.returnType == null || value.returnType.name == 'void') {
+      if (value.returnType == null || value.returnType?.name == 'void') {
         func += ''' functions['${value.name}'] = ${value.name};\n''';
-      } else if (value.returnType.name == 'Widget') {
+      } else if (value.returnType?.name == 'Widget') {
         component +=
         '''plugins['${value.name}'] = (props) => ${value.name};\n ''';
       } else {
         property += '''pros['${value.name}'] = ${value.name};\n''';
       }
-      methodAno += value.source;
+      methodAno += (value.source??'');
     }
   });
 
@@ -158,12 +157,12 @@ String _genProxy(Map rootAst, FairDslContex fairDslContex) {
 }
 
 // ignore: missing_return
-Map _parseRootAst(Map rootAst, FairDslContex fairDslContex) {
+Map? _parseRootAst(Map rootAst, FairDslContex? fairDslContex) {
   var rootExpression = Expression.fromAst(rootAst);
-  if (!rootExpression.isProgram) {
+  if (!(rootExpression?.isProgram??false)) {
     return null;
   }
-  var bodyList = rootExpression.asProgram.body;
+  var bodyList = rootExpression!.asProgram.body;
   if ((bodyList?.length ?? 0) == 0) {
     return null;
   }
@@ -171,39 +170,38 @@ Map _parseRootAst(Map rootAst, FairDslContex fairDslContex) {
   var tmpMap = {};
   var methods = {};
 
-  for (var body in bodyList) {
-    if (body.isClassDeclaration) {
-      var classBodyList = body.asClassDeclaration.body;
-      for (var bodyNode in classBodyList) {
+  for (var body in bodyList!) {
+    if (body?.isClassDeclaration==true) {
+      var classBodyList = body!.asClassDeclaration.body;
+      for (var bodyNode in classBodyList!) {
         //只处理build函数
-        if (bodyNode.isMethodDeclaration) {
+        if (bodyNode?.isMethodDeclaration==true) {
           // if(bodyNode.isMethodDeclaration && bodyNode.asMethodDeclaration.name == 'build'){
-          var buildBodyReturn = bodyNode.asMethodDeclaration.body.body;
-          if (buildBodyReturn.isNotEmpty &&
-              buildBodyReturn.last.isReturnStatement &&
-              buildBodyReturn.last.asReturnStatement.argument != null) {
+          var buildBodyReturn = bodyNode?.asMethodDeclaration.body?.body;
+          if (buildBodyReturn?.isNotEmpty==true &&
+              buildBodyReturn?.last?.isReturnStatement==true &&
+              buildBodyReturn?.last?.asReturnStatement.argument != null) {
             //解析build中widgetExpression
-            if (bodyNode.asMethodDeclaration.name == 'build') {
+            if (bodyNode?.asMethodDeclaration.name == 'build') {
               tmpMap = _buildWidgetDsl(
-                  buildBodyReturn.last.asReturnStatement.argument,
+                  buildBodyReturn?.last?.asReturnStatement.argument,
                   fairDslContex);
-            } else if (buildBodyReturn
-                .last.asReturnStatement.argument.isMethodInvocation) {
+            } else if (buildBodyReturn?.last?.asReturnStatement.argument?.isMethodInvocation==true) {
               //混编逻辑处理
               var methodMap = {
-                bodyNode.asMethodDeclaration.name: _buildWidgetDsl(
-                    buildBodyReturn.last.asReturnStatement.argument,
+                bodyNode?.asMethodDeclaration.name: _buildWidgetDsl(
+                    buildBodyReturn?.last?.asReturnStatement.argument,
                     fairDslContex)
               };
               methods.addAll(methodMap);
             }
           }
-        } else if (body.isFunctionDeclaration) {
+        } else if (body.isFunctionDeclaration==true) {
           var functionDeclaration = body.asFunctionDeclaration;
-          var buildBodyReturn = functionDeclaration.expression.body.body;
+          var buildBodyReturn = functionDeclaration.expression?.body?.body;
           var methodMap = {
             functionDeclaration.name: _buildWidgetDsl(
-                buildBodyReturn.last.asReturnStatement.argument, fairDslContex)
+                buildBodyReturn?.last?.asReturnStatement.argument, fairDslContex)
           };
           // methodList.add(methodMap);
           methods.addAll(methodMap);
@@ -216,60 +214,70 @@ Map _parseRootAst(Map rootAst, FairDslContex fairDslContex) {
 }
 
 dynamic _buildWidgetDsl(
-    Expression widgetExpression, FairDslContex fairDslContex) {
+    Expression? widgetExpression, FairDslContex? fairDslContex) {
   var dslMap = {};
   var paMap = [];
   var naMap = {};
 
-  var methodInvocationExpression = widgetExpression.asMethodInvocation;
+  var methodInvocationExpression = widgetExpression?.asMethodInvocation;
   //普通类
-  if (methodInvocationExpression.callee.isIdentifier) {
+  if (methodInvocationExpression?.callee?.isIdentifier==true) {
     //注册的方法不再使用className
-    if (fairDslContex.methodAnnotation
-        .containsKey(methodInvocationExpression.callee.asIdentifier.name)) {
-      return "\$(${methodInvocationExpression.callee.asIdentifier.name})";
-    } else if (fairDslContex.variableAnnotation
-        .containsKey(methodInvocationExpression.callee.asIdentifier.name)) {
-      return "%(${methodInvocationExpression.callee.asIdentifier.name})";
+    if (fairDslContex?.methodAnnotation
+        .containsKey(methodInvocationExpression?.callee?.asIdentifier.name)==true) {
+      return '\$(${methodInvocationExpression?.callee?.asIdentifier.name})';
+    } else if (fairDslContex?.variableAnnotation
+        .containsKey(methodInvocationExpression?.callee?.asIdentifier.name)==true) {
+      return '%(${methodInvocationExpression?.callee?.asIdentifier.name})';
     }
 
     if (RegExp(r'^[a-z_]')
-        .hasMatch(methodInvocationExpression.callee.asIdentifier.name)) {
-      return "%(${methodInvocationExpression.callee.asIdentifier.name})";
+        .hasMatch(methodInvocationExpression?.callee?.asIdentifier.name??'')) {
+      return '%(${methodInvocationExpression?.callee?.asIdentifier.name})';
     } else {
       dslMap.putIfAbsent('className',
-              () => methodInvocationExpression.callee.asIdentifier.name);
+              () => methodInvocationExpression?.callee?.asIdentifier.name);
     }
-  } else if (methodInvocationExpression.callee.isMemberExpression) {
+  } else if (methodInvocationExpression?.callee?.isMemberExpression==true) {
     //方法类
 
-    var memberExpression = methodInvocationExpression.callee.asMemberExpression;
-    dslMap.putIfAbsent(
-        'className',
-            () =>
-        memberExpression.object.asIdentifier.name +
-            '.' +
-            memberExpression.property);
+    var memberExpression = methodInvocationExpression?.callee?.asMemberExpression;
+    try {
+      dslMap.putIfAbsent(
+              'className',
+                  () =>
+                  (memberExpression?.object?.asIdentifier.name??'') +
+                  '.' +
+                      (memberExpression?.property??''));
+    } catch (e) {
+      // dslMap.putIfAbsent(
+      //     'className',
+      //         () =>
+      //     'Sugar' +
+      //         '.' +
+      //         'map');
+      print(e);
+    }
   } else {
     return null;
   }
 
   //1.pa
-  for (var arg in methodInvocationExpression.argumentList) {
-    if (arg.isNamedExpression) {
+  for (var arg in methodInvocationExpression!.argumentList!) {
+    if (arg?.isNamedExpression==true) {
       break;
     }
     //pa 常量处理
     var valueExpression = arg;
-    valueExpression.isFuncParam = true;
+    valueExpression?.isFuncParam = true;
     var paValue = _buildValueExpression(valueExpression, fairDslContex);
     paMap.add(paValue);
   }
 
   //2.na
-  for (var arg in methodInvocationExpression.argumentList) {
-    if (arg.isNamedExpression) {
-      var nameExpression = arg.asNamedExpression;
+  for (var arg in methodInvocationExpression.argumentList!) {
+    if (arg?.isNamedExpression==true) {
+      var nameExpression = arg?.asNamedExpression;
       if (nameExpression == null) {
         continue;
       }
@@ -296,85 +304,85 @@ dynamic _buildWidgetDsl(
 }
 
 dynamic _buildValueExpression(
-    Expression valueExpression, FairDslContex fairDslContex) {
+    Expression? valueExpression, FairDslContex? fairDslContex) {
   var naPaValue;
 
-  if (valueExpression.isIdentifier) {
+  if (valueExpression?.isIdentifier==true) {
     //映射变量声明
-    if (fairDslContex.variableAnnotation
-        .containsKey(valueExpression.asIdentifier.name) ||
-        fairDslContex.methodAnnotation
-            .containsKey(valueExpression.asIdentifier.name)) {
-      naPaValue = '#(' + valueExpression.asIdentifier.name + ')';
+    if (fairDslContex?.variableAnnotation
+        .containsKey(valueExpression?.asIdentifier.name)==true ||
+        fairDslContex?.methodAnnotation
+            .containsKey(valueExpression?.asIdentifier.name)==true) {
+      naPaValue = '#(' + (valueExpression?.asIdentifier.name??'') + ')';
     }
     // else if (fairDslContex.variables
     //     .containsKey(valueExpression.asIdentifier.name)) {
     //   naPaValue = '\$(' + valueExpression.asIdentifier.name + ')';
     // }
-    else if (FairLogicUnit().functions.containsKey(valueExpression.asIdentifier.name)) {
-      naPaValue = '@(' + valueExpression.asIdentifier.name + ')';
+    else if (FairLogicUnit().functions.containsKey(valueExpression?.asIdentifier.name)) {
+      naPaValue = '@(' + (valueExpression?.asIdentifier.name??'') + ')';
     } else {
-      naPaValue = '^(' + valueExpression.asIdentifier.name + ')';
+      naPaValue = '^(' + (valueExpression?.asIdentifier.name??'') + ')';
     }
-  } else if (valueExpression.isNumericLiteral) {
-    naPaValue = valueExpression.asNumericLiteral.value;
-  } else if (valueExpression.isStringLiteral) {
-    naPaValue = valueExpression.asStringLiteral.value;
-  } else if (valueExpression.isBooleanLiteral) {
-    naPaValue = valueExpression.asBooleanLiteral.value;
-  } else if (valueExpression.isPrefixedIdentifier) {
+  } else if (valueExpression?.isNumericLiteral==true) {
+    naPaValue = valueExpression?.asNumericLiteral.value;
+  } else if (valueExpression?.isStringLiteral==true) {
+    naPaValue = valueExpression?.asStringLiteral.value;
+  } else if (valueExpression?.isBooleanLiteral==true) {
+    naPaValue = valueExpression?.asBooleanLiteral.value;
+  } else if (valueExpression?.isPrefixedIdentifier==true) {
     if (RegExp(r'^[a-z_]') // widget.** 参数类的特殊处理成#(),兼容1期
-        .hasMatch(valueExpression.asPrefixedIdentifier.prefix) && ('widget' != valueExpression.asPrefixedIdentifier.prefix)) {
+        .hasMatch(valueExpression?.asPrefixedIdentifier.prefix??'') && ('widget' != valueExpression?.asPrefixedIdentifier.prefix)) {
       naPaValue = '\$(' +
-          valueExpression.asPrefixedIdentifier.prefix +
+          (valueExpression?.asPrefixedIdentifier.prefix??'') +
           '.' +
-          valueExpression.asPrefixedIdentifier.identifier +
+          (valueExpression?.asPrefixedIdentifier.identifier??'') +
           ')';
     } else {
       naPaValue = '#(' +
-          valueExpression.asPrefixedIdentifier.prefix +
+          (valueExpression?.asPrefixedIdentifier.prefix??'') +
           '.' +
-          valueExpression.asPrefixedIdentifier.identifier +
+          (valueExpression?.asPrefixedIdentifier.identifier??'') +
           ')';
     }
-  } else if (valueExpression.isPropertyAccess) {
-    if (valueExpression.asPropertyAccess.expression != null &&
-        valueExpression.asPropertyAccess.expression.isPrefixedIdentifier) {
+  } else if (valueExpression?.isPropertyAccess==true) {
+    if (valueExpression?.asPropertyAccess.expression != null &&
+        valueExpression?.asPropertyAccess.expression?.isPrefixedIdentifier==true) {
       var prefixedIdentifier =
-          valueExpression.asPropertyAccess.expression.asPrefixedIdentifier;
-      naPaValue = '\$(${prefixedIdentifier.prefix}' +
+          valueExpression?.asPropertyAccess.expression?.asPrefixedIdentifier;
+      naPaValue = '\$(${prefixedIdentifier?.prefix}' +
           '.' +
-          '${prefixedIdentifier.identifier}' +
+          '${prefixedIdentifier?.identifier}' +
           '.' +
-          '${valueExpression.asPropertyAccess.name})';
+          '${valueExpression?.asPropertyAccess.name})';
     } else {
       naPaValue = '';
     }
-  } else if (valueExpression.isMapLiteral) {
+  } else if (valueExpression?.isMapLiteral==true) {
     var retMap = <String, dynamic>{};
-    valueExpression.asMapLiteral.elements.forEach((key, value) {
+    valueExpression?.asMapLiteral.elements?.forEach((key, value) {
       retMap.putIfAbsent(key, () => _buildValueExpression(value,fairDslContex));
     });
     naPaValue = retMap;
-  } else if (valueExpression.isListLiteral) {
+  } else if (valueExpression?.isListLiteral==true) {
     var widgetExpressionList = [];
-    for (var itemWidgetExpression in valueExpression.asListLiteral.elements) {
+    for (var itemWidgetExpression in valueExpression!.asListLiteral.elements!) {
       widgetExpressionList
           .add(_buildValueExpression(itemWidgetExpression, fairDslContex));
     }
     naPaValue = widgetExpressionList;
-  } else if (valueExpression.isFunctionExpression) {
+  } else if (valueExpression?.isFunctionExpression==true) {
     naPaValue = '';
-    if (valueExpression.asFunctionExpression.body != null &&
-        valueExpression.asFunctionExpression.body.body.isNotEmpty) {
+    if (valueExpression?.asFunctionExpression.body != null &&
+        valueExpression?.asFunctionExpression.body?.body?.isNotEmpty==true) {
       naPaValue = _buildValueExpression(
-          valueExpression.asFunctionExpression.body.body.last, fairDslContex);
+          valueExpression?.asFunctionExpression.body?.body?.last, fairDslContex);
     }
-  } else if (valueExpression.isReturnStatement) {
+  } else if (valueExpression?.isReturnStatement==true) {
     naPaValue = _buildValueExpression(
-        valueExpression.asReturnStatement.argument, fairDslContex);
-  } else if (valueExpression.isStringInterpolation) {
-    var sourceString = valueExpression.asStringInterpolation.sourceString;
+        valueExpression?.asReturnStatement.argument, fairDslContex);
+  } else if (valueExpression?.isStringInterpolation==true) {
+    var sourceString = valueExpression?.asStringInterpolation.sourceString??'';
     if (sourceString.length >= 2) {
       if (sourceString.startsWith('\'') && sourceString.endsWith('\'') ||
           sourceString.startsWith('\"') && sourceString.endsWith('\"')) {
@@ -382,8 +390,8 @@ dynamic _buildValueExpression(
       }
     }
     naPaValue = '#(' + sourceString + ')';
-  } else if (valueExpression.isVariableExpression) {
-    var expression = valueExpression.asVariableExpression.expression;
+  } else if (valueExpression?.isVariableExpression==true) {
+    var expression = valueExpression?.asVariableExpression.expression??'';
     naPaValue = '\$(' + expression + ')';
   } else {
     naPaValue = _buildWidgetDsl(valueExpression, fairDslContex);

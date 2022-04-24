@@ -12,7 +12,7 @@ mixin P<T, K> {
 
 class W<T> {
   final T data;
-  final bool binding;
+  final bool? binding;
 
   W(this.data, this.binding);
 }

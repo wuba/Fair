@@ -5,8 +5,8 @@
  */
 
 class DemoList extends Object {
-  List<DemoItem> list;
-  int total;
+  List<DemoItem?>? list;
+  int? total;
 
   DemoList({
     this.list,
@@ -14,7 +14,7 @@ class DemoList extends Object {
   });
 
   factory DemoList.fromJson(Map<String, dynamic> json) => DemoList(
-        list: (json['list'] as List)
+        list: (json['list'] as List?)
             ?.map((e) =>
                 e == null ? null : DemoItem.fromJson(e as Map<String, dynamic>))
             ?.toList(),
@@ -28,9 +28,9 @@ class DemoList extends Object {
 }
 
 class DemoItem extends Object {
-  String id;
-  String name = '';
-  String type = '';
+  String? id;
+  String? name = '';
+  String? type = '';
 
   DemoItem({this.id, this.name, this.type});
 

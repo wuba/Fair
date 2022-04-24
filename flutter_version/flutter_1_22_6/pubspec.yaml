@@ -1,11 +1,11 @@
 name: fair_version
 description: Fair binding for Flutter v1.22.6
-version: 0.2.0
+version: 1.22.6
 homepage: https://fair.58.com/
 
 environment:
   sdk: ">=2.10.5 <3.0.0"
-  flutter: ">=1.22.6 <2.0.0"
+  flutter: ">=1.22.6"
 
 dependencies:
   flutter:

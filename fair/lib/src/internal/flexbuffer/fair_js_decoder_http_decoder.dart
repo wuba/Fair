@@ -14,7 +14,7 @@ import 'package:http/http.dart';
 abstract class HttpDecoder {
   Future<dynamic> encode();
 
-  Future<dynamic> decode(String url);
+  Future<dynamic> decode(String? url);
 }
 
 String _toString(Uint8List data) {
@@ -26,26 +26,26 @@ const STRING_LIMIT = 10 * 1024 / 8;
 
 ///默认JS网络下载，只支持GET请求，如果需要切换业务场景，请自定义
 class DefaultHttpDecoder implements HttpDecoder {
-  Client client;
+  Client? client;
 
   DefaultHttpDecoder() {
     client = http.Client();
   }
 
   @override
-  Future<dynamic> decode(String url) async {
+  Future<dynamic> decode(String? url) async {
     var start = DateTime.now().millisecondsSinceEpoch;
-    var response = await client.get(url);
+    var response = await client?.get(Uri.parse(url??''));
     var end = DateTime.now().millisecondsSinceEpoch;
     print('end1 ${end - start}');
-    if (response.statusCode != 200) {
+    if (response?.statusCode != 200) {
       throw FlutterError(
-          '加载JS网络路径Code =${response.statusCode},RemoteUrl: $url');
+          '加载JS网络路径Code =${response?.statusCode},RemoteUrl: $url');
     }
 
     var end2 = DateTime.now().millisecondsSinceEpoch;
     print('end ${end2 - start}');
-    var data = response.bodyBytes;
+    var data = response?.bodyBytes;
     if (data == null) {
       throw FlutterError('bodyBytes=null, RemoteUrl : $url');
     }

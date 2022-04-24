@@ -31,10 +31,10 @@ void main() {
 }
 
 dynamic _getParams(BuildContext context, String key) =>
-    (ModalRoute.of(context).settings.arguments is Map) ? (ModalRoute.of(context).settings.arguments as Map)[key] : null;
+    (ModalRoute.of(context)?.settings.arguments is Map) ? (ModalRoute.of(context)?.settings.arguments as Map)[key] : null;
 
 dynamic _getData(BuildContext context, String name) {
-  var data = Map.from((ModalRoute.of(context).settings.arguments as Map)['data']);
+  var data = Map.from((ModalRoute.of(context)?.settings.arguments as Map)['data']);
   data.addAll({'pageName': name});
   return data;
 }

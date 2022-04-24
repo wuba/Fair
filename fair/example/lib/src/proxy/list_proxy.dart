@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ListDelegate extends FairDelegate {
-  ScrollController _scrollController;
+  ScrollController? _scrollController;
 
   @override
   Map<String, Function> bindFunction() {
@@ -40,8 +40,8 @@ class ListDelegate extends FairDelegate {
     _scrollController = ScrollController()
       ..addListener(() {
         //判断是否滑到底
-        if (_scrollController.position.pixels ==
-            _scrollController.position.maxScrollExtent) {
+        if (_scrollController!.position.pixels ==
+            _scrollController!.position.maxScrollExtent) {
           _onLoadMore();
         }
       });
@@ -50,7 +50,7 @@ class ListDelegate extends FairDelegate {
   @override
   void dispose() {
     super.dispose();
-    _scrollController.dispose();
+    _scrollController?.dispose();
   }
 
   void _onLoadMore() {
@@ -62,7 +62,7 @@ class ListDelegate extends FairDelegate {
   }
 
   Widget _itemBuilder(context, index) {
-    var result = runtime?.invokeMethodSync(pageName, '_onItemByIndex', [index]);
+    var result = runtime?.invokeMethodSync(pageName, '_onItemByIndex', [index])??'';
     var value = jsonDecode(result);
     var itemData = value['result']['result'];
     return FairWidget(

@@ -14,13 +14,13 @@ class GlobalState {
   static final GlobalState _instance = GlobalState._();
 
   /// Control profile information such as logger
-  bool profile;
+  bool? profile;
   static const Map<String, String> DEFAULT_BUNDLE_PATHS = {
     'undefined': 'assets/bundle/undefined.json',
   };
 
   /// Provide state proxy for [FairWidget] to manager state of Widget
-  Map<String, FairDelegateBuilder> _builder;
+  Map<String, FairDelegateBuilder>? _builder;
 
   static int _counter = 0;
 
@@ -31,21 +31,21 @@ class GlobalState {
   }
 
   void init(
-    bool profileEnable,
-    Map<String, FairDelegateBuilder> builder,
+    bool? profileEnable,
+    Map<String, FairDelegateBuilder>? builder,
   ) {
     _counter = 0;
     profile = profileEnable;
     _builder = builder;
   }
 
-  static String id(String prefix) {
+  static String id(String? prefix) {
     return '$prefix#${GlobalState._counter++}';
   }
 
-  static FairDelegateBuilder of(String name) {
+  static FairDelegateBuilder of(String? name) {
     final builders = GlobalState.instance()._builder;
-    FairDelegateBuilder b;
+    FairDelegateBuilder? b;
     if (builders != null && name != null) {
       b = builders[name];
     }
@@ -53,9 +53,9 @@ class GlobalState {
   }
 }
 
-void log(String message, {int wrapWidth}) {
-  if (GlobalState.instance().profile) {
-    if (!message.startsWith('[Fair]')) {
+void log(String? message, {int? wrapWidth}) {
+  if (GlobalState.instance().profile==true) {
+    if (!(message?.startsWith('[Fair]')??false)) {
       foundation.debugPrint('[Fair] $message');
     } else {
       foundation.debugPrint(message);

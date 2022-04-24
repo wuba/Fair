@@ -19,10 +19,10 @@ class FairComponent extends StatelessWidget {
 
   FairComponent(
     this.tag, {
-    Key key,
+    Key? key,
     this.func,
-    @required List<dynamic> pa,
-    Map<String, dynamic> na,
+    required List<dynamic> pa,
+    Map<String, dynamic>? na,
   })  : props = _MergedValuedListenable(pa, na),
         id = GlobalState.id(tag),
         super(key: key);
@@ -52,16 +52,16 @@ class FairComponent extends StatelessWidget {
 }
 
 class _MergedValuedListenable extends ValueNotifier<Map<String, dynamic>> {
-  final List<dynamic> pa;
-  final Map<String, dynamic> na;
-  VoidCallback _listener;
+  final List<dynamic>? pa;
+  final Map<String, dynamic>? na;
+  VoidCallback? _listener;
 
   _MergedValuedListenable(this.pa, this.na) : super(Property.combined(pa, na));
 
-  void forEachListenable(List<dynamic> pa, Map<String, dynamic> na,
+  void forEachListenable(List<dynamic>? pa, Map<String, dynamic>? na,
       void Function(ValueNotifier element) f) {
-    pa?.whereType<ValueNotifier>()?.forEach(f);
-    na?.values?.whereType<ValueNotifier>()?.forEach(f);
+    pa?.whereType<ValueNotifier>().forEach(f);
+    na?.values.whereType<ValueNotifier>().forEach(f);
   }
 
   @override
@@ -81,7 +81,7 @@ class _MergedValuedListenable extends ValueNotifier<Map<String, dynamic>> {
     super.removeListener(listener);
     if (_listener == null) return;
     forEachListenable(pa, na, (e) {
-      e.removeListener(_listener);
+      e.removeListener(_listener!);
     });
   }
 }

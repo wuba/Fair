@@ -20,11 +20,11 @@ class FairLogicUnit {
   // 保存所有的方法
   Map functions = {};
 
-  void addVariable(String name) {
+  void addVariable(String? name) {
     variables.putIfAbsent(name, () => name);
   }
 
-  void addFunction(String name) {
+  void addFunction(String? name) {
     functions.putIfAbsent(name, () => name);
   }
 }

@@ -10,8 +10,7 @@ import 'package:pedantic/pedantic.dart';
 import 'package:source_gen/source_gen.dart';
 
 class BundleBuilder extends LibraryBuilder {
-  BundleBuilder(Generator generator,
-      {String generatedExtension, String Function(String code) formatOutput})
+  BundleBuilder(Generator generator, {String? generatedExtension, String Function(String code)? formatOutput})
       : _generator = generator,
         _generatedExtension = generatedExtension ?? '.bundle.json',
         super(
@@ -35,8 +34,7 @@ class BundleBuilder extends LibraryBuilder {
     LibraryElement library,
     BuildStep buildStep,
   ) async {
-    final generatedOutputs =
-        await _generate(library, [_generator], buildStep).toList();
+    final generatedOutputs = await _generate(library, [_generator], buildStep).toList();
     if (generatedOutputs.isEmpty) return;
     final outputId = buildStep.inputId.changeExtension(_generatedExtension);
 
@@ -107,8 +105,7 @@ class _GeneratedOutput {
   final String generatorDescription;
 
   _GeneratedOutput(Generator generator, this.output)
-      : assert(output != null),
-        assert(output.isNotEmpty),
+      : assert(output.isNotEmpty),
         // assuming length check is cheaper than simple string equality
         assert(output.length == output.trim().length),
         generatorDescription = _toString(generator);
