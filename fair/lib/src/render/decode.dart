@@ -14,7 +14,7 @@ import '../internal/bundle_provider.dart';
 import '../internal/error_tips.dart';
 import '../internal/fair_decoder.dart';
 import '../internal/global_state.dart';
-import '../widgets/version.dart';
+import 'package:fair_version/fair_version.dart';
 import 'builder.dart';
 
 class _DataSource {
