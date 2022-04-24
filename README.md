@@ -39,19 +39,17 @@ Assuming that the fair project and your own project are in the same folder:
 ```yaml
 # add Fair dependency
 dependencies:
-  fair:
-    path: ../fair/fair
+  fair: 2.3.0
 
 # add compiler dependency
 dev_dependencies:
-  build_runner: ^1.4.0
+  build_runner: ^2.0.0
   fair_compiler:
     path: ../fair/compiler
  
 # switch "fair_version" according to the local Flutter SDK version
 dependency_overrides:
-  fair_version:
-    path: ../fair/flutter_version/flutter_2_0_6
+  fair_version: 2.0.6+1
 ```
 
 **step3：Wrap your app with FairApp Widget**

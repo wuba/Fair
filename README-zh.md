@@ -51,8 +51,7 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 ```
 # Switch to another stable flutter version
 #dependency_overrides:
-#  fair_version:
-#    path: ../fair/flutter_version/flutter_2_5_0
+#  fair_version: 2.5.0
 
 ```
 > https://flutter.dev/docs/development/tools/sdk/releases?tab=macos
