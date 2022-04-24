@@ -13,17 +13,22 @@ import 'svg_const.dart';
   'package:flutter_svg/svg.dart',
 ])
 void main() {
-  runApp(
-    FairApp(
-      child: MaterialApp(home: MyApp()),
-      generated: AppGeneratedModule(),
-      modules: {
-        PageLinkModule.tagName: () => PageLinkModule(),
-        PageBuilderModule.tagName: () => PageBuilderModule(),
-      },
-    ),
+  WidgetsFlutterBinding.ensureInitialized();
+  FairApp.runApplication(
+    _getApp(),
+    plugins: {
+    },
   );
 }
+
+dynamic _getApp() => FairApp(
+  child: MaterialApp(home: MyApp()),
+  // generated: AppGeneratedModule(),
+  modules: {
+    PageLinkModule.tagName: () => PageLinkModule(),
+    PageBuilderModule.tagName: () => PageBuilderModule(),
+  },
+);
 
 class MyApp extends StatelessWidget {
   @override
