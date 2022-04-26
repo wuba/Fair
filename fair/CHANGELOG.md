@@ -1,3 +1,6 @@
+## [2.4.0]
+* fix FlatBuffers bug.
+
 ## [2.3.0]
 * Add null-safety
 * Add support of flutter 2.5.0、2.5.1、2.5.2、2.5.3
