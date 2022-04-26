@@ -2,9 +2,9 @@ import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
 class DeviceInfoPage extends StatefulWidget {
-  Map<String, dynamic> params;
+  Map<String, dynamic>? params;
 
-  DeviceInfoPage({Key key, this.params}) : super(key: key);
+  DeviceInfoPage({Key? key, this.params}) : super(key: key);
 
   @override
   _DeviceInfoPageState createState() {

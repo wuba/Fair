@@ -14,7 +14,7 @@ class DemoList extends Object {
   });
 
   factory DemoList.fromJson(Map<String, dynamic> json) => DemoList(
-        list: (json['list'] as List)
+        list: (json['list'] as List?)
             ?.map((e) =>
                 e == null ? null : DemoItem.fromJson(e as Map<String, dynamic>))
             ?.toList(),

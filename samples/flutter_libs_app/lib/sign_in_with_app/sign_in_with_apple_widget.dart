@@ -8,8 +8,8 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 @FairPatch()
 class SignInWithAppleExamplePage extends StatefulWidget {
-  String title;
-  SignInWithAppleExamplePage({Key key, this.title}) : super(key: key);
+  final String title;
+  SignInWithAppleExamplePage({required Key key, required this.title}) : super(key: key);
 
   @override
   _SignInWithAppleExamplePageState createState() {

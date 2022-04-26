@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/pub/v/fair.svg" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.4.0-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -49,11 +49,12 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 | Flutter 1.12.13+hotfix.9 | Dart 2.7.2  | ![v1.12.13](https://github.com/wuba/fair/workflows/11213/badge.svg) |
 
 ```
-# Switch to another stable flutter version
-#dependency_overrides:
-#  fair_version:
-#    path: ../fair/flutter_version/flutter_2_5_0
-
+# switch "fair_version" according to the local Flutter SDK version.
+# Flutter SDK 2.5.x(2.5.0、2.5.1、2.5.2、2.5.3) -> fair_version: 2.5.0
+# Flutter SDK 2.0.6 -> fair_version: 2.0.6+1
+# Flutter SDK 1.22.6 -> fair_version: 1.22.6
+dependency_overrides:
+  fair_version: 2.0.6+1
 ```
 > https://flutter.dev/docs/development/tools/sdk/releases?tab=macos
 

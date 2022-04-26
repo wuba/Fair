@@ -4,12 +4,12 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair_version/fair_version.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'widgets/version.dart';
 
 /// Show a dialog displaying the Fair information.
 void showFairAboutDialog(BuildContext context) {

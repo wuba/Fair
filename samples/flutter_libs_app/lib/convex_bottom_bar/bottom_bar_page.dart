@@ -2,7 +2,7 @@ import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
 class BottomBarPage extends StatefulWidget {
-  BottomBarPage({Key key}) : super(key: key);
+  BottomBarPage({Key? key}) : super(key: key);
 
   @override
   _BottomBarPageState createState() {

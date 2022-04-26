@@ -2,8 +2,8 @@ import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
 class GoogleFontsPage extends StatefulWidget {
-  Map<String, dynamic> params;
-  GoogleFontsPage({Key key, this.params}) : super(key: key);
+  Map<String, dynamic>? params;
+  GoogleFontsPage({Key? key, this.params}) : super(key: key);
 
   @override
   _GoogleFontsPageState createState() {

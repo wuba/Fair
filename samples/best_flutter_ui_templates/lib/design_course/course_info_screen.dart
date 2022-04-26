@@ -21,11 +21,11 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
     animation = Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
         parent: animationController,
         curve: Interval(0, 1.0, curve: Curves.fastOutSlowIn)));
-    setState();
+    _setState();
     super.initState();
   }
 
-  Future<void> setState() async {
+  Future<void> _setState() async {
     animationController.forward();
     await Future<dynamic>.delayed(const Duration(milliseconds: 200));
     setState(() {
