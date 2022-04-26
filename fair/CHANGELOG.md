@@ -1,5 +1,5 @@
 ## [2.4.0]
-* fix FlatBuffers bug.
+* FlatBuffers supports generating bin files in a null safe environment.
 
 ## [2.3.0]
 * Add null-safety
