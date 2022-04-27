@@ -13,3 +13,4 @@ doc/api/
 .draft/
 .DS_Store
 .idea/
+*.lock
