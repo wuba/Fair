@@ -72,6 +72,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "avenwu",
+      "name": "Wu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1622234?v=4",
+      "profile": "http://blog.hacktons.cn/",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
