@@ -1,9 +1,0 @@
-{
-  "className": "Text",
-  "pa": [
-    "#($state)"
-  ],
-  "na": {
-    "style": "#(headline2)"
-  }
-}
