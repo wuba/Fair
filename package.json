@@ -12,6 +12,7 @@
     "doc:build": "vuepress build -d ./doc_server/public doc"
   },
   "devDependencies": {
+    "all-contributors-cli": "^6.20.0",
     "vuepress": "^1.7.1"
   }
 }
