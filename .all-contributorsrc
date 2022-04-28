@@ -103,6 +103,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "waynesonic",
+      "name": "waynesonic",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5502794?v=4",
+      "profile": "https://github.com/waynesonic",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
