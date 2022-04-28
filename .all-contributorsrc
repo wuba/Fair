@@ -83,6 +83,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "LinLeyang",
+      "name": "Penta",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13174498?v=4",
+      "profile": "https://github.com/LinLeyang",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
