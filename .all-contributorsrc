@@ -6,7 +6,7 @@
   "files": [
     "README.md"
   ],
-  "imageSize": 50,
+  "imageSize": 100,
   "commit": true,
   "commitConvention": "none",
   "contributors": [
@@ -45,7 +45,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "wanbing",
+      "name": "wan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7804234?v=4",
+      "profile": "https://github.com/wanbing",
+      "contributions": [
+        "code"
+      ]
     }
   ],
-  "contributorsPerLine": 20
+  "contributorsPerLine": 7
 }
