@@ -30,6 +30,7 @@
 .pub-cache/
 .pub/
 /build/
+fair_config.json
 
 # Web related
 lib/generated_plugin_registrant.dart
