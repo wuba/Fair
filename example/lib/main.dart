@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:example/fair_widget/delegate/test_fair_delegate.dart';
 import 'package:example/home_page.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +10,11 @@ void main() {
 
   FairApp.runApplication(FairApp(
     child: MyApp(),
+    delegate: {
+      ///此处delegate注册的key名必须与fairwidget页面name的名字一致,
+      ///TestFairDelegate只作用于相同名字的fairwidget
+      'assets/fair/lib_fair_widget_fair_delegate_widget.fair.json': (ctx, _) => TestFairDelegate(),
+    },
   ));
 }
 
@@ -31,4 +39,8 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
     );
   }
+}
+
+Color randomColor() {
+  return Color.fromARGB(255, Random().nextInt(256), Random().nextInt(256), Random().nextInt(256));
 }
