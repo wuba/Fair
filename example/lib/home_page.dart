@@ -24,6 +24,10 @@ class HomePage extends StatelessWidget {
               showWidget(fairArguments: {"fairText": '路由是个好东西，要进一步封装'},
                 fairPath: 'assets/fair/lib_fair_widget_fair_delegate_widget.fair.json',);
             }),
+            addItem("fair plugin的使用", () {
+              showWidget(fairArguments: {"fairText": '路由是个好东西，要进一步封装'},
+                fairPath: 'assets/fair/lib_fair_widget_fair_plugin_widget.fair.json',);
+            }),
           ],
         ),
       ),

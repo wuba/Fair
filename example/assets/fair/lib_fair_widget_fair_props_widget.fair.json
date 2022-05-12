@@ -1,0 +1,35 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "backgroundColor": "#(Colors.white)",
+    "appBar": {
+      "className": "AppBar"
+    },
+    "body": {
+      "className": "Container",
+      "na": {
+        "child": {
+          "className": "Center",
+          "na": {
+            "child": {
+              "className": "Text",
+              "pa": [
+                "%(fairText)"
+              ],
+              "na": {
+                "style": {
+                  "className": "TextStyle",
+                  "na": {
+                    "color": "#(Colors.red)",
+                    "fontSize": 20
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

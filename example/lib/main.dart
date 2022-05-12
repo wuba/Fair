@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:example/fair_widget/delegate/test_fair_delegate.dart';
+import 'package:example/fair_widget/plugin/fair_basic_plugin.dart';
 import 'package:example/home_page.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +9,20 @@ import 'package:flutter/material.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  FairApp.runApplication(FairApp(
-    child: MyApp(),
-    delegate: {
-      ///此处delegate注册的key名必须与fairwidget页面name的名字一致,
-      ///TestFairDelegate只作用于相同名字的fairwidget
-      'assets/fair/lib_fair_widget_fair_delegate_widget.fair.json': (ctx, _) => TestFairDelegate(),
+  FairApp.runApplication(
+    FairApp(
+      child: MyApp(),
+      delegate: {
+        ///此处delegate注册的key名必须与fairwidget页面name的名字一致,
+        ///TestFairDelegate只作用于相同名字的fairwidget
+        'assets/fair/lib_fair_widget_fair_delegate_widget.fair.json': (ctx, _) => TestFairDelegate(),
+      },
+    ),
+    ///需要在此注册需要全全局使用的plugin,key名可以随意不做要求
+    plugins: {
+      "FairBasicPlugin": FairBasicPlugin(),
     },
-  ));
+  );
 }
 
 class MyApp extends StatelessWidget {
