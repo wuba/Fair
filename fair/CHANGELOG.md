@@ -1,3 +1,7 @@
+## [2.4.1]
+* Fix FairLogger import problem.
+* Upgrade Analyzer to 2.3.0.
+
 ## [2.4.0]
 * FlatBuffers supports generating bin files in a null safe environment.
 

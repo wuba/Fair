@@ -1,6 +1,6 @@
 name: fair_version
 description: Fair binding for Flutter v2.5.0
-version: 2.5.0
+version: 2.5.0+1
 homepage: https://fair.58.com/
 
 environment:

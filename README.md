@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.4.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.4.1-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -43,7 +43,7 @@ Assuming that the fair project and your own project are in the same folder:
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 2.4.0
+  fair: 2.4.1
 
 # add compiler dependency
 dev_dependencies:
@@ -56,7 +56,7 @@ dev_dependencies:
 # Flutter SDK 2.0.6 -> fair_version: 2.0.6+1
 # Flutter SDK 1.22.6 -> fair_version: 1.22.6
 dependency_overrides:
-  fair_version: 2.0.6+1
+  fair_version: 2.0.6+2
 ```
 
 **step3：Wrap your app with FairApp Widget**

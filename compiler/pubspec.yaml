@@ -21,9 +21,9 @@ dependencies:
   dart_style: ^2.0.0
   glob: ^2.0.1
   pedantic: ^1.11.1
-#  fair_annotation: ^2.3.0
-  fair_annotation:
-    path: ../annotation
+  fair_annotation: ^2.3.0
+#  fair_annotation:
+#    path: ../annotation
   http: ^0.13.3
   fairc:
     path: ../dart2dsl
