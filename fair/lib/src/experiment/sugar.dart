@@ -3,6 +3,8 @@
  * Use of this source code is governed by a BSD type license that can be
  * found in the LICENSE file.
  */
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -43,7 +45,20 @@ class Sugar {
     return data.mapEach((index, item) => builder(item));
   }
 
+  static K switchCase<T, K>(T key,List<SugarSwitchCaseObj<T,K>> caseObjects ,K defaultValue){
+    for (SugarSwitchCaseObj<T,K> sugarCase in caseObjects){
+      if(sugarCase.sugarCase == key){
+        return sugarCase.reValue;
+      }
+    }
+    return defaultValue;
+  }
+
   static Color colorWithOpacity = Colors.grey.withOpacity(0.8);
+
+  static Color colorsWithOpacity(Color c,double o){
+    return c.withOpacity(o);
+  }
 
   static double height(BuildContext context) => MediaQuery.of(context).size.height;
 
@@ -59,3 +74,10 @@ class Sugar {
 
   static Null Function() onTapEmpty() => () {};
 }
+
+class SugarSwitchCaseObj<T,K>{
+  final K reValue;
+  final T sugarCase;
+  SugarSwitchCaseObj({required this.sugarCase,required this.reValue});
+}
+

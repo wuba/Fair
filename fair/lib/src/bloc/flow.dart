@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../extension.dart';
 import '../type.dart';
+import '../experiment/sugar.dart';
 
 FairWidgetBinding provider = () {
   return {
@@ -50,6 +51,33 @@ FairWidgetBinding provider = () {
           (e) => e.runtimeType != p0.runtimeType ? '$e' == '$p0' : e == p0,
           orElse: () => null);
       return matched != null ? props['trueValue'] : props['falseValue'];
+    },
+    'Sugar.colorsWithOpacity':(props){
+      var p0 = pa0(props);
+      var p1 = pa1(props);
+      return (p0 as Color).withOpacity(p1 as double);
+    },
+
+    'Sugar.switchCase':(props){
+      var p0 = pa0(props);
+      List p1 = (pa1(props) as List);
+      var p11 = p1.mapEach((index, item) {
+        var sugarCase = item['na']['sugarCase'];
+        var reValue = item['na']['reValue'];
+        return SugarSwitchCaseObj(
+            sugarCase: sugarCase,
+            reValue: reValue
+        );
+      });
+      var p2 = pa2(props);
+      for (var sugarCase in p11){
+        assert(sugarCase is SugarSwitchCaseObj,'list containt elem witch is not SugarSwitchCaseObj type' );
+        SugarSwitchCaseObj cobj = (sugarCase as SugarSwitchCaseObj);
+        if (cobj.sugarCase == p0){
+          return cobj.reValue;
+        }
+      }
+      return p2;
     },
   };
 };
