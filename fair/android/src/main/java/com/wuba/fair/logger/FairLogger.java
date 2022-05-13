@@ -7,7 +7,7 @@ package com.wuba.fair.logger;
 
 
 import io.flutter.Log;
-import io.flutter.plugins.urllauncher.BuildConfig;
+import com.wuba.fair.BuildConfig;
 
 public class FairLogger {
     public static boolean isDebug = BuildConfig.DEBUG;
