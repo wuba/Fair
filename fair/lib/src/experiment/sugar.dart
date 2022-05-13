@@ -3,8 +3,6 @@
  * Use of this source code is governed by a BSD type license that can be
  * found in the LICENSE file.
  */
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
