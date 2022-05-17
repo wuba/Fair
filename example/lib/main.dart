@@ -18,7 +18,7 @@ void main() {
         'assets/fair/lib_fair_widget_fair_delegate_widget.fair.json': (ctx, _) => TestFairDelegate(),
       },
     ),
-    ///需要在此注册需要全全局使用的plugin,key名可以随意不做要求
+    ///需要在此注册需要全局使用的plugin,key名可以随意不做要求
     plugins: {
       "FairBasicPlugin": FairBasicPlugin(),
     },

@@ -26,6 +26,10 @@ class _FairDelegateWidgetState extends State<FairDelegateWidget> {
     );
   }
 
+ List<String> getData(){
+    return ['1','2','3','4','5','6','7','8','9','10'];
+  }
+
   ///fair暂时还不直接识别itemBuilder使用逻辑语句
   ///必须声明成方法,fair内部通过js保存方法,
   ///js无法使用识别dart的context所以js不能识别的方法
