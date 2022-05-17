@@ -102,13 +102,11 @@ var p = () => {
             props['pa'][0],
             props['pa'][1],
           ),
-      'MatrixUtils.inverseTransformRect': (props) =>
-          MatrixUtils.inverseTransformRect(
+      'MatrixUtils.inverseTransformRect': (props) => MatrixUtils.inverseTransformRect(
             props['pa'][0],
             props['pa'][1],
           ),
-      'MatrixUtils.createCylindricalProjectionTransform': (props) =>
-          MatrixUtils.createCylindricalProjectionTransform(
+      'MatrixUtils.createCylindricalProjectionTransform': (props) => MatrixUtils.createCylindricalProjectionTransform(
             radius: props['radius']?.toDouble(),
             angle: props['angle']?.toDouble(),
             perspective: props['perspective']?.toDouble() ?? 0.001,
@@ -131,13 +129,11 @@ var p = () => {
             props['pa'][0]?.toDouble(),
             props['pa'][1]?.toDouble(),
           ),
-      'FractionalOffset.fromOffsetAndSize': (props) =>
-          FractionalOffset.fromOffsetAndSize(
+      'FractionalOffset.fromOffsetAndSize': (props) => FractionalOffset.fromOffsetAndSize(
             props['pa'][0],
             props['pa'][1],
           ),
-      'FractionalOffset.fromOffsetAndRect': (props) =>
-          FractionalOffset.fromOffsetAndRect(
+      'FractionalOffset.fromOffsetAndRect': (props) => FractionalOffset.fromOffsetAndRect(
             props['pa'][0],
             props['pa'][1],
           ),
@@ -232,13 +228,18 @@ var p = () => {
         'center': TextAlignVertical.center,
         'bottom': TextAlignVertical.bottom,
       },
+      'LinearGradient': (props) => LinearGradient(
+            colors: as<Color>(props["colors"])!,
+            begin: props['begin'] ?? Alignment.centerLeft,
+            end: props['end'] ?? Alignment.centerRight,
+            stops: as<double>(props['stops']),
+            tileMode: props['tileMode'] ?? TileMode.clamp,
+            transform: props['transform'],
+          ),
       'LinearGradient.lerp': (props) => LinearGradient.lerp(
             props['pa'][0],
             props['pa'][1],
             props['pa'][2]?.toDouble(),
-          ),
-      'LinearGradient': (props) => LinearGradient(
-             colors: as<Color>(props["colors"])!,
           ),
       'RadialGradient.lerp': (props) => RadialGradient.lerp(
             props['pa'][0],
@@ -319,17 +320,14 @@ var p = () => {
       'BorderRadiusDirectional.all': (props) => BorderRadiusDirectional.all(
             props['pa'][0],
           ),
-      'BorderRadiusDirectional.circular': (props) =>
-          BorderRadiusDirectional.circular(
+      'BorderRadiusDirectional.circular': (props) => BorderRadiusDirectional.circular(
             props['pa'][0]?.toDouble(),
           ),
-      'BorderRadiusDirectional.vertical': (props) =>
-          BorderRadiusDirectional.vertical(
+      'BorderRadiusDirectional.vertical': (props) => BorderRadiusDirectional.vertical(
             top: props['top'] ?? Radius.zero,
             bottom: props['bottom'] ?? Radius.zero,
           ),
-      'BorderRadiusDirectional.horizontal': (props) =>
-          BorderRadiusDirectional.horizontal(
+      'BorderRadiusDirectional.horizontal': (props) => BorderRadiusDirectional.horizontal(
             start: props['start'] ?? Radius.zero,
             end: props['end'] ?? Radius.zero,
           ),

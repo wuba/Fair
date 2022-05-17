@@ -1,3 +1,14 @@
+## [2.4.1]
+* Fix FairLogger import problem.
+* Upgrade Analyzer to 2.3.0.
+
+## [2.4.0]
+* FlatBuffers supports generating bin files in a null safe environment.
+
+## [2.3.0]
+* Add null-safety
+* Add support of flutter 2.5.0、2.5.1、2.5.2、2.5.3
+
 ## [2.0.0]
 * Bug fix of fair_version widgets
 * Add support of flutter 2.0.6
