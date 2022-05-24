@@ -57,6 +57,9 @@ class Sugar {
   static Color colorsWithOpacity(Color c,double o){
     return c.withOpacity(o);
   }
+  static String convertToString<T>({required T orginalValue}){
+    return orginalValue.toString();
+  }
 
   static double height(BuildContext context) => MediaQuery.of(context).size.height;
 
@@ -72,10 +75,11 @@ class Sugar {
 
   static Null Function() onTapEmpty() => () {};
 }
-
 class SugarSwitchCaseObj<T,K>{
+
   final K reValue;
   final T sugarCase;
+
   SugarSwitchCaseObj({required this.sugarCase,required this.reValue});
 }
 

@@ -58,23 +58,27 @@ FairWidgetBinding provider = () {
       return (p0 as Color).withOpacity(p1 as double);
     },
 
+    'Sugar.convertToString':(props){
+      var p0 = pa0(props);
+      return p0.toString();
+    },
+    'SugarSwitchCaseObj':(props){
+      var p0 = props['sugarCase'];
+      var p1 = props['reValue'];
+
+      return SugarSwitchCaseObj(
+        sugarCase: p0,
+        reValue: p1,
+      );
+    },
     'Sugar.switchCase':(props){
       var p0 = pa0(props);
       List p1 = (pa1(props) as List);
-      var p11 = p1.mapEach((index, item) {
-        var sugarCase = item['na']['sugarCase'];
-        var reValue = item['na']['reValue'];
-        return SugarSwitchCaseObj(
-            sugarCase: sugarCase,
-            reValue: reValue
-        );
-      });
       var p2 = pa2(props);
-      for (var sugarCase in p11){
-        assert(sugarCase is SugarSwitchCaseObj,'list containt elem witch is not SugarSwitchCaseObj type' );
-        SugarSwitchCaseObj cobj = (sugarCase as SugarSwitchCaseObj);
-        if (cobj.sugarCase == p0){
-          return cobj.reValue;
+      for (var sugarCase in p1){
+        var caseValue = sugarCase as SugarSwitchCaseObj;
+        if (caseValue.sugarCase == p0){
+          return caseValue.reValue;
         }
       }
       return p2;
