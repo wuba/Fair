@@ -13,7 +13,7 @@ import 'package:build/build.dart';
 import 'package:crypto/crypto.dart' show md5;
 import 'package:fair_compiler/src/state_transfer.dart';
 import 'package:path/path.dart' as path;
-import 'package:dartToJs/index.dart' as dart2js;
+import 'package:fair_dart2js/index.dart' as dart2js;
 import 'helper.dart' show FlatCompiler, ModuleNameHelper;
 
 class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
