@@ -10,7 +10,7 @@ import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/error/error.dart';
-import 'package:dartToJs/src/list_ext.dart';
+import 'package:fair_dart2js/src/list_ext.dart';
 import 'package:path/path.dart' as p;
 
 enum ClassOutputTemplateType { raw, pageState }

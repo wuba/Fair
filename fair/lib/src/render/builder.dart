@@ -298,14 +298,9 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var source = pa1(map);
     var defaultValue = pa2(map);
     var children = [];
-    if (caseValue is String) {
-      var r = proxyMirror?.evaluate(context, bound, source);
-      if (r?.data != null) {
-        caseValue = r?.data;
-      }
-    }
+
     if (!(source is List)) {
-      throw Exception('Sugar.SwitchCase has no valid source array');
+      throw Exception('Sugar.SwitchCase has no valid cases array');
     }
 
     if (source is List) {
