@@ -28,7 +28,7 @@ class _PageOneState extends State<PageOne> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.pushNamed(context, 'fair_page_two', arguments: {
-              'path': 'assets/bundle/lib_page2page_page_two.fair.json',
+              'path': 'assets/fair/lib_page2page_page_two.fair.json',
               'data': {'title': 'PageTwo'}
             });
           },

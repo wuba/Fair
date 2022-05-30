@@ -30,6 +30,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/bundle/
     - assets/fair/
     - assets/plugin/

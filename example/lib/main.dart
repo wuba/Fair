@@ -55,9 +55,10 @@ class MyApp extends StatelessWidget {
         home: FairWidget(
             /// path 可以是 assets 目录下的 bundle 资源，也可以是手机存储
             /// 里的 bundle 资源，如果是手机存储里的 bundle 资源需要使用绝对路径
-            path: 'assets/bundle/lib_page2page_page_one.fair.json',
-          ));
-        // home: HomePage(),
+            path: 'assets/fair/lib_page2page_page_one.fair.json',
+          )
+        // home: HomePage()
+    );
   }
 }
 
