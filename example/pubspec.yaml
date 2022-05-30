@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   fair: ^2.4.1
+  dio: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -30,3 +31,5 @@ flutter:
   assets:
     - assets/
     - assets/bundle/
+    - assets/fair/
+    - assets/plugin/

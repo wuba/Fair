@@ -1,7 +1,11 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
+import 'package:example/fair_widget/delegate/test_fair_delegate.dart';
+import 'package:example/fair_widget/plugin/fair_basic_plugin.dart';
+import 'package:example/home_page.dart';
 
 /// 本 demo 演示 counting 的改造
 void main() {
@@ -10,16 +14,20 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   FairApp.runApplication(
-    _getApp(),
-    plugins: {},
+    FairApp(
+      child: MyApp(),
+      delegate: {
+        ///此处delegate注册的key名必须与fairwidget页面name的名字一致,
+        ///TestFairDelegate只作用于相同名字的fairwidget
+        'assets/fair/lib_fair_widget_fair_delegate_widget.fair.json': (ctx, _) => TestFairDelegate(),
+      },
+    ),
+    ///需要在此注册需要全局使用的plugin,key名可以随意不做要求
+    plugins: {
+      "FairBasicPlugin": FairBasicPlugin(),
+    },
   );
 }
-
-dynamic _getApp() => FairApp(
-  modules: {},
-  delegate: {},
-  child: MyApp(),
-);
 
 /// 获取路由传递的参数
 dynamic _getParams(BuildContext context, String key) =>
@@ -49,6 +57,7 @@ class MyApp extends StatelessWidget {
             /// 里的 bundle 资源，如果是手机存储里的 bundle 资源需要使用绝对路径
             path: 'assets/bundle/lib_page2page_page_one.fair.json',
           ));
+        // home: HomePage(),
   }
 }
 
@@ -124,4 +133,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+Color randomColor() {
+  return Color.fromARGB(255, Random().nextInt(256), Random().nextInt(256), Random().nextInt(256));
 }
