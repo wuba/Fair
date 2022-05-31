@@ -1,3 +1,6 @@
+## [1.1.0]
+* Support singleton parsing.
+
 ## [1.0.1]
 * bugfix.
 
