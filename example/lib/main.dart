@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:example/fair_widget/delegate/test_fair_delegate.dart';
 import 'package:example/fair_widget/plugin/fair_basic_plugin.dart';
 import 'package:example/home_page.dart';
+import 'src/generated.fair.dart' as g;
 
-/// 本 demo 演示 counting 的改造
+@FairBinding(packages: [
+  'package:example/fair_widget/fairbinding/fair_binding_widget.dart',
+])
 void main() {
   // runApp(MyApp());
 
@@ -21,6 +24,7 @@ void main() {
         ///TestFairDelegate只作用于相同名字的fairwidget
         'assets/fair/lib_fair_widget_fair_delegate_widget.fair.json': (ctx, _) => TestFairDelegate(),
       },
+      generated: g.AppGeneratedModule(),
     ),
     ///需要在此注册需要全局使用的plugin,key名可以随意不做要求
     plugins: {
@@ -53,10 +57,13 @@ class MyApp extends StatelessWidget {
         /// path 参数：需要加载的 bundle 资源文件路径
         /// data 参数：需要传递给动态页面的参数
         home: FairWidget(
-            /// path 可以是 assets 目录下的 bundle 资源，也可以是手机存储
-            /// 里的 bundle 资源，如果是手机存储里的 bundle 资源需要使用绝对路径
-            path: 'assets/fair/lib_page2page_page_one.fair.json',
-          )
+          /// path 可以是 assets 目录下的 bundle 资源，也可以是手机存储
+          /// 里的 bundle 资源，如果是手机存储里的 bundle 资源需要使用绝对路径
+          path: 'assets/fair/lib_main.fair.json',
+          data: {
+            'fairProps':jsonEncode({'title':'你好'})
+          },
+        )
         // home: HomePage()
     );
   }
