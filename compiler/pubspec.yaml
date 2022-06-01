@@ -15,7 +15,7 @@ dependencies:
   build_config: ^1.0.0
   process: ^4.0.0
   archive: ^3.3.0
-  intl: ^0.16.0
+  intl: ^0.17.0
   path: ^1.8.0
   analyzer: ^1.5.0
   dart_style: ^2.0.0
