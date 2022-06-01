@@ -34,8 +34,7 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/19757728?v=4",
       "profile": "https://yancechen.github.io/",
       "contributions": [
-        "code",
-        "doc"
+        "code"
       ]
     },
     {
@@ -131,7 +130,25 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "xiangwc",
+      "name": "xiangwc",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22017021?v=4",
+      "profile": "https://github.com/xiangwc",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "KKProject",
+      "name": "WangYk",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14860258?v=4",
+      "profile": "https://github.com/KKProject",
+      "contributions": [
+        "code"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 8
 }
