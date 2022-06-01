@@ -5,7 +5,7 @@ import 'package:path/path.dart';
 
 Future<void> stateTransfer() async {
   var jsonFile = File('fair_config.json');
-  if(!jsonFile.existsSync()){
+  if (!jsonFile.existsSync()) {
     print('[fair] fair_config.json cannot be found');
     return;
   }
@@ -22,12 +22,12 @@ Future<void> stateTransfer() async {
   var toolProject = Directory(toolPath);
   var sourcePath = join('build', 'fair');
   if (!toolProject.existsSync()) {
-    toolProject.createSync(recursive:true);
+    toolProject.createSync(recursive: true);
   }
   var sourceFile = Directory(sourcePath);
 
   print('[fair] Files is coping to targetPath...');
-  await sourceFile.list(recursive: true).forEach((element) {
+  await sourceFile.list(recursive: false).forEach((element) {
     //copy 文件夹中的所有文件
     var pathList = element.path.split(Platform.pathSeparator);
     var subList = pathList.sublist(pathList.indexOf('fair') + 1);
@@ -35,7 +35,7 @@ Future<void> stateTransfer() async {
     var targetFile = File(targetPath);
     var sourceFile = File(element.path);
     //判断当前路径是否是文件
-    if (sourceFile.existsSync()) {
+    if (sourceFile.existsSync() && !FileSystemEntity.isDirectorySync(sourceFile.path)) {
       if (!targetFile.parent.existsSync()) {
         targetFile.parent.createSync(recursive: true);
       }

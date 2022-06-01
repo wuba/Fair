@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.4.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.5.0-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -54,20 +54,22 @@ git clone https://github.com/wuba/fair.git
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 2.4.0
+  fair: 2.5.0
 
-# add compiler dependency
+# add build_runner and compiler dependency
 dev_dependencies:
   build_runner: ^2.0.0
   fair_compiler:
     path: ../fair/compiler
 
-# switch "fair_version" according to the local Flutter SDK version.
-# Flutter SDK 2.5.x(2.5.0、2.5.1、2.5.2、2.5.3) -> fair_version: 2.5.0
-# Flutter SDK 2.0.6 -> fair_version: 2.0.6+1
-# Flutter SDK 1.22.6 -> fair_version: 1.22.6
+# switch "fair_version" according to the local Flutter SDK version
+# Flutter SDK 2.8.x(2.8.0、2.8.1) -> flutter_2_8_0
+# Flutter SDK 2.5.x(2.5.0、2.5.1、2.5.2、2.5.3) -> flutter_2_5_0
+# Flutter SDK 2.0.6 -> flutter_2_0_6
+# Flutter SDK 1.22.6 -> flutter_1_22_6
 dependency_overrides:
-  fair_version: 2.0.6+1
+  fair_version:
+    path: ../fair/flutter_version/flutter_2_8_0
 ```
 
 **step3：将App替换为FairApp**

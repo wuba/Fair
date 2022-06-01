@@ -46,7 +46,7 @@ dev_dependencies:
 
 dependency_overrides:
   fair_version:
-    path: ../../flutter_version/flutter_2_5_0
+    path: ../../flutter_version/flutter_2_8_0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

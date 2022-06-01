@@ -4,12 +4,12 @@
  * found in the LICENSE file.
  */
 
-import 'package:fair/fair.dart';
+// import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
 import 'custom_func.dart' as a;
 
-@FairPatch()
+// @FairPatch()
 class SampleLogicPage2Page extends StatefulWidget {
   var _props;
 
@@ -22,7 +22,7 @@ class SampleLogicPage2Page extends StatefulWidget {
 }
 
 class _Page2PageState extends State<SampleLogicPage2Page> {
-  @FairProps()
+  // @FairProps()
   var fairProps;
 
   var _count;
