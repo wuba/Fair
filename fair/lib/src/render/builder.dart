@@ -45,7 +45,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     print('name:$name');
     if (name == null) {
       return WarningWidget(
-          name: name, error: '$tag is not supported', url: bundle);
+          parentContext:context,name: name, error: '$tag is not supported', url: bundle);
     }
     try {
       var module = bound?.modules?.moduleOf(name)?.call();
@@ -81,7 +81,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }
       return _block(map, methodMap, context, domain, mapper, name, isWidget);
     } catch (e) {
-      return WarningWidget(name: name, error: e, url: bundle);
+      return WarningWidget(parentContext:context, name: name, error: e, url: bundle, solution:"Tag name not supported yet,You need to use the @FairBinding annotation to tag the local Widget component");
     }
   }
 
