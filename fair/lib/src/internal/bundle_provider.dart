@@ -4,10 +4,13 @@
  * found in the LICENSE file.
  */
 
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 
 import '../app.dart';
 import '../type.dart';
@@ -28,6 +31,14 @@ class _DefaultProvider extends BundleLoader {
   static const JSON = '.json';
   static const FLEX = '.bin';
 
+  Future<String> androidExternalStoragePath() async {
+    var dir = await getExternalStorageDirectory();
+    if (dir != null) {
+      return dir.path;
+    }
+    return '';
+  }
+
   @override
   Future<Map?> onLoad(String? path, FairDecoder decoder,
       {bool cache = true, Map<String, String>? h}) {
@@ -40,10 +51,50 @@ class _DefaultProvider extends BundleLoader {
       throw ArgumentError(
           'unknown format, please use either $JSON or $FLEX;\n $path');
     }
-    if (path?.startsWith('http')==true) {
+
+    if (path?.startsWith('http') == true) {
       return _http(path, isFlexBuffer, headers: h, decode: decoder);
     }
-    return _asset(path, isFlexBuffer, cache: cache, decode: decoder);
+
+    /// iOS 平台无论是 assets 资源还是磁盘资源统一使用 _asset 加载
+    if (Platform.isIOS) {
+      return _asset(path, isFlexBuffer, cache: cache, decode: decoder);
+    }
+
+    var _androidExternalStoragePath = androidExternalStoragePath().toString();
+    if ('' == _androidExternalStoragePath) {
+      return _asset(path, isFlexBuffer, cache: cache, decode: decoder);
+    }
+    /// 通过 path.contains(外部存储路径) 来判断 bundle 资源是否为一个磁盘资源
+    if (path != null && path.contains(_androidExternalStoragePath)) {
+      return _externalStorageDirectory(path, isFlexBuffer,
+          cache: cache, decode: decoder);
+    } else {
+      return _asset(path, isFlexBuffer, cache: cache, decode: decoder);
+    }
+  }
+
+  Future<Map?> _externalStorageDirectory(String key, bool isFlexBuffer,
+      {bool cache = true, FairDecoder? decode}) async {
+    var file = File(key);
+    var watch = Stopwatch()..start();
+    int? end, end2;
+    Map? map;
+
+    if (isFlexBuffer) {
+      var data = await file.readAsBytes();
+      end = watch.elapsedMilliseconds;
+      map = await decode?.decode(data, isFlexBuffer);
+      end2 = watch.elapsedMilliseconds;
+    } else {
+      var data = await file.readAsString();
+      end = watch.elapsedMilliseconds;
+      map = await decode?.decode(data, isFlexBuffer);
+      end2 = watch.elapsedMilliseconds;
+    }
+
+    log('[Fair] $key load: $end ms, stream decode: $end2 ms');
+    return map;
   }
 
   Future<Map?> _asset(String? key, bool isFlexBuffer,
