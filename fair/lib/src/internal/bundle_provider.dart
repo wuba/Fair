@@ -10,7 +10,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
 
 import '../app.dart';
 import '../type.dart';
@@ -48,14 +47,6 @@ class _DefaultProvider extends BundleLoader with FairBundlePathCheck{
   var client = http.Client();
   static const JSON = '.json';
   static const FLEX = '.bin';
-
-  Future<String> androidExternalStoragePath() async {
-    var dir = await getExternalStorageDirectory();
-    if (dir != null) {
-      return dir.path;
-    }
-    return '';
-  }
 
   @override
   Future<Map?> onLoad(String? path, FairDecoder decoder,
