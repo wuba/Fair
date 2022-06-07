@@ -26,7 +26,25 @@ class FairBundle {
   }
 }
 
-class _DefaultProvider extends BundleLoader {
+mixin FairBundlePathCheck {
+  String externalStoragePath = '/storage/emulated/0/Android/data/';
+
+  /// 由于 iOS 设备可以使用 assets 的方式加载，所以此处只判断了 Android 设备的磁盘路径
+  /// 如需判断 iOS 设备的话，在此处补充即可。
+  bool isExternalStoragePath(String? originPath) {
+    if (originPath == null) {
+      return false;
+    }
+
+    if (originPath.contains(externalStoragePath)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
+class _DefaultProvider extends BundleLoader with FairBundlePathCheck{
   var client = http.Client();
   static const JSON = '.json';
   static const FLEX = '.bin';
@@ -61,12 +79,7 @@ class _DefaultProvider extends BundleLoader {
       return _asset(path, isFlexBuffer, cache: cache, decode: decoder);
     }
 
-    var _androidExternalStoragePath = androidExternalStoragePath().toString();
-    if ('' == _androidExternalStoragePath) {
-      return _asset(path, isFlexBuffer, cache: cache, decode: decoder);
-    }
-    /// 通过 path.contains(外部存储路径) 来判断 bundle 资源是否为一个磁盘资源
-    if (path != null && path.contains(_androidExternalStoragePath)) {
+    if (path != null && isExternalStoragePath(path)) {
       return _externalStorageDirectory(path, isFlexBuffer,
           cache: cache, decode: decoder);
     } else {
