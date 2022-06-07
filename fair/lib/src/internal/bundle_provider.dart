@@ -27,18 +27,18 @@ class FairBundle {
 }
 
 mixin FairBundlePathCheck {
-  String externalStoragePath = '/storage/emulated/0/Android/data/';
 
-  /// 由于 iOS 设备可以使用 assets 的方式加载，所以此处只判断了 Android 设备的磁盘路径
-  /// 如需判断 iOS 设备的话，在此处补充即可。
   bool isExternalStoragePath(String? originPath) {
     if (originPath == null) {
       return false;
     }
 
-    if (originPath.contains(externalStoragePath)) {
+    var file = File(originPath);
+    if (file.existsSync()) {
+      print('------>>>>>该文件存在');
       return true;
     } else {
+      print('------>>>>>该文件不存在');
       return false;
     }
   }
