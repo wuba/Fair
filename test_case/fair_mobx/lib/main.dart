@@ -1,0 +1,23 @@
+import 'package:fair/fair.dart';
+import 'package:fairmobx/counter_widgets.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(FairApp(child: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: CounterExample(),
+    );
+  }
+}

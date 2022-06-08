@@ -1,0 +1,152 @@
+{
+  "className": "Container",
+  "na": {
+    "decoration": {
+      "className": "BoxDecoration",
+      "na": {
+        "color": {
+          "className": "Sugar.colorsWithOpacity",
+          "pa": [
+            {
+              "className": "Color",
+              "pa": [
+                "0xffff602f"
+              ]
+            },
+            0.5
+          ]
+        }
+      }
+    },
+    "child": {
+      "className": "Column",
+      "na": {
+        "children": [
+          {
+            "className": "Container",
+            "na": {
+              "height": 100,
+              "width": {
+                "className": "Sugar.width",
+                "pa": [
+                  "^(context)"
+                ]
+              },
+              "margin": {
+                "className": "EdgeInsets.only",
+                "na": {
+                  "top": 20
+                }
+              },
+              "child": {
+                "className": "Center",
+                "na": {
+                  "child": {
+                    "className": "Sugar.switchCase",
+                    "pa": [
+                      2,
+                      [
+                        {
+                          "className": "SugarSwitchCaseObj",
+                          "na": {
+                            "reValue": {
+                              "className": "Text",
+                              "pa": [
+                                "2-ValueTitle"
+                              ]
+                            },
+                            "sugarCase": 2
+                          }
+                        },
+                        {
+                          "className": "SugarSwitchCaseObj",
+                          "na": {
+                            "reValue": {
+                              "className": "Text",
+                              "pa": [
+                                "3-ValueTitle"
+                              ]
+                            },
+                            "sugarCase": 3
+                          }
+                        },
+                        {
+                          "className": "SugarSwitchCaseObj",
+                          "na": {
+                            "reValue": {
+                              "className": "Text",
+                              "pa": [
+                                "4-ValueTitle"
+                              ]
+                            },
+                            "sugarCase": 4
+                          }
+                        }
+                      ],
+                      {
+                        "className": "Text",
+                        "pa": [
+                          "default-ValueTitle"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "className": "FloatingActionButton",
+            "na": {
+              "child": {
+                "className": "Text",
+                "pa": [
+                  {
+                    "className": "Sugar.switchCase",
+                    "pa": [
+                      "^(_value)",
+                      [
+                        {
+                          "className": "SugarSwitchCaseObj",
+                          "na": {
+                            "reValue": "2",
+                            "sugarCase": 2
+                          }
+                        },
+                        {
+                          "className": "SugarSwitchCaseObj",
+                          "na": {
+                            "reValue": "3",
+                            "sugarCase": 3
+                          }
+                        },
+                        {
+                          "className": "SugarSwitchCaseObj",
+                          "na": {
+                            "reValue": "4",
+                            "sugarCase": 4
+                          }
+                        }
+                      ],
+                      "defaultValue"
+                    ]
+                  }
+                ],
+                "na": {
+                  "style": {
+                    "className": "TextStyle",
+                    "na": {
+                      "fontWeight": "#(FontWeight.w100)"
+                    }
+                  }
+                }
+              },
+              "onPressed": "@(logAction)"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {}
+}

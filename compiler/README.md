@@ -1,0 +1,1 @@
+A complier which can generate Fair bundle for widget with annotation.

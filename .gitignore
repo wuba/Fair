@@ -20,6 +20,6 @@ doc/.vuepress/public/api
 doc/.vuepress/public/project/
 doc/.vuepress/dist/
 github-pages/
-samples/fair_example
+test_case/fair_example
 fair/example/android/app/.cxx/
 fair/android/.cxx/

@@ -4,13 +4,13 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair_version/fair_version.dart';
 import 'package:flutter/foundation.dart';
 
 import 'bloc/common.dart' as common;
 import 'bloc/flow.dart' as flow;
 import 'bloc/geometry.dart' as geometry;
 import 'internal/global_state.dart';
-import 'widgets/all.dart';
 
 class BindingProvider with $BindingImpl {
   final Map<String, dynamic> _binding = {

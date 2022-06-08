@@ -20,18 +20,18 @@ dependencies:
   dio: ^4.0.0
   permission_handler: 6.0.1
   image_picker: ^0.8.4+1
+  path: ^1.8.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  build_runner: ^2.0.0
+  test: ^1.17.12
+  build_runner: ^2.1.2
   fair_compiler:
     path: ../../compiler
 
 # Switch to another stable flutter version
 dependency_overrides:
    fair_version:
-     path: ../../flutter_version/flutter_2_5_0
+     path: ../../flutter_version/flutter_2_8_0
 
 #dependency_overrides:
 #   fair_version:

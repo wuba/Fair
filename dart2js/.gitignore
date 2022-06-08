@@ -3,3 +3,4 @@ pubspec.lock
 entry.aot
 .DS_Store
 .dart_tool
+*.lock

@@ -12,7 +12,7 @@ import 'package:fair_compiler/src/fair_asset.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:process/process.dart';
-import 'package:fairc/fairc.dart' as dart2dsl;
+import 'package:fair_dart2dsl/fairc.dart' as dart2dsl;
 
 mixin FlatCompiler {
   final command = 'flatc';
@@ -60,6 +60,7 @@ mixin FairCompiler {
   final command = 'dart';
   final branch = 'main';
 
+  /// Copy fair_bundle.fbs to the current project.
   Future<File> _syncFbs(BuildStep buildStep) async {
     final dir = path.join('.dart_tool', 'build', 'fairc');
     Directory(dir).createSync(recursive: true);
@@ -72,6 +73,9 @@ mixin FairCompiler {
     return fbs;
   }
 
+  /// Create a temporary file.
+  /// The file name is the hash value of the current date and time.
+  /// The file is located in the directory .dart_tool/build/fairc.
   Future<File> get temp async {
     return File(path.join('.dart_tool', 'build', 'fairc',
         DateTime.now().toString().hashCode.toString()))
