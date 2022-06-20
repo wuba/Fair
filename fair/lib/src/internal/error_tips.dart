@@ -29,59 +29,25 @@ class WarningWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  'Failure!',
-                   style:  TextStyle(
-                     fontWeight: FontWeight.bold,
-                     color: Color(0xff000000),
-                     fontSize: 25.0,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Tag: $name',
-                   style:  TextStyle(
-                     fontWeight: FontWeight.bold,
-                     color: Color(0xffff0000),
-                     fontSize: 20.0,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Bundle: $url',
-                   style:  TextStyle(
-                      color: Color(0xff000000),
-                      fontSize: 15.0,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Error: $error',
-                  style:  TextStyle(
-                     color: Color(0xff000000),
-                     fontSize: 15.0,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                 'Solution: $solution',
-                  style:  TextStyle(
-                     color: Color(0xff000000),
-                     fontWeight: FontWeight.bold,
-                     fontSize: 20.0,
-                  ),
-                ),
-                RaisedButton(
-                  child: Text('Click the button for details'),
-                  color: Theme.of(context).accentColor,
+                TextButton(
                   onPressed: (){
                     warningShow();
                   },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image(
+                        image: AssetImage('packages/fair/assets/images/error.jpg'),
+                        width: 80,
+                        height: 80,
+                      ),
+                      Text('click show message!')
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-
         ),
       ),);
   }

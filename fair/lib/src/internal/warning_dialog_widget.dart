@@ -49,9 +49,11 @@ class DialogWidget extends Dialog {
                     height: 1.0,
                   ),
                   Container(
+                    margin: const EdgeInsets.only(left: 10, top: 0, right: 10, bottom: 10),
                     constraints: BoxConstraints(minHeight: 100),
                     child: Center(
                       child: Column(
+
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
@@ -84,7 +86,7 @@ class DialogWidget extends Dialog {
                             style:  TextStyle(
                                color: Color(0xff000000),
                                fontWeight: FontWeight.bold,
-                               fontSize: 20.0,
+                               fontSize: 18.0,
                             ),
                           ),
                         ],
