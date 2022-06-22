@@ -21,7 +21,9 @@ class Domain<E> {
             exp == 'item' ||
             exp == 'index' ||
             exp.startsWith("\$(item") ||
-            exp.startsWith("\$(index"));
+            exp.startsWith("\$(index") ||
+            exp.startsWith("#(\${index") ||
+            exp.startsWith("#(\${item"));
   }
 
   String bindValue(String exp) {
@@ -33,6 +35,10 @@ class Domain<E> {
       return exp.replaceAll('index', '$index');
     }
     var processed = exp.substring(2, exp.length - 1);
+    if (processed.startsWith("\${")){
+      processed = processed.substring(2, processed.length - 1);
+    }
+
 
     if (processed.contains('.')) {
       List<String> expList = processed.split('.');
