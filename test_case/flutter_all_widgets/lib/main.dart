@@ -1,6 +1,25 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-void main() => runApp(MyApp());
+import 'package:fair/fair.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_all_widgets/widget_demo.dart';
+
+
+//void main() => runApp(MyApp());
+
+void main(){
+  WidgetsFlutterBinding.ensureInitialized();
+
+  FairApp.runApplication(
+    _getApp(),
+    plugins:{},
+  );
+}
+
+dynamic _getApp()=>FairApp(
+    modules: {},
+    delegate: {},
+    child: WidgetDemo());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -20,11 +39,17 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: FairWidget(
+        path: 'assets/bundle/lib_main.fair.json',
+        data: {
+          'fairProps':jsonEncode({'title':'我是Fair'})
+        },
+      ),
     );
   }
 }
 
+@FairPatch()
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -38,6 +63,7 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
+  dynamic fairProps;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -45,6 +71,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+
+  /// 定义与 JS 侧交互的参数，只支持 Map 类型的数据
+  @FairProps()
+  var fairProps;
+
+
+  @override
+  void initState() {
+    super.initState();
+    fairProps = widget.fairProps;
+  }
+
+  String _getTitle(){
+    return fairProps['title'];
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -69,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(_getTitle()),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -96,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.displaySmall,
+//              style: Theme.of(context).textTheme.bodyText1,
             ),
           ],
         ),

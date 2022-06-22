@@ -1,0 +1,15 @@
+{
+  "className": "Center",
+  "na": {
+    "child": {
+      "className": "Checkbox",
+      "na": {
+        "value": "#(_isChecked)",
+        "checkColor": "#(Colors.white)",
+        "activeColor": "#(Colors.red)",
+        "onChanged": null
+      }
+    }
+  },
+  "methodMap": {}
+}
