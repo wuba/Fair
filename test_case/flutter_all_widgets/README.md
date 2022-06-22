@@ -16,8 +16,8 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 ## 组件兼容测试
-** widget ** | ** 描述 ** | ** 是否解决** | **备注**
-:-: |  :-: |  :-: |  :-:
+**widget** | **描述** | **是否解决** | **备注**
+:-:|:-:|:-:|:-:
 CheckBox |onChanged属性，写法 (value) =>checked = value)； (value) {checked = value;})写法会报"type String is not a subtype of type '(bool?) =>void)?'"| 否||
         | 不识别 MaterialStateProperty | 否 |
         | value属性，值必须true或false，如果是变量或是方法会报 type 'String' is not a subtype of type 'bool?'| 否 |
