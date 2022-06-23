@@ -102,6 +102,7 @@ For more details, please refer to [https://fair.58.com](https://fair.58.com)
 
 ## versions
 ### 2.5.0
+updateDate：2022.05.31
 #### Fair
 Adapt to flutter SDK 2.8.0, 2.8.1  
 Dart2js supports parsing singletons  
