@@ -98,6 +98,44 @@ FairWidget(
 ## Documentation
 For more details, please refer to [https://fair.58.com](https://fair.58.com)
 
+## versions
+### 2.5.0
+#### Feature
+##### Fair
+Adapt to flutter SDK 2.8.0, 2.8.1  
+Dart2js supports parsing singletons  
+New syntax sugar switchCase、Sugar. colorsWithOpacity、Sugar. Converttostring, etc  
+##### example
+Comprehensively optimize the example structure and upgrade the example experience, which is more suitable for beginners.  
+
+In the source code, an example project is added to provide the standard usage of fair API.  
+
+example location：fair/example  
+
+
+
+### v2.4.1
+updateDate：2022.05.12  
+
+Fix FairLogger import problem.  
+Upgrade Analyzer to 2.3.0.  
+
+### v2.4.0
+updateDate：2022.04.26
+
+FlatBuffers supports generating bin files in a null safe environment  
+
+### v2.3.0
+updateDate: 2022.04.22
+
+#### Feature
+##### Fair
+supports null-safe  
+Adapt to Flutter SDK 2.5.0, 2.5.1, 2.5.2, 2.5.3 and other versions  
+##### demo
+Upgrade the outdated demo in the sample project  
+Supplement the iOS runtime environment in the sample project  
+
 ## 🕰2022 Roadmap
 
 * Major release plan
