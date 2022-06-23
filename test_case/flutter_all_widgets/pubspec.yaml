@@ -55,6 +55,8 @@ flutter:
   assets:
     - assets/bundle/
     - assets/bundle/checkbox/
+    - assets/bundle/cupertiontabbar/
+    - assets/bundle/outlinebutton/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

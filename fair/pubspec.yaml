@@ -18,7 +18,7 @@ dependencies:
 
   fair_version: ^2.8.0
 #  fair_version:
-#    path: ../flutter_version/flutter_2_5_0
+#    path: ../flutter_version/flutter_2_8_0
   flat_buffers: ^2.0.5
   url_launcher: ^6.0.10
   http: ^0.13.3

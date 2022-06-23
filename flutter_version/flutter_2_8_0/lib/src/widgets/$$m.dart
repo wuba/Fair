@@ -2252,6 +2252,16 @@ var p = () => {
     'dense': ScriptCategory.dense,
     'tall': ScriptCategory.tall,
   },
+  'OutlinedButton': (props) => OutlinedButton(
+    key: props['key'],
+    onPressed: props['onPressed'],
+    onLongPress: props['onLongPress'],
+    style: props['style'],
+    focusNode: props['focusNode'],
+    autofocus: props['autofocus'] ?? false,
+    clipBehavior: props['clipBehavior'] ?? Clip.none,
+    child: props['child'],
+  ),
   'OutlinedButton.styleFrom': (props) => OutlinedButton.styleFrom(
     primary: props['primary'],
     onSurface: props['onSurface'],
