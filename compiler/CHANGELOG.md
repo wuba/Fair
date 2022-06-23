@@ -1,8 +1,14 @@
-## [2.3.0]
-* Add null-safety
+## [1.1.0]
+* Support singleton parsing.
+
+## [1.0.1]
+* bugfix.
+
+## [1.0.0]
+* Add null-safety.
 
 ## [0.3.0+1]
-* bug fix
+* bugfix.
 
 ## [0.3.0]
 * Minimize size of assets.

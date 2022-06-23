@@ -5,7 +5,8 @@
  */
 
 import 'dart:convert';
-import 'package:fairc/fairdsl/fair_ast_logic_unit.dart';
+
+import 'package:fair_dart2dsl/fairdsl/fair_ast_logic_unit.dart';
 
 import 'fair_ast_node.dart';
 

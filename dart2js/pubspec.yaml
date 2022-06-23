@@ -1,9 +1,12 @@
-name: dartToJs
+name: fair_dart2js
 description: Convert individual dart file to js.
-# version: 1.0.0
+version: 1.1.0
+homepage: https://fair.58.com/
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
 dependencies:
-  analyzer: ^1.5.0
+  flutter:
+    sdk: flutter
+  analyzer: ^2.3.0
   path: ^1.8.0

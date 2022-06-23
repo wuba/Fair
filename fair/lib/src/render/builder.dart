@@ -50,7 +50,6 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     try {
       var module = bound?.modules?.moduleOf(name)?.call();
       var isWidget = module?.isWidget ?? false;
-
       dynamic mapper = module;
       if (mapper == null) {
         mapper = bound?.functionOf(name) ?? bound?.valueOf(name);
@@ -69,6 +68,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         return _buildSugarMapEach(mapper, map, methodMap, context);
       } else if (name == 'Sugar.map') {
         return _buildSugarMap(mapper, map, methodMap, context);
+      } else if (name == 'Sugar.switchCase'){
+        return _buildSwitchCase(mapper, map, methodMap, context);
       }
 
       var source = map['mapEach'];
@@ -288,6 +289,30 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var params = {
       'pa': [source, children]
     };
+    return mapEach.call(params);
+  }
+
+  Widget _buildSwitchCase(
+      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+    var caseValue = pa0(map);
+    var source = pa1(map);
+    var defaultValue = pa2(map);
+    var children = [];
+
+    if (!(source is List)) {
+      throw Exception('Sugar.SwitchCase has no valid cases array');
+    }
+
+    if (source is List) {
+      children = Domain(source).forEach(($, element) {
+          return convert(context, element, methodMap, domain: $);
+      });
+    }
+    var reurnWidget = Container();
+    var params = {
+      'pa': [caseValue, children,defaultValue]
+    };
+
     return mapEach.call(params);
   }
 

@@ -3,6 +3,7 @@
 
 .packages
 .pub/
+*.lock
 
 build/
 .idea/

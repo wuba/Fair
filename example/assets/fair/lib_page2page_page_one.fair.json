@@ -1,0 +1,66 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "PageOne"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "Container",
+      "na": {
+        "child": {
+          "className": "Padding",
+          "na": {
+            "padding": {
+              "className": "EdgeInsets.all",
+              "pa": [
+                20
+              ]
+            },
+            "child": {
+              "className": "Text",
+              "pa": [
+                "点击右下角按钮跳转到下个页面"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "floatingActionButton": {
+      "className": "FloatingActionButton",
+      "na": {
+        "onPressed": {
+          "className": "Navigator.pushNamed",
+          "pa": [
+            "^(context)",
+            "fair_page_two"
+          ],
+          "na": {
+            "arguments": {
+              "path": "assets/fair/lib_page2page_page_two.fair.json",
+              "data": {
+                "title": "^(nextPageName)"
+              }
+            }
+          }
+        },
+        "tooltip": "Increment",
+        "child": {
+          "className": "Icon",
+          "pa": [
+            "#(Icons.arrow_forward_sharp)"
+          ]
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}
