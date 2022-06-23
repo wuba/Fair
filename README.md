@@ -112,7 +112,7 @@ Comprehensively optimize the example structure and upgrade the example experienc
 
 In the source code, an example project is added to provide the standard usage of fair API.  
 
-example location：fair/example
+example location：`fair/example`
 
 ### v2.4.1
 updateDate：2022.05.12  
