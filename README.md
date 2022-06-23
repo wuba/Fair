@@ -106,7 +106,7 @@ updateDate：2022.05.31
 #### Fair
 Adapt to flutter SDK 2.8.0, 2.8.1  
 Dart2js supports parsing singletons  
-New syntax sugar switchCase、Sugar. colorsWithOpacity、Sugar. Converttostring, etc  
+New syntax Sugar.switchCase、Sugar.colorsWithOpacity、Sugar.convertToString, etc  
 #### example
 Comprehensively optimize the example structure and upgrade the example experience, which is more suitable for beginners.  
 
