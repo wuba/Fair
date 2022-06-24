@@ -108,6 +108,46 @@ path: 'assets/bundle/lib_src_page_dynamic_widget.fair.json',
 data: {"fairProps": json.encode({})}),
 ```
 
+## 🔨最近版本
+
+### 2.5.0
+更新时间：2022.05.31
+
+##### Fair
+- 适配 Flutter SDK 2.8.0、2.8.1
+- Dart2JS 支持解析单例
+- 新增语法糖Sugar.switchCase、Sugar.colorsWithOpacity、Sugar.convertToString等
+
+##### example
+全面优化example结构,升级example体验，更适合新手入门。  
+在源码中，新增 example 工程，用于提供 Fair API 的标准用法。
+
+example 工程位置：`fair/example`
+
+### 2.4.1
+更新时间：2022.05.12
+
+##### Fair
+- 修复 FairLogger 文件导包问题
+- 升级 analyzer 到 2.3.0
+
+### 2.4.0
+更新时间：2022.04.26
+
+##### Fair
+- FlatBuffers 支持在 null safe 环境下生成 bin 文件
+
+### 2.3.0
+更新时间：2022.04.22
+
+#### Fair
+- 支持空安全 null-safe
+- 适配Flutter SDK 2.5.0、2.5.1、2.5.2、2.5.3等版本
+
+#### demo
+- 升级 sample 工程里过时的demo
+- 补充 sample 工程里 iOS 的运行环境
+
 ## 🕰2022 规划
 
 * 主版本计划
