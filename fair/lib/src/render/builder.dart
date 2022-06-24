@@ -45,12 +45,11 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     print('name:$name');
     if (name == null) {
       return WarningWidget(
-          parentContext:context,name: name, error: '$tag is not supported', url: bundle);
+          name: name, error: '$tag is not supported', url: bundle);
     }
     try {
       var module = bound?.modules?.moduleOf(name)?.call();
       var isWidget = module?.isWidget ?? false;
-
       dynamic mapper = module;
       if (mapper == null) {
         mapper = bound?.functionOf(name) ?? bound?.valueOf(name);
@@ -69,6 +68,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         return _buildSugarMapEach(mapper, map, methodMap, context);
       } else if (name == 'Sugar.map') {
         return _buildSugarMap(mapper, map, methodMap, context);
+      } else if (name == 'Sugar.switchCase'){
+        return _buildSwitchCase(mapper, map, methodMap, context);
       }
 
       var source = map['mapEach'];
@@ -80,7 +81,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }
       return _block(map, methodMap, context, domain, mapper, name, isWidget);
     } catch (e) {
-      return WarningWidget(parentContext:context, name: name, error: e, url: bundle, solution:"Tag name not supported yet,You need to use the @FairBinding annotation to tag the local Widget component");
+      return WarningWidget(name: name, error: e, url: bundle);
     }
   }
 
@@ -112,7 +113,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         stack: stack,
         context: ErrorSummary('while parsing widget of $name, $fun'),
       ));
-      throw ArgumentError('name===$name,fun===$fun, error===$e, map===$map');
+      throw ArgumentError('name=$name, fun=$fun, error=$e, $map');
     }
   }
 
@@ -288,6 +289,30 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var params = {
       'pa': [source, children]
     };
+    return mapEach.call(params);
+  }
+
+  Widget _buildSwitchCase(
+      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+    var caseValue = pa0(map);
+    var source = pa1(map);
+    var defaultValue = pa2(map);
+    var children = [];
+
+    if (!(source is List)) {
+      throw Exception('Sugar.SwitchCase has no valid cases array');
+    }
+
+    if (source is List) {
+      children = Domain(source).forEach(($, element) {
+          return convert(context, element, methodMap, domain: $);
+      });
+    }
+    var reurnWidget = Container();
+    var params = {
+      'pa': [caseValue, children,defaultValue]
+    };
+
     return mapEach.call(params);
   }
 

@@ -31,7 +31,7 @@ class Loader {
       widget = _decoder!.toWidget(context);
       return widget;
     } catch (e) {
-      widget = WarningWidget(parentContext:context,name: page, url: url, error: e, solution: "$page load error");
+      widget = WarningWidget(name: page, url: url, error: e);
     }
     return widget;
   }

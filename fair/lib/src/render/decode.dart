@@ -38,17 +38,12 @@ class Decoder {
   bool get hasResolved => _source != null;
 
   Future<void> resolve(BuildContext context) async {
-    var jsonBean = await _loader.obtain(context).onLoad(url, _decoder,
-        cache: true, h: const {'fairVersion': '$fairVersion#$flutterVersion'});
+    var jsonBean = await _loader.obtain(context).onLoad(url, _decoder, cache: true, h: const {'fairVersion': '$fairVersion#$flutterVersion'});
     Map? data = <dynamic, dynamic>{};
     Map? methodMap = <String, dynamic>{};
 
     var d = jsonBean?.remove('data');
-    try {
-      methodMap = jsonBean?['methodMap'];
-    } catch (e) {
-      print(e);
-    }
+    methodMap = jsonBean?['methodMap'];
     jsonBean?.remove('methodMap');
 
     if (d != null) {
@@ -82,10 +77,8 @@ class Decoder {
       bound.data = data;
     }
     var proxy = app?.proxy;
-    Widget w = DynamicWidgetBuilder(proxy as ProxyMirror?, page, bound, bundle: url)
-            .convert(context, map, methodMap) ??
-        WarningWidget(
-            parentContext:context,name: page, url: url, error: 'tag name not supported yet');
+    Widget w = DynamicWidgetBuilder(proxy as ProxyMirror?, page, bound, bundle: url).convert(context, map, methodMap) ??
+        WarningWidget(name: page, url: url, error: 'tag name not supported yet');
     return w;
   }
 }
