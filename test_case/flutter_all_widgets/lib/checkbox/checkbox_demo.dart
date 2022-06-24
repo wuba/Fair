@@ -12,13 +12,25 @@ class CheckboxDemo extends StatelessWidget {
       ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
         children: [
-          FlutterCheckboxPage(),
-          FairWidget(
-              path:
-                  'assets/bundle/checkbox/lib_checkbox_checkbox_widget.fair.json',
-              data: {'fairProps': jsonEncode({})})
+          Container(
+            height: 200,
+            width: 150,
+            color: Colors.white,
+            child: FlutterCheckboxPage(),
+          ),
+          Container(
+            color: Colors.white,
+            height: 200,
+            width: 150.0,
+            child: FairWidget(
+                path:
+                    'assets/bundle/checkbox/lib_checkbox_checkbox_widget.fair.json',
+                data: {
+                  'fairProps': jsonEncode({'isChecked':true})
+                }),
+          )
         ],
       ),
     );
@@ -37,7 +49,7 @@ class _FlutterCheckboxState extends State<FlutterCheckboxPage> {
     return Colors.red;
   }
 
-  bool _getChecked(){
+  bool _getChecked() {
     return isChecked;
   }
 

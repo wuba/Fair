@@ -4,11 +4,13 @@ import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
 class OutlineButtonDemo extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("CheckBox"),
+        title: Text("OutlineButton"),
       ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
