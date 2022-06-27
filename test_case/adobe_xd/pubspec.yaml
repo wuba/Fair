@@ -27,7 +27,7 @@ dependencies:
   adobe_xd:
     git:
       url: https://github.com/AdobeXD/xd-to-flutter-plugin.git
-      ref: v2.0.0
+      ref: v2.0.1
       path: adobe_xd
   fair:
     path: ../../fair
@@ -46,7 +46,7 @@ dev_dependencies:
 
 dependency_overrides:
   fair_version:
-    path: ../../flutter_version/flutter_2_8_0
+    path: ../../flutter_version/flutter_2_10_0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
