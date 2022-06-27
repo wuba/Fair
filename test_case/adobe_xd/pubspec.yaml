@@ -27,7 +27,7 @@ dependencies:
   adobe_xd:
     git:
       url: https://github.com/AdobeXD/xd-to-flutter-plugin.git
-      ref: v2.0.1
+      ref: v2.0.0
       path: adobe_xd
   fair:
     path: ../../fair

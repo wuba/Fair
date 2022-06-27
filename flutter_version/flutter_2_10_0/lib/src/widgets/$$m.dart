@@ -7506,7 +7506,6 @@ var p = () => {
     'pie_chart': Icons.pie_chart,
     'pie_chart_sharp': Icons.pie_chart_sharp,
     'pie_chart_rounded': Icons.pie_chart_rounded,
-    'pie_chart_outlined': Icons.pie_chart_outlined,
     'pie_chart_outline': Icons.pie_chart_outline,
     'pie_chart_outline_sharp': Icons.pie_chart_outline_sharp,
     'pie_chart_outline_rounded': Icons.pie_chart_outline_rounded,
