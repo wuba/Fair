@@ -4,6 +4,13 @@ import 'package:flutter/material.dart';
 import 'utils.dart';
 
 var p = () => {
+  'BoxShadow': (props) => BoxShadow(
+    color: props['color']?? const Color(0xFF000000),
+    offset: props['offset']?? Offset.zero,
+    blurRadius: props['blurRadius'].toDouble(),
+    spreadRadius: props['spreadRadius'],
+    blurStyle: props['blurStyle']??BlurStyle.normal,
+  ),
   'BoxShadow.lerp': (props) => BoxShadow.lerp(
     props['pa'][0],
     props['pa'][1],
@@ -348,6 +355,11 @@ var p = () => {
     props['pa'][0],
     props['pa'][1],
     props['pa'][2]?.toDouble(),
+  ),
+  'Border.all': (props) => Border.all(
+    width : props['width'].toDouble(),
+    color : props['color'] ?? const Color(0xFF000000),
+    style : props['style'] ?? BorderStyle.solid,
   ),
   'BorderDirectional.merge': (props) => BorderDirectional.merge(
     props['pa'][0],
