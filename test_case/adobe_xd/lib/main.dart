@@ -23,7 +23,7 @@ void main() {
 
 dynamic _getApp() => FairApp(
   child: MaterialApp(home: MyApp()),
-  // generated: AppGeneratedModule(),
+  generated: AppGeneratedModule(),
   modules: {
     PageLinkModule.tagName: () => PageLinkModule(),
     PageBuilderModule.tagName: () => PageBuilderModule(),
