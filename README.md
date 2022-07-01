@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.4.1-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.5.0-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -43,7 +43,7 @@ Assuming that the fair project and your own project are in the same folder:
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 2.4.1
+  fair: 2.5.0
 
 # add build_runner and compiler dependency
 dev_dependencies:
@@ -52,12 +52,13 @@ dev_dependencies:
     path: ../fair/compiler
  
 # switch "fair_version" according to the local Flutter SDK version
+# Flutter SDK 2.8.x(2.8.0、2.8.1) -> flutter_2_8_0
 # Flutter SDK 2.5.x(2.5.0、2.5.1、2.5.2、2.5.3) -> flutter_2_5_0
 # Flutter SDK 2.0.6 -> flutter_2_0_6
 # Flutter SDK 1.22.6 -> flutter_1_22_6
 dependency_overrides:
   fair_version:
-    path: ../fair/flutter_version/flutter_2_5_0
+    path: ../fair/flutter_version/flutter_2_8_0
 ```
 
 **step3：Wrap your app with FairApp Widget**
@@ -99,6 +100,41 @@ FairWidget(
 ## Documentation
 For more details, please refer to [https://fair.58.com](https://fair.58.com)
 
+## versions
+### 2.5.0
+updateDate：2022.05.31
+#### Fair
+Adapt to flutter SDK 2.8.0, 2.8.1  
+Dart2js supports parsing singletons  
+New syntax Sugar.switchCase、Sugar.colorsWithOpacity、Sugar.convertToString, etc  
+#### example
+Comprehensively optimize the example structure and upgrade the example experience, which is more suitable for beginners.  
+
+In the source code, an example project is added to provide the standard usage of fair API.  
+
+example location：`fair/example`
+
+### v2.4.1
+updateDate：2022.05.12  
+
+Fix FairLogger import problem.  
+Upgrade Analyzer to 2.3.0.  
+
+### v2.4.0
+updateDate：2022.04.26
+
+FlatBuffers supports generating bin files in a null safe environment  
+
+### v2.3.0
+updateDate: 2022.04.22
+
+#### Fair
+supports null-safe  
+Adapt to Flutter SDK 2.5.0, 2.5.1, 2.5.2, 2.5.3 and other versions  
+#### demo
+Upgrade the outdated demo in the sample project  
+Supplement the iOS runtime environment in the sample project  
+
 ## 🕰2022 Roadmap
 
 * Major release plan
@@ -131,12 +167,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+
 <table>
   <tr>
     <td align="center"><a href="http://blog.hacktons.cn/"><img src="https://avatars.githubusercontent.com/u/1622234?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Wu</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=avenwu" title="Code">💻</a> <a href="https://github.com/wuba/fair/commits?author=avenwu" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/LinLeyang"><img src="https://avatars.githubusercontent.com/u/13174498?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Penta</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=LinLeyang" title="Code">💻</a> <a href="https://github.com/wuba/fair/commits?author=LinLeyang" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/153493932"><img src="https://avatars.githubusercontent.com/u/10431131?v=4?s=100" width="100px;" alt=""/><br /><sub><b>haijun</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=153493932" title="Code">💻</a> <a href="https://github.com/wuba/fair/commits?author=153493932" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://yancechen.github.io/"><img src="https://avatars.githubusercontent.com/u/19757728?v=4?s=100" width="100px;" alt=""/><br /><sub><b>陈有余</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=yancechen" title="Code">💻</a> <a href="https://github.com/wuba/fair/commits?author=yancechen" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/yancechen"><img src="https://avatars.githubusercontent.com/u/19757728?v=4?s=100" width="100px;" alt=""/><br /><sub><b>陈有余</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=yancechen" title="Code">💻</a> <a href="https://github.com/wuba/fair/commits?author=yancechen" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/yyzl0418"><img src="https://avatars.githubusercontent.com/u/14289945?v=4?s=100" width="100px;" alt=""/><br /><sub><b>yangyang</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=yyzl0418" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/wanbing"><img src="https://avatars.githubusercontent.com/u/7804234?v=4?s=100" width="100px;" alt=""/><br /><sub><b>wan</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=wanbing" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/bujiee"><img src="https://avatars.githubusercontent.com/u/16713978?v=4?s=100" width="100px;" alt=""/><br /><sub><b>bujie</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=bujiee" title="Code">💻</a></td>
@@ -148,9 +185,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/waynesonic"><img src="https://avatars.githubusercontent.com/u/5502794?v=4?s=100" width="100px;" alt=""/><br /><sub><b>waynesonic</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=waynesonic" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/paozhuanyinyu"><img src="https://avatars.githubusercontent.com/u/16041238?v=4?s=100" width="100px;" alt=""/><br /><sub><b>paozhuanyinyu</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=paozhuanyinyu" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Alzzzz"><img src="https://avatars.githubusercontent.com/u/19664495?v=4?s=100" width="100px;" alt=""/><br /><sub><b>alzzzz</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=Alzzzz" title="Code">💻</a> <a href="https://github.com/wuba/fair/commits?author=Alzzzz" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/xiangwc"><img src="https://avatars.githubusercontent.com/u/22017021?v=4?s=100" width="100px;" alt=""/><br /><sub><b>xiangwc</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=xiangwc" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/KKProject"><img src="https://avatars.githubusercontent.com/u/14860258?v=4?s=100" width="100px;" alt=""/><br /><sub><b>WangYk</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=KKProject" title="Code">💻</a></td>
   </tr>
 </table>
-
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 

@@ -1,6 +1,6 @@
 name: fair_compiler
 description: A complier which can generate Fair bundle for widget with annotation.
-version: 2.3.0
+version: 1.1.0
 homepage: https://fair.58.com/
 
 environment:
@@ -25,10 +25,8 @@ dependencies:
 #  fair_annotation:
 #    path: ../annotation
   http: ^0.13.3
-  fairc:
-    path: ../dart2dsl
-  dartToJs:
-    path: ../dart2js
+  fair_dart2dsl: ^1.0.1
+  fair_dart2js: ^1.1.0
 
 dev_dependencies:
   test: ^1.17.12

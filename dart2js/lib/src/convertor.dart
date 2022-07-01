@@ -10,7 +10,7 @@ import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/error/error.dart';
-import 'package:dartToJs/src/list_ext.dart';
+import 'package:fair_dart2js/src/list_ext.dart';
 import 'package:path/path.dart' as p;
 
 enum ClassOutputTemplateType { raw, pageState }
@@ -468,7 +468,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
         // if (fairWellExp.allMatches(element.metadata.first.toString()).isNotEmpty) {
         var excludeMethods = ['build'];
         if (!excludeMethods.contains(element.name.toString()) && element.returnType.toString() != 'Widget') {
-          tempClassDeclaration.methods.add(MethodDeclarationData(element.name.toString(), element.toString(), element.body is ExpressionFunctionBody));
+          tempClassDeclaration.methods.add(MethodDeclarationData(element.name.toString(), element.toString(), element.body is ExpressionFunctionBody)..isStatic = element.isStatic);
         }
         // }
       }
@@ -1608,7 +1608,9 @@ String convertFunctionExpression(String code) {
 }
 
 String convertFunctionFromData(MethodDeclarationData? data, [ClassDeclarationData? ctx]) {
-  var res = parseString(content: data?.body ?? '');
+  var content = data?.body ?? '';
+  if(data?.isStatic ?? false) content = content.replaceAll('static', '');
+  var res = parseString(content: content);
   var generator = SimpleFunctionGenerator(isArrowFunc: data?.isArrow ?? false, renamedParameters: data?.renamedParameters, parentClass: ctx?.parentClass);
   generator.func
     ?..withContext = true
@@ -1691,7 +1693,6 @@ String convertClassString(String content, [bool isDataBean = false]) {
   var result = parseString(content: content, featureSet: FeatureSet.fromEnableFlags([]));
   var visitor = ClassDeclarationVisitor(isDataBean);
   result.unit.visitChildren(visitor);
-
   return visitor.genJsCode();
 }
 

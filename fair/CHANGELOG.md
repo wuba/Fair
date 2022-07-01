@@ -1,3 +1,8 @@
+## [2.5.0]
+* Add support of flutter 2.8.0、2.8.1.
+* Support singleton parsing.
+* Add Sugar：Sugar.colorsWithOpacity、Sugar.switchCase、Sugar.convertToString.
+
 ## [2.4.1]
 * Fix FairLogger import problem.
 * Upgrade Analyzer to 2.3.0.

@@ -12,7 +12,7 @@ import 'package:fair_compiler/src/fair_asset.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:process/process.dart';
-import 'package:fairc/fairc.dart' as dart2dsl;
+import 'package:fair_dart2dsl/fairc.dart' as dart2dsl;
 
 mixin FlatCompiler {
   final command = 'flatc';
