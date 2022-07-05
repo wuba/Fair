@@ -1,0 +1,56 @@
+{
+  "className": "CupertinoAlertDialog",
+  "na": {
+    "title": {
+      "className": "Text",
+      "pa": [
+        "%(_getTitle)"
+      ]
+    },
+    "content": {
+      "className": "Text",
+      "pa": [
+        "%(_getContent)"
+      ]
+    },
+    "actions": [
+      {
+        "className": "CupertinoDialogAction",
+        "na": {
+          "isDefaultAction": true,
+          "onPressed": {
+            "className": "Navigator.pop",
+            "pa": [
+              "^(context)"
+            ]
+          },
+          "child": {
+            "className": "Text",
+            "pa": [
+              "取消"
+            ]
+          }
+        }
+      },
+      {
+        "className": "CupertinoDialogAction",
+        "na": {
+          "isDefaultAction": true,
+          "onPressed": {
+            "className": "Navigator.pop",
+            "pa": [
+              "^(context)"
+            ]
+          },
+          "child": {
+            "className": "Text",
+            "pa": [
+              "确定"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "methodMap": {}
+}

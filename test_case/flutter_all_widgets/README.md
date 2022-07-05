@@ -7,4 +7,6 @@ CheckBox |onChanged属性，写法 (value) =>checked = value)； (value) {checke
 CheckBox | 不识别 MaterialStateProperty | 否 |
 CupertinoTabBar| ([dynamic]) => dynamic' is not a subtype of type '(BuildContext, int) => Widget'| 否| 2022/06/24
 OutlinedButton | 不支持 | 是 | 2022/06/23
+CupertinoAlertDialog | 支持 | 是 | 2022/07/05
+
 
