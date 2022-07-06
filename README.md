@@ -101,6 +101,17 @@ FairWidget(
 For more details, please refer to [https://fair.58.com](https://fair.58.com)
 
 ## versions
+
+### 2.6.0
+updateDate：2022.07.05
+
+#### Fair
+- 1.Fair supports loading bundle files on the phone disk path;
+- 2. Adapt to Flutter SDK 2.10.0, 2.10.1, 2.10.2, 2.10.3;
+- 3.Dart2JS supports parsing static methods;
+- 4. When running, the page error message prompts optimization;
+- 5. Syntactic sugar supports parsing Model data.
+
 ### 2.5.0
 updateDate：2022.05.31
 #### Fair

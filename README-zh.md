@@ -110,6 +110,16 @@ data: {"fairProps": json.encode({})}),
 
 ## 🔨最近版本
 
+### 2.6.0
+更新时间：2022.07.05
+
+#### Fair
+- 1.Fair 支持加载手机磁盘路径上的 bundle 文件；
+- 2.适配 Flutter SDK 2.10.0、2.10.1、2.10.2、2.10.3 版本；
+- 3.Dart2JS 支持解析 static 方法；
+- 4.运行时，页面错误信息提示优化；
+- 5.语法糖支持解析 Model 数据。
+
 ### 2.5.0
 更新时间：2022.05.31
 
@@ -199,6 +209,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/Alzzzz"><img src="https://avatars.githubusercontent.com/u/19664495?v=4?s=100" width="100px;" alt=""/><br /><sub><b>alzzzz</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=Alzzzz" title="Code">💻</a> <a href="https://github.com/wuba/fair/commits?author=Alzzzz" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/xiangwc"><img src="https://avatars.githubusercontent.com/u/22017021?v=4?s=100" width="100px;" alt=""/><br /><sub><b>xiangwc</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=xiangwc" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/KKProject"><img src="https://avatars.githubusercontent.com/u/14860258?v=4?s=100" width="100px;" alt=""/><br /><sub><b>WangYk</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=KKProject" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/JunZiJianYi"><img src="https://avatars.githubusercontent.com/u/34125737?v=4?s=100" width="100px;" alt=""/><br /><sub><b>SunWei</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=JunZiJianYi" title="Code">💻</a></td>  
   </tr>
 </table>
 
