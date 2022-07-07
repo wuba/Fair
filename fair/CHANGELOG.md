@@ -1,5 +1,8 @@
-## [2.6.0]
+## [2.6.1]
+* Fixed some bugs.
 * Fair supports loading bundle from local disk.
+
+## [2.6.0]
 * Add support of flutter 2.10.0、2.10.1、2.10.2、2.10.3.
 * Support static methods parsing.
 * Runtime error message optimization.

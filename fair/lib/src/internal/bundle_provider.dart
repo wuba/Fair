@@ -34,10 +34,8 @@ mixin FairBundlePathCheck {
 
     var file = File(originPath);
     if (file.existsSync()) {
-      print('------>>>>>该文件存在');
       return true;
     } else {
-      print('------>>>>>该文件不存在');
       return false;
     }
   }

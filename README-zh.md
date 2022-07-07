@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.6.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.6.1-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -54,7 +54,7 @@ git clone https://github.com/wuba/fair.git
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 2.6.0
+  fair: 2.6.1
 
 # add build_runner and compiler dependency
 dev_dependencies:
