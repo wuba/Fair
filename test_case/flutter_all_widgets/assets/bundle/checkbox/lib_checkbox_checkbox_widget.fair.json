@@ -4,10 +4,10 @@
     "child": {
       "className": "Checkbox",
       "na": {
-        "value": "#(_isChecked)",
+        "value": "%(_isCheck)",
         "checkColor": "#(Colors.white)",
         "activeColor": "#(Colors.red)",
-        "onChanged": null
+        "onChanged": "@(_onChange)"
       }
     }
   },

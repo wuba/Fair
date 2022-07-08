@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:fair/fair.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +35,12 @@ class AlertDialogDemo extends StatelessWidget {
   void _showFairAlertDialog(BuildContext context){
     showCupertinoModalPopup<void>(
         context: context,
-        builder: (BuildContext context) => FairAlertDialogPage());
+        builder: (BuildContext context) => FairWidget(
+            path:
+            'assets/bundle/cupertinoalertdialog/lib_cupertinoalertdialog_alert_dialog_fair.fair.json',
+            data: {
+              'fairProps': jsonEncode({'title': 'Fair Alert','content':'我是Fair CupertinoAlertDialog,请点击取消或确定退出'})
+            }));
   }
 
   @override

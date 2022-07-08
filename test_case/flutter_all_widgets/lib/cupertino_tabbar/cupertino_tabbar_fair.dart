@@ -1,10 +1,9 @@
-import 'dart:js';
 
 import 'package:fair/fair.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'tabbar_bean.dart';
+
 
 @FairPatch()
 class FairCupertinoTabBarPage extends StatefulWidget {

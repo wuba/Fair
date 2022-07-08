@@ -17,6 +17,7 @@ class _FairAlertDialogState extends State<FairAlertDialogPage> {
 
   @override
   void initState() {
+    super.initState();
     this.fairProps = widget.fairProps;
   }
 
