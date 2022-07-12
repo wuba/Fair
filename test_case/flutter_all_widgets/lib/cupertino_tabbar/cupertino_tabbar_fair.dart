@@ -24,12 +24,10 @@ class _FairCupertinoTabBarState extends State<FairCupertinoTabBarPage> {
   @override
   void initState() {
     super.initState();
-    print('baixue:initState');
     fairProps = widget.fairProps;
   }
 
   List<String> _getTabList() {
-    print('baixue:${fairProps['tabList']}');
     return fairProps['tabList'];
   }
 
@@ -42,7 +40,6 @@ class _FairCupertinoTabBarState extends State<FairCupertinoTabBarPage> {
    * 可能解析时出错了，默认返回了WarningWidget,使用list.map((e)=> widget)效果一样
    */
   List<BottomNavigationBarItem> _getTableItem() {
-    print('_getTableItem');
     return Sugar.mapEach(
         _getTabList(),
             (index, item) => BottomNavigationBarItem(
@@ -50,7 +47,6 @@ class _FairCupertinoTabBarState extends State<FairCupertinoTabBarPage> {
   }
 
   CupertinoTabBar _getTabBarWidget() {
-    print('_getTabBarWidget');
     print(fairProps['tabList']);
     return CupertinoTabBar(
       items:  _getTableItem(),

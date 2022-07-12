@@ -2,6 +2,7 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_all_widgets/outlinebutton/outlinebutton_demo.dart';
+import 'package:flutter_all_widgets/rich_text/rich_text_demo.dart';
 
 import 'checkbox/checkbox_demo.dart';
 import 'circularProgressIndicator/circular_progressIndicator_demo.dart';
@@ -43,6 +44,7 @@ class HomePage extends StatelessWidget {
       WidgetItem("CupertinoTabBar", CupertinoTabBarDemo()),
       WidgetItem("CupertinoAlertDialog", AlertDialogDemo()),
       WidgetItem("CircularProgressIndicator", CircularProgressIndicatorDemo()),
+      WidgetItem("RichText", RichTextDemo()),
     ];
 
     return Scaffold(

@@ -59,6 +59,7 @@ flutter:
     - assets/bundle/outlinebutton/
     - assets/bundle/cupertinoalertdialog/
     - assets/bundle/circularprogressindicator/
+    - assets/bundle/richtext/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
