@@ -11,6 +11,9 @@ public class FairConstant {
     /*native-js 基础通信*/
     public static final String FLUTTER_COMMON_MESSAGE_CHANNEL = "com.wuba.fair/common_message_channel";
 
+    /*native-js 基础通信*/
+    public static final String FLUTTER_BASIC_MESSAGE_CHANNEL = "com.wuba.fair/basic_message_channel";
+
     public static final String INVOKE_JS_COMMON_FUNC = "invokeJSCommonFunc";
     public static final String INVOKE_JS_FUNC = "invokeJSFunc";
 
