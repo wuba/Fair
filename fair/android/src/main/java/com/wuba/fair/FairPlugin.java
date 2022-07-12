@@ -11,6 +11,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.wuba.fair.channel.FairFfi;
+import com.wuba.fair.constant.FairConstant;
 import com.wuba.fair.core.FairJsEngineProvider;
 import com.wuba.fair.core.FairJsFlutterEngine;
 import com.wuba.fair.core.base.FairJsLoader;
@@ -24,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
+import io.flutter.plugin.common.MethodChannel;
 
 public class FairPlugin implements FlutterPlugin {
     @SuppressLint("StaticFieldLeak")
@@ -34,12 +36,15 @@ public class FairPlugin implements FlutterPlugin {
     private Context mContext;
     private FairJsFlutterEngine engine;
     private FairFfi fairFfi;
+    private MethodChannel basicChannel;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
         logSp();
         mContext = binding.getApplicationContext();
         plugin = this;
+        basicChannel = MethodChannel(FairPlugin.get().getBinaryMessenger(), FairConstant.FLUTTER_BASIC_MESSAGE_CHANNEL);
+
         binaryMessenger = binding.getBinaryMessenger();
         fairFfi = new FairFfi();
         CountDownLatch countDownLatch = new CountDownLatch(1);
@@ -59,6 +64,9 @@ public class FairPlugin implements FlutterPlugin {
                 if (engine == null) {
                     engine = new FairJsFlutterEngine();
                 }
+
+                basicChannel.invokeMethod("jsInitSuccess", null, null);
+
                 countDownLatch.countDown();
 
             }
