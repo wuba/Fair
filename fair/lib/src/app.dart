@@ -114,11 +114,9 @@ class FairApp extends InheritedWidget with AppState {
     var runtime = Runtime();
     var basicChannel = runtime.getBasicChannel();
 
-    basicChannel.setMethodCallHandler((call) async {
-      var method = call.method;
-      if (method == 'jsInitSuccess') {
-        await runtime.loadCoreJs().then((value) => runApp(app));
-      }
+    basicChannel.invokeMethod('jsLoadListener').then((value){
+      runtime.loadCoreJs().then((value) => runApp(app));
     });
+
   }
 }

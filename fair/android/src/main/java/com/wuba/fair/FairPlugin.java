@@ -26,6 +26,10 @@ import java.util.concurrent.TimeUnit;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodChannel;
+import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
+import io.flutter.plugin.common.MethodChannel.Result;
+
+
 
 public class FairPlugin implements FlutterPlugin {
     @SuppressLint("StaticFieldLeak")
@@ -43,9 +47,9 @@ public class FairPlugin implements FlutterPlugin {
         logSp();
         mContext = binding.getApplicationContext();
         plugin = this;
-        basicChannel = MethodChannel(FairPlugin.get().getBinaryMessenger(), FairConstant.FLUTTER_BASIC_MESSAGE_CHANNEL);
-
         binaryMessenger = binding.getBinaryMessenger();
+        basicChannel =new MethodChannel(binaryMessenger, FairConstant.FLUTTER_BASIC_MESSAGE_CHANNEL);
+        basicChannel.setMethodCallHandler(methodHandler);
         fairFfi = new FairFfi();
         CountDownLatch countDownLatch = new CountDownLatch(1);
         //等待js引擎加载成功
@@ -65,7 +69,9 @@ public class FairPlugin implements FlutterPlugin {
                     engine = new FairJsFlutterEngine();
                 }
 
-                basicChannel.invokeMethod("jsInitSuccess", null, null);
+                if (jsLoadResult!=null){
+                    jsLoadResult.success("");
+                }
 
                 countDownLatch.countDown();
 
@@ -78,6 +84,22 @@ public class FairPlugin implements FlutterPlugin {
             e.printStackTrace();
         }
     }
+
+
+    Result jsLoadResult;
+
+    private MethodChannel.MethodCallHandler methodHandler = (call, result) -> {
+        switch (call.method) {
+            case "jsLoadListener":
+                jsLoadResult=result;
+                if (jsLoader!=null){
+                    jsLoadResult.success("");
+                }
+                break;
+            default:
+                break;
+        }
+    };
 
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
