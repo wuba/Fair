@@ -1,0 +1,13 @@
+{
+  "className": "OutlinedButton",
+  "na": {
+    "onPressed": "@(_onClick)",
+    "child": {
+      "className": "Text",
+      "pa": [
+        "%(_getButtonContent)"
+      ]
+    }
+  },
+  "methodMap": {}
+}

@@ -1,0 +1,33 @@
+{
+  "className": "CupertinoTabScaffold",
+  "na": {
+    "backgroundColor": "#(Colors.blueAccent)",
+    "tabBar": "%(_getTabBarWidget)",
+    "tabBuilder": "@(_getTabBuild)"
+  },
+  "methodMap": {
+    "_getTableItem": {},
+    "_getTabBarWidget": {
+      "className": "CupertinoTabBar",
+      "na": {
+        "items": "%(_getTableItem)"
+      }
+    },
+    "_getTabBuild": {
+      "className": "CupertinoTabView",
+      "na": {
+        "builder": {
+          "className": "Center",
+          "na": {
+            "child": {
+              "className": "Text",
+              "pa": [
+                "#(Page of tab $index)"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

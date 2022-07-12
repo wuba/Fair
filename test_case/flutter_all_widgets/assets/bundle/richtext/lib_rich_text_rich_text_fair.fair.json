@@ -1,0 +1,38 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "RichText",
+      "na": {
+        "text": {
+          "className": "TextSpan",
+          "na": {
+            "text": "%(_getContent)",
+            "style": "$(style:)",
+            "children": [
+              {
+                "className": "TextSpan",
+                "na": {
+                  "text": "bold",
+                  "style": {
+                    "className": "TextStyle",
+                    "na": {
+                      "fontWeight": "#(FontWeight.bold)"
+                    }
+                  }
+                }
+              },
+              {
+                "className": "TextSpan",
+                "na": {
+                  "text": " world!"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}
