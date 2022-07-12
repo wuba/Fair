@@ -79,6 +79,9 @@ extern NSString * const FairExecuteJSFunction;
 /// Dart -- > Native 调用方法的类型
 extern NSString * const FairMessageChannelMethodType;
 
+/// Dart -- >Native 回调
+extern NSString * const FairBasicMessageChannelExecuteID;
+
 /// JS函数调用的线程
 extern NSString * const FairJSThreadName;
 
