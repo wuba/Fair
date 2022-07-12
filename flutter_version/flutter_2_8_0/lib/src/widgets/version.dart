@@ -460,7 +460,7 @@ const widgetNames = {
   'DefaultMaterialLocalizations': false,
   'Typography': false,
   'ScriptCategory': false,
-  'OutlinedButton': true,
+  'OutlinedButton': false,
   'Divider': true,
   'VerticalDivider': true,
   'SliderTheme': false,
