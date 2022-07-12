@@ -29,6 +29,8 @@ class Loader {
     Widget widget;
     try {
       widget = _decoder!.toWidget(context);
+      print("==================解析控件结束==================");
+      print(widget);
       return widget;
     } catch (e) {
       widget = WarningWidget(parentContext:context,name: page, url: url, error: e, solution: "$page load error");

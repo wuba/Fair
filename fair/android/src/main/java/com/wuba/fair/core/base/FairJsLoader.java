@@ -23,41 +23,41 @@ public abstract class FairJsLoader {
     }
 
     private void loadMsgChannel() {
-        FairThread.runOnUI(() -> {
-            methodChannel = new MethodChannel(FairPlugin.get().getBinaryMessenger(),
-                    FairConstant.FLUTTER_LOADER_MESSAGE_CHANNEL);
-            methodChannel.setMethodCallHandler(methodHandler);
-        });
+        methodChannel = new MethodChannel(FairPlugin.get().getBinaryMessenger(),
+                FairConstant.FLUTTER_LOADER_MESSAGE_CHANNEL);
+        methodChannel.setMethodCallHandler(methodHandler);
     }
 
     private MethodChannel.MethodCallHandler methodHandler = (call, result) -> {
-        switch (call.method) {
-            case FairConstant.LOAD_MAIN_JS:
-                FairThread.get().run(new FairTask() {
-                    @Override
-                    public void runTask() {
-                        loadMainJs(call.arguments, s -> {
-                            FairThread.runOnUI(new Runnable() {
-                                @Override
-                                public void run() {
-                                    result.success(s);
-                                }
+        FairThread.runOnUI(() -> {
+            switch (call.method) {
+                case FairConstant.LOAD_MAIN_JS:
+                    FairThread.get().run(new FairTask() {
+                        @Override
+                        public void runTask() {
+                            loadMainJs(call.arguments, s -> {
+                                FairThread.runOnUI(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        result.success(s);
+                                    }
+                                });
                             });
-                        });
-                    }
-                });
-                break;
-            case FairConstant.RELEASE_MAIN_JS:
-                FairThread.get().run(new FairTask() {
-                    @Override
-                    public void runTask() {
-                        releaseJsObject(call.arguments);
-                    }
-                });
-                break;
-            default:
-                break;
-        }
+                        }
+                    });
+                    break;
+                case FairConstant.RELEASE_MAIN_JS:
+                    FairThread.get().run(new FairTask() {
+                        @Override
+                        public void runTask() {
+                            releaseJsObject(call.arguments);
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        });
     };
 
     public MethodChannel.MethodCallHandler getMethodHandler() {

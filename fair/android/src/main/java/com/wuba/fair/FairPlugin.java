@@ -11,6 +11,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.wuba.fair.channel.FairFfi;
+import com.wuba.fair.constant.FairConstant;
 import com.wuba.fair.core.FairJsEngineProvider;
 import com.wuba.fair.core.FairJsFlutterEngine;
 import com.wuba.fair.core.base.FairJsLoader;
@@ -24,6 +25,11 @@ import java.util.concurrent.TimeUnit;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
+import io.flutter.plugin.common.MethodChannel;
+import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
+import io.flutter.plugin.common.MethodChannel.Result;
+
+
 
 public class FairPlugin implements FlutterPlugin {
     @SuppressLint("StaticFieldLeak")
@@ -34,6 +40,7 @@ public class FairPlugin implements FlutterPlugin {
     private Context mContext;
     private FairJsFlutterEngine engine;
     private FairFfi fairFfi;
+    private MethodChannel basicChannel;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
@@ -41,6 +48,8 @@ public class FairPlugin implements FlutterPlugin {
         mContext = binding.getApplicationContext();
         plugin = this;
         binaryMessenger = binding.getBinaryMessenger();
+        basicChannel =new MethodChannel(binaryMessenger, FairConstant.FLUTTER_BASIC_MESSAGE_CHANNEL);
+        basicChannel.setMethodCallHandler(methodHandler);
         fairFfi = new FairFfi();
         CountDownLatch countDownLatch = new CountDownLatch(1);
         //等待js引擎加载成功
@@ -59,6 +68,11 @@ public class FairPlugin implements FlutterPlugin {
                 if (engine == null) {
                     engine = new FairJsFlutterEngine();
                 }
+
+                if (jsLoadResult!=null){
+                    jsLoadResult.success("");
+                }
+
                 countDownLatch.countDown();
 
             }
@@ -70,6 +84,22 @@ public class FairPlugin implements FlutterPlugin {
             e.printStackTrace();
         }
     }
+
+
+    Result jsLoadResult;
+
+    private MethodChannel.MethodCallHandler methodHandler = (call, result) -> {
+        switch (call.method) {
+            case "jsLoadListener":
+                jsLoadResult=result;
+                if (jsLoader!=null){
+                    jsLoadResult.success("");
+                }
+                break;
+            default:
+                break;
+        }
+    };
 
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {

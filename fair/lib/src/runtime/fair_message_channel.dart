@@ -21,6 +21,7 @@ final DynamicLibrary dl = Platform.isAndroid
 
 final String JS_LOADER = 'com.wuba.fair/js_loader';
 final String COMMON_MESSAGE_CHANNEL = 'com.wuba.fair/common_message_channel';
+final String BASIC_MESSAGE_CHANNEL = 'com.wuba.fair/basic_message_channel';
 
 class FairMessageChannel {
   Pointer<Utf8> Function(Pointer<Utf8>) invokeJSCommonFuncSync = dl
@@ -30,6 +31,7 @@ class FairMessageChannel {
 
   BasicMessageChannel<String?>? _commonChannel;
   MethodChannel? _methodChannel;
+  MethodChannel? basicMethodChannel;
 
   factory FairMessageChannel() {
     return _msg;
@@ -45,6 +47,7 @@ class FairMessageChannel {
     _commonChannel ??=
         BasicMessageChannel<String?>(COMMON_MESSAGE_CHANNEL, StringCodec());
     _methodChannel ??= MethodChannel(JS_LOADER);
+    basicMethodChannel ??= MethodChannel(BASIC_MESSAGE_CHANNEL);
 
     _commonChannel!.setMessageHandler((String? message) async {
       print('来自native端的消息：$message');
