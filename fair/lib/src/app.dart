@@ -114,16 +114,15 @@ class FairApp extends InheritedWidget with AppState {
     // WidgetsFlutterBinding.ensureInitialized();
     FairPluginDispatcher.registerPlugins(plugins);
 
-    if(Platform.isIOS){
-      Runtime().loadCoreJs().then((value) => runApp(app));
-    }else{
+    if(Platform.isAndroid){
       var runtime = Runtime();
       var basicChannel = runtime.getBasicChannel();
       basicChannel.invokeMethod('jsLoadListener').then((value){
         runtime.loadCoreJs().then((value) => runApp(app));
       });
+
+    }else{
+      Runtime().loadCoreJs().then((value) => runApp(app));
     }
-
-
   }
 }
