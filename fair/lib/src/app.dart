@@ -4,6 +4,8 @@
  * found in the LICENSE file.
  */
 
+import 'dart:io';
+
 import 'package:fair/fair.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -111,12 +113,16 @@ class FairApp extends InheritedWidget with AppState {
   static void runApplication(Widget app, {Map<String, IFairPlugin>? plugins}) {
     // WidgetsFlutterBinding.ensureInitialized();
     FairPluginDispatcher.registerPlugins(plugins);
-    var runtime = Runtime();
-    var basicChannel = runtime.getBasicChannel();
 
-    basicChannel.invokeMethod('jsLoadListener').then((value){
-      runtime.loadCoreJs().then((value) => runApp(app));
-    });
+    if(Platform.isAndroid){
+      var runtime = Runtime();
+      var basicChannel = runtime.getBasicChannel();
+      basicChannel.invokeMethod('jsLoadListener').then((value){
+        runtime.loadCoreJs().then((value) => runApp(app));
+      });
 
+    }else{
+      Runtime().loadCoreJs().then((value) => runApp(app));
+    }
   }
 }
