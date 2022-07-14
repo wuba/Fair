@@ -10,5 +10,6 @@ OutlinedButton | 不支持 | 是 | 2022/06/23
 CupertinoAlertDialog | 报错 V8ScriptCompilationException | 否 | 2022/07/05
 CircularProgressIndicator | 不支持| 否 | 2022/07/08
 RichText | 不支持TextStyle| 否 | 2022/07/11
+AbsorbPointer | 2.8.0 'ElevatedButton': false | 否 |2022/07/14
 
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_all_widgets/outlinebutton/outlinebutton_demo.dart';
 import 'package:flutter_all_widgets/rich_text/rich_text_demo.dart';
 
+import 'absorbpointer/absorbpointer_demo.dart';
 import 'checkbox/checkbox_demo.dart';
 import 'circularProgressIndicator/circular_progressIndicator_demo.dart';
 import 'cupertino_tabbar/cupertino_tabbar_demo.dart';
@@ -45,6 +46,7 @@ class HomePage extends StatelessWidget {
       WidgetItem("CupertinoAlertDialog", AlertDialogDemo()),
       WidgetItem("CircularProgressIndicator", CircularProgressIndicatorDemo()),
       WidgetItem("RichText", RichTextDemo()),
+      WidgetItem("AbsorbPointer", AbsorbPointerDemo()),
     ];
 
     return Scaffold(
@@ -60,6 +62,7 @@ class HomePage extends StatelessWidget {
                   builder: (item) =>
                       addWidget(context, item.title, item.className)).toList(),
             ),
+            Column(),
           ],
         ));
   }

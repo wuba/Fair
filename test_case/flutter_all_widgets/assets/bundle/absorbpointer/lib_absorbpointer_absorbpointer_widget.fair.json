@@ -1,0 +1,53 @@
+{
+  "className": "Stack",
+  "na": {
+    "alignment": "#(AlignmentDirectional.center)",
+    "children": [
+      {
+        "className": "SizedBox",
+        "na": {
+          "width": 200.0,
+          "height": 100.0,
+          "child": {
+            "className": "ElevatedButton",
+            "na": {
+              "onPressed": "%(print)"
+            }
+          }
+        }
+      },
+      {
+        "className": "SizedBox",
+        "na": {
+          "width": 100.0,
+          "height": 200.0,
+          "child": {
+            "className": "AbsorbPointer",
+            "na": {
+              "child": {
+                "className": "ElevatedButton",
+                "na": {
+                  "style": {
+                    "className": "ElevatedButton.styleFrom",
+                    "na": {
+                      "primary": "%(_getButtonColor)"
+                    }
+                  },
+                  "onPressed": "%(print)"
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "methodMap": {
+    "_getButtonColor": {
+      "className": "Color",
+      "pa": [
+        "^(color)"
+      ]
+    }
+  }
+}
