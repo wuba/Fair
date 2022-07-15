@@ -3,10 +3,29 @@
   "na": {
     "onPressed": "@(_showDialog)",
     "child": {
-      "className": "Text",
-      "pa": [
-        "Fair Show Dialogg"
-      ]
+      "className": "Container",
+      "na": {
+        "height": 120.0,
+        "width": 120.0,
+        "child": {
+          "className": "Align",
+          "na": {
+            "alignment": {
+              "className": "FractionalOffset",
+              "pa": [
+                0.2,
+                0.6
+              ]
+            },
+            "child": {
+              "className": "Text",
+              "pa": [
+                "Fair Show Dialog"
+              ]
+            }
+          }
+        }
+      }
     }
   },
   "methodMap": {

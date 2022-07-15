@@ -1,6 +1,7 @@
 
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_all_widgets/animatedalign/animatedalign_demo.dart';
 import 'package:flutter_all_widgets/outlinebutton/outlinebutton_demo.dart';
 import 'package:flutter_all_widgets/rich_text/rich_text_demo.dart';
 
@@ -49,6 +50,7 @@ class HomePage extends StatelessWidget {
       WidgetItem("RichText", RichTextDemo()),
       WidgetItem("AbsorbPointer", AbsorbPointerDemo()),
       WidgetItem("AlertDialog", AlertDialogDemo()),
+      WidgetItem("AnimatedAlign", AnimatedAlignDemo()),
     ];
 
     return Scaffold(
