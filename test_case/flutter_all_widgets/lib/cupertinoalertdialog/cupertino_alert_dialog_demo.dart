@@ -4,9 +4,8 @@ import 'package:fair/fair.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'alert_dialog_fair.dart';
 
-class AlertDialogDemo extends StatelessWidget {
+class CupertinoAlertDialogDemo extends StatelessWidget {
   void _showAlertDialog(BuildContext context) {
     showCupertinoModalPopup<void>(
         context: context,

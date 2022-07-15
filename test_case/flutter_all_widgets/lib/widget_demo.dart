@@ -5,10 +5,11 @@ import 'package:flutter_all_widgets/outlinebutton/outlinebutton_demo.dart';
 import 'package:flutter_all_widgets/rich_text/rich_text_demo.dart';
 
 import 'absorbpointer/absorbpointer_demo.dart';
+import 'alertdialog/alertdialog_demo.dart';
 import 'checkbox/checkbox_demo.dart';
 import 'circularProgressIndicator/circular_progressIndicator_demo.dart';
 import 'cupertino_tabbar/cupertino_tabbar_demo.dart';
-import 'cupertinoalertdialog/alert_dialog_demo.dart';
+import 'cupertinoalertdialog/cupertino_alert_dialog_demo.dart';
 import 'widget_item.dart';
 
 class WidgetDemo extends StatelessWidget {
@@ -43,10 +44,11 @@ class HomePage extends StatelessWidget {
       WidgetItem("OutlineButton", OutlineButtonDemo()),
       WidgetItem("Checkbox", CheckboxDemo()),
       WidgetItem("CupertinoTabBar", CupertinoTabBarDemo()),
-      WidgetItem("CupertinoAlertDialog", AlertDialogDemo()),
+      WidgetItem("CupertinoAlertDialog", CupertinoAlertDialogDemo()),
       WidgetItem("CircularProgressIndicator", CircularProgressIndicatorDemo()),
       WidgetItem("RichText", RichTextDemo()),
       WidgetItem("AbsorbPointer", AbsorbPointerDemo()),
+      WidgetItem("AlertDialog", AlertDialogDemo()),
     ];
 
     return Scaffold(

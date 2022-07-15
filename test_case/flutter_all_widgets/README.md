@@ -11,5 +11,8 @@ CupertinoAlertDialog | 报错 V8ScriptCompilationException | 否 | 2022/07/05
 CircularProgressIndicator | 不支持| 否 | 2022/07/08
 RichText | 不支持TextStyle| 否 | 2022/07/11
 AbsorbPointer | 2.8.0 'ElevatedButton': false | 否 |2022/07/14
+TextButton |TextButton not register | 否| 2022/07/15
+AlertDialog | 不支持() =>xxx写法;AlertDialog不展示,未报错| 否 | 2022/07/15
+
 
 

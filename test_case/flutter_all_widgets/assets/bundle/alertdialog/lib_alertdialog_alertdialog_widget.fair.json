@@ -1,0 +1,57 @@
+{
+  "className": "TextButton",
+  "na": {
+    "onPressed": "@(_showDialog)",
+    "child": {
+      "className": "Text",
+      "pa": [
+        "Fair Show Dialogg"
+      ]
+    }
+  },
+  "methodMap": {
+    "_getAlertDialog": {
+      "className": "AlertDialog",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "Fair AlertDialog"
+          ]
+        },
+        "content": {
+          "className": "Text",
+          "pa": [
+            "%(_getAlertContent)"
+          ]
+        },
+        "actions": [
+          {
+            "className": "TextButton",
+            "na": {
+              "onPressed": "@(_cancelButton)",
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "Cancel"
+                ]
+              }
+            }
+          },
+          {
+            "className": "TextButton",
+            "na": {
+              "onPressed": "@(_cancelButton)",
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "Ok"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
