@@ -6,15 +6,21 @@ import 'package:flutter/material.dart';
 import 'package:example/fair_widget/delegate/test_fair_delegate.dart';
 import 'package:example/fair_widget/plugin/fair_basic_plugin.dart';
 import 'package:example/home_page.dart';
+import 'package:flutter/services.dart';
 import 'src/generated.fair.dart' as g;
 
 @FairBinding(packages: [
   'package:example/fair_widget/fairbinding/fair_binding_widget.dart',
 ])
-void main() {
+void main() async{
   // runApp(MyApp());
 
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]);
+
 
   FairApp.runApplication(
     FairApp(
@@ -45,26 +51,26 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        routes: {
-          'fair_page_two': (context) => FairWidget(
-              path: _getParams(context, 'path'),
-              data: {'fairProps': jsonEncode(_getParams(context, 'data'))}),
-        },
+        // routes: {
+        //   'fair_page_two': (context) => FairWidget(
+        //       path: _getParams(context, 'path'),
+        //       data: {'fairProps': jsonEncode(_getParams(context, 'data'))}),
+        // },
         // home: MyHomePage(title: 'Flutter Demo Home Page'),
 
         /// FairWidget 是用来加载 bundle 资源的容器
         ///
         /// path 参数：需要加载的 bundle 资源文件路径
         /// data 参数：需要传递给动态页面的参数
-        home: FairWidget(
-          /// path 可以是 assets 目录下的 bundle 资源，也可以是手机存储
-          /// 里的 bundle 资源，如果是手机存储里的 bundle 资源需要使用绝对路径
-          path: 'assets/fair/lib_main.fair.json',
-          data: {
-            'fairProps':jsonEncode({'title':'你好'})
-          },
-        )
-        // home: HomePage()
+        // home: FairWidget(
+        //   /// path 可以是 assets 目录下的 bundle 资源，也可以是手机存储
+        //   /// 里的 bundle 资源，如果是手机存储里的 bundle 资源需要使用绝对路径
+        //   path: 'assets/fair/lib_main.fair.json',
+        //   data: {
+        //     'fairProps':jsonEncode({'title':'你好'})
+        //   },
+        // )
+        home: HomePage()
     );
   }
 }
