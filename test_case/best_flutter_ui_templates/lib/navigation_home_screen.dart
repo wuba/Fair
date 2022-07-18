@@ -57,7 +57,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
           // screenView = HelpScreen();
           screenView = FairWidget(
             name: 'help',
-            path: 'assets/bundle/lib_help_screen.fair.json',
+            path: 'assets/bundle/lib_help_screen.fair.bin',
           );
         });
       } else if (drawerIndex == DrawerIndex.FeedBack) {
