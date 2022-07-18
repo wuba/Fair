@@ -25,7 +25,7 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 
 ![best-ui-template](best-ui-template.png)
 
-> 使用的工程来自 https://github.com/mitesh77/Best-Flutter-UI-Templates
+> 使用的工程来自 https://github.com/mitesh77/Best-Flutter-UI-Templates </br>
 > 项目位置：/example/lib/best_flutter_ui
 
 
