@@ -1,6 +1,7 @@
 import 'package:example/best_flutter_ui/app_theme.dart';
 import 'package:example/best_flutter_ui/src/fair/home_list_proxy.dart';
 import 'package:fair/fair.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'model/homelist.dart';
@@ -88,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                                 callBack: () {
                                                   Navigator.push<dynamic>(
                                                     context,
-                                                    MaterialPageRoute<dynamic>(
+                                                    CupertinoPageRoute<dynamic>(
                                                       builder: (BuildContext context) => homeList[index].navigateScreen!,
                                                     ),
                                                   );

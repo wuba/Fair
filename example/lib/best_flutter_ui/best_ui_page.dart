@@ -30,16 +30,21 @@ class _BestUiPageState extends State<BestUiPage> {
       systemNavigationBarIconBrightness: Brightness.dark,
     ));
 
+    return Theme(data: ThemeData(
+      primarySwatch: Colors.blue,
+      textTheme: AppTheme.textTheme,
+      platform: TargetPlatform.iOS,
+    ), child: NavigationHomeScreen());
 
-    return MaterialApp(
-      title: 'Flutter UI',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        textTheme: AppTheme.textTheme,
-        platform: TargetPlatform.iOS,
-      ),
-      home: NavigationHomeScreen(),
-    );
+    // return MaterialApp(
+    //   title: 'Flutter UI',
+    //   debugShowCheckedModeBanner: false,
+    //   theme: ThemeData(
+    //     primarySwatch: Colors.blue,
+    //     textTheme: AppTheme.textTheme,
+    //     platform: TargetPlatform.iOS,
+    //   ),
+    //   home: NavigationHomeScreen(),
+    // );
   }
 }
