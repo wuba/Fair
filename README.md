@@ -19,6 +19,13 @@ We create Fair so we can dispatch any pages changes to users as bundle(s), the w
 
 ![](fair/what-is-fair-en.png)
 
+Fair's UI rendering is lossless and can be restored at the pixel level. Take a look at the effect of escaping some pages of Best Flutter UI Templates:
+
+![best-ui-template](best-ui-template.png)
+
+> The project used is from https://github.com/mitesh77/Best-Flutter-UI-Templates </br>
+> location：/example/lib/best_flutter_ui
+
 ## 🏛Architecture
 
 ![fair architecture](fair.png)
