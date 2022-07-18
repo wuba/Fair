@@ -63,6 +63,7 @@ flutter:
     - assets/bundle/absorbpointer/
     - assets/bundle/alertdialog/
     - assets/bundle/animatedalign/
+    - assets/bundle/animatedcontainer/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

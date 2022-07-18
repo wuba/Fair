@@ -1,0 +1,65 @@
+{
+  "className": "GestureDetector",
+  "na": {
+    "onTap": "@(_setSelect)",
+    "child": {
+      "className": "AnimatedContainer",
+      "na": {
+        "width": {
+          "className": "Sugar.ifEqualBool",
+          "pa": [
+            "^(selected)"
+          ],
+          "na": {
+            "trueValue": 200.0,
+            "falseValue": 100.0
+          }
+        },
+        "height": {
+          "className": "Sugar.ifEqualBool",
+          "pa": [
+            "^(selected)"
+          ],
+          "na": {
+            "trueValue": 100.0,
+            "falseValue": 200.0
+          }
+        },
+        "color": {
+          "className": "Sugar.ifEqualBool",
+          "pa": [
+            "^(selected)"
+          ],
+          "na": {
+            "trueValue": "#(Colors.red)",
+            "falseValue": "#(Colors.blue)"
+          }
+        },
+        "alignment": {
+          "className": "Sugar.ifEqualBool",
+          "pa": [
+            "^(selected)"
+          ],
+          "na": {
+            "trueValue": "#(Alignment.center)",
+            "falseValue": "#(AlignmentDirectional.topCenter)"
+          }
+        },
+        "duration": {
+          "className": "Duration",
+          "na": {
+            "seconds": 2
+          }
+        },
+        "curve": "#(Curves.fastOutSlowIn)",
+        "child": {
+          "className": "FlutterLogo",
+          "na": {
+            "size": 73
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}
