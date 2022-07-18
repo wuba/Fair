@@ -162,22 +162,22 @@ example 工程位置：`fair/example`
 ## 🕰2022 规划
 
 * 主版本计划
-  * null-safe 版本支持，预计4月22日上线     ✅
-  * Flutter 2.8.0版本适配，预计5月中旬上线  ✅
-  * Flutter 2.10.0版本适配，预计6月初上线
-  * IDE 语法检测和提示插件
-  * 丰富语法糖
+  * null-safe 版本支持，预计4月22日上线      ✅
+  * Flutter 2.8.0版本适配，预计5月中旬上线   ✅
+  * Flutter 2.10.0版本适配，预计6月初上线    ✅
+  * IDE 语法检测和提示插件                  ✅
+  * 丰富语法糖 
 * 热更新平台
   * Dart Server工程搭建   ✅
   * Flutter Web工程搭建   ✅
   * 补丁/资源管理
   * 项目管理
-  * 移动端 Update&Download
+  * 移动端 Update&Download ✅
 * 线上动态化
   * Flutter Web工程搭建   ✅
   * Dart Server工程搭建   ✅
   * Action编辑
-  * 代码编辑
+  * 代码编辑              ✅
   * 组件编辑
   * 页面编辑
   * 工程编辑

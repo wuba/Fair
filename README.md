@@ -157,21 +157,21 @@ Supplement the iOS runtime environment in the sample project
 
 * Major release plan
    * null-safe version support, expected to be launched on April 22 ✅
-   * Flutter 2.8.0 version adaptation, expected to be launched in mid-May
-   * Flutter 2.10.0 version adaptation, is expected to be launched in early June
-   * IDE syntax detection and hint plugin
+   * Flutter 2.8.0 version adaptation, expected to be launched in mid-May ✅
+   * Flutter 2.10.0 version adaptation, is expected to be launched in early June  ✅
+   * IDE syntax detection and hint plugin ✅
    * Rich syntactic sugar
 * Hot update platform
    * Dart Server project construction ✅
    * Flutter Web project construction ✅
    * Patch/resource management
    * Project management
-   * Mobile Update&Download
+   * Mobile Update&Download           ✅
 * Online dynamic
    * Flutter Web project construction ✅
    * Dart Server project construction ✅
    * ActionEdit
-   * Code editing
+   * Code editing                     ✅
    * Component editing
    * Page editing
    * Engineering editor
