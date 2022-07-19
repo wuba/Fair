@@ -24,7 +24,7 @@ class AbsorbPointerDemo extends StatelessWidget{
           FairWidget(
             path: 'assets/bundle/absorbpointer/lib_absorbpointer_absorbpointer_widget.fair.json',
             data: {
-              "fairProps":jsonEncode({'color':0x00aaaaaa})
+              "fairProps":jsonEncode({'color':0xFFE3F2FD})
             },
           )
         ],

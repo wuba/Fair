@@ -36,7 +36,7 @@ class CupertinoAlertDialogDemo extends StatelessWidget {
         context: context,
         builder: (BuildContext context) => FairWidget(
             path:
-            'assets/bundle/cupertinoalertdialog/lib_cupertinoalertdialog_alert_dialog_fair.fair.json',
+            'assets/bundle/cupertinoalertdialog/lib_cupertinoalertdialog_cupertino_alert_dialog_fair.fair.json',
             data: {
               'fairProps': jsonEncode({'title': 'Fair Alert','content':'我是Fair CupertinoAlertDialog,请点击取消或确定退出'})
             }));

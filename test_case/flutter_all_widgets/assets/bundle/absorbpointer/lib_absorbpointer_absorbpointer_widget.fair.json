@@ -11,7 +11,7 @@
           "child": {
             "className": "ElevatedButton",
             "na": {
-              "onPressed": "%(print)"
+              "onPressed": "@(_clickButtonBg)"
             }
           }
         }
@@ -27,13 +27,8 @@
               "child": {
                 "className": "ElevatedButton",
                 "na": {
-                  "style": {
-                    "className": "ElevatedButton.styleFrom",
-                    "na": {
-                      "primary": "%(_getButtonColor)"
-                    }
-                  },
-                  "onPressed": "%(print)"
+                  "style": "%(_getButtonStyle)",
+                  "onPressed": "@(_clickButtonTop)"
                 }
               }
             }
@@ -43,11 +38,11 @@
     ]
   },
   "methodMap": {
-    "_getButtonColor": {
-      "className": "Color",
-      "pa": [
-        "^(color)"
-      ]
+    "_getButtonStyle": {
+      "className": "ElevatedButton.styleFrom",
+      "na": {
+        "primary": "%(_getButtonColor)"
+      }
     }
   }
 }

@@ -2,6 +2,11 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
+/**
+ * 问题一：ElevatedButton no register
+ * 问题二：Invalid radix-16 number (at character 1)
+ * 问题三：ButtonStyle false
+ */
 @FairPatch()
 class FairAbsorbPointerPage extends StatefulWidget{
 
@@ -28,7 +33,19 @@ class _FairAbsorbPointerPageState extends State<FairAbsorbPointerPage>{
 
   Color _getButtonColor(){
     var color = fairProps['color'];
-    return Color(color);
+    return Colors.blue.shade200;
+  }
+
+  void _clickButtonBg(){
+    print("click bg");
+  }
+
+  void _clickButtonTop(){
+    print("click top");
+  }
+
+  ButtonStyle _getButtonStyle(){
+    return ElevatedButton.styleFrom(primary: _getButtonColor());
   }
 
   @override
@@ -40,9 +57,7 @@ class _FairAbsorbPointerPageState extends State<FairAbsorbPointerPage>{
            width: 200.0,
            height: 100.0,
            child: ElevatedButton(
-             onPressed: (){
-               print("click bg");
-             },
+             onPressed: _clickButtonBg,
              child: null,
            )
        ),
@@ -51,10 +66,8 @@ class _FairAbsorbPointerPageState extends State<FairAbsorbPointerPage>{
          height: 200.0,
          child:AbsorbPointer(
            child:  ElevatedButton(
-             style: ElevatedButton.styleFrom(primary: _getButtonColor()),
-             onPressed: (){
-               print("click top");
-             },
+             style: _getButtonStyle(),
+             onPressed: _clickButtonTop,
              child: null,
            ),
          )

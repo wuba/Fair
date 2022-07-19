@@ -9,6 +9,7 @@ import 'absorbpointer/absorbpointer_demo.dart';
 import 'alertdialog/alertdialog_demo.dart';
 import 'animated/animatedbuilder_demo.dart';
 import 'animated/animatedcontainer_demo.dart';
+import 'animated/animateddefaulttextstyle_demo.dart';
 import 'checkbox/checkbox_demo.dart';
 import 'circularProgressIndicator/circular_progressIndicator_demo.dart';
 import 'cupertino_tabbar/cupertino_tabbar_demo.dart';
@@ -55,6 +56,7 @@ class HomePage extends StatelessWidget {
       WidgetItem("AnimatedAlign", AnimatedAlignDemo()),
       WidgetItem("AnimatedBuilder", AnimatedBuilderDemo()),
       WidgetItem("AnimatedContainer", AnimatedContainerDemo()),
+      WidgetItem("AnimatedDefaultTextStyle", AnimatedDefaultTextStyleDemo()),
     ];
 
     return Scaffold(
