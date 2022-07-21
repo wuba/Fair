@@ -1,0 +1,55 @@
+{
+  "className": "Column",
+  "na": {
+    "children": [
+      {
+        "className": "AnimatedCrossFade",
+        "na": {
+          "duration": {
+            "className": "Duration",
+            "na": {
+              "seconds": 3
+            }
+          },
+          "firstChild": {
+            "className": "FlutterLogo",
+            "na": {
+              "style": "#(FlutterLogoStyle.horizontal)",
+              "size": 100.0
+            }
+          },
+          "secondChild": {
+            "className": "FlutterLogo",
+            "na": {
+              "style": "#(FlutterLogoStyle.stacked)",
+              "size": 100.0
+            }
+          },
+          "crossFadeState": {
+            "className": "Sugar.ifEqualBool",
+            "pa": [
+              "^(_first)"
+            ],
+            "na": {
+              "trueValue": "#(CrossFadeState.showFirst)",
+              "falseValue": "#(CrossFadeState.showSecond)"
+            }
+          }
+        }
+      },
+      {
+        "className": "TextButton",
+        "na": {
+          "child": {
+            "className": "Text",
+            "pa": [
+              "切换"
+            ]
+          },
+          "onPressed": "@(_setFirst)"
+        }
+      }
+    ]
+  },
+  "methodMap": {}
+}
