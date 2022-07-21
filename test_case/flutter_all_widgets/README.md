@@ -16,7 +16,7 @@ AlertDialog | 不支持() =>xxx写法;AlertDialog不展示,未报错| 否 | 2022
 AnimatedAlign | 2.8.0不支持 Duration，添加映射文件可解决（需修改版本生成脚本）| 否 |2022/07/15
 AnimatedBuilder |`FormatException` | 否 | 2022/07/18
 AnimatedContainer | | | 2022/07/18
-
+AnimatedDefaultTextStyle | 报错 The method '_mulFromInteger' was called on null.|否 | 2022/07/20
 
 
 

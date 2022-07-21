@@ -1,0 +1,49 @@
+{
+  "className": "GestureDetector",
+  "na": {
+    "onTap": "@(_setSelected)",
+    "child": {
+      "className": "AnimatedDefaultTextStyle",
+      "na": {
+        "child": {
+          "className": "Text",
+          "pa": [
+            "Fair Click Me"
+          ]
+        },
+        "style": {
+          "className": "Sugar.ifEqualBool",
+          "pa": [
+            "^(selected)"
+          ],
+          "na": {
+            "trueValue": {
+              "className": "TextStyle",
+              "na": {
+                "fontSize": 50,
+                "color": "#(Colors.red)",
+                "fontWeight": "#(FontWeight.bold)"
+              }
+            },
+            "falseValue": {
+              "className": "TextStyle",
+              "na": {
+                "color": "#(Colors.blue)",
+                "fontSize": 24.0
+              }
+            }
+          }
+        },
+        "duration": {
+          "className": "Duration",
+          "na": {
+            "milliseconds": 200
+          }
+        },
+        "curve": "#(Curves.bounceInOut)",
+        "maxLines": 1
+      }
+    }
+  },
+  "methodMap": {}
+}
