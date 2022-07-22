@@ -68,6 +68,7 @@ flutter:
     - assets/bundle/animatedcrossfade/
     - assets/bundle/animatedlistliststate/
     - assets/bundle/animatedmodalbarrier/
+    - assets/bundle/animatedopacity/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

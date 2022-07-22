@@ -15,9 +15,9 @@ class AnimatedModalBarrierDemo extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           FlutterAnimatedModalBarrierPage(),
-          FairWidget(
-            path: 'assets/bundle/animatedmodalbarrier/',
-          )
+//          FairWidget(
+//            path: 'assets/bundle/animatedmodalbarrier/',
+//          )
         ],
       ),
     );
