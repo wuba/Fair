@@ -3,6 +3,9 @@
  * Use of this source code is governed by a BSD type license that can be
  * found in the LICENSE file.
  */
+import 'dart:io';
+
+import 'package:fair/src/internal/bundle_provider.dart';
 import 'package:fair/src/internal/flexbuffer/fair_js_decoder_http_decoder.dart';
 import 'package:flutter/services.dart';
 
@@ -23,7 +26,7 @@ class FairJSFairJSDecoderHelper {
 }
 
 ///JS资源解析器
-class FairJSDecoder {
+class FairJSDecoder with FairBundlePathCheck{
   FairJSDecoder._internal();
 
   static final FairJSDecoder _fairJSDecoder = FairJSDecoder._internal();
@@ -48,8 +51,13 @@ class FairJSDecoder {
   /*
    *解析assert
    */
-  Future<String> _resolveAssert(String? assertPath) async =>
-      rootBundle.loadString(assertPath??'');
+  Future<String> _resolveAssert(String? assertPath) async {
+    if (isExternalStoragePath(assertPath)) {
+      var file = File(assertPath ?? '');
+      return await file.readAsString();
+    }
+    return rootBundle.loadString(assertPath ?? '');
+  }
 
   /*
    * 解析Http资源,需要用户自定义自己的解析器
