@@ -8,8 +8,7 @@ class FairAnimatedBuilderPage extends StatefulWidget {
   State<StatefulWidget> createState() => _FairAnimatedBuilderPageState();
 }
 
-class _FairAnimatedBuilderPageState extends State<FairAnimatedBuilderPage>
-    with TickerProviderStateMixin {
+class _FairAnimatedBuilderPageState extends State<FairAnimatedBuilderPage> with TickerProviderStateMixin {
   AnimationController _controller;
 
   @override

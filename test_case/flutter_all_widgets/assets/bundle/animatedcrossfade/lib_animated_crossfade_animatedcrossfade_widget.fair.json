@@ -38,7 +38,7 @@
         }
       },
       {
-        "className": "TextButton",
+        "className": "ElevatedButton",
         "na": {
           "child": {
             "className": "Text",

@@ -18,15 +18,17 @@ class AnimatedCrossFadeDemo extends StatelessWidget{
       appBar: AppBar(
         title: Text('AnimatedCrossFade'),
       ),
-      body:Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          FlutterAnimatedCrossFade(),
-          FairWidget(
-            path: 'assets/bundle/animatedcrossfade/lib_animatedcrossfade_animatedcrossfade_widget.fair.json',
-          )
-        ],
-      ),
+      body:Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            FlutterAnimatedCrossFade(),
+            FairWidget(
+              path: 'assets/bundle/animatedcrossfade/lib_animated_crossfade_animatedcrossfade_widget.fair.json',
+            )
+          ],
+        ),
+      )
     );
   }
 
@@ -54,7 +56,7 @@ class _FlutterAnimatedCrossFadePageState extends State<FlutterAnimatedCrossFade>
           secondChild: const FlutterLogo(style: FlutterLogoStyle.stacked, size: 100.0),
           crossFadeState: _first ? CrossFadeState.showFirst : CrossFadeState.showSecond,
         ),
-        TextButton(
+        ElevatedButton(
           child: Text('切换'),
           onPressed: () {
             setState(() {

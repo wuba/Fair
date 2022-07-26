@@ -25,12 +25,12 @@ class _FairAnimatedCrossFadePageState extends State<FairAnimatedCrossFadePage>{
     return Column(
       children: [
         AnimatedCrossFade(
-          duration: Duration(seconds: 3),
+          duration: const Duration(seconds: 3),
           firstChild: const FlutterLogo(style: FlutterLogoStyle.horizontal, size: 100.0),
           secondChild: const FlutterLogo(style: FlutterLogoStyle.stacked, size: 100.0),
           crossFadeState: Sugar.ifEqualBool(_first, trueValue: CrossFadeState.showFirst , falseValue: CrossFadeState.showSecond),
         ),
-        TextButton(
+        ElevatedButton(
           child: Text('切换'),
           onPressed: _setFirst,
         ),
