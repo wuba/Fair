@@ -14,6 +14,8 @@ NSString * const FairMessageChannelLoadJSFileType = @"loadJsFile";
 
 NSString * const FairMessageChannelExecuteID = @"com.wuba.fair/common_message_channel";
 
+NSString * const FairBasicMessageChannelExecuteID = @"com.wuba.fair/basic_message_channel";
+
 NSString * const FairExecuteJSFunction = @"invokeJSFunc";
 
 NSString * const FairMessageChannelMethodType = @"method";

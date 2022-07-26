@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.5.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.6.1-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -25,7 +25,8 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 
 ![best-ui-template](best-ui-template.png)
 
-> 使用的工程来自 https://github.com/mitesh77/Best-Flutter-UI-Templates
+> 使用的工程来自 https://github.com/mitesh77/Best-Flutter-UI-Templates </br>
+> 项目位置：/example/lib/best_flutter_ui
 
 
 ## 🏛 架构
@@ -54,22 +55,22 @@ git clone https://github.com/wuba/fair.git
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 2.5.0
+  fair: 2.6.1
 
 # add build_runner and compiler dependency
 dev_dependencies:
   build_runner: ^2.0.0
-  fair_compiler:
-    path: ../fair/compiler
+  fair_compiler: ^1.2.0
 
 # switch "fair_version" according to the local Flutter SDK version
+# Flutter SDK 2.10.x(2.10.0、2.10.1、2.10.2、2.10.3) -> flutter_2_10_0
 # Flutter SDK 2.8.x(2.8.0、2.8.1) -> flutter_2_8_0
 # Flutter SDK 2.5.x(2.5.0、2.5.1、2.5.2、2.5.3) -> flutter_2_5_0
 # Flutter SDK 2.0.6 -> flutter_2_0_6
 # Flutter SDK 1.22.6 -> flutter_1_22_6
 dependency_overrides:
   fair_version:
-    path: ../fair/flutter_version/flutter_2_8_0
+    path: ../fair/flutter_version/flutter_2_10_0
 ```
 
 **step3：将App替换为FairApp**
@@ -107,6 +108,56 @@ name: 'DynamicWidget',
 path: 'assets/bundle/lib_src_page_dynamic_widget.fair.json',
 data: {"fairProps": json.encode({})}),
 ```
+
+## 🔨最近版本
+
+### 2.6.0
+更新时间：2022.07.05
+
+#### Fair
+- 1.Fair 支持加载手机磁盘路径上的 bundle 文件；
+- 2.适配 Flutter SDK 2.10.0、2.10.1、2.10.2、2.10.3 版本；
+- 3.Dart2JS 支持解析 static 方法；
+- 4.运行时，页面错误信息提示优化；
+- 5.语法糖支持解析 Model 数据。
+
+### 2.5.0
+更新时间：2022.05.31
+
+##### Fair
+- 适配 Flutter SDK 2.8.0、2.8.1
+- Dart2JS 支持解析单例
+- 新增语法糖Sugar.switchCase、Sugar.colorsWithOpacity、Sugar.convertToString等
+
+##### example
+全面优化example结构,升级example体验，更适合新手入门。  
+在源码中，新增 example 工程，用于提供 Fair API 的标准用法。
+
+example 工程位置：`fair/example`
+
+### 2.4.1
+更新时间：2022.05.12
+
+##### Fair
+- 修复 FairLogger 文件导包问题
+- 升级 analyzer 到 2.3.0
+
+### 2.4.0
+更新时间：2022.04.26
+
+##### Fair
+- FlatBuffers 支持在 null safe 环境下生成 bin 文件
+
+### 2.3.0
+更新时间：2022.04.22
+
+#### Fair
+- 支持空安全 null-safe
+- 适配Flutter SDK 2.5.0、2.5.1、2.5.2、2.5.3等版本
+
+#### demo
+- 升级 sample 工程里过时的demo
+- 补充 sample 工程里 iOS 的运行环境
 
 ## 🕰2022 规划
 
@@ -159,6 +210,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/Alzzzz"><img src="https://avatars.githubusercontent.com/u/19664495?v=4?s=100" width="100px;" alt=""/><br /><sub><b>alzzzz</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=Alzzzz" title="Code">💻</a> <a href="https://github.com/wuba/fair/commits?author=Alzzzz" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/xiangwc"><img src="https://avatars.githubusercontent.com/u/22017021?v=4?s=100" width="100px;" alt=""/><br /><sub><b>xiangwc</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=xiangwc" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/KKProject"><img src="https://avatars.githubusercontent.com/u/14860258?v=4?s=100" width="100px;" alt=""/><br /><sub><b>WangYk</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=KKProject" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/JunZiJianYi"><img src="https://avatars.githubusercontent.com/u/34125737?v=4?s=100" width="100px;" alt=""/><br /><sub><b>SunWei</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=JunZiJianYi" title="Code">💻</a></td>  
   </tr>
 </table>
 

@@ -316,6 +316,7 @@ const widgetNames = {
   'Material': true,
   'MaterialType': false,
   'TextTheme': false,
+  'InkWell': true,
   'InkRipple': false,
   'ElevatedButtonThemeData': false,
   'ElevatedButtonTheme': false,

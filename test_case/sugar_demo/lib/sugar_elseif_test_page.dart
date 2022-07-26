@@ -1,6 +1,7 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'person.dart';
 
 @FairPatch()
 class SugarElseIfPage extends StatefulWidget {
@@ -51,6 +52,21 @@ class _SugarElseIfPageState extends State<SugarElseIfPage> {
                   ),
                 ),
                 onPressed: logAction,),
+            Column(
+              children: Sugar.mapEach([Person(name: "kk",age: 18, wei: 99),Person(name: "mm", age: 14, wei: 88)], (index, Person item) {
+            return Container(
+                height: 100,
+                width: Sugar.width(context),
+                child: Center(
+                 child: Row(
+                   children: [
+                     Text(item.name),
+                     Text("${item.age}")
+                   ],
+                 ),
+                ));
+          }),
+            )
 
           ],
         ));

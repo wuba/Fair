@@ -1,3 +1,4 @@
+import 'package:example/best_flutter_ui/best_ui_page.dart';
 import 'package:example/public_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,11 @@ class HomePage extends StatelessWidget {
             addItem("fair plugin的使用", () {
               showWidget(fairArguments: {"fairText": '路由是个好东西，要进一步封装'},
                 fairPath: 'assets/fair/lib_fair_widget_fair_plugin_widget.fair.json',);
+            }),
+            addItem("fair bestUI演示", () {
+              Navigator.of(context).push(CupertinoPageRoute(builder: (_) {
+                return BestUiPage();
+              }));
             }),
           ],
         ),

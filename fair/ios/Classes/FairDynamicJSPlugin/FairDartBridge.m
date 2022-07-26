@@ -15,6 +15,8 @@
 @property (nonatomic, strong) FlutterMethodChannel *flutterMethodChannel;
 /// Fair的flutter通道
 @property (nonatomic, strong) FlutterBasicMessageChannel *flutterBasicMessageChannel;
+/// fair回调通道
+@property (nonatomic, strong) FlutterBasicMessageChannel *flutterCallbackMessageChannel;
 /// binaryMessenger
 @property (nonatomic, weak) NSObject<FlutterBinaryMessenger> *binaryMessenger;
 
@@ -40,7 +42,13 @@ FairSingletonM(FairDartBridge);
     // 设置从flutter拿到的js脚本的通道
     self.flutterMethodChannel = [FlutterMethodChannel methodChannelWithName:FairMessageChannelInjectionID binaryMessenger:self.binaryMessenger];
     // 设置Flutter通信通道代理
-    self.flutterBasicMessageChannel = [[FlutterBasicMessageChannel alloc] initWithName:FairMessageChannelExecuteID binaryMessenger:self.binaryMessenger codec:[FlutterStringCodec sharedInstance]];
+    self.flutterBasicMessageChannel = [[FlutterBasicMessageChannel alloc] initWithName:FairMessageChannelExecuteID
+                                                                       binaryMessenger:self.binaryMessenger
+                                                                                 codec:[FlutterStringCodec sharedInstance]];
+    
+    self.flutterCallbackMessageChannel = [[FlutterBasicMessageChannel alloc] initWithName:FairBasicMessageChannelExecuteID
+                                                                          binaryMessenger:self.binaryMessenger
+                                                                                    codec:[FlutterStringCodec sharedInstance]];
     
     [self setDartListener];
     
@@ -78,6 +86,26 @@ FairSingletonM(FairDartBridge);
         
         FairLog(@"%@", message);
 
+        if (strongSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(executeJSFunctionAsync:params:callback:)]) {
+            NSArray *params = message && [message isKindOfClass:[NSString class]] ? @[message] : @[];
+            [strongSelf.delegate executeJSFunctionAsync:FairExecuteJSFunction params:params callback:^(id result, NSError *error) {
+                FairLog(@"%@", result);
+                JSValue *value = result;
+                if (value && [value isKindOfClass:[JSValue class]]) {
+                    NSString *str = value.toString;
+                    FairLog(@"%@", str);
+                    if (![str isEqualToString:@"undefined"] && FAIR_IS_NOT_EMPTY_STRING(str)) {
+                        callback(str);
+                    }
+                }
+            }];
+        }
+    }];
+    
+    [self.flutterCallbackMessageChannel setMessageHandler:^(id  _Nullable message, FlutterReply  _Nonnull callback) {
+        FairStrongObject(strongSelf, weakSelf);
+        FairLog(@"%@", message);
+        
         if (strongSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(executeJSFunctionAsync:params:callback:)]) {
             NSArray *params = message && [message isKindOfClass:[NSString class]] ? @[message] : @[];
             [strongSelf.delegate executeJSFunctionAsync:FairExecuteJSFunction params:params callback:^(id result, NSError *error) {
