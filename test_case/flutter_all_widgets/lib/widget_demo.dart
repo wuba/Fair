@@ -13,6 +13,7 @@ import 'animated/animateddefaulttextstyle_demo.dart';
 import 'animated/liststate/animatedliststate_demo.dart';
 import 'animated/modalbarrier/animatedmodalbarrier_demo.dart';
 import 'animated/opacity/animatedopacity_demo.dart';
+import 'animated/opacity/animatedphysicalmodel_demo.dart';
 import 'animatedcrossfade/animatedcrossfade_demo.dart';
 import 'checkbox/checkbox_demo.dart';
 import 'circularProgressIndicator/circular_progressIndicator_demo.dart';
@@ -65,6 +66,7 @@ class HomePage extends StatelessWidget {
       WidgetItem("AnimatedListState", AnimatedListStateDemo()),
       WidgetItem("AnimatedModalBarrier", AnimatedModalBarrierDemo()),
       WidgetItem("AnimatedOpacity", AnimatedOpacityDemo()),
+      WidgetItem("AnimatedPhysicalModel", AnimatedPhysicalModelDemo()),
     ];
 
     return Scaffold(

@@ -20,7 +20,7 @@ AnimatedDefaultTextStyle | 报错 The method '_mulFromInteger' was called on nul
 AnimatedCrossFade | The method '_mulFromInteger' was called on null. | 否 | 2022/07/21
 AnimatedListState | com.eclipsesource.v8.V8ScriptExecutionException | 否 | 20122/07/22
 AnimatedModalBarrier | Failed parse ast; | 否 | 2011/07/22
-AnimatedOpacity | The method '_mulFromInteger' was called on null.|否 | 2022/07/21
+AnimatedOpacity | The method '_mulFromInteger' was called on null.|否 | 2022/07/22
 
 
 
