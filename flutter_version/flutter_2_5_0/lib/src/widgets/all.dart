@@ -7,6 +7,7 @@ import '\$\$p.dart' as $2;
 import '\$\$m.dart' as $3;
 import '\$\$r.dart' as $4;
 import '\$\$a.dart' as $5;
+import '\$\$ext.dart' as $6;
 
 mixin $BindingImpl {
   final provider = [
@@ -16,5 +17,6 @@ mixin $BindingImpl {
     $3.p,
     $4.p,
     $5.p,
+    $6.p,
   ];
 }

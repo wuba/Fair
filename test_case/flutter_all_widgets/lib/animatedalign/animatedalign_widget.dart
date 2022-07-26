@@ -20,7 +20,6 @@ class _FairAnimatedAlignPageState extends State<FairAnimatedAlignPage>{
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
