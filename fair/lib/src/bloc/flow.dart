@@ -83,5 +83,10 @@ FairWidgetBinding provider = () {
       }
       return p2;
     },
+    'Sugar.listBuilder':(props){
+      var p0 = pa0(props);
+      var listView = ListView(children: p0,);
+      return listView;
+    },
   };
 };
