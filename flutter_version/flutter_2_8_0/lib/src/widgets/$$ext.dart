@@ -36,5 +36,17 @@ var p = () => {
             milliseconds: props['milliseconds'] ?? 0,
             microseconds: props['microseconds'] ?? 0,
           ),
+      'ElevatedButton': (props) => ElevatedButton(
+            key: props['key'],
+            child: props['child'],
+            onPressed: props['onPressed'],
+            onLongPress: props['onLongPress'],
+            onHover: props['onHover'],
+            onFocusChange: props['onFocusChange'],
+            style: props['style'],
+            focusNode: props['focusNode'],
+            autofocus: props['autofocus']?? false,
+            clipBehavior: props['clipBehavior']?? Clip.none,
+      ),
       // 往下补充Widget映射关系
     };
