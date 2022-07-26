@@ -42,19 +42,21 @@ class _FlutterAnimatedOpacityPageState extends State<FlutterAnimatedOpacityPage>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        AnimatedOpacity(
-          opacity: opacityLevel,
-          duration: const Duration(seconds: 3),
-          child: const FlutterLogo(size: 75,),
-        ),
-        ElevatedButton(
-          onPressed: _changeOpacity,
-          child: const Text('Logo'),
-        ),
-      ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AnimatedOpacity(
+            opacity: opacityLevel,
+            duration: const Duration(seconds: 3),
+            child: const FlutterLogo(size: 75,),
+          ),
+          ElevatedButton(
+            onPressed: _changeOpacity,
+            child: const Text('Flutter Click'),
+          ),
+        ],
+      ),
     );
   }
 

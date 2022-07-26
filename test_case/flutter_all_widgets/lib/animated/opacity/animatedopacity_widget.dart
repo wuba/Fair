@@ -26,9 +26,9 @@ class _FairAnimatedOpacityPageState extends State<FairAnimatedOpacityPage>{
           duration: const Duration(seconds: 3),
           child: const FlutterLogo(size: 75,),
         ),
-        MaterialButton(
+        ElevatedButton(
           onPressed: _changeOpacity,
-          child: const Text('Fair Logo'),
+          child: const Text('Fair Click'),
         ),
       ],
     );

@@ -22,13 +22,13 @@
         }
       },
       {
-        "className": "MaterialButton",
+        "className": "ElevatedButton",
         "na": {
           "onPressed": "@(_changeOpacity)",
           "child": {
             "className": "Text",
             "pa": [
-              "Fair Logo"
+              "Fair Click"
             ]
           }
         }
