@@ -3,9 +3,7 @@ import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
 /**
- * 问题一：ElevatedButton no register
- * 问题二：Invalid radix-16 number (at character 1)
- * 问题三：ButtonStyle false
+ *  formatException:Unexpected character(at character 1) jsAppObj is null
  */
 @FairPatch()
 class FairAbsorbPointerPage extends StatefulWidget{
@@ -45,7 +43,7 @@ class _FairAbsorbPointerPageState extends State<FairAbsorbPointerPage>{
   }
 
   ButtonStyle _getButtonStyle(){
-    return ElevatedButton.styleFrom(primary: _getButtonColor());
+    ElevatedButton.styleFrom(primary: Colors.blue.shade200);
   }
 
   @override
@@ -53,24 +51,24 @@ class _FairAbsorbPointerPageState extends State<FairAbsorbPointerPage>{
    return  Stack(
      alignment: AlignmentDirectional.center,
      children:<Widget> [
-       SizedBox(
-           width: 200.0,
-           height: 100.0,
-           child: ElevatedButton(
-             onPressed: _clickButtonBg,
-             child: null,
-           )
-       ),
+//       SizedBox(
+//           width: 200.0,
+//           height: 100.0,
+//           child: ElevatedButton(
+//             onPressed: _clickButtonBg,
+//             child: null,
+//           )
+//       ),
        SizedBox(
          width: 100.0,
          height: 200.0,
-         child:AbsorbPointer(
+//         child:AbsorbPointer(
            child:  ElevatedButton(
              style: _getButtonStyle(),
              onPressed: _clickButtonTop,
              child: null,
            ),
-         )
+//         )
        ),
      ],
    );

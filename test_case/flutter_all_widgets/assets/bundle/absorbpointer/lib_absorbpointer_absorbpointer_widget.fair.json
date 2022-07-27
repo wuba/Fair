@@ -6,30 +6,18 @@
       {
         "className": "SizedBox",
         "na": {
-          "width": 200.0,
-          "height": 100.0,
-          "child": {
-            "className": "ElevatedButton",
-            "na": {
-              "onPressed": "@(_clickButtonBg)"
-            }
-          }
-        }
-      },
-      {
-        "className": "SizedBox",
-        "na": {
           "width": 100.0,
           "height": 200.0,
           "child": {
-            "className": "AbsorbPointer",
+            "className": "ElevatedButton",
             "na": {
+              "style": "%(_getButtonStyle)",
+              "onPressed": "@(_clickButtonTop)",
               "child": {
-                "className": "ElevatedButton",
-                "na": {
-                  "style": "%(_getButtonStyle)",
-                  "onPressed": "@(_clickButtonTop)"
-                }
+                "className": "Text",
+                "pa": [
+                  "fair"
+                ]
               }
             }
           }
@@ -37,12 +25,5 @@
       }
     ]
   },
-  "methodMap": {
-    "_getButtonStyle": {
-      "className": "ElevatedButton.styleFrom",
-      "na": {
-        "primary": "%(_getButtonColor)"
-      }
-    }
-  }
+  "methodMap": {}
 }
