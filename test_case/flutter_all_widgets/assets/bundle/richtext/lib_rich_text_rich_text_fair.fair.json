@@ -4,35 +4,18 @@
     "child": {
       "className": "RichText",
       "na": {
-        "text": {
-          "className": "TextSpan",
-          "na": {
-            "text": "%(_getContent)",
-            "style": "$(style:)",
-            "children": [
-              {
-                "className": "TextSpan",
-                "na": {
-                  "text": "bold",
-                  "style": {
-                    "className": "TextStyle",
-                    "na": {
-                      "fontWeight": "#(FontWeight.bold)"
-                    }
-                  }
-                }
-              },
-              {
-                "className": "TextSpan",
-                "na": {
-                  "text": " world!"
-                }
-              }
-            ]
-          }
-        }
+        "text": "%(_getTextSpan)"
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {
+    "_getTextSpan": {
+      "className": "TextSpan",
+      "na": {
+        "text": "Hello",
+        "style": "$(style:)",
+        "children": "%(_getChildren)"
+      }
+    }
+  }
 }
