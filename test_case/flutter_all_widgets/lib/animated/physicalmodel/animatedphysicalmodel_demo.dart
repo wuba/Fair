@@ -1,4 +1,5 @@
 
+import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
 /**
@@ -11,11 +12,17 @@ class AnimatedPhysicalModelDemo extends StatelessWidget{
       appBar: AppBar(
         title: Text('AnimatedPhysicalModel'),
       ),
-      body: Column(
-        children: [
-          FlutterAnimatedPhysicalModelPage(),
-        ],
-      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            FlutterAnimatedPhysicalModelPage(),
+            FairWidget(
+              path: 'assets/bundle/animatedphysicalmode/lib_animated_physicalmodel_animatedphysicalmodel_widget.fair.json',
+            )
+          ],
+        ),
+      )
     );
   }
 
@@ -51,9 +58,9 @@ class _FlutterAnimatedPhysicalModelPageState extends State<FlutterAnimatedPhysic
     return Column(
       children: [
         _buildAnimatedPhysicalModel(),
-        GestureDetector(
-          child: Text('动画'),
-          onTap: (){
+        ElevatedButton(
+          child: Text('Flutter 动画'),
+          onPressed: (){
             setState(() {
               _animated = !_animated;
             });

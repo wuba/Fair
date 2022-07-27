@@ -48,5 +48,8 @@ var p = () => {
             autofocus: props['autofocus']?? false,
             clipBehavior: props['clipBehavior']?? Clip.none,
       ),
+      'BorderRadius.circular': (props) => BorderRadius.circular(
+            props['pa'][0]?.toDouble(),
+      ),
       // 往下补充Widget映射关系
     };

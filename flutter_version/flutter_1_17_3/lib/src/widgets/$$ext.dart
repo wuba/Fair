@@ -34,5 +34,8 @@ var p = () => {
             milliseconds: props['milliseconds'] ?? 0,
             microseconds: props['microseconds'] ?? 0,
       ),
+      'BorderRadius.circular': (props) => BorderRadius.circular(
+            props['pa'][0]?.toDouble(),
+      ),
       // 往下补充Widget映射关系
 };

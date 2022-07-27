@@ -46,5 +46,8 @@ var p = () => {
             focusNode: props['focusNode'],
             autofocus: props['autofocus']?? false,
       ),
+      'BorderRadius.circular': (props) => BorderRadius.circular(
+            props['pa'][0]?.toDouble(),
+      ),
       // 往下补充Widget映射关系
     };

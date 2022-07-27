@@ -1,0 +1,86 @@
+{
+  "className": "Column",
+  "na": {
+    "children": [
+      "%(_buildAnimatedPhysicalModel)",
+      {
+        "className": "ElevatedButton",
+        "na": {
+          "child": {
+            "className": "Text",
+            "pa": [
+              "Fair 动画"
+            ]
+          },
+          "onPressed": "@(_setAnimated)"
+        }
+      }
+    ]
+  },
+  "methodMap": {
+    "_buildAnimatedPhysicalModel": {
+      "className": "AnimatedPhysicalModel",
+      "na": {
+        "borderRadius": {
+          "className": "BorderRadius.circular",
+          "pa": [
+            {
+              "className": "Sugar.ifEqualBool",
+              "pa": [
+                "^(_animated)"
+              ],
+              "na": {
+                "trueValue": 20,
+                "falseValue": 10
+              }
+            }
+          ]
+        },
+        "shape": "#(BoxShape.rectangle)",
+        "color": {
+          "className": "Sugar.ifEqualBool",
+          "pa": [
+            "^(_animated)"
+          ],
+          "na": {
+            "trueValue": "#(Colors.blue)",
+            "falseValue": "#(Colors.red)"
+          }
+        },
+        "elevation": {
+          "className": "Sugar.ifEqualBool",
+          "pa": [
+            "^(_animated)"
+          ],
+          "na": {
+            "trueValue": 18,
+            "falseValue": 8
+          }
+        },
+        "shadowColor": {
+          "className": "Sugar.ifEqualBool",
+          "pa": [
+            "^(_animated)"
+          ],
+          "na": {
+            "trueValue": "#(Colors.red)",
+            "falseValue": "#(Colors.blue)"
+          }
+        },
+        "child": {
+          "className": "Container",
+          "na": {
+            "height": 100,
+            "width": 100
+          }
+        },
+        "duration": {
+          "className": "Duration",
+          "na": {
+            "seconds": 1
+          }
+        }
+      }
+    }
+  }
+}
