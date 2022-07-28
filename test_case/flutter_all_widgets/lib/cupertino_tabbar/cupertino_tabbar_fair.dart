@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
-
+/**
+ * type 'WarningWidget' is not a subtype of type 'List<dynamic>?'
+ */
 @FairPatch()
 class FairCupertinoTabBarPage extends StatefulWidget {
   dynamic fairProps;
@@ -31,14 +33,6 @@ class _FairCupertinoTabBarState extends State<FairCupertinoTabBarPage> {
     return fairProps['tabList'];
   }
 
-  /**
-   * 问题1：
-   * CupertinoTabBar的item中，调用此方法
-   *
-   * type 'WarningWidget' is not a subtype of type 'List<dynamic>?'
-   *
-   * 可能解析时出错了，默认返回了WarningWidget,使用list.map((e)=> widget)效果一样
-   */
   List<BottomNavigationBarItem> _getTableItem() {
     return Sugar.mapEach(
         _getTabList(),
@@ -47,16 +41,12 @@ class _FairCupertinoTabBarState extends State<FairCupertinoTabBarPage> {
   }
 
   CupertinoTabBar _getTabBarWidget() {
-    print(fairProps['tabList']);
     return CupertinoTabBar(
-      items:  _getTableItem(),
+      items: _getTableItem(),
     );
   }
 
-  /**
-   * 问题2：
-   * ([dynamic]) => dynamic' is not a subtype of type '(BuildContext, int) => Widget'
-   */
+
   Widget _getTabBuild(BuildContext context, int index) {
     return CupertinoTabView(
       builder: (BuildContext context) => Center(
@@ -68,7 +58,7 @@ class _FairCupertinoTabBarState extends State<FairCupertinoTabBarPage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
-      backgroundColor: Colors.blueAccent,
+      backgroundColor: Colors.blue,
       tabBar: _getTabBarWidget(),
       tabBuilder: _getTabBuild,
     );
