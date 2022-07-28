@@ -16,7 +16,7 @@ dependencies:
 #  fair_annotation:
 #    path: ../annotation
 
-  fair_version: 2.5.0+1
+  #fair_version: 2.5.0+1
 #  fair_version:
 #    path: ../flutter_version/flutter_2_5_0
   flat_buffers: ^2.0.5
@@ -28,6 +28,8 @@ dev_dependencies:
     sdk: flutter
   analyzer: ^2.3.0
   pedantic: ^1.11.1
+  fair_version:
+     path: ../flutter_version/flutter_3_0_0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
