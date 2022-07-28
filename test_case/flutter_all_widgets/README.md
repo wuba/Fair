@@ -23,6 +23,8 @@ AnimatedModalBarrier | Failed parse ast; | 否 | 2011/07/22
 AnimatedOpacity | 是 | 是 | 2022/07/22
 AnimatedPhysicalModel | 否 | | 2022/07/27
 AnimatedPositioned | 否| | 2022/07/28
+AnimatedSize | 否 | | 2022/07/28
+
 
 
 

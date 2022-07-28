@@ -16,6 +16,7 @@ import 'animated/opacity/animatedopacity_demo.dart';
 import 'animated/physicalmodel/animatedphysicalmodel_demo.dart';
 import 'animated/crossfade/animatedcrossfade_demo.dart';
 import 'animated/positioned/animatedpositioned_demo.dart';
+import 'animated/size/animatedsize_demo.dart';
 import 'checkbox/checkbox_demo.dart';
 import 'circularProgressIndicator/circular_progressIndicator_demo.dart';
 import 'cupertino_tabbar/cupertino_tabbar_demo.dart';
@@ -69,6 +70,7 @@ class HomePage extends StatelessWidget {
       WidgetItem("AnimatedOpacity", AnimatedOpacityDemo()),
       WidgetItem("AnimatedPhysicalModel", AnimatedPhysicalModelDemo()),
       WidgetItem("AnimatedPositioned", AnimatedPositionedDemo()),
+      WidgetItem("AnimatedSize", AnimatedSizeDemo()),
     ];
 
     return Scaffold(
