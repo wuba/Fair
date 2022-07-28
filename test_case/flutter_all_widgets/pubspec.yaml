@@ -70,6 +70,7 @@ flutter:
     - assets/bundle/animatedmodalbarrier/
     - assets/bundle/animatedopacity/
     - assets/bundle/animatedphysicalmode/
+    - assets/bundle/animatedpositioned/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
