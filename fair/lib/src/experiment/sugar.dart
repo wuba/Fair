@@ -43,6 +43,14 @@ class Sugar {
     return data.mapEach((index, item) => builder(item));
   }
 
+  /// listBuilder
+  static ListView listBuilder({required int count,required Widget Function(int item) builder}){
+    return ListView.builder(itemCount: count,itemBuilder:(BuildContext context, int index){
+      return builder(index);
+    });
+  }
+
+
   static K switchCase<T, K>(T key,List<SugarSwitchCaseObj<T,K>> caseObjects ,K defaultValue){
     for (SugarSwitchCaseObj<T,K> sugarCase in caseObjects){
       if(sugarCase.sugarCase == key){

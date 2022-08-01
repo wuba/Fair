@@ -73,6 +73,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       } else if (name == 'Sugar.switchCase') {
         dynamic re = _buildSwitchCase(mapper, map, methodMap, context);
         return re;
+      }else if (name == 'Sugar.listBuilder'){
+        return _buildSugarListBuilder(mapper, map, methodMap, context);
       }
 
       var source = map['mapEach'];
@@ -341,6 +343,22 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       'pa': [caseValue, children, defaultValue]
     };
 
+    return mapEach.call(params);
+  }
+
+  ListView _buildSugarListBuilder(
+      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+    var count = map['na']['count'];
+    var source = List<int>.generate(count, (i) => i + 1);
+
+    Domain domain = Domain(source);
+    var list = Domain(source).forEach(($, _) {
+      return convert(context, map['na']['builder'], methodMap, domain:$) as Widget;
+    });
+    List<Widget> lW = list.map((e) => e as Widget).toList();
+    var params = {
+      'pa': [lW]
+    };
     return mapEach.call(params);
   }
 
