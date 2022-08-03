@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_all_widgets/animated/widget/animatedwidget_demo.dart';
 import 'package:flutter_all_widgets/animatedalign/animatedalign_demo.dart';
 import 'package:flutter_all_widgets/outlinebutton/outlinebutton_demo.dart';
 import 'package:flutter_all_widgets/rich_text/rich_text_demo.dart';
@@ -73,6 +74,7 @@ class HomePage extends StatelessWidget {
       WidgetItem("AnimatedPhysicalModel", AnimatedPhysicalModelDemo()),
       WidgetItem("AnimatedPositioned", AnimatedPositionedDemo()),
       WidgetItem("AnimatedSize", AnimatedSizeDemo()),
+      WidgetItem("AnimatedWidget", AnimatedWidgetDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
