@@ -58,8 +58,6 @@ flutter:
   assets:
     - assets/bundle/
     - assets/
-#    - assets/basic/
-#    - assets/plugin/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
