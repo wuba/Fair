@@ -18,7 +18,7 @@ class AnimatedPhysicalModelDemo extends StatelessWidget{
           children: [
             FlutterAnimatedPhysicalModelPage(),
             FairWidget(
-              path: 'assets/bundle/animatedphysicalmode/lib_animated_physicalmodel_animatedphysicalmodel_widget.fair.json',
+              path: 'assets/bundle/animated/lib_animated_physicalmodel_animatedphysicalmodel_widget.fair.json',
             )
           ],
         ),

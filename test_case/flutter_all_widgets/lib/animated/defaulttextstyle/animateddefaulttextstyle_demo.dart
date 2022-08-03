@@ -14,7 +14,7 @@ class AnimatedDefaultTextStyleDemo extends StatelessWidget {
         children: [
           FlutterAnimatedDefaultTextStylePage(),
           FairWidget(
-            path: 'assets/bundle/animateddefaulttextstyle/lib_animated_animateddefulttextstyle_widget.fair.json',
+            path: 'assets/bundle/animated/lib_animated_animateddefulttextstyle_widget.fair.json',
           )
         ],
       ),

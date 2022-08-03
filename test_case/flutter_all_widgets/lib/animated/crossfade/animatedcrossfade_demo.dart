@@ -24,7 +24,7 @@ class AnimatedCrossFadeDemo extends StatelessWidget{
           children: [
             FlutterAnimatedCrossFade(),
             FairWidget(
-              path: 'assets/bundle/animatedcrossfade/lib_animated_crossfade_animatedcrossfade_widget.fair.json',
+              path: 'assets/bundle/animated/lib_animated_crossfade_animatedcrossfade_widget.fair.json',
             )
           ],
         ),

@@ -17,7 +17,7 @@ class AnimatedOpacityDemo extends StatelessWidget{
         children: [
           FlutterAnimatedOpacityPage(),
           FairWidget(
-            path: 'assets/bundle/animatedopacity/lib_animated_opacity_animatedopacity_widget.fair.json',
+            path: 'assets/bundle/animated/lib_animated_opacity_animatedopacity_widget.fair.json',
           ),
         ],
       ),

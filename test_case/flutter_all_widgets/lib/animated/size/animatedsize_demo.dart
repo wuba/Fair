@@ -13,7 +13,7 @@ class AnimatedSizeDemo extends StatelessWidget {
         children: [
           Center(child: FlutterAnimatedSizePage(),),
           Center(child: FairWidget(
-            path: 'assets/bundle/animatedsize/lib_animated_size_animatedsize_widget.fair.json',
+            path: 'assets/bundle/animated/lib_animated_size_animatedsize_widget.fair.json',
           ),)
         ],
       ),

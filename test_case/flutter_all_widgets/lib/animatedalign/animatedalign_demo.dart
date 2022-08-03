@@ -14,7 +14,7 @@ class AnimatedAlignDemo extends StatelessWidget{
         children: [
           FlutterAnimatedAlignPage(),
           FairWidget(
-            path: 'assets/bundle/animatedalign/lib_animatedalign_animatedalign_widget.fair.json',
+            path: 'assets/bundle/animated/lib_animatedalign_animatedalign_widget.fair.json',
             data: {},
           )
         ],

@@ -29,7 +29,7 @@ class AnimatedListStateDemo extends StatelessWidget{
               child: Text('Flutter AnimatedListState'),
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder:(context)=>FairWidget(
-                  path: 'assets/bundle/animatedlistliststate/lib_animated_liststate_animatedliststate_widget.fair.json',
+                  path: 'assets/bundle/animated/lib_animated_liststate_animatedliststate_widget.fair.json',
                 )));
               },
             ),

@@ -1,9 +1,10 @@
 
-import 'package:fair/fair.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_all_widgets/animatedalign/animatedalign_demo.dart';
 import 'package:flutter_all_widgets/outlinebutton/outlinebutton_demo.dart';
 import 'package:flutter_all_widgets/rich_text/rich_text_demo.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'absorbpointer/absorbpointer_demo.dart';
 import 'alertdialog/alertdialog_demo.dart';
@@ -27,17 +28,18 @@ class WidgetDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "All Widget Demo",
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: HomePage());
+      title: "All Widget Demo",
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: HomePage(),
+    );
   }
 }
 
 class HomePage extends StatelessWidget {
   Widget addWidget(BuildContext context, String title, Widget widget) {
-    return  Container(
+    return Container(
       padding: EdgeInsets.all(10.0),
       alignment: Alignment.center,
       child: GestureDetector(
@@ -73,21 +75,39 @@ class HomePage extends StatelessWidget {
       WidgetItem("AnimatedSize", AnimatedSizeDemo()),
     ];
 
+    Widget _widgetCard(WidgetItem item, int index) {
+      return Container(
+        height: ((index % 5 + 1) * 50).toDouble(),
+        color: Colors.blueGrey,
+        alignment: Alignment.center,
+        child: GestureDetector(
+            child: Text(
+              "$index:${item.title}",
+              style: TextStyle(color: Colors.white),
+            ),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => item.className));
+            }),
+      );
+    }
+
     return Scaffold(
         appBar: AppBar(
           title: Text("All Widget Demo"),
         ),
-        body: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: Sugar.map(widgets,
-                  builder: (item) =>
-                      addWidget(context, item.title, item.className)).toList(),
-            ),
-            Column(),
-          ],
+        body: MasonryGridView.count(
+          crossAxisCount: 3,
+          mainAxisSpacing: 4,
+          crossAxisSpacing: 4,
+          shrinkWrap: true,
+//          physics:const NeverScrollableScrollPhysics(),
+          itemBuilder: (BuildContext context, int index) {
+            if (index < widgets.length) {
+              return _widgetCard(widgets[index], index);
+            }
+            return null;
+          },
         ));
   }
 }

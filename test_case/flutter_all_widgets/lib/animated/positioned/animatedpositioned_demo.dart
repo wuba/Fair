@@ -14,7 +14,7 @@ class AnimatedPositionedDemo extends StatelessWidget{
         children: [
           FlutterAnimatedPositionedPage(),
           FairWidget(
-            path: 'assets/bundle/animatedpositioned/lib_animated_positioned_animatedpositioned_widget.fair.json',
+            path: 'assets/bundle/animated/lib_animated_positioned_animatedpositioned_widget.fair.json',
           )
         ],
       ),

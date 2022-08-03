@@ -16,7 +16,7 @@ class AnimatedContainerDemo extends StatelessWidget {
         children: [
           FlutterAnimatedContainerPage(),
           FairWidget(
-            path: 'assets/bundle/animatedcontainer/lib_animated_animatedcontainer_widget.fair.json',
+            path: 'assets/animated/lib_animated_animatedcontainer_widget.fair.json',
           )
         ],
       )
