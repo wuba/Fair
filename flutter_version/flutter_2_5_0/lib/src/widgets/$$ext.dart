@@ -28,6 +28,16 @@ var p = () => {
             onFocusChange: props['onFocusChange'],
             autofocus: props['autofocus'] ?? false,
           ),
+      'OutlinedButton':(props) => OutlinedButton(
+            key: props['key'],
+            onPressed: props['onPressed']!,
+            child: props['child']!,
+            onLongPress: props['onLongPress'],
+            style: props['style'],
+            focusNode: props['focusNode'],
+            autofocus: props['autofocus'] ?? false,
+            clipBehavior: props['clipBehavior'] ?? Clip.none,
+      ),
       'Duration': (props) => Duration(
             days: props['days'] ?? 0,
             hours: props['hours'] ?? 0,
