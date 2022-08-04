@@ -29,27 +29,31 @@ class _FairAlertDialogState extends State<FairAlertDialogPage> {
     return fairProps['content'];
   }
 
+  List<CupertinoDialogAction> getActions(){
+    return <CupertinoDialogAction>[
+      CupertinoDialogAction(
+        isDefaultAction: true,
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: const Text('取消'),
+      ),
+      CupertinoDialogAction(
+        isDefaultAction: true,
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: const Text('确定'),
+      )
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoAlertDialog(
       title: Text(_getTitle()),
       content: Text(_getContent()),
-      actions: <CupertinoDialogAction>[
-        CupertinoDialogAction(
-          isDefaultAction: true,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('取消'),
-        ),
-        CupertinoDialogAction(
-          isDefaultAction: true,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('确定'),
-        )
-      ],
+      actions: getActions(),
     );
   }
 }

@@ -1,0 +1,31 @@
+{
+  "className": "GestureDetector",
+  "na": {
+    "onTap": "@(_update)",
+    "child": {
+      "className": "Container",
+      "na": {
+        "color": "#(Colors.amberAccent)",
+        "child": {
+          "className": "AnimatedSize",
+          "na": {
+            "curve": "#(Curves.easeIn)",
+            "duration": {
+              "className": "Duration",
+              "na": {
+                "seconds": 1
+              }
+            },
+            "child": {
+              "className": "FlutterLogo",
+              "na": {
+                "size": "^(_size)"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

@@ -11,7 +11,7 @@ class RichTextDemo extends StatelessWidget {
       appBar: AppBar(
         title: Text('RichTextDemo'),
       ),
-      body:Row(
+      body:Column(
         children: [
           Expanded(
             child: RichText(

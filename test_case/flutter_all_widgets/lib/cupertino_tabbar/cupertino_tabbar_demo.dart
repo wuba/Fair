@@ -23,7 +23,7 @@ class CupertinoTabBarDemo extends StatelessWidget {
           Container(
             height: 300,
             child: FairWidget(
-              path: 'assets/bundle/cupertinotabbar/lib_cupertino_tabbar_cupertino_tabbar_fair.fair.json',
+              path: 'assets/bundle/animated/lib_cupertino_tabbar_cupertino_tabbar_fair.fair.json',
                 data: {
                   'fairProps':jsonEncode({'tabList':['首页','我的']})
                 }

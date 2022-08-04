@@ -22,6 +22,7 @@ dependencies:
 
   fair:
     path: ../../fair
+  flutter_staggered_grid_view: ^0.6.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -54,12 +55,15 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/bundle/
+    - assets/bundle/animated/
     - assets/bundle/checkbox/
     - assets/bundle/cupertinotabbar/
     - assets/bundle/outlinebutton/
     - assets/bundle/cupertinoalertdialog/
     - assets/bundle/circularprogressindicator/
     - assets/bundle/richtext/
+    - assets/bundle/absorbpointer/
+    - assets/bundle/alertdialog/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

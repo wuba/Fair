@@ -1,0 +1,88 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "Flutter AnimatedListState"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "AnimatedList",
+      "na": {
+        "key": "^(_listKey)",
+        "initialItemCount": "$(_list.length)",
+        "itemBuilder": "@(_itemBuilder)"
+      }
+    },
+    "floatingActionButton": {
+      "className": "Row",
+      "na": {
+        "mainAxisAlignment": "#(MainAxisAlignment.center)",
+        "crossAxisAlignment": "#(CrossAxisAlignment.center)",
+        "children": [
+          {
+            "className": "FloatingActionButton",
+            "na": {
+              "onPressed": "@(_addItem)",
+              "child": {
+                "className": "Icon",
+                "pa": [
+                  "#(Icons.add)"
+                ]
+              }
+            }
+          },
+          {
+            "className": "SizedBox",
+            "na": {
+              "width": 60
+            }
+          },
+          {
+            "className": "FloatingActionButton",
+            "na": {
+              "onPressed": "@(_removeItem)",
+              "child": {
+                "className": "Icon",
+                "pa": [
+                  "#(Icons.remove)"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {
+    "_buildItem": {
+      "className": "SizeTransition",
+      "na": {
+        "sizeFactor": "^(_animation)",
+        "child": {
+          "className": "Card",
+          "na": {
+            "child": {
+              "className": "ListTile",
+              "na": {
+                "title": {
+                  "className": "Text",
+                  "pa": [
+                    "^(_item)"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "_itemBuilder": "%(_buildItem)"
+  }
+}

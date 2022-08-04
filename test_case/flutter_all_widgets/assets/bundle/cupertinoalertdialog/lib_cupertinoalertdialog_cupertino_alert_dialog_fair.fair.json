@@ -1,0 +1,19 @@
+{
+  "className": "CupertinoAlertDialog",
+  "na": {
+    "title": {
+      "className": "Text",
+      "pa": [
+        "%(_getTitle)"
+      ]
+    },
+    "content": {
+      "className": "Text",
+      "pa": [
+        "%(_getContent)"
+      ]
+    },
+    "actions": "%(getActions)"
+  },
+  "methodMap": {}
+}

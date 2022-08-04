@@ -4,9 +4,8 @@ import 'package:fair/fair.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'alert_dialog_fair.dart';
 
-class AlertDialogDemo extends StatelessWidget {
+class CupertinoAlertDialogDemo extends StatelessWidget {
   void _showAlertDialog(BuildContext context) {
     showCupertinoModalPopup<void>(
         context: context,
@@ -37,7 +36,7 @@ class AlertDialogDemo extends StatelessWidget {
         context: context,
         builder: (BuildContext context) => FairWidget(
             path:
-            'assets/bundle/cupertinoalertdialog/lib_cupertinoalertdialog_alert_dialog_fair.fair.json',
+            'assets/bundle/cupertinoalertdialog/lib_cupertinoalertdialog_cupertino_alert_dialog_fair.fair.json',
             data: {
               'fairProps': jsonEncode({'title': 'Fair Alert','content':'我是Fair CupertinoAlertDialog,请点击取消或确定退出'})
             }));

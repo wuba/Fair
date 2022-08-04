@@ -1,0 +1,29 @@
+{
+  "className": "Stack",
+  "na": {
+    "alignment": "#(AlignmentDirectional.center)",
+    "children": [
+      {
+        "className": "SizedBox",
+        "na": {
+          "width": 100.0,
+          "height": 200.0,
+          "child": {
+            "className": "ElevatedButton",
+            "na": {
+              "style": "%(_getButtonStyle)",
+              "onPressed": "@(_clickButtonTop)",
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "fair"
+                ]
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "methodMap": {}
+}

@@ -28,5 +28,16 @@ var p = () => {
             onFocusChange: props['onFocusChange'],
             autofocus: props['autofocus'] ?? false,
           ),
+      'Duration': (props) => Duration(
+            days: props['days'] ?? 0,
+            hours: props['hours'] ?? 0,
+            minutes: props['minutes'] ?? 0,
+            seconds: props['seconds'] ?? 0,
+            milliseconds: props['milliseconds'] ?? 0,
+            microseconds: props['microseconds'] ?? 0,
+      ),
+      'BorderRadius.circular': (props) => BorderRadius.circular(
+            props['pa'][0]?.toDouble(),
+      ),
       // 往下补充Widget映射关系
     };
