@@ -6,6 +6,8 @@ import 'package:flutter_all_widgets/placeholder/placeholder_demo.dart';
 import 'package:flutter_all_widgets/popupmenubutton/popupmenubutton_demo.dart';
 import 'package:flutter_all_widgets/positioned_transition/positioned_transition_demo.dart';
 import 'package:flutter_all_widgets/radio/radio_demo.dart';
+import 'package:flutter_all_widgets/raw/image/rawimage_demo.dart';
+import 'package:flutter_all_widgets/raw/keyboard_listener/raw_keyboard_listener_demo.dart';
 import 'package:flutter_all_widgets/rich_text/rich_text_demo.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -81,6 +83,8 @@ class HomePage extends StatelessWidget {
       WidgetItem("PopupmenuButton", PopupmenuButtonDemo()),
       WidgetItem("PositionedTransition", PositionedTransitionDemo()),
       WidgetItem("Radio", RadioDemo()),
+      WidgetItem("RawImage", RawImageDemo()),
+      WidgetItem("RawKeyboardListener", RawKeyboardListenerDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
