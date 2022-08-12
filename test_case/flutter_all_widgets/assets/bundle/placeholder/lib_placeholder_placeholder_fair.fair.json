@@ -1,0 +1,15 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "Placeholder",
+      "na": {
+        "color": "%(_getColor)",
+        "strokeWidth": "%(_getStrokeWidth)",
+        "fallbackWidth": "%(_getFallbackWidth)",
+        "fallbackHeight": "%(_getFallbackHeight)"
+      }
+    }
+  },
+  "methodMap": {}
+}

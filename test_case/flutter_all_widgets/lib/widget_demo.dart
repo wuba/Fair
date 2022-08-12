@@ -1,9 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_all_widgets/animated/widget/animatedwidget_demo.dart';
 import 'package:flutter_all_widgets/animatedalign/animatedalign_demo.dart';
 import 'package:flutter_all_widgets/outlinebutton/outlinebutton_demo.dart';
+import 'package:flutter_all_widgets/placeholder/placeholder_demo.dart';
 import 'package:flutter_all_widgets/rich_text/rich_text_demo.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -75,6 +74,7 @@ class HomePage extends StatelessWidget {
       WidgetItem("AnimatedPositioned", AnimatedPositionedDemo()),
       WidgetItem("AnimatedSize", AnimatedSizeDemo()),
       WidgetItem("AnimatedWidget", AnimatedWidgetDemo()),
+      WidgetItem("Placeholder", PlaceholderDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
@@ -83,6 +83,7 @@ class HomePage extends StatelessWidget {
         color: Colors.blueGrey,
         alignment: Alignment.center,
         child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
             child: Text(
               "$index:${item.title}",
               style: TextStyle(color: Colors.white),
