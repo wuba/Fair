@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
 class PositionedTransitionDemo extends StatefulWidget {
@@ -43,13 +40,6 @@ class _PositionedTransitionDemoState extends State<PositionedTransitionDemo>
                 child: Container(
                   color: Colors.green,
                 )),
-          ),
-          Expanded(
-            child: FairWidget(
-              path:
-                  'assets/bundle/popupmenubutton/lib_popupmenubutton_popupmenubutton_fair.fair.json',
-              data: {'fairProps': jsonEncode({})},
-            ),
           )
         ],
       ),

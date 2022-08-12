@@ -1,0 +1,14 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "Radio",
+      "na": {
+        "value": "%(_getValue)",
+        "groupValue": "%(_getGroupValue)",
+        "onChanged": "@(_onChanged)"
+      }
+    }
+  },
+  "methodMap": {}
+}
