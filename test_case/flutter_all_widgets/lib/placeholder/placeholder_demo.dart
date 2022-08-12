@@ -26,7 +26,6 @@ class PlaceholderDemo extends StatelessWidget {
                   'assets/bundle/placeholder/lib_placeholder_placeholder_fair.fair.json',
               data: {
                 'fairProps': jsonEncode({
-                  'color': '0xFF112233',
                   'strokeWidth': '5.0',
                   'fallbackWidth': '200.0',
                   'fallbackHeight': '200.0',
