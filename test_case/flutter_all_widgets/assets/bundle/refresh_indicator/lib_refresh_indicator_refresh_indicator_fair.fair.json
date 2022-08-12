@@ -1,0 +1,13 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "RefreshIndicator",
+      "na": {
+        "onRefresh": "@(_onRefresh)",
+        "child": "%(_getChild)"
+      }
+    }
+  },
+  "methodMap": {}
+}
