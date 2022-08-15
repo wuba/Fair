@@ -85,7 +85,33 @@ FairWidgetBinding provider = () {
     },
     'Sugar.listBuilder':(props){
       var p0 = pa0(props);
-      var listView = ListView(children: p0,);
+      var p1 = pa1(props);
+      ListView paramsObj = ListView();
+      if(p1 is ListView){
+        paramsObj = p1 as ListView;
+      }
+
+      SliverChildListDelegate childrenDelegate = paramsObj.childrenDelegate as SliverChildListDelegate;
+      var listView = ListView(
+        scrollDirection:  paramsObj.scrollDirection,
+        reverse:  paramsObj.reverse,
+        controller:  paramsObj.controller,
+        primary:  paramsObj.primary,
+        physics:  paramsObj.physics,
+        shrinkWrap:  paramsObj.shrinkWrap,
+        padding:  paramsObj.padding,
+        itemExtent: paramsObj.itemExtent,
+        prototypeItem: paramsObj.prototypeItem,
+        addAutomaticKeepAlives: childrenDelegate.addAutomaticKeepAlives,
+        addRepaintBoundaries: childrenDelegate.addRepaintBoundaries,
+        addSemanticIndexes: childrenDelegate.addSemanticIndexes,
+        cacheExtent: paramsObj.cacheExtent,
+        semanticChildCount: paramsObj.semanticChildCount,
+        dragStartBehavior: paramsObj.dragStartBehavior,
+        keyboardDismissBehavior: paramsObj.keyboardDismissBehavior,
+        restorationId: paramsObj.restorationId,
+        clipBehavior: paramsObj.clipBehavior,
+        children: p0,);
       return listView;
     },
   };
