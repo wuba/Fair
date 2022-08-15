@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildOperateBtn(String name, Function callback){
     return GestureDetector(
-      child: FlatButton(
+      child: TextButton(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Container(

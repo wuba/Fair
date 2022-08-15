@@ -129,9 +129,9 @@ class DialogWidget extends Dialog {
   Widget _buildBottomCancelButton() {
     return Flexible(
       fit: FlexFit.tight,
-      child: FlatButton(
-        onPressed: this.cancelFun,
-        child:  Text('Cancel', style: TextStyle(color: Color(0xff666666))),
+      child:InkWell(
+        onTap: this.cancelFun,
+        child: Text('Cancel', style: TextStyle(color: Color(0xff666666))),
       ),
     );
   }
