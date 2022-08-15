@@ -60,6 +60,31 @@ class _SugarElseIfPageState extends State<SugarElseIfPage> {
                     );
                   }),
             ),
+            SizedBox(
+              width: Sugar.width(context),
+              height: 50,
+              child: Sugar.listBuilder(
+                  scrollDirection: Axis.horizontal,
+                  reverse: true,
+                  itemCount: 15,
+                  itemBuilder: (BuildContext context, int item) {
+                    return Center(
+                      child: Container(
+                        height: 50,
+                        width: 60,
+                        child: Container(
+                          color: Colors.amber,
+                          margin: EdgeInsets.only(left: 10),
+                          child: Center(
+                            child: Text(
+                                "$item"
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+            ),
             FloatingActionButton(
               child: Text(
                 Sugar.switchCase(
