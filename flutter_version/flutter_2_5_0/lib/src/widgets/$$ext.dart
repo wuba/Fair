@@ -59,5 +59,10 @@ var p = () => {
       'BorderRadius.circular': (props) => BorderRadius.circular(
             props['pa'][0]?.toDouble(),
       ),
+      'ImageFilter.blur':(props)=>ImageFilter.blur(
+            sigmaX: props['sigmaX']?.toDouble() ?? 0.0,
+            sigmaY: props['sigmaY']?.toDouble() ?? 0.0,
+            tileMode: props['tileMode']?? TileMode.clamp,
+      ),
       // 往下补充Widget映射关系
     };

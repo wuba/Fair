@@ -21,6 +21,8 @@ import 'animated/positioned/animatedpositioned_demo.dart';
 import 'animated/size/animatedsize_demo.dart';
 import 'appbar/appbar_demo.dart';
 import 'aspectratio/aspectratio_demo.dart';
+import 'autocomplete/autocomplete_demo.dart';
+import 'backdropfilter/backdropfilter_demo.dart';
 import 'checkbox/checkbox_demo.dart';
 import 'circularProgressIndicator/circular_progressIndicator_demo.dart';
 import 'cupertino_tabbar/cupertino_tabbar_demo.dart';
@@ -79,6 +81,8 @@ class HomePage extends StatelessWidget {
       WidgetItem("AnimatedWidget", AnimatedWidgetDemo()),
       WidgetItem("AppBar", AppBarDemo()),
       WidgetItem("AspectRatio", AspectRatioDemo()),
+      WidgetItem("Autocomplete", AutocompleteDemo()),
+      WidgetItem("BackdropFilter", BackdropFilterDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {

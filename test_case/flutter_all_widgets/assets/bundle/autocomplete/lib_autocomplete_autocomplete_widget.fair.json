@@ -1,0 +1,20 @@
+{
+  "className": "Autocomplete",
+  "na": {
+    "optionsBuilder": "@(_builderAutoComplete)",
+    "onSelected": "@(_onSelected)"
+  },
+  "methodMap": {
+    "_builderAutoComplete": {
+      "className": "_kOptions.where",
+      "pa": [
+        {
+          "className": "option.contains",
+          "pa": [
+            {}
+          ]
+        }
+      ]
+    }
+  }
+}

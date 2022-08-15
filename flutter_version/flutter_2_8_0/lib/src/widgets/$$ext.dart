@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 var p = () => {
@@ -101,5 +103,10 @@ var p = () => {
             package: props['package'],
             overflow: props['overflow'],
           ),
+      'ImageFilter.blur':(props)=>ImageFilter.blur(
+            sigmaX: props['sigmaX']?.toDouble() ?? 0.0,
+            sigmaY: props['sigmaY']?.toDouble() ?? 0.0,
+            tileMode: props['tileMode']?? TileMode.clamp,
+      ),
       // 往下补充Widget映射关系
     };
