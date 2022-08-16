@@ -19,6 +19,7 @@ import 'package:flutter_all_widgets/scale_transition/scale_transition_demo.dart'
 import 'package:flutter_all_widgets/scroll/scroll_configuration/scroll_configuration_demo.dart';
 import 'package:flutter_all_widgets/scroll/scrollable/scrollable_demo.dart';
 import 'package:flutter_all_widgets/scroll/scrollbar/scrollbar_demo.dart';
+import 'package:flutter_all_widgets/semantics/semantics_demo.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'absorbpointer/absorbpointer_demo.dart';
@@ -105,6 +106,7 @@ class HomePage extends StatelessWidget {
       WidgetItem("ScrollConfiguration", ScrollConfigurationDemo()),
       WidgetItem("Scrollable", ScrollableDemo()),
       WidgetItem("Scrollbar", ScrollbarDemo()),
+      WidgetItem("Semantics", SemanticsDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
