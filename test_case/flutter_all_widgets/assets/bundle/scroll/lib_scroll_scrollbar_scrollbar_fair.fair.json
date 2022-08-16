@@ -1,0 +1,12 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "Scrollbar",
+      "na": {
+        "child": "%(_getChild)"
+      }
+    }
+  },
+  "methodMap": {}
+}

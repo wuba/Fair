@@ -1,0 +1,13 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "ScrollConfiguration",
+      "na": {
+        "behavior": "%(_getBehavior)",
+        "child": "%(_getChild)"
+      }
+    }
+  },
+  "methodMap": {}
+}

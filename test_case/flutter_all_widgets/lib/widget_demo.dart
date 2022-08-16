@@ -15,6 +15,10 @@ import 'package:flutter_all_widgets/rotate/rotatedbox/rotatedbox_demo.dart';
 import 'package:flutter_all_widgets/rotate/rotation_transition/rotation_transition_demo.dart';
 import 'package:flutter_all_widgets/row/row_demo.dart';
 import 'package:flutter_all_widgets/scaffold/scaffold_demo.dart';
+import 'package:flutter_all_widgets/scale_transition/scale_transition_demo.dart';
+import 'package:flutter_all_widgets/scroll/scroll_configuration/scroll_configuration_demo.dart';
+import 'package:flutter_all_widgets/scroll/scrollable/scrollable_demo.dart';
+import 'package:flutter_all_widgets/scroll/scrollbar/scrollbar_demo.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'absorbpointer/absorbpointer_demo.dart';
@@ -97,6 +101,10 @@ class HomePage extends StatelessWidget {
       WidgetItem("RotationTransition", RotationTransitionDemo()),
       WidgetItem("Row", RowDemo()),
       WidgetItem("Scaffold", ScaffoldDemo()),
+      WidgetItem("ScaleTransition", ScaleTransitionDemo()),
+      WidgetItem("ScrollConfiguration", ScrollConfigurationDemo()),
+      WidgetItem("Scrollable", ScrollableDemo()),
+      WidgetItem("Scrollbar", ScrollbarDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {

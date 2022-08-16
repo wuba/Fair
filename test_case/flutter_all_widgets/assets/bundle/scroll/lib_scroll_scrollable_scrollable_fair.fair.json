@@ -1,0 +1,12 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "Scrollable",
+      "na": {
+        "viewportBuilder": "@(_getBuilder)"
+      }
+    }
+  },
+  "methodMap": {}
+}
