@@ -58,7 +58,6 @@ flutter:
     - assets/bundle/
     - assets/bundle/animated/
     - assets/bundle/checkbox/
-    - assets/bundle/cupertinotabbar/
     - assets/bundle/outlinebutton/
     - assets/bundle/cupertinoalertdialog/
     - assets/bundle/circularprogressindicator/
@@ -71,6 +70,7 @@ flutter:
     - assets/bundle/backdropfilter/
     - assets/bundle/baseline/
     - assets/bundle/bottomnavigationbar/
+    - assets/bundle/bottomsheet/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
