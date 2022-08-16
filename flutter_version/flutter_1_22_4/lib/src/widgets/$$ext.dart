@@ -59,5 +59,11 @@ var p = () => {
       'BorderRadius.circular': (props) => BorderRadius.circular(
             props['pa'][0]?.toDouble(),
       ),
+      'BottomNavigationBarItem':(props)=>BottomNavigationBarItem(
+            icon: props['icon'],
+            label: props['label'],
+            activeIcon: props['activeIcon'] ?? props['icon'],
+            backgroundColor: props['backgroundColor'],
+      ),
       // 往下补充Widget映射关系
     };
