@@ -74,6 +74,7 @@ flutter:
     - assets/bundle/scaffold/
     - assets/bundle/scroll/
     - assets/bundle/semantics/
+    - assets/bundle/simpledialog/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
