@@ -1,0 +1,17 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "body": {
+      "className": "Center",
+      "na": {
+        "child": {
+          "className": "Text",
+          "pa": [
+            "fair"
+          ]
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

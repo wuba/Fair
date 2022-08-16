@@ -14,6 +14,7 @@ import 'package:flutter_all_widgets/rich_text/rich_text_demo.dart';
 import 'package:flutter_all_widgets/rotate/rotatedbox/rotatedbox_demo.dart';
 import 'package:flutter_all_widgets/rotate/rotation_transition/rotation_transition_demo.dart';
 import 'package:flutter_all_widgets/row/row_demo.dart';
+import 'package:flutter_all_widgets/scaffold/scaffold_demo.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'absorbpointer/absorbpointer_demo.dart';
@@ -95,6 +96,7 @@ class HomePage extends StatelessWidget {
       WidgetItem("RotatedBox", RotatedBoxDemo()),
       WidgetItem("RotationTransition", RotationTransitionDemo()),
       WidgetItem("Row", RowDemo()),
+      WidgetItem("Scaffold", ScaffoldDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
