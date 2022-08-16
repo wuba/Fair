@@ -11,6 +11,9 @@ import 'package:flutter_all_widgets/raw/keyboard_listener/raw_keyboard_listener_
 import 'package:flutter_all_widgets/refresh_indicator/refresh_indicator_demo.dart';
 import 'package:flutter_all_widgets/reorderable_listview/reorderable_listview_demo.dart';
 import 'package:flutter_all_widgets/rich_text/rich_text_demo.dart';
+import 'package:flutter_all_widgets/rotate/rotatedbox/rotatedbox_demo.dart';
+import 'package:flutter_all_widgets/rotate/rotation_transition/rotation_transition_demo.dart';
+import 'package:flutter_all_widgets/row/row_demo.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'absorbpointer/absorbpointer_demo.dart';
@@ -89,6 +92,9 @@ class HomePage extends StatelessWidget {
       WidgetItem("RawKeyboardListener", RawKeyboardListenerDemo()),
       WidgetItem("RefreshIndicator", RefreshIndicatorDemo()),
       WidgetItem("ReorderableListView", ReorderableListViewDemo()),
+      WidgetItem("RotatedBox", RotatedBoxDemo()),
+      WidgetItem("RotationTransition", RotationTransitionDemo()),
+      WidgetItem("Row", RowDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {

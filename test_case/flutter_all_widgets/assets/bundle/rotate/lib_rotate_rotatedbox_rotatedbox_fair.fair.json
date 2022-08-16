@@ -1,0 +1,13 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "RotatedBox",
+      "na": {
+        "quarterTurns": "%(_getTurns)",
+        "child": "%(_getChild)"
+      }
+    }
+  },
+  "methodMap": {}
+}
