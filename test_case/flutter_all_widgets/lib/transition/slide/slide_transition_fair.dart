@@ -2,16 +2,16 @@ import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
-class FairSizeTransitionPage extends StatefulWidget {
+class FairSlideTransitionPage extends StatefulWidget {
   dynamic fairProps;
 
-  FairSizeTransitionPage({Key key, this.fairProps}) : super(key: key);
+  FairSlideTransitionPage({Key key, this.fairProps}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _FairSizeTransitionPageState();
+  State<StatefulWidget> createState() => _FairSlideTransitionPageState();
 }
 
-class _FairSizeTransitionPageState extends State<FairSizeTransitionPage>
+class _FairSlideTransitionPageState extends State<FairSlideTransitionPage>
     with SingleTickerProviderStateMixin {
   @FairProps()
   var fairProps;
@@ -24,8 +24,7 @@ class _FairSizeTransitionPageState extends State<FairSizeTransitionPage>
     _animationController =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
 
-    _animation = Tween(begin: .0, end: .5).animate(_animationController);
-
+    _animation = Tween(begin: Offset(0.0,0.0), end: Offset(1.0,1.0)).animate(_animationController);
     //开始动画
     _animationController.forward();
     super.initState();
@@ -35,15 +34,16 @@ class _FairSizeTransitionPageState extends State<FairSizeTransitionPage>
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: SizeTransition(
-      sizeFactor: _animation,
-      axis: Axis.horizontal,
-      child: Container(
-        height: 200,
-        width: 200,
-        color: Colors.red,
+      color: Colors.blue,
+      height: 100,
+      width: 100,
+      child: SlideTransition(
+        position: _animation,
+        child: Container(
+          color: Colors.red,
+        ),
       ),
-    ));
+    );
   }
 
   @override
