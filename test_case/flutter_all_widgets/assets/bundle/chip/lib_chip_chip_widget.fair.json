@@ -1,0 +1,24 @@
+{
+  "className": "Chip",
+  "na": {
+    "avatar": {
+      "className": "CircleAvatar",
+      "na": {
+        "backgroundColor": "#(Colors.blueGrey)",
+        "child": {
+          "className": "Text",
+          "pa": [
+            "Fair"
+          ]
+        }
+      }
+    },
+    "label": {
+      "className": "Text",
+      "pa": [
+        "Aaron Burr"
+      ]
+    }
+  },
+  "methodMap": {}
+}
