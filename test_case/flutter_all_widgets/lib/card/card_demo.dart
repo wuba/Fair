@@ -7,6 +7,7 @@ class CardDemo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Card'),),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           FlutterCardPage(),
           FairWidget(

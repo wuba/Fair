@@ -27,6 +27,7 @@ import 'baseline/baseline_demo.dart';
 import 'bottom_navigation_bar/bottomnavigationbar_demo.dart';
 import 'bottomsheet/bottomsheet_demo.dart';
 import 'card/card_demo.dart';
+import 'center/center_demo.dart';
 import 'checkbox/checkbox_demo.dart';
 import 'circularProgressIndicator/circular_progressIndicator_demo.dart';
 import 'cupertino_tabbar/cupertino_tabbar_demo.dart';
@@ -91,6 +92,7 @@ class HomePage extends StatelessWidget {
       WidgetItem("BottomNavigationBar", BottomNavigationBarDemo()),
       WidgetItem("BottomSheet", BottomSheetDemo()),
       WidgetItem("Card", CardDemo()),
+      WidgetItem("Center", CenterDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
