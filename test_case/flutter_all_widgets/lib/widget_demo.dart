@@ -22,6 +22,7 @@ import 'package:flutter_all_widgets/simpledialog/simpledialog_demo.dart';
 import 'package:flutter_all_widgets/sized/box/sized_box_demo.dart';
 import 'package:flutter_all_widgets/sized/overflow_box/sized_overflow_box_demo.dart';
 import 'package:flutter_all_widgets/slider/slider_demo.dart';
+import 'package:flutter_all_widgets/sliver/appbar/sliver_appbar_demo.dart';
 import 'package:flutter_all_widgets/transition/positioned/positioned_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/rotation/rotation_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/scale/scale_transition_demo.dart';
@@ -119,8 +120,9 @@ class HomePage extends StatelessWidget {
       WidgetItem("SizeTransition", SizeTransitionDemo()),
       WidgetItem("SizedBox", SizedBoxDemo()),
       WidgetItem("SizedOverflowBox", SizedOverflowBoxDemo()),
-      WidgetItem("Slider", SliderDemo()),
       WidgetItem("SlideTransition", SlideTransitionDemo()),
+      WidgetItem("Slider", SliderDemo()),
+      WidgetItem("SliverAppBar", SliverAppBarDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
