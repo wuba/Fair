@@ -1,0 +1,26 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "SizedBox",
+      "na": {
+        "height": "%(_getHeight)",
+        "width": "%(_getWidth)",
+        "child": {
+          "className": "Container",
+          "na": {
+            "color": "#(Colors.blue)",
+            "alignment": "#(Alignment.center)",
+            "child": {
+              "className": "Text",
+              "pa": [
+                "Fair Sample"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}
