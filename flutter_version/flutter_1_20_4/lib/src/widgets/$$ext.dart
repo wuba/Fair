@@ -45,5 +45,20 @@ var p = () => {
             activeIcon: props['activeIcon'] ?? props['icon'],
             backgroundColor: props['backgroundColor'],
       ),
+      'StadiumBorder': (props) => StadiumBorder(
+            side:props['side'] ?? BorderSide.none,
+      ),
+      'RoundedRectangleBorder': (props) => RoundedRectangleBorder(
+            side: props['side'] ?? BorderSide.none,
+            borderRadius: props['props'] ?? BorderRadius.zero,
+      ),
+      'ContinuousRectangleBorder': (props) => ContinuousRectangleBorder(
+            side: props['side'] ?? BorderSide.none,
+            borderRadius: props['props'] ?? BorderRadius.zero,
+      ),
+      'BeveledRectangleBorder':(props) => BeveledRectangleBorder(
+            side: props['side'] ?? BorderSide.none,
+            borderRadius: props['props'] ?? BorderRadius.zero,
+      ),
       // 往下补充Widget映射关系
     };

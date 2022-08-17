@@ -30,7 +30,7 @@ var p = () => {
             onFocusChange: props['onFocusChange'],
             autofocus: props['autofocus'] ?? false,
           ),
-      'OutlinedButton':(props) => OutlinedButton(
+      'OutlinedButton': (props) => OutlinedButton(
             key: props['key'],
             onPressed: props['onPressed']!,
             child: props['child']!,
@@ -41,7 +41,7 @@ var p = () => {
             focusNode: props['focusNode'],
             autofocus: props['autofocus'] ?? false,
             clipBehavior: props['clipBehavior'] ?? Clip.none,
-      ),
+          ),
       'Duration': (props) => Duration(
             days: props['days'] ?? 0,
             hours: props['hours'] ?? 0,
@@ -59,14 +59,14 @@ var p = () => {
             onFocusChange: props['onFocusChange'],
             style: props['style'],
             focusNode: props['focusNode'],
-            autofocus: props['autofocus']?? false,
-            clipBehavior: props['clipBehavior']?? Clip.none,
-      ),
+            autofocus: props['autofocus'] ?? false,
+            clipBehavior: props['clipBehavior'] ?? Clip.none,
+          ),
       'BorderRadius.circular': (props) => BorderRadius.circular(
             props['pa'][0]?.toDouble(),
-      ),
+          ),
       'TextSpan': (props) => TextSpan(
-          text: props['text'],
+            text: props['text'],
             children: props['children'],
             style: props['style'],
             recognizer: props['recognizer'],
@@ -76,7 +76,7 @@ var p = () => {
             semanticsLabel: props['semanticsLabel'],
             locale: props['locale'],
             spellOut: props['spellOut'],
-      ),
+          ),
       'TextStyle': (props) => TextStyle(
             inherit: props['inherit'] ?? true,
             color: props['color'],
@@ -103,19 +103,19 @@ var p = () => {
             package: props['package'],
             overflow: props['overflow'],
           ),
-      'ImageFilter.blur':(props)=>ImageFilter.blur(
+      'ImageFilter.blur': (props) => ImageFilter.blur(
             sigmaX: props['sigmaX']?.toDouble() ?? 0.0,
             sigmaY: props['sigmaY']?.toDouble() ?? 0.0,
-            tileMode: props['tileMode']?? TileMode.clamp,
-      ),
-      'BottomNavigationBarItem':(props)=>BottomNavigationBarItem(
+            tileMode: props['tileMode'] ?? TileMode.clamp,
+          ),
+      'BottomNavigationBarItem': (props) => BottomNavigationBarItem(
             icon: props['icon'],
             label: props['label'],
             activeIcon: props['activeIcon'] ?? props['icon'],
             backgroundColor: props['backgroundColor'],
             tooltip: props['tooltip'],
-      ),
-      'TextButton': (props)=> TextButton(
+          ),
+      'TextButton': (props) => TextButton(
             key: props['key'],
             onPressed: props['onPressed'],
             child: props['child'],
@@ -126,6 +126,21 @@ var p = () => {
             focusNode: props['focusNode'],
             autofocus: props['autofocus'] ?? false,
             clipBehavior: props['clipBehavior'] ?? Clip.none,
+          ),
+      'StadiumBorder': (props) => StadiumBorder(
+            side: props['side'] ?? BorderSide.none,
+          ),
+      'RoundedRectangleBorder': (props) => RoundedRectangleBorder(
+            side: props['side'] ?? BorderSide.none,
+            borderRadius: props['props'] ?? BorderRadius.zero,
+          ),
+      'ContinuousRectangleBorder': (props) => ContinuousRectangleBorder(
+            side: props['side'] ?? BorderSide.none,
+            borderRadius: props['props'] ?? BorderRadius.zero,
+          ),
+      'BeveledRectangleBorder':(props) => BeveledRectangleBorder(
+            side: props['side'] ?? BorderSide.none,
+            borderRadius: props['props'] ?? BorderRadius.zero,
       ),
       // 往下补充Widget映射关系
     };
