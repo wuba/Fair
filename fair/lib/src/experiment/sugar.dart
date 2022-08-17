@@ -44,15 +44,7 @@ class Sugar {
     return data.mapEach((index, item) => builder(item));
   }
 
-  /// listBuilder
-  // static ListView listBuilder(
-  //     {required int count,required Widget Function(int item) builder}){
-  //   return ListView.builder(itemCount: count,itemBuilder:(BuildContext context, int index){
-  //     return builder(index);
-  //   });
-  // }
-
-
+  /// ListView.builder()
   static ListView listBuilder({
     Key? key,
     Axis scrollDirection = Axis.vertical,
