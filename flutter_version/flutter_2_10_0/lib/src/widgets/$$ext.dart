@@ -70,5 +70,17 @@ var p = () => {
             backgroundColor: props['backgroundColor'],
             tooltip: props['tooltip'],
       ),
+      'TextButton': (props)=> TextButton(
+            key: props['key'],
+            onPressed: props['onPressed'],
+            child: props['child'],
+            onLongPress: props['onLongPress'],
+            onHover: props['onHover'],
+            onFocusChange: props['onFocusChange'],
+            style: props['style'],
+            focusNode: props['focusNode'],
+            autofocus: props['autofocus'] ?? false,
+            clipBehavior: props['clipBehavior'] ?? Clip.none,
+      ),
       // 往下补充Widget映射关系
     };
