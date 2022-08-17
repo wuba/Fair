@@ -347,18 +347,32 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   ListView _buildSugarListBuilder(
-      Function mapEach, Map map, Map? methodMap, BuildContext context) {
-    var count = map['na']['count'];
-    var source = List<int>.generate(count, (i) => i + 1);
+      Function mapEach,
+      Map map,
+      Map? methodMap,
+      BuildContext context) {
 
+    // Copy the node Map
+    // change 'ClassName' to 'ListView'
+    // Create a ListView OBJ with default convert function,This OBJ will be Used to get properties
+    Map propertyTransMap = Map.from(map);
+    propertyTransMap['className']='ListView';
+    var propertiesProvider = convert(context, propertyTransMap, methodMap);
+
+    Map na = map['na'];
+    var count = na['itemCount'];
+    var source = List<int>.generate(count, (i) => i + 1);
     Domain domain = Domain(source);
     var list = Domain(source).forEach(($, _) {
-      return convert(context, map['na']['builder'], methodMap, domain:$) as Widget;
+      return convert(context, na['itemBuilder'], methodMap, domain:$) as Widget;
     });
-    List<Widget> lW = list.map((e) => e as Widget).toList();
+    List<Widget> children = list.map((e) => e as Widget).toList();
+
+
     var params = {
-      'pa': [lW]
+      'pa': [children,propertiesProvider]
     };
+
     return mapEach.call(params);
   }
 
