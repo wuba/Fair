@@ -78,6 +78,9 @@ flutter:
     - assets/bundle/sized/
     - assets/bundle/slider/
     - assets/bundle/sliver/
+    - assets/bundle/snackbar/
+    - assets/bundle/stack/
+    - assets/bundle/stepper/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

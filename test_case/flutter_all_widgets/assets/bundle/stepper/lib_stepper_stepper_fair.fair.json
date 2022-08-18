@@ -1,0 +1,12 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "Stepper",
+      "na": {
+        "steps": "%(_getSteps)"
+      }
+    }
+  },
+  "methodMap": {}
+}
