@@ -138,9 +138,15 @@ var p = () => {
             side: props['side'] ?? BorderSide.none,
             borderRadius: props['props'] ?? BorderRadius.zero,
           ),
-      'BeveledRectangleBorder':(props) => BeveledRectangleBorder(
+      'BeveledRectangleBorder': (props) => BeveledRectangleBorder(
             side: props['side'] ?? BorderSide.none,
             borderRadius: props['props'] ?? BorderRadius.zero,
+      ),
+      'BoxConstraints': (props) => BoxConstraints(
+            minWidth: props['minWidth']?.toDouble() ?? 0.0,
+            maxWidth: props['maxWidth']?.toDouble() ?? double.infinity,
+            minHeight: props['minHeight']?.toDouble() ?? 0.0,
+            maxHeight: props['maxHeight']?.toDouble() ?? double.infinity,
       ),
       // 往下补充Widget映射关系
     };

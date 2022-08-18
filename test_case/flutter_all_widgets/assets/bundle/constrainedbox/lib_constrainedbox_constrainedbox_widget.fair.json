@@ -1,0 +1,21 @@
+{
+  "className": "ConstrainedBox",
+  "na": {
+    "constraints": {
+      "className": "BoxConstraints",
+      "na": {
+        "maxHeight": 60,
+        "maxWidth": 200
+      }
+    },
+    "child": {
+      "className": "Container",
+      "na": {
+        "height": 300,
+        "width": 300,
+        "color": "#(Colors.red)"
+      }
+    }
+  },
+  "methodMap": {}
+}
