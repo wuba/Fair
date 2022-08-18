@@ -1,0 +1,69 @@
+{
+  "className": "CustomScrollView",
+  "na": {
+    "slivers": [
+      {
+        "className": "SliverAppBar",
+        "na": {
+          "pinned": true,
+          "expandedHeight": 200.0,
+          "flexibleSpace": {
+            "className": "FlexibleSpaceBar",
+            "na": {
+              "title": {
+                "className": "Text",
+                "pa": [
+                  "复仇者联盟"
+                ]
+              },
+              "background": {
+                "className": "Image.network",
+                "pa": [
+                  "https://github.com/wuba/fair/raw/main/best-ui-template.png"
+                ],
+                "na": {
+                  "fit": "#(BoxFit.fitHeight)"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "className": "SliverToBoxAdapter",
+        "na": {
+          "child": "%(_getChild)"
+        }
+      },
+      {
+        "className": "SliverFixedExtentList",
+        "na": {
+          "itemExtent": 80.0,
+          "delegate": {
+            "className": "SliverChildBuilderDelegate",
+            "pa": [
+              {
+                "className": "Card",
+                "na": {
+                  "child": {
+                    "className": "Container",
+                    "na": {
+                      "alignment": "#(Alignment.center)",
+                      "child": {
+                        "className": "Text",
+                        "pa": [
+                          ""
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "methodMap": {}
+}

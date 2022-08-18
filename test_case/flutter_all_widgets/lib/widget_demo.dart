@@ -28,6 +28,9 @@ import 'package:flutter_all_widgets/sliver/child_list_delegate/sliver_child_list
 import 'package:flutter_all_widgets/sliver/fixed_extent_list/sliver_fixed_extent_list_demo.dart';
 import 'package:flutter_all_widgets/sliver/grid/slivergrid_demo.dart';
 import 'package:flutter_all_widgets/sliver/list/sliverlist_demo.dart';
+import 'package:flutter_all_widgets/sliver/padding/sliverpadding_demo.dart';
+import 'package:flutter_all_widgets/sliver/persistent_header/sliver_persistent_header_demo.dart';
+import 'package:flutter_all_widgets/sliver/to_box_adapter/slivertoboxadapter_demo.dart';
 import 'package:flutter_all_widgets/transition/positioned/positioned_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/rotation/rotation_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/scale/scale_transition_demo.dart';
@@ -128,11 +131,15 @@ class HomePage extends StatelessWidget {
       WidgetItem("SlideTransition", SlideTransitionDemo()),
       WidgetItem("Slider", SliderDemo()),
       WidgetItem("SliverAppBar", SliverAppBarDemo()),
-      WidgetItem("SliverChildBuilderDelegate", SliverChildBuilderDelegateDemo()),
+      WidgetItem(
+          "SliverChildBuilderDelegate", SliverChildBuilderDelegateDemo()),
       WidgetItem("SliverChildListDelegate", SliverChildListDelegateDemo()),
       WidgetItem("SliverFixedExtentList", SliverFixedExtentListDemo()),
       WidgetItem("SliverGrid", SliverGridDemo()),
       WidgetItem("SliverList", SliverListDemo()),
+      WidgetItem("SliverPadding", SliverPaddingDemo()),
+      WidgetItem("SliverPersistentHeader", SliverPersistentHeaderDemo()),
+      WidgetItem("SliverToBoxAdapter", SliverToBoxAdapterDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {

@@ -1,0 +1,15 @@
+{
+  "className": "CustomScrollView",
+  "na": {
+    "slivers": [
+      {
+        "className": "SliverPadding",
+        "na": {
+          "padding": "%(_getPadding)",
+          "sliver": "%(_getSliver)"
+        }
+      }
+    ]
+  },
+  "methodMap": {}
+}
