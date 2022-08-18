@@ -1,0 +1,14 @@
+{
+  "className": "CustomScrollView",
+  "na": {
+    "slivers": [
+      {
+        "className": "SliverList",
+        "na": {
+          "delegate": "%(_getDelegate)"
+        }
+      }
+    ]
+  },
+  "methodMap": {}
+}
