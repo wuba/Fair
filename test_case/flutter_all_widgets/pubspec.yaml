@@ -81,6 +81,8 @@ flutter:
     - assets/bundle/snackbar/
     - assets/bundle/stack/
     - assets/bundle/stepper/
+    - assets/bundle/streambuilder/
+    - assets/bundle/switch/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

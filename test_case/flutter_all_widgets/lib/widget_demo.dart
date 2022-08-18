@@ -34,6 +34,8 @@ import 'package:flutter_all_widgets/sliver/to_box_adapter/slivertoboxadapter_dem
 import 'package:flutter_all_widgets/snackbar/snackbar_demo.dart';
 import 'package:flutter_all_widgets/stack/stack_demo.dart';
 import 'package:flutter_all_widgets/stepper/stepper_demo.dart';
+import 'package:flutter_all_widgets/streambuilder/streambuilder_demo.dart';
+import 'package:flutter_all_widgets/switch/switch_demo.dart';
 import 'package:flutter_all_widgets/transition/positioned/positioned_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/rotation/rotation_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/scale/scale_transition_demo.dart';
@@ -146,24 +148,26 @@ class HomePage extends StatelessWidget {
       WidgetItem("SnackBar", SnackBarDemo()),
       WidgetItem("Stack", StackDemo()),
       WidgetItem("Stepper", StepperDemo()),
+      WidgetItem("StreamBuilder", StreamBuilderDemo()),
+      WidgetItem("Switch", SwitchDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
-      return Container(
-        height: ((index % 5 + 1) * 50).toDouble(),
-        color: Colors.blueGrey,
-        alignment: Alignment.center,
-        child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
+      return GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          child: Container(
+            height: ((index % 5 + 1) * 50).toDouble(),
+            color: Colors.blueGrey,
+            alignment: Alignment.center,
             child: Text(
               "$index:${item.title}",
               style: TextStyle(color: Colors.white),
             ),
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => item.className));
-            }),
-      );
+          ),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => item.className));
+          });
     }
 
     return Scaffold(
