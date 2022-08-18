@@ -101,5 +101,25 @@ var p = () => {
             package: props['package'],
             overflow: props['overflow'],
           ),
+      'SliverChildBuilderDelegate': (props) => SliverChildBuilderDelegate(
+            props['pa'][0],
+            findChildIndexCallback: props['findChildIndexCallback'],
+            childCount: props['childCount'],
+            addAutomaticKeepAlives: props['addAutomaticKeepAlives'] ?? true,
+            addRepaintBoundaries: props['addRepaintBoundaries'] ?? true,
+            addSemanticIndexes: props['addSemanticIndexes'] ?? true,
+            semanticIndexCallback: props['semanticIndexCallback'] ??
+                (Widget _,int index) => index,
+            semanticIndexOffset: props['semanticIndexOffset'] ?? 0,
+      ),
+      'SliverChildListDelegate': (props) => SliverChildListDelegate(
+            props['pa'][0],
+            addAutomaticKeepAlives: props['addAutomaticKeepAlives'] ?? true,
+            addRepaintBoundaries: props['addRepaintBoundaries'] ?? true,
+            addSemanticIndexes: props['addSemanticIndexes'] ?? true,
+            semanticIndexCallback: props['semanticIndexCallback'] ??
+                    (Widget _,int index) => index,
+            semanticIndexOffset: props['semanticIndexOffset'] ?? 0,
+      ),
       // 往下补充Widget映射关系
     };

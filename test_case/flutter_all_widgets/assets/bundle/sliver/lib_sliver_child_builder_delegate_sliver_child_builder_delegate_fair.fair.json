@@ -1,0 +1,15 @@
+{
+  "className": "CustomScrollView",
+  "na": {
+    "slivers": [
+      {
+        "className": "SliverFixedExtentList",
+        "na": {
+          "itemExtent": 80.0,
+          "delegate": "%(_getDelegate)"
+        }
+      }
+    ]
+  },
+  "methodMap": {}
+}

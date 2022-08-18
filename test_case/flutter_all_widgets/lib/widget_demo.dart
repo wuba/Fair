@@ -23,6 +23,8 @@ import 'package:flutter_all_widgets/sized/box/sized_box_demo.dart';
 import 'package:flutter_all_widgets/sized/overflow_box/sized_overflow_box_demo.dart';
 import 'package:flutter_all_widgets/slider/slider_demo.dart';
 import 'package:flutter_all_widgets/sliver/appbar/sliver_appbar_demo.dart';
+import 'package:flutter_all_widgets/sliver/child_builder_delegate/sliver_child_builder_delegate_demo.dart';
+import 'package:flutter_all_widgets/sliver/child_list_delegate/sliver_child_list_delegate_demo.dart';
 import 'package:flutter_all_widgets/transition/positioned/positioned_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/rotation/rotation_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/scale/scale_transition_demo.dart';
@@ -123,6 +125,8 @@ class HomePage extends StatelessWidget {
       WidgetItem("SlideTransition", SlideTransitionDemo()),
       WidgetItem("Slider", SliderDemo()),
       WidgetItem("SliverAppBar", SliverAppBarDemo()),
+      WidgetItem("SliverChildBuilderDelegate", SliverChildBuilderDelegateDemo()),
+      WidgetItem("SliverChildListDelegate", SliverChildListDelegateDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
