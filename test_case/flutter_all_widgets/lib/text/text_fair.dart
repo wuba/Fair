@@ -21,10 +21,10 @@ class _FairTextPageState extends State<FairTextPage> {
     fairProps = widget.fairProps;
   }
 
-  String _getContent() => fairProps['content'] ?? 'Fair Sample';
+  String _getContent() => fairProps['content'];
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text(_getContent()));
+    return Text(_getContent());
   }
 }
