@@ -1,0 +1,12 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "Text",
+      "pa": [
+        "%(_getContent)"
+      ]
+    }
+  },
+  "methodMap": {}
+}

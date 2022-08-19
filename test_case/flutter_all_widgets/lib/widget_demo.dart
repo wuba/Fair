@@ -39,6 +39,7 @@ import 'package:flutter_all_widgets/switch/switch_demo.dart';
 import 'package:flutter_all_widgets/tab/pageselector/tabpage_selector_demo.dart';
 import 'package:flutter_all_widgets/tab/tabbar/tabbar_demo.dart';
 import 'package:flutter_all_widgets/table/table_demo.dart';
+import 'package:flutter_all_widgets/text/text_demo.dart';
 import 'package:flutter_all_widgets/transition/positioned/positioned_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/rotation/rotation_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/scale/scale_transition_demo.dart';
@@ -156,6 +157,7 @@ class HomePage extends StatelessWidget {
       WidgetItem("TabBar+TabBarView+TabController", TabBarDemo()),
       WidgetItem("TabPageSelector+TabBarView+TabController", TabPageSelectorDemo()),
       WidgetItem("Table", TableDemo()),
+      WidgetItem("Text", TextDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
