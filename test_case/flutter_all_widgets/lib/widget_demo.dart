@@ -41,6 +41,7 @@ import 'package:flutter_all_widgets/tab/tabbar/tabbar_demo.dart';
 import 'package:flutter_all_widgets/table/table_demo.dart';
 import 'package:flutter_all_widgets/text/text_demo.dart';
 import 'package:flutter_all_widgets/textbutton/textbutton_demo.dart';
+import 'package:flutter_all_widgets/textfield/textfield_demo.dart';
 import 'package:flutter_all_widgets/transition/positioned/positioned_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/rotation/rotation_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/scale/scale_transition_demo.dart';
@@ -160,6 +161,7 @@ class HomePage extends StatelessWidget {
       WidgetItem("Table", TableDemo()),
       WidgetItem("Text", TextDemo()),
       WidgetItem("TextButton", TextButtonDemo()),
+      WidgetItem("TextField", TextFieldDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
