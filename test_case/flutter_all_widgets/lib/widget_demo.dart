@@ -34,7 +34,9 @@ import 'circularProgressIndicator/circular_progressIndicator_demo.dart';
 import 'clipoval/clipoval_demo.dart';
 import 'clippath/clippath_demo.dart';
 import 'constrainedbox/constrainedbox_demo.dart';
+import 'container/container_demo.dart';
 import 'cupertino_tabbar/cupertino_tabbar_demo.dart';
+import 'cupertinoactionsheet/cupertino_action_sheet_demo.dart';
 import 'cupertinoalertdialog/cupertino_alert_dialog_demo.dart';
 import 'widget_item.dart';
 
@@ -101,6 +103,8 @@ class HomePage extends StatelessWidget {
       WidgetItem("ClipOval", ClipOvalDemo()),
       WidgetItem("ClipPath", ClipPathDemo()),
       WidgetItem("ConstrainedBox", ConstrainedBoxDemo()),
+      WidgetItem("Container", ContainerDemo()),
+      WidgetItem("CupertinoActionSheet", CupertinoActionSheetDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
