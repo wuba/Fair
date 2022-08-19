@@ -36,6 +36,8 @@ import 'package:flutter_all_widgets/stack/stack_demo.dart';
 import 'package:flutter_all_widgets/stepper/stepper_demo.dart';
 import 'package:flutter_all_widgets/streambuilder/streambuilder_demo.dart';
 import 'package:flutter_all_widgets/switch/switch_demo.dart';
+import 'package:flutter_all_widgets/tab/pageselector/tabpage_selector_demo.dart';
+import 'package:flutter_all_widgets/tab/tabbar/tabbar_demo.dart';
 import 'package:flutter_all_widgets/transition/positioned/positioned_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/rotation/rotation_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/scale/scale_transition_demo.dart';
@@ -150,6 +152,8 @@ class HomePage extends StatelessWidget {
       WidgetItem("Stepper", StepperDemo()),
       WidgetItem("StreamBuilder", StreamBuilderDemo()),
       WidgetItem("Switch", SwitchDemo()),
+      WidgetItem("TabBar+TabBarView+TabController", TabBarDemo()),
+      WidgetItem("TabPageSelector+TabBarView+TabController", TabPageSelectorDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {

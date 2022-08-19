@@ -83,6 +83,16 @@ flutter:
     - assets/bundle/stepper/
     - assets/bundle/streambuilder/
     - assets/bundle/switch/
+    - assets/bundle/tab/
+    - assets/bundle/table/
+    - assets/bundle/text/
+    - assets/bundle/textbutton/
+    - assets/bundle/textfield/
+    - assets/bundle/theme/
+    - assets/bundle/tooltip/
+    - assets/bundle/transform/
+    - assets/bundle/widgetsapp/
+    - assets/bundle/wrap/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

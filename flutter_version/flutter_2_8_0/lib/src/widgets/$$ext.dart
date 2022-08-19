@@ -120,6 +120,10 @@ var p = () => {
             semanticIndexCallback: props['semanticIndexCallback'] ??
                     (Widget _,int index) => index,
             semanticIndexOffset: props['semanticIndexOffset'] ?? 0,
-      ),
+          ),
+      'TabController': (props) => TabController(
+          length: props['length'],
+          vsync: props['vsync'] ?? ScrollableState(),
+          initialIndex: props['initialIndex'] ?? 0)
       // 往下补充Widget映射关系
     };
