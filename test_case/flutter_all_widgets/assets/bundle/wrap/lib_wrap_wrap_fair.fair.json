@@ -1,0 +1,25 @@
+{
+  "className": "Wrap",
+  "na": {
+    "children": {
+      "className": "List.generate",
+      "pa": [
+        10,
+        {
+          "className": "Container",
+          "na": {
+            "height": 50,
+            "width": "^(w)",
+            "child": {
+              "className": "Text",
+              "pa": [
+                "#($i)"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "methodMap": {}
+}

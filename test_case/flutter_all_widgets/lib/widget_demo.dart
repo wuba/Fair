@@ -51,6 +51,7 @@ import 'package:flutter_all_widgets/transition/scale/scale_transition_demo.dart'
 import 'package:flutter_all_widgets/transition/size/size_transition_demo.dart';
 import 'package:flutter_all_widgets/transition/slide/slide_transition_demo.dart';
 import 'package:flutter_all_widgets/widgetsapp/widgetsapp_demo.dart';
+import 'package:flutter_all_widgets/wrap/wrap_demo.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'absorbpointer/absorbpointer_demo.dart';
@@ -170,6 +171,7 @@ class HomePage extends StatelessWidget {
       WidgetItem("Tooltip", TooltipDemo()),
       WidgetItem("Transform", TransformDemo()),
       WidgetItem("WidgetsApp", WidgetsAppDemo()),
+      WidgetItem("Wrap", WrapDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
