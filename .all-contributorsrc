@@ -175,6 +175,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "gaofeiyu",
+      "name": "Goofy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6150536?v=4",
+      "profile": "http://www.gaofeiyu.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 8
