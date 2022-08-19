@@ -1,0 +1,78 @@
+{
+  "className": "Center",
+  "na": {
+    "child": {
+      "className": "Column",
+      "na": {
+        "mainAxisSize": "#(MainAxisSize.min)",
+        "children": [
+          {
+            "className": "CupertinoButton",
+            "na": {
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "Disabled"
+                ]
+              }
+            }
+          },
+          {
+            "className": "SizedBox",
+            "na": {
+              "height": 30
+            }
+          },
+          {
+            "className": "CupertinoButton.filled",
+            "na": {
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "Disabled"
+                ]
+              }
+            }
+          },
+          {
+            "className": "SizedBox",
+            "na": {
+              "height": 30
+            }
+          },
+          {
+            "className": "CupertinoButton",
+            "na": {
+              "onPressed": "@(_onPressed)",
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "Enabled"
+                ]
+              }
+            }
+          },
+          {
+            "className": "SizedBox",
+            "na": {
+              "height": 30
+            }
+          },
+          {
+            "className": "CupertinoButton.filled",
+            "na": {
+              "onPressed": "@(_onPressed)",
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "Enabled"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {}
+}
