@@ -59,5 +59,9 @@ var p = () => {
       'BorderRadius.circular': (props) => BorderRadius.circular(
             props['pa'][0]?.toDouble(),
       ),
+      'TabController': (props) => TabController(
+          length: props['length'],
+          vsync: props['vsync'] ?? ScrollableState(),
+          initialIndex: props['initialIndex'] ?? 0),
       // 往下补充Widget映射关系
     };
