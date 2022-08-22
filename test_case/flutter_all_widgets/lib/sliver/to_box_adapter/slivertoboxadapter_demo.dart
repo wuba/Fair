@@ -20,7 +20,7 @@ class SliverToBoxAdapterDemo extends StatelessWidget {
                     pinned: true,
                     expandedHeight: 200.0,
                     flexibleSpace: FlexibleSpaceBar(
-                      title: Text('复仇者联盟'),
+                      title: Text('Fair Sample'),
                       background: Image.network(
                         'https://github.com/wuba/fair/raw/main/best-ui-template.png',
                         fit: BoxFit.fitHeight,

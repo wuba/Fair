@@ -21,7 +21,7 @@ class _FairSnackBarPageState extends State<FairSnackBarPage> {
     fairProps = widget.fairProps;
   }
 
-  String _getContent() => fairProps['content'] ?? 'Fair Sample';
+  String _getContent() => fairProps['content'];
 
   @override
   Widget build(BuildContext context) {
