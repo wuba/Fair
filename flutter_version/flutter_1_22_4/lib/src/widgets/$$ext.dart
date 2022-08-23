@@ -90,5 +90,32 @@ var p = () => {
             side: props['side'] ?? BorderSide.none,
             borderRadius: props['props'] ?? BorderRadius.zero,
       ),
+      'BoxConstraints': (props) => BoxConstraints(
+            minWidth: props['minWidth']?.toDouble() ?? 0.0,
+            maxWidth: props['maxWidth']?.toDouble() ?? double.infinity,
+            minHeight: props['minHeight']?.toDouble() ?? 0.0,
+            maxHeight: props['maxHeight']?.toDouble() ?? double.infinity,
+      ),
+      'BoxDecoration': (props) => BoxDecoration(
+            color: props['color'],
+            image: props['image'],
+            border: props['border'],
+            borderRadius: props['borderRadius'],
+            boxShadow: props['boxShadow'],
+            gradient: props['gradient'],
+            backgroundBlendMode: props['backgroundBlendMode'],
+            shape: props['shape'] ?? BoxShape.rectangle,
+      ),
+      'Border': (props) => Border(
+            top: props['top'] ?? BorderSide.none,
+            right: props['right'] ?? BorderSide.none,
+            bottom: props['bottom'] ?? BorderSide.none,
+            left: props['left'] ?? BorderSide.none,
+      ),
+      'BorderSide': (props) => BorderSide(
+            color: props['color'] ?? const Color(0xFF000000),
+            width: props['width'] ?? 1.0,
+            style: props['style'] ?? BorderStyle.solid,
+      ),
       // 往下补充Widget映射关系
     };
