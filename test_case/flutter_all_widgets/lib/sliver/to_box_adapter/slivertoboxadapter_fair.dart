@@ -22,8 +22,6 @@ class _FairSliverToBoxAdapterPageState
     fairProps = widget.fairProps;
   }
 
-  Widget _getChild() => fairProps['child'] ?? Text('Fair');
-
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -40,7 +38,7 @@ class _FairSliverToBoxAdapterPageState
           ),
         ),
         SliverToBoxAdapter(
-          child: _getChild(),
+          child: Text('Fair'),
         ),
         SliverFixedExtentList(
           itemExtent: 80.0,

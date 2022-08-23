@@ -9,5 +9,18 @@
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {
+    "_getChild": {
+      "className": "Container",
+      "na": {
+        "color": "#(Colors.green)",
+        "child": {
+          "className": "Text",
+          "pa": [
+            "Hello world"
+          ]
+        }
+      }
+    }
+  }
 }

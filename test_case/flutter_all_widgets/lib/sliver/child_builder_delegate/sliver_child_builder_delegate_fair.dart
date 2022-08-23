@@ -24,17 +24,19 @@ class _FairSliverChildBuilderDelegatePageState
     fairProps = widget.fairProps;
   }
 
-  SliverChildDelegate _getDelegate() => SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          return Card(
-            child: Container(
-              alignment: Alignment.center,
-              color: Colors.primaries[(index % 18)],
-              child: Text(''),
-            ),
-          );
-        },
-      );
+  SliverChildDelegate _getDelegate() {
+    return SliverChildBuilderDelegate(
+      (BuildContext context, int index) {
+        return Card(
+          child: Container(
+            alignment: Alignment.center,
+            color: Colors.primaries[(index % 18)],
+            child: Text(''),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

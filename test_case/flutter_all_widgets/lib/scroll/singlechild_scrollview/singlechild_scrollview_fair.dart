@@ -22,14 +22,16 @@ class _FairSingleChildScrollViewPageState
     fairProps = widget.fairProps;
   }
 
-  Widget _getChild() => Column(
-        children: List.generate(
-            50,
-            (index) => Container(
-                  height: 150,
-                  color: Colors.primaries[index % Colors.primaries.length],
-                )).toList(),
-      );
+  Widget _getChild() {
+    return Column(
+      children: List.generate(
+          50,
+          (index) => Container(
+                height: 150,
+                color: Colors.primaries[index % Colors.primaries.length],
+              )).toList(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

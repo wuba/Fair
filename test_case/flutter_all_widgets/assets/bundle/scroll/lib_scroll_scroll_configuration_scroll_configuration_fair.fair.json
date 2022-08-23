@@ -9,5 +9,24 @@
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {
+    "_getChild": {
+      "className": "ListView.separated",
+      "na": {
+        "itemBuilder": {
+          "className": "Text",
+          "pa": [
+            "#(Item$index)"
+          ]
+        },
+        "separatorBuilder": {
+          "className": "Divider"
+        },
+        "itemCount": 50
+      }
+    },
+    "_getBehavior": {
+      "className": "ScrollBehavior"
+    }
+  }
 }

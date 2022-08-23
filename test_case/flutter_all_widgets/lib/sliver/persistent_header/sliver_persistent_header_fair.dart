@@ -22,15 +22,12 @@ class _FairSliverPersistentHeaderPageState
     fairProps = widget.fairProps;
   }
 
-  SliverPersistentHeaderDelegate _getDelegate() =>
-      fairProps['delegate'] ?? FairSliverPersistentHeaderDelegate();
-
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
         SliverPersistentHeader(
-          delegate: _getDelegate(),
+          delegate: FairSliverPersistentHeaderDelegate(),
         ),
         SliverGrid(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

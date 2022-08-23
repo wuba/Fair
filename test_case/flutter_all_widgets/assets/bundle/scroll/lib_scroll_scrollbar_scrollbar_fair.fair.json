@@ -8,5 +8,32 @@
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {
+    "_getChild": {
+      "className": "ListView.builder",
+      "na": {
+        "reverse": false,
+        "itemBuilder": {
+          "className": "Card",
+          "na": {
+            "child": {
+              "className": "Container",
+              "na": {
+                "height": 45,
+                "alignment": "#(Alignment.center)",
+                "child": {
+                  "className": "Text",
+                  "pa": [
+                    "#($index)"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "itemCount": 30,
+        "itemExtent": 50
+      }
+    }
+  }
 }

@@ -21,17 +21,13 @@ class _FairSliverPaddingPageState extends State<FairSliverPaddingPage> {
     fairProps = widget.fairProps;
   }
 
-  EdgeInsetsGeometry _getPadding() =>
-      fairProps['padding'] ?? EdgeInsets.all(10);
+  EdgeInsetsGeometry _getPadding() {
+    return fairProps['padding'];
+  }
 
-  Widget _getSliver() =>
-      fairProps['sliver'] ??
-      SliverToBoxAdapter(child: Container(
-        color: Colors.green,
-        child: Center(
-          child: Text('Fair'),
-        ),
-      ),);
+  Widget _getSliver() {
+    return fairProps['sliver'];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +35,15 @@ class _FairSliverPaddingPageState extends State<FairSliverPaddingPage> {
       child: CustomScrollView(
         slivers: <Widget>[
           SliverPadding(
-            padding: _getPadding(),
-            sliver: _getSliver(),
+            padding: EdgeInsets.all(10),
+            sliver: SliverToBoxAdapter(
+              child: Container(
+                color: Colors.green,
+                child: Center(
+                  child: Text('Fair'),
+                ),
+              ),
+            ),
           ),
         ],
       ),

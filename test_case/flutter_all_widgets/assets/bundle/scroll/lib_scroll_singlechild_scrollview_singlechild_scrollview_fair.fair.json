@@ -8,5 +8,12 @@
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {
+    "_getChild": {
+      "className": "Column",
+      "na": {
+        "children": {}
+      }
+    }
+  }
 }

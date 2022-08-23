@@ -11,5 +11,28 @@
       }
     ]
   },
-  "methodMap": {}
+  "methodMap": {
+    "_getDelegate": {
+      "className": "SliverChildBuilderDelegate",
+      "pa": [
+        {
+          "className": "Card",
+          "na": {
+            "child": {
+              "className": "Container",
+              "na": {
+                "alignment": "#(Alignment.center)",
+                "child": {
+                  "className": "Text",
+                  "pa": [
+                    ""
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
 }

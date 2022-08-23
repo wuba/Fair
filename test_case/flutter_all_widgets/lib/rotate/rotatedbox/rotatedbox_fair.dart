@@ -21,12 +21,16 @@ class _FairRotatedBoxPageState extends State<FairRotatedBoxPage> {
     fairProps = widget.fairProps;
   }
 
-  int _getTurns() => fairProps['quarterTurns'];
+  int _getTurns() {
+    return fairProps['quarterTurns'];
+  }
 
-  Widget _getChild() => Container(
-        color: Colors.green,
-        child: Text("Hello world"),
-      );
+  Widget _getChild() {
+    return Container(
+      color: Colors.green,
+      child: Text("Hello world"),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

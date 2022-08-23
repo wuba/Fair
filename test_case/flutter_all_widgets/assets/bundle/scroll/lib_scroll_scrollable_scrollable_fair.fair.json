@@ -8,5 +8,31 @@
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {
+    "_getBuilder": {
+      "className": "ListView",
+      "na": {
+        "children": [
+          {
+            "className": "Text",
+            "pa": [
+              "fair1"
+            ]
+          },
+          {
+            "className": "Text",
+            "pa": [
+              "fair2"
+            ]
+          },
+          {
+            "className": "Text",
+            "pa": [
+              "fair3"
+            ]
+          }
+        ]
+      }
+    }
+  }
 }

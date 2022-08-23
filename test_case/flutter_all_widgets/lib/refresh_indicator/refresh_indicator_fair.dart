@@ -29,15 +29,17 @@ class _FairRefreshIndicatorPageState extends State<FairRefreshIndicatorPage> {
     });
   }
 
-  Widget _getChild() => ListView.builder(
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text('fair ${_list[index]}'),
-          );
-        },
-        itemExtent: 50,
-        itemCount: _list.length,
-      );
+  Widget _getChild() {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text('fair ${_list[index]}'),
+        );
+      },
+      itemExtent: 50,
+      itemCount: _list.length,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

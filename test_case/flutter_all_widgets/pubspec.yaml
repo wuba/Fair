@@ -69,6 +69,7 @@ flutter:
     - assets/bundle/radio/
     - assets/bundle/raw/
     - assets/bundle/refresh_indicator/
+    - assets/bundle/reorderable_listview/
     - assets/bundle/rotate/
     - assets/bundle/row/
     - assets/bundle/scaffold/

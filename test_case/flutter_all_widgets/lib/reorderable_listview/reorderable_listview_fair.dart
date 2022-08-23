@@ -24,18 +24,20 @@ class _FairReorderableListViewPageState
     fairProps = widget.fairProps;
   }
 
-  List<Widget> _getChildren() => <Widget>[
-        for (String item in items)
-          Container(
-            key: ValueKey(item),
-            height: 100,
-            margin: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-            decoration: BoxDecoration(
-                color:
-                    Colors.primaries[int.parse(item) % Colors.primaries.length],
-                borderRadius: BorderRadius.circular(10)),
-          )
-      ];
+  List<Widget> _getChildren() {
+    return <Widget>[
+      for (String item in items)
+        Container(
+          key: ValueKey(item),
+          height: 100,
+          margin: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+          decoration: BoxDecoration(
+              color:
+                  Colors.primaries[int.parse(item) % Colors.primaries.length],
+              borderRadius: BorderRadius.circular(10)),
+        )
+    ];
+  }
 
   _onReorder(oldIndex, newIndex) {
     if (oldIndex < newIndex) {

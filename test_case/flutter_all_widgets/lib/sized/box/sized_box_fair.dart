@@ -21,9 +21,13 @@ class _FairSizedBoxPageState extends State<FairSizedBoxPage> {
     fairProps = widget.fairProps;
   }
 
-  double _getHeight() => fairProps['height'];
+  double _getHeight() {
+    return fairProps['height'];
+  }
 
-  double _getWidth() => fairProps['width'];
+  double _getWidth() {
+    return fairProps['width'];
+  }
 
   @override
   Widget build(BuildContext context) {

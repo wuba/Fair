@@ -21,14 +21,6 @@ class _FairPlaceholderPageState extends State<FairPlaceholderPage> {
     fairProps = widget.fairProps;
   }
 
-  Color _getColor() => Color(int.parse(fairProps['color']));
-
-  double _getStrokeWidth() => double.parse(fairProps['strokeWidth']);
-
-  double _getFallbackWidth() => double.parse(fairProps['fallbackWidth']);
-
-  double _getFallbackHeight() => double.parse(fairProps['fallbackHeight']);
-
   @override
   Widget build(BuildContext context) {
     return Container(

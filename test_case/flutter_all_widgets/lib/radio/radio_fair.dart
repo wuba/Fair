@@ -25,9 +25,13 @@ class _FairRadioPageState extends State<FairRadioPage> {
     print('$value');
   }
 
-  _getValue() => fairProps['value'];
+  _getValue() {
+    return fairProps['value'];
+  }
 
-  _getGroupValue() => fairProps['groupValue'];
+  _getGroupValue() {
+    return fairProps['groupValue'];
+  }
 
   @override
   Widget build(BuildContext context) {

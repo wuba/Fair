@@ -21,13 +21,15 @@ class _FairScrollablePageState extends State<FairScrollablePage> {
     fairProps = widget.fairProps;
   }
 
-  Widget _getBuilder(context, position) => ListView(
-        children: <Widget>[
-          Text('fair1'),
-          Text('fair2'),
-          Text('fair3'),
-        ],
-      );
+  Widget _getBuilder(context, position) {
+    return ListView(
+      children: <Widget>[
+        Text('fair1'),
+        Text('fair2'),
+        Text('fair3'),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

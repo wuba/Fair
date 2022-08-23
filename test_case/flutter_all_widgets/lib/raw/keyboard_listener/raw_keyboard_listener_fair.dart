@@ -22,9 +22,13 @@ class _FairRawKeyboardListenerPageState
     fairProps = widget.fairProps;
   }
 
-  _handleKey(key) => print('key label:${key.data.keyLabel}');
+  _handleKey(key) {
+    print('key label:${key.data.keyLabel}');
+  }
 
-  FocusNode _getNode() => FocusNode();
+  FocusNode _getNode() {
+    return FocusNode();
+  }
 
   @override
   Widget build(BuildContext context) {

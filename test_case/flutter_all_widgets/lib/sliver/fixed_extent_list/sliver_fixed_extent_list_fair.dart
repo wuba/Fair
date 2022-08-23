@@ -5,12 +5,10 @@ import 'package:flutter/material.dart';
 class FairSliverFixedExtentListPage extends StatefulWidget {
   dynamic fairProps;
 
-  FairSliverFixedExtentListPage({Key key, this.fairProps})
-      : super(key: key);
+  FairSliverFixedExtentListPage({Key key, this.fairProps}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() =>
-      _FairSliverFixedExtentListPageState();
+  State<StatefulWidget> createState() => _FairSliverFixedExtentListPageState();
 }
 
 class _FairSliverFixedExtentListPageState
@@ -24,17 +22,19 @@ class _FairSliverFixedExtentListPageState
     fairProps = widget.fairProps;
   }
 
-  SliverChildDelegate _getDelegate() => SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          return Card(
-            child: Container(
-              alignment: Alignment.center,
-              color: Colors.primaries[(index % 18)],
-              child: Text(''),
-            ),
-          );
-        },
-      );
+  SliverChildDelegate _getDelegate() {
+    return SliverChildBuilderDelegate(
+      (BuildContext context, int index) {
+        return Card(
+          child: Container(
+            alignment: Alignment.center,
+            color: Colors.primaries[(index % 18)],
+            child: Text(''),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

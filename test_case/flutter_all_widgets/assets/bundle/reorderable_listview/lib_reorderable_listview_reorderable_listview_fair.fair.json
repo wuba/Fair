@@ -4,8 +4,8 @@
     "child": {
       "className": "ReorderableListView",
       "na": {
-        "children": [],
-        "onReorder": "%(setState)"
+        "children": "%(_getChildren)",
+        "onReorder": "@(_onReorder)"
       }
     }
   },

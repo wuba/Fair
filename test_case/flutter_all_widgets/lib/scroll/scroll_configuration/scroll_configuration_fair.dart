@@ -23,17 +23,21 @@ class _FairScrollConfigurationDemoPageState
     fairProps = widget.fairProps;
   }
 
-  Widget _getChild() => ListView.separated(
-        itemBuilder: (BuildContext context, int index) {
-          return Text('Item$index');
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider();
-        },
-        itemCount: 50,
-      );
+  Widget _getChild(){
+    return ListView.separated(
+      itemBuilder: (BuildContext context, int index) {
+        return Text('Item$index');
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return Divider();
+      },
+      itemCount: 50,
+    );
+  }
 
-  ScrollBehavior _getBehavior() => ScrollBehavior();
+  ScrollBehavior _getBehavior() {
+    return ScrollBehavior();
+  }
 
   @override
   Widget build(BuildContext context) {

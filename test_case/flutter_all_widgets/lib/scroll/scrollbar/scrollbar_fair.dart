@@ -21,20 +21,22 @@ class _FairScrollbarPageState extends State<FairScrollbarPage> {
     fairProps = widget.fairProps;
   }
 
-  Widget _getChild() => ListView.builder(
-        reverse: false,
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: Container(
-              height: 45,
-              alignment: Alignment.center,
-              child: Text('$index'),
-            ),
-          );
-        },
-        itemCount: 30,
-        itemExtent: 50,
-      );
+  Widget _getChild() {
+    return ListView.builder(
+      reverse: false,
+      itemBuilder: (BuildContext context, int index) {
+        return Card(
+          child: Container(
+            height: 45,
+            alignment: Alignment.center,
+            child: Text('$index'),
+          ),
+        );
+      },
+      itemCount: 30,
+      itemExtent: 50,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

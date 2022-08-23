@@ -21,9 +21,13 @@ class _FairTextButtonPageState extends State<FairTextButtonPage> {
     fairProps = widget.fairProps;
   }
 
-  String _getContent() => fairProps['content'];
+  String _getContent() {
+    return fairProps['content'];
+  }
 
-  _onPressed() => print('click text button');
+  _onPressed() {
+    print('click text button');
+  }
 
   @override
   Widget build(BuildContext context) {

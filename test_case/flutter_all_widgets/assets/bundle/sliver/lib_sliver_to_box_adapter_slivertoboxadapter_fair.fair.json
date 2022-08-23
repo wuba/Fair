@@ -13,7 +13,7 @@
               "title": {
                 "className": "Text",
                 "pa": [
-                  "复仇者联盟"
+                  "Fair Sample"
                 ]
               },
               "background": {
@@ -32,7 +32,12 @@
       {
         "className": "SliverToBoxAdapter",
         "na": {
-          "child": "%(_getChild)"
+          "child": {
+            "className": "Text",
+            "pa": [
+              "Fair"
+            ]
+          }
         }
       },
       {

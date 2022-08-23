@@ -10,5 +10,9 @@
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {
+    "_getNode": {
+      "className": "FocusNode"
+    }
+  }
 }

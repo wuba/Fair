@@ -21,16 +21,18 @@ class _FairSliverGridPageState extends State<FairSliverGridPage> {
     fairProps = widget.fairProps;
   }
 
-  SliverGridDelegate _getGridDelegate() =>
-      SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, crossAxisSpacing: 5, mainAxisSpacing: 3);
+  SliverGridDelegate _getGridDelegate() {
+    return SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3, crossAxisSpacing: 5, mainAxisSpacing: 3);
+  }
 
-  SliverChildDelegate _getDelegate() =>
-      SliverChildBuilderDelegate((BuildContext context, int index) {
-        return Container(
-          color: Colors.primaries[index % Colors.primaries.length],
-        );
-      }, childCount: 20);
+  SliverChildDelegate _getDelegate() {
+    return SliverChildBuilderDelegate((BuildContext context, int index) {
+      return Container(
+        color: Colors.primaries[index % Colors.primaries.length],
+      );
+    }, childCount: 20);
+  }
 
   @override
   Widget build(BuildContext context) {

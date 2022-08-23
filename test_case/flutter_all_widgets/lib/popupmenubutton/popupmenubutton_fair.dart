@@ -21,14 +21,18 @@ class _FairPopupmenuButtonPageState extends State<FairPopupmenuButtonPage> {
     fairProps = widget.fairProps;
   }
 
-  List<String> _getItems() => fairProps['item'];
+  List<String> _getItems(){
+    return fairProps['item'];
+  }
 
-  List<PopupMenuEntry<dynamic>> _getItemBuilder(context) => _getItems()
-      .map((e) => PopupMenuItem<String>(
-            value: e,
-            child: Text(e),
-          ))
-      .toList();
+  List<PopupMenuEntry<dynamic>> _getItemBuilder(context) {
+    return _getItems()
+        .map((e) => PopupMenuItem<String>(
+              value: e,
+              child: Text(e),
+            ))
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
