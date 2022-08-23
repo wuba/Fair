@@ -39,6 +39,8 @@ import 'cupertino_tabbar/cupertino_tabbar_demo.dart';
 import 'cupertinoactionsheet/cupertino_action_sheet_demo.dart';
 import 'cupertinoalertdialog/cupertino_alert_dialog_demo.dart';
 import 'cupertinobutton/cupertinobutton_demo.dart';
+import 'cupertinocontextmenu/cupertinocontextmenu_demo.dart';
+import 'cupertinodatepicker/cupertinodatepicker_demo.dart';
 import 'widget_item.dart';
 
 class WidgetDemo extends StatelessWidget {
@@ -107,6 +109,8 @@ class HomePage extends StatelessWidget {
       WidgetItem("Container", ContainerDemo()),
       WidgetItem("CupertinoActionSheet", CupertinoActionSheetDemo()),
       WidgetItem("CupertinoButton", CupertinoButtonDemo()),
+      WidgetItem("CupertinoContextMenu", CupertinoContextMenuDemo()),
+      WidgetItem("CupertinoDatePicker", CupertinoDatePickerDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {

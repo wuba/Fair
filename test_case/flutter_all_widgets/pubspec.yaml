@@ -80,6 +80,8 @@ flutter:
     - assets/bundle/container/
     - assets/bundle/cupertinoactionsheet/
     - assets/bundle/cupertinobutton/
+    - assets/bundle/cupertinocontextmenu/
+    - assets/bundle/cupertinodatepicker/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
