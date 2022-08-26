@@ -264,7 +264,6 @@ class ClassDeclarationData {
 
         break;
     }
-
     return tpl;
   }
 }
@@ -397,7 +396,6 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
               element.name.name.trim(),
               "void test() ${elementBody}",
               element.body is ExpressionFunctionBody);
-          // stdout.writeln("fieldDeclaration[1].trim === ${convertFunctionFromData(methodDeclaration)}");
           var res = parseString(content: methodDeclaration.body);
 
           var generator = SimpleFunctionGenerator(
@@ -760,7 +758,6 @@ class FunctionDeclarationNode {
     }
 
     var finalBody = withContext ? wrapBodyWithCtx() : body.toSource();
-
     return '''${isAsync ? 'async ' : ''}function $name(${argumentList.map((elem) => elem[0]).join(',')}$namedArgs$optionalArgs) { 
       $finalBody
     }''';
@@ -1079,8 +1076,16 @@ class ReturnStatementNode extends StatementNode {
 
   @override
   String toSource() {
+
+    String exprR = expr ?? "";
+    if(exprR != null && exprR.isNotEmpty ){
+      if(exprR.startsWith("Future(")){
+        exprR = exprR.replaceAll("Future(", "Promise.resolve().then(");
+      }
+    }
+
     return '''
-    return $expr${!(expr?.endsWith(';') ?? false) ? ';' : ''}
+    return $exprR${!(exprR?.endsWith(';') ?? false) ? ';' : ''}
     ''';
   }
 }

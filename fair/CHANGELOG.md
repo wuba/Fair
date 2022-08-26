@@ -1,3 +1,7 @@
+## [2.7.0]
+* Add support of Flutter SDK 3.0.0、3.0.1、3.0.2、3.0.3、3.0.4、3.0.5.
+* Fixed some bugs.
+
 ## [2.6.1]
 * Fixed some bugs.
 * Fair supports loading bundle from local disk.
