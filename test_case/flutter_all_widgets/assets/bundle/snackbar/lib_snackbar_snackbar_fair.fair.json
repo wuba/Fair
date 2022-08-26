@@ -1,0 +1,32 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "ElevatedButton",
+      "na": {
+        "onPressed": {
+          "pa": [
+            {
+              "className": "SnackBar",
+              "na": {
+                "content": {
+                  "className": "Text",
+                  "pa": [
+                    "%(_getContent)"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "child": {
+          "className": "Text",
+          "pa": [
+            "Click To Show SnackBar"
+          ]
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

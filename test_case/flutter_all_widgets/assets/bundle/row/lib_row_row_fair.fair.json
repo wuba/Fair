@@ -1,0 +1,12 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "Row",
+      "na": {
+        "children": "%(_getChildren)"
+      }
+    }
+  },
+  "methodMap": {}
+}

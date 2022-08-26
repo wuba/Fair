@@ -1,0 +1,18 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "SimpleDialog",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "提示"
+          ]
+        },
+        "children": "%(_getChildren)"
+      }
+    }
+  },
+  "methodMap": {}
+}

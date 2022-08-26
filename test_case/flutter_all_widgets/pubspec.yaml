@@ -64,6 +64,36 @@ flutter:
     - assets/bundle/richtext/
     - assets/bundle/absorbpointer/
     - assets/bundle/alertdialog/
+    - assets/bundle/placeholder/
+    - assets/bundle/popupmenubutton/
+    - assets/bundle/radio/
+    - assets/bundle/raw/
+    - assets/bundle/refresh_indicator/
+    - assets/bundle/reorderable_listview/
+    - assets/bundle/rotate/
+    - assets/bundle/row/
+    - assets/bundle/scaffold/
+    - assets/bundle/scroll/
+    - assets/bundle/semantics/
+    - assets/bundle/simpledialog/
+    - assets/bundle/sized/
+    - assets/bundle/slider/
+    - assets/bundle/sliver/
+    - assets/bundle/snackbar/
+    - assets/bundle/stack/
+    - assets/bundle/stepper/
+    - assets/bundle/streambuilder/
+    - assets/bundle/switch/
+    - assets/bundle/tab/
+    - assets/bundle/table/
+    - assets/bundle/text/
+    - assets/bundle/textbutton/
+    - assets/bundle/textfield/
+    - assets/bundle/theme/
+    - assets/bundle/tooltip/
+    - assets/bundle/transform/
+    - assets/bundle/widgetsapp/
+    - assets/bundle/wrap/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

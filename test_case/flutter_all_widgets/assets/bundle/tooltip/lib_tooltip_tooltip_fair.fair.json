@@ -1,0 +1,13 @@
+{
+  "className": "Tooltip",
+  "na": {
+    "message": "Fair Sample",
+    "child": {
+      "className": "Icon",
+      "pa": [
+        "#(Icons.book_online)"
+      ]
+    }
+  },
+  "methodMap": {}
+}

@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_all_widgets/animated/widget/spinning_container.dart';
 
 import 'animatedwidget_widget.dart';
 

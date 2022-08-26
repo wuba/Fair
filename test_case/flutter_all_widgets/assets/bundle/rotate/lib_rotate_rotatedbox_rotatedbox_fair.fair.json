@@ -1,0 +1,26 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "RotatedBox",
+      "na": {
+        "quarterTurns": "%(_getTurns)",
+        "child": "%(_getChild)"
+      }
+    }
+  },
+  "methodMap": {
+    "_getChild": {
+      "className": "Container",
+      "na": {
+        "color": "#(Colors.green)",
+        "child": {
+          "className": "Text",
+          "pa": [
+            "Hello world"
+          ]
+        }
+      }
+    }
+  }
+}

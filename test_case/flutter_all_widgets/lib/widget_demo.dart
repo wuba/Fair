@@ -1,10 +1,57 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_all_widgets/animated/widget/animatedwidget_demo.dart';
 import 'package:flutter_all_widgets/animatedalign/animatedalign_demo.dart';
 import 'package:flutter_all_widgets/outlinebutton/outlinebutton_demo.dart';
+import 'package:flutter_all_widgets/placeholder/placeholder_demo.dart';
+import 'package:flutter_all_widgets/popupmenubutton/popupmenubutton_demo.dart';
+import 'package:flutter_all_widgets/radio/radio_demo.dart';
+import 'package:flutter_all_widgets/raw/image/rawimage_demo.dart';
+import 'package:flutter_all_widgets/raw/keyboard_listener/raw_keyboard_listener_demo.dart';
+import 'package:flutter_all_widgets/refresh_indicator/refresh_indicator_demo.dart';
+import 'package:flutter_all_widgets/reorderable_listview/reorderable_listview_demo.dart';
 import 'package:flutter_all_widgets/rich_text/rich_text_demo.dart';
+import 'package:flutter_all_widgets/rotate/rotatedbox/rotatedbox_demo.dart';
+import 'package:flutter_all_widgets/row/row_demo.dart';
+import 'package:flutter_all_widgets/scaffold/scaffold_demo.dart';
+import 'package:flutter_all_widgets/scroll/scroll_configuration/scroll_configuration_demo.dart';
+import 'package:flutter_all_widgets/scroll/scrollable/scrollable_demo.dart';
+import 'package:flutter_all_widgets/scroll/scrollbar/scrollbar_demo.dart';
+import 'package:flutter_all_widgets/scroll/singlechild_scrollview/singlechild_scrollview_demo.dart';
+import 'package:flutter_all_widgets/semantics/semantics_demo.dart';
+import 'package:flutter_all_widgets/simpledialog/simpledialog_demo.dart';
+import 'package:flutter_all_widgets/sized/box/sized_box_demo.dart';
+import 'package:flutter_all_widgets/sized/overflow_box/sized_overflow_box_demo.dart';
+import 'package:flutter_all_widgets/slider/slider_demo.dart';
+import 'package:flutter_all_widgets/sliver/appbar/sliver_appbar_demo.dart';
+import 'package:flutter_all_widgets/sliver/child_builder_delegate/sliver_child_builder_delegate_demo.dart';
+import 'package:flutter_all_widgets/sliver/child_list_delegate/sliver_child_list_delegate_demo.dart';
+import 'package:flutter_all_widgets/sliver/fixed_extent_list/sliver_fixed_extent_list_demo.dart';
+import 'package:flutter_all_widgets/sliver/grid/slivergrid_demo.dart';
+import 'package:flutter_all_widgets/sliver/list/sliverlist_demo.dart';
+import 'package:flutter_all_widgets/sliver/padding/sliverpadding_demo.dart';
+import 'package:flutter_all_widgets/sliver/persistent_header/sliver_persistent_header_demo.dart';
+import 'package:flutter_all_widgets/sliver/to_box_adapter/slivertoboxadapter_demo.dart';
+import 'package:flutter_all_widgets/snackbar/snackbar_demo.dart';
+import 'package:flutter_all_widgets/stack/stack_demo.dart';
+import 'package:flutter_all_widgets/stepper/stepper_demo.dart';
+import 'package:flutter_all_widgets/streambuilder/streambuilder_demo.dart';
+import 'package:flutter_all_widgets/switch/switch_demo.dart';
+import 'package:flutter_all_widgets/tab/pageselector/tabpage_selector_demo.dart';
+import 'package:flutter_all_widgets/tab/tabbar/tabbar_demo.dart';
+import 'package:flutter_all_widgets/table/table_demo.dart';
+import 'package:flutter_all_widgets/text/text_demo.dart';
+import 'package:flutter_all_widgets/textbutton/textbutton_demo.dart';
+import 'package:flutter_all_widgets/textfield/textfield_demo.dart';
+import 'package:flutter_all_widgets/theme/theme_demo.dart';
+import 'package:flutter_all_widgets/tooltip/tooltip_demo.dart';
+import 'package:flutter_all_widgets/transform/transform_demo.dart';
+import 'package:flutter_all_widgets/transition/positioned/positioned_transition_demo.dart';
+import 'package:flutter_all_widgets/transition/rotation/rotation_transition_demo.dart';
+import 'package:flutter_all_widgets/transition/scale/scale_transition_demo.dart';
+import 'package:flutter_all_widgets/transition/size/size_transition_demo.dart';
+import 'package:flutter_all_widgets/transition/slide/slide_transition_demo.dart';
+import 'package:flutter_all_widgets/widgetsapp/widgetsapp_demo.dart';
+import 'package:flutter_all_widgets/wrap/wrap_demo.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'absorbpointer/absorbpointer_demo.dart';
@@ -75,23 +122,74 @@ class HomePage extends StatelessWidget {
       WidgetItem("AnimatedPositioned", AnimatedPositionedDemo()),
       WidgetItem("AnimatedSize", AnimatedSizeDemo()),
       WidgetItem("AnimatedWidget", AnimatedWidgetDemo()),
+      WidgetItem("Placeholder", PlaceholderDemo()),
+      WidgetItem("PopupmenuButton", PopupmenuButtonDemo()),
+      WidgetItem("PositionedTransition", PositionedTransitionDemo()),
+      WidgetItem("Radio", RadioDemo()),
+      WidgetItem("RawImage", RawImageDemo()),
+      WidgetItem("RawKeyboardListener", RawKeyboardListenerDemo()),
+      WidgetItem("RefreshIndicator", RefreshIndicatorDemo()),
+      WidgetItem("ReorderableListView", ReorderableListViewDemo()),
+      WidgetItem("RotatedBox", RotatedBoxDemo()),
+      WidgetItem("RotationTransition", RotationTransitionDemo()),
+      WidgetItem("Row", RowDemo()),
+      WidgetItem("Scaffold", ScaffoldDemo()),
+      WidgetItem("ScaleTransition", ScaleTransitionDemo()),
+      WidgetItem("ScrollConfiguration", ScrollConfigurationDemo()),
+      WidgetItem("Scrollable", ScrollableDemo()),
+      WidgetItem("Scrollbar", ScrollbarDemo()),
+      WidgetItem("Semantics", SemanticsDemo()),
+      WidgetItem("SimpleDialog", SimpleDialogDemo()),
+      WidgetItem("SingleChildScrollView", SingleChildScrollViewDemo()),
+      WidgetItem("SizeTransition", SizeTransitionDemo()),
+      WidgetItem("SizedBox", SizedBoxDemo()),
+      WidgetItem("SizedOverflowBox", SizedOverflowBoxDemo()),
+      WidgetItem("SlideTransition", SlideTransitionDemo()),
+      WidgetItem("Slider", SliderDemo()),
+      WidgetItem("SliverAppBar", SliverAppBarDemo()),
+      WidgetItem(
+          "SliverChildBuilderDelegate", SliverChildBuilderDelegateDemo()),
+      WidgetItem("SliverChildListDelegate", SliverChildListDelegateDemo()),
+      WidgetItem("SliverFixedExtentList", SliverFixedExtentListDemo()),
+      WidgetItem("SliverGrid", SliverGridDemo()),
+      WidgetItem("SliverList", SliverListDemo()),
+      WidgetItem("SliverPadding", SliverPaddingDemo()),
+      WidgetItem("SliverPersistentHeader", SliverPersistentHeaderDemo()),
+      WidgetItem("SliverToBoxAdapter", SliverToBoxAdapterDemo()),
+      WidgetItem("SnackBar", SnackBarDemo()),
+      WidgetItem("Stack", StackDemo()),
+      WidgetItem("Stepper", StepperDemo()),
+      WidgetItem("StreamBuilder", StreamBuilderDemo()),
+      WidgetItem("Switch", SwitchDemo()),
+      WidgetItem("TabBar+TabBarView+TabController", TabBarDemo()),
+      WidgetItem("TabPageSelector+TabBarView+TabController", TabPageSelectorDemo()),
+      WidgetItem("Table", TableDemo()),
+      WidgetItem("Text", TextDemo()),
+      WidgetItem("TextButton", TextButtonDemo()),
+      WidgetItem("TextField", TextFieldDemo()),
+      WidgetItem("Theme", ThemeDemo()),
+      WidgetItem("Tooltip", TooltipDemo()),
+      WidgetItem("Transform", TransformDemo()),
+      WidgetItem("WidgetsApp", WidgetsAppDemo()),
+      WidgetItem("Wrap", WrapDemo()),
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
-      return Container(
-        height: ((index % 5 + 1) * 50).toDouble(),
-        color: Colors.blueGrey,
-        alignment: Alignment.center,
-        child: GestureDetector(
+      return GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          child: Container(
+            height: ((index % 5 + 1) * 50).toDouble(),
+            color: Colors.blueGrey,
+            alignment: Alignment.center,
             child: Text(
               "$index:${item.title}",
               style: TextStyle(color: Colors.white),
             ),
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => item.className));
-            }),
-      );
+          ),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => item.className));
+          });
     }
 
     return Scaffold(

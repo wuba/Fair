@@ -1,0 +1,22 @@
+{
+  "className": "Container",
+  "na": {
+    "color": "#(Colors.blue)",
+    "alignment": "#(Alignment.center)",
+    "child": {
+      "className": "Text",
+      "pa": [
+        "Fair SliverPersistentHeader Demo"
+      ],
+      "na": {
+        "style": {
+          "className": "TextStyle",
+          "na": {
+            "color": "#(Colors.white)"
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

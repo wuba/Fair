@@ -1,0 +1,13 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "Switch",
+      "na": {
+        "value": "^(_switchValue)",
+        "onChanged": "@(_onChanged)"
+      }
+    }
+  },
+  "methodMap": {}
+}

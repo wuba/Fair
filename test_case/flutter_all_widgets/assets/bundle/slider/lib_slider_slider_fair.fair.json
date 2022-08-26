@@ -1,0 +1,13 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "Slider",
+      "na": {
+        "value": "^(_sliderValue)",
+        "onChanged": "@(_onChanged)"
+      }
+    }
+  },
+  "methodMap": {}
+}

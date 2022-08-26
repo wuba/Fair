@@ -1,0 +1,46 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "CustomScrollView",
+      "na": {
+        "slivers": [
+          {
+            "className": "SliverPadding",
+            "na": {
+              "padding": {
+                "className": "EdgeInsets.all",
+                "pa": [
+                  10
+                ]
+              },
+              "sliver": {
+                "className": "SliverToBoxAdapter",
+                "na": {
+                  "child": {
+                    "className": "Container",
+                    "na": {
+                      "color": "#(Colors.green)",
+                      "child": {
+                        "className": "Center",
+                        "na": {
+                          "child": {
+                            "className": "Text",
+                            "pa": [
+                              "Fair"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {}
+}

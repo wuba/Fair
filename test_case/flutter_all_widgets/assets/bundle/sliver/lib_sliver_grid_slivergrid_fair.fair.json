@@ -1,0 +1,35 @@
+{
+  "className": "CustomScrollView",
+  "na": {
+    "slivers": [
+      {
+        "className": "SliverGrid",
+        "na": {
+          "gridDelegate": "%(_getGridDelegate)",
+          "delegate": "%(_getDelegate)"
+        }
+      }
+    ]
+  },
+  "methodMap": {
+    "_getGridDelegate": {
+      "className": "SliverGridDelegateWithFixedCrossAxisCount",
+      "na": {
+        "crossAxisCount": 3,
+        "crossAxisSpacing": 5,
+        "mainAxisSpacing": 3
+      }
+    },
+    "_getDelegate": {
+      "className": "SliverChildBuilderDelegate",
+      "pa": [
+        {
+          "className": "Container"
+        }
+      ],
+      "na": {
+        "childCount": 20
+      }
+    }
+  }
+}

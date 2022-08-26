@@ -1,0 +1,56 @@
+{
+  "className": "Column",
+  "na": {
+    "children": [
+      {
+        "className": "Container",
+        "na": {
+          "height": 50,
+          "width": "$(double.infinity)",
+          "color": "#(Colors.blue)",
+          "alignment": "#(Alignment.center)",
+          "child": {
+            "className": "TabPageSelector",
+            "na": {
+              "controller": "^(_controller)",
+              "color": "#(Colors.white)",
+              "selectedColor": "#(Colors.red)"
+            }
+          }
+        }
+      },
+      {
+        "className": "Expanded",
+        "na": {
+          "child": {
+            "className": "TabBarView",
+            "na": {
+              "controller": "^(_controller)",
+              "children": [
+                {
+                  "className": "Container",
+                  "na": {
+                    "color": "#(Colors.blue)"
+                  }
+                },
+                {
+                  "className": "Container",
+                  "na": {
+                    "color": "#(Colors.red)"
+                  }
+                },
+                {
+                  "className": "Container",
+                  "na": {
+                    "color": "#(Colors.yellow)"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "methodMap": {}
+}

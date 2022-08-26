@@ -1,0 +1,27 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "SizedOverflowBox",
+      "na": {
+        "size": {
+          "className": "Size",
+          "pa": [
+            100.0,
+            100.0
+          ]
+        },
+        "alignment": "#(AlignmentDirectional.bottomStart)",
+        "child": {
+          "className": "Container",
+          "na": {
+            "height": 50.0,
+            "width": 150.0,
+            "color": "#(Colors.blue)"
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

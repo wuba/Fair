@@ -1,0 +1,20 @@
+{
+  "className": "Transform",
+  "na": {
+    "transform": {
+      "className": "Matrix4.rotationZ",
+      "pa": [
+        0.5
+      ]
+    },
+    "child": {
+      "className": "Container",
+      "na": {
+        "height": 100,
+        "width": 100,
+        "color": "#(Colors.red)"
+      }
+    }
+  },
+  "methodMap": {}
+}

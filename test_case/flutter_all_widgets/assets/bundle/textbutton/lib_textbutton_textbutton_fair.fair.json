@@ -1,0 +1,13 @@
+{
+  "className": "TextButton",
+  "na": {
+    "onPressed": "@(_onPressed)",
+    "child": {
+      "className": "Text",
+      "pa": [
+        "%(_getContent)"
+      ]
+    }
+  },
+  "methodMap": {}
+}

@@ -1,0 +1,184 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "Table",
+      "na": {
+        "children": [
+          {
+            "className": "TableRow",
+            "na": {
+              "decoration": {
+                "className": "ShapeDecoration",
+                "na": {
+                  "shape": {
+                    "className": "RoundedRectangleBorder",
+                    "na": {
+                      "borderRadius": {
+                        "className": "BorderRadius.circular",
+                        "pa": [
+                          5
+                        ]
+                      }
+                    }
+                  },
+                  "color": "#(Colors.blue)"
+                }
+              },
+              "children": [
+                {
+                  "className": "TableCell",
+                  "na": {
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Fair 一期"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "TableCell",
+                  "na": {
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Fair 二期"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "TableCell",
+                  "na": {
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Fair 三期"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "className": "TableRow",
+            "na": {
+              "decoration": {
+                "className": "ShapeDecoration",
+                "na": {
+                  "shape": {
+                    "className": "RoundedRectangleBorder",
+                    "na": {
+                      "borderRadius": {
+                        "className": "BorderRadius.circular",
+                        "pa": [
+                          5
+                        ]
+                      }
+                    }
+                  },
+                  "color": "#(Colors.green)"
+                }
+              },
+              "children": [
+                {
+                  "className": "TableCell",
+                  "na": {
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "布局动态化"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "TableCell",
+                  "na": {
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "逻辑动态化"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "TableCell",
+                  "na": {
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "变得更好用"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "className": "TableRow",
+            "na": {
+              "decoration": {
+                "className": "ShapeDecoration",
+                "na": {
+                  "shape": {
+                    "className": "RoundedRectangleBorder",
+                    "na": {
+                      "borderRadius": {
+                        "className": "BorderRadius.circular",
+                        "pa": [
+                          5
+                        ]
+                      }
+                    }
+                  },
+                  "color": "#(Colors.yellow)"
+                }
+              },
+              "children": [
+                {
+                  "className": "TableCell",
+                  "na": {
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "2020"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "TableCell",
+                  "na": {
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "2021"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "TableCell",
+                  "na": {
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "2022"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {}
+}
