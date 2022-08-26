@@ -1653,7 +1653,7 @@ class AppGeneratedModule extends GeneratedModule {
             duration: props['duration'] ?? const Duration(milliseconds: 2000),
             onTap: props['onTap'],
             alignment: props['alignment'] ?? const Alignment(0.0, 0.0),
-            textAlign: props['textAlign'] ?? TextAlign.start,
+            textAlign: props['textAlign'] as TextAlign,// ?? TextAlign.start,
             displayFullTextOnTap: props['displayFullTextOnTap'] ?? false,
             repeatForever: props['repeatForever'] ?? false,
             isRepeatingAnimation: props['isRepeatingAnimation'] ?? true,
