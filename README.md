@@ -159,13 +159,14 @@ Supplement the iOS runtime environment in the sample project
    * null-safe version support, expected to be launched on April 22 ✅
    * Flutter 2.8.0 version adaptation, expected to be launched in mid-May ✅
    * Flutter 2.10.0 version adaptation, is expected to be launched in early June  ✅
+   * Flutter 3.0 version adaptation               ✅
    * IDE syntax detection and hint plugin ✅
    * Rich syntactic sugar
 * Hot update platform
    * Dart Server project construction ✅
    * Flutter Web project construction ✅
-   * Patch/resource management
-   * Project management
+   * Patch/resource management         ✅
+   * Project management                ✅
    * Mobile Update&Download           ✅
 * Online dynamic
    * Flutter Web project construction ✅
@@ -177,7 +178,11 @@ Supplement the iOS runtime environment in the sample project
    * Engineering editor
    * Flutter effect preview
    * Fair DSL preview
-
+* IDE plug-in
+   * Fair project generation
+   * Fair template generation
+   * Fair syntax detection
+  
 ## ✨Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -222,6 +227,19 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## 📱Accessed APPs
+<table>
+  <tr>
+    <td align="center"><img src="https://pic3.58cdn.com.cn/nowater/frs/n_v303052b2c3f3b4ea5a5989f5e52d71481.jpg" width="100px;" alt=""/><br /><sub><b>58阿姨</b></sub><br /></td>
+    <td align="center"><img src="https://pic5.58cdn.com.cn/nowater/frs/n_v3ba05182f1dc9460dab8e02d22914f700.jpg" width="100px;" alt=""/><br /><sub><b>移动经纪人</b></sub><br /></td>
+    <td align="center"><img src="https://pic7.58cdn.com.cn/nowater/frs/n_v35eecf738ac6c4ec992bfc0d1b8d910d4.jpg" width="100px;" alt=""/><br /><sub><b>安居拍房</b></sub><br /></td>
+    <td align="center"><img src="https://pic1.58cdn.com.cn/nowater/frs/n_v3b4fd1abf1e484d3da864a177a12a28e2.jpg" width="100px;" alt=""/><br /><sub><b>神奇保</b></sub><br /></td>
+    <td align="center"><img src="https://pic6.58cdn.com.cn/nowater/frs/n_v36e650b70b7834204959547bf616869ef.jpg" width="100px;" alt=""/><br /><sub><b>58商办通</b></sub><br /></td>
+    <td align="center"><img src="https://pic1.58cdn.com.cn/nowater/frs/n_v378fdb523858b4475b05fb04f66f105ae.jpg" width="100px;" alt=""/><br /><sub><b>58商家版</b></sub><br /></td>
+    <td align="center"><img src="https://pic6.58cdn.com.cn/nowater/frs/n_v31394c57d6c234aecad820c94dd1c8dc6.png" width="100px;" alt=""/><br /><sub><b>中华英才网</b></sub><br /></td>
+  </tr>
+</table>
 
 ## 👏🏻Supporters
 
