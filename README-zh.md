@@ -55,22 +55,23 @@ git clone https://github.com/wuba/fair.git
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 2.5.0
+  fair: 2.7.0
 
 # add build_runner and compiler dependency
 dev_dependencies:
   build_runner: ^2.0.0
-  fair_compiler:
-    path: ../fair/compiler
+  fair_compiler: ^1.2.0
 
 # switch "fair_version" according to the local Flutter SDK version
+# Flutter SDK 3.0.x(3.0.0、3.0.1、3.0.2、3.0.3、3.0.4、3.0.5) -> flutter_3_0_0
+# Flutter SDK 2.10.x(2.10.0、2.10.1、2.10.2、2.10.3) -> flutter_2_10_0
 # Flutter SDK 2.8.x(2.8.0、2.8.1) -> flutter_2_8_0
 # Flutter SDK 2.5.x(2.5.0、2.5.1、2.5.2、2.5.3) -> flutter_2_5_0
 # Flutter SDK 2.0.6 -> flutter_2_0_6
 # Flutter SDK 1.22.6 -> flutter_1_22_6
 dependency_overrides:
   fair_version:
-    path: ../fair/flutter_version/flutter_2_8_0
+    path: ../fair/flutter_version/flutter_3_0_0
 ```
 
 **step3：将App替换为FairApp**
@@ -110,6 +111,12 @@ data: {"fairProps": json.encode({})}),
 ```
 
 ## 🔨最近版本
+### 2.7.0
+更新时间：2022.08.10
+
+#### Fair
+- 适配 Flutter SDK 3.0.0、3.0.1、3.0.2、3.0.3、3.0.4、3.0.5版本；
+- 修复部分已知BUG
 
 ### 2.6.0
 更新时间：2022.07.05
