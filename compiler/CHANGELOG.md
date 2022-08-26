@@ -1,3 +1,6 @@
+## [1.2.0]
+* Support static methods parsing.
+
 ## [1.1.0]
 * Support singleton parsing.
 

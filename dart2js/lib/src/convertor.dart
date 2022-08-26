@@ -264,7 +264,6 @@ class ClassDeclarationData {
 
         break;
     }
-
     return tpl;
   }
 }
@@ -397,7 +396,6 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
               element.name.name.trim(),
               "void test() ${elementBody}",
               element.body is ExpressionFunctionBody);
-          // stdout.writeln("fieldDeclaration[1].trim === ${convertFunctionFromData(methodDeclaration)}");
           var res = parseString(content: methodDeclaration.body);
 
           var generator = SimpleFunctionGenerator(
@@ -468,7 +466,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
         // if (fairWellExp.allMatches(element.metadata.first.toString()).isNotEmpty) {
         var excludeMethods = ['build'];
         if (!excludeMethods.contains(element.name.toString()) && element.returnType.toString() != 'Widget') {
-          tempClassDeclaration.methods.add(MethodDeclarationData(element.name.toString(), element.toString(), element.body is ExpressionFunctionBody));
+          tempClassDeclaration.methods.add(MethodDeclarationData(element.name.toString(), element.toString(), element.body is ExpressionFunctionBody)..isStatic = element.isStatic);
         }
         // }
       }
@@ -760,7 +758,6 @@ class FunctionDeclarationNode {
     }
 
     var finalBody = withContext ? wrapBodyWithCtx() : body.toSource();
-
     return '''${isAsync ? 'async ' : ''}function $name(${argumentList.map((elem) => elem[0]).join(',')}$namedArgs$optionalArgs) { 
       $finalBody
     }''';
@@ -1079,8 +1076,16 @@ class ReturnStatementNode extends StatementNode {
 
   @override
   String toSource() {
+
+    String exprR = expr ?? "";
+    if(exprR != null && exprR.isNotEmpty ){
+      if(exprR.startsWith("Future(")){
+        exprR = exprR.replaceAll("Future(", "Promise.resolve().then(");
+      }
+    }
+
     return '''
-    return $expr${!(expr?.endsWith(';') ?? false) ? ';' : ''}
+    return $exprR${!(exprR?.endsWith(';') ?? false) ? ';' : ''}
     ''';
   }
 }
@@ -1608,7 +1613,9 @@ String convertFunctionExpression(String code) {
 }
 
 String convertFunctionFromData(MethodDeclarationData? data, [ClassDeclarationData? ctx]) {
-  var res = parseString(content: data?.body ?? '');
+  var content = data?.body ?? '';
+  if(data?.isStatic ?? false) content = content.replaceAll('static', '');
+  var res = parseString(content: content);
   var generator = SimpleFunctionGenerator(isArrowFunc: data?.isArrow ?? false, renamedParameters: data?.renamedParameters, parentClass: ctx?.parentClass);
   generator.func
     ?..withContext = true
@@ -1691,7 +1698,6 @@ String convertClassString(String content, [bool isDataBean = false]) {
   var result = parseString(content: content, featureSet: FeatureSet.fromEnableFlags([]));
   var visitor = ClassDeclarationVisitor(isDataBean);
   result.unit.visitChildren(visitor);
-
   return visitor.genJsCode();
 }
 

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:sugar_demo/sugar_elseif_test_page.dart';
+import 'person.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,11 +13,29 @@ void main() {
 
 }
 
+class TestGeneratedModule implements GeneratedModule{
+  @override
+  Map<String, dynamic> components() {
+    return {
+      'Person': Person.from
+    };
+  }
+
+  @override
+  Map<String, bool> mapping() {
+    return const {
+      'Person':false
+    };
+  }
+
+}
+
 FairApp getApp() => FairApp(
   modules: const {
   },
   delegate: const {
   },
+  generated: TestGeneratedModule(),
   child: MaterialApp(
     color: Colors.blue,
     home: //SugarElseIfPage(fairProps: json.encode({'value':1}),)
