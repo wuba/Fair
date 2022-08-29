@@ -29,8 +29,14 @@ class _FairRefreshIndicatorPageState extends State<FairRefreshIndicatorPage> {
     });
   }
 
+  Widget _getListTitle(context, index) {
+    return ListTile(
+      title: Text('fair ${_list[index]}'),
+    );
+  }
+
   Widget _getChild() {
-    return ListView.builder(
+    return Sugar.listBuilder(
       itemBuilder: (context, index) {
         return ListTile(
           title: Text('fair ${_list[index]}'),

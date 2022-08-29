@@ -10,8 +10,19 @@
     }
   },
   "methodMap": {
+    "_getListTitle": {
+      "className": "ListTile",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "#(fair ${_list[index]})"
+          ]
+        }
+      }
+    },
     "_getChild": {
-      "className": "ListView.builder",
+      "className": "Sugar.listBuilder",
       "na": {
         "itemBuilder": {
           "className": "ListTile",
