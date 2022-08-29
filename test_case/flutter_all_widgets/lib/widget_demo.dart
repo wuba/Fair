@@ -140,7 +140,6 @@ class HomePage extends StatelessWidget {
       WidgetItem("AnimatedPositioned", AnimatedPositionedDemo()),
       WidgetItem("AnimatedSize", AnimatedSizeDemo()),
       WidgetItem("AnimatedWidget", AnimatedWidgetDemo()),
-<<<<<<< HEAD
       WidgetItem("AppBar", AppBarDemo()),
       WidgetItem("AspectRatio", AspectRatioDemo()),
       WidgetItem("Autocomplete", AutocompleteDemo()),
@@ -159,7 +158,6 @@ class HomePage extends StatelessWidget {
       WidgetItem("CupertinoButton", CupertinoButtonDemo()),
       WidgetItem("CupertinoContextMenu", CupertinoContextMenuDemo()),
       WidgetItem("CupertinoDatePicker", CupertinoDatePickerDemo()),
-=======
       WidgetItem("Placeholder", PlaceholderDemo()),
       WidgetItem("PopupmenuButton", PopupmenuButtonDemo()),
       WidgetItem("PositionedTransition", PositionedTransitionDemo()),
@@ -210,7 +208,6 @@ class HomePage extends StatelessWidget {
       WidgetItem("Transform", TransformDemo()),
       WidgetItem("WidgetsApp", WidgetsAppDemo()),
       WidgetItem("Wrap", WrapDemo()),
->>>>>>> upstream/f-3.0-flutter-widget
     ];
 
     Widget _widgetCard(WidgetItem item, int index) {
