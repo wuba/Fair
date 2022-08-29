@@ -64,7 +64,6 @@ flutter:
     - assets/bundle/richtext/
     - assets/bundle/absorbpointer/
     - assets/bundle/alertdialog/
-<<<<<<< HEAD
     - assets/bundle/appbar/
     - assets/bundle/aspectratio/
     - assets/bundle/autocomplete/
@@ -83,7 +82,6 @@ flutter:
     - assets/bundle/cupertinobutton/
     - assets/bundle/cupertinocontextmenu/
     - assets/bundle/cupertinodatepicker/
-=======
     - assets/bundle/placeholder/
     - assets/bundle/popupmenubutton/
     - assets/bundle/radio/
@@ -114,7 +112,6 @@ flutter:
     - assets/bundle/transform/
     - assets/bundle/widgetsapp/
     - assets/bundle/wrap/
->>>>>>> upstream/f-3.0-flutter-widget
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
