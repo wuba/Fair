@@ -147,5 +147,13 @@ var p = () => {
             width: props['width'] ?? 1.0,
             style: props['style'] ?? BorderStyle.solid,
       ),
+      'FocusNode': (props) => FocusNode(
+            debugLabel: props['props'],
+            onKey: props['onKey'],
+            onKeyEvent: props['onKeyEvent'],
+            skipTraversal: props['skipTraversal'] ?? false,
+            canRequestFocus: props['canRequestFocus'] ?? true,
+            descendantsAreFocusable: props['descendantsAreFocusable'] ?? true,
+      ),
       // 往下补充Widget映射关系
     };

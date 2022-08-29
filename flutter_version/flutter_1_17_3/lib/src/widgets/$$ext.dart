@@ -98,5 +98,11 @@ var p = () => {
             clipBehavior: props['clipBehavior'] ?? Clip.none,
             child: props['child'],
       ),
+      'FocusNode': (props) => FocusNode(
+            debugLabel: props['props'],
+            onKey: props['onKey'],
+            skipTraversal: props['skipTraversal'] ?? false,
+            canRequestFocus: props['canRequestFocus'] ?? true,
+      ),
       // 往下补充Widget映射关系
 };

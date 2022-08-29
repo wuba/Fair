@@ -121,6 +121,14 @@ var p = () => {
       'TabController': (props) => TabController(
           length: props['length'],
           vsync: props['vsync'] ?? ScrollableState(),
-          initialIndex: props['initialIndex'] ?? 0),
+          initialIndex: props['initialIndex'] ?? 0,
+      ),
+      'FocusNode': (props) => FocusNode(
+            debugLabel: props['props'],
+            onKey: props['onKey'],
+            skipTraversal: props['skipTraversal'] ?? false,
+            canRequestFocus: props['canRequestFocus'] ?? true,
+            descendantsAreFocusable: props['descendantsAreFocusable'] ?? true,
+      ),
       // 往下补充Widget映射关系
     };
