@@ -1,0 +1,37 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "Stack",
+      "na": {
+        "children": [
+          {
+            "className": "Container",
+            "na": {
+              "height": 200,
+              "width": 200,
+              "color": "#(Colors.red)"
+            }
+          },
+          {
+            "className": "Container",
+            "na": {
+              "height": 170,
+              "width": 170,
+              "color": "#(Colors.blue)"
+            }
+          },
+          {
+            "className": "Container",
+            "na": {
+              "height": 140,
+              "width": 140,
+              "color": "#(Colors.yellow)"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {}
+}

@@ -1,0 +1,13 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "ReorderableListView",
+      "na": {
+        "children": "%(_getChildren)",
+        "onReorder": "@(_onReorder)"
+      }
+    }
+  },
+  "methodMap": {}
+}

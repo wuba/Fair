@@ -74,6 +74,7 @@ var p = () => {
             focusNode: props['focusNode'],
             autofocus: props['autofocus'] ?? false,
             clipBehavior: props['clipBehavior'] ?? Clip.none,
+            child: props['child'],
       ),
       'StadiumBorder': (props) => StadiumBorder(
             side:props['side'] ?? BorderSide.none,
@@ -117,5 +118,9 @@ var p = () => {
             width: props['width'] ?? 1.0,
             style: props['style'] ?? BorderStyle.solid,
       ),
+      'TabController': (props) => TabController(
+          length: props['length'],
+          vsync: props['vsync'] ?? ScrollableState(),
+          initialIndex: props['initialIndex'] ?? 0),
       // 往下补充Widget映射关系
     };

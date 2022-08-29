@@ -1,0 +1,64 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "Stepper",
+      "na": {
+        "steps": [
+          {
+            "className": "Step",
+            "na": {
+              "title": {
+                "className": "Text",
+                "pa": [
+                  "Fair一期"
+                ]
+              },
+              "content": {
+                "className": "Text",
+                "pa": [
+                  "2020"
+                ]
+              }
+            }
+          },
+          {
+            "className": "Step",
+            "na": {
+              "title": {
+                "className": "Text",
+                "pa": [
+                  "Fair二期"
+                ]
+              },
+              "content": {
+                "className": "Text",
+                "pa": [
+                  "2021"
+                ]
+              }
+            }
+          },
+          {
+            "className": "Step",
+            "na": {
+              "title": {
+                "className": "Text",
+                "pa": [
+                  "Fair三期"
+                ]
+              },
+              "content": {
+                "className": "Text",
+                "pa": [
+                  "2022"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {}
+}

@@ -1,0 +1,7 @@
+{
+  "className": "Text",
+  "pa": [
+    "%(_getContent)"
+  ],
+  "methodMap": {}
+}

@@ -1,0 +1,18 @@
+{
+  "className": "RawKeyboardListener",
+  "na": {
+    "focusNode": "%(_getNode)",
+    "onKey": "@(_handleKey)",
+    "child": {
+      "className": "Container",
+      "na": {
+        "color": "#(Colors.blue)"
+      }
+    }
+  },
+  "methodMap": {
+    "_getNode": {
+      "className": "FocusNode"
+    }
+  }
+}

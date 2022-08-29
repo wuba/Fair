@@ -1,0 +1,14 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "PopupMenuButton",
+      "na": {
+        "itemBuilder": "@(_getItemBuilder)"
+      }
+    }
+  },
+  "methodMap": {
+    "_getItemBuilder": {}
+  }
+}

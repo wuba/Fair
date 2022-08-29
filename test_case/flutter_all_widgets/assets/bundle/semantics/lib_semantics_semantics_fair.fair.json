@@ -1,0 +1,17 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "Semantics",
+      "na": {
+        "child": {
+          "className": "Text",
+          "pa": [
+            "Fair Sample"
+          ]
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

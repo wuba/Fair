@@ -85,5 +85,20 @@ var p = () => {
             width: props['width'] ?? 1.0,
             style: props['style'] ?? BorderStyle.solid,
       ),
+      'TabController': (props) => TabController(
+          length: props['length'],
+          vsync: props['vsync'] ?? ScrollableState(),
+          initialIndex: props['initialIndex'] ?? 0
+      ),
+      'TextButton': (props) => TextButton(
+            key: props['key'],
+            onPressed: props['onPressed'],
+            onLongPress: props['onLongPress'],
+            style: props['style'],
+            focusNode: props['focusNode'],
+            autofocus: props['autofocus'] ?? false,
+            clipBehavior: props['clipBehavior'] ?? Clip.none,
+            child: props['child'],
+      ),
       // 往下补充Widget映射关系
     };

@@ -1,0 +1,18 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "StreamBuilder",
+      "na": {
+        "stream": "$(_streamController.stream)",
+        "builder": {
+          "className": "Text",
+          "pa": [
+            "未收到数据"
+          ]
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

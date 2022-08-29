@@ -71,15 +71,39 @@ var p = () => {
             backgroundColor: props['backgroundColor'],
             tooltip: props['tooltip'],
       ),
-      'TextButton': (props)=> TextButton(
+      'SliverChildBuilderDelegate': (props) => SliverChildBuilderDelegate(
+            props['pa'][0],
+            findChildIndexCallback: props['findChildIndexCallback'],
+            childCount: props['childCount'],
+            addAutomaticKeepAlives: props['addAutomaticKeepAlives'] ?? true,
+            addRepaintBoundaries: props['addRepaintBoundaries'] ?? true,
+            addSemanticIndexes: props['addSemanticIndexes'] ?? true,
+            semanticIndexCallback: props['semanticIndexCallback'] ??
+                    (Widget _,int index) => index,
+            semanticIndexOffset: props['semanticIndexOffset'] ?? 0,
+      ),
+      'SliverChildListDelegate': (props) => SliverChildListDelegate(
+            props['pa'][0],
+            addAutomaticKeepAlives: props['addAutomaticKeepAlives'] ?? true,
+            addRepaintBoundaries: props['addRepaintBoundaries'] ?? true,
+            addSemanticIndexes: props['addSemanticIndexes'] ?? true,
+            semanticIndexCallback: props['semanticIndexCallback'] ??
+                    (Widget _,int index) => index,
+            semanticIndexOffset: props['semanticIndexOffset'] ?? 0,
+      ),
+      'TabController': (props) => TabController(
+          length: props['length'],
+          vsync: props['vsync'] ?? ScrollableState(),
+          initialIndex: props['initialIndex'] ?? 0),
+      'TextButton': (props) => TextButton(
             key: props['key'],
             onPressed: props['onPressed'],
-            child: props['child'],
             onLongPress: props['onLongPress'],
             style: props['style'],
             focusNode: props['focusNode'],
             autofocus: props['autofocus'] ?? false,
             clipBehavior: props['clipBehavior'] ?? Clip.none,
+            child: props['child'],
       ),
       'StadiumBorder': (props) => StadiumBorder(
             side:props['side'] ?? BorderSide.none,

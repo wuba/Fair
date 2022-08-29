@@ -1,5 +1,9 @@
 
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/f-3.0-flutter-widget
 import 'animatedwidget_widget.dart';
 
 class AnimatedWidgetDemo extends StatelessWidget{

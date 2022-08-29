@@ -1,0 +1,29 @@
+{
+  "className": "WidgetsApp",
+  "na": {
+    "color": {
+      "className": "Color",
+      "pa": [
+        "0xFFFFFFFF"
+      ]
+    },
+    "onGenerateRoute": {
+      "className": "CupertinoPageRoute",
+      "na": {
+        "settings": "^(settings)",
+        "builder": {
+          "className": "CupertinoTabView",
+          "na": {
+            "builder": {
+              "className": "Text",
+              "pa": [
+                "home"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

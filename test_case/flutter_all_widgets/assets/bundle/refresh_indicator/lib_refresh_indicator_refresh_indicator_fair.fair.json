@@ -1,0 +1,32 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "RefreshIndicator",
+      "na": {
+        "onRefresh": "@(_onRefresh)",
+        "child": "%(_getChild)"
+      }
+    }
+  },
+  "methodMap": {
+    "_getChild": {
+      "className": "ListView.builder",
+      "na": {
+        "itemBuilder": {
+          "className": "ListTile",
+          "na": {
+            "title": {
+              "className": "Text",
+              "pa": [
+                "#(fair ${_list[index]})"
+              ]
+            }
+          }
+        },
+        "itemExtent": 50,
+        "itemCount": "$(_list.length)"
+      }
+    }
+  }
+}

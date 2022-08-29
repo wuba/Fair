@@ -74,6 +74,7 @@ var p = () => {
             focusNode: props['focusNode'],
             autofocus: props['autofocus'] ?? false,
             clipBehavior: props['clipBehavior'] ?? Clip.none,
+            child: props['child'],
       ),
       'StadiumBorder': (props) => StadiumBorder(
             side:props['side'] ?? BorderSide.none,

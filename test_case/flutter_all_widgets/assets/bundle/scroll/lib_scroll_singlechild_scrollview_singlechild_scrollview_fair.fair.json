@@ -1,0 +1,19 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "SingleChildScrollView",
+      "na": {
+        "child": "%(_getChild)"
+      }
+    }
+  },
+  "methodMap": {
+    "_getChild": {
+      "className": "Column",
+      "na": {
+        "children": {}
+      }
+    }
+  }
+}
