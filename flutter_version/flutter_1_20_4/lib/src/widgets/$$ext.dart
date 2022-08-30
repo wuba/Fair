@@ -184,5 +184,8 @@ var p = () => {
             listTileTheme: props['listTileTheme'],
             androidOverscrollIndicator: props['androidOverscrollIndicator'],
       ),
+      'Matrix4.rotationZ': (props) => Matrix4.rotationZ(
+            props['pa'][0]?.toDouble(),
+      ),
       // 往下补充Widget映射关系
     };
