@@ -39,7 +39,7 @@ class _FairReorderableListViewPageState
     ];
   }
 
-  _onReorder(oldIndex, newIndex) {
+  void _onReorder(oldIndex, newIndex) {
     if (oldIndex < newIndex) {
       newIndex -= 1;
     }
