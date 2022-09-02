@@ -197,6 +197,8 @@ Supplement the iOS runtime environment in the sample project
    * Fair template generation
    * Fair syntax detection
 
+## 🔧 Tools
+Hot Update Platform：https://github.com/wuba/FairPushy
 
 ## 📱Accessed APPs
 <table>
