@@ -18,6 +18,7 @@ Fair是为Flutter设计的动态化框架，通过Fair Compiler工具对原生Da
 **Fair 的接入和使用，建议大家阅读在线文档:**
 
 > 在线文档：[https://fair.58.com/](https://fair.58.com/)
+> 热更新平台：[FAIR PUSHY](https://github.com/wuba/FairPushy)
 
 ![](fair/what-is-fair.png)
 
