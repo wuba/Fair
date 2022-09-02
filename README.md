@@ -106,7 +106,8 @@ FairWidget(
 ```
 
 ## Documentation
-For more details, please refer to [https://fair.58.com](https://fair.58.com)
+For more details, please refer to [https://fair.58.com](https://fair.58.com)  
+If you need to hot update the platform, please follow [FAIR PUSHY](https://github.com/wuba/FairPushy)
 
 ## versions
 
@@ -197,8 +198,6 @@ Supplement the iOS runtime environment in the sample project
    * Fair template generation
    * Fair syntax detection
 
-## 🔧 Tools
-Hot Update Platform：https://github.com/wuba/FairPushy
 
 ## 📱Accessed APPs
 <table>
