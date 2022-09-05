@@ -46,6 +46,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var name = map[tag];
     print('name:$name');
     if (name == null) {
+      print('qixu11');
       return WarningWidget(
           parentContext:context,name: name, error: '$tag is not supported', url: bundle);
     }
@@ -75,6 +76,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         return re;
       }else if (name == 'Sugar.listBuilder'){
         return _buildSugarListBuilder(mapper, map, methodMap, context);
+      }else if (name == 'Sugar.isNestedScrollView'){
+        return _buildSugarNestedScrollView(mapper, map, methodMap, context);
       }
 
       var source = map['mapEach'];
@@ -86,6 +89,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }
       return _block(map, methodMap, context, domain, mapper, name, isWidget);
     } catch (e) {
+      print('qixu12'+e.toString());
            return WarningWidget(parentContext:context, name: name, error: e, url: bundle, solution:"Tag name not supported yet,You need to use the @FairBinding annotation to tag the local Widget component");
     }
   }
@@ -371,6 +375,32 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
     var params = {
       'pa': [children,propertiesProvider]
+    };
+
+    return mapEach.call(params);
+  }
+  NestedScrollView _buildSugarNestedScrollView(Function mapEach,
+      Map map,
+      Map? methodMap,
+      BuildContext context){
+
+    // Map propertyTransMap = Map.from(map);
+    // propertyTransMap['className']='NestedScrollView';
+    // var propertiesProvider = convert(context, propertyTransMap, methodMap);
+    // print('qixu2'+propertiesProvider.toString());
+    Map na = map['na'];
+    print('qixu3'+na.toString());
+    print('qixu4'+methodMap.toString());
+    var headerSliverBuilder = na['headerSliverBuilder'];
+    var body = na['body'];
+    print('qixu5'+headerSliverBuilder.toString());
+    // var source = List<int>.generate(20, (i) => i + 1);
+    // var list = Domain(source).forEach(($, _) {
+    //   return convert(context, na['itemBuilder'], methodMap, domain:$) as Widget;
+    // });
+    // List<Widget> children = list.map((e) => e as Widget).toList();
+    var params = {
+      'pa': [headerSliverBuilder,body,]
     };
 
     return mapEach.call(params);

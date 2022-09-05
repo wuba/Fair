@@ -3,6 +3,8 @@
  * Use of this source code is governed by a BSD type license that can be
  * found in the LICENSE file.
  */
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/gestures.dart';
@@ -91,7 +93,33 @@ class Sugar {
         itemCount: itemCount,
         itemBuilder:itemBuilder);
   }
-
+  static NestedScrollView isNestedScrollView({
+    Key? key,
+    ScrollController? controller,
+    Axis scrollDirection = Axis.vertical,
+    bool reverse = false,
+    ScrollPhysics? physics,
+    required NestedScrollViewHeaderSliversBuilder headerSliverBuilder,
+    required Widget body,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    bool floatHeaderSlivers = false,
+    Clip clipBehavior = Clip.hardEdge,
+    String? restorationId,
+    ScrollBehavior? scrollBehavior,
+    }){return NestedScrollView(
+      key: key,
+      scrollDirection: scrollDirection,
+      reverse: reverse,
+      controller: controller,
+      physics: physics,
+      headerSliverBuilder: headerSliverBuilder,
+      body: body,
+      dragStartBehavior: dragStartBehavior,
+      floatHeaderSlivers: floatHeaderSlivers,
+      clipBehavior: clipBehavior,
+      restorationId: restorationId,
+      scrollBehavior: scrollBehavior,
+  );}
 
   static K switchCase<T, K>(T key,List<SugarSwitchCaseObj<T,K>> caseObjects ,K defaultValue){
     for (SugarSwitchCaseObj<T,K> sugarCase in caseObjects){

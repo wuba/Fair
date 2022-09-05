@@ -50,12 +50,12 @@ class _SugarElseIfPageState extends State<SugarElseIfPage> {
               width: Sugar.width(context),
               height: Sugar.height(context),
               child: Sugar.listBuilder(
-                  count: 20,
-                  builder: (int itme) {
+                  itemCount: 20,
+                  itemBuilder: (BuildContext context, int item) {
                     return Center(
                       child: Container(
                         height: 20,
-                        child: Text("$itme"),
+                        child: Text("itme"),
                       ),
                     );
                   }),

@@ -176,13 +176,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-  dartToJs:
-    dependency: transitive
-    description:
-      path: "../../dart2js"
-      relative: true
-    source: path
-    version: "0.0.0"
   dart_style:
     dependency: transitive
     description:
@@ -196,7 +189,7 @@ packages:
       path: "../../fair"
       relative: true
     source: path
-    version: "2.4.1"
+    version: "2.7.0"
   fair_annotation:
     dependency: transitive
     description:
@@ -210,21 +203,28 @@ packages:
       path: "../../compiler"
       relative: true
     source: path
-    version: "2.3.0"
+    version: "1.2.2"
+  fair_dart2dsl:
+    dependency: transitive
+    description:
+      name: fair_dart2dsl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
+  fair_dart2js:
+    dependency: transitive
+    description:
+      name: fair_dart2js
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   fair_version:
     dependency: "direct overridden"
     description:
       path: "../../flutter_version/flutter_3_0_0"
       relative: true
     source: path
-    version: "0.2.0"
-  fairc:
-    dependency: transitive
-    description:
-      path: "../../dart2dsl"
-      relative: true
-    source: path
-    version: "0.0.0"
+    version: "3.0.0"
   fake_async:
     dependency: transitive
     description:

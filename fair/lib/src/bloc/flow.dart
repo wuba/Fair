@@ -4,7 +4,9 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair/src/internal/global_state.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../extension.dart';
 import '../type.dart';
@@ -113,6 +115,42 @@ FairWidgetBinding provider = () {
         clipBehavior: paramsObj.clipBehavior,
         children: p0,);
       return listView;
+    },
+    'Sugar.isNestedScrollView':(props){
+      var p0 = pa0(props);
+      var p1 = pa1(props);
+      // var p2 = pa2(props);
+      print('qixu1');
+      print(props);
+      print(p0);
+      print(p1);
+      // print(p2);
+      print('qixu2');
+      return NestedScrollView(headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
+        return <Widget>[
+          SliverAppBar(
+            expandedHeight: 230.0,
+            pinned: true,
+            floating: true,
+            stretch: true,
+            snap: false,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(
+                '我是测试',
+                style: TextStyle(
+                    color: Color(0xFF333333),
+                    fontWeight: FontWeight.w700,
+                    fontSize: 17,
+                    fontFamily: 'PingFangSC-Semibold'),
+              ),
+              background: Image.network(
+                'http://img.haote.com/upload/20180918/2018091815372344164.jpg',
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+          )
+        ];
+      }, body: Text('body不能为null'));
     },
   };
 };
