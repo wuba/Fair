@@ -46,7 +46,6 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var name = map[tag];
     print('name:$name');
     if (name == null) {
-      print('qixu11');
       return WarningWidget(
           parentContext:context,name: name, error: '$tag is not supported', url: bundle);
     }
@@ -89,7 +88,6 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }
       return _block(map, methodMap, context, domain, mapper, name, isWidget);
     } catch (e) {
-      print('qixu12'+e.toString());
            return WarningWidget(parentContext:context, name: name, error: e, url: bundle, solution:"Tag name not supported yet,You need to use the @FairBinding annotation to tag the local Widget component");
     }
   }
@@ -383,24 +381,19 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       Map map,
       Map? methodMap,
       BuildContext context){
-
-    // Map propertyTransMap = Map.from(map);
-    // propertyTransMap['className']='NestedScrollView';
-    // var propertiesProvider = convert(context, propertyTransMap, methodMap);
-    // print('qixu2'+propertiesProvider.toString());
+    Map propertyTransMap = Map.from(map);
+    var propertiesProvider = convert(context, propertyTransMap, methodMap);
     Map na = map['na'];
-    print('qixu3'+na.toString());
-    print('qixu4'+methodMap.toString());
-    var headerSliverBuilder = na['headerSliverBuilder'];
-    var body = na['body'];
-    print('qixu5'+headerSliverBuilder.toString());
-    // var source = List<int>.generate(20, (i) => i + 1);
-    // var list = Domain(source).forEach(($, _) {
-    //   return convert(context, na['itemBuilder'], methodMap, domain:$) as Widget;
-    // });
-    // List<Widget> children = list.map((e) => e as Widget).toList();
+    var body = convert(context, na['body'], methodMap);
+    var headerSliverBuilder =na['headerSliverBuilder'];
+    var source = List<int>.generate(headerSliverBuilder.length, (i) => i + 1);
+
+    var list = Domain(source).forEach(($, index) {
+      return convert(context, headerSliverBuilder[index-1], methodMap, domain:$) as Widget;
+    });
+    List<Widget> headerBuilder = list.map((e) => e as Widget).toList();
     var params = {
-      'pa': [headerSliverBuilder,body,]
+      'pa': [context,propertiesProvider,headerBuilder,body,]
     };
 
     return mapEach.call(params);

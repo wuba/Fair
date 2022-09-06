@@ -119,38 +119,32 @@ FairWidgetBinding provider = () {
     'Sugar.isNestedScrollView':(props){
       var p0 = pa0(props);
       var p1 = pa1(props);
-      // var p2 = pa2(props);
-      print('qixu1');
-      print(props);
-      print(p0);
-      print(p1);
-      // print(p2);
-      print('qixu2');
-      return NestedScrollView(headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
-        return <Widget>[
-          SliverAppBar(
-            expandedHeight: 230.0,
-            pinned: true,
-            floating: true,
-            stretch: true,
-            snap: false,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text(
-                '我是测试',
-                style: TextStyle(
-                    color: Color(0xFF333333),
-                    fontWeight: FontWeight.w700,
-                    fontSize: 17,
-                    fontFamily: 'PingFangSC-Semibold'),
-              ),
-              background: Image.network(
-                'http://img.haote.com/upload/20180918/2018091815372344164.jpg',
-                fit: BoxFit.fitHeight,
-              ),
-            ),
-          )
-        ];
-      }, body: Text('body不能为null'));
+      var p2 = pa2(props);
+      var p3 = pa3(props);
+      var paramsObj = Sugar.isNestedScrollView(context: p0, innerBoxIsScrolled: true, headerSliverBuilder: p2, body: p3);
+      if(p1 is NestedScrollView){
+        paramsObj = p1 as NestedScrollView;
+      }
+      var nestedScrollView=NestedScrollView(
+          scrollDirection: paramsObj.scrollDirection,
+          reverse: paramsObj.reverse,
+          controller: paramsObj.controller,
+          physics: paramsObj.physics,
+          headerSliverBuilder: (context,innerBoxIsScrolled){return p2;},
+          body: p3,
+          dragStartBehavior: paramsObj.dragStartBehavior,
+          floatHeaderSlivers: paramsObj.floatHeaderSlivers,
+          clipBehavior: paramsObj.clipBehavior,
+          restorationId: paramsObj.restorationId,
+          scrollBehavior: paramsObj.scrollBehavior,
+          );
+      return nestedScrollView;
+    },
+    'Sugar.isNestedScrollView#headerSliverBuilder': (props) => (
+        BuildContext context,
+        bool innerBoxIsScrolled,
+        ) {
+      return (props['block']) as List;
     },
   };
 };

@@ -1,6 +1,8 @@
 {
-  "className": "NestedScrollView",
+  "className": "Sugar.isNestedScrollView",
   "na": {
+    "context": "^(context)",
+    "innerBoxIsScrolled": false,
     "headerSliverBuilder": [
       {
         "className": "SliverAppBar",
