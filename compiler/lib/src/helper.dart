@@ -96,12 +96,13 @@ mixin FairCompiler {
             content = output.substring(startIndex + _startTag.length, endIndex);
           }
         }
-      } catch (e) {
+      } catch (e, s) {
         var errorLog = await File(path.join('build', 'fair', 'log',
-            '${DateFormat('yyyy-MM-dd_HH:mm:sss').format(DateTime.now())}.txt'))
+                '${DateFormat('yyyy-MM-dd_HH:mm:sss').format(DateTime.now())}.txt'))
             .create(recursive: true);
         var f = await errorLog.open(mode: FileMode.append);
-        await f.writeString('${e.toString()}\n');
+        await f
+            .writeString('error:\n${e.toString()}\nstack:\n${s.toString()}\n');
         error = 'No content is generated: ${errorLog.path}';
         print('[Fair] $error');
       }
