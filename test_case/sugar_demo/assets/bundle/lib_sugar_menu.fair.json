@@ -6,7 +6,7 @@
       "na": {
         "actions": [
           {
-            "className": "Sugar.popMenu",
+            "className": "Sugar.popMenuButton",
             "na": {
               "onSelected": "@(_onSelected)",
               "itemBuilder": [

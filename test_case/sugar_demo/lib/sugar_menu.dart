@@ -1,7 +1,6 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
-
 @FairPatch()
 class PopupMenuDemo extends StatefulWidget {
   @override
@@ -20,7 +19,7 @@ class PopupMenuState extends State<PopupMenuDemo> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          Sugar.popMenu(
+          Sugar.popMenuButton(
               onSelected: _onSelected,
             itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
               const PopupMenuItem<String>(
