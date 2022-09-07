@@ -5,6 +5,7 @@
  */
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../extension.dart';
 import '../type.dart';
@@ -82,6 +83,14 @@ FairWidgetBinding provider = () {
         }
       }
       return p2;
+    },
+    'Sugar.popMenuButton': (props) {
+      var p0 = pa0(props);
+      return PopupMenuButton(
+        onSelected: p0.onSelected,
+        itemBuilder: p0.itemBuilder,
+        padding: p0.padding,
+      );
     },
     'Sugar.listBuilder':(props){
       var p0 = pa0(props);

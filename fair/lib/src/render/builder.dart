@@ -6,6 +6,7 @@
 
 import 'package:fair/fair.dart';
 import 'package:fair/src/type.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../extension.dart';
@@ -75,6 +76,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         return re;
       }else if (name == 'Sugar.listBuilder'){
         return _buildSugarListBuilder(mapper, map, methodMap, context);
+      }else if(name == 'Sugar.popMenuButton'){
+        return _popupMenuBuilder(mapper, map, methodMap, context);
       }
 
       var source = map['mapEach'];
@@ -343,6 +346,34 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       'pa': [caseValue, children, defaultValue]
     };
 
+    return mapEach.call(params);
+  }
+
+  PopupMenuButton _popupMenuBuilder(Function mapEach,
+      Map map,
+      Map? methodMap,
+      BuildContext context){
+    var propertyTransMap = Map.from(map);
+    Map na = map['na'];
+    var itemBuilder  = na['itemBuilder'];
+    propertyTransMap['className']='PopupMenuButton';
+    //刷新时
+    if(itemBuilder is Function){
+      var propertiesProvider = convert(context, propertyTransMap, methodMap);
+      return mapEach.call({'pa': [ propertiesProvider]});
+    }
+    //第一次解析
+    if(itemBuilder is List){
+      var list = Domain(itemBuilder).forEach(($, element) {
+        return convert(context, element, methodMap, domain: $) as Widget;
+      });
+      var children = list.map((e) => e as PopupMenuEntry<Object>).toList();
+      na['itemBuilder'] = (BuildContext context) => children;
+    }
+    var propertiesProvider = convert(context, propertyTransMap, methodMap);
+    var params = {
+      'pa': [ propertiesProvider]
+    };
     return mapEach.call(params);
   }
 

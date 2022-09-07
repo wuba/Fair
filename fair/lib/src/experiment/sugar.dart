@@ -92,6 +92,20 @@ class Sugar {
         itemBuilder:itemBuilder);
   }
 
+  ///popmenu
+  static PopupMenuButton popMenuButton<T>({
+    Key? key,
+    required PopupMenuItemBuilder<T> itemBuilder,
+    PopupMenuItemSelected<T>? onSelected,
+    EdgeInsetsGeometry? padding,
+  }){
+    return PopupMenuButton<T>(
+      key: key,
+        itemBuilder:itemBuilder,
+        onSelected: onSelected,
+        padding: padding ?? const EdgeInsets.all(8.0),
+    );
+  }
 
   static K switchCase<T, K>(T key,List<SugarSwitchCaseObj<T,K>> caseObjects ,K defaultValue){
     for (SugarSwitchCaseObj<T,K> sugarCase in caseObjects){
