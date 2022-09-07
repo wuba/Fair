@@ -38,7 +38,8 @@ FairApp getApp() => FairApp(
   generated: TestGeneratedModule(),
   child: MaterialApp(
     color: Colors.blue,
-    home: //SugarElseIfPage(fairProps: json.encode({'value':1}),)
+    home:
+    // SugarElseIfPage(fairProps: json.encode({'value':1}),)
     FairWidget(
         name: 'DynamicWidget',
         path: 'assets/bundle/lib_sugar_elseif_test_page.fair.json',

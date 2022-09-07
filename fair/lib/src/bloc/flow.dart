@@ -9,6 +9,8 @@ import 'package:flutter/cupertino.dart';
 import '../extension.dart';
 import '../type.dart';
 import '../experiment/sugar.dart';
+import 'dart:async';
+
 
 FairWidgetBinding provider = () {
   return {
@@ -114,5 +116,38 @@ FairWidgetBinding provider = () {
         children: p0,);
       return listView;
     },
+
+    'Sugar.sliverChildBuilderDelegate': (props) {
+      var p0 = pa0(props);
+      List<Widget> p1 = pa1(props);
+      var p2 = pa2(props);
+
+      var sliverChildBuilderDelegate = SliverChildBuilderDelegate(
+            (p0, index) {
+          return  p1[index];
+        },
+        childCount: p2,);
+      return sliverChildBuilderDelegate;
+    },
+
+
+    'Sugar.sliverGridDelegateWithFixedCrossAxisCount': (props) {
+      Map<String, dynamic> p0 = pa0(props);
+
+      var crossAxisCount = p0['crossAxisCount'];
+      var mainAxisSpacing = p0['mainAxisSpacing'];
+      var crossAxisSpacing = p0['crossAxisSpacing'];
+      var childAspectRatio = p0['childAspectRatio'];
+
+      var sliverGridDelegateWithFixedCrossAxisCount = SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount, //Grid按两列显示
+        mainAxisSpacing: mainAxisSpacing,
+        crossAxisSpacing: crossAxisSpacing,
+        childAspectRatio: childAspectRatio,
+      );
+      return sliverGridDelegateWithFixedCrossAxisCount;
+    },
+
+
   };
 };
