@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import '../extension.dart';
 import '../type.dart';
 import '../experiment/sugar.dart';
+import '../utils.dart';
 
 FairWidgetBinding provider = () {
   return {
@@ -116,35 +117,58 @@ FairWidgetBinding provider = () {
         children: p0,);
       return listView;
     },
-    'Sugar.isNestedScrollView':(props){
+    'Sugar.isNestedScrollViewHeaderSliversBuilder':(props){
+      var p2 = pa2(props);
+      var nestedScrollViewHeaderSliversBuilder=(BuildContext context, bool innerBoxIsScrolled){return (p2 as List<Widget>);};
+      return nestedScrollViewHeaderSliversBuilder;
+    },
+
+    'Sugar.isButtonStyle':(props){
       var p0 = pa0(props);
       var p1 = pa1(props);
-      var p2 = pa2(props);
-      var p3 = pa3(props);
-      var paramsObj = Sugar.isNestedScrollView(context: p0, innerBoxIsScrolled: true, headerSliverBuilder: p2, body: p3);
-      if(p1 is NestedScrollView){
-        paramsObj = p1 as NestedScrollView;
+      ButtonStyle paramsObj=ButtonStyle();
+      if(p1 is ButtonStyle){
+        paramsObj = p1 as ButtonStyle;
       }
-      var nestedScrollView=NestedScrollView(
-          scrollDirection: paramsObj.scrollDirection,
-          reverse: paramsObj.reverse,
-          controller: paramsObj.controller,
-          physics: paramsObj.physics,
-          headerSliverBuilder: (context,innerBoxIsScrolled){return p2;},
-          body: p3,
-          dragStartBehavior: paramsObj.dragStartBehavior,
-          floatHeaderSlivers: paramsObj.floatHeaderSlivers,
-          clipBehavior: paramsObj.clipBehavior,
-          restorationId: paramsObj.restorationId,
-          scrollBehavior: paramsObj.scrollBehavior,
-          );
-      return nestedScrollView;
+      var buttonStyle=ButtonStyle(
+        textStyle: paramsObj.textStyle,
+        backgroundColor: paramsObj.backgroundColor,
+        foregroundColor: paramsObj.foregroundColor,
+        overlayColor: paramsObj.overlayColor,
+        shadowColor: paramsObj.shadowColor,
+        surfaceTintColor: paramsObj.surfaceTintColor,
+        elevation: paramsObj.elevation,
+        padding: paramsObj.padding,
+        minimumSize: paramsObj.minimumSize,
+        fixedSize: paramsObj.fixedSize,
+        maximumSize: paramsObj.maximumSize,
+        side: paramsObj.side,
+        shape: paramsObj.shape,
+        mouseCursor: paramsObj.mouseCursor,
+        visualDensity: paramsObj.visualDensity,
+        tapTargetSize: paramsObj.tapTargetSize,
+        animationDuration: paramsObj.animationDuration,
+        enableFeedback: paramsObj.enableFeedback,
+        alignment: paramsObj.alignment,
+        splashFactory: paramsObj.splashFactory,
+      );
+      return buttonStyle;
     },
-    'Sugar.isNestedScrollView#headerSliverBuilder': (props) => (
-        BuildContext context,
-        bool innerBoxIsScrolled,
-        ) {
-      return (props['block']) as List;
-    },
+  'Sugar.isDuration':(props){
+      var days = 0;
+      if(null!=props['days']){days=props['days'];}
+      var hours = 0;
+      if(null!=props['hours']){hours=props['hours'];}
+      var minutes = 0;
+      if(null!=props['minutes']){minutes=props['minutes'];}
+      var seconds = 0;
+      if(null!=props['seconds']){seconds=props['seconds'];}
+      var milliseconds = 0;
+      if(null!=props['milliseconds']){milliseconds=props['milliseconds'];}
+      var microseconds = 0;
+      if(null!=props['microseconds']){microseconds=props['microseconds'];}
+      return Duration(days:days,hours:hours,minutes:minutes,seconds: seconds,milliseconds:milliseconds,microseconds:microseconds);
+  }
+
   };
 };

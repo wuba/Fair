@@ -93,36 +93,75 @@ class Sugar {
         itemCount: itemCount,
         itemBuilder:itemBuilder);
   }
-  static NestedScrollView isNestedScrollView({
-    Key? key,
-    ScrollController? controller,
-    Axis scrollDirection = Axis.vertical,
-    bool reverse = false,
-    ScrollPhysics? physics,
+  static NestedScrollViewHeaderSliversBuilder isNestedScrollViewHeaderSliversBuilder({
     required BuildContext context,
     required bool innerBoxIsScrolled,
-    required List<Widget> headerSliverBuilder,
-    required Widget body,
-    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-    bool floatHeaderSlivers = false,
-    Clip clipBehavior = Clip.hardEdge,
-    String? restorationId,
-    ScrollBehavior? scrollBehavior,
-    }){return NestedScrollView(
-      key: key,
-      scrollDirection: scrollDirection,
-      reverse: reverse,
-      controller: controller,
-      physics: physics,
-      headerSliverBuilder: (context,innerBoxIsScrolled){return headerSliverBuilder;},
-      body: body,
-      dragStartBehavior: dragStartBehavior,
-      floatHeaderSlivers: floatHeaderSlivers,
-      clipBehavior: clipBehavior,
-      restorationId: restorationId,
-      scrollBehavior: scrollBehavior,
-  );}
+    required List<Widget> headerSliverBuilder}){
+    return (BuildContext context, bool innerBoxIsScrolled){
+      return headerSliverBuilder;
+    };
+  }
 
+  static ButtonStyle isButtonStyle({
+    Color? backgroundColor,
+    Color? foregroundColor,
+    Color? overlayColor,
+    Color? shadowColor,
+    Color? surfaceTintColor,
+    double? elevation,
+    TextStyle? textStyle,
+    EdgeInsetsGeometry? padding,
+    Size? minimumSize,
+    Size? fixedSize,
+    Size? maximumSize,
+    BorderSide? side,
+    OutlinedBorder? shape,
+    MouseCursor? mouseCursor,
+    VisualDensity? visualDensity,
+    MaterialTapTargetSize? tapTargetSize,
+    Duration? animationDuration,
+    bool? enableFeedback,
+    AlignmentGeometry? alignment,
+    InteractiveInkFeatureFactory? splashFactory,
+  }){
+    return ButtonStyle(
+      textStyle: MaterialStateProperty.all<TextStyle?>(textStyle),
+      backgroundColor: MaterialStateProperty.all(backgroundColor),
+      foregroundColor: ButtonStyleButton.allOrNull<Color>(foregroundColor),
+      overlayColor: ButtonStyleButton.allOrNull<Color>(overlayColor),
+      shadowColor: ButtonStyleButton.allOrNull<Color>(shadowColor),
+      surfaceTintColor: ButtonStyleButton.allOrNull<Color>(surfaceTintColor),
+      elevation: MaterialStateProperty.all(elevation),
+      padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
+      minimumSize: ButtonStyleButton.allOrNull<Size>(minimumSize),
+      fixedSize: ButtonStyleButton.allOrNull<Size>(fixedSize),
+      maximumSize: ButtonStyleButton.allOrNull<Size>(maximumSize),
+      side: ButtonStyleButton.allOrNull<BorderSide>(side),
+      shape: ButtonStyleButton.allOrNull<OutlinedBorder>(shape),
+      mouseCursor: MaterialStateProperty.all<MouseCursor?>(mouseCursor),
+      visualDensity: visualDensity,
+      tapTargetSize: tapTargetSize,
+      animationDuration: animationDuration,
+      enableFeedback: enableFeedback,
+      alignment: alignment,
+      splashFactory: splashFactory,
+    );
+  }
+  static Duration isDuration({
+    int days = 0,
+    int hours = 0,
+    int minutes = 0,
+    int seconds = 0,
+    int milliseconds = 0,
+    int microseconds = 0}){
+    return Duration(
+        hours:hours,
+        minutes:minutes,
+        seconds:seconds,
+        milliseconds:milliseconds,
+        microseconds:microseconds,
+    );
+  }
   static K switchCase<T, K>(T key,List<SugarSwitchCaseObj<T,K>> caseObjects ,K defaultValue){
     for (SugarSwitchCaseObj<T,K> sugarCase in caseObjects){
       if(sugarCase.sugarCase == key){

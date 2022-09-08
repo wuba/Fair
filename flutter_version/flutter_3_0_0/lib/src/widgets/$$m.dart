@@ -73,6 +73,16 @@ var p = () => {
     curve: props['curve'] ?? Curves.fastOutSlowIn,
     child: props['child'],
   ),
+  'ElevatedButton': (props) => ElevatedButton(
+    key: props['key'],
+    onPressed: props['onPressed'],
+    onLongPress: props['onLongPress'],
+    style: props['style'],
+    focusNode: props['focusNode'],
+    autofocus: props['autofocus'] ?? false,
+    clipBehavior: props['clipBehavior'] ?? Clip.none,
+    child: props['child'],
+  ),
   'ProgressIndicatorThemeData.lerp': (props) =>
       ProgressIndicatorThemeData.lerp(
         props['pa'][0],
@@ -82,6 +92,7 @@ var p = () => {
   'ProgressIndicatorTheme.of': (props) => ProgressIndicatorTheme.of(
     props['pa'][0],
   ),
+
   'MaterialButton': (props) => MaterialButton(
     key: props['key'],
     onPressed: props['onPressed'],
@@ -10031,6 +10042,28 @@ var p = () => {
     'centered': BottomNavigationBarLandscapeLayout.centered,
     'linear': BottomNavigationBarLandscapeLayout.linear,
   },
+  'ButtonStyle': (props) => ButtonStyle(
+        textStyle: props['textStyle'],
+        backgroundColor: props['backgroundColor'],
+        foregroundColor: props['foregroundColor'],
+        overlayColor: props['overlayColor'](),
+        shadowColor: props['shadowColor'](),
+        surfaceTintColor: props['surfaceTintColor'],
+        elevation: props['elevation'],
+        padding: props['padding'],
+        minimumSize: props['minimumSize'],
+        fixedSize: props['fixedSize'],
+        maximumSize: props['maximumSize'],
+        side: props['side'],
+        shape: props['shape'],
+        mouseCursor: props['mouseCursor'],
+        visualDensity: props['visualDensity'],
+        tapTargetSize: props['tapTargetSize'],
+        animationDuration: props['animationDuration'],
+        enableFeedback: props['enableFeedback'],
+        alignment: props['alignment'],
+        splashFactory: props['splashFactory'],
+  ),
   'ButtonStyle.lerp': (props) => ButtonStyle.lerp(
     props['pa'][0],
     props['pa'][1],

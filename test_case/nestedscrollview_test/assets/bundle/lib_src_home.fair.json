@@ -1,49 +1,54 @@
 {
-  "className": "Sugar.isNestedScrollView",
+  "className": "NestedScrollView",
   "na": {
-    "context": "^(context)",
-    "innerBoxIsScrolled": false,
-    "headerSliverBuilder": [
-      {
-        "className": "SliverAppBar",
-        "na": {
-          "expandedHeight": 230.0,
-          "pinned": true,
-          "floating": true,
-          "stretch": true,
-          "snap": false,
-          "leading": {
-            "className": "IconButton",
+    "headerSliverBuilder": {
+      "className": "Sugar.isNestedScrollViewHeaderSliversBuilder",
+      "na": {
+        "context": "^(context)",
+        "innerBoxIsScrolled": false,
+        "headerSliverBuilder": [
+          {
+            "className": "SliverAppBar",
             "na": {
-              "icon": {
-                "className": "Image.network",
-                "pa": [
-                  "^(backIcon)"
-                ],
+              "expandedHeight": 230.0,
+              "pinned": true,
+              "floating": true,
+              "stretch": true,
+              "snap": false,
+              "leading": {
+                "className": "IconButton",
                 "na": {
-                  "height": 22,
-                  "width": 22
+                  "icon": {
+                    "className": "Image.network",
+                    "pa": [
+                      "^(backIcon)"
+                    ],
+                    "na": {
+                      "height": 22,
+                      "width": 22
+                    }
+                  }
                 }
-              }
-            }
-          },
-          "flexibleSpace": {
-            "className": "FlexibleSpaceBar",
-            "na": {
-              "background": {
-                "className": "Image.network",
-                "pa": [
-                  "http://img.haote.com/upload/20180918/2018091815372344164.jpg"
-                ],
+              },
+              "flexibleSpace": {
+                "className": "FlexibleSpaceBar",
                 "na": {
-                  "fit": "#(BoxFit.fitHeight)"
+                  "background": {
+                    "className": "Image.network",
+                    "pa": [
+                      "http://img.haote.com/upload/20180918/2018091815372344164.jpg"
+                    ],
+                    "na": {
+                      "fit": "#(BoxFit.fitHeight)"
+                    }
+                  }
                 }
               }
             }
           }
-        }
+        ]
       }
-    ],
+    },
     "body": {
       "className": "Text",
       "pa": [
