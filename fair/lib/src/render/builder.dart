@@ -76,13 +76,16 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         return re;
       }else if (name == 'Sugar.listBuilder'){
         return _buildSugarListBuilder(mapper, map, methodMap, context);
+      }else if(name == 'Sugar.isNestedScrollViewHeaderSliversBuilder'){
+        return _buildNestedScrollViewHeaderSlivers(mapper, map, methodMap, context);
+      }else if(name == 'Sugar.isButtonStyle'){
+        return _buildSugarButtonStyle(mapper, map, methodMap, context);
       }else if(name == 'Sugar.popMenuButton'){
         return _popupMenuBuilder(mapper, map, methodMap, context);
       }else if (name == 'Sugar.sliverChildBuilderDelegate') {
         return _buildSugarSliverChildBuilderDelegate(mapper, map, methodMap, context);
       }else if (name == 'Sugar.sliverGridDelegateWithFixedCrossAxisCount') {
         return _buildSugarSliverGridDelegateWithFixedCrossAxisCount(mapper, map, methodMap, context);
-
       }
 
       var source = map['mapEach'];
@@ -409,6 +412,137 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       'pa': [children,propertiesProvider]
     };
 
+    return mapEach.call(params);
+  }
+
+  NestedScrollViewHeaderSliversBuilder _buildNestedScrollViewHeaderSlivers (Function mapEach,
+      Map map,
+      Map? methodMap,
+      BuildContext context){
+    var na =map['na'];
+    var innerBoxIsScrolled=na['innerBoxIsScrolled'];
+    var headerSliverBuilder =na['headerSliverBuilder'];
+    var source = List<int>.generate(headerSliverBuilder.length, (i) => i + 1);
+
+    var list = Domain(source).forEach(($, index) {
+      return convert(context, headerSliverBuilder[index-1], methodMap, domain:$) as Widget;
+    });
+    List<Widget> headerBuilder = list.map((e) => e as Widget).toList();
+    var params = {
+      'pa': [context,innerBoxIsScrolled,headerBuilder]
+    };
+    return mapEach.call(params);
+  }
+  ButtonStyle _buildSugarButtonStyle (Function mapEach,
+      Map map,
+      Map? methodMap,
+      BuildContext context){
+    var na =map['na'];
+    var textStyle=na['textStyle'];
+    if(null!=textStyle){
+      textStyle=convert(context,textStyle , methodMap);
+    }
+    var backgroundColor=na['backgroundColor'];
+    if(null!=backgroundColor){
+      backgroundColor=convert(context,backgroundColor , methodMap);
+    }
+    var foregroundColor=na['foregroundColor'];
+    if(null!=foregroundColor){
+      foregroundColor=convert(context,foregroundColor , methodMap);
+    }
+    var overlayColor=na['overlayColor'];
+    if(null!=overlayColor){
+      overlayColor=convert(context,overlayColor , methodMap);
+    }
+    var shadowColor=na['shadowColor'];
+    if(null!=shadowColor){
+      shadowColor=convert(context,shadowColor , methodMap);
+    }
+    var surfaceTintColor=na['surfaceTintColor'];
+    if(null!=surfaceTintColor){
+      surfaceTintColor=convert(context,surfaceTintColor , methodMap);
+    }
+    var elevation=na['elevation'];
+    if(null!=elevation){
+      elevation=convert(context,elevation , methodMap);
+    }
+    var padding=na['padding'];
+    if(null!=padding){
+      padding=convert(context,padding , methodMap);
+    }
+    var minimumSize=na['minimumSize'];
+    if(null!=minimumSize){
+      minimumSize=convert(context,minimumSize , methodMap);
+    }
+    var fixedSize=na['fixedSize'];
+    if(null!=fixedSize){
+      fixedSize=convert(context,fixedSize , methodMap);
+    }
+    var maximumSize=na['maximumSize'];
+    if(null!=maximumSize){
+      maximumSize=convert(context,maximumSize , methodMap);
+    }
+    var side=na['side'];
+    if(null!=side){
+      side=convert(context,side , methodMap);
+    }
+    var shape=na['shape'];
+    if(null!=shape){
+      shape=convert(context,shape , methodMap);
+    }
+    var mouseCursor=na['mouseCursor'];
+    if(null!=mouseCursor){
+      mouseCursor=convert(context,mouseCursor , methodMap);
+    }
+    var visualDensity=na['visualDensity'];
+    if(null!=visualDensity){
+      visualDensity=convert(context,visualDensity , methodMap);
+    }
+    var tapTargetSize=na['tapTargetSize'];
+    if(null!=tapTargetSize){
+      tapTargetSize=convert(context,tapTargetSize , methodMap);
+    }
+    var animationDuration=na['animationDuration'];
+    if(null!=animationDuration){
+      animationDuration=convert(context,animationDuration , methodMap);
+    }
+    var enableFeedback=na['enableFeedback'];
+    if(null!=enableFeedback){
+      enableFeedback=convert(context,enableFeedback , methodMap);
+    }
+    var alignment=na['alignment'];
+    if(null!=alignment){
+      alignment=convert(context,alignment , methodMap);
+    }
+    var splashFactory=na['splashFactory'];
+    if(null!=splashFactory){
+      splashFactory=convert(context,splashFactory , methodMap);
+    }
+    var buttonStyle=Sugar.isButtonStyle(
+      textStyle: textStyle,
+      backgroundColor: backgroundColor,
+      foregroundColor: foregroundColor,
+      overlayColor: overlayColor,
+      shadowColor: shadowColor,
+      surfaceTintColor: surfaceTintColor,
+      elevation: elevation,
+      padding: padding,
+      minimumSize: minimumSize,
+      fixedSize: fixedSize,
+      maximumSize: maximumSize,
+      side: side,
+      shape: shape,
+      mouseCursor: mouseCursor,
+      visualDensity: visualDensity,
+      tapTargetSize: tapTargetSize,
+      animationDuration: animationDuration,
+      enableFeedback: enableFeedback,
+      alignment: alignment,
+      splashFactory: splashFactory,
+    );
+    var params = {
+      'pa': [na,buttonStyle]
+    };
     return mapEach.call(params);
   }
 

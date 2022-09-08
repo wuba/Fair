@@ -157,6 +157,16 @@ var p = () => {
   'InkRipple': {
     'splashFactory': InkRipple.splashFactory,
   },
+  'ElevatedButton': (props) => ElevatedButton(
+    key: props['key'],
+    onPressed: props['onPressed'],
+    onLongPress: props['onLongPress'],
+    style: props['style'],
+    focusNode: props['focusNode'],
+    autofocus: props['autofocus'] ?? false,
+    clipBehavior: props['clipBehavior'] ?? Clip.none,
+    child: props['child'],
+  ),
   'ElevatedButtonThemeData.lerp': (props) => ElevatedButtonThemeData.lerp(
     props['pa'][0],
     props['pa'][1],
