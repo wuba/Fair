@@ -196,19 +196,19 @@ packages:
       path: "../../compiler"
       relative: true
     source: path
-    version: "1.2.2"
+    version: "1.2.0"
   fair_dart2dsl:
     dependency: transitive
     description:
       name: fair_dart2dsl
-      url: "https://pub.dartlang.org"
+      url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.1"
   fair_dart2js:
     dependency: transitive
     description:
       name: fair_dart2js
-      url: "https://pub.dartlang.org"
+      url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.2.0"
   fair_version:
@@ -531,7 +531,7 @@ packages:
       name: url_launcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.1.5"
+    version: "6.1.2"
   url_launcher_android:
     dependency: transitive
     description:

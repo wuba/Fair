@@ -12,6 +12,8 @@ import '../extension.dart';
 import '../type.dart';
 import '../experiment/sugar.dart';
 import '../utils.dart';
+import 'dart:async';
+
 
 FairWidgetBinding provider = () {
   return {
@@ -85,6 +87,26 @@ FairWidgetBinding provider = () {
         }
       }
       return p2;
+    },
+    'Sugar.popMenuButton': (props) {
+      var p0 = pa0(props);
+      return PopupMenuButton(
+        onSelected: p0.onSelected,
+        itemBuilder: p0.itemBuilder,
+        child: p0.child,
+        padding: p0.padding,
+        initialValue: p0.initialValue,
+        onCanceled: p0.onCanceled,
+        tooltip: p0.tooltip,
+        elevation: p0.elevation,
+        icon: p0.icon,
+        iconSize: p0.iconSize,
+        shape: p0.shape,
+        offset: p0.offset,
+        enabled: p0.enabled,
+        color: p0.color,
+        enableFeedback: p0.enableFeedback,
+      );
     },
     'Sugar.listBuilder':(props){
       var p0 = pa0(props);
@@ -168,7 +190,38 @@ FairWidgetBinding provider = () {
       var microseconds = 0;
       if(null!=props['microseconds']){microseconds=props['microseconds'];}
       return Duration(days:days,hours:hours,minutes:minutes,seconds: seconds,milliseconds:milliseconds,microseconds:microseconds);
-  }
+  },
+
+    'Sugar.sliverChildBuilderDelegate': (props) {
+      var p0 = pa0(props);
+      List<Widget> p1 = pa1(props);
+      var p2 = pa2(props);
+
+      var sliverChildBuilderDelegate = SliverChildBuilderDelegate(
+            (p0, index) {
+          return  p1[index];
+        },
+        childCount: p2,);
+      return sliverChildBuilderDelegate;
+    },
+
+
+    'Sugar.sliverGridDelegateWithFixedCrossAxisCount': (props) {
+      Map<String, dynamic> p0 = pa0(props);
+
+      var crossAxisCount = p0['crossAxisCount'];
+      var mainAxisSpacing = p0['mainAxisSpacing'];
+      var crossAxisSpacing = p0['crossAxisSpacing'];
+      var childAspectRatio = p0['childAspectRatio'];
+
+      var sliverGridDelegateWithFixedCrossAxisCount = SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount, //Grid按两列显示
+        mainAxisSpacing: mainAxisSpacing,
+        crossAxisSpacing: crossAxisSpacing,
+        childAspectRatio: childAspectRatio,
+      );
+      return sliverGridDelegateWithFixedCrossAxisCount;
+    },
 
   };
 };

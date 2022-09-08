@@ -10,6 +10,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/gestures.dart';
 
 import '../extension.dart';
+import 'dart:async';
 
 /// The operations can be used in DSL.
 class Sugar {
@@ -162,6 +163,45 @@ class Sugar {
         microseconds:microseconds,
     );
   }
+  ///popmenu
+  static PopupMenuButton popMenuButton<T>({
+    Key? key,
+    required PopupMenuItemBuilder<T> itemBuilder,
+    PopupMenuItemSelected<T>? onSelected,
+    T? initialValue,
+    EdgeInsetsGeometry padding = const EdgeInsets.all(8.0),
+    PopupMenuCanceled? onCanceled,
+    String? tooltip,
+    double? elevation,
+    Widget? child,
+    Widget? icon,
+    double? iconSize,
+    ShapeBorder? shape,
+    Offset offset = Offset.zero ,
+    bool enabled = true,
+    Color? color,
+    bool? enableFeedback
+  }){
+    return PopupMenuButton<T>(
+      key: key,
+      itemBuilder: itemBuilder,
+      onSelected: onSelected,
+      initialValue: initialValue,
+      padding: padding,
+      onCanceled: onCanceled,
+      tooltip: tooltip,
+      elevation: elevation,
+      icon: icon,
+      iconSize: iconSize,
+      shape: shape,
+      offset: offset,
+      enabled: enabled,
+      color: color,
+      enableFeedback: enableFeedback,
+      child: child,
+    );
+  }
+
   static K switchCase<T, K>(T key,List<SugarSwitchCaseObj<T,K>> caseObjects ,K defaultValue){
     for (SugarSwitchCaseObj<T,K> sugarCase in caseObjects){
       if(sugarCase.sugarCase == key){
@@ -193,6 +233,34 @@ class Sugar {
       };
 
   static Null Function() onTapEmpty() => () {};
+
+  /*CustomScrollView-common-delegate*/
+  static SliverChildBuilderDelegate sliverChildBuilderDelegate({
+    Key? key,
+    required NullableIndexedWidgetBuilder builder,
+    int? childCount
+  }) {
+    return SliverChildBuilderDelegate((builder),
+        childCount: childCount
+    );
+  }
+  /*CustomScrollView-SliverGrid*/
+  static SliverGridDelegateWithFixedCrossAxisCount sliverGridDelegateWithFixedCrossAxisCount(
+      {
+        required int crossAxisCount,
+        double mainAxisSpacing = 0.0,
+        double crossAxisSpacing = 0.0,
+        double childAspectRatio = 1.0,
+
+      }) {
+    return SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: crossAxisCount, //Grid按两列显示
+      mainAxisSpacing: mainAxisSpacing,
+      crossAxisSpacing: crossAxisSpacing,
+      childAspectRatio: childAspectRatio,
+    );
+  }
+
 }
 class SugarSwitchCaseObj<T,K>{
 

@@ -80,6 +80,12 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         return _buildNestedScrollViewHeaderSlivers(mapper, map, methodMap, context);
       }else if(name == 'Sugar.isButtonStyle'){
         return _buildSugarButtonStyle(mapper, map, methodMap, context);
+      }else if(name == 'Sugar.popMenuButton'){
+        return _popupMenuBuilder(mapper, map, methodMap, context);
+      }else if (name == 'Sugar.sliverChildBuilderDelegate') {
+        return _buildSugarSliverChildBuilderDelegate(mapper, map, methodMap, context);
+      }else if (name == 'Sugar.sliverGridDelegateWithFixedCrossAxisCount') {
+        return _buildSugarSliverGridDelegateWithFixedCrossAxisCount(mapper, map, methodMap, context);
       }
 
       var source = map['mapEach'];
@@ -351,6 +357,34 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return mapEach.call(params);
   }
 
+  PopupMenuButton _popupMenuBuilder(Function mapEach,
+      Map map,
+      Map? methodMap,
+      BuildContext context){
+    var propertyTransMap = Map.from(map);
+    Map na = map['na'];
+    var itemBuilder  = na['itemBuilder'];
+    propertyTransMap['className']='PopupMenuButton';
+    //刷新时
+    if(itemBuilder is Function){
+      var propertiesProvider = convert(context, propertyTransMap, methodMap);
+      return mapEach.call({'pa': [ propertiesProvider]});
+    }
+    //第一次解析
+    if(itemBuilder is List){
+      var list = Domain(itemBuilder).forEach(($, element) {
+        return convert(context, element, methodMap, domain: $) as Widget;
+      });
+      var children = list.map((e) => e as PopupMenuEntry<Object>).toList();
+      na['itemBuilder'] = (BuildContext context) => children;
+    }
+    var propertiesProvider = convert(context, propertyTransMap, methodMap);
+    var params = {
+      'pa': [ propertiesProvider]
+    };
+    return mapEach.call(params);
+  }
+
   ListView _buildSugarListBuilder(
       Function mapEach,
       Map map,
@@ -540,5 +574,60 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   bool _isSupportedNa(Map map) {
     var name = map[tag];
     return name != null;
+  }
+
+  SliverChildBuilderDelegate _buildSugarSliverChildBuilderDelegate(
+      Function mapEach,
+      Map map,
+      Map? methodMap,
+      BuildContext context) {
+
+    Map na = map['na'];
+    var childCount = na['childCount'];
+    var source = List<int>.generate(childCount, (i) => i + 1);
+    var list = Domain(source).forEach(($, _) {//拿到所有itemBuilder对应的数组
+      return convert(context, na['builder'], methodMap, domain:$) as Widget;
+    });
+    List<Widget> children = list.map((e) => e as Widget).toList();
+
+
+    var params = {
+      'pa': [context,children,childCount]
+    };
+
+    return mapEach.call(params);
+  }
+
+  SliverGridDelegateWithFixedCrossAxisCount _buildSugarSliverGridDelegateWithFixedCrossAxisCount(
+      Function mapEach,
+      Map map,
+      Map? methodMap,
+      BuildContext context) {
+    Map gridDelegateNa = map['na'];
+    double mainAxisSpacing = 0.0;
+    double crossAxisSpacing = 0.0;
+    double childAspectRatio = 1.0;
+    var crossAxisCount = gridDelegateNa['crossAxisCount'];
+
+    if (gridDelegateNa.containsKey('mainAxisSpacing') == true) {
+      mainAxisSpacing = gridDelegateNa['mainAxisSpacing'];
+    }
+    if (gridDelegateNa.containsKey('crossAxisSpacing') == true) {
+      crossAxisSpacing = gridDelegateNa['crossAxisSpacing'];
+    }
+    if (gridDelegateNa.containsKey('childAspectRatio') == true) {
+      childAspectRatio = gridDelegateNa['childAspectRatio'];
+    }
+    Map<String, dynamic> gridProperty = {
+      'crossAxisCount': crossAxisCount,
+      'mainAxisSpacing': mainAxisSpacing,
+      'crossAxisSpacing': crossAxisSpacing,
+      'childAspectRatio': childAspectRatio,
+    };
+    var params = {
+      'pa': [gridProperty]
+    };
+
+    return mapEach.call(params);
   }
 }
