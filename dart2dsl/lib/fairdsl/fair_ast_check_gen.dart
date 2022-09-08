@@ -76,4 +76,4 @@ class AstNodeMapGenerator extends GeneratorForAnnotation<AstNodeCheck> {
 }
 
 Builder AstNodeMapBuilder(BuilderOptions options) =>
-    LibraryBuilder(AstNodeMapGenerator());
+    LibraryBuilder(AstNodeMapGenerator(), generatedExtension: '.fair.dart');
