@@ -60,7 +60,23 @@ FairWidgetBinding provider = () {
       var p1 = pa1(props);
       return (p0 as Color).withOpacity(p1 as double);
     },
-
+    'Sugar.colorsShade':(props){
+      MaterialColor color = pa0(props);
+      var p1 = pa1(props);
+      var shadeMap={
+        50:color.shade50,
+        100:color.shade100,
+        200:color.shade200,
+        300:color.shade300,
+        400:color.shade400,
+        500:color.shade500,
+        600:color.shade600,
+        700:color.shade700,
+        800:color.shade800,
+        900:color.shade900,
+      };
+      return shadeMap.remove(p1) as Color;
+    },
     'Sugar.convertToString':(props){
       var p0 = pa0(props);
       return p0.toString();

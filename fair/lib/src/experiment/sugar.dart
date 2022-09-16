@@ -146,6 +146,22 @@ class Sugar {
   static Color colorsWithOpacity(Color c,double o){
     return c.withOpacity(o);
   }
+  static Color colorsShade( MaterialColor color, int i){
+    var shadeMap={
+      50:color.shade50,
+      100:color.shade100,
+      200:color.shade200,
+      300:color.shade300,
+      400:color.shade400,
+      500:color.shade500,
+      600:color.shade600,
+      700:color.shade700,
+      800:color.shade800,
+      900:color.shade900,
+    };
+    return shadeMap.remove(i) as Color;
+  }
+
   static String convertToString<T>({required T orginalValue}){
     return orginalValue.toString();
   }
