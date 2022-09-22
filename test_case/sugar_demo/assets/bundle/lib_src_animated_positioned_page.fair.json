@@ -1,0 +1,80 @@
+{
+  "className": "SizedBox",
+  "na": {
+    "width": 200,
+    "height": 350,
+    "child": {
+      "className": "Stack",
+      "na": {
+        "children": [
+          {
+            "className": "AnimatedPositioned",
+            "na": {
+              "width": {
+                "className": "Sugar.ifEqualBool",
+                "pa": [
+                  "^(selected)"
+                ],
+                "na": {
+                  "trueValue": 200.0,
+                  "falseValue": 50.0
+                }
+              },
+              "height": {
+                "className": "Sugar.ifEqualBool",
+                "pa": [
+                  "^(selected)"
+                ],
+                "na": {
+                  "trueValue": 50.0,
+                  "falseValue": 200.0
+                }
+              },
+              "top": {
+                "className": "Sugar.ifEqualBool",
+                "pa": [
+                  "^(selected)"
+                ],
+                "na": {
+                  "trueValue": 50.0,
+                  "falseValue": 150.0
+                }
+              },
+              "duration": {
+                "className": "Sugar.isDuration",
+                "na": {
+                  "seconds": 2
+                }
+              },
+              "curve": "#(Curves.fastOutSlowIn)",
+              "child": {
+                "className": "GestureDetector",
+                "na": {
+                  "onTap": "@(_changePositioned)",
+                  "child": {
+                    "className": "Container",
+                    "na": {
+                      "color": "#(Colors.blue)",
+                      "child": {
+                        "className": "Center",
+                        "na": {
+                          "child": {
+                            "className": "Text",
+                            "pa": [
+                              "Tap me"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {}
+}

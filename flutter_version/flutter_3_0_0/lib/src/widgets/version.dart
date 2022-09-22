@@ -438,7 +438,7 @@ const widgetNames = {
   'CardTheme': false,
   'BottomSheetThemeData': false,
   'Tooltip': true,
-  'ElevatedButton': false,
+  'ElevatedButton': true,
   'SwitchListTile': true,
   'DropdownButtonHideUnderline': false,
   'DropdownButton': true,

@@ -1,0 +1,36 @@
+{
+  "className": "Column",
+  "na": {
+    "mainAxisAlignment": "#(MainAxisAlignment.center)",
+    "children": [
+      {
+        "className": "AnimatedOpacity",
+        "na": {
+          "opacity": "^(opacityLevel)",
+          "duration": {
+            "className": "Sugar.isDuration",
+            "na": {
+              "seconds": 4
+            }
+          },
+          "child": {
+            "className": "FlutterLogo"
+          }
+        }
+      },
+      {
+        "className": "ElevatedButton",
+        "na": {
+          "onPressed": "@(_changeOpacity)",
+          "child": {
+            "className": "Text",
+            "pa": [
+              "Fade Logo"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "methodMap": {}
+}

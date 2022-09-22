@@ -153,6 +153,58 @@ FairWidgetBinding provider = () {
         children: p0,);
       return listView;
     },
+    'Sugar.isNestedScrollViewHeaderSliversBuilder':(props){
+      var p2 = pa2(props);
+      var nestedScrollViewHeaderSliversBuilder=(BuildContext context, bool innerBoxIsScrolled){return (p2 as List<Widget>);};
+      return nestedScrollViewHeaderSliversBuilder;
+    },
+
+    'Sugar.isButtonStyle':(props){
+      var p0 = pa0(props);
+      var p1 = pa1(props);
+      ButtonStyle paramsObj=ButtonStyle();
+      if(p1 is ButtonStyle){
+        paramsObj = p1 as ButtonStyle;
+      }
+      var buttonStyle=ButtonStyle(
+        textStyle: paramsObj.textStyle,
+        backgroundColor: paramsObj.backgroundColor,
+        foregroundColor: paramsObj.foregroundColor,
+        overlayColor: paramsObj.overlayColor,
+        shadowColor: paramsObj.shadowColor,
+        surfaceTintColor: paramsObj.surfaceTintColor,
+        elevation: paramsObj.elevation,
+        padding: paramsObj.padding,
+        minimumSize: paramsObj.minimumSize,
+        fixedSize: paramsObj.fixedSize,
+        maximumSize: paramsObj.maximumSize,
+        side: paramsObj.side,
+        shape: paramsObj.shape,
+        mouseCursor: paramsObj.mouseCursor,
+        visualDensity: paramsObj.visualDensity,
+        tapTargetSize: paramsObj.tapTargetSize,
+        animationDuration: paramsObj.animationDuration,
+        enableFeedback: paramsObj.enableFeedback,
+        alignment: paramsObj.alignment,
+        splashFactory: paramsObj.splashFactory,
+      );
+      return buttonStyle;
+    },
+  'Sugar.isDuration':(props){
+      var days = 0;
+      if(null!=props['days']){days=props['days'];}
+      var hours = 0;
+      if(null!=props['hours']){hours=props['hours'];}
+      var minutes = 0;
+      if(null!=props['minutes']){minutes=props['minutes'];}
+      var seconds = 0;
+      if(null!=props['seconds']){seconds=props['seconds'];}
+      var milliseconds = 0;
+      if(null!=props['milliseconds']){milliseconds=props['milliseconds'];}
+      var microseconds = 0;
+      if(null!=props['microseconds']){microseconds=props['microseconds'];}
+      return Duration(days:days,hours:hours,minutes:minutes,seconds: seconds,milliseconds:milliseconds,microseconds:microseconds);
+  },
 
     'Sugar.sliverChildBuilderDelegate': (props) {
       var p0 = pa0(props);
