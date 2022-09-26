@@ -74,8 +74,9 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       } else if (name == 'Sugar.switchCase') {
         dynamic re = _buildSwitchCase(mapper, map, methodMap, context);
         return re;
-      }else if (name == 'Sugar.listBuilder'){
-        return _buildSugarListBuilder(mapper, map, methodMap, context);
+      } else if (name == 'Sugar.listBuilder') {
+        return _buildSugarListBuilder(
+            name, domain, mapper, map, methodMap, context);
       }else if(name == 'Sugar.isNestedScrollViewHeaderSliversBuilder'){
         return _buildNestedScrollViewHeaderSlivers(mapper, map, methodMap, context);
       }else if(name == 'Sugar.isButtonStyle'){
@@ -384,32 +385,34 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     };
     return mapEach.call(params);
   }
-
-  ListView _buildSugarListBuilder(
-      Function mapEach,
-      Map map,
-      Map? methodMap,
-      BuildContext context) {
-
-    // Copy the node Map
-    // change 'ClassName' to 'ListView'
-    // Create a ListView OBJ with default convert function,This OBJ will be Used to get properties
+  
+ListView _buildSugarListBuilder(String name, Domain? superDomain,
+      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+      
     Map propertyTransMap = Map.from(map);
-    propertyTransMap['className']='ListView';
+
+    Map naOrMap = map['na'];
+    var itemBuilder = naOrMap['itemBuilder'];
+    naOrMap.remove('itemBuilder');
+
+    var na = _named(name, map['na'], methodMap, context, superDomain);
+    var pa = _positioned(map['pa'], methodMap, context, superDomain);
+    Map naMap = Property.extract(list: pa.data, map: na.data);
+
+    propertyTransMap['className'] = 'ListView';
+    propertyTransMap['na'] = naMap;
     var propertiesProvider = convert(context, propertyTransMap, methodMap);
 
-    Map na = map['na'];
-    var count = na['itemCount'];
+    var count = naMap["itemCount"];
     var source = List<int>.generate(count, (i) => i + 1);
     Domain domain = Domain(source);
     var list = Domain(source).forEach(($, _) {
-      return convert(context, na['itemBuilder'], methodMap, domain:$) as Widget;
+      return convert(context, itemBuilder, methodMap, domain: $) as Widget;
     });
     List<Widget> children = list.map((e) => e as Widget).toList();
 
-
     var params = {
-      'pa': [children,propertiesProvider]
+      'pa': [children, propertiesProvider]
     };
 
     return mapEach.call(params);
