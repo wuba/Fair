@@ -1,31 +1,89 @@
 {
-  "className": "Container",
+  "className": "Scaffold",
   "na": {
-    "decoration": {
-      "className": "BoxDecoration",
+    "appBar": {
+      "className": "AppBar",
       "na": {
-        "color": {
-          "className": "Sugar.colorsWithOpacity",
+        "title": {
+          "className": "Text",
           "pa": [
-            {
-              "className": "Color",
-              "pa": [
-                "0xffff602f"
-              ]
-            },
-            0.5
+            "SugarDemo"
           ]
         }
       }
     },
-    "child": {
+    "body": {
       "className": "Column",
       "na": {
         "children": [
           {
+            "className": "Column",
+            "na": {
+              "children": {
+                "className": "Sugar.mapEach",
+                "pa": [
+                  [
+                    {
+                      "className": "Person",
+                      "na": {
+                        "name": "kk",
+                        "age": 18,
+                        "wei": 99
+                      }
+                    },
+                    {
+                      "className": "Person",
+                      "na": {
+                        "name": "mm",
+                        "age": 14,
+                        "wei": 88
+                      }
+                    }
+                  ],
+                  {
+                    "className": "Container",
+                    "na": {
+                      "height": 50,
+                      "width": {
+                        "className": "Sugar.width",
+                        "pa": [
+                          "^(context)"
+                        ]
+                      },
+                      "child": {
+                        "className": "Center",
+                        "na": {
+                          "child": {
+                            "className": "Row",
+                            "na": {
+                              "children": [
+                                {
+                                  "className": "Text",
+                                  "pa": [
+                                    "$(item.name)"
+                                  ]
+                                },
+                                {
+                                  "className": "Text",
+                                  "pa": [
+                                    "#(${item.age})"
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
             "className": "Container",
             "na": {
-              "height": 100,
+              "height": 50,
               "width": {
                 "className": "Sugar.width",
                 "pa": [
@@ -35,7 +93,7 @@
               "margin": {
                 "className": "EdgeInsets.only",
                 "na": {
-                  "top": 20
+                  "top": 5
                 }
               },
               "child": {
@@ -44,7 +102,7 @@
                   "child": {
                     "className": "Sugar.switchCase",
                     "pa": [
-                      2,
+                      "^(_value)",
                       [
                         {
                           "className": "SugarSwitchCaseObj",
@@ -131,17 +189,193 @@
                       "defaultValue"
                     ]
                   }
-                ],
+                ]
+              },
+              "onPressed": "@(logAction)"
+            }
+          },
+          {
+            "className": "SizedBox",
+            "na": {
+              "width": {
+                "className": "Sugar.width",
+                "pa": [
+                  "^(context)"
+                ]
+              },
+              "height": 50,
+              "child": {
+                "className": "Sugar.listBuilder",
                 "na": {
-                  "style": {
-                    "className": "TextStyle",
+                  "scrollDirection": "#(Axis.horizontal)",
+                  "reverse": true,
+                  "itemCount": 15,
+                  "itemBuilder": {
+                    "className": "Center",
                     "na": {
-                      "fontWeight": "#(FontWeight.w100)"
+                      "child": {
+                        "className": "Container",
+                        "na": {
+                          "height": 50,
+                          "width": 60,
+                          "child": {
+                            "className": "Container",
+                            "na": {
+                              "color": "#(Colors.amber)",
+                              "margin": {
+                                "className": "EdgeInsets.only",
+                                "na": {
+                                  "left": 10
+                                }
+                              },
+                              "child": {
+                                "className": "Center",
+                                "na": {
+                                  "child": {
+                                    "className": "Text",
+                                    "pa": [
+                                      "#($item)"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }
+              }
+            }
+          },
+          {
+            "className": "SizedBox",
+            "na": {
+              "height": 40,
+              "width": {
+                "className": "Sugar.width",
+                "pa": [
+                  "^(context)"
+                ]
               },
-              "onPressed": "@(logAction)"
+              "child": {
+                "className": "Container",
+                "na": {
+                  "margin": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "left": 0,
+                      "right": 1,
+                      "top": 10
+                    }
+                  },
+                  "color": "#(Colors.green)",
+                  "child": {
+                    "className": "Center",
+                    "na": {
+                      "child": {
+                        "className": "Text",
+                        "pa": [
+                          "CustomScrollView-Sugar"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "className": "SizedBox",
+            "na": {
+              "width": {
+                "className": "Sugar.width",
+                "pa": [
+                  "^(context)"
+                ]
+              },
+              "height": 400,
+              "child": {
+                "className": "CustomScrollView",
+                "na": {
+                  "slivers": [
+                    {
+                      "className": "SliverList",
+                      "na": {
+                        "delegate": {
+                          "className": "Sugar.sliverChildBuilderDelegate",
+                          "na": {
+                            "builder": {
+                              "className": "Container",
+                              "na": {
+                                "margin": {
+                                  "className": "EdgeInsets.only",
+                                  "na": {
+                                    "top": 10
+                                  }
+                                },
+                                "height": 85,
+                                "alignment": "#(Alignment.center)",
+                                "color": "#(Colors.blue)",
+                                "child": {
+                                  "className": "Text",
+                                  "pa": [
+                                    "#($index)"
+                                  ],
+                                  "na": {
+                                    "style": {
+                                      "className": "TextStyle",
+                                      "na": {
+                                        "color": "#(Colors.white)",
+                                        "fontSize": 20
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "childCount": 3
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "className": "SliverGrid",
+                      "na": {
+                        "gridDelegate": {
+                          "className": "Sugar.sliverGridDelegateWithFixedCrossAxisCount",
+                          "na": {
+                            "crossAxisCount": 2,
+                            "mainAxisSpacing": 10.0,
+                            "crossAxisSpacing": 10.0,
+                            "childAspectRatio": 4.0
+                          }
+                        },
+                        "delegate": {
+                          "className": "Sugar.sliverChildBuilderDelegate",
+                          "na": {
+                            "builder": {
+                              "className": "Container",
+                              "na": {
+                                "alignment": "#(Alignment.center)",
+                                "color": "#(Colors.deepOrange)",
+                                "child": {
+                                  "className": "Text",
+                                  "pa": [
+                                    "#(是 grid item $index 啊~~)"
+                                  ]
+                                }
+                              }
+                            },
+                            "childCount": 20
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
             }
           }
         ]

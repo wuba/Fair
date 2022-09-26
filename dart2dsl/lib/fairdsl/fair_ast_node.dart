@@ -6,7 +6,7 @@
 
 import 'dart:io';
 
-import 'package:fairc/fairdsl/fair_ast_logic_unit.dart';
+import 'package:fair_dart2dsl/fairdsl/fair_ast_logic_unit.dart';
 
 enum AstNodeName {
   Identifier,

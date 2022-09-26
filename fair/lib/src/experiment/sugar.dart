@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/gestures.dart';
 
 import '../extension.dart';
+import 'dart:async';
 
 /// The operations can be used in DSL.
 class Sugar {
@@ -91,7 +92,113 @@ class Sugar {
         itemCount: itemCount,
         itemBuilder:itemBuilder);
   }
+  static NestedScrollViewHeaderSliversBuilder isNestedScrollViewHeaderSliversBuilder({
+    required BuildContext context,
+    required bool innerBoxIsScrolled,
+    required List<Widget> headerSliverBuilder}){
+    return (BuildContext context, bool innerBoxIsScrolled){
+      return headerSliverBuilder;
+    };
+  }
 
+  static ButtonStyle isButtonStyle({
+    Color? backgroundColor,
+    Color? foregroundColor,
+    Color? overlayColor,
+    Color? shadowColor,
+    Color? surfaceTintColor,
+    double? elevation,
+    TextStyle? textStyle,
+    EdgeInsetsGeometry? padding,
+    Size? minimumSize,
+    Size? fixedSize,
+    Size? maximumSize,
+    BorderSide? side,
+    OutlinedBorder? shape,
+    MouseCursor? mouseCursor,
+    VisualDensity? visualDensity,
+    MaterialTapTargetSize? tapTargetSize,
+    Duration? animationDuration,
+    bool? enableFeedback,
+    AlignmentGeometry? alignment,
+    InteractiveInkFeatureFactory? splashFactory,
+  }){
+    return ButtonStyle(
+      textStyle: MaterialStateProperty.all<TextStyle?>(textStyle),
+      backgroundColor: MaterialStateProperty.all(backgroundColor),
+      foregroundColor: ButtonStyleButton.allOrNull<Color>(foregroundColor),
+      overlayColor: ButtonStyleButton.allOrNull<Color>(overlayColor),
+      shadowColor: ButtonStyleButton.allOrNull<Color>(shadowColor),
+      surfaceTintColor: ButtonStyleButton.allOrNull<Color>(surfaceTintColor),
+      elevation: MaterialStateProperty.all(elevation),
+      padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
+      minimumSize: ButtonStyleButton.allOrNull<Size>(minimumSize),
+      fixedSize: ButtonStyleButton.allOrNull<Size>(fixedSize),
+      maximumSize: ButtonStyleButton.allOrNull<Size>(maximumSize),
+      side: ButtonStyleButton.allOrNull<BorderSide>(side),
+      shape: ButtonStyleButton.allOrNull<OutlinedBorder>(shape),
+      mouseCursor: MaterialStateProperty.all<MouseCursor?>(mouseCursor),
+      visualDensity: visualDensity,
+      tapTargetSize: tapTargetSize,
+      animationDuration: animationDuration,
+      enableFeedback: enableFeedback,
+      alignment: alignment,
+      splashFactory: splashFactory,
+    );
+  }
+  static Duration isDuration({
+    int days = 0,
+    int hours = 0,
+    int minutes = 0,
+    int seconds = 0,
+    int milliseconds = 0,
+    int microseconds = 0}){
+    return Duration(
+        hours:hours,
+        minutes:minutes,
+        seconds:seconds,
+        milliseconds:milliseconds,
+        microseconds:microseconds,
+    );
+  }
+  ///popmenu
+  static PopupMenuButton popMenuButton<T>({
+    Key? key,
+    required PopupMenuItemBuilder<T> itemBuilder,
+    PopupMenuItemSelected<T>? onSelected,
+    T? initialValue,
+    EdgeInsetsGeometry padding = const EdgeInsets.all(8.0),
+    PopupMenuCanceled? onCanceled,
+    String? tooltip,
+    double? elevation,
+    Widget? child,
+    Widget? icon,
+    double? iconSize,
+    ShapeBorder? shape,
+    Offset offset = Offset.zero ,
+    bool enabled = true,
+    Color? color,
+    bool? enableFeedback
+  }){
+    return PopupMenuButton<T>(
+      key: key,
+      itemBuilder: itemBuilder,
+      onSelected: onSelected,
+      initialValue: initialValue,
+      padding: padding,
+      onCanceled: onCanceled,
+      tooltip: tooltip,
+      elevation: elevation,
+      icon: icon,
+      iconSize: iconSize,
+      shape: shape,
+      offset: offset,
+      enabled: enabled,
+      color: color,
+      enableFeedback: enableFeedback,
+      child: child,
+    );
+  }
 
   static K switchCase<T, K>(T key,List<SugarSwitchCaseObj<T,K>> caseObjects ,K defaultValue){
     for (SugarSwitchCaseObj<T,K> sugarCase in caseObjects){
@@ -107,6 +214,22 @@ class Sugar {
   static Color colorsWithOpacity(Color c,double o){
     return c.withOpacity(o);
   }
+  static Color colorsShade( MaterialColor color, int i){
+    var shadeMap={
+      50:color.shade50,
+      100:color.shade100,
+      200:color.shade200,
+      300:color.shade300,
+      400:color.shade400,
+      500:color.shade500,
+      600:color.shade600,
+      700:color.shade700,
+      800:color.shade800,
+      900:color.shade900,
+    };
+    return shadeMap.remove(i) as Color;
+  }
+
   static String convertToString<T>({required T orginalValue}){
     return orginalValue.toString();
   }
@@ -124,6 +247,34 @@ class Sugar {
       };
 
   static Null Function() onTapEmpty() => () {};
+
+  /*CustomScrollView-common-delegate*/
+  static SliverChildBuilderDelegate sliverChildBuilderDelegate({
+    Key? key,
+    required NullableIndexedWidgetBuilder builder,
+    int? childCount
+  }) {
+    return SliverChildBuilderDelegate((builder),
+        childCount: childCount
+    );
+  }
+  /*CustomScrollView-SliverGrid*/
+  static SliverGridDelegateWithFixedCrossAxisCount sliverGridDelegateWithFixedCrossAxisCount(
+      {
+        required int crossAxisCount,
+        double mainAxisSpacing = 0.0,
+        double crossAxisSpacing = 0.0,
+        double childAspectRatio = 1.0,
+
+      }) {
+    return SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: crossAxisCount, //Grid按两列显示
+      mainAxisSpacing: mainAxisSpacing,
+      crossAxisSpacing: crossAxisSpacing,
+      childAspectRatio: childAspectRatio,
+    );
+  }
+
 }
 class SugarSwitchCaseObj<T,K>{
 

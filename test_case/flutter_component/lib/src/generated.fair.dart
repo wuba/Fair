@@ -1642,18 +1642,18 @@ class AppGeneratedModule extends GeneratedModule {
       },
       'RotateAnimatedTextKit': (props) => RotateAnimatedTextKit(
             key: props['key'],
-            text: (props['text']),//as<String>(props['text'])
+            text: (props['text']).cast<String>(),//as<String>(props['text'])
             textStyle: props['textStyle'],
             transitionHeight: props['transitionHeight']?.toDouble(),
-            pause: props['pause'],
+            pause: props['pause'] ?? const Duration(milliseconds: 500),
             onNext: props['onNext'],
             onNextBeforePause: props['onNextBeforePause'],
             onFinished: props['onFinished'],
             totalRepeatCount: props['totalRepeatCount'] ?? 3,
-            duration: props['duration'],
+            duration: props['duration'] ?? const Duration(milliseconds: 2000),
             onTap: props['onTap'],
             alignment: props['alignment'] ?? const Alignment(0.0, 0.0),
-            textAlign: props['textAlign'] ?? TextAlign.start,
+            textAlign: props['textAlign'] as TextAlign,// ?? TextAlign.start,
             displayFullTextOnTap: props['displayFullTextOnTap'] ?? false,
             repeatForever: props['repeatForever'] ?? false,
             isRepeatingAnimation: props['isRepeatingAnimation'] ?? true,
@@ -1670,7 +1670,7 @@ class AppGeneratedModule extends GeneratedModule {
                 props['animationDuration'] ?? const Duration(milliseconds: 270),
             mainAxisAlignment:
                 props['mainAxisAlignment'] ?? MainAxisAlignment.spaceBetween,
-            items: (props['items']),//as<BottomNavyBarItem>(props['items']
+            items: (props['items']).cast<BottomNavyBarItem>(),//as<BottomNavyBarItem>(props['items']
             onItemSelected: props['onItemSelected'],
             curve: props['curve'] ?? Curves.linear,
           ),

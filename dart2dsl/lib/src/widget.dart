@@ -12,9 +12,9 @@ import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:path/path.dart';
 import 'package:analyzer/src/dart/ast/ast.dart';
 import 'package:analyzer/src/dart/element/element.dart';
+import 'package:path/path.dart';
 import 'transformer.dart';
 
 var baseWidget = [
@@ -69,7 +69,7 @@ Future<String> parseDir(Directory dir) async {
   for (var path in files) {
     var context = collection.contextFor(path);
     var w = await processFile(context, path);
-    if (w?.components?.isEmpty ?? false) continue;
+    if (w?.components?.isEmpty ?? true) continue;
     components.add(w!);
   }
   return _generateWidget(components: components);
@@ -468,17 +468,25 @@ Map<String, dynamic> _writeMethod(StringBuffer buffer, String? name, Method elem
                 : 'props[\'${p.name}\'] ?? ${defaultCache[p.name]},';
         print('💕 using cached default value  ${element.name} ${p.name}=> ${defaultCache[p.name]}');
       } else {
-        prop = isDouble
-            ? 'props[\'${p.name}\']?.toDouble(),'
-            : isList
-                ? 'as${cName}(props[\'${p.name}\']),'
-                : 'props[\'${p.name}\'],';
+        if (p.isOptional == true) {
+          prop = isDouble
+              ? 'props[\'${p.name}\']?.toDouble(),'
+              : isList
+                  ? 'as${cName}(props[\'${p.name}\']),'
+                  : 'props[\'${p.name}\'],';
+        } else {
+          prop = isDouble
+              ? 'props[\'${p.name}\']?.toDouble() ?? 0,'
+              : isList
+                  ? 'as${cName}(props[\'${p.name}\']) ?? const [],'
+                  : 'props[\'${p.name}\'],';
+        }
       }
       var namedDeclare = '${p.name}: $prop';
       var positionDeclare = isDouble ? 'props[\'pa\'][$i]?.toDouble(),' : 'props[\'pa\'][$i],';
       buffer.write(p.isNamed == true ? namedDeclare : positionDeclare);
     }
-    var params = element.parameters?.fold('', (String value, p) => ((value ?? '') + (p.isNamed == true ? '${p.type} ${p.name}, ' : '${p.name}, ')));
+    var params = element.parameters?.fold('', (String? value, p) => ((value ?? '') + (p.isNamed == true ? '${p.type} ${p.name}, ' : '${p.name}, ')));
     print('➡️ $name({$params})');
   } else {
     print('➡️ $name()');

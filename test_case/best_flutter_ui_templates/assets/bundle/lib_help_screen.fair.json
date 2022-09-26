@@ -1,0 +1,207 @@
+{
+  "className": "Container",
+  "na": {
+    "color": "#(AppTheme.nearlyWhite)",
+    "child": {
+      "className": "SafeArea",
+      "na": {
+        "top": false,
+        "child": {
+          "className": "Scaffold",
+          "na": {
+            "backgroundColor": "#(AppTheme.nearlyWhite)",
+            "body": {
+              "className": "Column",
+              "na": {
+                "children": [
+                  {
+                    "className": "Container",
+                    "na": {
+                      "padding": {
+                        "className": "EdgeInsets.only",
+                        "na": {
+                          "top": {
+                            "className": "Sugar.paddingTop",
+                            "pa": [
+                              "context"
+                            ]
+                          },
+                          "left": 16,
+                          "right": 16
+                        }
+                      },
+                      "child": {
+                        "className": "Image.asset",
+                        "pa": [
+                          "assets/images/helpImage.png"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "className": "Container",
+                    "na": {
+                      "padding": {
+                        "className": "EdgeInsets.only",
+                        "na": {
+                          "top": 8
+                        }
+                      },
+                      "child": {
+                        "className": "Text",
+                        "pa": [
+                          "How can we help you?"
+                        ],
+                        "na": {
+                          "style": {
+                            "className": "TextStyle",
+                            "na": {
+                              "fontSize": 20,
+                              "fontWeight": "#(FontWeight.bold)"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "className": "Container",
+                    "na": {
+                      "padding": {
+                        "className": "EdgeInsets.only",
+                        "na": {
+                          "top": 16
+                        }
+                      },
+                      "child": {
+                        "className": "Text",
+                        "pa": [
+                          "It looks like you are experiencing problems\nwith our sign up process. We are here to\nhelp so please get in touch with us"
+                        ],
+                        "na": {
+                          "textAlign": "#(TextAlign.center)",
+                          "style": {
+                            "className": "TextStyle",
+                            "na": {
+                              "fontSize": 16
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "className": "Expanded",
+                    "na": {
+                      "child": {
+                        "className": "Padding",
+                        "na": {
+                          "padding": {
+                            "className": "EdgeInsets.all",
+                            "pa": [
+                              8.0
+                            ]
+                          },
+                          "child": {
+                            "className": "Center",
+                            "na": {
+                              "child": {
+                                "className": "Container",
+                                "na": {
+                                  "width": 140,
+                                  "height": 40,
+                                  "decoration": {
+                                    "className": "BoxDecoration",
+                                    "na": {
+                                      "color": "#(Colors.blue)",
+                                      "borderRadius": {
+                                        "className": "BorderRadius.all",
+                                        "pa": [
+                                          {
+                                            "className": "Radius.circular",
+                                            "pa": [
+                                              4.0
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      "boxShadow": [
+                                        {
+                                          "className": "BoxShadow",
+                                          "na": {
+                                            "color": "#(AppTheme.greyWithOpacity)",
+                                            "offset": {
+                                              "className": "Offset",
+                                              "pa": [
+                                                4,
+                                                4
+                                              ]
+                                            },
+                                            "blurRadius": 8.0
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "child": {
+                                    "className": "Material",
+                                    "na": {
+                                      "color": "#(Colors.transparent)",
+                                      "child": {
+                                        "className": "InkWell",
+                                        "na": {
+                                          "onTap": {
+                                            "className": "Sugar.onTapEmpty"
+                                          },
+                                          "child": {
+                                            "className": "Center",
+                                            "na": {
+                                              "child": {
+                                                "className": "Padding",
+                                                "na": {
+                                                  "padding": {
+                                                    "className": "EdgeInsets.all",
+                                                    "pa": [
+                                                      4.0
+                                                    ]
+                                                  },
+                                                  "child": {
+                                                    "className": "Text",
+                                                    "pa": [
+                                                      "Chat with Us"
+                                                    ],
+                                                    "na": {
+                                                      "style": {
+                                                        "className": "TextStyle",
+                                                        "na": {
+                                                          "fontWeight": "#(FontWeight.w500)",
+                                                          "color": "#(Colors.white)"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

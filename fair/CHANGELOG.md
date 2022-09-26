@@ -1,3 +1,22 @@
+## [2.7.0]
+* Add support of Flutter SDK 3.0.0、3.0.1、3.0.2、3.0.3、3.0.4、3.0.5.
+* Fixed some bugs.
+
+## [2.6.1]
+* Fixed some bugs.
+* Fair supports loading bundle from local disk.
+
+## [2.6.0]
+* Add support of flutter 2.10.0、2.10.1、2.10.2、2.10.3.
+* Support static methods parsing.
+* Runtime error message optimization.
+* Sugar supports parsing Model type data.
+
+## [2.5.0]
+* Add support of flutter 2.8.0、2.8.1.
+* Support singleton parsing.
+* Add Sugar：Sugar.colorsWithOpacity、Sugar.switchCase、Sugar.convertToString.
+
 ## [2.4.1]
 * Fix FairLogger import problem.
 * Upgrade Analyzer to 2.3.0.

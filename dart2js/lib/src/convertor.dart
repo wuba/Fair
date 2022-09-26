@@ -10,7 +10,7 @@ import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/error/error.dart';
-import 'package:dartToJs/src/list_ext.dart';
+import 'package:fair_dart2js/src/list_ext.dart';
 import 'package:path/path.dart' as p;
 
 enum ClassOutputTemplateType { raw, pageState }
@@ -152,6 +152,7 @@ class FieldDeclarationData {
   String? name;
   String? initVal;
   var isStatic = false;
+  var isGetter = false;
 
   FieldDeclarationData(this.name, this.initVal);
 }
@@ -171,6 +172,8 @@ class ClassDeclarationData {
         {
           var fieldsLiterval = '';
           fields.where((element) => !element.isStatic).forEach((element) {
+            element.isGetter ?
+            fieldsLiterval += 'this.${element.name} = (function(_this) { with (_this) {${element.initVal ?? 'null'} } })(this);' :
             fieldsLiterval += 'this.${element.name} = ${element.initVal};';
           });
           var memberMethodsLiterval = '';
@@ -178,7 +181,9 @@ class ClassDeclarationData {
             memberMethodsLiterval += '${element.name}: ${convertFunctionFromData(element, this)},';
           });
           var staticFieldsLiteral =
-              fields.where((element) => element.isStatic).map((e) => '$className.${e.name} = (function() { with ($className) { return ${e.initVal ?? 'null'}; } })();').join('\r\n');
+              fields.where((element) => element.isStatic).map((e) => e.isGetter
+                  ? '$className.${e.name} = (function() { with ($className) {${e.initVal ?? 'null'}} })();'
+                  : '$className.${e.name} = (function() { with ($className) { return ${e.initVal ?? 'null'}; } })();').join('\r\n');
           var staticMethodsLiteral = methods.where((element) => element.isStatic).map((e) => '$className.${e.name} = ${convertFunctionFromData(e, this)};').join('\r\n');
           var defaultContructorIsFactory = methods.firstWhereOrNull((element) => element.isFactory == true && element.name == factoryConstructorAlias, orElse: () => null) != null;
           var autoGenDefaultConstructor = methods.firstWhereOrNull((element) => !element.isStatic && element.name == constructorAlias, orElse: () => null) == null;
@@ -259,7 +264,6 @@ class ClassDeclarationData {
 
         break;
     }
-
     return tpl;
   }
 }
@@ -285,6 +289,7 @@ class UniqueNameGenerator {
 class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisitor> {
   List<ClassDeclarationData> classes = [];
   bool isDataBean;
+  List<MethodDeclaration> getterList = [];
 
   ClassDeclarationVisitor([this.isDataBean = false]);
 
@@ -303,6 +308,10 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
             .add(FieldDeclarationData(fieldDeclaration[0].trim(), fieldDeclaration.length == 2 ? convertExpression(fieldDeclaration[1].trim()) : null)..isStatic = element.isStatic);
       } else if (element is MethodDeclaration) {
         if (isDataBean && ['fromJson', 'toJson'].contains(element.name.name)) {
+          return;
+        }
+        if (element.isGetter) {
+          getterList.add(element);
           return;
         }
         // var fairWellExp = RegExp(r"@FairWell\('(.+)'\)");
@@ -370,6 +379,43 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
         classDeclarationData.methods.add(methodDeclaration);
       }
     });
+    if (getterList.length > 0) {
+      getterList.forEach((element) {
+        var elementBody = element.body.toString();
+        if (element.body is EmptyFunctionBody) {
+          elementBody = '{}';
+        }
+        if (element.body is ExpressionFunctionBody) {
+          classDeclarationData.fields.add(FieldDeclarationData(
+              element.name.name.trim(),
+              "return ${convertExpression(element.body.toString().replaceAll("=>", "").trim())};")
+            ..isStatic = element.isStatic
+            ..isGetter = true);
+        } else {
+          var methodDeclaration = MethodDeclarationData(
+              element.name.name.trim(),
+              "void test() ${elementBody}",
+              element.body is ExpressionFunctionBody);
+          var res = parseString(content: methodDeclaration.body);
+
+          var generator = SimpleFunctionGenerator(
+              isArrowFunc: false,
+              renamedParameters: methodDeclaration.renamedParameters,
+              parentClass: classDeclarationData?.parentClass);
+
+          generator.func
+            ?..withContext = true
+            ..classHasStaticFields = element.isStatic;
+          res.unit.visitChildren(generator);
+
+          classDeclarationData.fields.add(FieldDeclarationData(
+              element.name.name, generator.func?.body.toSource())
+            ..isStatic = element.isStatic
+            ..isGetter = true);
+        }
+        return;
+      });
+    }
     classes.add(classDeclarationData);
     return null;
   }
@@ -420,7 +466,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
         // if (fairWellExp.allMatches(element.metadata.first.toString()).isNotEmpty) {
         var excludeMethods = ['build'];
         if (!excludeMethods.contains(element.name.toString()) && element.returnType.toString() != 'Widget') {
-          tempClassDeclaration.methods.add(MethodDeclarationData(element.name.toString(), element.toString(), element.body is ExpressionFunctionBody));
+          tempClassDeclaration.methods.add(MethodDeclarationData(element.name.toString(), element.toString(), element.body is ExpressionFunctionBody)..isStatic = element.isStatic);
         }
         // }
       }
@@ -712,7 +758,6 @@ class FunctionDeclarationNode {
     }
 
     var finalBody = withContext ? wrapBodyWithCtx() : body.toSource();
-
     return '''${isAsync ? 'async ' : ''}function $name(${argumentList.map((elem) => elem[0]).join(',')}$namedArgs$optionalArgs) { 
       $finalBody
     }''';
@@ -1031,8 +1076,16 @@ class ReturnStatementNode extends StatementNode {
 
   @override
   String toSource() {
+
+    String exprR = expr ?? "";
+    if(exprR != null && exprR.isNotEmpty ){
+      if(exprR.startsWith("Future(")){
+        exprR = exprR.replaceAll("Future(", "Promise.resolve().then(");
+      }
+    }
+
     return '''
-    return $expr${!(expr?.endsWith(';') ?? false) ? ';' : ''}
+    return $exprR${!(exprR?.endsWith(';') ?? false) ? ';' : ''}
     ''';
   }
 }
@@ -1560,7 +1613,9 @@ String convertFunctionExpression(String code) {
 }
 
 String convertFunctionFromData(MethodDeclarationData? data, [ClassDeclarationData? ctx]) {
-  var res = parseString(content: data?.body ?? '');
+  var content = data?.body ?? '';
+  if(data?.isStatic ?? false) content = content.replaceAll('static', '');
+  var res = parseString(content: content);
   var generator = SimpleFunctionGenerator(isArrowFunc: data?.isArrow ?? false, renamedParameters: data?.renamedParameters, parentClass: ctx?.parentClass);
   generator.func
     ?..withContext = true
@@ -1643,7 +1698,6 @@ String convertClassString(String content, [bool isDataBean = false]) {
   var result = parseString(content: content, featureSet: FeatureSet.fromEnableFlags([]));
   var visitor = ClassDeclarationVisitor(isDataBean);
   result.unit.visitChildren(visitor);
-
   return visitor.genJsCode();
 }
 

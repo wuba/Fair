@@ -12,7 +12,7 @@ import 'package:fair_compiler/src/fair_asset.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:process/process.dart';
-import 'package:fairc/fairc.dart' as dart2dsl;
+import 'package:fair_dart2dsl/fairc.dart' as dart2dsl;
 
 mixin FlatCompiler {
   final command = 'flatc';
@@ -96,12 +96,13 @@ mixin FairCompiler {
             content = output.substring(startIndex + _startTag.length, endIndex);
           }
         }
-      } catch (e) {
+      } catch (e, s) {
         var errorLog = await File(path.join('build', 'fair', 'log',
-            '${DateFormat('yyyy-MM-dd_HH:mm:sss').format(DateTime.now())}.txt'))
+                '${DateFormat('yyyy-MM-dd_HH:mm:sss').format(DateTime.now())}.txt'))
             .create(recursive: true);
         var f = await errorLog.open(mode: FileMode.append);
-        await f.writeString('${e.toString()}\n');
+        await f
+            .writeString('error:\n${e.toString()}\nstack:\n${s.toString()}\n');
         error = 'No content is generated: ${errorLog.path}';
         print('[Fair] $error');
       }

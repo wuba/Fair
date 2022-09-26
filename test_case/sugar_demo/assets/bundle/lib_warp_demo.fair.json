@@ -1,0 +1,128 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar"
+    },
+    "body": {
+      "className": "Wrap",
+      "na": {
+        "spacing": 8.0,
+        "runSpacing": 4.0,
+        "children": [
+          {
+            "className": "Chip",
+            "na": {
+              "avatar": {
+                "className": "CircleAvatar",
+                "na": {
+                  "backgroundColor": {
+                    "className": "Sugar.colorsShade",
+                    "pa": [
+                      "#(Colors.blue)",
+                      900
+                    ]
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "AH"
+                    ]
+                  }
+                }
+              },
+              "label": {
+                "className": "Text",
+                "pa": [
+                  "Hamilton"
+                ]
+              }
+            }
+          },
+          {
+            "className": "Chip",
+            "na": {
+              "avatar": {
+                "className": "CircleAvatar",
+                "na": {
+                  "backgroundColor": {
+                    "className": "Sugar.colorsWithOpacity",
+                    "pa": [
+                      "#(Colors.blue)",
+                      0.9
+                    ]
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "ML"
+                    ]
+                  }
+                }
+              },
+              "label": {
+                "className": "Text",
+                "pa": [
+                  "Lafayette"
+                ]
+              }
+            }
+          },
+          {
+            "className": "Chip",
+            "na": {
+              "avatar": {
+                "className": "CircleAvatar",
+                "na": {
+                  "backgroundColor": {
+                    "className": "Sugar.colorsWithOpacity",
+                    "pa": [
+                      "#(Colors.blue)",
+                      0.9
+                    ]
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "HM"
+                    ]
+                  }
+                }
+              },
+              "label": {
+                "className": "Text",
+                "pa": [
+                  "Mulligan"
+                ]
+              }
+            }
+          },
+          {
+            "className": "Chip",
+            "na": {
+              "avatar": {
+                "className": "CircleAvatar",
+                "na": {
+                  "backgroundColor": "$(backgroundColor:)",
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "LP"
+                    ]
+                  }
+                }
+              },
+              "label": {
+                "className": "Text",
+                "pa": [
+                  "Laurens"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {}
+}

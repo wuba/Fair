@@ -11,6 +11,7 @@ const double kMinInteractiveDimensionCupertino = 44.0;
 
 class _DefaultHeroTag {
   const _DefaultHeroTag();
+
   @override
   String toString() => '<default FloatingActionButton tag>';
 }
@@ -35,8 +36,7 @@ var p = () => {
             currentDate: props['currentDate'],
             onDateChanged: props['onDateChanged'],
             onDisplayedMonthChanged: props['onDisplayedMonthChanged'],
-            initialCalendarMode:
-                props['initialCalendarMode'] ?? DatePickerMode.day,
+            initialCalendarMode: props['initialCalendarMode'] ?? DatePickerMode.day,
             selectableDayPredicate: props['selectableDayPredicate'],
           ),
       'CalendarDatePicker#selectableDayPredicate': (props) => (
@@ -52,8 +52,7 @@ var p = () => {
             initialDate: props['initialDate'],
             selectedDate: props['selectedDate'],
             onChanged: props['onChanged'],
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
           ),
       'TextButtonThemeData.lerp': (props) => TextButtonThemeData.lerp(
             props['pa'][0],
@@ -67,14 +66,12 @@ var p = () => {
             key: props['key'],
             decoration: props['decoration'],
             margin: props['margin'] ?? const EdgeInsets.only(bottom: 8.0),
-            padding: props['padding'] ??
-                const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
+            padding: props['padding'] ?? const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
             duration: props['duration'] ?? const Duration(milliseconds: 250),
             curve: props['curve'] ?? Curves.fastOutSlowIn,
             child: props['child'],
           ),
-      'ProgressIndicatorThemeData.lerp': (props) =>
-          ProgressIndicatorThemeData.lerp(
+      'ProgressIndicatorThemeData.lerp': (props) => ProgressIndicatorThemeData.lerp(
             props['pa'][0],
             props['pa'][1],
             props['pa'][2]?.toDouble(),
@@ -133,8 +130,7 @@ var p = () => {
             shape: props['shape'],
             borderOnForeground: props['borderOnForeground'] ?? true,
             clipBehavior: props['clipBehavior'] ?? Clip.none,
-            animationDuration:
-                props['animationDuration'] ?? kThemeChangeDuration,
+            animationDuration: props['animationDuration'] ?? kThemeChangeDuration,
             child: props['child'],
           ),
       'Material.defaultSplashRadius': Material.defaultSplashRadius,
@@ -153,6 +149,31 @@ var p = () => {
             props['pa'][0],
             props['pa'][1],
             props['pa'][2]?.toDouble(),
+          ),
+      'InkWell': (props) => InkWell(
+            key: props['key'],
+            child: props['child'],
+            onTap: props['onTap'],
+            onDoubleTap: props['onDoubleTap'],
+            onLongPress: props['onLongPress'],
+            onTapDown: props['onTapDown'],
+            onTapCancel: props['onTapCancel'],
+            onHighlightChanged: props['onHighlightChanged'],
+            onHover: props['onHover'],
+            focusColor: props['focusColor'],
+            hoverColor: props['hoverColor'],
+            highlightColor: props['highlightColor'],
+            splashColor: props['splashColor'],
+            splashFactory: props['splashFactory'],
+            radius: props['radius']?.toDouble(),
+            borderRadius: props['borderRadius'],
+            customBorder: props['customBorder'],
+            enableFeedback: props['enableFeedback'] ?? true,
+            excludeFromSemantics: props['excludeFromSemantics'] ?? false,
+            focusNode: props['focusNode'],
+            canRequestFocus: props['canRequestFocus'] ?? true,
+            onFocusChange: props['onFocusChange'],
+            autofocus: props['autofocus'] ?? false,
           ),
       'InkRipple': {
         'splashFactory': InkRipple.splashFactory,
@@ -200,16 +221,13 @@ var p = () => {
             backgroundColor: props['backgroundColor'],
             resizeToAvoidBottomInset: props['resizeToAvoidBottomInset'],
             primary: props['primary'] ?? true,
-            drawerDragStartBehavior:
-                props['drawerDragStartBehavior'] ?? DragStartBehavior.start,
+            drawerDragStartBehavior: props['drawerDragStartBehavior'] ?? DragStartBehavior.start,
             extendBody: props['extendBody'] ?? false,
             extendBodyBehindAppBar: props['extendBodyBehindAppBar'] ?? false,
             drawerScrimColor: props['drawerScrimColor'],
             drawerEdgeDragWidth: props['drawerEdgeDragWidth']?.toDouble(),
-            drawerEnableOpenDragGesture:
-                props['drawerEnableOpenDragGesture'] ?? true,
-            endDrawerEnableOpenDragGesture:
-                props['endDrawerEnableOpenDragGesture'] ?? true,
+            drawerEnableOpenDragGesture: props['drawerEnableOpenDragGesture'] ?? true,
+            endDrawerEnableOpenDragGesture: props['endDrawerEnableOpenDragGesture'] ?? true,
             restorationId: props['restorationId'],
           ),
       'Scaffold#onDrawerChanged': (props) => (
@@ -278,15 +296,13 @@ var p = () => {
             color: props['color'],
             onPressed: props['onPressed'],
           ),
-      'TextSelectionToolbarTextButton': (props) =>
-          TextSelectionToolbarTextButton(
+      'TextSelectionToolbarTextButton': (props) => TextSelectionToolbarTextButton(
             key: props['key'],
             child: props['child'],
             padding: props['padding'],
             onPressed: props['onPressed'],
           ),
-      'TextSelectionToolbarTextButton.getPadding': (props) =>
-          TextSelectionToolbarTextButton.getPadding(
+      'TextSelectionToolbarTextButton.getPadding': (props) => TextSelectionToolbarTextButton.getPadding(
             props['pa'][0],
             props['pa'][1],
           ),
@@ -297,8 +313,7 @@ var p = () => {
             decoration: props['decoration'] ?? const InputDecoration(),
             keyboardType: props['keyboardType'],
             textInputAction: props['textInputAction'],
-            textCapitalization:
-                props['textCapitalization'] ?? TextCapitalization.none,
+            textCapitalization: props['textCapitalization'] ?? TextCapitalization.none,
             style: props['style'],
             strutStyle: props['strutStyle'],
             textAlign: props['textAlign'] ?? TextAlign.start,
@@ -330,16 +345,12 @@ var p = () => {
             cursorHeight: props['cursorHeight']?.toDouble(),
             cursorRadius: props['cursorRadius'],
             cursorColor: props['cursorColor'],
-            selectionHeightStyle:
-                props['selectionHeightStyle'] ?? ui.BoxHeightStyle.tight,
-            selectionWidthStyle:
-                props['selectionWidthStyle'] ?? ui.BoxWidthStyle.tight,
+            selectionHeightStyle: props['selectionHeightStyle'] ?? ui.BoxHeightStyle.tight,
+            selectionWidthStyle: props['selectionWidthStyle'] ?? ui.BoxWidthStyle.tight,
             keyboardAppearance: props['keyboardAppearance'],
             scrollPadding: props['scrollPadding'] ?? const EdgeInsets.all(20.0),
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
-            enableInteractiveSelection:
-                props['enableInteractiveSelection'] ?? true,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
+            enableInteractiveSelection: props['enableInteractiveSelection'] ?? true,
             selectionControls: props['selectionControls'],
             onTap: props['onTap'],
             mouseCursor: props['mouseCursor'],
@@ -348,8 +359,7 @@ var p = () => {
             scrollPhysics: props['scrollPhysics'],
             autofillHints: props['autofillHints'],
             restorationId: props['restorationId'],
-            enableIMEPersonalizedLearning:
-                props['enableIMEPersonalizedLearning'] ?? true,
+            enableIMEPersonalizedLearning: props['enableIMEPersonalizedLearning'] ?? true,
           ),
       'TextField#buildCounter': (props) => (
             dynamic context,
@@ -406,7 +416,8 @@ var p = () => {
             key: props['key'],
             anchorAbove: props['anchorAbove'],
             anchorBelow: props['anchorBelow'],
-            toolbarBuilder: props['toolbarBuilder'], // ?? _defaultToolbarBuilder,
+            toolbarBuilder: props['toolbarBuilder'],
+            // ?? _defaultToolbarBuilder,
             children: as<Widget>(props['children'])!,
           ),
       'TextSelectionThemeData.lerp': (props) => TextSelectionThemeData.lerp(
@@ -430,8 +441,7 @@ var p = () => {
             dense: props['dense'],
             secondary: props['secondary'],
             selected: props['selected'] ?? false,
-            controlAffinity:
-                props['controlAffinity'] ?? ListTileControlAffinity.platform,
+            controlAffinity: props['controlAffinity'] ?? ListTileControlAffinity.platform,
             autofocus: props['autofocus'] ?? false,
             contentPadding: props['contentPadding'],
             shape: props['shape'],
@@ -446,13 +456,11 @@ var p = () => {
             onRefresh: props['onRefresh'],
             color: props['color'],
             backgroundColor: props['backgroundColor'],
-            notificationPredicate: props['notificationPredicate'] ??
-                defaultScrollNotificationPredicate,
+            notificationPredicate: props['notificationPredicate'] ?? defaultScrollNotificationPredicate,
             semanticsLabel: props['semanticsLabel'],
             semanticsValue: props['semanticsValue'],
             strokeWidth: props['strokeWidth']?.toDouble() ?? 2.0,
-            triggerMode:
-                props['triggerMode'] ?? RefreshIndicatorTriggerMode.onEdge,
+            triggerMode: props['triggerMode'] ?? RefreshIndicatorTriggerMode.onEdge,
           ),
       'RefreshIndicator#onRefresh': (props) => () {
             return (props['block']) as Future;
@@ -522,8 +530,7 @@ var p = () => {
             props['pa'][0],
             props['pa'][1]?.toDouble(),
           ),
-      'ElevationOverlay.colorWithOverlay': (props) =>
-          ElevationOverlay.colorWithOverlay(
+      'ElevationOverlay.colorWithOverlay': (props) => ElevationOverlay.colorWithOverlay(
             props['pa'][0],
             props['pa'][1],
             props['pa'][2]?.toDouble(),
@@ -546,14 +553,10 @@ var p = () => {
             cursorHeight: props['cursorHeight']?.toDouble(),
             cursorRadius: props['cursorRadius'],
             cursorColor: props['cursorColor'],
-            selectionHeightStyle:
-                props['selectionHeightStyle'] ?? ui.BoxHeightStyle.tight,
-            selectionWidthStyle:
-                props['selectionWidthStyle'] ?? ui.BoxWidthStyle.tight,
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
-            enableInteractiveSelection:
-                props['enableInteractiveSelection'] ?? true,
+            selectionHeightStyle: props['selectionHeightStyle'] ?? ui.BoxHeightStyle.tight,
+            selectionWidthStyle: props['selectionWidthStyle'] ?? ui.BoxWidthStyle.tight,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
+            enableInteractiveSelection: props['enableInteractiveSelection'] ?? true,
             selectionControls: props['selectionControls'],
             onTap: props['onTap'],
             scrollPhysics: props['scrollPhysics'],
@@ -579,14 +582,10 @@ var p = () => {
             cursorHeight: props['cursorHeight']?.toDouble(),
             cursorRadius: props['cursorRadius'],
             cursorColor: props['cursorColor'],
-            selectionHeightStyle:
-                props['selectionHeightStyle'] ?? ui.BoxHeightStyle.tight,
-            selectionWidthStyle:
-                props['selectionWidthStyle'] ?? ui.BoxWidthStyle.tight,
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
-            enableInteractiveSelection:
-                props['enableInteractiveSelection'] ?? true,
+            selectionHeightStyle: props['selectionHeightStyle'] ?? ui.BoxHeightStyle.tight,
+            selectionWidthStyle: props['selectionWidthStyle'] ?? ui.BoxWidthStyle.tight,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
+            enableInteractiveSelection: props['enableInteractiveSelection'] ?? true,
             selectionControls: props['selectionControls'],
             onTap: props['onTap'],
             scrollPhysics: props['scrollPhysics'],
@@ -643,7 +642,7 @@ var p = () => {
             layoutBehavior: props['layoutBehavior'],
             overflowDirection: props['overflowDirection'],
             overflowButtonSpacing: props['overflowButtonSpacing']?.toDouble(),
-            children: as<Widget>(props['children'])?? const <Widget>[],
+            children: as<Widget>(props['children']) ?? const <Widget>[],
           ),
       'AppBarTheme.of': (props) => AppBarTheme.of(
             props['pa'][0],
@@ -730,11 +729,9 @@ var p = () => {
             duration: props['duration'] ?? _snackBarDisplayDuration,
             animation: props['animation'],
             onVisible: props['onVisible'],
-            dismissDirection:
-                props['dismissDirection'] ?? DismissDirection.down,
+            dismissDirection: props['dismissDirection'] ?? DismissDirection.down,
           ),
-      'SnackBar.createAnimationController': (props) =>
-          SnackBar.createAnimationController(
+      'SnackBar.createAnimationController': (props) => SnackBar.createAnimationController(
             vsync: props['vsync'],
           ),
       'SnackBarClosedReason': {
@@ -784,10 +781,8 @@ var p = () => {
             shrinkWrap: props['shrinkWrap'] ?? false,
             anchor: props['anchor']?.toDouble() ?? 0.0,
             cacheExtent: props['cacheExtent']?.toDouble(),
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
-            keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
-                ScrollViewKeyboardDismissBehavior.manual,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
+            keyboardDismissBehavior: props['keyboardDismissBehavior'] ?? ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
             children: as<Widget>(props['children'])!,
@@ -811,10 +806,8 @@ var p = () => {
             shrinkWrap: props['shrinkWrap'] ?? false,
             anchor: props['anchor']?.toDouble() ?? 0.0,
             cacheExtent: props['cacheExtent']?.toDouble(),
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
-            keyboardDismissBehavior: props['keyboardDismissBehavior'] ??
-                ScrollViewKeyboardDismissBehavior.manual,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
+            keyboardDismissBehavior: props['keyboardDismissBehavior'] ?? ScrollViewKeyboardDismissBehavior.manual,
             restorationId: props['restorationId'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
           ),
@@ -879,11 +872,9 @@ var p = () => {
             disabledElevation: props['disabledElevation']?.toDouble() ?? 0.0,
             padding: props['padding'] ?? EdgeInsets.zero,
             visualDensity: props['visualDensity'] ?? VisualDensity.standard,
-            constraints: props['constraints'] ??
-                const BoxConstraints(minWidth: 88.0, minHeight: 36.0),
+            constraints: props['constraints'] ?? const BoxConstraints(minWidth: 88.0, minHeight: 36.0),
             shape: props['shape'] ?? const RoundedRectangleBorder(),
-            animationDuration:
-                props['animationDuration'] ?? kThemeChangeDuration,
+            animationDuration: props['animationDuration'] ?? kThemeChangeDuration,
             clipBehavior: props['clipBehavior'] ?? Clip.none,
             focusNode: props['focusNode'],
             autofocus: props['autofocus'] ?? false,
@@ -921,8 +912,7 @@ var p = () => {
             showBottomBorder: props['showBottomBorder'] ?? false,
             dividerThickness: props['dividerThickness']?.toDouble(),
             rows: as<DataRow>(props['rows'])!,
-            checkboxHorizontalMargin:
-                props['checkboxHorizontalMargin']?.toDouble(),
+            checkboxHorizontalMargin: props['checkboxHorizontalMargin']?.toDouble(),
           ),
       'DefaultTabController': (props) => DefaultTabController(
             key: props['key'],
@@ -952,8 +942,7 @@ var p = () => {
             minWidth: props['minWidth']?.toDouble(),
             minExtendedWidth: props['minExtendedWidth']?.toDouble(),
           ),
-      'NavigationRail.extendedAnimation': (props) =>
-          NavigationRail.extendedAnimation(
+      'NavigationRail.extendedAnimation': (props) => NavigationRail.extendedAnimation(
             props['pa'][0],
           ),
       'NavigationRailLabelType': {
@@ -1002,10 +991,8 @@ var p = () => {
             key: props['key'],
             backgroundColor: props['backgroundColor'],
             elevation: props['elevation']?.toDouble(),
-            insetAnimationDuration: props['insetAnimationDuration'] ??
-                const Duration(milliseconds: 100),
-            insetAnimationCurve:
-                props['insetAnimationCurve'] ?? Curves.decelerate,
+            insetAnimationDuration: props['insetAnimationDuration'] ?? const Duration(milliseconds: 100),
+            insetAnimationCurve: props['insetAnimationCurve'] ?? Curves.decelerate,
             clipBehavior: props['clipBehavior'] ?? Clip.none,
             shape: props['shape'],
             child: props['child'],
@@ -1016,15 +1003,13 @@ var p = () => {
             titlePadding: props['titlePadding'],
             titleTextStyle: props['titleTextStyle'],
             content: props['content'],
-            contentPadding: props['contentPadding'] ??
-                const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
+            contentPadding: props['contentPadding'] ?? const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
             contentTextStyle: props['contentTextStyle'],
             actions: as(props['actions']),
             actionsPadding: props['actionsPadding'] ?? EdgeInsets.zero,
             actionsAlignment: props['actionsAlignment'],
             actionsOverflowDirection: props['actionsOverflowDirection'],
-            actionsOverflowButtonSpacing:
-                props['actionsOverflowButtonSpacing']?.toDouble(),
+            actionsOverflowButtonSpacing: props['actionsOverflowButtonSpacing']?.toDouble(),
             buttonPadding: props['buttonPadding'],
             backgroundColor: props['backgroundColor'],
             elevation: props['elevation']?.toDouble(),
@@ -1042,12 +1027,10 @@ var p = () => {
       'SimpleDialog': (props) => SimpleDialog(
             key: props['key'],
             title: props['title'],
-            titlePadding: props['titlePadding'] ??
-                const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 0.0),
+            titlePadding: props['titlePadding'] ?? const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 0.0),
             titleTextStyle: props['titleTextStyle'],
             children: as(props['children']),
-            contentPadding: props['contentPadding'] ??
-                const EdgeInsets.fromLTRB(0.0, 12.0, 0.0, 16.0),
+            contentPadding: props['contentPadding'] ?? const EdgeInsets.fromLTRB(0.0, 12.0, 0.0, 16.0),
             backgroundColor: props['backgroundColor'],
             elevation: props['elevation']?.toDouble(),
             semanticLabel: props['semanticLabel'],
@@ -1114,8 +1097,7 @@ var p = () => {
             hourLabelText: props['hourLabelText'],
             minuteLabelText: props['minuteLabelText'],
             restorationId: props['restorationId'],
-            initialEntryMode:
-                props['initialEntryMode'] ?? TimePickerEntryMode.dial,
+            initialEntryMode: props['initialEntryMode'] ?? TimePickerEntryMode.dial,
           ),
       'TimePickerEntryMode': {
         'values': TimePickerEntryMode.values,
@@ -1178,8 +1160,7 @@ var p = () => {
             dense: props['dense'],
             secondary: props['secondary'],
             selected: props['selected'] ?? false,
-            controlAffinity:
-                props['controlAffinity'] ?? ListTileControlAffinity.platform,
+            controlAffinity: props['controlAffinity'] ?? ListTileControlAffinity.platform,
             autofocus: props['autofocus'] ?? false,
             contentPadding: props['contentPadding'],
             tristate: props['tristate'] ?? false,
@@ -1198,8 +1179,7 @@ var p = () => {
             key: props['key'],
             text: props['text'],
             icon: props['icon'],
-            iconMargin:
-                props['iconMargin'] ?? const EdgeInsets.only(bottom: 10.0),
+            iconMargin: props['iconMargin'] ?? const EdgeInsets.only(bottom: 10.0),
             height: props['height']?.toDouble(),
             child: props['child'],
           ),
@@ -1210,8 +1190,7 @@ var p = () => {
             isScrollable: props['isScrollable'] ?? false,
             padding: props['padding'],
             indicatorColor: props['indicatorColor'],
-            automaticIndicatorColorAdjustment:
-                props['automaticIndicatorColorAdjustment'] ?? true,
+            automaticIndicatorColorAdjustment: props['automaticIndicatorColorAdjustment'] ?? true,
             indicatorWeight: props['indicatorWeight']?.toDouble() ?? 2.0,
             indicatorPadding: props['indicatorPadding'] ?? EdgeInsets.zero,
             indicator: props['indicator'],
@@ -1221,8 +1200,7 @@ var p = () => {
             labelPadding: props['labelPadding'],
             unselectedLabelColor: props['unselectedLabelColor'],
             unselectedLabelStyle: props['unselectedLabelStyle'],
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
             overlayColor: props['overlayColor'],
             mouseCursor: props['mouseCursor'],
             enableFeedback: props['enableFeedback'],
@@ -1233,8 +1211,7 @@ var p = () => {
             key: props['key'],
             controller: props['controller'],
             physics: props['physics'],
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
             children: as<Widget>(props['children'])!,
           ),
       'TabPageSelectorIndicator': (props) => TabPageSelectorIndicator(
@@ -1261,14 +1238,12 @@ var p = () => {
             firstDate: props['firstDate'],
             lastDate: props['lastDate'],
             currentDate: props['currentDate'],
-            initialEntryMode:
-                props['initialEntryMode'] ?? DatePickerEntryMode.calendar,
+            initialEntryMode: props['initialEntryMode'] ?? DatePickerEntryMode.calendar,
             selectableDayPredicate: props['selectableDayPredicate'],
             cancelText: props['cancelText'],
             confirmText: props['confirmText'],
             helpText: props['helpText'],
-            initialCalendarMode:
-                props['initialCalendarMode'] ?? DatePickerMode.day,
+            initialCalendarMode: props['initialCalendarMode'] ?? DatePickerMode.day,
             errorFormatText: props['errorFormatText'],
             errorInvalidText: props['errorInvalidText'],
             fieldHintText: props['fieldHintText'],
@@ -1286,8 +1261,7 @@ var p = () => {
             firstDate: props['firstDate'],
             lastDate: props['lastDate'],
             currentDate: props['currentDate'],
-            initialEntryMode:
-                props['initialEntryMode'] ?? DatePickerEntryMode.calendar,
+            initialEntryMode: props['initialEntryMode'] ?? DatePickerEntryMode.calendar,
             helpText: props['helpText'],
             cancelText: props['cancelText'],
             confirmText: props['confirmText'],
@@ -1301,8 +1275,7 @@ var p = () => {
             fieldEndLabelText: props['fieldEndLabelText'],
             restorationId: props['restorationId'],
           ),
-      'BottomNavigationBarThemeData.lerp': (props) =>
-          BottomNavigationBarThemeData.lerp(
+      'BottomNavigationBarThemeData.lerp': (props) => BottomNavigationBarThemeData.lerp(
             props['pa'][0],
             props['pa'][1],
             props['pa'][2]?.toDouble(),
@@ -1406,8 +1379,7 @@ var p = () => {
             clipBehavior: props['clipBehavior'] ?? Clip.none,
             focusNode: props['focusNode'],
             autofocus: props['autofocus'] ?? false,
-            extendedIconLabelSpacing:
-                props['extendedIconLabelSpacing']?.toDouble(),
+            extendedIconLabelSpacing: props['extendedIconLabelSpacing']?.toDouble(),
             extendedPadding: props['extendedPadding'],
             extendedTextStyle: props['extendedTextStyle'],
             icon: props['icon'],
@@ -1493,8 +1465,7 @@ var p = () => {
       'AppBar': (props) => AppBar(
             key: props['key'],
             leading: props['leading'],
-            automaticallyImplyLeading:
-                props['automaticallyImplyLeading'] ?? true,
+            automaticallyImplyLeading: props['automaticallyImplyLeading'] ?? true,
             title: props['title'],
             actions: as(props['actions']),
             flexibleSpace: props['flexibleSpace'],
@@ -1528,8 +1499,7 @@ var p = () => {
       'SliverAppBar': (props) => SliverAppBar(
             key: props['key'],
             leading: props['leading'],
-            automaticallyImplyLeading:
-                props['automaticallyImplyLeading'] ?? true,
+            automaticallyImplyLeading: props['automaticallyImplyLeading'] ?? true,
             title: props['title'],
             actions: as(props['actions']),
             flexibleSpace: props['flexibleSpace'],
@@ -1553,8 +1523,7 @@ var p = () => {
             pinned: props['pinned'] ?? false,
             snap: props['snap'] ?? false,
             stretch: props['stretch'] ?? false,
-            stretchTriggerOffset:
-                props['stretchTriggerOffset']?.toDouble() ?? 100.0,
+            stretchTriggerOffset: props['stretchTriggerOffset']?.toDouble() ?? 100.0,
             onStretchTrigger: props['onStretchTrigger'],
             shape: props['shape'],
             toolbarHeight: props['toolbarHeight']?.toDouble() ?? kToolbarHeight,
@@ -1579,10 +1548,8 @@ var p = () => {
             margin: props['margin'] ?? const EdgeInsets.only(bottom: 8.0),
             currentAccountPicture: props['currentAccountPicture'],
             otherAccountsPictures: as(props['otherAccountsPictures']),
-            currentAccountPictureSize:
-                props['currentAccountPictureSize'] ?? const Size.square(72.0),
-            otherAccountsPicturesSize:
-                props['otherAccountsPicturesSize'] ?? const Size.square(40.0),
+            currentAccountPictureSize: props['currentAccountPictureSize'] ?? const Size.square(72.0),
+            otherAccountsPicturesSize: props['otherAccountsPicturesSize'] ?? const Size.square(40.0),
             accountName: props['accountName'],
             accountEmail: props['accountEmail'],
             onDetailsPressed: props['onDetailsPressed'],
@@ -1592,8 +1559,7 @@ var p = () => {
             props['pa'][0],
             props['pa'][1],
           ),
-      'ThemeData.estimateBrightnessForColor': (props) =>
-          ThemeData.estimateBrightnessForColor(
+      'ThemeData.estimateBrightnessForColor': (props) => ThemeData.estimateBrightnessForColor(
             props['pa'][0],
           ),
       'ThemeData.lerp': (props) => ThemeData.lerp(
@@ -1628,13 +1594,11 @@ var p = () => {
             padding: props['padding'],
             leadingPadding: props['leadingPadding'],
             forceActionsBelow: props['forceActionsBelow'] ?? false,
-            overflowAlignment:
-                props['overflowAlignment'] ?? OverflowBarAlignment.end,
+            overflowAlignment: props['overflowAlignment'] ?? OverflowBarAlignment.end,
             animation: props['animation'],
             onVisible: props['onVisible'],
           ),
-      'MaterialBanner.createAnimationController': (props) =>
-          MaterialBanner.createAnimationController(
+      'MaterialBanner.createAnimationController': (props) => MaterialBanner.createAnimationController(
             vsync: props['vsync'],
           ),
       'MaterialBannerClosedReason': {
@@ -1829,8 +1793,7 @@ var p = () => {
             sortColumnIndex: props['sortColumnIndex'],
             sortAscending: props['sortAscending'] ?? true,
             onSelectAll: props['onSelectAll'],
-            dataRowHeight:
-                props['dataRowHeight']?.toDouble() ?? kMinInteractiveDimension,
+            dataRowHeight: props['dataRowHeight']?.toDouble() ?? kMinInteractiveDimension,
             headingRowHeight: props['headingRowHeight']?.toDouble() ?? 56.0,
             horizontalMargin: props['horizontalMargin']?.toDouble() ?? 24.0,
             columnSpacing: props['columnSpacing']?.toDouble() ?? 56.0,
@@ -1840,24 +1803,15 @@ var p = () => {
             onPageChanged: props['onPageChanged'],
             rowsPerPage: props['rowsPerPage'] ?? defaultRowsPerPage,
             availableRowsPerPage: as<int>(props['availableRowsPerPage']) ??
-                const <int>[
-                  defaultRowsPerPage,
-                  defaultRowsPerPage * 2,
-                  defaultRowsPerPage * 5,
-                  defaultRowsPerPage * 10
-                ],
+                const <int>[defaultRowsPerPage, defaultRowsPerPage * 2, defaultRowsPerPage * 5, defaultRowsPerPage * 10],
             onRowsPerPageChanged: props['onRowsPerPageChanged'],
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
             arrowHeadColor: props['arrowHeadColor'],
             source: props['source'],
-            checkboxHorizontalMargin:
-                props['checkboxHorizontalMargin']?.toDouble(),
+            checkboxHorizontalMargin: props['checkboxHorizontalMargin']?.toDouble(),
           ),
-      'PaginatedDataTable.defaultRowsPerPage':
-          PaginatedDataTable.defaultRowsPerPage,
-      'FloatingActionButtonThemeData.lerp': (props) =>
-          FloatingActionButtonThemeData.lerp(
+      'PaginatedDataTable.defaultRowsPerPage': PaginatedDataTable.defaultRowsPerPage,
+      'FloatingActionButtonThemeData.lerp': (props) => FloatingActionButtonThemeData.lerp(
             props['pa'][0],
             props['pa'][1],
             props['pa'][2]?.toDouble(),
@@ -1942,8 +1896,7 @@ var p = () => {
             secondary: props['secondary'],
             selected: props['selected'] ?? false,
             autofocus: props['autofocus'] ?? false,
-            controlAffinity:
-                props['controlAffinity'] ?? ListTileControlAffinity.platform,
+            controlAffinity: props['controlAffinity'] ?? ListTileControlAffinity.platform,
             shape: props['shape'],
             selectedTileColor: props['selectedTileColor'],
           ),
@@ -1966,13 +1919,11 @@ var p = () => {
             secondary: props['secondary'],
             selected: props['selected'] ?? false,
             autofocus: props['autofocus'] ?? false,
-            controlAffinity:
-                props['controlAffinity'] ?? ListTileControlAffinity.platform,
+            controlAffinity: props['controlAffinity'] ?? ListTileControlAffinity.platform,
             shape: props['shape'],
             selectedTileColor: props['selectedTileColor'],
           ),
-      'DropdownButtonHideUnderline.at': (props) =>
-          DropdownButtonHideUnderline.at(
+      'DropdownButtonHideUnderline.at': (props) => DropdownButtonHideUnderline.at(
             props['pa'][0],
           ),
       'DropdownButton': (props) => DropdownButton(
@@ -1993,8 +1944,7 @@ var p = () => {
             iconSize: props['iconSize']?.toDouble() ?? 24.0,
             isDense: props['isDense'] ?? false,
             isExpanded: props['isExpanded'] ?? false,
-            itemHeight:
-                props['itemHeight']?.toDouble() ?? kMinInteractiveDimension,
+            itemHeight: props['itemHeight']?.toDouble() ?? kMinInteractiveDimension,
             focusColor: props['focusColor'],
             focusNode: props['focusNode'],
             autofocus: props['autofocus'] ?? false,
@@ -2204,8 +2154,7 @@ var p = () => {
           ) {
             return (props['block']);
           },
-      'BottomSheet.createAnimationController': (props) =>
-          BottomSheet.createAnimationController(
+      'BottomSheet.createAnimationController': (props) => BottomSheet.createAnimationController(
             props['pa'][0],
           ),
       'DataTableThemeData.lerp': (props) => DataTableThemeData.lerp(
@@ -2219,8 +2168,7 @@ var p = () => {
       'DefaultMaterialLocalizations': {
         'delegate': DefaultMaterialLocalizations.delegate,
       },
-      'DefaultMaterialLocalizations.load': (props) =>
-          DefaultMaterialLocalizations.load(
+      'DefaultMaterialLocalizations.load': (props) => DefaultMaterialLocalizations.load(
             props['pa'][0],
           ),
       'Typography': {
@@ -2339,8 +2287,7 @@ var p = () => {
             borderRadius: props['borderRadius'],
             borderWidth: props['borderWidth']?.toDouble(),
             direction: props['direction'] ?? Axis.horizontal,
-            verticalDirection:
-                props['verticalDirection'] ?? VerticalDirection.down,
+            verticalDirection: props['verticalDirection'] ?? VerticalDirection.down,
           ),
       'ToggleButtons#onPressed': (props) => (
             int index,
@@ -2373,21 +2320,17 @@ var p = () => {
           ),
       'ExpansionPanelList': (props) => ExpansionPanelList(
             key: props['key'],
-            children: as<ExpansionPanel>(props['children']) ??
-                const <ExpansionPanel>[],
+            children: as<ExpansionPanel>(props['children']) ?? const <ExpansionPanel>[],
             expansionCallback: props['expansionCallback'],
-            animationDuration:
-                props['animationDuration'] ?? kThemeAnimationDuration,
+            animationDuration: props['animationDuration'] ?? kThemeAnimationDuration,
             dividerColor: props['dividerColor'],
             elevation: props['elevation']?.toDouble() ?? 2,
           ),
       'ExpansionPanelList.radio': (props) => ExpansionPanelList.radio(
             key: props['key'],
-            children: as<ExpansionPanel>(props['children']) ??
-                const <ExpansionPanelRadio>[],
+            children: as<ExpansionPanel>(props['children']) ?? const <ExpansionPanelRadio>[],
             expansionCallback: props['expansionCallback'],
-            animationDuration:
-                props['animationDuration'] ?? kThemeAnimationDuration,
+            animationDuration: props['animationDuration'] ?? kThemeAnimationDuration,
             initialOpenPanelValue: props['initialOpenPanelValue'],
             dividerColor: props['dividerColor'],
             elevation: props['elevation']?.toDouble() ?? 2,
@@ -2410,10 +2353,9 @@ var p = () => {
       'Autocomplete': (props) => Autocomplete(
             key: props['key'],
             optionsBuilder: props['optionsBuilder'],
-            displayStringForOption: props['displayStringForOption'] ??
-                RawAutocomplete.defaultStringForOption,
-            fieldViewBuilder:
-                props['fieldViewBuilder'], // ?? _defaultFieldViewBuilder,
+            displayStringForOption: props['displayStringForOption'] ?? RawAutocomplete.defaultStringForOption,
+            fieldViewBuilder: props['fieldViewBuilder'],
+            // ?? _defaultFieldViewBuilder,
             onSelected: props['onSelected'],
             optionsMaxHeight: props['optionsMaxHeight']?.toDouble() ?? 200.0,
             optionsViewBuilder: props['optionsViewBuilder'],
@@ -2551,8 +2493,7 @@ var p = () => {
         'four_g_plus_mobiledata': Icons.four_g_plus_mobiledata,
         'four_g_plus_mobiledata_sharp': Icons.four_g_plus_mobiledata_sharp,
         'four_g_plus_mobiledata_rounded': Icons.four_g_plus_mobiledata_rounded,
-        'four_g_plus_mobiledata_outlined':
-            Icons.four_g_plus_mobiledata_outlined,
+        'four_g_plus_mobiledata_outlined': Icons.four_g_plus_mobiledata_outlined,
         'four_k': Icons.four_k,
         'four_k_sharp': Icons.four_k_sharp,
         'four_k_rounded': Icons.four_k_rounded,
@@ -2684,8 +2625,7 @@ var p = () => {
         'account_balance_wallet': Icons.account_balance_wallet,
         'account_balance_wallet_sharp': Icons.account_balance_wallet_sharp,
         'account_balance_wallet_rounded': Icons.account_balance_wallet_rounded,
-        'account_balance_wallet_outlined':
-            Icons.account_balance_wallet_outlined,
+        'account_balance_wallet_outlined': Icons.account_balance_wallet_outlined,
         'account_box': Icons.account_box,
         'account_box_sharp': Icons.account_box_sharp,
         'account_box_rounded': Icons.account_box_rounded,
@@ -2829,52 +2769,32 @@ var p = () => {
         'airline_seat_flat_outlined': Icons.airline_seat_flat_outlined,
         'airline_seat_flat_angled': Icons.airline_seat_flat_angled,
         'airline_seat_flat_angled_sharp': Icons.airline_seat_flat_angled_sharp,
-        'airline_seat_flat_angled_rounded':
-            Icons.airline_seat_flat_angled_rounded,
-        'airline_seat_flat_angled_outlined':
-            Icons.airline_seat_flat_angled_outlined,
+        'airline_seat_flat_angled_rounded': Icons.airline_seat_flat_angled_rounded,
+        'airline_seat_flat_angled_outlined': Icons.airline_seat_flat_angled_outlined,
         'airline_seat_individual_suite': Icons.airline_seat_individual_suite,
-        'airline_seat_individual_suite_sharp':
-            Icons.airline_seat_individual_suite_sharp,
-        'airline_seat_individual_suite_rounded':
-            Icons.airline_seat_individual_suite_rounded,
-        'airline_seat_individual_suite_outlined':
-            Icons.airline_seat_individual_suite_outlined,
+        'airline_seat_individual_suite_sharp': Icons.airline_seat_individual_suite_sharp,
+        'airline_seat_individual_suite_rounded': Icons.airline_seat_individual_suite_rounded,
+        'airline_seat_individual_suite_outlined': Icons.airline_seat_individual_suite_outlined,
         'airline_seat_legroom_extra': Icons.airline_seat_legroom_extra,
-        'airline_seat_legroom_extra_sharp':
-            Icons.airline_seat_legroom_extra_sharp,
-        'airline_seat_legroom_extra_rounded':
-            Icons.airline_seat_legroom_extra_rounded,
-        'airline_seat_legroom_extra_outlined':
-            Icons.airline_seat_legroom_extra_outlined,
+        'airline_seat_legroom_extra_sharp': Icons.airline_seat_legroom_extra_sharp,
+        'airline_seat_legroom_extra_rounded': Icons.airline_seat_legroom_extra_rounded,
+        'airline_seat_legroom_extra_outlined': Icons.airline_seat_legroom_extra_outlined,
         'airline_seat_legroom_normal': Icons.airline_seat_legroom_normal,
-        'airline_seat_legroom_normal_sharp':
-            Icons.airline_seat_legroom_normal_sharp,
-        'airline_seat_legroom_normal_rounded':
-            Icons.airline_seat_legroom_normal_rounded,
-        'airline_seat_legroom_normal_outlined':
-            Icons.airline_seat_legroom_normal_outlined,
+        'airline_seat_legroom_normal_sharp': Icons.airline_seat_legroom_normal_sharp,
+        'airline_seat_legroom_normal_rounded': Icons.airline_seat_legroom_normal_rounded,
+        'airline_seat_legroom_normal_outlined': Icons.airline_seat_legroom_normal_outlined,
         'airline_seat_legroom_reduced': Icons.airline_seat_legroom_reduced,
-        'airline_seat_legroom_reduced_sharp':
-            Icons.airline_seat_legroom_reduced_sharp,
-        'airline_seat_legroom_reduced_rounded':
-            Icons.airline_seat_legroom_reduced_rounded,
-        'airline_seat_legroom_reduced_outlined':
-            Icons.airline_seat_legroom_reduced_outlined,
+        'airline_seat_legroom_reduced_sharp': Icons.airline_seat_legroom_reduced_sharp,
+        'airline_seat_legroom_reduced_rounded': Icons.airline_seat_legroom_reduced_rounded,
+        'airline_seat_legroom_reduced_outlined': Icons.airline_seat_legroom_reduced_outlined,
         'airline_seat_recline_extra': Icons.airline_seat_recline_extra,
-        'airline_seat_recline_extra_sharp':
-            Icons.airline_seat_recline_extra_sharp,
-        'airline_seat_recline_extra_rounded':
-            Icons.airline_seat_recline_extra_rounded,
-        'airline_seat_recline_extra_outlined':
-            Icons.airline_seat_recline_extra_outlined,
+        'airline_seat_recline_extra_sharp': Icons.airline_seat_recline_extra_sharp,
+        'airline_seat_recline_extra_rounded': Icons.airline_seat_recline_extra_rounded,
+        'airline_seat_recline_extra_outlined': Icons.airline_seat_recline_extra_outlined,
         'airline_seat_recline_normal': Icons.airline_seat_recline_normal,
-        'airline_seat_recline_normal_sharp':
-            Icons.airline_seat_recline_normal_sharp,
-        'airline_seat_recline_normal_rounded':
-            Icons.airline_seat_recline_normal_rounded,
-        'airline_seat_recline_normal_outlined':
-            Icons.airline_seat_recline_normal_outlined,
+        'airline_seat_recline_normal_sharp': Icons.airline_seat_recline_normal_sharp,
+        'airline_seat_recline_normal_rounded': Icons.airline_seat_recline_normal_rounded,
+        'airline_seat_recline_normal_outlined': Icons.airline_seat_recline_normal_outlined,
         'airplane_ticket': Icons.airplane_ticket,
         'airplane_ticket_sharp': Icons.airplane_ticket_sharp,
         'airplane_ticket_rounded': Icons.airplane_ticket_rounded,
@@ -2925,10 +2845,8 @@ var p = () => {
         'album_outlined': Icons.album_outlined,
         'align_horizontal_center': Icons.align_horizontal_center,
         'align_horizontal_center_sharp': Icons.align_horizontal_center_sharp,
-        'align_horizontal_center_rounded':
-            Icons.align_horizontal_center_rounded,
-        'align_horizontal_center_outlined':
-            Icons.align_horizontal_center_outlined,
+        'align_horizontal_center_rounded': Icons.align_horizontal_center_rounded,
+        'align_horizontal_center_outlined': Icons.align_horizontal_center_outlined,
         'align_horizontal_left': Icons.align_horizontal_left,
         'align_horizontal_left_sharp': Icons.align_horizontal_left_sharp,
         'align_horizontal_left_rounded': Icons.align_horizontal_left_rounded,
@@ -2936,8 +2854,7 @@ var p = () => {
         'align_horizontal_right': Icons.align_horizontal_right,
         'align_horizontal_right_sharp': Icons.align_horizontal_right_sharp,
         'align_horizontal_right_rounded': Icons.align_horizontal_right_rounded,
-        'align_horizontal_right_outlined':
-            Icons.align_horizontal_right_outlined,
+        'align_horizontal_right_outlined': Icons.align_horizontal_right_outlined,
         'align_vertical_bottom': Icons.align_vertical_bottom,
         'align_vertical_bottom_sharp': Icons.align_vertical_bottom_sharp,
         'align_vertical_bottom_rounded': Icons.align_vertical_bottom_rounded,
@@ -3065,8 +2982,7 @@ var p = () => {
         'arrow_drop_down_circle': Icons.arrow_drop_down_circle,
         'arrow_drop_down_circle_sharp': Icons.arrow_drop_down_circle_sharp,
         'arrow_drop_down_circle_rounded': Icons.arrow_drop_down_circle_rounded,
-        'arrow_drop_down_circle_outlined':
-            Icons.arrow_drop_down_circle_outlined,
+        'arrow_drop_down_circle_outlined': Icons.arrow_drop_down_circle_outlined,
         'arrow_drop_up': Icons.arrow_drop_up,
         'arrow_drop_up_sharp': Icons.arrow_drop_up_sharp,
         'arrow_drop_up_rounded': Icons.arrow_drop_up_rounded,
@@ -3827,10 +3743,8 @@ var p = () => {
         'check_box_outlined': Icons.check_box_outlined,
         'check_box_outline_blank': Icons.check_box_outline_blank,
         'check_box_outline_blank_sharp': Icons.check_box_outline_blank_sharp,
-        'check_box_outline_blank_rounded':
-            Icons.check_box_outline_blank_rounded,
-        'check_box_outline_blank_outlined':
-            Icons.check_box_outline_blank_outlined,
+        'check_box_outline_blank_rounded': Icons.check_box_outline_blank_rounded,
+        'check_box_outline_blank_outlined': Icons.check_box_outline_blank_outlined,
         'check_circle': Icons.check_circle,
         'check_circle_sharp': Icons.check_circle_sharp,
         'check_circle_rounded': Icons.check_circle_rounded,
@@ -3913,10 +3827,8 @@ var p = () => {
         'closed_caption_outlined': Icons.closed_caption_outlined,
         'closed_caption_disabled': Icons.closed_caption_disabled,
         'closed_caption_disabled_sharp': Icons.closed_caption_disabled_sharp,
-        'closed_caption_disabled_rounded':
-            Icons.closed_caption_disabled_rounded,
-        'closed_caption_disabled_outlined':
-            Icons.closed_caption_disabled_outlined,
+        'closed_caption_disabled_rounded': Icons.closed_caption_disabled_rounded,
+        'closed_caption_disabled_outlined': Icons.closed_caption_disabled_outlined,
         'closed_caption_off': Icons.closed_caption_off,
         'closed_caption_off_sharp': Icons.closed_caption_off_sharp,
         'closed_caption_off_rounded': Icons.closed_caption_off_rounded,
@@ -4023,10 +3935,8 @@ var p = () => {
         'confirmation_number_outlined': Icons.confirmation_number_outlined,
         'connect_without_contact': Icons.connect_without_contact,
         'connect_without_contact_sharp': Icons.connect_without_contact_sharp,
-        'connect_without_contact_rounded':
-            Icons.connect_without_contact_rounded,
-        'connect_without_contact_outlined':
-            Icons.connect_without_contact_outlined,
+        'connect_without_contact_rounded': Icons.connect_without_contact_rounded,
+        'connect_without_contact_outlined': Icons.connect_without_contact_outlined,
         'connected_tv': Icons.connected_tv,
         'connected_tv_sharp': Icons.connected_tv_sharp,
         'connected_tv_rounded': Icons.connected_tv_rounded,
@@ -4085,10 +3995,8 @@ var p = () => {
         'control_point_outlined': Icons.control_point_outlined,
         'control_point_duplicate': Icons.control_point_duplicate,
         'control_point_duplicate_sharp': Icons.control_point_duplicate_sharp,
-        'control_point_duplicate_rounded':
-            Icons.control_point_duplicate_rounded,
-        'control_point_duplicate_outlined':
-            Icons.control_point_duplicate_outlined,
+        'control_point_duplicate_rounded': Icons.control_point_duplicate_rounded,
+        'control_point_duplicate_outlined': Icons.control_point_duplicate_outlined,
         'copy': Icons.copy,
         'copy_sharp': Icons.copy_sharp,
         'copy_rounded': Icons.copy_rounded,
@@ -4267,10 +4175,8 @@ var p = () => {
         'design_services_outlined': Icons.design_services_outlined,
         'desktop_access_disabled': Icons.desktop_access_disabled,
         'desktop_access_disabled_sharp': Icons.desktop_access_disabled_sharp,
-        'desktop_access_disabled_rounded':
-            Icons.desktop_access_disabled_rounded,
-        'desktop_access_disabled_outlined':
-            Icons.desktop_access_disabled_outlined,
+        'desktop_access_disabled_rounded': Icons.desktop_access_disabled_rounded,
+        'desktop_access_disabled_outlined': Icons.desktop_access_disabled_outlined,
         'desktop_mac': Icons.desktop_mac,
         'desktop_mac_sharp': Icons.desktop_mac_sharp,
         'desktop_mac_rounded': Icons.desktop_mac_rounded,
@@ -4346,8 +4252,7 @@ var p = () => {
         'directions_boat_filled': Icons.directions_boat_filled,
         'directions_boat_filled_sharp': Icons.directions_boat_filled_sharp,
         'directions_boat_filled_rounded': Icons.directions_boat_filled_rounded,
-        'directions_boat_filled_outlined':
-            Icons.directions_boat_filled_outlined,
+        'directions_boat_filled_outlined': Icons.directions_boat_filled_outlined,
         'directions_bus': Icons.directions_bus,
         'directions_bus_sharp': Icons.directions_bus_sharp,
         'directions_bus_rounded': Icons.directions_bus_rounded,
@@ -4377,12 +4282,9 @@ var p = () => {
         'directions_railway_rounded': Icons.directions_railway_rounded,
         'directions_railway_outlined': Icons.directions_railway_outlined,
         'directions_railway_filled': Icons.directions_railway_filled,
-        'directions_railway_filled_sharp':
-            Icons.directions_railway_filled_sharp,
-        'directions_railway_filled_rounded':
-            Icons.directions_railway_filled_rounded,
-        'directions_railway_filled_outlined':
-            Icons.directions_railway_filled_outlined,
+        'directions_railway_filled_sharp': Icons.directions_railway_filled_sharp,
+        'directions_railway_filled_rounded': Icons.directions_railway_filled_rounded,
+        'directions_railway_filled_outlined': Icons.directions_railway_filled_outlined,
         'directions_run': Icons.directions_run,
         'directions_run_sharp': Icons.directions_run_sharp,
         'directions_run_rounded': Icons.directions_run_rounded,
@@ -4393,10 +4295,8 @@ var p = () => {
         'directions_subway_outlined': Icons.directions_subway_outlined,
         'directions_subway_filled': Icons.directions_subway_filled,
         'directions_subway_filled_sharp': Icons.directions_subway_filled_sharp,
-        'directions_subway_filled_rounded':
-            Icons.directions_subway_filled_rounded,
-        'directions_subway_filled_outlined':
-            Icons.directions_subway_filled_outlined,
+        'directions_subway_filled_rounded': Icons.directions_subway_filled_rounded,
+        'directions_subway_filled_outlined': Icons.directions_subway_filled_outlined,
         'directions_train': Icons.directions_train,
         'directions_train_sharp': Icons.directions_train_sharp,
         'directions_train_rounded': Icons.directions_train_rounded,
@@ -4406,12 +4306,9 @@ var p = () => {
         'directions_transit_rounded': Icons.directions_transit_rounded,
         'directions_transit_outlined': Icons.directions_transit_outlined,
         'directions_transit_filled': Icons.directions_transit_filled,
-        'directions_transit_filled_sharp':
-            Icons.directions_transit_filled_sharp,
-        'directions_transit_filled_rounded':
-            Icons.directions_transit_filled_rounded,
-        'directions_transit_filled_outlined':
-            Icons.directions_transit_filled_outlined,
+        'directions_transit_filled_sharp': Icons.directions_transit_filled_sharp,
+        'directions_transit_filled_rounded': Icons.directions_transit_filled_rounded,
+        'directions_transit_filled_outlined': Icons.directions_transit_filled_outlined,
         'directions_walk': Icons.directions_walk,
         'directions_walk_sharp': Icons.directions_walk_sharp,
         'directions_walk_rounded': Icons.directions_walk_rounded,
@@ -4468,14 +4365,10 @@ var p = () => {
         'do_not_disturb_on_sharp': Icons.do_not_disturb_on_sharp,
         'do_not_disturb_on_rounded': Icons.do_not_disturb_on_rounded,
         'do_not_disturb_on_outlined': Icons.do_not_disturb_on_outlined,
-        'do_not_disturb_on_total_silence':
-            Icons.do_not_disturb_on_total_silence,
-        'do_not_disturb_on_total_silence_sharp':
-            Icons.do_not_disturb_on_total_silence_sharp,
-        'do_not_disturb_on_total_silence_rounded':
-            Icons.do_not_disturb_on_total_silence_rounded,
-        'do_not_disturb_on_total_silence_outlined':
-            Icons.do_not_disturb_on_total_silence_outlined,
+        'do_not_disturb_on_total_silence': Icons.do_not_disturb_on_total_silence,
+        'do_not_disturb_on_total_silence_sharp': Icons.do_not_disturb_on_total_silence_sharp,
+        'do_not_disturb_on_total_silence_rounded': Icons.do_not_disturb_on_total_silence_rounded,
+        'do_not_disturb_on_total_silence_outlined': Icons.do_not_disturb_on_total_silence_outlined,
         'do_not_step': Icons.do_not_step,
         'do_not_step_sharp': Icons.do_not_step_sharp,
         'do_not_step_rounded': Icons.do_not_step_rounded,
@@ -4586,12 +4479,9 @@ var p = () => {
         'drive_file_move_outlined': Icons.drive_file_move_outlined,
         'drive_file_move_outline': Icons.drive_file_move_outline,
         'drive_file_rename_outline': Icons.drive_file_rename_outline,
-        'drive_file_rename_outline_sharp':
-            Icons.drive_file_rename_outline_sharp,
-        'drive_file_rename_outline_rounded':
-            Icons.drive_file_rename_outline_rounded,
-        'drive_file_rename_outline_outlined':
-            Icons.drive_file_rename_outline_outlined,
+        'drive_file_rename_outline_sharp': Icons.drive_file_rename_outline_sharp,
+        'drive_file_rename_outline_rounded': Icons.drive_file_rename_outline_rounded,
+        'drive_file_rename_outline_outlined': Icons.drive_file_rename_outline_outlined,
         'drive_folder_upload': Icons.drive_folder_upload,
         'drive_folder_upload_sharp': Icons.drive_folder_upload_sharp,
         'drive_folder_upload_rounded': Icons.drive_folder_upload_rounded,
@@ -4758,10 +4648,8 @@ var p = () => {
         'engineering_outlined': Icons.engineering_outlined,
         'enhance_photo_translate': Icons.enhance_photo_translate,
         'enhance_photo_translate_sharp': Icons.enhance_photo_translate_sharp,
-        'enhance_photo_translate_rounded':
-            Icons.enhance_photo_translate_rounded,
-        'enhance_photo_translate_outlined':
-            Icons.enhance_photo_translate_outlined,
+        'enhance_photo_translate_rounded': Icons.enhance_photo_translate_rounded,
+        'enhance_photo_translate_outlined': Icons.enhance_photo_translate_outlined,
         'enhanced_encryption': Icons.enhanced_encryption,
         'enhanced_encryption_sharp': Icons.enhanced_encryption_sharp,
         'enhanced_encryption_rounded': Icons.enhanced_encryption_rounded,
@@ -4892,10 +4780,8 @@ var p = () => {
         'face_outlined': Icons.face_outlined,
         'face_retouching_natural': Icons.face_retouching_natural,
         'face_retouching_natural_sharp': Icons.face_retouching_natural_sharp,
-        'face_retouching_natural_rounded':
-            Icons.face_retouching_natural_rounded,
-        'face_retouching_natural_outlined':
-            Icons.face_retouching_natural_outlined,
+        'face_retouching_natural_rounded': Icons.face_retouching_natural_rounded,
+        'face_retouching_natural_outlined': Icons.face_retouching_natural_outlined,
         'face_retouching_off': Icons.face_retouching_off,
         'face_retouching_off_sharp': Icons.face_retouching_off_sharp,
         'face_retouching_off_rounded': Icons.face_retouching_off_rounded,
@@ -5284,13 +5170,11 @@ var p = () => {
         'format_indent_decrease': Icons.format_indent_decrease,
         'format_indent_decrease_sharp': Icons.format_indent_decrease_sharp,
         'format_indent_decrease_rounded': Icons.format_indent_decrease_rounded,
-        'format_indent_decrease_outlined':
-            Icons.format_indent_decrease_outlined,
+        'format_indent_decrease_outlined': Icons.format_indent_decrease_outlined,
         'format_indent_increase': Icons.format_indent_increase,
         'format_indent_increase_sharp': Icons.format_indent_increase_sharp,
         'format_indent_increase_rounded': Icons.format_indent_increase_rounded,
-        'format_indent_increase_outlined':
-            Icons.format_indent_increase_outlined,
+        'format_indent_increase_outlined': Icons.format_indent_increase_outlined,
         'format_italic': Icons.format_italic,
         'format_italic_sharp': Icons.format_italic_sharp,
         'format_italic_rounded': Icons.format_italic_rounded,
@@ -5309,10 +5193,8 @@ var p = () => {
         'format_list_numbered_outlined': Icons.format_list_numbered_outlined,
         'format_list_numbered_rtl': Icons.format_list_numbered_rtl,
         'format_list_numbered_rtl_sharp': Icons.format_list_numbered_rtl_sharp,
-        'format_list_numbered_rtl_rounded':
-            Icons.format_list_numbered_rtl_rounded,
-        'format_list_numbered_rtl_outlined':
-            Icons.format_list_numbered_rtl_outlined,
+        'format_list_numbered_rtl_rounded': Icons.format_list_numbered_rtl_rounded,
+        'format_list_numbered_rtl_outlined': Icons.format_list_numbered_rtl_outlined,
         'format_paint': Icons.format_paint,
         'format_paint_sharp': Icons.format_paint_sharp,
         'format_paint_rounded': Icons.format_paint_rounded,
@@ -5334,19 +5216,13 @@ var p = () => {
         'format_strikethrough_rounded': Icons.format_strikethrough_rounded,
         'format_strikethrough_outlined': Icons.format_strikethrough_outlined,
         'format_textdirection_l_to_r': Icons.format_textdirection_l_to_r,
-        'format_textdirection_l_to_r_sharp':
-            Icons.format_textdirection_l_to_r_sharp,
-        'format_textdirection_l_to_r_rounded':
-            Icons.format_textdirection_l_to_r_rounded,
-        'format_textdirection_l_to_r_outlined':
-            Icons.format_textdirection_l_to_r_outlined,
+        'format_textdirection_l_to_r_sharp': Icons.format_textdirection_l_to_r_sharp,
+        'format_textdirection_l_to_r_rounded': Icons.format_textdirection_l_to_r_rounded,
+        'format_textdirection_l_to_r_outlined': Icons.format_textdirection_l_to_r_outlined,
         'format_textdirection_r_to_l': Icons.format_textdirection_r_to_l,
-        'format_textdirection_r_to_l_sharp':
-            Icons.format_textdirection_r_to_l_sharp,
-        'format_textdirection_r_to_l_rounded':
-            Icons.format_textdirection_r_to_l_rounded,
-        'format_textdirection_r_to_l_outlined':
-            Icons.format_textdirection_r_to_l_outlined,
+        'format_textdirection_r_to_l_sharp': Icons.format_textdirection_r_to_l_sharp,
+        'format_textdirection_r_to_l_rounded': Icons.format_textdirection_r_to_l_rounded,
+        'format_textdirection_r_to_l_outlined': Icons.format_textdirection_r_to_l_outlined,
         'format_underline': Icons.format_underline,
         'format_underline_sharp': Icons.format_underline_sharp,
         'format_underline_rounded': Icons.format_underline_rounded,
@@ -5838,10 +5714,8 @@ var p = () => {
         'inbox_outlined': Icons.inbox_outlined,
         'indeterminate_check_box': Icons.indeterminate_check_box,
         'indeterminate_check_box_sharp': Icons.indeterminate_check_box_sharp,
-        'indeterminate_check_box_rounded':
-            Icons.indeterminate_check_box_rounded,
-        'indeterminate_check_box_outlined':
-            Icons.indeterminate_check_box_outlined,
+        'indeterminate_check_box_rounded': Icons.indeterminate_check_box_rounded,
+        'indeterminate_check_box_outlined': Icons.indeterminate_check_box_outlined,
         'info': Icons.info,
         'info_sharp': Icons.info_sharp,
         'info_rounded': Icons.info_rounded,
@@ -5890,10 +5764,8 @@ var p = () => {
         'insights_outlined': Icons.insights_outlined,
         'integration_instructions': Icons.integration_instructions,
         'integration_instructions_sharp': Icons.integration_instructions_sharp,
-        'integration_instructions_rounded':
-            Icons.integration_instructions_rounded,
-        'integration_instructions_outlined':
-            Icons.integration_instructions_outlined,
+        'integration_instructions_rounded': Icons.integration_instructions_rounded,
+        'integration_instructions_outlined': Icons.integration_instructions_outlined,
         'inventory': Icons.inventory,
         'inventory_sharp': Icons.inventory_sharp,
         'inventory_rounded': Icons.inventory_rounded,
@@ -6004,8 +5876,7 @@ var p = () => {
         'label_important_outlined': Icons.label_important_outlined,
         'label_important_outline': Icons.label_important_outline,
         'label_important_outline_sharp': Icons.label_important_outline_sharp,
-        'label_important_outline_rounded':
-            Icons.label_important_outline_rounded,
+        'label_important_outline_rounded': Icons.label_important_outline_rounded,
         'label_off': Icons.label_off,
         'label_off_sharp': Icons.label_off_sharp,
         'label_off_rounded': Icons.label_off_rounded,
@@ -6190,10 +6061,8 @@ var p = () => {
         'local_car_wash_outlined': Icons.local_car_wash_outlined,
         'local_convenience_store': Icons.local_convenience_store,
         'local_convenience_store_sharp': Icons.local_convenience_store_sharp,
-        'local_convenience_store_rounded':
-            Icons.local_convenience_store_rounded,
-        'local_convenience_store_outlined':
-            Icons.local_convenience_store_outlined,
+        'local_convenience_store_rounded': Icons.local_convenience_store_rounded,
+        'local_convenience_store_outlined': Icons.local_convenience_store_outlined,
         'local_dining': Icons.local_dining,
         'local_dining_sharp': Icons.local_dining_sharp,
         'local_dining_rounded': Icons.local_dining_rounded,
@@ -6569,8 +6438,7 @@ var p = () => {
         'miscellaneous_services': Icons.miscellaneous_services,
         'miscellaneous_services_sharp': Icons.miscellaneous_services_sharp,
         'miscellaneous_services_rounded': Icons.miscellaneous_services_rounded,
-        'miscellaneous_services_outlined':
-            Icons.miscellaneous_services_outlined,
+        'miscellaneous_services_outlined': Icons.miscellaneous_services_outlined,
         'missed_video_call': Icons.missed_video_call,
         'missed_video_call_sharp': Icons.missed_video_call_sharp,
         'missed_video_call_rounded': Icons.missed_video_call_rounded,
@@ -6892,12 +6760,9 @@ var p = () => {
         'no_encryption_rounded': Icons.no_encryption_rounded,
         'no_encryption_outlined': Icons.no_encryption_outlined,
         'no_encryption_gmailerrorred': Icons.no_encryption_gmailerrorred,
-        'no_encryption_gmailerrorred_sharp':
-            Icons.no_encryption_gmailerrorred_sharp,
-        'no_encryption_gmailerrorred_rounded':
-            Icons.no_encryption_gmailerrorred_rounded,
-        'no_encryption_gmailerrorred_outlined':
-            Icons.no_encryption_gmailerrorred_outlined,
+        'no_encryption_gmailerrorred_sharp': Icons.no_encryption_gmailerrorred_sharp,
+        'no_encryption_gmailerrorred_rounded': Icons.no_encryption_gmailerrorred_rounded,
+        'no_encryption_gmailerrorred_outlined': Icons.no_encryption_gmailerrorred_outlined,
         'no_flash': Icons.no_flash,
         'no_flash_sharp': Icons.no_flash_sharp,
         'no_flash_rounded': Icons.no_flash_rounded,
@@ -6990,8 +6855,7 @@ var p = () => {
         'notification_important': Icons.notification_important,
         'notification_important_sharp': Icons.notification_important_sharp,
         'notification_important_rounded': Icons.notification_important_rounded,
-        'notification_important_outlined':
-            Icons.notification_important_outlined,
+        'notification_important_outlined': Icons.notification_important_outlined,
         'notifications': Icons.notifications,
         'notifications_sharp': Icons.notifications_sharp,
         'notifications_rounded': Icons.notifications_rounded,
@@ -7138,44 +7002,33 @@ var p = () => {
         'panorama_horizontal_rounded': Icons.panorama_horizontal_rounded,
         'panorama_horizontal_outlined': Icons.panorama_horizontal_outlined,
         'panorama_horizontal_select': Icons.panorama_horizontal_select,
-        'panorama_horizontal_select_sharp':
-            Icons.panorama_horizontal_select_sharp,
-        'panorama_horizontal_select_rounded':
-            Icons.panorama_horizontal_select_rounded,
-        'panorama_horizontal_select_outlined':
-            Icons.panorama_horizontal_select_outlined,
+        'panorama_horizontal_select_sharp': Icons.panorama_horizontal_select_sharp,
+        'panorama_horizontal_select_rounded': Icons.panorama_horizontal_select_rounded,
+        'panorama_horizontal_select_outlined': Icons.panorama_horizontal_select_outlined,
         'panorama_photosphere': Icons.panorama_photosphere,
         'panorama_photosphere_sharp': Icons.panorama_photosphere_sharp,
         'panorama_photosphere_rounded': Icons.panorama_photosphere_rounded,
         'panorama_photosphere_outlined': Icons.panorama_photosphere_outlined,
         'panorama_photosphere_select': Icons.panorama_photosphere_select,
-        'panorama_photosphere_select_sharp':
-            Icons.panorama_photosphere_select_sharp,
-        'panorama_photosphere_select_rounded':
-            Icons.panorama_photosphere_select_rounded,
-        'panorama_photosphere_select_outlined':
-            Icons.panorama_photosphere_select_outlined,
+        'panorama_photosphere_select_sharp': Icons.panorama_photosphere_select_sharp,
+        'panorama_photosphere_select_rounded': Icons.panorama_photosphere_select_rounded,
+        'panorama_photosphere_select_outlined': Icons.panorama_photosphere_select_outlined,
         'panorama_vertical': Icons.panorama_vertical,
         'panorama_vertical_sharp': Icons.panorama_vertical_sharp,
         'panorama_vertical_rounded': Icons.panorama_vertical_rounded,
         'panorama_vertical_outlined': Icons.panorama_vertical_outlined,
         'panorama_vertical_select': Icons.panorama_vertical_select,
         'panorama_vertical_select_sharp': Icons.panorama_vertical_select_sharp,
-        'panorama_vertical_select_rounded':
-            Icons.panorama_vertical_select_rounded,
-        'panorama_vertical_select_outlined':
-            Icons.panorama_vertical_select_outlined,
+        'panorama_vertical_select_rounded': Icons.panorama_vertical_select_rounded,
+        'panorama_vertical_select_outlined': Icons.panorama_vertical_select_outlined,
         'panorama_wide_angle': Icons.panorama_wide_angle,
         'panorama_wide_angle_sharp': Icons.panorama_wide_angle_sharp,
         'panorama_wide_angle_rounded': Icons.panorama_wide_angle_rounded,
         'panorama_wide_angle_outlined': Icons.panorama_wide_angle_outlined,
         'panorama_wide_angle_select': Icons.panorama_wide_angle_select,
-        'panorama_wide_angle_select_sharp':
-            Icons.panorama_wide_angle_select_sharp,
-        'panorama_wide_angle_select_rounded':
-            Icons.panorama_wide_angle_select_rounded,
-        'panorama_wide_angle_select_outlined':
-            Icons.panorama_wide_angle_select_outlined,
+        'panorama_wide_angle_select_sharp': Icons.panorama_wide_angle_select_sharp,
+        'panorama_wide_angle_select_rounded': Icons.panorama_wide_angle_select_rounded,
+        'panorama_wide_angle_select_outlined': Icons.panorama_wide_angle_select_outlined,
         'paragliding': Icons.paragliding,
         'paragliding_sharp': Icons.paragliding_sharp,
         'paragliding_rounded': Icons.paragliding_rounded,
@@ -7274,10 +7127,8 @@ var p = () => {
         'perm_device_info_outlined': Icons.perm_device_info_outlined,
         'perm_device_information': Icons.perm_device_information,
         'perm_device_information_sharp': Icons.perm_device_information_sharp,
-        'perm_device_information_rounded':
-            Icons.perm_device_information_rounded,
-        'perm_device_information_outlined':
-            Icons.perm_device_information_outlined,
+        'perm_device_information_rounded': Icons.perm_device_information_rounded,
+        'perm_device_information_outlined': Icons.perm_device_information_outlined,
         'perm_identity': Icons.perm_identity,
         'perm_identity_sharp': Icons.perm_identity_sharp,
         'perm_identity_rounded': Icons.perm_identity_rounded,
@@ -7372,10 +7223,8 @@ var p = () => {
         'phone_android_outlined': Icons.phone_android_outlined,
         'phone_bluetooth_speaker': Icons.phone_bluetooth_speaker,
         'phone_bluetooth_speaker_sharp': Icons.phone_bluetooth_speaker_sharp,
-        'phone_bluetooth_speaker_rounded':
-            Icons.phone_bluetooth_speaker_rounded,
-        'phone_bluetooth_speaker_outlined':
-            Icons.phone_bluetooth_speaker_outlined,
+        'phone_bluetooth_speaker_rounded': Icons.phone_bluetooth_speaker_rounded,
+        'phone_bluetooth_speaker_outlined': Icons.phone_bluetooth_speaker_outlined,
         'phone_callback': Icons.phone_callback,
         'phone_callback_sharp': Icons.phone_callback_sharp,
         'phone_callback_rounded': Icons.phone_callback_rounded,
@@ -7466,22 +7315,16 @@ var p = () => {
         'photo_library_outlined': Icons.photo_library_outlined,
         'photo_size_select_actual': Icons.photo_size_select_actual,
         'photo_size_select_actual_sharp': Icons.photo_size_select_actual_sharp,
-        'photo_size_select_actual_rounded':
-            Icons.photo_size_select_actual_rounded,
-        'photo_size_select_actual_outlined':
-            Icons.photo_size_select_actual_outlined,
+        'photo_size_select_actual_rounded': Icons.photo_size_select_actual_rounded,
+        'photo_size_select_actual_outlined': Icons.photo_size_select_actual_outlined,
         'photo_size_select_large': Icons.photo_size_select_large,
         'photo_size_select_large_sharp': Icons.photo_size_select_large_sharp,
-        'photo_size_select_large_rounded':
-            Icons.photo_size_select_large_rounded,
-        'photo_size_select_large_outlined':
-            Icons.photo_size_select_large_outlined,
+        'photo_size_select_large_rounded': Icons.photo_size_select_large_rounded,
+        'photo_size_select_large_outlined': Icons.photo_size_select_large_outlined,
         'photo_size_select_small': Icons.photo_size_select_small,
         'photo_size_select_small_sharp': Icons.photo_size_select_small_sharp,
-        'photo_size_select_small_rounded':
-            Icons.photo_size_select_small_rounded,
-        'photo_size_select_small_outlined':
-            Icons.photo_size_select_small_outlined,
+        'photo_size_select_small_rounded': Icons.photo_size_select_small_rounded,
+        'photo_size_select_small_outlined': Icons.photo_size_select_small_outlined,
         'piano': Icons.piano,
         'piano_sharp': Icons.piano_sharp,
         'piano_rounded': Icons.piano_rounded,
@@ -7501,8 +7344,7 @@ var p = () => {
         'picture_in_picture_alt': Icons.picture_in_picture_alt,
         'picture_in_picture_alt_sharp': Icons.picture_in_picture_alt_sharp,
         'picture_in_picture_alt_rounded': Icons.picture_in_picture_alt_rounded,
-        'picture_in_picture_alt_outlined':
-            Icons.picture_in_picture_alt_outlined,
+        'picture_in_picture_alt_outlined': Icons.picture_in_picture_alt_outlined,
         'pie_chart': Icons.pie_chart,
         'pie_chart_sharp': Icons.pie_chart_sharp,
         'pie_chart_rounded': Icons.pie_chart_rounded,
@@ -7637,10 +7479,8 @@ var p = () => {
         'power_settings_new_outlined': Icons.power_settings_new_outlined,
         'precision_manufacturing': Icons.precision_manufacturing,
         'precision_manufacturing_sharp': Icons.precision_manufacturing_sharp,
-        'precision_manufacturing_rounded':
-            Icons.precision_manufacturing_rounded,
-        'precision_manufacturing_outlined':
-            Icons.precision_manufacturing_outlined,
+        'precision_manufacturing_rounded': Icons.precision_manufacturing_rounded,
+        'precision_manufacturing_outlined': Icons.precision_manufacturing_outlined,
         'pregnant_woman': Icons.pregnant_woman,
         'pregnant_woman_sharp': Icons.pregnant_woman_sharp,
         'pregnant_woman_rounded': Icons.pregnant_woman_rounded,
@@ -7678,12 +7518,9 @@ var p = () => {
         'privacy_tip_rounded': Icons.privacy_tip_rounded,
         'privacy_tip_outlined': Icons.privacy_tip_outlined,
         'production_quantity_limits': Icons.production_quantity_limits,
-        'production_quantity_limits_sharp':
-            Icons.production_quantity_limits_sharp,
-        'production_quantity_limits_rounded':
-            Icons.production_quantity_limits_rounded,
-        'production_quantity_limits_outlined':
-            Icons.production_quantity_limits_outlined,
+        'production_quantity_limits_sharp': Icons.production_quantity_limits_sharp,
+        'production_quantity_limits_rounded': Icons.production_quantity_limits_rounded,
+        'production_quantity_limits_outlined': Icons.production_quantity_limits_outlined,
         'psychology': Icons.psychology,
         'psychology_sharp': Icons.psychology_sharp,
         'psychology_rounded': Icons.psychology_rounded,
@@ -7703,8 +7540,7 @@ var p = () => {
         'published_with_changes': Icons.published_with_changes,
         'published_with_changes_sharp': Icons.published_with_changes_sharp,
         'published_with_changes_rounded': Icons.published_with_changes_rounded,
-        'published_with_changes_outlined':
-            Icons.published_with_changes_outlined,
+        'published_with_changes_outlined': Icons.published_with_changes_outlined,
         'push_pin': Icons.push_pin,
         'push_pin_sharp': Icons.push_pin_sharp,
         'push_pin_rounded': Icons.push_pin_rounded,
@@ -7788,8 +7624,7 @@ var p = () => {
         'radio_button_unchecked': Icons.radio_button_unchecked,
         'radio_button_unchecked_sharp': Icons.radio_button_unchecked_sharp,
         'radio_button_unchecked_rounded': Icons.radio_button_unchecked_rounded,
-        'radio_button_unchecked_outlined':
-            Icons.radio_button_unchecked_outlined,
+        'radio_button_unchecked_outlined': Icons.radio_button_unchecked_outlined,
         'railway_alert': Icons.railway_alert,
         'railway_alert_sharp': Icons.railway_alert_sharp,
         'railway_alert_rounded': Icons.railway_alert_rounded,
@@ -8204,10 +8039,8 @@ var p = () => {
         'security_update_good_outlined': Icons.security_update_good_outlined,
         'security_update_warning': Icons.security_update_warning,
         'security_update_warning_sharp': Icons.security_update_warning_sharp,
-        'security_update_warning_rounded':
-            Icons.security_update_warning_rounded,
-        'security_update_warning_outlined':
-            Icons.security_update_warning_outlined,
+        'security_update_warning_rounded': Icons.security_update_warning_rounded,
+        'security_update_warning_outlined': Icons.security_update_warning_outlined,
         'segment': Icons.segment,
         'segment_sharp': Icons.segment_sharp,
         'segment_rounded': Icons.segment_rounded,
@@ -8255,8 +8088,7 @@ var p = () => {
         'sentiment_dissatisfied': Icons.sentiment_dissatisfied,
         'sentiment_dissatisfied_sharp': Icons.sentiment_dissatisfied_sharp,
         'sentiment_dissatisfied_rounded': Icons.sentiment_dissatisfied_rounded,
-        'sentiment_dissatisfied_outlined':
-            Icons.sentiment_dissatisfied_outlined,
+        'sentiment_dissatisfied_outlined': Icons.sentiment_dissatisfied_outlined,
         'sentiment_neutral': Icons.sentiment_neutral,
         'sentiment_neutral_sharp': Icons.sentiment_neutral_sharp,
         'sentiment_neutral_rounded': Icons.sentiment_neutral_rounded,
@@ -8267,23 +8099,16 @@ var p = () => {
         'sentiment_satisfied_outlined': Icons.sentiment_satisfied_outlined,
         'sentiment_satisfied_alt': Icons.sentiment_satisfied_alt,
         'sentiment_satisfied_alt_sharp': Icons.sentiment_satisfied_alt_sharp,
-        'sentiment_satisfied_alt_rounded':
-            Icons.sentiment_satisfied_alt_rounded,
-        'sentiment_satisfied_alt_outlined':
-            Icons.sentiment_satisfied_alt_outlined,
+        'sentiment_satisfied_alt_rounded': Icons.sentiment_satisfied_alt_rounded,
+        'sentiment_satisfied_alt_outlined': Icons.sentiment_satisfied_alt_outlined,
         'sentiment_very_dissatisfied': Icons.sentiment_very_dissatisfied,
-        'sentiment_very_dissatisfied_sharp':
-            Icons.sentiment_very_dissatisfied_sharp,
-        'sentiment_very_dissatisfied_rounded':
-            Icons.sentiment_very_dissatisfied_rounded,
-        'sentiment_very_dissatisfied_outlined':
-            Icons.sentiment_very_dissatisfied_outlined,
+        'sentiment_very_dissatisfied_sharp': Icons.sentiment_very_dissatisfied_sharp,
+        'sentiment_very_dissatisfied_rounded': Icons.sentiment_very_dissatisfied_rounded,
+        'sentiment_very_dissatisfied_outlined': Icons.sentiment_very_dissatisfied_outlined,
         'sentiment_very_satisfied': Icons.sentiment_very_satisfied,
         'sentiment_very_satisfied_sharp': Icons.sentiment_very_satisfied_sharp,
-        'sentiment_very_satisfied_rounded':
-            Icons.sentiment_very_satisfied_rounded,
-        'sentiment_very_satisfied_outlined':
-            Icons.sentiment_very_satisfied_outlined,
+        'sentiment_very_satisfied_rounded': Icons.sentiment_very_satisfied_rounded,
+        'sentiment_very_satisfied_outlined': Icons.sentiment_very_satisfied_outlined,
         'set_meal': Icons.set_meal,
         'set_meal_sharp': Icons.set_meal_sharp,
         'set_meal_rounded': Icons.set_meal_rounded,
@@ -8295,18 +8120,15 @@ var p = () => {
         'settings_accessibility': Icons.settings_accessibility,
         'settings_accessibility_sharp': Icons.settings_accessibility_sharp,
         'settings_accessibility_rounded': Icons.settings_accessibility_rounded,
-        'settings_accessibility_outlined':
-            Icons.settings_accessibility_outlined,
+        'settings_accessibility_outlined': Icons.settings_accessibility_outlined,
         'settings_applications': Icons.settings_applications,
         'settings_applications_sharp': Icons.settings_applications_sharp,
         'settings_applications_rounded': Icons.settings_applications_rounded,
         'settings_applications_outlined': Icons.settings_applications_outlined,
         'settings_backup_restore': Icons.settings_backup_restore,
         'settings_backup_restore_sharp': Icons.settings_backup_restore_sharp,
-        'settings_backup_restore_rounded':
-            Icons.settings_backup_restore_rounded,
-        'settings_backup_restore_outlined':
-            Icons.settings_backup_restore_outlined,
+        'settings_backup_restore_rounded': Icons.settings_backup_restore_rounded,
+        'settings_backup_restore_outlined': Icons.settings_backup_restore_outlined,
         'settings_bluetooth': Icons.settings_bluetooth,
         'settings_bluetooth_sharp': Icons.settings_bluetooth_sharp,
         'settings_bluetooth_rounded': Icons.settings_bluetooth_rounded,
@@ -8330,20 +8152,15 @@ var p = () => {
         'settings_input_antenna': Icons.settings_input_antenna,
         'settings_input_antenna_sharp': Icons.settings_input_antenna_sharp,
         'settings_input_antenna_rounded': Icons.settings_input_antenna_rounded,
-        'settings_input_antenna_outlined':
-            Icons.settings_input_antenna_outlined,
+        'settings_input_antenna_outlined': Icons.settings_input_antenna_outlined,
         'settings_input_component': Icons.settings_input_component,
         'settings_input_component_sharp': Icons.settings_input_component_sharp,
-        'settings_input_component_rounded':
-            Icons.settings_input_component_rounded,
-        'settings_input_component_outlined':
-            Icons.settings_input_component_outlined,
+        'settings_input_component_rounded': Icons.settings_input_component_rounded,
+        'settings_input_component_outlined': Icons.settings_input_component_outlined,
         'settings_input_composite': Icons.settings_input_composite,
         'settings_input_composite_sharp': Icons.settings_input_composite_sharp,
-        'settings_input_composite_rounded':
-            Icons.settings_input_composite_rounded,
-        'settings_input_composite_outlined':
-            Icons.settings_input_composite_outlined,
+        'settings_input_composite_rounded': Icons.settings_input_composite_rounded,
+        'settings_input_composite_outlined': Icons.settings_input_composite_outlined,
         'settings_input_hdmi': Icons.settings_input_hdmi,
         'settings_input_hdmi_sharp': Icons.settings_input_hdmi_sharp,
         'settings_input_hdmi_rounded': Icons.settings_input_hdmi_rounded,
@@ -8374,10 +8191,8 @@ var p = () => {
         'settings_suggest_outlined': Icons.settings_suggest_outlined,
         'settings_system_daydream': Icons.settings_system_daydream,
         'settings_system_daydream_sharp': Icons.settings_system_daydream_sharp,
-        'settings_system_daydream_rounded':
-            Icons.settings_system_daydream_rounded,
-        'settings_system_daydream_outlined':
-            Icons.settings_system_daydream_outlined,
+        'settings_system_daydream_rounded': Icons.settings_system_daydream_rounded,
+        'settings_system_daydream_outlined': Icons.settings_system_daydream_outlined,
         'settings_voice': Icons.settings_voice,
         'settings_voice_sharp': Icons.settings_voice_sharp,
         'settings_voice_rounded': Icons.settings_voice_rounded,
@@ -8466,32 +8281,22 @@ var p = () => {
         'signal_cellular_alt_sharp': Icons.signal_cellular_alt_sharp,
         'signal_cellular_alt_rounded': Icons.signal_cellular_alt_rounded,
         'signal_cellular_alt_outlined': Icons.signal_cellular_alt_outlined,
-        'signal_cellular_connected_no_internet_0_bar':
-            Icons.signal_cellular_connected_no_internet_0_bar,
-        'signal_cellular_connected_no_internet_0_bar_sharp':
-            Icons.signal_cellular_connected_no_internet_0_bar_sharp,
-        'signal_cellular_connected_no_internet_0_bar_rounded':
-            Icons.signal_cellular_connected_no_internet_0_bar_rounded,
-        'signal_cellular_connected_no_internet_0_bar_outlined':
-            Icons.signal_cellular_connected_no_internet_0_bar_outlined,
-        'signal_cellular_connected_no_internet_4_bar':
-            Icons.signal_cellular_connected_no_internet_4_bar,
-        'signal_cellular_connected_no_internet_4_bar_sharp':
-            Icons.signal_cellular_connected_no_internet_4_bar_sharp,
-        'signal_cellular_connected_no_internet_4_bar_rounded':
-            Icons.signal_cellular_connected_no_internet_4_bar_rounded,
-        'signal_cellular_connected_no_internet_4_bar_outlined':
-            Icons.signal_cellular_connected_no_internet_4_bar_outlined,
+        'signal_cellular_connected_no_internet_0_bar': Icons.signal_cellular_connected_no_internet_0_bar,
+        'signal_cellular_connected_no_internet_0_bar_sharp': Icons.signal_cellular_connected_no_internet_0_bar_sharp,
+        'signal_cellular_connected_no_internet_0_bar_rounded': Icons.signal_cellular_connected_no_internet_0_bar_rounded,
+        'signal_cellular_connected_no_internet_0_bar_outlined': Icons.signal_cellular_connected_no_internet_0_bar_outlined,
+        'signal_cellular_connected_no_internet_4_bar': Icons.signal_cellular_connected_no_internet_4_bar,
+        'signal_cellular_connected_no_internet_4_bar_sharp': Icons.signal_cellular_connected_no_internet_4_bar_sharp,
+        'signal_cellular_connected_no_internet_4_bar_rounded': Icons.signal_cellular_connected_no_internet_4_bar_rounded,
+        'signal_cellular_connected_no_internet_4_bar_outlined': Icons.signal_cellular_connected_no_internet_4_bar_outlined,
         'signal_cellular_no_sim': Icons.signal_cellular_no_sim,
         'signal_cellular_no_sim_sharp': Icons.signal_cellular_no_sim_sharp,
         'signal_cellular_no_sim_rounded': Icons.signal_cellular_no_sim_rounded,
-        'signal_cellular_no_sim_outlined':
-            Icons.signal_cellular_no_sim_outlined,
+        'signal_cellular_no_sim_outlined': Icons.signal_cellular_no_sim_outlined,
         'signal_cellular_nodata': Icons.signal_cellular_nodata,
         'signal_cellular_nodata_sharp': Icons.signal_cellular_nodata_sharp,
         'signal_cellular_nodata_rounded': Icons.signal_cellular_nodata_rounded,
-        'signal_cellular_nodata_outlined':
-            Icons.signal_cellular_nodata_outlined,
+        'signal_cellular_nodata_outlined': Icons.signal_cellular_nodata_outlined,
         'signal_cellular_null': Icons.signal_cellular_null,
         'signal_cellular_null_sharp': Icons.signal_cellular_null_sharp,
         'signal_cellular_null_rounded': Icons.signal_cellular_null_rounded,
@@ -8511,46 +8316,31 @@ var p = () => {
         'signal_wifi_4_bar_lock': Icons.signal_wifi_4_bar_lock,
         'signal_wifi_4_bar_lock_sharp': Icons.signal_wifi_4_bar_lock_sharp,
         'signal_wifi_4_bar_lock_rounded': Icons.signal_wifi_4_bar_lock_rounded,
-        'signal_wifi_4_bar_lock_outlined':
-            Icons.signal_wifi_4_bar_lock_outlined,
+        'signal_wifi_4_bar_lock_outlined': Icons.signal_wifi_4_bar_lock_outlined,
         'signal_wifi_bad': Icons.signal_wifi_bad,
         'signal_wifi_bad_sharp': Icons.signal_wifi_bad_sharp,
         'signal_wifi_bad_rounded': Icons.signal_wifi_bad_rounded,
         'signal_wifi_bad_outlined': Icons.signal_wifi_bad_outlined,
-        'signal_wifi_connected_no_internet_4':
-            Icons.signal_wifi_connected_no_internet_4,
-        'signal_wifi_connected_no_internet_4_sharp':
-            Icons.signal_wifi_connected_no_internet_4_sharp,
-        'signal_wifi_connected_no_internet_4_rounded':
-            Icons.signal_wifi_connected_no_internet_4_rounded,
-        'signal_wifi_connected_no_internet_4_outlined':
-            Icons.signal_wifi_connected_no_internet_4_outlined,
+        'signal_wifi_connected_no_internet_4': Icons.signal_wifi_connected_no_internet_4,
+        'signal_wifi_connected_no_internet_4_sharp': Icons.signal_wifi_connected_no_internet_4_sharp,
+        'signal_wifi_connected_no_internet_4_rounded': Icons.signal_wifi_connected_no_internet_4_rounded,
+        'signal_wifi_connected_no_internet_4_outlined': Icons.signal_wifi_connected_no_internet_4_outlined,
         'signal_wifi_off': Icons.signal_wifi_off,
         'signal_wifi_off_sharp': Icons.signal_wifi_off_sharp,
         'signal_wifi_off_rounded': Icons.signal_wifi_off_rounded,
         'signal_wifi_off_outlined': Icons.signal_wifi_off_outlined,
         'signal_wifi_statusbar_4_bar': Icons.signal_wifi_statusbar_4_bar,
-        'signal_wifi_statusbar_4_bar_sharp':
-            Icons.signal_wifi_statusbar_4_bar_sharp,
-        'signal_wifi_statusbar_4_bar_rounded':
-            Icons.signal_wifi_statusbar_4_bar_rounded,
-        'signal_wifi_statusbar_4_bar_outlined':
-            Icons.signal_wifi_statusbar_4_bar_outlined,
-        'signal_wifi_statusbar_connected_no_internet_4':
-            Icons.signal_wifi_statusbar_connected_no_internet_4,
-        'signal_wifi_statusbar_connected_no_internet_4_sharp':
-            Icons.signal_wifi_statusbar_connected_no_internet_4_sharp,
-        'signal_wifi_statusbar_connected_no_internet_4_rounded':
-            Icons.signal_wifi_statusbar_connected_no_internet_4_rounded,
-        'signal_wifi_statusbar_connected_no_internet_4_outlined':
-            Icons.signal_wifi_statusbar_connected_no_internet_4_outlined,
+        'signal_wifi_statusbar_4_bar_sharp': Icons.signal_wifi_statusbar_4_bar_sharp,
+        'signal_wifi_statusbar_4_bar_rounded': Icons.signal_wifi_statusbar_4_bar_rounded,
+        'signal_wifi_statusbar_4_bar_outlined': Icons.signal_wifi_statusbar_4_bar_outlined,
+        'signal_wifi_statusbar_connected_no_internet_4': Icons.signal_wifi_statusbar_connected_no_internet_4,
+        'signal_wifi_statusbar_connected_no_internet_4_sharp': Icons.signal_wifi_statusbar_connected_no_internet_4_sharp,
+        'signal_wifi_statusbar_connected_no_internet_4_rounded': Icons.signal_wifi_statusbar_connected_no_internet_4_rounded,
+        'signal_wifi_statusbar_connected_no_internet_4_outlined': Icons.signal_wifi_statusbar_connected_no_internet_4_outlined,
         'signal_wifi_statusbar_null': Icons.signal_wifi_statusbar_null,
-        'signal_wifi_statusbar_null_sharp':
-            Icons.signal_wifi_statusbar_null_sharp,
-        'signal_wifi_statusbar_null_rounded':
-            Icons.signal_wifi_statusbar_null_rounded,
-        'signal_wifi_statusbar_null_outlined':
-            Icons.signal_wifi_statusbar_null_outlined,
+        'signal_wifi_statusbar_null_sharp': Icons.signal_wifi_statusbar_null_sharp,
+        'signal_wifi_statusbar_null_rounded': Icons.signal_wifi_statusbar_null_rounded,
+        'signal_wifi_statusbar_null_outlined': Icons.signal_wifi_statusbar_null_outlined,
         'sim_card': Icons.sim_card,
         'sim_card_sharp': Icons.sim_card_sharp,
         'sim_card_rounded': Icons.sim_card_rounded,
@@ -8850,8 +8640,7 @@ var p = () => {
         'stay_current_landscape': Icons.stay_current_landscape,
         'stay_current_landscape_sharp': Icons.stay_current_landscape_sharp,
         'stay_current_landscape_rounded': Icons.stay_current_landscape_rounded,
-        'stay_current_landscape_outlined':
-            Icons.stay_current_landscape_outlined,
+        'stay_current_landscape_outlined': Icons.stay_current_landscape_outlined,
         'stay_current_portrait': Icons.stay_current_portrait,
         'stay_current_portrait_sharp': Icons.stay_current_portrait_sharp,
         'stay_current_portrait_rounded': Icons.stay_current_portrait_rounded,
@@ -8859,8 +8648,7 @@ var p = () => {
         'stay_primary_landscape': Icons.stay_primary_landscape,
         'stay_primary_landscape_sharp': Icons.stay_primary_landscape_sharp,
         'stay_primary_landscape_rounded': Icons.stay_primary_landscape_rounded,
-        'stay_primary_landscape_outlined':
-            Icons.stay_primary_landscape_outlined,
+        'stay_primary_landscape_outlined': Icons.stay_primary_landscape_outlined,
         'stay_primary_portrait': Icons.stay_primary_portrait,
         'stay_primary_portrait_sharp': Icons.stay_primary_portrait_sharp,
         'stay_primary_portrait_rounded': Icons.stay_primary_portrait_rounded,
@@ -8927,16 +8715,12 @@ var p = () => {
         'style_outlined': Icons.style_outlined,
         'subdirectory_arrow_left': Icons.subdirectory_arrow_left,
         'subdirectory_arrow_left_sharp': Icons.subdirectory_arrow_left_sharp,
-        'subdirectory_arrow_left_rounded':
-            Icons.subdirectory_arrow_left_rounded,
-        'subdirectory_arrow_left_outlined':
-            Icons.subdirectory_arrow_left_outlined,
+        'subdirectory_arrow_left_rounded': Icons.subdirectory_arrow_left_rounded,
+        'subdirectory_arrow_left_outlined': Icons.subdirectory_arrow_left_outlined,
         'subdirectory_arrow_right': Icons.subdirectory_arrow_right,
         'subdirectory_arrow_right_sharp': Icons.subdirectory_arrow_right_sharp,
-        'subdirectory_arrow_right_rounded':
-            Icons.subdirectory_arrow_right_rounded,
-        'subdirectory_arrow_right_outlined':
-            Icons.subdirectory_arrow_right_outlined,
+        'subdirectory_arrow_right_rounded': Icons.subdirectory_arrow_right_rounded,
+        'subdirectory_arrow_right_outlined': Icons.subdirectory_arrow_right_outlined,
         'subject': Icons.subject,
         'subject_sharp': Icons.subject_sharp,
         'subject_rounded': Icons.subject_rounded,
@@ -8972,8 +8756,7 @@ var p = () => {
         'supervised_user_circle': Icons.supervised_user_circle,
         'supervised_user_circle_sharp': Icons.supervised_user_circle_sharp,
         'supervised_user_circle_rounded': Icons.supervised_user_circle_rounded,
-        'supervised_user_circle_outlined':
-            Icons.supervised_user_circle_outlined,
+        'supervised_user_circle_outlined': Icons.supervised_user_circle_outlined,
         'supervisor_account': Icons.supervisor_account,
         'supervisor_account_sharp': Icons.supervisor_account_sharp,
         'supervisor_account_rounded': Icons.supervisor_account_rounded,
@@ -9005,8 +8788,7 @@ var p = () => {
         'swap_horizontal_circle': Icons.swap_horizontal_circle,
         'swap_horizontal_circle_sharp': Icons.swap_horizontal_circle_sharp,
         'swap_horizontal_circle_rounded': Icons.swap_horizontal_circle_rounded,
-        'swap_horizontal_circle_outlined':
-            Icons.swap_horizontal_circle_outlined,
+        'swap_horizontal_circle_outlined': Icons.swap_horizontal_circle_outlined,
         'swap_vert': Icons.swap_vert,
         'swap_vert_sharp': Icons.swap_vert_sharp,
         'swap_vert_rounded': Icons.swap_vert_rounded,
@@ -9062,22 +8844,15 @@ var p = () => {
         'system_security_update': Icons.system_security_update,
         'system_security_update_sharp': Icons.system_security_update_sharp,
         'system_security_update_rounded': Icons.system_security_update_rounded,
-        'system_security_update_outlined':
-            Icons.system_security_update_outlined,
+        'system_security_update_outlined': Icons.system_security_update_outlined,
         'system_security_update_good': Icons.system_security_update_good,
-        'system_security_update_good_sharp':
-            Icons.system_security_update_good_sharp,
-        'system_security_update_good_rounded':
-            Icons.system_security_update_good_rounded,
-        'system_security_update_good_outlined':
-            Icons.system_security_update_good_outlined,
+        'system_security_update_good_sharp': Icons.system_security_update_good_sharp,
+        'system_security_update_good_rounded': Icons.system_security_update_good_rounded,
+        'system_security_update_good_outlined': Icons.system_security_update_good_outlined,
         'system_security_update_warning': Icons.system_security_update_warning,
-        'system_security_update_warning_sharp':
-            Icons.system_security_update_warning_sharp,
-        'system_security_update_warning_rounded':
-            Icons.system_security_update_warning_rounded,
-        'system_security_update_warning_outlined':
-            Icons.system_security_update_warning_outlined,
+        'system_security_update_warning_sharp': Icons.system_security_update_warning_sharp,
+        'system_security_update_warning_rounded': Icons.system_security_update_warning_rounded,
+        'system_security_update_warning_outlined': Icons.system_security_update_warning_outlined,
         'system_update': Icons.system_update,
         'system_update_sharp': Icons.system_update_sharp,
         'system_update_rounded': Icons.system_update_rounded,
@@ -9176,10 +8951,8 @@ var p = () => {
         'text_rotate_vertical_outlined': Icons.text_rotate_vertical_outlined,
         'text_rotation_angledown': Icons.text_rotation_angledown,
         'text_rotation_angledown_sharp': Icons.text_rotation_angledown_sharp,
-        'text_rotation_angledown_rounded':
-            Icons.text_rotation_angledown_rounded,
-        'text_rotation_angledown_outlined':
-            Icons.text_rotation_angledown_outlined,
+        'text_rotation_angledown_rounded': Icons.text_rotation_angledown_rounded,
+        'text_rotation_angledown_outlined': Icons.text_rotation_angledown_outlined,
         'text_rotation_angleup': Icons.text_rotation_angleup,
         'text_rotation_angleup_sharp': Icons.text_rotation_angleup_sharp,
         'text_rotation_angleup_rounded': Icons.text_rotation_angleup_rounded,
@@ -9345,12 +9118,9 @@ var p = () => {
         'tram_rounded': Icons.tram_rounded,
         'tram_outlined': Icons.tram_outlined,
         'transfer_within_a_station': Icons.transfer_within_a_station,
-        'transfer_within_a_station_sharp':
-            Icons.transfer_within_a_station_sharp,
-        'transfer_within_a_station_rounded':
-            Icons.transfer_within_a_station_rounded,
-        'transfer_within_a_station_outlined':
-            Icons.transfer_within_a_station_outlined,
+        'transfer_within_a_station_sharp': Icons.transfer_within_a_station_sharp,
+        'transfer_within_a_station_rounded': Icons.transfer_within_a_station_rounded,
+        'transfer_within_a_station_outlined': Icons.transfer_within_a_station_outlined,
         'transform': Icons.transform,
         'transform_sharp': Icons.transform_sharp,
         'transform_rounded': Icons.transform_rounded,
@@ -9842,12 +9612,9 @@ var p = () => {
         'wifi_tethering_rounded': Icons.wifi_tethering_rounded,
         'wifi_tethering_outlined': Icons.wifi_tethering_outlined,
         'wifi_tethering_error_rounded': Icons.wifi_tethering_error_rounded,
-        'wifi_tethering_error_rounded_sharp':
-            Icons.wifi_tethering_error_rounded_sharp,
-        'wifi_tethering_error_rounded_rounded':
-            Icons.wifi_tethering_error_rounded_rounded,
-        'wifi_tethering_error_rounded_outlined':
-            Icons.wifi_tethering_error_rounded_outlined,
+        'wifi_tethering_error_rounded_sharp': Icons.wifi_tethering_error_rounded_sharp,
+        'wifi_tethering_error_rounded_rounded': Icons.wifi_tethering_error_rounded_rounded,
+        'wifi_tethering_error_rounded_outlined': Icons.wifi_tethering_error_rounded_outlined,
         'wifi_tethering_off': Icons.wifi_tethering_off,
         'wifi_tethering_off_sharp': Icons.wifi_tethering_off_sharp,
         'wifi_tethering_off_rounded': Icons.wifi_tethering_off_rounded,
@@ -9921,8 +9688,7 @@ var p = () => {
             onGenerateRoute: props['onGenerateRoute'],
             onGenerateInitialRoutes: props['onGenerateInitialRoutes'],
             onUnknownRoute: props['onUnknownRoute'],
-            navigatorObservers:
-                as(props['navigatorObservers']) ?? const <NavigatorObserver>[],
+            navigatorObservers: as(props['navigatorObservers']) ?? const <NavigatorObserver>[],
             builder: props['builder'],
             title: props['title'] ?? '',
             onGenerateTitle: props['onGenerateTitle'],
@@ -9936,17 +9702,13 @@ var p = () => {
             localizationsDelegates: props['localizationsDelegates'],
             localeListResolutionCallback: props['localeListResolutionCallback'],
             localeResolutionCallback: props['localeResolutionCallback'],
-            supportedLocales:
-                props['supportedLocales'] ?? const <Locale>[Locale('en', 'US')],
+            supportedLocales: props['supportedLocales'] ?? const <Locale>[Locale('en', 'US')],
             debugShowMaterialGrid: props['debugShowMaterialGrid'] ?? false,
             showPerformanceOverlay: props['showPerformanceOverlay'] ?? false,
-            checkerboardRasterCacheImages:
-                props['checkerboardRasterCacheImages'] ?? false,
-            checkerboardOffscreenLayers:
-                props['checkerboardOffscreenLayers'] ?? false,
+            checkerboardRasterCacheImages: props['checkerboardRasterCacheImages'] ?? false,
+            checkerboardOffscreenLayers: props['checkerboardOffscreenLayers'] ?? false,
             showSemanticsDebugger: props['showSemanticsDebugger'] ?? false,
-            debugShowCheckedModeBanner:
-                props['debugShowCheckedModeBanner'] ?? true,
+            debugShowCheckedModeBanner: props['debugShowCheckedModeBanner'] ?? true,
             shortcuts: props['shortcuts'],
             actions: props['actions'],
             restorationScopeId: props['restorationScopeId'],
@@ -9973,25 +9735,20 @@ var p = () => {
             localizationsDelegates: props['localizationsDelegates'],
             localeListResolutionCallback: props['localeListResolutionCallback'],
             localeResolutionCallback: props['localeResolutionCallback'],
-            supportedLocales:
-                props['supportedLocales'] ?? const <Locale>[Locale('en', 'US')],
+            supportedLocales: props['supportedLocales'] ?? const <Locale>[Locale('en', 'US')],
             debugShowMaterialGrid: props['debugShowMaterialGrid'] ?? false,
             showPerformanceOverlay: props['showPerformanceOverlay'] ?? false,
-            checkerboardRasterCacheImages:
-                props['checkerboardRasterCacheImages'] ?? false,
-            checkerboardOffscreenLayers:
-                props['checkerboardOffscreenLayers'] ?? false,
+            checkerboardRasterCacheImages: props['checkerboardRasterCacheImages'] ?? false,
+            checkerboardOffscreenLayers: props['checkerboardOffscreenLayers'] ?? false,
             showSemanticsDebugger: props['showSemanticsDebugger'] ?? false,
-            debugShowCheckedModeBanner:
-                props['debugShowCheckedModeBanner'] ?? true,
+            debugShowCheckedModeBanner: props['debugShowCheckedModeBanner'] ?? true,
             shortcuts: props['shortcuts'],
             actions: props['actions'],
             restorationScopeId: props['restorationScopeId'],
             scrollBehavior: props['scrollBehavior'],
             useInheritedMediaQuery: props['useInheritedMediaQuery'] ?? false,
           ),
-      'MaterialApp.createMaterialHeroController': (props) =>
-          MaterialApp.createMaterialHeroController(),
+      'MaterialApp.createMaterialHeroController': (props) => MaterialApp.createMaterialHeroController(),
       'ThemeMode': {
         'values': ThemeMode.values,
         'system': ThemeMode.system,
@@ -10066,8 +9823,7 @@ var p = () => {
             thumbColor: props['thumbColor'],
             trackColor: props['trackColor'],
             materialTapTargetSize: props['materialTapTargetSize'],
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
             mouseCursor: props['mouseCursor'],
             focusColor: props['focusColor'],
             hoverColor: props['hoverColor'],
@@ -10091,8 +9847,7 @@ var p = () => {
             materialTapTargetSize: props['materialTapTargetSize'],
             thumbColor: props['thumbColor'],
             trackColor: props['trackColor'],
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
             mouseCursor: props['mouseCursor'],
             focusColor: props['focusColor'],
             hoverColor: props['hoverColor'],
@@ -10108,11 +9863,9 @@ var p = () => {
             centerTitle: props['centerTitle'],
             titlePadding: props['titlePadding'],
             collapseMode: props['collapseMode'] ?? CollapseMode.parallax,
-            stretchModes: as<StretchMode>(props['stretchModes']) ??
-                const <StretchMode>[StretchMode.zoomBackground],
+            stretchModes: as<StretchMode>(props['stretchModes']) ?? const <StretchMode>[StretchMode.zoomBackground],
           ),
-      'FlexibleSpaceBar.createSettings': (props) =>
-          FlexibleSpaceBar.createSettings(
+      'FlexibleSpaceBar.createSettings': (props) => FlexibleSpaceBar.createSettings(
             toolbarOpacity: props['toolbarOpacity']?.toDouble(),
             minExtent: props['minExtent']?.toDouble(),
             maxExtent: props['maxExtent']?.toDouble(),
@@ -10177,8 +9930,7 @@ var p = () => {
             props['pa'][0],
             props['pa'][1],
           ),
-      'DateUtils.addMonthsToMonthDate': (props) =>
-          DateUtils.addMonthsToMonthDate(
+      'DateUtils.addMonthsToMonthDate': (props) => DateUtils.addMonthsToMonthDate(
             props['pa'][0],
             props['pa'][1],
           ),
@@ -10219,8 +9971,7 @@ var p = () => {
             alignment: props['alignment'],
             isDrawerOpen: props['isDrawerOpen'] ?? false,
             drawerCallback: props['drawerCallback'],
-            dragStartBehavior:
-                props['dragStartBehavior'] ?? DragStartBehavior.start,
+            dragStartBehavior: props['dragStartBehavior'] ?? DragStartBehavior.start,
             scrimColor: props['scrimColor'],
             edgeDragWidth: props['edgeDragWidth']?.toDouble(),
             enableOpenDragGesture: props['enableOpenDragGesture'] ?? true,
@@ -10240,8 +9991,7 @@ var p = () => {
             mainAxis: props['mainAxis'] ?? Axis.vertical,
             elevation: props['elevation']?.toDouble() ?? 2,
             hasDividers: props['hasDividers'] ?? false,
-            children: as<MergeableMaterialItem>(props['children']) ??
-                const <MergeableMaterialItem>[],
+            children: as<MergeableMaterialItem>(props['children']) ?? const <MergeableMaterialItem>[],
             dividerColor: props['dividerColor'],
           ),
       'MaterialState': {
