@@ -22,6 +22,10 @@ class _SugarElseIfPageState extends State<SugarElseIfPage> {
     print('Click...');
   }
 
+  int _getItemCount() {
+    return _value;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,12 +54,12 @@ class _SugarElseIfPageState extends State<SugarElseIfPage> {
               width: Sugar.width(context),
               height: Sugar.height(context),
               child: Sugar.listBuilder(
-                  count: 20,
-                  builder: (int itme) {
-                    return Center(
+                  itemCount: _getItemCount(),
+                  itemBuilder: (BuildContext context, int item) {
+                    Center(
                       child: Container(
                         height: 20,
-                        child: Text("$itme"),
+                        child: Text("$item"),
                       ),
                     );
                   }),
@@ -76,9 +80,7 @@ class _SugarElseIfPageState extends State<SugarElseIfPage> {
                           color: Colors.amber,
                           margin: EdgeInsets.only(left: 10),
                           child: Center(
-                            child: Text(
-                                "$item"
-                            ),
+                            child: Text("$item"),
                           ),
                         ),
                       ),
