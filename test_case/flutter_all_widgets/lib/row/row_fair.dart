@@ -21,18 +21,14 @@ class _FairRowPageState extends State<FairRowPage> {
     fairProps = widget.fairProps;
   }
 
-  List<Widget> _getChildren() {
-    return [
-      Text('Fair Sample 1'),
-      Text('Fair Sample 2'),
-    ];
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
         child: Row(
-      children: _getChildren(),
+      children: [
+        Text('Fair Sample 1'),
+        Text('Fair Sample 2'),
+      ],
     ));
   }
 }

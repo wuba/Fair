@@ -1,0 +1,57 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar"
+    },
+    "body": {
+      "className": "Row",
+      "na": {
+        "children": [
+          {
+            "className": "Expanded",
+            "na": {
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "Deliver features faster"
+                ],
+                "na": {
+                  "textAlign": "#(TextAlign.center)"
+                }
+              }
+            }
+          },
+          {
+            "className": "Expanded",
+            "na": {
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "Craft beautiful UIs"
+                ],
+                "na": {
+                  "textAlign": "#(TextAlign.center)"
+                }
+              }
+            }
+          },
+          {
+            "className": "Expanded",
+            "na": {
+              "child": {
+                "className": "FittedBox",
+                "na": {
+                  "child": {
+                    "className": "FlutterLogo"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {}
+}
