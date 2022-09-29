@@ -1,0 +1,86 @@
+{
+  "className": "Center",
+  "na": {
+    "child": {
+      "className": "Card",
+      "na": {
+        "child": {
+          "className": "Column",
+          "na": {
+            "mainAxisSize": "#(MainAxisSize.min)",
+            "children": [
+              {
+                "className": "ListTile",
+                "na": {
+                  "leading": {
+                    "className": "Icon",
+                    "pa": [
+                      "#(Icons.album)"
+                    ]
+                  },
+                  "title": {
+                    "className": "Text",
+                    "pa": [
+                      "The Enchanted Nightingale"
+                    ]
+                  },
+                  "subtitle": {
+                    "className": "Text",
+                    "pa": [
+                      "Music by Julie Gable. Lyrics by Sidney Stein."
+                    ]
+                  }
+                }
+              },
+              {
+                "className": "Row",
+                "na": {
+                  "mainAxisAlignment": "#(MainAxisAlignment.end)",
+                  "children": [
+                    {
+                      "className": "TextButton",
+                      "na": {
+                        "onPressed": "@(onTap)",
+                        "child": {
+                          "className": "Text",
+                          "pa": [
+                            "Buy tickets"
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "className": "SizedBox",
+                      "na": {
+                        "width": 8
+                      }
+                    },
+                    {
+                      "className": "TextButton",
+                      "na": {
+                        "onPressed": "@(onTap)",
+                        "child": {
+                          "className": "Text",
+                          "pa": [
+                            "List"
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "className": "SizedBox",
+                      "na": {
+                        "width": 8
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

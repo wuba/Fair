@@ -54,16 +54,34 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/images/qixi.png
     - assets/bundle/
     - assets/bundle/animated/
     - assets/bundle/checkbox/
-    - assets/bundle/cupertinotabbar/
     - assets/bundle/outlinebutton/
     - assets/bundle/cupertinoalertdialog/
     - assets/bundle/circularprogressindicator/
     - assets/bundle/richtext/
     - assets/bundle/absorbpointer/
     - assets/bundle/alertdialog/
+    - assets/bundle/appbar/
+    - assets/bundle/aspectratio/
+    - assets/bundle/autocomplete/
+    - assets/bundle/backdropfilter/
+    - assets/bundle/baseline/
+    - assets/bundle/bottomnavigationbar/
+    - assets/bundle/bottomsheet/
+    - assets/bundle/card/
+    - assets/bundle/center/
+    - assets/bundle/chip/
+    - assets/bundle/clipoval/
+    - assets/bundle/clippath/
+    - assets/bundle/constrainedbox/
+    - assets/bundle/container/
+    - assets/bundle/cupertinoactionsheet/
+    - assets/bundle/cupertinobutton/
+    - assets/bundle/cupertinocontextmenu/
+    - assets/bundle/cupertinodatepicker/
     - assets/bundle/placeholder/
     - assets/bundle/popupmenubutton/
     - assets/bundle/radio/

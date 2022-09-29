@@ -1,0 +1,25 @@
+{
+  "className": "ClipPath.shape",
+  "na": {
+    "shape": {
+      "className": "StadiumBorder"
+    },
+    "child": {
+      "className": "Container",
+      "na": {
+        "height": 150,
+        "width": 250,
+        "child": {
+          "className": "Image.asset",
+          "pa": [
+            "assets/images/qixi.png"
+          ],
+          "na": {
+            "fit": "#(BoxFit.cover)"
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

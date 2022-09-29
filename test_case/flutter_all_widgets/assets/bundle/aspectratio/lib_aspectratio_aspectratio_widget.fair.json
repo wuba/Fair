@@ -1,0 +1,27 @@
+{
+  "className": "Container",
+  "na": {
+    "color": "#(Colors.blue)",
+    "alignment": "#(Alignment.center)",
+    "width": "%(_getWidth)",
+    "height": 100.0,
+    "child": {
+      "className": "AspectRatio",
+      "na": {
+        "child": {
+          "className": "Container",
+          "na": {
+            "color": "#(Colors.green)",
+            "child": {
+              "className": "Text",
+              "pa": [
+                "Fair 按比例显示"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

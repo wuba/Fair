@@ -754,7 +754,7 @@ Object.__inner__ = function () {};
   DateTime.tryParse = function (formattedString) {
     try {
       return DateTime.parse(formattedString);
-    } catch {
+    } catch (err) {
       return null;
     }
   };

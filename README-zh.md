@@ -17,7 +17,10 @@ Fair是为Flutter设计的动态化框架，通过Fair Compiler工具对原生Da
 
 **Fair 的接入和使用，建议大家阅读在线文档:**
 
-> 在线文档：[https://fair.58.com/](https://fair.58.com/)
+> 在线文档：[https://fair.58.com/](https://fair.58.com/)  
+
+**如果您需要热更新平台，可关注Fair Pushy**
+> 热更新平台：[FAIR PUSHY](https://github.com/wuba/FairPushy)
 
 ![](fair/what-is-fair.png)
 
@@ -111,6 +114,12 @@ data: {"fairProps": json.encode({})}),
 ```
 
 ## 🔨最近版本
+### 2.7.0
+更新时间：2022.08.10
+
+#### Fair
+- 适配 Flutter SDK 3.0.0、3.0.1、3.0.2、3.0.3、3.0.4、3.0.5版本；
+- 修复部分已知BUG
 
 ### 2.6.0
 更新时间：2022.07.05
@@ -166,13 +175,14 @@ example 工程位置：`fair/example`
   * null-safe 版本支持，预计4月22日上线      ✅
   * Flutter 2.8.0版本适配，预计5月中旬上线   ✅
   * Flutter 2.10.0版本适配，预计6月初上线    ✅
+  * Flutter 3.0版本适配                   ✅
   * IDE 语法检测和提示插件                  ✅
   * 丰富语法糖 
 * 热更新平台
   * Dart Server工程搭建   ✅
   * Flutter Web工程搭建   ✅
-  * 补丁/资源管理
-  * 项目管理
+  * 补丁/资源管理          ✅
+  * 项目管理               ✅
   * 移动端 Update&Download ✅
 * 线上动态化
   * Flutter Web工程搭建   ✅
@@ -184,6 +194,23 @@ example 工程位置：`fair/example`
   * 工程编辑
   * Flutter效果预览
   * Fair DSL预览
+* IDE插件
+  * Fair工程生成
+  * Fair模板生成
+  * Fair语法检测
+  
+## 📱接入APP
+<table>
+  <tr>
+    <td align="center"><img src="https://pic3.58cdn.com.cn/nowater/frs/n_v303052b2c3f3b4ea5a5989f5e52d71481.jpg" width="100px;" alt=""/><br /><sub><b>58阿姨</b></sub><br /></td>
+    <td align="center"><img src="https://pic5.58cdn.com.cn/nowater/frs/n_v3ba05182f1dc9460dab8e02d22914f700.jpg" width="100px;" alt=""/><br /><sub><b>移动经纪人</b></sub><br /></td>
+    <td align="center"><img src="https://pic7.58cdn.com.cn/nowater/frs/n_v35eecf738ac6c4ec992bfc0d1b8d910d4.jpg" width="100px;" alt=""/><br /><sub><b>安居拍房</b></sub><br /></td>
+    <td align="center"><img src="https://pic1.58cdn.com.cn/nowater/frs/n_v3b4fd1abf1e484d3da864a177a12a28e2.jpg" width="100px;" alt=""/><br /><sub><b>神奇保</b></sub><br /></td>
+    <td align="center"><img src="https://pic6.58cdn.com.cn/nowater/frs/n_v36e650b70b7834204959547bf616869ef.jpg" width="100px;" alt=""/><br /><sub><b>58商办通</b></sub><br /></td>
+    <td align="center"><img src="https://pic1.58cdn.com.cn/nowater/frs/n_v378fdb523858b4475b05fb04f66f105ae.jpg" width="100px;" alt=""/><br /><sub><b>58商家版</b></sub><br /></td>
+    <td align="center"><img src="https://pic6.58cdn.com.cn/nowater/frs/n_v31394c57d6c234aecad820c94dd1c8dc6.png" width="100px;" alt=""/><br /><sub><b>中华英才网</b></sub><br /></td>
+  </tr>
+</table>
 
 ## ✨️ 贡献者
 

@@ -1,0 +1,12 @@
+{
+  "className": "Center",
+  "na": {
+    "child": {
+      "className": "Text",
+      "pa": [
+        "Fair Center"
+      ]
+    }
+  },
+  "methodMap": {}
+}

@@ -1,0 +1,38 @@
+{
+  "className": "CupertinoPageScaffold",
+  "na": {
+    "child": {
+      "className": "DefaultTextStyle",
+      "na": {
+        "style": {
+          "className": "TextStyle",
+          "na": {
+            "color": {
+              "pa": [
+                "^(context)"
+              ]
+            },
+            "fontSize": 22.0
+          }
+        },
+        "child": {
+          "className": "Center",
+          "na": {
+            "child": {
+              "className": "Column",
+              "na": {
+                "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                "children": [
+                  "%(_DatePickerItem)",
+                  "%(_DatePickerItem)",
+                  "%(_DatePickerItem)"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

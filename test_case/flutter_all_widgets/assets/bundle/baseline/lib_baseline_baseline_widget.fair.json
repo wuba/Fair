@@ -1,0 +1,68 @@
+{
+  "className": "Row",
+  "na": {
+    "mainAxisAlignment": "#(MainAxisAlignment.spaceBetween)",
+    "children": [
+      {
+        "className": "Baseline",
+        "na": {
+          "baseline": 50.0,
+          "baselineType": "#(TextBaseline.alphabetic)",
+          "child": {
+            "className": "Text",
+            "pa": [
+              "TjTjTj"
+            ],
+            "na": {
+              "style": {
+                "className": "TextStyle",
+                "na": {
+                  "fontSize": 20.0,
+                  "textBaseline": "#(TextBaseline.alphabetic)"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "className": "Baseline",
+        "na": {
+          "baseline": 50.0,
+          "baselineType": "#(TextBaseline.alphabetic)",
+          "child": {
+            "className": "Container",
+            "na": {
+              "width": 30.0,
+              "height": 30.0,
+              "color": "#(Colors.red)"
+            }
+          }
+        }
+      },
+      {
+        "className": "Baseline",
+        "na": {
+          "baseline": 50.0,
+          "baselineType": "#(TextBaseline.alphabetic)",
+          "child": {
+            "className": "Text",
+            "pa": [
+              "RyRyRy"
+            ],
+            "na": {
+              "style": {
+                "className": "TextStyle",
+                "na": {
+                  "fontSize": 35.0,
+                  "textBaseline": "#(TextBaseline.alphabetic)"
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "methodMap": {}
+}

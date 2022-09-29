@@ -10,7 +10,57 @@
             "提示"
           ]
         },
-        "children": "%(_getChildren)"
+        "children": [
+          {
+            "className": "Container",
+            "na": {
+              "height": 80,
+              "alignment": "#(Alignment.center)",
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "确认删除吗？"
+                ]
+              }
+            }
+          },
+          {
+            "className": "Divider",
+            "na": {
+              "height": 1
+            }
+          },
+          {
+            "className": "TextButton",
+            "na": {
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "取消"
+                ]
+              },
+              "onPressed": "@(_getCancel)"
+            }
+          },
+          {
+            "className": "Divider",
+            "na": {
+              "height": 1
+            }
+          },
+          {
+            "className": "TextButton",
+            "na": {
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "确认"
+                ]
+              },
+              "onPressed": "@(_getOk)"
+            }
+          }
+        ]
       }
     }
   },

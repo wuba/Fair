@@ -1,0 +1,48 @@
+{
+  "className": "Stack",
+  "na": {
+    "alignment": "#(Alignment.center)",
+    "children": [
+      {
+        "className": "Container",
+        "na": {
+          "width": 200,
+          "height": 300,
+          "child": {
+            "className": "Image.asset",
+            "pa": [
+              "assets/images/qixi.png"
+            ]
+          }
+        }
+      },
+      {
+        "className": "BackdropFilter",
+        "na": {
+          "filter": {
+            "className": "ImageFilter.blur",
+            "na": {
+              "sigmaX": 5.0,
+              "sigmaY": 5.0
+            }
+          },
+          "child": {
+            "className": "Center"
+          }
+        }
+      }
+    ]
+  },
+  "methodMap": {
+    "_getContainer": {
+      "className": "Container",
+      "na": {
+        "color": {
+          "pa": [
+            0
+          ]
+        }
+      }
+    }
+  }
+}

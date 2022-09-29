@@ -1,0 +1,50 @@
+{
+  "className": "Center",
+  "na": {
+    "child": {
+      "className": "SizedBox",
+      "na": {
+        "width": 100,
+        "height": 100,
+        "child": {
+          "className": "CupertinoContextMenu",
+          "na": {
+            "actions": [
+              {
+                "className": "CupertinoContextMenuAction",
+                "na": {
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "菜单1"
+                    ]
+                  },
+                  "onPressed": "@(_onPressed)"
+                }
+              },
+              {
+                "className": "CupertinoContextMenuAction",
+                "na": {
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "菜单2"
+                    ]
+                  },
+                  "onPressed": "@(_onPressed)"
+                }
+              }
+            ],
+            "child": {
+              "className": "Container",
+              "na": {
+                "color": "#(Colors.red)"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

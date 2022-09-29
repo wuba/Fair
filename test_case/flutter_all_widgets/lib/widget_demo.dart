@@ -66,10 +66,28 @@ import 'animated/physicalmodel/animatedphysicalmodel_demo.dart';
 import 'animated/crossfade/animatedcrossfade_demo.dart';
 import 'animated/positioned/animatedpositioned_demo.dart';
 import 'animated/size/animatedsize_demo.dart';
+import 'appbar/appbar_demo.dart';
+import 'aspectratio/aspectratio_demo.dart';
+import 'autocomplete/autocomplete_demo.dart';
+import 'backdropfilter/backdropfilter_demo.dart';
+import 'baseline/baseline_demo.dart';
+import 'bottom_navigation_bar/bottomnavigationbar_demo.dart';
+import 'bottomsheet/bottomsheet_demo.dart';
+import 'card/card_demo.dart';
+import 'center/center_demo.dart';
 import 'checkbox/checkbox_demo.dart';
+import 'chip/chip_demo.dart';
 import 'circularProgressIndicator/circular_progressIndicator_demo.dart';
+import 'clipoval/clipoval_demo.dart';
+import 'clippath/clippath_demo.dart';
+import 'constrainedbox/constrainedbox_demo.dart';
+import 'container/container_demo.dart';
 import 'cupertino_tabbar/cupertino_tabbar_demo.dart';
+import 'cupertinoactionsheet/cupertino_action_sheet_demo.dart';
 import 'cupertinoalertdialog/cupertino_alert_dialog_demo.dart';
+import 'cupertinobutton/cupertinobutton_demo.dart';
+import 'cupertinocontextmenu/cupertinocontextmenu_demo.dart';
+import 'cupertinodatepicker/cupertinodatepicker_demo.dart';
 import 'widget_item.dart';
 
 class WidgetDemo extends StatelessWidget {
@@ -122,6 +140,24 @@ class HomePage extends StatelessWidget {
       WidgetItem("AnimatedPositioned", AnimatedPositionedDemo()),
       WidgetItem("AnimatedSize", AnimatedSizeDemo()),
       WidgetItem("AnimatedWidget", AnimatedWidgetDemo()),
+      WidgetItem("AppBar", AppBarDemo()),
+      WidgetItem("AspectRatio", AspectRatioDemo()),
+      WidgetItem("Autocomplete", AutocompleteDemo()),
+      WidgetItem("BackdropFilter", BackdropFilterDemo()),
+      WidgetItem("Baseline", BaselineDemo()),
+      WidgetItem("BottomNavigationBar", BottomNavigationBarDemo()),
+      WidgetItem("BottomSheet", BottomSheetDemo()),
+      WidgetItem("Card", CardDemo()),
+      WidgetItem("Center", CenterDemo()),
+      WidgetItem("Chip", ChipDemo()),
+      WidgetItem("ClipOval", ClipOvalDemo()),
+      WidgetItem("ClipPath", ClipPathDemo()),
+      WidgetItem("ConstrainedBox", ConstrainedBoxDemo()),
+      WidgetItem("Container", ContainerDemo()),
+      WidgetItem("CupertinoActionSheet", CupertinoActionSheetDemo()),
+      WidgetItem("CupertinoButton", CupertinoButtonDemo()),
+      WidgetItem("CupertinoContextMenu", CupertinoContextMenuDemo()),
+      WidgetItem("CupertinoDatePicker", CupertinoDatePickerDemo()),
       WidgetItem("Placeholder", PlaceholderDemo()),
       WidgetItem("PopupmenuButton", PopupmenuButtonDemo()),
       WidgetItem("PositionedTransition", PositionedTransitionDemo()),

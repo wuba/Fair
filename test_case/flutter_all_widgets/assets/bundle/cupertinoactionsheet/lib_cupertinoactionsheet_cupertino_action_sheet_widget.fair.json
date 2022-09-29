@@ -1,0 +1,34 @@
+{
+  "className": "CupertinoPageScaffold",
+  "na": {
+    "navigationBar": {
+      "className": "CupertinoNavigationBar",
+      "na": {
+        "middle": {
+          "className": "Text",
+          "pa": [
+            "%(_getTitle)"
+          ]
+        }
+      }
+    },
+    "child": {
+      "className": "Center",
+      "na": {
+        "child": {
+          "className": "CupertinoButton",
+          "na": {
+            "onPressed": "@(_show)",
+            "child": {
+              "className": "Text",
+              "pa": [
+                "Fair CupertinoActionSheet"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

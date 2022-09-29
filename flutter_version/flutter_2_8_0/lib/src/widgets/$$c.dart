@@ -2024,7 +2024,7 @@ var p = () => {
     brightness: props['brightness'],
     padding: props['padding'],
     transitionBetweenRoutes: props['transitionBetweenRoutes'] ?? true,
-    heroTag: props['heroTag'] ?? _defaultHeroTag,
+
   ),
   'CupertinoSliverNavigationBar': (props) => CupertinoSliverNavigationBar(
     key: props['key'],

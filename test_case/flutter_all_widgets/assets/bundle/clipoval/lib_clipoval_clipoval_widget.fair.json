@@ -1,0 +1,29 @@
+{
+  "className": "ClipRect",
+  "na": {
+    "child": {
+      "className": "Align",
+      "na": {
+        "alignment": "#(Alignment.topCenter)",
+        "heightFactor": 0.5,
+        "child": {
+          "className": "Container",
+          "na": {
+            "height": 250,
+            "width": 150,
+            "child": {
+              "className": "Image.asset",
+              "pa": [
+                "assets/images/qixi.png"
+              ],
+              "na": {
+                "fit": "#(BoxFit.cover)"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

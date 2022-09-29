@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-
 import 'animatedwidget_widget.dart';
 
 class AnimatedWidgetDemo extends StatelessWidget{

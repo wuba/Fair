@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_all_widgets/src/generated.fair.dart';
 import 'package:flutter_all_widgets/widget_demo.dart';
 
 
@@ -17,6 +18,7 @@ void main(){
 }
 
 dynamic _getApp()=>FairApp(
+    generated: AppGeneratedModule(),
     modules: {},
     delegate: {},
     child: WidgetDemo());
