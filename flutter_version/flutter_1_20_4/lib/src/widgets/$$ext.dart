@@ -187,5 +187,15 @@ var p = () => {
       'Matrix4.rotationZ': (props) => Matrix4.rotationZ(
             props['pa'][0]?.toDouble(),
       ),
+      'TableRow': (props) => TableRow(
+            key: props['key'],
+            decoration: props['decoration'],
+            children: props['children'],
+      ),
+      'TableBorder.all': (props) => TableBorder.all(
+            color: props['color'] ?? Color(0xFF000000),
+            width: props['width'] ?? 1.0,
+            style: props['style'] ?? BorderStyle.solid,
+      ),
       // 往下补充Widget映射关系
     };

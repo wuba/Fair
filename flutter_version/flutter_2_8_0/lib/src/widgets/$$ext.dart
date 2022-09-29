@@ -123,16 +123,16 @@ var p = () => {
             addRepaintBoundaries: props['addRepaintBoundaries'] ?? true,
             addSemanticIndexes: props['addSemanticIndexes'] ?? true,
             semanticIndexCallback: props['semanticIndexCallback'] ??
-                (Widget _,int index) => index,
+                (Widget _, int index) => index,
             semanticIndexOffset: props['semanticIndexOffset'] ?? 0,
-      ),
+          ),
       'SliverChildListDelegate': (props) => SliverChildListDelegate(
             props['pa'][0],
             addAutomaticKeepAlives: props['addAutomaticKeepAlives'] ?? true,
             addRepaintBoundaries: props['addRepaintBoundaries'] ?? true,
             addSemanticIndexes: props['addSemanticIndexes'] ?? true,
             semanticIndexCallback: props['semanticIndexCallback'] ??
-                    (Widget _,int index) => index,
+                (Widget _, int index) => index,
             semanticIndexOffset: props['semanticIndexOffset'] ?? 0,
           ),
       'TabController': (props) => TabController(
@@ -163,13 +163,13 @@ var p = () => {
       'BeveledRectangleBorder': (props) => BeveledRectangleBorder(
             side: props['side'] ?? BorderSide.none,
             borderRadius: props['props'] ?? BorderRadius.zero,
-      ),
+          ),
       'BoxConstraints': (props) => BoxConstraints(
             minWidth: props['minWidth']?.toDouble() ?? 0.0,
             maxWidth: props['maxWidth']?.toDouble() ?? double.infinity,
             minHeight: props['minHeight']?.toDouble() ?? 0.0,
             maxHeight: props['maxHeight']?.toDouble() ?? double.infinity,
-      ),
+          ),
       'BoxDecoration': (props) => BoxDecoration(
             color: props['color'],
             image: props['image'],
@@ -179,18 +179,18 @@ var p = () => {
             gradient: props['gradient'],
             backgroundBlendMode: props['backgroundBlendMode'],
             shape: props['shape'] ?? BoxShape.rectangle,
-      ),
+          ),
       'Border': (props) => Border(
             top: props['top'] ?? BorderSide.none,
             right: props['right'] ?? BorderSide.none,
             bottom: props['bottom'] ?? BorderSide.none,
             left: props['left'] ?? BorderSide.none,
-      ),
+          ),
       'BorderSide': (props) => BorderSide(
-          color: props['color'] ?? const Color(0xFF000000),
-          width: props['width'] ?? 1.0,
-          style: props['style'] ?? BorderStyle.solid,
-      ),
+            color: props['color'] ?? const Color(0xFF000000),
+            width: props['width'] ?? 1.0,
+            style: props['style'] ?? BorderStyle.solid,
+          ),
       'FocusNode': (props) => FocusNode(
             debugLabel: props['props'],
             onKey: props['onKey'],
@@ -198,9 +198,9 @@ var p = () => {
             skipTraversal: props['skipTraversal'] ?? false,
             canRequestFocus: props['canRequestFocus'] ?? true,
             descendantsAreFocusable: props['descendantsAreFocusable'] ?? true,
-      ),
-      'ThemeData':(props) => ThemeData(
-          brightness: props['brightness'],
+          ),
+      'ThemeData': (props) => ThemeData(
+            brightness: props['brightness'],
             visualDensity: props['visualDensity'],
             primarySwatch: props['primarySwatch'],
             primaryColor: props['primaryColor'],
@@ -274,9 +274,20 @@ var p = () => {
             drawerTheme: props['drawerTheme'],
             listTileTheme: props['listTileTheme'],
             androidOverscrollIndicator: props['androidOverscrollIndicator'],
-      ),
+          ),
       'Matrix4.rotationZ': (props) => Matrix4.rotationZ(
-        props['pa'][0]?.toDouble(),
-      ),
+            props['pa'][0]?.toDouble(),
+          ),
+      'TableRow': (props) => TableRow(
+            key: props['key'],
+            decoration: props['decoration'],
+            children: props['children'],
+          ),
+      'TableBorder.all': (props) => TableBorder.all(
+            color: props['color'] ?? Color(0xFF000000),
+            width: props['width'] ?? 1.0,
+            style: props['style'] ?? BorderStyle.solid,
+            borderRadius: props['borderRadius'] ?? BorderRadius.zero,
+          ),
       // 往下补充Widget映射关系
     };
