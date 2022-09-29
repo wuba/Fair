@@ -30,50 +30,39 @@
               "height": 1
             }
           },
-          "%(_getCancel)",
+          {
+            "className": "TextButton",
+            "na": {
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "取消"
+                ]
+              },
+              "onPressed": "@(_getCancel)"
+            }
+          },
           {
             "className": "Divider",
             "na": {
               "height": 1
             }
           },
-          "%(_getOk)"
+          {
+            "className": "TextButton",
+            "na": {
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "确认"
+                ]
+              },
+              "onPressed": "@(_getOk)"
+            }
+          }
         ]
       }
     }
   },
-  "methodMap": {
-    "_getOk": {
-      "className": "TextButton",
-      "na": {
-        "child": {
-          "className": "Text",
-          "pa": [
-            "确认"
-          ]
-        },
-        "onPressed": {
-          "pa": [
-            "ok"
-          ]
-        }
-      }
-    },
-    "_getCancel": {
-      "className": "TextButton",
-      "na": {
-        "child": {
-          "className": "Text",
-          "pa": [
-            "取消"
-          ]
-        },
-        "onPressed": {
-          "pa": [
-            "cancel"
-          ]
-        }
-      }
-    }
-  }
+  "methodMap": {}
 }

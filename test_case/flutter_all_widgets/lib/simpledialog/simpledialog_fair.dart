@@ -21,16 +21,12 @@ class _FairSimpleDialogPageState extends State<FairSimpleDialogPage> {
     fairProps = widget.fairProps;
   }
 
-  Widget _getOk(BuildContext context) {
-    return TextButton(
-        child: Text('确认'),
-        onPressed: () => Navigator.of(context).pop('ok'));
+  void _getOk() {
+    Navigator.of(context).pop();
   }
 
-  Widget _getCancel(BuildContext context) {
-    return TextButton(
-        child: Text('取消'),
-        onPressed: () =>Navigator.of(context).pop('cancel'));
+  void _getCancel() {
+     Navigator.of(context).pop();
   }
 
   @override
@@ -47,11 +43,15 @@ class _FairSimpleDialogPageState extends State<FairSimpleDialogPage> {
         Divider(
           height: 1,
         ),
-        _getCancel(context),
+        TextButton(
+            child: Text('取消'),
+            onPressed: _getCancel),
         Divider(
           height: 1,
         ),
-        _getOk(context),
+        TextButton(
+            child: Text('确认'),
+            onPressed: _getOk,)
       ],
     ));
   }
