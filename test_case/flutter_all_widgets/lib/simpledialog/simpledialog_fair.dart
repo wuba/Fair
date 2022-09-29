@@ -21,32 +21,16 @@ class _FairSimpleDialogPageState extends State<FairSimpleDialogPage> {
     fairProps = widget.fairProps;
   }
 
-  List<Widget> _getChildren() {
-    return [
-      Container(
-        height: 80,
-        alignment: Alignment.center,
-        child: Text('确认删除吗？'),
-      ),
-      Divider(
-        height: 1,
-      ),
-      FlatButton(
-        child: Text('取消'),
-        onPressed: () {
-          Navigator.of(context).pop('cancel');
-        },
-      ),
-      Divider(
-        height: 1,
-      ),
-      FlatButton(
+  Widget _getOk(BuildContext context) {
+    return TextButton(
         child: Text('确认'),
-        onPressed: () {
-          Navigator.of(context).pop('ok');
-        },
-      ),
-    ];
+        onPressed: () => Navigator.of(context).pop('ok'));
+  }
+
+  Widget _getCancel(BuildContext context) {
+    return TextButton(
+        child: Text('取消'),
+        onPressed: () =>Navigator.of(context).pop('cancel'));
   }
 
   @override
@@ -54,7 +38,21 @@ class _FairSimpleDialogPageState extends State<FairSimpleDialogPage> {
     return Container(
         child: SimpleDialog(
       title: Text('提示'),
-      children: _getChildren(),
+      children: <Widget>[
+        Container(
+          height: 80,
+          alignment: Alignment.center,
+          child: Text('确认删除吗？'),
+        ),
+        Divider(
+          height: 1,
+        ),
+        _getCancel(context),
+        Divider(
+          height: 1,
+        ),
+        _getOk(context),
+      ],
     ));
   }
 }
