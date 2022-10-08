@@ -9,7 +9,7 @@ group 'com.wuba.fair'
 version '1.0'
 
 buildscript {
-    ext.kotlin_version = '1.3.50'
+    ext.kotlin_version = '1.5.31'
     repositories {
         google()
         jcenter()
