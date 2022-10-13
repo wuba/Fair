@@ -291,20 +291,14 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     if (!(source is List)) {
       throw Exception('Sugar.mapEach has no valid source array');
     }
-
-    //转为对象
+    
     if (source is List) {
       source = Domain(source).forEach(($, element) {
         if (element is Map) {
-          String? funcName = element['funcName'];
-          if (funcName != null) {
-            dynamic func =
-                bound?.functionOf(funcName) ?? bound?.valueOf(funcName);
-            if (func != null) {
-              return $.getSourceItem(func);
-            }
+          if(element[tag] == null){
+            return element;  //直接返回Map对象
           }
-          return element;
+          return convert(context, element, methodMap, domain: $);
         } else {
           return element;
         }
@@ -339,6 +333,9 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     if (source is List) {
       source = Domain(source).forEach(($, element) {
         if (element is Map) {
+          if(element[tag] == null){
+            return element; //直接返回Map对象
+          }
           return convert(context, element, methodMap, domain: $);
         } else {
           return element;

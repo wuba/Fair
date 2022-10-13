@@ -66,14 +66,6 @@ class Domain<E> {
 
     return processed;
   }
-  //获取当前index的数据,并且转换为对象
-  dynamic getSourceItem(Function? func) {
-    if(func!=null){
-      return Function.apply(
-          func, [source![index]], null);
-    }
-    return source![index];
-  }
 
   List forEach(dynamic Function(Domain $, E element) f) {
     index = 0;
