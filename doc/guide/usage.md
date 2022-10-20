@@ -32,7 +32,7 @@ dependency_overrides:
     path: ../fair/flutter_version/flutter_2_0_6
 ```
 
-Please check the runtime environment on your computer. Fair is based on Flutter 1.20.4 & 1.22.4 .The latest stable flutter version will continue to be supported in the future. Currently supported versions are listed bellow (If you encounter problems, issue feedback):
+Please check the runtime environment on your computer. Fair is based on Flutter 1.20.4 & 1.22.4 .The latest stable flutter version will continue to be supported in the future. Currently supported versions are listed below (If you encounter problems, issue feedback):
 
 | Flutter Version          | Dart Version|
 | ------------------------ | ----------- |

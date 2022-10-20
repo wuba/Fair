@@ -24,6 +24,10 @@ class Runtime implements IRuntime {
     return _runtime;
   }
 
+  MethodChannel getBasicChannel(){
+    return _channel!.basicMethodChannel!;
+  }
+
   FairMessageChannel? _channel;
 
   Runtime._internal() {
@@ -38,6 +42,10 @@ class Runtime implements IRuntime {
       call?.call(message);
       return null;
     });
+  }
+
+  void setJsLoadListener(){
+
   }
 
   @override

@@ -1,3 +1,12 @@
+## [1.2.2]
+* bugfix.
+
+## [1.2.1]
+* bugfix.
+
+## [1.2.0]
+* Support static methods parsing.
+
 ## [1.1.0]
 * Support singleton parsing.
 

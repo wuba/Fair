@@ -14,6 +14,12 @@ var p = () => {
             props['pa'][1],
             props['pa'][2]?.toDouble(),
           ),
+      'BoxShadow': (props) => BoxShadow(
+            color: props['color'] ?? const Color(0xFF000000),
+            offset: props['offset'] ?? Offset.zero,
+            blurRadius: props['blurRadius']?.toDouble() ?? 0.0,
+            spreadRadius: props['spreadRadius']?.toDouble() ?? 0.0,
+          ),
       'PlaceholderDimensions': {
         'empty': PlaceholderDimensions.empty,
       },

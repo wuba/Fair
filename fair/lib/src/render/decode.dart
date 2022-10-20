@@ -78,7 +78,7 @@ class Decoder {
     }
     var proxy = app?.proxy;
     Widget w = DynamicWidgetBuilder(proxy as ProxyMirror?, page, bound, bundle: url).convert(context, map, methodMap) ??
-        WarningWidget(name: page, url: url, error: 'tag name not supported yet');
+                WarningWidget(parentContext:context,name: page, url: url, error: 'tag name not supported yet');
     return w;
   }
 }

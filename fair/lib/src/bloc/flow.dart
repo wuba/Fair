@@ -5,10 +5,13 @@
  */
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../extension.dart';
 import '../type.dart';
 import '../experiment/sugar.dart';
+import 'dart:async';
+
 
 FairWidgetBinding provider = () {
   return {
@@ -57,7 +60,23 @@ FairWidgetBinding provider = () {
       var p1 = pa1(props);
       return (p0 as Color).withOpacity(p1 as double);
     },
-
+    'Sugar.colorsShade':(props){
+      MaterialColor color = pa0(props);
+      var p1 = pa1(props);
+      var shadeMap={
+        50:color.shade50,
+        100:color.shade100,
+        200:color.shade200,
+        300:color.shade300,
+        400:color.shade400,
+        500:color.shade500,
+        600:color.shade600,
+        700:color.shade700,
+        800:color.shade800,
+        900:color.shade900,
+      };
+      return shadeMap.remove(p1) as Color;
+    },
     'Sugar.convertToString':(props){
       var p0 = pa0(props);
       return p0.toString();
@@ -83,5 +102,141 @@ FairWidgetBinding provider = () {
       }
       return p2;
     },
+    'Sugar.popMenuButton': (props) {
+      var p0 = pa0(props);
+      return PopupMenuButton(
+        onSelected: p0.onSelected,
+        itemBuilder: p0.itemBuilder,
+        child: p0.child,
+        padding: p0.padding,
+        initialValue: p0.initialValue,
+        onCanceled: p0.onCanceled,
+        tooltip: p0.tooltip,
+        elevation: p0.elevation,
+        icon: p0.icon,
+        iconSize: p0.iconSize,
+        shape: p0.shape,
+        offset: p0.offset,
+        enabled: p0.enabled,
+        color: p0.color,
+        enableFeedback: p0.enableFeedback,
+      );
+    },
+    'Sugar.listBuilder':(props){
+      var p0 = pa0(props);
+      var p1 = pa1(props);
+      ListView paramsObj = ListView();
+      if(p1 is ListView){
+        paramsObj = p1 as ListView;
+      }
+
+      SliverChildListDelegate childrenDelegate = paramsObj.childrenDelegate as SliverChildListDelegate;
+      var listView = ListView(
+        scrollDirection:  paramsObj.scrollDirection,
+        reverse:  paramsObj.reverse,
+        controller:  paramsObj.controller,
+        primary:  paramsObj.primary,
+        physics:  paramsObj.physics,
+        shrinkWrap:  paramsObj.shrinkWrap,
+        padding:  paramsObj.padding,
+        itemExtent: paramsObj.itemExtent,
+        prototypeItem: paramsObj.prototypeItem,
+        addAutomaticKeepAlives: childrenDelegate.addAutomaticKeepAlives,
+        addRepaintBoundaries: childrenDelegate.addRepaintBoundaries,
+        addSemanticIndexes: childrenDelegate.addSemanticIndexes,
+        cacheExtent: paramsObj.cacheExtent,
+        semanticChildCount: paramsObj.semanticChildCount,
+        dragStartBehavior: paramsObj.dragStartBehavior,
+        keyboardDismissBehavior: paramsObj.keyboardDismissBehavior,
+        restorationId: paramsObj.restorationId,
+        clipBehavior: paramsObj.clipBehavior,
+        children: p0,);
+      return listView;
+    },
+    'Sugar.isNestedScrollViewHeaderSliversBuilder':(props){
+      var p2 = pa2(props);
+      var nestedScrollViewHeaderSliversBuilder=(BuildContext context, bool innerBoxIsScrolled){return (p2 as List<Widget>);};
+      return nestedScrollViewHeaderSliversBuilder;
+    },
+
+    'Sugar.isButtonStyle':(props){
+      var p0 = pa0(props);
+      var p1 = pa1(props);
+      ButtonStyle paramsObj=ButtonStyle();
+      if(p1 is ButtonStyle){
+        paramsObj = p1 as ButtonStyle;
+      }
+      var buttonStyle=ButtonStyle(
+        textStyle: paramsObj.textStyle,
+        backgroundColor: paramsObj.backgroundColor,
+        foregroundColor: paramsObj.foregroundColor,
+        overlayColor: paramsObj.overlayColor,
+        shadowColor: paramsObj.shadowColor,
+        surfaceTintColor: paramsObj.surfaceTintColor,
+        elevation: paramsObj.elevation,
+        padding: paramsObj.padding,
+        minimumSize: paramsObj.minimumSize,
+        fixedSize: paramsObj.fixedSize,
+        maximumSize: paramsObj.maximumSize,
+        side: paramsObj.side,
+        shape: paramsObj.shape,
+        mouseCursor: paramsObj.mouseCursor,
+        visualDensity: paramsObj.visualDensity,
+        tapTargetSize: paramsObj.tapTargetSize,
+        animationDuration: paramsObj.animationDuration,
+        enableFeedback: paramsObj.enableFeedback,
+        alignment: paramsObj.alignment,
+        splashFactory: paramsObj.splashFactory,
+      );
+      return buttonStyle;
+    },
+  'Sugar.isDuration':(props){
+      var days = 0;
+      if(null!=props['days']){days=props['days'];}
+      var hours = 0;
+      if(null!=props['hours']){hours=props['hours'];}
+      var minutes = 0;
+      if(null!=props['minutes']){minutes=props['minutes'];}
+      var seconds = 0;
+      if(null!=props['seconds']){seconds=props['seconds'];}
+      var milliseconds = 0;
+      if(null!=props['milliseconds']){milliseconds=props['milliseconds'];}
+      var microseconds = 0;
+      if(null!=props['microseconds']){microseconds=props['microseconds'];}
+      return Duration(days:days,hours:hours,minutes:minutes,seconds: seconds,milliseconds:milliseconds,microseconds:microseconds);
+  },
+
+    'Sugar.sliverChildBuilderDelegate': (props) {
+      var p0 = pa0(props);
+      List<Widget> p1 = pa1(props);
+      var p2 = pa2(props);
+
+      var sliverChildBuilderDelegate = SliverChildBuilderDelegate(
+            (p0, index) {
+          return  p1[index];
+        },
+        childCount: p2,);
+      return sliverChildBuilderDelegate;
+    },
+
+
+    'Sugar.sliverGridDelegateWithFixedCrossAxisCount': (props) {
+      Map<String, dynamic> p0 = pa0(props);
+
+      var crossAxisCount = p0['crossAxisCount'];
+      var mainAxisSpacing = p0['mainAxisSpacing'];
+      var crossAxisSpacing = p0['crossAxisSpacing'];
+      var childAspectRatio = p0['childAspectRatio'];
+
+      var sliverGridDelegateWithFixedCrossAxisCount = SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount, //Grid按两列显示
+        mainAxisSpacing: mainAxisSpacing,
+        crossAxisSpacing: crossAxisSpacing,
+        childAspectRatio: childAspectRatio,
+      );
+      return sliverGridDelegateWithFixedCrossAxisCount;
+    },
+
+
   };
 };

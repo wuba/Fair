@@ -12,6 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  font_awesome_flutter: ^10.1.0
+  smooth_star_rating_nsafe: ^1.0.0+1
+  intl: ^0.17.0
   fair: ^2.4.1
   dio: ^4.0.0
 
@@ -23,7 +26,7 @@ dev_dependencies:
 
 dependency_overrides:
   fair_version:
-    path: ../flutter_version/flutter_2_5_0
+    path: ../flutter_version/flutter_3_3_0
 
 flutter:
 
@@ -32,3 +35,24 @@ flutter:
     - assets/
     - assets/fair/
     - assets/plugin/
+    - assets/images/
+    - assets/design_course/
+    - assets/fitness_app/
+    - assets/hotel/
+    - assets/bundle/
+  fonts:
+    - family: WorkSans
+      fonts:
+        - asset: assets/fonts/WorkSans-Regular.ttf
+        - asset: assets/fonts/WorkSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/WorkSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/WorkSans-Bold.ttf
+          weight: 700
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Bold.ttf
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Medium.ttf
+          weight: 400
