@@ -9,9 +9,9 @@ library fair_core;
 
 import 'dart:convert';
 import 'dart:html';
-import 'dart:js';
 
 import 'package:fair/src/runtime/plugin/plugin_dispatcher.dart';
+import 'package:flutter/services.dart';
 import 'package:js/js.dart';
 import 'package:js/js_util.dart';
 
@@ -26,6 +26,7 @@ class FairMessageChannel {
   }
 
   static final FairMessageChannel _msg = FairMessageChannel._internal();
+  MethodChannel? basicMethodChannel;
 
   FairMessageChannel._internal() {
     _initMessageChannel();
