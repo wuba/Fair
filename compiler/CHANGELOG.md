@@ -1,3 +1,6 @@
+## [1.3.0]
+* Module split.
+
 ## [1.2.2]
 * bugfix.
 

@@ -1,3 +1,8 @@
+## [2.8.0]
+* Add support of Flutter SDK 3.3.0+.
+* Add Sugar：Sugar.isNestedScrollViewHeaderSliversBuilder、Sugar.isButtonStyle、Sugar.isDuration、Sugar.popMenuButton、Sugar.sliverChildBuilderDelegate、Sugar.sliverGridDelegateWithFixedCrossAxisCount.
+* Fixed some bugs.
+
 ## [2.7.0]
 * Add support of Flutter SDK 3.0.0、3.0.1、3.0.2、3.0.3、3.0.4、3.0.5.
 * Fixed some bugs.
