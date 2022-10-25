@@ -28,7 +28,7 @@ class FairBundle {
 mixin FairBundlePathCheck {
 
   bool isExternalStoragePath(String? originPath) {
-    if (originPath == null) {
+    if (kIsWeb || originPath == null) {
       return false;
     }
 
