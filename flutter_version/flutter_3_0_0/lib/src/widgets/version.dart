@@ -110,6 +110,7 @@ const widgetNames = {
   'IndexedSemantics': true,
   'KeyedSubtree': true,
   'Builder': true,
+  'InkWell': true,
   'StatefulBuilder': true,
   'ColoredBox': true,
   'GestureDetector': true,
