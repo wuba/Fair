@@ -17,7 +17,8 @@ class Domain<E> {
   bool match(dynamic exp) {
     return source != null &&
         exp is String &&
-        ((RegExp('#\\(.+\\)', multiLine: true).hasMatch(exp) && (exp.contains('\$item') || exp.contains('\$index'))) ||
+        ((RegExp('#\\(.+\\)', multiLine: true).hasMatch(exp) &&
+                (exp.contains('\$item') || exp.contains('\$index'))) ||
             exp == 'item' ||
             exp == 'index' ||
             exp.startsWith("\$(item") ||
@@ -35,23 +36,26 @@ class Domain<E> {
       return exp.replaceAll('index', '$index');
     }
     var processed = exp.substring(2, exp.length - 1);
-    if (processed.startsWith("\${")){
+    if (processed.startsWith("\${")) {
       processed = processed.substring(2, processed.length - 1);
     }
-
 
     if (processed.contains('.')) {
       List<String> expList = processed.split('.');
       if (expList.first == '\$item' || expList.first == 'item') {
         dynamic obj = source?[index];
+        dynamic modelValue;
         if (obj is BaseModel) {
           Map<String, dynamic> json = (obj as BaseModel).toJson();
+          modelValue = json;
+        }else if(obj is Map){
+          modelValue = obj;
+        }
+        if(modelValue!=null){
           expList.removeAt(0);
-          dynamic modelValue = json;
-          for(String k in expList){
+          for (String k in expList) {
             modelValue = modelValue[k];
           }
-
           processed = "${modelValue}";
         }
       }

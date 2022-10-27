@@ -2,7 +2,7 @@
   <img src="https://fair.58.com/logo.png">
 </p>
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.7.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.8.0-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -19,7 +19,7 @@ We create Fair so we can dispatch UI changes to users as bundle(s), the way simi
 Use Flutter Fair require few steps. Add dependency inside `pubspec.yaml`.
 ```yaml
 dependencies:
-  fair: ^2.7.0
+  fair: ^2.8.0
 ```
 
 Wrap your app with FairApp Widget.
