@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.7.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.8.0-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -58,12 +58,12 @@ git clone https://github.com/wuba/fair.git
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 2.7.0
+  fair: 2.8.0
 
 # add build_runner and compiler dependency
 dev_dependencies:
   build_runner: ^2.0.0
-  fair_compiler: ^1.2.0
+  fair_compiler: ^1.4.0
 
 # switch "fair_version" according to the local Flutter SDK version
 # Flutter SDK 3.0.x(3.0.0、3.0.1、3.0.2、3.0.3、3.0.4、3.0.5) -> flutter_3_0_0
@@ -114,6 +114,14 @@ data: {"fairProps": json.encode({})}),
 ```
 
 ## 🔨最近版本
+
+### 2.8.0
+更新时间：2022.10.21
+
+- 适配 Flutter SDK 3.3.0+；
+- 新增语法糖：Sugar.isNestedScrollViewHeaderSliversBuilder、Sugar.isButtonStyle、Sugar.isDuration、Sugar.popMenuButton、Sugar.sliverChildBuilderDelegate、Sugar.sliverGridDelegateWithFixedCrossAxisCount；
+- 修复了一些bug。
+
 ### 2.7.0
 更新时间：2022.08.10
 
