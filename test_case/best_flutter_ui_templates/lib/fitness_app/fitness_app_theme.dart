@@ -1,14 +1,13 @@
-import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
-//
-@FairBinding()
-class AppTheme {
-  AppTheme._();
-
-  static const Color notWhite = Color(0xFFEDF0F2);
-  static const Color nearlyWhite = Color(0xFFFEFEFE);
+class FitnessAppTheme {
+  FitnessAppTheme._();
+  static const Color nearlyWhite = Color(0xFFFAFAFA);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color background = Color(0xFFF2F3F8);
+  static const Color nearlyDarkBlue = Color(0xFF2633C5);
+
+  static const Color nearlyBlue = Color(0xFF00B6F0);
   static const Color nearlyBlack = Color(0xFF213333);
   static const Color grey = Color(0xFF3A5160);
   static const Color dark_grey = Color(0xFF313A44);
@@ -18,10 +17,8 @@ class AppTheme {
   static const Color lightText = Color(0xFF4A6572);
   static const Color deactivatedText = Color(0xFF767676);
   static const Color dismissibleBackground = Color(0xFF364A54);
-  static const Color chipBackground = Color(0xFFEEF1F3);
   static const Color spacer = Color(0xFFF2F2F2);
-  static const String fontName = 'WorkSans';
-  static const Color greyWithOpacity = Color(0xD99E9E9E);
+  static const String fontName = 'Roboto';
 
   static const TextTheme textTheme = TextTheme(
     headline4: display1,
@@ -34,7 +31,6 @@ class AppTheme {
   );
 
   static const TextStyle display1 = TextStyle(
-    // h4 -> display1
     fontFamily: fontName,
     fontWeight: FontWeight.bold,
     fontSize: 36,
@@ -44,7 +40,6 @@ class AppTheme {
   );
 
   static const TextStyle headline = TextStyle(
-    // h5 -> headline
     fontFamily: fontName,
     fontWeight: FontWeight.bold,
     fontSize: 24,
@@ -53,7 +48,6 @@ class AppTheme {
   );
 
   static const TextStyle title = TextStyle(
-    // h6 -> title
     fontFamily: fontName,
     fontWeight: FontWeight.bold,
     fontSize: 16,
@@ -62,7 +56,6 @@ class AppTheme {
   );
 
   static const TextStyle subtitle = TextStyle(
-    // subtitle2 -> subtitle
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
     fontSize: 14,
@@ -71,7 +64,6 @@ class AppTheme {
   );
 
   static const TextStyle body2 = TextStyle(
-    // body1 -> body2
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
     fontSize: 14,
@@ -80,7 +72,6 @@ class AppTheme {
   );
 
   static const TextStyle body1 = TextStyle(
-    // body2 -> body1
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
     fontSize: 16,
@@ -89,7 +80,6 @@ class AppTheme {
   );
 
   static const TextStyle caption = TextStyle(
-    // Caption -> caption
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
     fontSize: 12,

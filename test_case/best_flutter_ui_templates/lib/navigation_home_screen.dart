@@ -11,8 +11,8 @@ class NavigationHomeScreen extends StatefulWidget {
 }
 
 class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
-  Widget screenView;
-  DrawerIndex drawerIndex;
+  Widget? screenView;
+  DrawerIndex? drawerIndex;
 
   @override
   void initState() {
@@ -24,7 +24,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppTheme.nearlyWhite,
+      color: AppTheme.white,
       child: SafeArea(
         top: false,
         bottom: false,

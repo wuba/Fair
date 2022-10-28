@@ -10,7 +10,7 @@ import 'src/generated.fair.dart' as p;
 
 @FairBinding(packages: [
   'package:font_awesome_flutter/font_awesome_flutter.dart',
-  'package:smooth_star_rating/smooth_star_rating.dart'
+  'package:flutter_rating_bar/flutter_rating_bar.dart'
 ])
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,9 +33,9 @@ class MyApp extends StatelessWidget {
       systemNavigationBarIconBrightness: Brightness.dark,
     ));
     return FairApp(
-      child:  MaterialApp(
+      child: MaterialApp(
         title: 'Flutter UI',
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: true,
         theme: ThemeData(
           primarySwatch: Colors.blue,
           textTheme: AppTheme.textTheme,
