@@ -3515,6 +3515,16 @@ var p = () => {
             position: props['position'] ?? DecorationPosition.background,
             child: props['child'],
       ),
+      'BoxDecoration': (props) => BoxDecoration(
+            color: props['color'],
+            image: props['image'],
+            border: props['border'],
+            borderRadius: props['borderRadius'],
+            boxShadow: as<BoxShadow>(props['boxShadow']),
+            gradient: props['gradient'],
+            backgroundBlendMode: props['backgroundBlendMode'],
+            shape: props['shape'] ?? BoxShape.rectangle,
+      ),
       'Container': (props) => Container(
             key: props['key'],
             alignment: props['alignment'],
@@ -3629,6 +3639,11 @@ var p = () => {
             color: props['color'],
             semanticLabel: props['semanticLabel'],
             textDirection: props['textDirection'],
+      ),
+      'IconData': (props) => IconData(
+            props['pa'][0],
+            fontFamily: props['fontFamily'],
+            fontPackage: props['fontPackage'],
       ),
       'Visibility': (props) => Visibility(
             key: props['key'],

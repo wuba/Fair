@@ -578,4 +578,5 @@ const widgetNames = {
   'AnimationStatus': false,
   'CatmullRomCurve': false,
   'Curves': false,
+  'IconData': true,
 };
