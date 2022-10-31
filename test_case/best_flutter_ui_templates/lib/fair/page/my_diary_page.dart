@@ -2,6 +2,8 @@ import 'package:best_flutter_ui_templates/fitness_app/fitness_app_theme.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
+import '../component/fair_uiview/title_view.dart';
+
 @FairPatch()
 class MyDiaryPage extends StatefulWidget {
   const MyDiaryPage({Key? key, this.animationController}) : super(key: key);
@@ -12,14 +14,27 @@ class MyDiaryPage extends StatefulWidget {
 }
 
 class _MyDiaryPageState extends State<MyDiaryPage> {
+  List<Widget> listViews = <Widget>[];
+
   @override
   void initState() {
     super.initState();
+    addAllListData();
   }
 
-  Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 50));
-    return true;
+  void addAllListData() {
+    listViews.add(
+      TitleView(titleTxt: 'Mediterranean diet', subTxt: 'Details'),
+    );
+    listViews.add(
+      Container()
+    );
+    listViews.add(
+      TitleView(
+        titleTxt: 'Meals today',
+        subTxt: 'Customize'
+      ),
+    );
   }
 
   @override
@@ -31,6 +46,7 @@ class _MyDiaryPageState extends State<MyDiaryPage> {
         body: Stack(
           children: <Widget>[
             getAppBarUI(),
+            getMainListViewUI(),
             SizedBox(
               height: MediaQuery.of(context).padding.bottom,
             )
@@ -151,6 +167,23 @@ class _MyDiaryPageState extends State<MyDiaryPage> {
           )
         ],
       ),
+    );
+  }
+
+  Widget getMainListViewUI() {
+    return ListView.builder(
+      padding: EdgeInsets.only(
+        top: AppBar().preferredSize.height +
+            MediaQuery.of(context).padding.top +
+            24,
+        bottom: 62 + MediaQuery.of(context).padding.bottom,
+      ),
+      itemCount: listViews.length,
+      scrollDirection: Axis.vertical,
+      itemBuilder: (BuildContext context, int index) {
+        widget.animationController?.forward();
+        return listViews[index];
+      },
     );
   }
 }

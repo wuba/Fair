@@ -20,7 +20,11 @@ class HomeList {
     ),
     HomeList(
       imagePath: 'assets/fitness_app/fitness_app.png',
-      // navigateScreen: FitnessAppHomeScreen(),
+      navigateScreen: FitnessAppHomeScreen(),
+      // navigateScreen: MyDiaryPage()
+    ),
+    HomeList(
+      imagePath: 'assets/fitness_app/fitness_app.png',
       navigateScreen: MyDiaryPage()
     ),
     HomeList(
