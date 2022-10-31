@@ -2891,6 +2891,11 @@ var p = () => {
             cacheWidth: props['cacheWidth'],
             cacheHeight: props['cacheHeight'],
       ),
+      'AssetImage': (props) => AssetImage(
+            props['pa'][0],
+            bundle: props['bundle'],
+            package: props['package'],
+      ),
       'Image.asset': (props) => Image.asset(
             props['pa'][0],
             key: props['key'],
