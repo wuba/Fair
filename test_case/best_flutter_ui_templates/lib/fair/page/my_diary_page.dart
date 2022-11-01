@@ -1,3 +1,4 @@
+import 'package:best_flutter_ui_templates/fair/component/my_diary/mediterranean_diet.dart';
 import 'package:best_flutter_ui_templates/fitness_app/fitness_app_theme.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,10 @@ class _MyDiaryPageState extends State<MyDiaryPage> {
       TitleView(titleTxt: 'Mediterranean diet', subTxt: 'Details'),
     );
     listViews.add(
-      Container()
+        FairWidget(
+          name: 'mediterranean_diet_view',
+          path: 'assets/bundle/lib_fair_component_my_diary_mediterranean_diet.fair.json',
+        )
     );
     listViews.add(
       TitleView(

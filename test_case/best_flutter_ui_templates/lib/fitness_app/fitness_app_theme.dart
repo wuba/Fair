@@ -1,5 +1,7 @@
+import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
+@FairBinding()
 class FitnessAppTheme {
   FitnessAppTheme._();
   static const Color nearlyWhite = Color(0xFFFAFAFA);

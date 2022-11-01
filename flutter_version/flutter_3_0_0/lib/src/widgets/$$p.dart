@@ -8,7 +8,7 @@ var p = () => {
     color: props['color']?? const Color(0xFF000000),
     offset: props['offset']?? Offset.zero,
     blurRadius: props['blurRadius'].toDouble(),
-    spreadRadius: props['spreadRadius'],
+    spreadRadius: props['spreadRadius'] ?? 0.0,
     blurStyle: props['blurStyle']??BlurStyle.normal,
   ),
   'BoxShadow.lerp': (props) => BoxShadow.lerp(
@@ -395,6 +395,12 @@ var p = () => {
     'values': BorderStyle.values,
     'none': BorderStyle.none,
     'solid': BorderStyle.solid,
+  },
+  'Clip': {
+    'none': Clip.none,
+    'hardEdge': Clip.hardEdge,
+    'antiAlias': Clip.antiAlias,
+    'antiAliasWithSaveLayer': Clip.antiAliasWithSaveLayer,
   },
   'FlutterLogoDecoration.lerp': (props) => FlutterLogoDecoration.lerp(
     props['pa'][0],
