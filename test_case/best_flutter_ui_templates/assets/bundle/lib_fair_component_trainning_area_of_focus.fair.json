@@ -1,0 +1,40 @@
+{
+  "className": "AspectRatio",
+  "na": {
+    "aspectRatio": 1.0,
+    "child": {
+      "className": "Padding",
+      "na": {
+        "padding": {
+          "className": "EdgeInsets.only",
+          "na": {
+            "left": 8.0,
+            "right": 8
+          }
+        },
+        "child": {
+          "className": "GridView.builder",
+          "na": {
+            "itemCount": 10,
+            "gridDelegate": {
+              "className": "SliverGridDelegateWithFixedCrossAxisCount",
+              "na": {
+                "crossAxisCount": 2,
+                "mainAxisSpacing": 24.0,
+                "crossAxisSpacing": 24.0,
+                "childAspectRatio": 1.0
+              }
+            },
+            "itemBuilder": {
+              "className": "Text",
+              "pa": [
+                "tfjksadhfkasdf"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

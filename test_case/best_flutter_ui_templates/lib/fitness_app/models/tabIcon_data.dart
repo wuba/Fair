@@ -1,5 +1,7 @@
+import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
+@FairBinding()
 class TabIconData {
   TabIconData({
     this.imagePath = '',

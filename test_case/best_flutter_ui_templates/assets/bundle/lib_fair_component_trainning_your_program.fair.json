@@ -1,0 +1,306 @@
+{
+  "className": "Padding",
+  "na": {
+    "padding": {
+      "className": "EdgeInsets.only",
+      "na": {
+        "left": 24,
+        "right": 24,
+        "top": 16,
+        "bottom": 18
+      }
+    },
+    "child": {
+      "className": "Container",
+      "na": {
+        "decoration": {
+          "className": "BoxDecoration",
+          "na": {
+            "gradient": {
+              "className": "LinearGradient",
+              "na": {
+                "colors": [
+                  "#(FitnessAppTheme.nearlyDarkBlue)",
+                  {
+                    "className": "Color",
+                    "pa": [
+                      "0xff6F56E8"
+                    ]
+                  }
+                ],
+                "begin": "#(Alignment.topLeft)",
+                "end": "#(Alignment.bottomRight)"
+              }
+            },
+            "borderRadius": {
+              "className": "BorderRadius.only",
+              "na": {
+                "topLeft": {
+                  "className": "Radius.circular",
+                  "pa": [
+                    8.0
+                  ]
+                },
+                "bottomLeft": {
+                  "className": "Radius.circular",
+                  "pa": [
+                    8.0
+                  ]
+                },
+                "bottomRight": {
+                  "className": "Radius.circular",
+                  "pa": [
+                    8.0
+                  ]
+                },
+                "topRight": {
+                  "className": "Radius.circular",
+                  "pa": [
+                    68.0
+                  ]
+                }
+              }
+            },
+            "boxShadow": [
+              {
+                "className": "BoxShadow",
+                "na": {
+                  "color": {
+                    "className": "Sugar.colorsWithOpacity",
+                    "pa": [
+                      "#(FitnessAppTheme.grey)",
+                      0.6
+                    ]
+                  },
+                  "offset": {
+                    "className": "Offset",
+                    "pa": [
+                      1.1,
+                      1.1
+                    ]
+                  },
+                  "blurRadius": 10.0
+                }
+              }
+            ]
+          }
+        },
+        "child": {
+          "className": "Padding",
+          "na": {
+            "padding": {
+              "className": "EdgeInsets.all",
+              "pa": [
+                16.0
+              ]
+            },
+            "child": {
+              "className": "Column",
+              "na": {
+                "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                "children": [
+                  {
+                    "className": "Text",
+                    "pa": [
+                      "Next workout"
+                    ],
+                    "na": {
+                      "textAlign": "#(TextAlign.left)",
+                      "style": {
+                        "className": "TextStyle",
+                        "na": {
+                          "fontFamily": "#(FitnessAppTheme.fontName)",
+                          "fontWeight": "#(FontWeight.normal)",
+                          "fontSize": 14,
+                          "letterSpacing": 0.0,
+                          "color": "#(FitnessAppTheme.white)"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "className": "Padding",
+                    "na": {
+                      "padding": {
+                        "className": "EdgeInsets.only",
+                        "na": {
+                          "top": 8.0
+                        }
+                      },
+                      "child": {
+                        "className": "Text",
+                        "pa": [
+                          "Legs Toning and\nGlutes Workout at Home"
+                        ],
+                        "na": {
+                          "textAlign": "#(TextAlign.left)",
+                          "style": {
+                            "className": "TextStyle",
+                            "na": {
+                              "fontFamily": "#(FitnessAppTheme.fontName)",
+                              "fontWeight": "#(FontWeight.normal)",
+                              "fontSize": 20,
+                              "letterSpacing": 0.0,
+                              "color": "#(FitnessAppTheme.white)"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "className": "SizedBox",
+                    "na": {
+                      "height": 32
+                    }
+                  },
+                  {
+                    "className": "Padding",
+                    "na": {
+                      "padding": {
+                        "className": "EdgeInsets.only",
+                        "na": {
+                          "right": 4
+                        }
+                      },
+                      "child": {
+                        "className": "Row",
+                        "na": {
+                          "crossAxisAlignment": "#(CrossAxisAlignment.end)",
+                          "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                          "children": [
+                            {
+                              "className": "Padding",
+                              "na": {
+                                "padding": {
+                                  "className": "EdgeInsets.only",
+                                  "na": {
+                                    "left": 4
+                                  }
+                                },
+                                "child": {
+                                  "className": "Icon",
+                                  "pa": [
+                                    "#(Icons.timer)"
+                                  ],
+                                  "na": {
+                                    "color": "#(FitnessAppTheme.white)",
+                                    "size": 16
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "className": "Padding",
+                              "na": {
+                                "padding": {
+                                  "className": "EdgeInsets.only",
+                                  "na": {
+                                    "left": 4.0
+                                  }
+                                },
+                                "child": {
+                                  "className": "Text",
+                                  "pa": [
+                                    "68 min"
+                                  ],
+                                  "na": {
+                                    "textAlign": "#(TextAlign.center)",
+                                    "style": {
+                                      "className": "TextStyle",
+                                      "na": {
+                                        "fontFamily": "#(FitnessAppTheme.fontName)",
+                                        "fontWeight": "#(FontWeight.w500)",
+                                        "fontSize": 14,
+                                        "letterSpacing": 0.0,
+                                        "color": "#(FitnessAppTheme.white)"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "className": "Expanded",
+                              "na": {
+                                "child": {
+                                  "className": "SizedBox"
+                                }
+                              }
+                            },
+                            {
+                              "className": "Container",
+                              "na": {
+                                "decoration": {
+                                  "className": "BoxDecoration",
+                                  "na": {
+                                    "color": "#(FitnessAppTheme.nearlyWhite)",
+                                    "shape": "#(BoxShape.circle)",
+                                    "boxShadow": [
+                                      {
+                                        "className": "BoxShadow",
+                                        "na": {
+                                          "color": {
+                                            "className": "Sugar.colorsWithOpacity",
+                                            "pa": [
+                                              "#(FitnessAppTheme.nearlyBlack)",
+                                              0.4
+                                            ]
+                                          },
+                                          "offset": {
+                                            "className": "Offset",
+                                            "pa": [
+                                              8.0,
+                                              8.0
+                                            ]
+                                          },
+                                          "blurRadius": 8.0
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                "child": {
+                                  "className": "Padding",
+                                  "na": {
+                                    "padding": {
+                                      "className": "EdgeInsets.all",
+                                      "pa": [
+                                        0.0
+                                      ]
+                                    },
+                                    "child": {
+                                      "className": "Icon",
+                                      "pa": [
+                                        "#(Icons.arrow_right)"
+                                      ],
+                                      "na": {
+                                        "color": {
+                                          "className": "Color",
+                                          "pa": [
+                                            "0xFF6F56E8"
+                                          ]
+                                        },
+                                        "size": 44
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}
