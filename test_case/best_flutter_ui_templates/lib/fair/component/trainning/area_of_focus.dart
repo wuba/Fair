@@ -55,7 +55,7 @@ class _FocusListViewState extends State<FocusView> {
         padding: const EdgeInsets.only(left: 8.0, right: 8),
         child: GridView.builder(
           itemCount: 10,
-          gridDelegate: const Sugar.SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 24.0,
             crossAxisSpacing: 24.0,
