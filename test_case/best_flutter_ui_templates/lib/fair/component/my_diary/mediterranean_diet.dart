@@ -96,7 +96,7 @@ class MediterranesnDietView extends StatelessWidget {
                                           const EdgeInsets.only(
                                               left: 4, bottom: 3),
                                           child: Text(
-                                            '${(1127).toInt()}',
+                                            '1127',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontFamily:
@@ -191,7 +191,7 @@ class MediterranesnDietView extends StatelessWidget {
                                           const EdgeInsets.only(
                                               left: 4, bottom: 3),
                                           child: Text(
-                                            '${(102).toInt()}',
+                                            '102',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontFamily:
@@ -262,7 +262,7 @@ class MediterranesnDietView extends StatelessWidget {
                                 CrossAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    '${(1503).toInt()}',
+                                    '1503',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontFamily:

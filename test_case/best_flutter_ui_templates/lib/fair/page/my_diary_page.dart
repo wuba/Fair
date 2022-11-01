@@ -39,6 +39,41 @@ class _MyDiaryPageState extends State<MyDiaryPage> {
         subTxt: 'Customize'
       ),
     );
+
+    listViews.add(
+      TitleView(
+          titleTxt: 'Body measurement',
+          subTxt: 'Customize'
+      ),
+    );
+
+    listViews.add(
+        FairWidget(
+          name: 'body_measurement',
+          path: 'assets/bundle/lib_fair_component_my_diary_body_measurement.fair.json',
+        )
+    );
+
+    listViews.add(
+      TitleView(
+          titleTxt: 'Water',
+          subTxt: 'Customize'
+      ),
+    );
+
+    listViews.add(
+        FairWidget(
+          name: 'Water',
+          path: 'assets/bundle/lib_fair_component_my_diary_water.fair.json',
+        )
+    );
+
+    listViews.add(
+        FairWidget(
+          name: 'glassView',
+          path: 'assets/bundle/lib_fair_component_my_diary_glass_view.fair.json',
+        )
+    );
   }
 
   @override

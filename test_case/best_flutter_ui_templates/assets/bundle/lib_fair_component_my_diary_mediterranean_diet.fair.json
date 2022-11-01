@@ -226,7 +226,7 @@
                                                                 "child": {
                                                                   "className": "Text",
                                                                   "pa": [
-                                                                    "#(${(1127).toInt()})"
+                                                                    "1127"
                                                                   ],
                                                                   "na": {
                                                                     "textAlign": "#(TextAlign.center)",
@@ -410,7 +410,7 @@
                                                                 "child": {
                                                                   "className": "Text",
                                                                   "pa": [
-                                                                    "#(${(102).toInt()})"
+                                                                    "102"
                                                                   ],
                                                                   "na": {
                                                                     "textAlign": "#(TextAlign.center)",
@@ -554,7 +554,7 @@
                                                     {
                                                       "className": "Text",
                                                       "pa": [
-                                                        "#(${(1503).toInt()})"
+                                                        "1503"
                                                       ],
                                                       "na": {
                                                         "textAlign": "#(TextAlign.center)",
