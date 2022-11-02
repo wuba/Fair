@@ -20,7 +20,6 @@ import '../../../fitness_app/fintness_app_theme.dart';
 //   }
 // }
 
-
 @FairPatch()
 class FocusView extends StatefulWidget {
   const FocusView({Key? key}) : super(key: key);
@@ -52,43 +51,66 @@ class _FocusListViewState extends State<FocusView> {
     return AspectRatio(
       aspectRatio: 1.0,
       child: Padding(
-        padding: const EdgeInsets.only(left: 8.0, right: 8),
-        child: GridView.builder(
-          itemCount: 10,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          padding: const EdgeInsets.only(left: 8.0, right: 8),
+          child: GridView.count(
             crossAxisCount: 2,
             mainAxisSpacing: 24.0,
             crossAxisSpacing: 24.0,
             childAspectRatio: 1.0,
+            children: [
+              AspectRatio(
+                aspectRatio: 1.5,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                  child: Image.network(
+                      'https://pic5.58cdn.com.cn/nowater/frs/n_v31ea165ec1cb846ca89a334fde9b78f2d.png',
+                      fit: BoxFit.cover),
+                ),
+              ),
+              AspectRatio(
+                aspectRatio: 1.5,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                  child: Image.network(
+                      'https://pic6.58cdn.com.cn/nowater/frs/n_v31ffd5c348ceb41f597bdc2063f4669f6.png',
+                      fit: BoxFit.cover),
+                ),
+              ),
+              AspectRatio(
+                aspectRatio: 1.5,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                  child: Image.network(
+                      'https://pic1.58cdn.com.cn/nowater/frs/n_v3069ac48509cf4f728e65bdf91421967c.png',
+                      fit: BoxFit.cover),
+                ),
+              ),
+            ],
+          )
+          // child: GridView(
+          //   padding:
+          //       const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+          //   physics: const BouncingScrollPhysics(),
+          //   scrollDirection: Axis.vertical,
+          //   children: Sugar.mapEach(areaListData, (index, item) {
+          //     return AreaView(imagepath: areaListData[index]);
+          //   }),
+          //   // children: List<Widget>.generate(
+          //   //   areaListData.length,
+          //   //       (int index) {
+          //   //     return AreaView(
+          //   //       imagepath: areaListData[index]
+          //   //     );
+          //   //   },
+          //   // ),
+          //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          //     crossAxisCount: 2,
+          //     mainAxisSpacing: 24.0,
+          //     crossAxisSpacing: 24.0,
+          //     childAspectRatio: 1.0,
+          //   ),
+          // ),
           ),
-          itemBuilder: (BuildContext context, int index) {
-            return Text('tfjksadhfkasdf');
-          },
-        ),
-        // child: GridView(
-        //   padding:
-        //       const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
-        //   physics: const BouncingScrollPhysics(),
-        //   scrollDirection: Axis.vertical,
-        //   children: Sugar.mapEach(areaListData, (index, item) {
-        //     return AreaView(imagepath: areaListData[index]);
-        //   }),
-        //   // children: List<Widget>.generate(
-        //   //   areaListData.length,
-        //   //       (int index) {
-        //   //     return AreaView(
-        //   //       imagepath: areaListData[index]
-        //   //     );
-        //   //   },
-        //   // ),
-        //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        //     crossAxisCount: 2,
-        //     mainAxisSpacing: 24.0,
-        //     crossAxisSpacing: 24.0,
-        //     childAspectRatio: 1.0,
-        //   ),
-        // ),
-      ),
     );
   }
 }
