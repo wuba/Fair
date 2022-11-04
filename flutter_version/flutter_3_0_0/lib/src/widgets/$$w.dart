@@ -4047,4 +4047,11 @@ var p = () => {
           ) {
             return (props['block']) as Widget;
       },
+      'AlwaysScrollableScrollPhysics': (props) => AlwaysScrollableScrollPhysics(),
+      'ClampingScrollPhysics': (props) => ClampingScrollPhysics(),
+      'FixedExtentScrollPhysics': (props) => FixedExtentScrollPhysics(),
+      'NeverScrollableScrollPhysics': (props) => NeverScrollableScrollPhysics(),
+      'PageScrollPhysics': (props) => PageScrollPhysics(),
+      'RangeMaintainingScrollPhysics': (props) => RangeMaintainingScrollPhysics(),
+      'BouncingScrollPhysics': (props) => BouncingScrollPhysics(),
 };

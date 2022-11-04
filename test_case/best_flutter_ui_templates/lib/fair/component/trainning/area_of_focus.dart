@@ -57,6 +57,7 @@ class _FocusListViewState extends State<FocusView> {
             mainAxisSpacing: 24.0,
             crossAxisSpacing: 24.0,
             childAspectRatio: 1.0,
+            physics: NeverScrollableScrollPhysics(),
             children: [
               AspectRatio(
                 aspectRatio: 1.5,

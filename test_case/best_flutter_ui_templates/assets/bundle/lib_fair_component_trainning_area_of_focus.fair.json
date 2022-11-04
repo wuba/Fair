@@ -13,24 +13,110 @@
           }
         },
         "child": {
-          "className": "GridView.builder",
+          "className": "GridView.count",
           "na": {
-            "itemCount": 10,
-            "gridDelegate": {
-              "className": "SliverGridDelegateWithFixedCrossAxisCount",
-              "na": {
-                "crossAxisCount": 2,
-                "mainAxisSpacing": 24.0,
-                "crossAxisSpacing": 24.0,
-                "childAspectRatio": 1.0
-              }
+            "crossAxisCount": 2,
+            "mainAxisSpacing": 24.0,
+            "crossAxisSpacing": 24.0,
+            "childAspectRatio": 1.0,
+            "physics": {
+              "className": "NeverScrollableScrollPhysics"
             },
-            "itemBuilder": {
-              "className": "Text",
-              "pa": [
-                "tfjksadhfkasdf"
-              ]
-            }
+            "children": [
+              {
+                "className": "AspectRatio",
+                "na": {
+                  "aspectRatio": 1.5,
+                  "child": {
+                    "className": "ClipRRect",
+                    "na": {
+                      "borderRadius": {
+                        "className": "BorderRadius.all",
+                        "pa": [
+                          {
+                            "className": "Radius.circular",
+                            "pa": [
+                              4.0
+                            ]
+                          }
+                        ]
+                      },
+                      "child": {
+                        "className": "Image.network",
+                        "pa": [
+                          "https://pic5.58cdn.com.cn/nowater/frs/n_v31ea165ec1cb846ca89a334fde9b78f2d.png"
+                        ],
+                        "na": {
+                          "fit": "#(BoxFit.cover)"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "className": "AspectRatio",
+                "na": {
+                  "aspectRatio": 1.5,
+                  "child": {
+                    "className": "ClipRRect",
+                    "na": {
+                      "borderRadius": {
+                        "className": "BorderRadius.all",
+                        "pa": [
+                          {
+                            "className": "Radius.circular",
+                            "pa": [
+                              4.0
+                            ]
+                          }
+                        ]
+                      },
+                      "child": {
+                        "className": "Image.network",
+                        "pa": [
+                          "https://pic6.58cdn.com.cn/nowater/frs/n_v31ffd5c348ceb41f597bdc2063f4669f6.png"
+                        ],
+                        "na": {
+                          "fit": "#(BoxFit.cover)"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "className": "AspectRatio",
+                "na": {
+                  "aspectRatio": 1.5,
+                  "child": {
+                    "className": "ClipRRect",
+                    "na": {
+                      "borderRadius": {
+                        "className": "BorderRadius.all",
+                        "pa": [
+                          {
+                            "className": "Radius.circular",
+                            "pa": [
+                              4.0
+                            ]
+                          }
+                        ]
+                      },
+                      "child": {
+                        "className": "Image.network",
+                        "pa": [
+                          "https://pic1.58cdn.com.cn/nowater/frs/n_v3069ac48509cf4f728e65bdf91421967c.png"
+                        ],
+                        "na": {
+                          "fit": "#(BoxFit.cover)"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
           }
         }
       }
