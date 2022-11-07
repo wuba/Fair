@@ -15,13 +15,13 @@
         "child": {
           "className": "GridView.count",
           "na": {
+            "physics": {
+              "className": "NeverScrollableScrollPhysics"
+            },
             "crossAxisCount": 2,
             "mainAxisSpacing": 24.0,
             "crossAxisSpacing": 24.0,
             "childAspectRatio": 1.0,
-            "physics": {
-              "className": "NeverScrollableScrollPhysics"
-            },
             "children": [
               {
                 "className": "AspectRatio",

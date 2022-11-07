@@ -10,14 +10,14 @@ import 'src/generated.fair.dart' as p;
 
 @FairBinding(packages: [
   'package:font_awesome_flutter/font_awesome_flutter.dart',
-  'package:flutter_rating_bar/flutter_rating_bar.dart'
+  'package:flutter_rating_bar/flutter_rating_bar.dart',
 ])
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
-  ]).then((_) => runApp(MyApp()));
+  ]).then((_) => FairApp.runApplication(MyApp()));
 }
 
 class MyApp extends StatelessWidget {

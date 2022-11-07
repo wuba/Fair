@@ -41,6 +41,13 @@ class _MyDiaryPageState extends State<MyDiaryPage> {
     );
 
     listViews.add(
+        FairWidget(
+          name: 'mediterranean_diet_view',
+          path: 'assets/bundle/lib_fair_component_meals_list_meals_list_view.fair.json',
+        )
+    );
+
+    listViews.add(
       TitleView(
           titleTxt: 'Body measurement',
           subTxt: 'Customize'
