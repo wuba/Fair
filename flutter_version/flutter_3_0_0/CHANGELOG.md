@@ -1,3 +1,7 @@
+## 3.0.0+1
+* Generated from flutter 3.0.0 
+* Add the InkWell to the mapping table
+
 ## 3.0.0
 * Generated from flutter 3.0.0
 

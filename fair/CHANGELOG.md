@@ -1,3 +1,6 @@
+## [2.8.1]
+* Fixed：CustomScrollView reference external function builder bug.
+
 ## [2.8.0]
 * Add support of Flutter SDK 3.3.0+.
 * Add Sugar：Sugar.isNestedScrollViewHeaderSliversBuilder、Sugar.isButtonStyle、Sugar.isDuration、Sugar.popMenuButton、Sugar.sliverChildBuilderDelegate、Sugar.sliverGridDelegateWithFixedCrossAxisCount.

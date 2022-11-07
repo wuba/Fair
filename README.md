@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.8.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.8.1-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -17,7 +17,7 @@ Fair is a lightweight package for Flutter, which can be used to update widget tr
 
 We create Fair so we can dispatch any pages changes to users as bundle(s), the way similar to React Native. With Flutter Fair integrated, you can publish your pages without waiting for the next release date of your App. Fair provides standard widget and some logic plugins, it can be used as a new dynamic page or as part of existing Flutter page.
 
-![](fair/what-is-fair-en.png)
+![](what-is-fair-en.png)
 
 Fair's UI rendering is lossless and can be restored at the pixel level. Take a look at the effect of escaping some pages of Best Flutter UI Templates:
 
@@ -50,12 +50,12 @@ Assuming that the fair project and your own project are in the same folder:
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 2.8.0
+  fair: 2.8.1
 
 # add build_runner and compiler dependency
 dev_dependencies:
   build_runner: ^2.0.0
-  fair_compiler: ^1.3.0
+  fair_compiler: ^1.4.0
  
 # switch "fair_version" according to the local Flutter SDK version
 # Flutter SDK 3.0.x(3.0.0、3.0.1、3.0.2、3.0.3、3.0.4、3.0.5) -> flutter_3_0_0
@@ -110,6 +110,11 @@ For more details, please refer to [https://fair.58.com](https://fair.58.com)
 If you need the hot update platform, please follow [FAIR PUSHY](https://github.com/wuba/FairPushy)
 
 ## versions
+
+### 2.8.1
+updateDate：2022.11.01
+
+- Fixed：CustomScrollView reference external function builder bug.
 
 ### 2.8.0
 updateDate：2022.10.21
