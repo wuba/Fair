@@ -7,7 +7,6 @@
 import 'dart:convert';
 
 import 'package:fair/fair.dart';
-import 'package:fair_example/src/page/home_page.dart';
 import 'package:fair_example/src/page/logic-page2page/sample_logic_page2page.dart';
 import 'package:fair_example/src/page/logic_home_page.dart';
 import 'package:fair_example/src/page/modules.dart';

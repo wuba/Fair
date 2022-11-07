@@ -25,7 +25,7 @@ class GlassView extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 24, right: 24, top: 0, bottom: 24),
                   child: Stack(
-                    overflow: Overflow.visible,
+                    clipBehavior: Clip.none,
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.only(top: 16),

@@ -1,6 +1,6 @@
 name: fair_dart2dsl
 description: Companion compiler for fair_compiler for converting Dart to DSL.
-version: 1.0.1
+version: 1.0.2
 homepage: https://fair.58.com/
 
 environment:

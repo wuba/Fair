@@ -23,7 +23,16 @@ class _SugarElseIfPageState extends State<SugarElseIfPage> {
     print('Click......');
   }
 
+
+
+  int _getItemCount() {
+    return _value;
+  }
+
+
   // List<String> li = ['kk','ddd','dddd'];
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +74,23 @@ class _SugarElseIfPageState extends State<SugarElseIfPage> {
                       ],
                       Text("default-ValueTitle")),
                 )),
+
+
+            SizedBox(
+              width: Sugar.width(context),
+              height: Sugar.height(context),
+              child: Sugar.listBuilder(
+                  itemCount: _getItemCount(),
+                  itemBuilder: (BuildContext context, int item) {
+                    Center(
+                      child: Container(
+                        height: 20,
+                        child: Text("$item"),
+                      ),
+                    );
+                  }),
+
+
             FloatingActionButton(
               child: Text(
                 Sugar.switchCase(

@@ -256,7 +256,7 @@ class MediterranesnDietView extends StatelessWidget {
                             padding: const EdgeInsets.only(right: 16),
                             child: Center(
                               child: Stack(
-                                overflow: Overflow.visible,
+                                clipBehavior: Clip.none,
                                 children: <Widget>[
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),

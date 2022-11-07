@@ -3,8 +3,9 @@
  * Use of this source code is governed by a BSD type license that can be
  * found in the LICENSE file.
  */
-import 'convertor.dart';
+import 'convertorV2.dart';
 import 'dart:io' show Platform;
+import 'package:fair_dart2js/src/visitor/UniqueNameGenerator.dart';
 import 'package:path/path.dart' show dirname;
 
 bool compare(String testcaseName, String actual, String expected) {
@@ -13,7 +14,7 @@ bool compare(String testcaseName, String actual, String expected) {
   }
 
   var isNotEqual = (actual.isEmpty && expected.isNotEmpty) ||
-    (actual.isNotEmpty && expected.isEmpty);
+      (actual.isNotEmpty && expected.isEmpty);
   if (isNotEqual) {
     print('''$testcaseName Actual: $actual \r\nExpected: $expected''');
     return false;
@@ -31,7 +32,8 @@ bool compare(String testcaseName, String actual, String expected) {
       continue;
     }
     if (actual[i] != expected[j]) {
-      print('''$testcaseName Actual: $actual \r\nExpected: $expected \r\nat position $i(${actual.substring(i, i+30)}) $j(${expected.substring(j, j+30)})''');
+      print(
+          '''$testcaseName Actual: $actual \r\nExpected: $expected \r\nat position $i(${actual.substring(i, i + 30)}) $j(${expected.substring(j, j + 30)})''');
       return false;
     } else {
       i++;
@@ -43,7 +45,8 @@ bool compare(String testcaseName, String actual, String expected) {
       i++;
       continue;
     } else {
-      print('''$testcaseName Actual: $actual \r\nExpected: $expected \r\nat position $i(${actual[i]}) $j()''');
+      print(
+          '''$testcaseName Actual: $actual \r\nExpected: $expected \r\nat position $i(${actual[i]}) $j()''');
       return false;
     }
   }
@@ -52,7 +55,8 @@ bool compare(String testcaseName, String actual, String expected) {
       j++;
       continue;
     } else {
-      print('''$testcaseName Actual: $actual \r\nExpected: $expected \r\nat position $i() $j(${expected[j]})''');
+      print(
+          '''$testcaseName Actual: $actual \r\nExpected: $expected \r\nat position $i() $j(${expected[j]})''');
       return false;
     }
   }
@@ -1002,12 +1006,20 @@ bool testcaseDeclareList() {
 }
 
 bool testcaseSuper() {
-  return compare('testcaseSuper', convertFunctionFromData(MethodDeclarationData('testcaseSuper', '''
+  return compare(
+      'testcaseSuper',
+      convertFunctionFromData(
+          MethodDeclarationData(
+              'testcaseSuper',
+              '''
   void testcaseSuper() {
     super.initState();
     futureBuilderFuture = _generateData(this);
   }
-  ''', false), ClassDeclarationData()..parentClass='Parent'), '''
+  ''',
+              false),
+          ClassDeclarationData()..parentClass = 'Parent'),
+      '''
   function testcaseSuper() { 
             const __thiz__ = this;
       
@@ -1418,7 +1430,8 @@ res.total = json.total;
 
 bool testcaseClassDeclareFactoryConstructor() {
   UniqueNameGenerator().reset();
-  return compare('testcaseClassDeclareFactoryConstructor', convertClassString(r'''
+  return compare(
+      'testcaseClassDeclareFactoryConstructor', convertClassString(r'''
     class E {
       int e;
 
@@ -1472,7 +1485,8 @@ E.ee1 =       (str) => E.ee(int.parse(str));
 
 bool testcaseClassDeclareDelegateConstructor() {
   UniqueNameGenerator().reset();
-  return compare('testcaseClassDeclareDelegateConstructor', convertClassString(r'''
+  return compare(
+      'testcaseClassDeclareDelegateConstructor', convertClassString(r'''
     class E {
       int e;
 
@@ -1666,7 +1680,7 @@ b = 1;
 //     print(super.a.b);
 //   }
 //   '''), '''
-  
+
 //   ''');
 // }
 
@@ -2474,7 +2488,11 @@ this.g3 = xx;
 }
 
 bool testcaseImport() {
-  return compare('testcaseImport', convertWidgetStateFile(dirname(Platform.script.path) + '/__test_data__/page1/page1.dart'), '''
+  return compare(
+      'testcaseImport',
+      convertWidgetStateFile(
+          dirname(Platform.script.path) + '/__test_data__/page1/page1.dart'),
+      '''
   GLOBAL['#FairKey#'] = (function(__initProps__) {
       const __global__ = this;
                 defineModule(5, function(__mod__) {
@@ -2765,7 +2783,6 @@ fairProps = widget._props;
 }
 
 void main() {
-
   print('Executing testcases...');
   var arr = [
     testcaseFor1,
