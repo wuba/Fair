@@ -13,7 +13,7 @@ class ReturnStatementNode extends StatementNode {
     }
 
     return '''
-    return $exprR${!(exprR?.endsWith(';') ?? false) ? ';' : ''}
+    return $exprR${!(exprR.endsWith(';')) ? ';' : ''}
     ''';
   }
 }
