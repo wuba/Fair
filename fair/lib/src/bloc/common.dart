@@ -5,7 +5,7 @@
  */
 
 import 'dart:io';
-
+import 'package:flutter/material.dart';
 import 'package:fair_version/fair_version.dart';
 import 'package:flutter/widgets.dart';
 
@@ -69,5 +69,13 @@ FairWidgetBinding provider = () {
     'SimpleTextItemBuilder': (props) => (text) => Text(text),
     'double.infinity': double.infinity,
     'File': (props) => File(props['pa'][0]),
+    'InputDecoration': (props) => InputDecoration(
+        prefixIcon: props['prefixIcon'],
+        suffixIcon: props['suffixIcon'],
+        border: props['border'],
+        focusedBorder: props['focusedBorder'],
+        enabledBorder: props['enabledBorder']),
+    'OutlineInputBorder': (props) => OutlineInputBorder(
+        borderRadius: props['borderRadius'], borderSide: props['borderSide']),
   };
 };
