@@ -113,6 +113,37 @@ path: 'assets/bundle/lib_src_page_dynamic_widget.fair.json',
 data: {"fairProps": json.encode({})}),
 ```
 
+## 🧰配套工具
+fair 开发提效工具
+### Dart命令行工具 [faircli](https://pub.dev/packages/faircli)
+
+一键创建fair工程
+
+**faircli安装**
+```dart
+dart pub global activate faircli
+```
+
+**创建动态化工程**
+```dart
+faircli create -n dynamic_project_name
+```
+**创建载体工程**
+```dart
+faircli create -k carrier -n carrier_project_name
+```
+
+### AS插件 [FairTemplate](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
+
+提供常用页面/组件模板代码
+
+![fair fair_template](fair_template.png)
+
+### 配套工具使用流程
+![fair tools](fair_tools.png)
+
+更多介绍请查看 [文档](fair_tools.md)
+
 ## 🔨最近版本
 
 ### 2.8.0
