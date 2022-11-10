@@ -105,10 +105,6 @@ FairWidget(
   data: {"fairProps": json.encode({})}),
 ```
 
-## Documentation
-For more details, please refer to [https://fair.58.com](https://fair.58.com)  
-If you need the hot update platform, please follow [FAIR PUSHY](https://github.com/wuba/FairPushy)
-
 ## DevTools
 fair development tools
 ### Dart Commandline Tool [faircli](https://pub.dev/packages/faircli)
@@ -129,7 +125,7 @@ faircli create -n dynamic_project_name
 faircli create -k carrier -n carrier_project_name
 ```
 
-### AS Plugin [FairTemplate](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
+### IDEA Plugin [FairTemplate](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
 
 Page/Component Template Code
 
@@ -150,6 +146,13 @@ After using faircli to configure the local hot update service, open the develope
 </html>
 
 For more details, please refer to [fair_tools](fair_tools.md)
+
+## Documentation
+For more details, please refer to [https://fair.58.com](https://fair.58.com)  
+### Tools
+Fair Cli: [Fair_CLI](https://pub.dev/packages/faircli)  
+IEDA plugin: [jetbrains_plugin_fair_template](https://plugins.jetbrains.com/plugin/20323-fairtemplate)  
+Hot update platform: [FAIR PUSHY](https://github.com/wuba/FairPushy)
 
 ## versions
 
