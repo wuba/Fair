@@ -144,6 +144,15 @@ faircli create -k carrier -n carrier_project_name
 ### 配套工具使用流程
 ![fair tools](fair_tools.png)
 
+### 配套工具使用效果
+使用faircli配置好本地的热更服务后，在移动设备上打开开发者选项，选择本地模式，输入开发机ip，预览fair动态化效果
+
+<html>
+<div align="center">
+<img src="fair_tools.gif" width="50%">
+</div>
+</html>
+
 更多介绍请查看 [文档](fair_tools.md)
 
 ## 🔨最近版本

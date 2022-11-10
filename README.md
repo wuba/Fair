@@ -140,6 +140,15 @@ Page/Component Template Code
 ### DevTools flow chart
 ![fair tools](fair_tools.png)
 
+### DevTools demo
+After using faircli to configure the local hot update service, open the developer options on the mobile device, select the local mode, enter the ip of the development machine, and you can preview the fair dynamic effect
+
+<html>
+<div align="center">
+<img src="fair_tools.gif" width="50%">
+</div>
+</html>
+
 For more details, please refer to [fair_tools](fair_tools.md)
 
 ## versions
