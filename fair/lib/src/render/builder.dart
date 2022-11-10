@@ -595,18 +595,39 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   SliverChildBuilderDelegate _buildSugarSliverChildBuilderDelegate(
-      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+      Function mapEach,
+      Map map,
+      Map? methodMap,
+      BuildContext context) {
+
     Map na = map['na'];
     var childCount = na['childCount'];
+    var builder = na['builder'];
+    Map builderMap = <String,dynamic>{};
+
+    //函数传入处理
+    if(methodMap != null && methodMap.keys.isNotEmpty){
+      methodMap.keys.forEach((element) {
+        if(builder is String && builder.contains(element)) {
+          builderMap = methodMap[element];
+        }
+      });
+    }
+    // 常规
+    if (builderMap.isEmpty) {
+      builderMap = na['builder'];
+    }
+
     var source = List<int>.generate(childCount, (i) => i + 1);
-    var list = Domain(source).forEach(($, _) {
-      //拿到所有itemBuilder对应的数组
-      return convert(context, na['builder'], methodMap, domain: $) as Widget;
+
+    var list = Domain(source).forEach(($, _) {//拿到所有itemBuilder对应的数组
+      return convert(context, builderMap, methodMap, domain:$) as Widget;
     });
     List<Widget> children = list.map((e) => e as Widget).toList();
 
+
     var params = {
-      'pa': [context, children, childCount]
+      'pa': [context,children,childCount]
     };
 
     return mapEach.call(params);

@@ -9,6 +9,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:fair/fair.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -47,7 +48,7 @@ class WBPermission extends IFairPlugin {
     //用户可以自定义参数，通过参数确定图片的选择方式
     var isGranted = false;
     if(Permission_Photo==type){
-      if (Platform.isIOS) {
+      if (!kIsWeb && Platform.isIOS) {
         isGranted = await Permission.photos.request().isGranted;
       } else {
         isGranted = await Permission.storage.request().isGranted;

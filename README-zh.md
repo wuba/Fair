@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.8.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.8.1-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -22,7 +22,7 @@ Fair是为Flutter设计的动态化框架，通过Fair Compiler工具对原生Da
 **如果您需要热更新平台，可关注Fair Pushy**
 > 热更新平台：[FAIR PUSHY](https://github.com/wuba/FairPushy)
 
-![](fair/what-is-fair.png)
+![](what-is-fair.png)
 
 Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转义Best Flutter UI Templates部分页面后的效果：
 
@@ -58,7 +58,7 @@ git clone https://github.com/wuba/fair.git
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 2.8.0
+  fair: 2.8.1
 
 # add build_runner and compiler dependency
 dev_dependencies:
@@ -113,7 +113,45 @@ path: 'assets/bundle/lib_src_page_dynamic_widget.fair.json',
 data: {"fairProps": json.encode({})}),
 ```
 
+## 🧰配套工具
+fair 开发提效工具
+### Dart命令行工具 [faircli](https://pub.dev/packages/faircli)
+
+一键创建fair工程
+
+**faircli安装**
+```dart
+dart pub global activate faircli
+```
+
+**创建动态化工程**
+```dart
+faircli create -n dynamic_project_name
+```
+**创建载体工程**
+```dart
+faircli create -k carrier -n carrier_project_name
+```
+
+### AS插件 [FairTemplate](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
+
+提供常用页面/组件模板代码
+
+<html>
+<img src="fair_template.png" width="80%">
+</html>
+
+### 配套工具使用流程
+![fair tools](fair_tools.png)
+
+更多介绍请查看 [文档](fair_tools.md)
+
 ## 🔨最近版本
+
+### 2.8.1
+更新时间：2022.11.01
+
+- 修复 bug：CustomScrollView 引用外部函数构建 builder 报错。
 
 ### 2.8.0
 更新时间：2022.10.21

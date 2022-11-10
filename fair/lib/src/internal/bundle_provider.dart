@@ -28,7 +28,7 @@ class FairBundle {
 mixin FairBundlePathCheck {
 
   bool isExternalStoragePath(String? originPath) {
-    if (originPath == null) {
+    if (kIsWeb || originPath == null) {
       return false;
     }
 
@@ -64,7 +64,7 @@ class _DefaultProvider extends BundleLoader with FairBundlePathCheck{
     }
 
     /// iOS 平台无论是 assets 资源还是磁盘资源统一使用 _asset 加载
-    if (Platform.isIOS) {
+    if (!kIsWeb && Platform.isIOS) {
       return _asset(path, isFlexBuffer, cache: cache, decode: decoder);
     }
 
