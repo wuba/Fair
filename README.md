@@ -129,7 +129,7 @@ faircli create -n dynamic_project_name
 faircli create -k carrier -n carrier_project_name
 ```
 
-### AS Plugin [FairTemplate](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
+### IDEA Plugin [FairTemplate](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
 
 Page/Component Template Code
 
@@ -149,7 +149,10 @@ After using faircli to configure the local hot update service, open the develope
 </div>
 </html>
 
-For more details, please refer to [fair_tools](fair_tools.md)
+For more details, please refer to [fair_tools](fair_tools.md)    
+tools:  
+Fair Cli: [https://pub.dev/packages/faircli](https://pub.dev/packages/faircli)  
+IEDA plugin: [https://plugins.jetbrains.com/plugin/20323-fairtemplate](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
 
 ## versions
 
