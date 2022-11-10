@@ -141,7 +141,7 @@ Page/Component Template Code
 ![fair tools](fair_tools.png)
 
 ### DevTools demo
-After using faircli to configure the local hot update service, open the developer options on the mobile device, select the local mode, enter the ip of the development machine, and you can preview the fair dynamic effect
+After using faircli to configure the local hot update service, open the developer options on the mobile device, select the local mode, enter the ip of the development machine, then preview fair dynamic effect
 
 <html>
 <div align="center">
