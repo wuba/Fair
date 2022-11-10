@@ -77,5 +77,10 @@ FairWidgetBinding provider = () {
         enabledBorder: props['enabledBorder']),
     'OutlineInputBorder': (props) => OutlineInputBorder(
         borderRadius: props['borderRadius'], borderSide: props['borderSide']),
+    'BorderSide': (props) => BorderSide(
+        color: props['color'],
+        width: props['width'],
+        style: props['style'] ?? BorderStyle.solid,
+        strokeAlign: props['strokeAlign'] ?? StrokeAlign.inside),
   };
 };
