@@ -1,5 +1,7 @@
+import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
+@FairBinding()
 class TabIconData {
   TabIconData({
     this.imagePath = '',
@@ -14,7 +16,7 @@ class TabIconData {
   bool isSelected;
   int index;
 
-  AnimationController animationController;
+  AnimationController? animationController;
 
   static List<TabIconData> tabIconsList = <TabIconData>[
     TabIconData(

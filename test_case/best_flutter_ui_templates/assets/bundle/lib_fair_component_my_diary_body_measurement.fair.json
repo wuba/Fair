@@ -1,0 +1,589 @@
+{
+  "className": "Padding",
+  "na": {
+    "padding": {
+      "className": "EdgeInsets.only",
+      "na": {
+        "left": 24,
+        "right": 24,
+        "top": 16,
+        "bottom": 18
+      }
+    },
+    "child": {
+      "className": "Container",
+      "na": {
+        "decoration": {
+          "className": "BoxDecoration",
+          "na": {
+            "color": "#(FitnessAppTheme.white)",
+            "borderRadius": {
+              "className": "BorderRadius.only",
+              "na": {
+                "topLeft": {
+                  "className": "Radius.circular",
+                  "pa": [
+                    8.0
+                  ]
+                },
+                "bottomLeft": {
+                  "className": "Radius.circular",
+                  "pa": [
+                    8.0
+                  ]
+                },
+                "bottomRight": {
+                  "className": "Radius.circular",
+                  "pa": [
+                    8.0
+                  ]
+                },
+                "topRight": {
+                  "className": "Radius.circular",
+                  "pa": [
+                    68.0
+                  ]
+                }
+              }
+            },
+            "boxShadow": [
+              {
+                "className": "BoxShadow",
+                "na": {
+                  "color": {
+                    "className": "Color",
+                    "pa": [
+                      "0x333A5160"
+                    ]
+                  },
+                  "offset": {
+                    "className": "Offset",
+                    "pa": [
+                      1.1,
+                      1.1
+                    ]
+                  },
+                  "blurRadius": 10.0
+                }
+              }
+            ]
+          }
+        },
+        "child": {
+          "className": "Column",
+          "na": {
+            "children": [
+              {
+                "className": "Padding",
+                "na": {
+                  "padding": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "top": 16,
+                      "left": 16,
+                      "right": 24
+                    }
+                  },
+                  "child": {
+                    "className": "Column",
+                    "na": {
+                      "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                      "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                      "children": [
+                        {
+                          "className": "Padding",
+                          "na": {
+                            "padding": {
+                              "className": "EdgeInsets.only",
+                              "na": {
+                                "left": 4,
+                                "bottom": 8,
+                                "top": 16
+                              }
+                            },
+                            "child": {
+                              "className": "Text",
+                              "pa": [
+                                "Weight"
+                              ],
+                              "na": {
+                                "textAlign": "#(TextAlign.center)",
+                                "style": {
+                                  "className": "TextStyle",
+                                  "na": {
+                                    "fontFamily": "#(FitnessAppTheme.fontName)",
+                                    "fontWeight": "#(FontWeight.w500)",
+                                    "fontSize": 16,
+                                    "color": "#(FitnessAppTheme.darkText)"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "className": "Row",
+                          "na": {
+                            "mainAxisAlignment": "#(MainAxisAlignment.spaceBetween)",
+                            "crossAxisAlignment": "#(CrossAxisAlignment.center)",
+                            "children": [
+                              {
+                                "className": "Row",
+                                "na": {
+                                  "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                  "crossAxisAlignment": "#(CrossAxisAlignment.end)",
+                                  "children": [
+                                    {
+                                      "className": "Padding",
+                                      "na": {
+                                        "padding": {
+                                          "className": "EdgeInsets.only",
+                                          "na": {
+                                            "left": 4,
+                                            "bottom": 3
+                                          }
+                                        },
+                                        "child": {
+                                          "className": "Text",
+                                          "pa": [
+                                            "206.8"
+                                          ],
+                                          "na": {
+                                            "textAlign": "#(TextAlign.center)",
+                                            "style": {
+                                              "className": "TextStyle",
+                                              "na": {
+                                                "fontFamily": "#(FitnessAppTheme.fontName)",
+                                                "fontWeight": "#(FontWeight.w600)",
+                                                "fontSize": 32,
+                                                "color": "#(FitnessAppTheme.nearlyDarkBlue)"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "className": "Padding",
+                                      "na": {
+                                        "padding": {
+                                          "className": "EdgeInsets.only",
+                                          "na": {
+                                            "left": 8,
+                                            "bottom": 8
+                                          }
+                                        },
+                                        "child": {
+                                          "className": "Text",
+                                          "pa": [
+                                            "Ibs"
+                                          ],
+                                          "na": {
+                                            "textAlign": "#(TextAlign.center)",
+                                            "style": {
+                                              "className": "TextStyle",
+                                              "na": {
+                                                "fontFamily": "#(FitnessAppTheme.fontName)",
+                                                "fontWeight": "#(FontWeight.w500)",
+                                                "fontSize": 18,
+                                                "color": "#(FitnessAppTheme.nearlyDarkBlue)"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "className": "Column",
+                                "na": {
+                                  "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                  "crossAxisAlignment": "#(CrossAxisAlignment.end)",
+                                  "children": [
+                                    {
+                                      "className": "Row",
+                                      "na": {
+                                        "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                        "children": [
+                                          {
+                                            "className": "Icon",
+                                            "pa": [
+                                              "#(Icons.access_time)"
+                                            ],
+                                            "na": {
+                                              "color": {
+                                                "className": "Color",
+                                                "pa": [
+                                                  "0x7F3A5160"
+                                                ]
+                                              },
+                                              "size": 16
+                                            }
+                                          },
+                                          {
+                                            "className": "Padding",
+                                            "na": {
+                                              "padding": {
+                                                "className": "EdgeInsets.only",
+                                                "na": {
+                                                  "left": 4.0
+                                                }
+                                              },
+                                              "child": {
+                                                "className": "Text",
+                                                "pa": [
+                                                  "Today 8:26 AM"
+                                                ],
+                                                "na": {
+                                                  "textAlign": "#(TextAlign.center)",
+                                                  "style": {
+                                                    "className": "TextStyle",
+                                                    "na": {
+                                                      "fontFamily": "#(FitnessAppTheme.fontName)",
+                                                      "fontWeight": "#(FontWeight.w500)",
+                                                      "fontSize": 14,
+                                                      "letterSpacing": 0.0,
+                                                      "color": {
+                                                        "className": "Sugar.colorsWithOpacity",
+                                                        "pa": [
+                                                          "#(FitnessAppTheme.grey)",
+                                                          0.5
+                                                        ]
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "className": "Padding",
+                                      "na": {
+                                        "padding": {
+                                          "className": "EdgeInsets.only",
+                                          "na": {
+                                            "top": 4,
+                                            "bottom": 14
+                                          }
+                                        },
+                                        "child": {
+                                          "className": "Text",
+                                          "pa": [
+                                            "InBody SmartScale"
+                                          ],
+                                          "na": {
+                                            "textAlign": "#(TextAlign.center)",
+                                            "style": {
+                                              "className": "TextStyle",
+                                              "na": {
+                                                "fontFamily": "#(FitnessAppTheme.fontName)",
+                                                "fontWeight": "#(FontWeight.w500)",
+                                                "fontSize": 12,
+                                                "letterSpacing": 0.0,
+                                                "color": "#(FitnessAppTheme.nearlyDarkBlue)"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Padding",
+                "na": {
+                  "padding": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "left": 24,
+                      "right": 24,
+                      "top": 8,
+                      "bottom": 8
+                    }
+                  },
+                  "child": {
+                    "className": "Container",
+                    "na": {
+                      "height": 2,
+                      "decoration": {
+                        "className": "BoxDecoration",
+                        "na": {
+                          "color": "#(FitnessAppTheme.background)",
+                          "borderRadius": {
+                            "className": "BorderRadius.all",
+                            "pa": [
+                              {
+                                "className": "Radius.circular",
+                                "pa": [
+                                  4.0
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Padding",
+                "na": {
+                  "padding": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "left": 24,
+                      "right": 24,
+                      "top": 8,
+                      "bottom": 16
+                    }
+                  },
+                  "child": {
+                    "className": "Row",
+                    "na": {
+                      "children": [
+                        {
+                          "className": "Expanded",
+                          "na": {
+                            "child": {
+                              "className": "Column",
+                              "na": {
+                                "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                "children": [
+                                  {
+                                    "className": "Text",
+                                    "pa": [
+                                      "185 cm"
+                                    ],
+                                    "na": {
+                                      "textAlign": "#(TextAlign.center)",
+                                      "style": {
+                                        "className": "TextStyle",
+                                        "na": {
+                                          "fontFamily": "#(FitnessAppTheme.fontName)",
+                                          "fontWeight": "#(FontWeight.w500)",
+                                          "fontSize": 16,
+                                          "color": "#(FitnessAppTheme.darkText)"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "className": "Padding",
+                                    "na": {
+                                      "padding": {
+                                        "className": "EdgeInsets.only",
+                                        "na": {
+                                          "top": 6
+                                        }
+                                      },
+                                      "child": {
+                                        "className": "Text",
+                                        "pa": [
+                                          "Height"
+                                        ],
+                                        "na": {
+                                          "textAlign": "#(TextAlign.center)",
+                                          "style": {
+                                            "className": "TextStyle",
+                                            "na": {
+                                              "fontFamily": "#(FitnessAppTheme.fontName)",
+                                              "fontWeight": "#(FontWeight.w600)",
+                                              "fontSize": 12,
+                                              "color": {
+                                                "className": "Sugar.colorsWithOpacity",
+                                                "pa": [
+                                                  "#(FitnessAppTheme.grey)",
+                                                  0.5
+                                                ]
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "className": "Expanded",
+                          "na": {
+                            "child": {
+                              "className": "Row",
+                              "na": {
+                                "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                "crossAxisAlignment": "#(CrossAxisAlignment.center)",
+                                "children": [
+                                  {
+                                    "className": "Column",
+                                    "na": {
+                                      "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                      "crossAxisAlignment": "#(CrossAxisAlignment.center)",
+                                      "children": [
+                                        {
+                                          "className": "Text",
+                                          "pa": [
+                                            "27.3 BMI"
+                                          ],
+                                          "na": {
+                                            "textAlign": "#(TextAlign.center)",
+                                            "style": {
+                                              "className": "TextStyle",
+                                              "na": {
+                                                "fontFamily": "#(FitnessAppTheme.fontName)",
+                                                "fontWeight": "#(FontWeight.w500)",
+                                                "fontSize": 16,
+                                                "color": "#(FitnessAppTheme.darkText)"
+                                              }
+                                            }
+                                          }
+                                        },
+                                        {
+                                          "className": "Padding",
+                                          "na": {
+                                            "padding": {
+                                              "className": "EdgeInsets.only",
+                                              "na": {
+                                                "top": 6
+                                              }
+                                            },
+                                            "child": {
+                                              "className": "Text",
+                                              "pa": [
+                                                "Overweight"
+                                              ],
+                                              "na": {
+                                                "textAlign": "#(TextAlign.center)",
+                                                "style": {
+                                                  "className": "TextStyle",
+                                                  "na": {
+                                                    "fontFamily": "#(FitnessAppTheme.fontName)",
+                                                    "fontWeight": "#(FontWeight.w600)",
+                                                    "fontSize": 12,
+                                                    "color": {
+                                                      "className": "Sugar.colorsWithOpacity",
+                                                      "pa": [
+                                                        "#(FitnessAppTheme.grey)",
+                                                        0.5
+                                                      ]
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "className": "Expanded",
+                          "na": {
+                            "child": {
+                              "className": "Row",
+                              "na": {
+                                "mainAxisAlignment": "#(MainAxisAlignment.end)",
+                                "crossAxisAlignment": "#(CrossAxisAlignment.center)",
+                                "children": [
+                                  {
+                                    "className": "Column",
+                                    "na": {
+                                      "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                      "crossAxisAlignment": "#(CrossAxisAlignment.end)",
+                                      "children": [
+                                        {
+                                          "className": "Text",
+                                          "pa": [
+                                            "20%"
+                                          ],
+                                          "na": {
+                                            "style": {
+                                              "className": "TextStyle",
+                                              "na": {
+                                                "fontFamily": "#(FitnessAppTheme.fontName)",
+                                                "fontWeight": "#(FontWeight.w500)",
+                                                "fontSize": 16,
+                                                "color": "#(FitnessAppTheme.darkText)"
+                                              }
+                                            }
+                                          }
+                                        },
+                                        {
+                                          "className": "Padding",
+                                          "na": {
+                                            "padding": {
+                                              "className": "EdgeInsets.only",
+                                              "na": {
+                                                "top": 6
+                                              }
+                                            },
+                                            "child": {
+                                              "className": "Text",
+                                              "pa": [
+                                                "Body fat"
+                                              ],
+                                              "na": {
+                                                "textAlign": "#(TextAlign.center)",
+                                                "style": {
+                                                  "className": "TextStyle",
+                                                  "na": {
+                                                    "fontFamily": "#(FitnessAppTheme.fontName)",
+                                                    "fontWeight": "#(FontWeight.w600)",
+                                                    "fontSize": 12,
+                                                    "color": {
+                                                      "className": "Sugar.colorsWithOpacity",
+                                                      "pa": [
+                                                        "#(FitnessAppTheme.grey)",
+                                                        0.5
+                                                      ]
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

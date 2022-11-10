@@ -578,4 +578,12 @@ const widgetNames = {
   'AnimationStatus': false,
   'CatmullRomCurve': false,
   'Curves': false,
+  'IconData': true,
+  'AlwaysScrollableScrollPhysics': false,
+  'ClampingScrollPhysics': false,
+  'FixedExtentScrollPhysics': false,
+  'NeverScrollableScrollPhysics': false,
+  'PageScrollPhysics': false,
+  'RangeMaintainingScrollPhysics': false,
+  'BouncingScrollPhysics': false
 };

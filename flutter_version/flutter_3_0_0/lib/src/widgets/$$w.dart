@@ -2891,6 +2891,11 @@ var p = () => {
             cacheWidth: props['cacheWidth'],
             cacheHeight: props['cacheHeight'],
       ),
+      'AssetImage': (props) => AssetImage(
+            props['pa'][0],
+            bundle: props['bundle'],
+            package: props['package'],
+      ),
       'Image.asset': (props) => Image.asset(
             props['pa'][0],
             key: props['key'],
@@ -3515,6 +3520,16 @@ var p = () => {
             position: props['position'] ?? DecorationPosition.background,
             child: props['child'],
       ),
+      'BoxDecoration': (props) => BoxDecoration(
+            color: props['color'],
+            image: props['image'],
+            border: props['border'],
+            borderRadius: props['borderRadius'],
+            boxShadow: as<BoxShadow>(props['boxShadow']),
+            gradient: props['gradient'],
+            backgroundBlendMode: props['backgroundBlendMode'],
+            shape: props['shape'] ?? BoxShape.rectangle,
+      ),
       'Container': (props) => Container(
             key: props['key'],
             alignment: props['alignment'],
@@ -3629,6 +3644,11 @@ var p = () => {
             color: props['color'],
             semanticLabel: props['semanticLabel'],
             textDirection: props['textDirection'],
+      ),
+      'IconData': (props) => IconData(
+            props['pa'][0],
+            fontFamily: props['fontFamily'],
+            fontPackage: props['fontPackage'],
       ),
       'Visibility': (props) => Visibility(
             key: props['key'],
@@ -4027,4 +4047,11 @@ var p = () => {
           ) {
             return (props['block']) as Widget;
       },
+      'AlwaysScrollableScrollPhysics': (props) => AlwaysScrollableScrollPhysics(),
+      'ClampingScrollPhysics': (props) => ClampingScrollPhysics(),
+      'FixedExtentScrollPhysics': (props) => FixedExtentScrollPhysics(),
+      'NeverScrollableScrollPhysics': (props) => NeverScrollableScrollPhysics(),
+      'PageScrollPhysics': (props) => PageScrollPhysics(),
+      'RangeMaintainingScrollPhysics': (props) => RangeMaintainingScrollPhysics(),
+      'BouncingScrollPhysics': (props) => BouncingScrollPhysics(),
 };

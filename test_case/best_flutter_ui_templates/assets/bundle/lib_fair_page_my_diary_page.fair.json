@@ -1,0 +1,290 @@
+{
+  "className": "Container",
+  "na": {
+    "color": "#(FitnessAppTheme.background)",
+    "child": {
+      "className": "Scaffold",
+      "na": {
+        "backgroundColor": "#(Colors.transparent)",
+        "body": {
+          "className": "Stack",
+          "na": {
+            "children": [
+              "%(getAppBarUI)",
+              "%(getMainListViewUI)",
+              {
+                "className": "SizedBox",
+                "na": {
+                  "height": "$(height:)"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {
+    "getAppBarUI": {
+      "className": "Container",
+      "na": {
+        "decoration": {
+          "className": "BoxDecoration",
+          "na": {
+            "color": {
+              "pa": [
+                1
+              ]
+            },
+            "borderRadius": {
+              "className": "BorderRadius.only",
+              "na": {
+                "bottomLeft": {
+                  "className": "Radius.circular",
+                  "pa": [
+                    32.0
+                  ]
+                }
+              }
+            },
+            "boxShadow": [
+              {
+                "className": "BoxShadow",
+                "na": {
+                  "color": {
+                    "pa": [
+                      0.4
+                    ]
+                  },
+                  "offset": {
+                    "className": "Offset",
+                    "pa": [
+                      1.1,
+                      1.1
+                    ]
+                  },
+                  "blurRadius": 10.0
+                }
+              }
+            ]
+          }
+        },
+        "child": {
+          "className": "Column",
+          "na": {
+            "children": [
+              {
+                "className": "SizedBox",
+                "na": {
+                  "height": "$(height:)"
+                }
+              },
+              {
+                "className": "Padding",
+                "na": {
+                  "padding": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "left": 16,
+                      "right": 16
+                    }
+                  },
+                  "child": {
+                    "className": "Row",
+                    "na": {
+                      "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                      "children": [
+                        {
+                          "className": "Expanded",
+                          "na": {
+                            "child": {
+                              "className": "Padding",
+                              "na": {
+                                "padding": {
+                                  "className": "EdgeInsets.all",
+                                  "pa": [
+                                    8.0
+                                  ]
+                                },
+                                "child": {
+                                  "className": "Text",
+                                  "pa": [
+                                    "My Diary"
+                                  ],
+                                  "na": {
+                                    "textAlign": "#(TextAlign.left)",
+                                    "style": {
+                                      "className": "TextStyle",
+                                      "na": {
+                                        "fontFamily": "#(FitnessAppTheme.fontName)",
+                                        "fontWeight": "#(FontWeight.w700)",
+                                        "fontSize": 22,
+                                        "letterSpacing": 1.2,
+                                        "color": "#(FitnessAppTheme.darkerText)"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "className": "SizedBox",
+                          "na": {
+                            "height": 38,
+                            "width": 38,
+                            "child": {
+                              "className": "InkWell",
+                              "na": {
+                                "highlightColor": "#(Colors.transparent)",
+                                "borderRadius": {
+                                  "className": "BorderRadius.all",
+                                  "pa": [
+                                    {
+                                      "className": "Radius.circular",
+                                      "pa": [
+                                        32.0
+                                      ]
+                                    }
+                                  ]
+                                },
+                                "onTap": "",
+                                "child": {
+                                  "className": "Center",
+                                  "na": {
+                                    "child": {
+                                      "className": "Icon",
+                                      "pa": [
+                                        "#(Icons.keyboard_arrow_left)"
+                                      ],
+                                      "na": {
+                                        "color": "#(FitnessAppTheme.grey)"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "className": "Padding",
+                          "na": {
+                            "padding": {
+                              "className": "EdgeInsets.only",
+                              "na": {
+                                "left": 8,
+                                "right": 8
+                              }
+                            },
+                            "child": {
+                              "className": "Row",
+                              "na": {
+                                "children": [
+                                  {
+                                    "className": "Padding",
+                                    "na": {
+                                      "padding": {
+                                        "className": "EdgeInsets.only",
+                                        "na": {
+                                          "right": 8
+                                        }
+                                      },
+                                      "child": {
+                                        "className": "Icon",
+                                        "pa": [
+                                          "#(Icons.calendar_today)"
+                                        ],
+                                        "na": {
+                                          "color": "#(FitnessAppTheme.grey)",
+                                          "size": 18
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "className": "Text",
+                                    "pa": [
+                                      "15 May"
+                                    ],
+                                    "na": {
+                                      "textAlign": "#(TextAlign.left)",
+                                      "style": {
+                                        "className": "TextStyle",
+                                        "na": {
+                                          "fontFamily": "#(FitnessAppTheme.fontName)",
+                                          "fontWeight": "#(FontWeight.normal)",
+                                          "fontSize": 18,
+                                          "color": "#(FitnessAppTheme.darkerText)"
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "className": "SizedBox",
+                          "na": {
+                            "height": 38,
+                            "width": 38,
+                            "child": {
+                              "className": "InkWell",
+                              "na": {
+                                "highlightColor": "#(Colors.transparent)",
+                                "borderRadius": {
+                                  "className": "BorderRadius.all",
+                                  "pa": [
+                                    {
+                                      "className": "Radius.circular",
+                                      "pa": [
+                                        32.0
+                                      ]
+                                    }
+                                  ]
+                                },
+                                "onTap": "",
+                                "child": {
+                                  "className": "Center",
+                                  "na": {
+                                    "child": {
+                                      "className": "Icon",
+                                      "pa": [
+                                        "#(Icons.keyboard_arrow_right)"
+                                      ],
+                                      "na": {
+                                        "color": "#(FitnessAppTheme.grey)"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "getMainListViewUI": {
+      "className": "ListView.builder",
+      "na": {
+        "padding": {
+          "className": "EdgeInsets.only"
+        },
+        "itemCount": "$(listViews.length)",
+        "scrollDirection": "#(Axis.vertical)",
+        "itemBuilder": null
+      }
+    }
+  }
+}
