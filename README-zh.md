@@ -137,7 +137,9 @@ faircli create -k carrier -n carrier_project_name
 
 提供常用页面/组件模板代码
 
-![fair fair_template](fair_template.png)
+<html>
+<img src="fair_template.png" width="80%">
+</html>
 
 ### 配套工具使用流程
 ![fair tools](fair_tools.png)
