@@ -109,6 +109,39 @@ FairWidget(
 For more details, please refer to [https://fair.58.com](https://fair.58.com)  
 If you need the hot update platform, please follow [FAIR PUSHY](https://github.com/wuba/FairPushy)
 
+## DevTools
+fair development tools
+### Dart Commandline Tool [faircli](https://pub.dev/packages/faircli)
+
+create fair project
+
+**faircli install**
+```dart
+dart pub global activate faircli
+```
+
+**create fair dynamic project**
+```dart
+faircli create -n dynamic_project_name
+```
+**create fair carrier project**
+```dart
+faircli create -k carrier -n carrier_project_name
+```
+
+### AS Plugin [FairTemplate](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
+
+Page/Component Template Code
+
+<html>
+<img src="fair_template.png" width="80%">
+</html>
+
+### DevTools flow chart
+![fair tools](fair_tools.png)
+
+For more details, please refer to [fair_tools](fair_tools.md)
+
 ## versions
 
 ### 2.8.1
