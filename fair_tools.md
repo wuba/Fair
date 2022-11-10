@@ -21,7 +21,11 @@
 
 > 使用流程图如下：
 
-![](https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_Xd7b37VaU5d35a35d3Wc137bWcXU5a5a.png)
+<html>
+<div align="center">
+<img src="https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_Xd7b37VaU5d35a35d3Wc137bWcXU5a5a.png" width="90%">
+</div>
+</html>
 
 ### 使用说明
 
@@ -61,50 +65,87 @@ carrier_project_name: 载体工程名
 
 ##### 使用演示
 
-![](https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_377bV9V913WcWcU57bXdU735U75a13Xd.gif)
+<html>
+<div align="center">
+<img src="https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_377bV9V913WcWcU57bXdU735U75a13Xd.gif" width="70%">
+</div>
+</html>
 
 #### 步骤三：IDE插件-功能开发
 
 ##### 模板代码使用
 
-![](https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_5913d3Xd7b13Vad35aU5Va35d37b35Xd.png)
+<html>
+<div align="center">
+<img src="https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_5913d3Xd7b13Vad35aU5Va35d37b35Xd.png" width="60%">
+</div>
+</html>
 
 选择代码模板，生成对应的代码文件。
 
-![](https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_XdVa3737WbU55aVa135a373735d3XUd3.png)
+<html>
+<div align="center">
+<img src="https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_XdVa3737WbU55aVa135a373735d3XUd3.png" width="70%">
+</div>
+</html>
 
 在生成的代码中，进行二次开发。
 
 ##### 一键打包
 
 功能开发完成后，可使用 AS 插件进行一键打包。
-![](https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_13U5d3V9V9U7d337Xdd137U559XUXd35.png)
+
+<html>
+<div align="center">
+<img src="https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_13U5d3V9V9U7d337Xdd137U559XUXd35.png" width="70%">
+</div>
+</html>
 
 #### 步骤四：启动本地热更新服务
 
 打包完成之后，可启动本地热更新服务，进行开发功能预览。
 
-![](https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_7bVa5aXd35d3U57bd15aU77bWb35WbXd.png)
+<html>
+<div align="center">
+<img src="https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_7bVa5aXd35d3U57bd15aU77bWb35WbXd.png" width="70%">
+</div>
+</html>
 
 当控制台打印如下信息，表示成功启动本地热更新服务。
 
-![](https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_37Wb5a5aV9U713XU59XU595a7bVa7b35.png)
+<html>
+<div align="center">
+<img src="https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_37Wb5a5aV9U713XU59XU595a7bVa7b35.png" width="70%">
+</div>
+</html>
 
 ##### 开发者选项
 
 运行载体工程，进入开发者选项页面。
 
-![](https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_Wc3735VaWcV9Wc597b595a3559Wc5ad3.png)
+<html>
+<div align="center">
+<img src="https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_Wc3735VaWcV9Wc597b595a3559Wc5ad3.png" width="40%">
+</div>
+</html>
 
 输入 host，加载 bundle 列表。选择对应的 bundle，进行功能预览。
 手机摇一摇，可触发重新加载功能。
 
 #### 步骤五：IDE插件-上传 bundle 到线上环境
 
-![](https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_U5U759d3d3U559355937d3XdWcd1Xdd3.png)
+<html>
+<div align="center">
+<img src="https://wos.58cdn.com.cn/IjGfEdCbIlr/ishare/pic_U5U759d3d3U559355937d3XdWcd1Xdd3.png" width="70%">
+</div>
+</html>
 
 ### 使用效果
 
 当使用faircli工具配置好本地的热更服务后，在移动设备上打开开发者选项，选择本地模式，输入电脑ip地址，就可以预览fair动态化效果
 
-![](https://wosin2.58corp.com/QSOnMlKjIQv/tegyunuploadfile/08866b27686de280f6a5b7e128775396)
+<html>
+<div align="center">
+<img src="fair_tools.gif" width="50%">
+</div>
+</html>

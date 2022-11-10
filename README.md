@@ -133,7 +133,9 @@ faircli create -k carrier -n carrier_project_name
 
 Page/Component Template Code
 
-![fair fair_template](fair_template.png)
+<html>
+<img src="fair_template.png" width="80%">
+</html>
 
 ### DevTools flow chart
 ![fair tools](fair_tools.png)
