@@ -58,7 +58,7 @@ class ProxyMirror with P {
       }
       var result = exp.onEvaluate(this, bindingData, text, pre);
       pre = result.exp??'';
-      if (result.valid) {
+      if (result.valid()) {
         return W<dynamic>(result.data, result.needBinding);
       }
     }

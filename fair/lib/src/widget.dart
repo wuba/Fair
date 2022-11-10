@@ -228,6 +228,25 @@ class FairDelegate extends RuntimeFairDelegate {
     func['Sugar.width'] = (props) => Sugar.width(context);
     func['Sugar.requestFocus'] = (props) => Sugar.requestFocus(context);
     func['Sugar.onTapEmpty'] = (props) => Sugar.onTapEmpty();
+    func['Sugar.netWorkImage'] = (props) {
+      var url = pa0(props);
+      return Sugar.netWorkImage(url);
+    };
+    func['Sugar.boxConstraints'] = (props) {
+      double minWidth = props['minWidth'];
+      double maxWidth = props['maxWidth'];
+      double minHeight = props['minHeight'];
+      double maxHeight = props['maxHeight'];
+      return Sugar.boxConstraints(
+          maxWidth: maxWidth,
+          minWidth: minWidth,
+          maxHeight: maxHeight,
+          minHeight: minHeight);
+    };
+
+    func['Sugar.borderSide'] = (props) {
+      return Sugar.borderSide(color: props['color'], width: props['width']);
+    };
     return func;
   }
 
