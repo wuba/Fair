@@ -145,15 +145,14 @@ After using faircli to configure the local hot update service, open the develope
 </div>
 </html>
 
-For more details, please refer to [fair_tools](fair_tools.md)  
-  
-*tools:*  
-Fair Cli: [Fair_CLI](https://pub.dev/packages/faircli)  
-IEDA plugin: [jetbrains_plugin_fair_template](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
+For more details, please refer to [fair_tools](fair_tools.md)
 
 ## Documentation
 For more details, please refer to [https://fair.58.com](https://fair.58.com)  
-If you need the hot update platform, please follow [FAIR PUSHY](https://github.com/wuba/FairPushy)
+### Tools
+Hot update platform: [FAIR PUSHY](https://github.com/wuba/FairPushy)  
+Fair Cli: [Fair_CLI](https://pub.dev/packages/faircli)  
+IEDA plugin: [jetbrains_plugin_fair_template](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
 
 ## versions
 
