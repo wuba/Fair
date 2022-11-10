@@ -156,8 +156,8 @@ faircli create -k carrier -n carrier_project_name
 更多介绍请查看 [文档](fair_tools.md)  
   
 *工具集：*  
-Fair脚手架: [https://pub.dev/packages/faircli](https://pub.dev/packages/faircli)  
-IDEA插件: [https://plugins.jetbrains.com/plugin/20323-fairtemplate](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
+Fair脚手架: [Fair CLI](https://pub.dev/packages/faircli)  
+IDEA插件: [jetbrains plugin fairtemplate](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
 
 
 ## 🔨最近版本
