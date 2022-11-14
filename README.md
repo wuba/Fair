@@ -13,9 +13,9 @@
 
 ---
 
-Fair is a lightweight package for Flutter, which can be used to update widget tree and state dynamically. This package is still at an early stage.
+Fair is a dynamic framework designed for Flutter. Through the automatic conversion of native Dart source files by the Fair Compiler tool, the project can obtain the ability to dynamically update the Widget Tree and State.
 
-We create Fair so we can dispatch any pages changes to users as bundle(s), the way similar to React Native. With Flutter Fair integrated, you can publish your pages without waiting for the next release date of your App. Fair provides standard widget and some logic plugins, it can be used as a new dynamic page or as part of existing Flutter page.
+The goal of creating Fair is to support updates through business bundles and JS distribution without the release of versions (Android, iOS, Web), similar to React Native. After integrating with Flutter Fair, you can quickly publish new pages without waiting for your app's next release date. Fair provides standard widgets, which can be used as a new dynamic page or as part of an existing Flutter page, such as typography/style modification of operation bits, full page replacement, partial replacement, etc.
 
 ![](what-is-fair-en.png)
 
