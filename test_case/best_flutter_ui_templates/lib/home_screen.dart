@@ -94,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                           child: FairWidget(
                                               name: 'item#$index',
                                               path:
-                                                  'assets/bundle/lib_component_home_list.fair.bin',
+                                                  'assets/bundle/lib_component_home_list.fair.json',
                                               delegate: HomeListProxy(
                                                 listData: homeList[index],
                                                 callBack: () {

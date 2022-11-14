@@ -76,7 +76,16 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
             path: 'assets/bundle/lib_invite_friend_screen.fair.bin',
           );
         });
-      } else {
+      } else if (drawerIndex == DrawerIndex.About) {
+        setState(() {
+          // screenView = InviteFriend();
+          screenView = FairWidget(
+            name: 'grid_template',
+            path: 'assets/bundle/lib_fair_component_grid_gridview_template.fair.json',
+          );
+        });
+      }
+      else {
         //do in your way......
       }
     }
