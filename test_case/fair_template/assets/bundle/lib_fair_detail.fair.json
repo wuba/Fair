@@ -1,0 +1,377 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "floatingActionButton": {
+      "className": "Container",
+      "na": {
+        "width": {
+          "className": "Sugar.width",
+          "pa": [
+            "^(context)"
+          ]
+        },
+        "height": 45,
+        "margin": {
+          "className": "EdgeInsets.fromLTRB",
+          "pa": [
+            50,
+            0,
+            50,
+            15
+          ]
+        },
+        "child": {
+          "className": "ElevatedButton",
+          "na": {
+            "child": {
+              "className": "Text",
+              "pa": [
+                "RSVP to Event"
+              ]
+            },
+            "onPressed": "@(_onPress)"
+          }
+        }
+      }
+    },
+    "body": {
+      "className": "Column",
+      "na": {
+        "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+        "children": [
+          "%(_topWidget)",
+          "%(_outlineWidget)",
+          "%(_timeAndLocation)",
+          "%(_DetailTitle)",
+          "%(_information)"
+        ]
+      }
+    }
+  },
+  "methodMap": {
+    "_topWidget": {
+      "className": "Stack",
+      "na": {
+        "children": [
+          {
+            "className": "Container",
+            "na": {
+              "child": {
+                "className": "Image.asset",
+                "pa": [
+                  "assets/images/zhibo.jpeg"
+                ]
+              }
+            }
+          },
+          {
+            "className": "Positioned",
+            "na": {
+              "top": 20,
+              "child": {
+                "className": "Container",
+                "na": {
+                  "height": 72,
+                  "width": 66,
+                  "child": {
+                    "className": "Image.asset",
+                    "pa": [
+                      "assets/images/back.png"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "_outlineWidget": {
+      "className": "Padding",
+      "na": {
+        "padding": {
+          "className": "EdgeInsets.fromLTRB",
+          "pa": [
+            20,
+            25,
+            20,
+            0
+          ]
+        },
+        "child": {
+          "className": "Column",
+          "na": {
+            "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+            "children": [
+              {
+                "className": "Text",
+                "pa": [
+                  "%(_getAuth)"
+                ],
+                "na": {
+                  "style": {
+                    "className": "TextStyle",
+                    "na": {
+                      "color": {
+                        "className": "Color",
+                        "pa": [
+                          "0xFF3978C4"
+                        ]
+                      },
+                      "fontWeight": "#(FontWeight.w500)",
+                      "fontSize": 15
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Padding",
+                "na": {
+                  "padding": {
+                    "className": "EdgeInsets.fromLTRB",
+                    "pa": [
+                      0,
+                      15,
+                      0,
+                      0
+                    ]
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "%(_getTitle)"
+                    ],
+                    "na": {
+                      "style": {
+                        "className": "TextStyle",
+                        "na": {
+                          "color": "#(Colors.black)",
+                          "fontWeight": "#(FontWeight.bold)",
+                          "fontSize": 20
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Padding",
+                "na": {
+                  "padding": {
+                    "className": "EdgeInsets.fromLTRB",
+                    "pa": [
+                      0,
+                      10,
+                      0,
+                      0
+                    ]
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "%(_getDes)"
+                    ],
+                    "na": {
+                      "maxLines": 2,
+                      "overflow": "#(TextOverflow.ellipsis)",
+                      "style": {
+                        "className": "TextStyle",
+                        "na": {
+                          "color": "#(Colors.grey)",
+                          "fontWeight": "#(FontWeight.w400)",
+                          "fontSize": 14
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "_timeAndLocation": {
+      "className": "Padding",
+      "na": {
+        "padding": {
+          "className": "EdgeInsets.fromLTRB",
+          "pa": [
+            20,
+            15,
+            20,
+            0
+          ]
+        },
+        "child": {
+          "className": "Row",
+          "na": {
+            "crossAxisAlignment": "#(CrossAxisAlignment.end)",
+            "children": [
+              {
+                "className": "Container",
+                "na": {
+                  "width": 20,
+                  "height": 20,
+                  "child": {
+                    "className": "Image.asset",
+                    "pa": [
+                      "assets/images/time.png"
+                    ]
+                  }
+                }
+              },
+              {
+                "className": "Padding",
+                "na": {
+                  "padding": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "left": 5
+                    }
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "%(_getTime)"
+                    ],
+                    "na": {
+                      "style": {
+                        "className": "TextStyle",
+                        "na": {
+                          "fontSize": 15,
+                          "color": {
+                            "className": "Color",
+                            "pa": [
+                              "0xFF3978C4"
+                            ]
+                          }
+                        }
+                      },
+                      "maxLines": 1
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Padding",
+                "na": {
+                  "padding": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "left": 30
+                    }
+                  },
+                  "child": {
+                    "className": "Container",
+                    "na": {
+                      "width": 26,
+                      "height": 20,
+                      "child": {
+                        "className": "Image.asset",
+                        "pa": [
+                          "assets/images/location.png"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Expanded",
+                "na": {
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "%(_getLocation)"
+                    ],
+                    "na": {
+                      "style": {
+                        "className": "TextStyle",
+                        "na": {
+                          "color": {
+                            "className": "Color",
+                            "pa": [
+                              "0xFF3978C4"
+                            ]
+                          }
+                        }
+                      },
+                      "maxLines": 1,
+                      "overflow": "#(TextOverflow.ellipsis)"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "_DetailTitle": {
+      "className": "Padding",
+      "na": {
+        "padding": {
+          "className": "EdgeInsets.fromLTRB",
+          "pa": [
+            20,
+            25,
+            20,
+            0
+          ]
+        },
+        "child": {
+          "className": "Text",
+          "pa": [
+            "Event Details"
+          ],
+          "na": {
+            "style": {
+              "className": "TextStyle",
+              "na": {
+                "color": "#(Colors.grey)",
+                "fontSize": 14,
+                "fontWeight": "#(FontWeight.w500)"
+              }
+            }
+          }
+        }
+      }
+    },
+    "_information": {
+      "className": "Padding",
+      "na": {
+        "padding": {
+          "className": "EdgeInsets.fromLTRB",
+          "pa": [
+            20,
+            10,
+            20,
+            0
+          ]
+        },
+        "child": {
+          "className": "Text",
+          "pa": [
+            "%(_getDetailContent)"
+          ],
+          "na": {
+            "style": {
+              "className": "TextStyle",
+              "na": {
+                "color": {
+                  "className": "Color",
+                  "pa": [
+                    "0xFF121416"
+                  ]
+                },
+                "fontSize": 15,
+                "fontWeight": "#(FontWeight.w500)"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
