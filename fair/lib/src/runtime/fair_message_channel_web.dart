@@ -45,7 +45,8 @@ class FairMessageChannel {
 
     if (funcName == 'invokePlugin') {
       var p = await FairPluginDispatcher.dispatch(invokeData);
-      return p;
+      callback.call(p);
+      return;
     }
     var result = _callback?.call(invokeData);
     callback.call(result);
