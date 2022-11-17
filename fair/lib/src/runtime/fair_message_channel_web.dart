@@ -12,8 +12,8 @@ import 'dart:html';
 
 import 'package:fair/src/runtime/plugin/plugin_dispatcher.dart';
 import 'package:flutter/services.dart';
-import 'package:js/js.dart';
-import 'package:js/js_util.dart';
+import 'js/js.dart' if (dart.library.html) 'package:js/js.dart';
+import 'js/js_util.dart' if (dart.library.html) 'package:js/js_util.dart';
 
 import 'fair_runtime_declaration.dart';
 
