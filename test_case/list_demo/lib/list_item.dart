@@ -25,9 +25,9 @@ class _ListItemState extends State<ListItem> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                             fit: BoxFit.fitHeight,
-                            image: Sugar.netWorkImage(
+                            image: NetworkImage(
                                 "https://img.iplaysoft.com/wp-content/uploads/2019/free-images/free_stock_photo.jpg!0x0.webp"))),
                     width: 70,
                     height: 70,
