@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.8.1-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.0.0-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -50,7 +50,7 @@ Assuming that the fair project and your own project are in the same folder:
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 2.8.1
+  fair: 3.0.0
 
 # add build_runner and compiler dependency
 dev_dependencies:
@@ -58,6 +58,7 @@ dev_dependencies:
   fair_compiler: ^1.4.0
  
 # switch "fair_version" according to the local Flutter SDK version
+# Flutter SDK 3.3.x(3.3.0、3.3.1、3.3.2、3.3.3、3.3.4、3.3.5、3.3.6) -> flutter_3_3_0
 # Flutter SDK 3.0.x(3.0.0、3.0.1、3.0.2、3.0.3、3.0.4、3.0.5) -> flutter_3_0_0
 # Flutter SDK 2.10.x(2.10.0、2.10.1、2.10.2、2.10.3) -> flutter_2_10_0
 # Flutter SDK 2.8.x(2.8.0、2.8.1) -> flutter_2_8_0
@@ -66,7 +67,7 @@ dev_dependencies:
 # Flutter SDK 1.22.6 -> flutter_1_22_6
 dependency_overrides:
   fair_version:
-    path: ../fair/flutter_version/flutter_3_0_0
+    path: ../fair/flutter_version/flutter_3_3_0
 ```
 
 **step3：Wrap your app with FairApp Widget**
@@ -155,6 +156,13 @@ IEDA plugin: [jetbrains_plugin_fair_template](https://plugins.jetbrains.com/plug
 Hot update platform: [FAIR PUSHY](https://github.com/wuba/FairPushy)
 
 ## versions
+
+### 3.0.0
+updateDate：2022.11.17
+
+- Fix class constructor parsing exception.
+- Fair Compatible Web.
+- Bindmap logic optimization.
 
 ### 2.8.1
 updateDate：2022.11.01

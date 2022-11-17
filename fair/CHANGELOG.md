@@ -1,3 +1,8 @@
+## [3.0.0]
+* Fix class constructor parsing exception.
+* Fair Compatible Web.
+* Bindmap logic optimization.
+
 ## [2.8.1]
 * Fixed：CustomScrollView reference external function builder bug.
 
