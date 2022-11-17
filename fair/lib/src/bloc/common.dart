@@ -80,7 +80,7 @@ FairWidgetBinding provider = () {
     'BorderSide': (props) => BorderSide(
         color: props['color'],
         width: props['width'],
-        style: props['style'] ?? BorderStyle.solid,
-        strokeAlign: props['strokeAlign'] ?? StrokeAlign.inside),
+        style: props['style'] ?? BorderStyle.solid
+        ),
   };
 };
