@@ -5,7 +5,7 @@ A complier which can generate Fair bundle for widget with annotation.
 ![](http://pic1.58cdn.com.cn/nowater/jltx/n_v26dd88a1afa1c4cc9b186524f96ff3f65.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-1.4.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-1.4.1-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -48,12 +48,12 @@ Assuming that the fair project and your own project are in the same folder:
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 2.8.0
+  fair: 3.0.0
 
 # add build_runner and compiler dependency
 dev_dependencies:
   build_runner: ^2.0.0
-  fair_compiler: ^1.4.0
+  fair_compiler: ^1.4.1
  
 # switch "fair_version" according to the local Flutter SDK version
 # Flutter SDK 3.0.x(3.0.0、3.0.1、3.0.2、3.0.3、3.0.4、3.0.5) -> flutter_3_0_0
