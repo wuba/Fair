@@ -110,6 +110,7 @@ const widgetNames = {
   'IndexedSemantics': true,
   'KeyedSubtree': true,
   'Builder': true,
+  'InkWell': true,
   'StatefulBuilder': true,
   'ColoredBox': true,
   'GestureDetector': true,
@@ -577,4 +578,12 @@ const widgetNames = {
   'AnimationStatus': false,
   'CatmullRomCurve': false,
   'Curves': false,
+  'IconData': true,
+  'AlwaysScrollableScrollPhysics': false,
+  'ClampingScrollPhysics': false,
+  'FixedExtentScrollPhysics': false,
+  'NeverScrollableScrollPhysics': false,
+  'PageScrollPhysics': false,
+  'RangeMaintainingScrollPhysics': false,
+  'BouncingScrollPhysics': false
 };

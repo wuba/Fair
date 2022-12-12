@@ -43,7 +43,7 @@ class Decoder {
     Map? methodMap = <String, dynamic>{};
 
     var d = jsonBean?.remove('data');
-    methodMap = jsonBean?['methodMap'];
+    methodMap = jsonBean?['methodMap'] ?? <String, dynamic>{};
     jsonBean?.remove('methodMap');
 
     if (d != null) {

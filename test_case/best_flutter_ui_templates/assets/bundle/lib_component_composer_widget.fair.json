@@ -1,0 +1,112 @@
+{
+  "className": "Padding",
+  "na": {
+    "padding": {
+      "className": "EdgeInsets.only",
+      "na": {
+        "top": 16,
+        "left": 32,
+        "right": 32
+      }
+    },
+    "child": {
+      "className": "Container",
+      "na": {
+        "decoration": {
+          "className": "BoxDecoration",
+          "na": {
+            "color": "#(AppTheme.white)",
+            "borderRadius": {
+              "className": "BorderRadius.circular",
+              "pa": [
+                8
+              ]
+            },
+            "boxShadow": [
+              {
+                "className": "BoxShadow",
+                "na": {
+                  "color": "#(AppTheme.greyWithOpacity)",
+                  "offset": {
+                    "className": "Offset",
+                    "pa": [
+                      4,
+                      4
+                    ]
+                  },
+                  "blurRadius": 8
+                }
+              }
+            ]
+          }
+        },
+        "child": {
+          "className": "ClipRRect",
+          "na": {
+            "borderRadius": {
+              "className": "BorderRadius.circular",
+              "pa": [
+                25
+              ]
+            },
+            "child": {
+              "className": "Container",
+              "na": {
+                "padding": {
+                  "className": "EdgeInsets.all",
+                  "pa": [
+                    4.0
+                  ]
+                },
+                "constraints": {
+                  "className": "BoxConstraints",
+                  "na": {
+                    "minHeight": 80,
+                    "maxHeight": 160
+                  }
+                },
+                "color": "#(AppTheme.white)",
+                "child": {
+                  "className": "SingleChildScrollView",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.only",
+                      "na": {
+                        "left": 10,
+                        "right": 10,
+                        "top": 0,
+                        "bottom": 0
+                      }
+                    },
+                    "child": {
+                      "className": "TextField",
+                      "na": {
+                        "onChanged": "",
+                        "style": {
+                          "className": "TextStyle",
+                          "na": {
+                            "fontFamily": "#(AppTheme.fontName)",
+                            "fontSize": 16,
+                            "color": "#(AppTheme.dark_grey)"
+                          }
+                        },
+                        "cursorColor": "#(Colors.blue)",
+                        "decoration": {
+                          "className": "InputDecoration",
+                          "na": {
+                            "border": "#(InputBorder.none)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

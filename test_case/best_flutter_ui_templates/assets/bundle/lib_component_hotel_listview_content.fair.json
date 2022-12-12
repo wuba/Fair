@@ -43,7 +43,8 @@
                           4
                         ]
                       },
-                      "blurRadius": 16
+                      "blurRadius": 16,
+                      "spreadRadius": 0
                     }
                   }
                 ]
@@ -78,7 +79,7 @@
                                 "child": {
                                   "className": "Image.asset",
                                   "pa": [
-                                    "#(hotelData.imagePath)"
+                                    "$((hotelData!.imagePath,)"
                                   ],
                                   "na": {
                                     "fit": "#(BoxFit.cover)"
@@ -122,7 +123,7 @@
                                                         {
                                                           "className": "Text",
                                                           "pa": [
-                                                            "#(hotelData.titleTxt)"
+                                                            "$((hotelData!.titleTxt,)"
                                                           ],
                                                           "na": {
                                                             "textAlign": "#(TextAlign.left)",
@@ -144,7 +145,7 @@
                                                               {
                                                                 "className": "Text",
                                                                 "pa": [
-                                                                  "#(hotelData.subTxt)"
+                                                                  "$((hotelData!.subTxt,)"
                                                                 ],
                                                                 "na": {
                                                                   "style": {
@@ -178,9 +179,7 @@
                                                                   "child": {
                                                                     "className": "Text",
                                                                     "pa": [
-                                                                      {
-                                                                        "className": "distance"
-                                                                      }
+                                                                      "%(distance)"
                                                                     ],
                                                                     "na": {
                                                                       "overflow": "#(TextOverflow.ellipsis)",
@@ -212,22 +211,53 @@
                                                               "na": {
                                                                 "children": [
                                                                   {
-                                                                    "className": "SmoothStarRating",
+                                                                    "className": "RatingBar",
                                                                     "na": {
+                                                                      "initialRating": "$(initialRating:)",
+                                                                      "direction": "#(Axis.horizontal)",
                                                                       "allowHalfRating": true,
-                                                                      "starCount": 5,
-                                                                      "rating": "#(hotelData.rating)",
-                                                                      "size": 20,
-                                                                      "color": "#(primaryColor)",
-                                                                      "borderColor": "#(primaryColor)"
+                                                                      "itemCount": 5,
+                                                                      "itemSize": 24,
+                                                                      "ratingWidget": {
+                                                                        "className": "RatingWidget",
+                                                                        "na": {
+                                                                          "full": {
+                                                                            "className": "Icon",
+                                                                            "pa": [
+                                                                              "#(Icons.star_rate_rounded)"
+                                                                            ],
+                                                                            "na": {
+                                                                              "color": "$(color:)"
+                                                                            }
+                                                                          },
+                                                                          "half": {
+                                                                            "className": "Icon",
+                                                                            "pa": [
+                                                                              "#(Icons.star_half_rounded)"
+                                                                            ],
+                                                                            "na": {
+                                                                              "color": "$(color:)"
+                                                                            }
+                                                                          },
+                                                                          "empty": {
+                                                                            "className": "Icon",
+                                                                            "pa": [
+                                                                              "#(Icons.star_border_rounded)"
+                                                                            ],
+                                                                            "na": {
+                                                                              "color": "$(color:)"
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      },
+                                                                      "itemPadding": "#(EdgeInsets.zero)",
+                                                                      "onRatingUpdate": "%(print)"
                                                                     }
                                                                   },
                                                                   {
                                                                     "className": "Text",
                                                                     "pa": [
-                                                                      {
-                                                                        "className": "reviews"
-                                                                      }
+                                                                      "%(reviews)"
                                                                     ],
                                                                     "na": {
                                                                       "style": {
@@ -272,9 +302,7 @@
                                                 {
                                                   "className": "Text",
                                                   "pa": [
-                                                    {
-                                                      "className": "perNight"
-                                                    }
+                                                    "%(perNight)"
                                                   ],
                                                   "na": {
                                                     "textAlign": "#(TextAlign.left)",
@@ -373,5 +401,6 @@
         }
       }
     }
-  }
+  },
+  "methodMap": {}
 }

@@ -46,8 +46,14 @@ class Domain<E> {
       List<String> expList = processed.split('.');
       if (expList.first == '\$item' || expList.first == 'item') {
         dynamic obj = source?[index];
+        dynamic modelValue;
         if (obj is BaseModel) {
           Map<String, dynamic> json = (obj as BaseModel).toJson();
+          modelValue = json;
+        }else if(obj is Map){
+          modelValue = obj;
+        }
+        if(modelValue!=null){
           expList.removeAt(0);
           dynamic modelValue = json;
           for (String k in expList) {

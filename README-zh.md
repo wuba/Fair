@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.8.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.0.0-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -22,7 +22,7 @@ Fair是为Flutter设计的动态化框架，通过Fair Compiler工具对原生Da
 **如果您需要热更新平台，可关注Fair Pushy**
 > 热更新平台：[FAIR PUSHY](https://github.com/wuba/FairPushy)
 
-![](fair/what-is-fair.png)
+![](what-is-fair.png)
 
 Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转义Best Flutter UI Templates部分页面后的效果：
 
@@ -58,14 +58,15 @@ git clone https://github.com/wuba/fair.git
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 2.8.0
+  fair: 3.0.0
 
 # add build_runner and compiler dependency
 dev_dependencies:
   build_runner: ^2.0.0
-  fair_compiler: ^1.2.0
+  fair_compiler: ^1.4.1
 
 # switch "fair_version" according to the local Flutter SDK version
+# Flutter SDK 3.3.x(3.3.0、3.3.1、3.3.2、3.3.3、3.3.4、3.3.5、3.3.6) -> flutter_3_3_0
 # Flutter SDK 3.0.x(3.0.0、3.0.1、3.0.2、3.0.3、3.0.4、3.0.5) -> flutter_3_0_0
 # Flutter SDK 2.10.x(2.10.0、2.10.1、2.10.2、2.10.3) -> flutter_2_10_0
 # Flutter SDK 2.8.x(2.8.0、2.8.1) -> flutter_2_8_0
@@ -74,7 +75,7 @@ dev_dependencies:
 # Flutter SDK 1.22.6 -> flutter_1_22_6
 dependency_overrides:
   fair_version:
-    path: ../fair/flutter_version/flutter_3_0_0
+    path: ../fair/flutter_version/flutter_3_3_0
 ```
 
 **step3：将App替换为FairApp**
@@ -113,7 +114,66 @@ path: 'assets/bundle/lib_src_page_dynamic_widget.fair.json',
 data: {"fairProps": json.encode({})}),
 ```
 
+## 🧰配套工具
+fair 开发提效工具
+### Dart命令行工具 [faircli](https://pub.dev/packages/faircli)
+
+一键创建fair工程
+
+**faircli安装**
+```dart
+dart pub global activate faircli
+```
+
+**创建动态化工程**
+```dart
+faircli create -n dynamic_project_name
+```
+**创建载体工程**
+```dart
+faircli create -k carrier -n carrier_project_name
+```
+
+### IDEA插件 [FairTemplate](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
+
+提供常用页面/组件模板代码
+
+<html>
+<img src="fair_template.png" width="80%">
+</html>
+
+### 配套工具使用流程
+![fair tools](fair_tools.png)
+
+### 配套工具使用效果
+使用faircli配置好本地的热更服务后，在移动设备上打开开发者选项，选择本地模式，输入开发机ip，预览fair动态化效果
+
+<html>
+<div align="center">
+<img src="fair_tools.gif" width="50%">
+</div>
+</html>
+
+更多介绍请查看 [文档](fair_tools.md)  
+  
+*工具集：*  
+Fair脚手架: [Fair CLI](https://pub.dev/packages/faircli)  
+IDEA插件: [jetbrains plugin fairtemplate](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
+
+
 ## 🔨最近版本
+
+### 3.0.0
+更新时间：2022.11.17
+
+- 修复class 构造函数解析异常；
+- Fair 兼容 Web 端；
+- bindmap 逻辑优化。
+
+### 2.8.1
+更新时间：2022.11.01
+
+- 修复 bug：CustomScrollView 引用外部函数构建 builder 报错。
 
 ### 2.8.0
 更新时间：2022.10.21
@@ -255,6 +315,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/itzhaoqian"><img src="https://avatars.githubusercontent.com/u/23277488?v=4?s=100" width="100px;" alt=""/><br /><sub><b>itzhaoqian</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=itzhaoqian" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/xxliang"><img src="https://avatars.githubusercontent.com/u/5005255?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sunlight Xie</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=xxliang" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/a303268287"><img src="https://avatars.githubusercontent.com/u/19368353?v=4?s=100" width="100px;" alt=""/><br /><sub><b>lhdycxgghb</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=a303268287" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/hlwhl"><img src="https://avatars.githubusercontent.com/u/7610615?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Prome</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=hlwhl" title="Code">💻</a></td>
   </tr>
 </table>
 

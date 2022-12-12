@@ -1,0 +1,49 @@
+{
+  "className": "Container",
+  "na": {
+    "height": 216,
+    "width": 400,
+    "child": {
+      "className": "ListView",
+      "na": {
+        "padding": {
+          "className": "EdgeInsets.only",
+          "na": {
+            "top": 0,
+            "bottom": 0,
+            "right": 16,
+            "left": 16
+          }
+        },
+        "scrollDirection": "#(Axis.horizontal)",
+        "children": [
+          {
+            "className": "MealsView",
+            "na": {
+              "mealsListData": "#(MealsListData.icon1)"
+            }
+          },
+          {
+            "className": "MealsView",
+            "na": {
+              "mealsListData": "#(MealsListData.icon2)"
+            }
+          },
+          {
+            "className": "MealsView",
+            "na": {
+              "mealsListData": "#(MealsListData.icon3)"
+            }
+          },
+          {
+            "className": "MealsView",
+            "na": {
+              "mealsListData": "#(MealsListData.icon4)"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {}
+}

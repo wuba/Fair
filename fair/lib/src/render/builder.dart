@@ -48,7 +48,10 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     print('name:$name');
     if (name == null) {
       return WarningWidget(
-          parentContext:context,name: name, error: '$tag is not supported', url: bundle);
+          parentContext: context,
+          name: name,
+          error: '$tag is not supported',
+          url: bundle);
     }
     try {
       var module = bound?.modules?.moduleOf(name)?.call();
@@ -77,16 +80,19 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       } else if (name == 'Sugar.listBuilder') {
         return _buildSugarListBuilder(
             name, domain, mapper, map, methodMap, context);
-      }else if(name == 'Sugar.isNestedScrollViewHeaderSliversBuilder'){
-        return _buildNestedScrollViewHeaderSlivers(mapper, map, methodMap, context);
-      }else if(name == 'Sugar.isButtonStyle'){
+      } else if (name == 'Sugar.isNestedScrollViewHeaderSliversBuilder') {
+        return _buildNestedScrollViewHeaderSlivers(
+            mapper, map, methodMap, context);
+      } else if (name == 'Sugar.isButtonStyle') {
         return _buildSugarButtonStyle(mapper, map, methodMap, context);
-      }else if(name == 'Sugar.popMenuButton'){
+      } else if (name == 'Sugar.popMenuButton') {
         return _popupMenuBuilder(mapper, map, methodMap, context);
-      }else if (name == 'Sugar.sliverChildBuilderDelegate') {
-        return _buildSugarSliverChildBuilderDelegate(mapper, map, methodMap, context);
-      }else if (name == 'Sugar.sliverGridDelegateWithFixedCrossAxisCount') {
-        return _buildSugarSliverGridDelegateWithFixedCrossAxisCount(mapper, map, methodMap, context);
+      } else if (name == 'Sugar.sliverChildBuilderDelegate') {
+        return _buildSugarSliverChildBuilderDelegate(
+            mapper, map, methodMap, context);
+      } else if (name == 'Sugar.sliverGridDelegateWithFixedCrossAxisCount') {
+        return _buildSugarSliverGridDelegateWithFixedCrossAxisCount(
+            mapper, map, methodMap, context);
       }
 
       var source = map['mapEach'];
@@ -98,7 +104,13 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }
       return _block(map, methodMap, context, domain, mapper, name, isWidget);
     } catch (e) {
-           return WarningWidget(parentContext:context, name: name, error: e, url: bundle, solution:"Tag name not supported yet,You need to use the @FairBinding annotation to tag the local Widget component");
+      return WarningWidget(
+          parentContext: context,
+          name: name,
+          error: e,
+          url: bundle,
+          solution:
+              "Tag name not supported yet,You need to use the @FairBinding annotation to tag the local Widget component");
     }
   }
 
@@ -117,7 +129,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     // var arguments = map['arguments'];
     final bind = widget && (na.binding == true || pa.binding == true);
     try {
-      fun = FairModule.cast(ctx, fun);
+      fun = FairModule.cast(ctx, fun); 
       if (forceApply || !bind) {
         return Function.apply(
             fun, [Property.extract(list: pa.data, map: na.data)], null);
@@ -130,7 +142,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         stack: stack,
         context: ErrorSummary('while parsing widget of $name, $fun'),
       ));
-       throw ArgumentError('name===$name,fun===$fun, error===$e, map===$map');
+      throw ArgumentError('name===$name,fun===$fun, error===$e, map===$map');
     }
   }
 
@@ -144,6 +156,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
           pa.add(convert(context, e, methodMap, domain: domain));
         } else if (domain != null && domain.match(e)) {
           pa.add(domain.bindValue(e));
+        } else if (domain != null && e is MapEntry && domain.match(e.value)) {
+          pa.add(domain.bindValue(e.value));
         } else if (e is String) {
           var r = proxyMirror?.evaluate(context, bound, e);
           if (r?.binding == true) {
@@ -176,6 +190,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
               _namedList(tag, naMap, methodMap, context, domain, e.value);
         } else if (domain != null && domain.match(e)) {
           na[e.key] = domain.bindValue(e as String);
+        } else if (domain != null && e is MapEntry && domain.match(e.value)) {
+          na[e.key] = domain.bindValue(e.value);
         } else if (e.value is String) {
           var w = _namedString(tag, naMap, methodMap, context, domain, e.value);
           needBinding = w.binding ?? false;
@@ -275,16 +291,20 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     if (!(source is List)) {
       throw Exception('Sugar.mapEach has no valid source array');
     }
-
+    
     if (source is List) {
       source = Domain(source).forEach(($, element) {
         if (element is Map) {
+          if(element[tag] == null){
+            return element;  //直接返回Map对象
+          }
           return convert(context, element, methodMap, domain: $);
         } else {
           return element;
         }
       });
     }
+    //转为Widget
     if (source is List) {
       children = Domain(source).forEach(($, _) {
         return convert(context, pa1(map), methodMap, domain: $);
@@ -313,6 +333,9 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     if (source is List) {
       source = Domain(source).forEach(($, element) {
         if (element is Map) {
+          if(element[tag] == null){
+            return element; //直接返回Map对象
+          }
           return convert(context, element, methodMap, domain: $);
         } else {
           return element;
@@ -358,21 +381,21 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return mapEach.call(params);
   }
 
-  PopupMenuButton _popupMenuBuilder(Function mapEach,
-      Map map,
-      Map? methodMap,
-      BuildContext context){
+  PopupMenuButton _popupMenuBuilder(
+      Function mapEach, Map map, Map? methodMap, BuildContext context) {
     var propertyTransMap = Map.from(map);
     Map na = map['na'];
-    var itemBuilder  = na['itemBuilder'];
-    propertyTransMap['className']='PopupMenuButton';
+    var itemBuilder = na['itemBuilder'];
+    propertyTransMap['className'] = 'PopupMenuButton';
     //刷新时
-    if(itemBuilder is Function){
+    if (itemBuilder is Function) {
       var propertiesProvider = convert(context, propertyTransMap, methodMap);
-      return mapEach.call({'pa': [ propertiesProvider]});
+      return mapEach.call({
+        'pa': [propertiesProvider]
+      });
     }
     //第一次解析
-    if(itemBuilder is List){
+    if (itemBuilder is List) {
       var list = Domain(itemBuilder).forEach(($, element) {
         return convert(context, element, methodMap, domain: $) as Widget;
       });
@@ -381,14 +404,13 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }
     var propertiesProvider = convert(context, propertyTransMap, methodMap);
     var params = {
-      'pa': [ propertiesProvider]
+      'pa': [propertiesProvider]
     };
     return mapEach.call(params);
   }
-  
-ListView _buildSugarListBuilder(String name, Domain? superDomain,
+
+  ListView _buildSugarListBuilder(String name, Domain? superDomain,
       Function mapEach, Map map, Map? methodMap, BuildContext context) {
-      
     Map propertyTransMap = Map.from(map);
 
     Map naOrMap = map['na'];
@@ -418,110 +440,108 @@ ListView _buildSugarListBuilder(String name, Domain? superDomain,
     return mapEach.call(params);
   }
 
-  NestedScrollViewHeaderSliversBuilder _buildNestedScrollViewHeaderSlivers (Function mapEach,
-      Map map,
-      Map? methodMap,
-      BuildContext context){
-    var na =map['na'];
-    var innerBoxIsScrolled=na['innerBoxIsScrolled'];
-    var headerSliverBuilder =na['headerSliverBuilder'];
+  NestedScrollViewHeaderSliversBuilder _buildNestedScrollViewHeaderSlivers(
+      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+    var na = map['na'];
+    var innerBoxIsScrolled = na['innerBoxIsScrolled'];
+    var headerSliverBuilder = na['headerSliverBuilder'];
     var source = List<int>.generate(headerSliverBuilder.length, (i) => i + 1);
 
     var list = Domain(source).forEach(($, index) {
-      return convert(context, headerSliverBuilder[index-1], methodMap, domain:$) as Widget;
+      return convert(context, headerSliverBuilder[index - 1], methodMap,
+          domain: $) as Widget;
     });
     List<Widget> headerBuilder = list.map((e) => e as Widget).toList();
     var params = {
-      'pa': [context,innerBoxIsScrolled,headerBuilder]
+      'pa': [context, innerBoxIsScrolled, headerBuilder]
     };
     return mapEach.call(params);
   }
-  ButtonStyle _buildSugarButtonStyle (Function mapEach,
-      Map map,
-      Map? methodMap,
-      BuildContext context){
-    var na =map['na'];
-    var textStyle=na['textStyle'];
-    if(null!=textStyle){
-      textStyle=convert(context,textStyle , methodMap);
+
+  ButtonStyle _buildSugarButtonStyle(
+      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+    var na = map['na'];
+    var textStyle = na['textStyle'];
+    if (null != textStyle) {
+      textStyle = convert(context, textStyle, methodMap);
     }
-    var backgroundColor=na['backgroundColor'];
-    if(null!=backgroundColor){
-      backgroundColor=convert(context,backgroundColor , methodMap);
+    var backgroundColor = na['backgroundColor'];
+    if (null != backgroundColor) {
+      backgroundColor = convert(context, backgroundColor, methodMap);
     }
-    var foregroundColor=na['foregroundColor'];
-    if(null!=foregroundColor){
-      foregroundColor=convert(context,foregroundColor , methodMap);
+    var foregroundColor = na['foregroundColor'];
+    if (null != foregroundColor) {
+      foregroundColor = convert(context, foregroundColor, methodMap);
     }
-    var overlayColor=na['overlayColor'];
-    if(null!=overlayColor){
-      overlayColor=convert(context,overlayColor , methodMap);
+    var overlayColor = na['overlayColor'];
+    if (null != overlayColor) {
+      overlayColor = convert(context, overlayColor, methodMap);
     }
-    var shadowColor=na['shadowColor'];
-    if(null!=shadowColor){
-      shadowColor=convert(context,shadowColor , methodMap);
+    var shadowColor = na['shadowColor'];
+    if (null != shadowColor) {
+      shadowColor = convert(context, shadowColor, methodMap);
     }
-    var surfaceTintColor=na['surfaceTintColor'];
-    if(null!=surfaceTintColor){
-      surfaceTintColor=convert(context,surfaceTintColor , methodMap);
+    var surfaceTintColor = na['surfaceTintColor'];
+    if (null != surfaceTintColor) {
+      surfaceTintColor = convert(context, surfaceTintColor, methodMap);
     }
-    var elevation=na['elevation'];
-    if(null!=elevation){
-      elevation=convert(context,elevation , methodMap);
+    var elevation = na['elevation'];
+    if (null != elevation) {
+      elevation = convert(context, elevation, methodMap);
     }
-    var padding=na['padding'];
-    if(null!=padding){
-      padding=convert(context,padding , methodMap);
+    var padding = na['padding'];
+    if (null != padding) {
+      padding = convert(context, padding, methodMap);
     }
-    var minimumSize=na['minimumSize'];
-    if(null!=minimumSize){
-      minimumSize=convert(context,minimumSize , methodMap);
+    var minimumSize = na['minimumSize'];
+    if (null != minimumSize) {
+      minimumSize = convert(context, minimumSize, methodMap);
     }
-    var fixedSize=na['fixedSize'];
-    if(null!=fixedSize){
-      fixedSize=convert(context,fixedSize , methodMap);
+    var fixedSize = na['fixedSize'];
+    if (null != fixedSize) {
+      fixedSize = convert(context, fixedSize, methodMap);
     }
-    var maximumSize=na['maximumSize'];
-    if(null!=maximumSize){
-      maximumSize=convert(context,maximumSize , methodMap);
+    var maximumSize = na['maximumSize'];
+    if (null != maximumSize) {
+      maximumSize = convert(context, maximumSize, methodMap);
     }
-    var side=na['side'];
-    if(null!=side){
-      side=convert(context,side , methodMap);
+    var side = na['side'];
+    if (null != side) {
+      side = convert(context, side, methodMap);
     }
-    var shape=na['shape'];
-    if(null!=shape){
-      shape=convert(context,shape , methodMap);
+    var shape = na['shape'];
+    if (null != shape) {
+      shape = convert(context, shape, methodMap);
     }
-    var mouseCursor=na['mouseCursor'];
-    if(null!=mouseCursor){
-      mouseCursor=convert(context,mouseCursor , methodMap);
+    var mouseCursor = na['mouseCursor'];
+    if (null != mouseCursor) {
+      mouseCursor = convert(context, mouseCursor, methodMap);
     }
-    var visualDensity=na['visualDensity'];
-    if(null!=visualDensity){
-      visualDensity=convert(context,visualDensity , methodMap);
+    var visualDensity = na['visualDensity'];
+    if (null != visualDensity) {
+      visualDensity = convert(context, visualDensity, methodMap);
     }
-    var tapTargetSize=na['tapTargetSize'];
-    if(null!=tapTargetSize){
-      tapTargetSize=convert(context,tapTargetSize , methodMap);
+    var tapTargetSize = na['tapTargetSize'];
+    if (null != tapTargetSize) {
+      tapTargetSize = convert(context, tapTargetSize, methodMap);
     }
-    var animationDuration=na['animationDuration'];
-    if(null!=animationDuration){
-      animationDuration=convert(context,animationDuration , methodMap);
+    var animationDuration = na['animationDuration'];
+    if (null != animationDuration) {
+      animationDuration = convert(context, animationDuration, methodMap);
     }
-    var enableFeedback=na['enableFeedback'];
-    if(null!=enableFeedback){
-      enableFeedback=convert(context,enableFeedback , methodMap);
+    var enableFeedback = na['enableFeedback'];
+    if (null != enableFeedback) {
+      enableFeedback = convert(context, enableFeedback, methodMap);
     }
-    var alignment=na['alignment'];
-    if(null!=alignment){
-      alignment=convert(context,alignment , methodMap);
+    var alignment = na['alignment'];
+    if (null != alignment) {
+      alignment = convert(context, alignment, methodMap);
     }
-    var splashFactory=na['splashFactory'];
-    if(null!=splashFactory){
-      splashFactory=convert(context,splashFactory , methodMap);
+    var splashFactory = na['splashFactory'];
+    if (null != splashFactory) {
+      splashFactory = convert(context, splashFactory, methodMap);
     }
-    var buttonStyle=Sugar.isButtonStyle(
+    var buttonStyle = Sugar.isButtonStyle(
       textStyle: textStyle,
       backgroundColor: backgroundColor,
       foregroundColor: foregroundColor,
@@ -544,7 +564,7 @@ ListView _buildSugarListBuilder(String name, Domain? superDomain,
       splashFactory: splashFactory,
     );
     var params = {
-      'pa': [na,buttonStyle]
+      'pa': [na, buttonStyle]
     };
     return mapEach.call(params);
   }
@@ -582,9 +602,26 @@ ListView _buildSugarListBuilder(String name, Domain? superDomain,
 
     Map na = map['na'];
     var childCount = na['childCount'];
+    var builder = na['builder'];
+    Map builderMap = <String,dynamic>{};
+
+    //函数传入处理
+    if(methodMap != null && methodMap.keys.isNotEmpty){
+      methodMap.keys.forEach((element) {
+        if(builder is String && builder.contains(element)) {
+          builderMap = methodMap[element];
+        }
+      });
+    }
+    // 常规
+    if (builderMap.isEmpty) {
+      builderMap = na['builder'];
+    }
+
     var source = List<int>.generate(childCount, (i) => i + 1);
+
     var list = Domain(source).forEach(($, _) {//拿到所有itemBuilder对应的数组
-      return convert(context, na['builder'], methodMap, domain:$) as Widget;
+      return convert(context, builderMap, methodMap, domain:$) as Widget;
     });
     List<Widget> children = list.map((e) => e as Widget).toList();
 
@@ -596,11 +633,9 @@ ListView _buildSugarListBuilder(String name, Domain? superDomain,
     return mapEach.call(params);
   }
 
-  SliverGridDelegateWithFixedCrossAxisCount _buildSugarSliverGridDelegateWithFixedCrossAxisCount(
-      Function mapEach,
-      Map map,
-      Map? methodMap,
-      BuildContext context) {
+  SliverGridDelegateWithFixedCrossAxisCount
+      _buildSugarSliverGridDelegateWithFixedCrossAxisCount(
+          Function mapEach, Map map, Map? methodMap, BuildContext context) {
     Map gridDelegateNa = map['na'];
     double mainAxisSpacing = 0.0;
     double crossAxisSpacing = 0.0;
