@@ -17,7 +17,8 @@ class Domain<E> {
   bool match(dynamic exp) {
     return source != null &&
         exp is String &&
-        ((RegExp('#\\(.+\\)', multiLine: true).hasMatch(exp) && (exp.contains('\$item') || exp.contains('\$index'))) ||
+        ((RegExp('#\\(.+\\)', multiLine: true).hasMatch(exp) &&
+                (exp.contains('\$item') || exp.contains('\$index'))) ||
             exp == 'item' ||
             exp == 'index' ||
             exp.startsWith("\$(item") ||
@@ -26,7 +27,7 @@ class Domain<E> {
             exp.startsWith("#(\${item"));
   }
 
-  String bindValue(String exp) {
+  dynamic bindValue(String exp) {
     // TODO mapEach
     if (exp == 'item') {
       return exp.replaceAll('item', '${source?[index]}');
@@ -34,11 +35,12 @@ class Domain<E> {
     if (exp == 'index') {
       return exp.replaceAll('index', '$index');
     }
+    // Carrying ”#(“ indicates value conversion to a string
+    final bool isStringValue = exp.startsWith('#(');
     var processed = exp.substring(2, exp.length - 1);
-    if (processed.startsWith("\${")){
+    if (processed.startsWith("\${")) {
       processed = processed.substring(2, processed.length - 1);
     }
-
 
     if (processed.contains('.')) {
       List<String> expList = processed.split('.');
@@ -48,11 +50,11 @@ class Domain<E> {
           Map<String, dynamic> json = (obj as BaseModel).toJson();
           expList.removeAt(0);
           dynamic modelValue = json;
-          for(String k in expList){
+          for (String k in expList) {
             modelValue = modelValue[k];
           }
-
-          processed = "${modelValue}";
+          // If conversion to a string is not explicitly indicated, the original type is returned
+          processed = isStringValue ? "${modelValue}" : modelValue;
         }
       }
     } else {
