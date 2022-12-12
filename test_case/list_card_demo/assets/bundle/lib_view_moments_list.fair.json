@@ -1,0 +1,125 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "NestedScrollView",
+      "na": {
+        "headerSliverBuilder": {
+          "className": "Sugar.isNestedScrollViewHeaderSliversBuilder",
+          "na": {
+            "context": "^(context)",
+            "innerBoxIsScrolled": false,
+            "headerSliverBuilder": [
+              {
+                "className": "SliverAppBar",
+                "na": {
+                  "pinned": true,
+                  "stretch": true,
+                  "expandedHeight": 200,
+                  "snap": false,
+                  "elevation": 0,
+                  "backgroundColor": "#(Colors.white)",
+                  "leading": {
+                    "className": "IconButton",
+                    "na": {
+                      "icon": {
+                        "className": "Image.asset",
+                        "pa": [
+                          "assets/images/left.png"
+                        ],
+                        "na": {
+                          "height": 22,
+                          "width": 22
+                        }
+                      }
+                    }
+                  },
+                  "flexibleSpace": {
+                    "className": "FlexibleSpaceBar",
+                    "na": {
+                      "title": {
+                        "className": "Row",
+                        "na": {
+                          "children": [
+                            {
+                              "className": "Padding",
+                              "na": {
+                                "padding": {
+                                  "className": "EdgeInsets.fromLTRB",
+                                  "pa": [
+                                    50,
+                                    10,
+                                    10,
+                                    2
+                                  ]
+                                },
+                                "child": {
+                                  "className": "Text",
+                                  "pa": [
+                                    "欢迎来到妮妮朋友圈"
+                                  ],
+                                  "na": {
+                                    "style": {
+                                      "className": "TextStyle",
+                                      "na": {
+                                        "color": {
+                                          "className": "Color",
+                                          "pa": [
+                                            "0xFF333333"
+                                          ]
+                                        },
+                                        "fontWeight": "#(FontWeight.w700)",
+                                        "fontSize": 17
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "centerTitle": true,
+                      "background": {
+                        "className": "Image.network",
+                        "pa": [
+                          "https://img1.baidu.com/it/u=1500716295,3279382336&fm=253&fmt=auto&app=120&f=JPEG"
+                        ],
+                        "na": {
+                          "fit": "#(BoxFit.fill)"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "body": {
+          "className": "Container",
+          "na": {
+            "color": "#(Colors.white)",
+            "child": {
+              "className": "Sugar.listBuilder",
+              "na": {
+                "itemCount": 5,
+                "itemBuilder": {
+                  "className": "FairWidget",
+                  "na": {
+                    "name": "itme",
+                    "path": "assets/bundle/lib_view_list_card_item.fair.json",
+                    "data": {
+                      "": ""
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

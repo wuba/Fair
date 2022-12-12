@@ -274,30 +274,6 @@ class Sugar {
       childAspectRatio: childAspectRatio,
     );
   }
-
-  static ImageProvider netWorkImage(String url) => NetworkImage(url);
-
-  static BoxConstraints boxConstraints({
-    double minWidth = 0.0,
-    double maxWidth = double.infinity,
-    double minHeight = 0.0,
-    double maxHeight = double.infinity,
-  }) =>
-      BoxConstraints(
-          maxHeight: maxHeight,
-          minHeight: minHeight,
-          maxWidth: maxWidth,
-          minWidth: minWidth);
-
-  static BorderSide borderSide({
-    Color color = const Color(0xFF000000),
-    double width = 1.0,
-    BorderStyle style = BorderStyle.solid,
-    StrokeAlign strokeAlign = StrokeAlign.inside,
-  }) =>
-      BorderSide(
-          color: color, width: width, style: style, strokeAlign: strokeAlign);
-
 }
 class SugarSwitchCaseObj<T,K>{
 

@@ -13,7 +13,8 @@ import 'bloc/geometry.dart' as geometry;
 import 'internal/global_state.dart';
 
 class BindingProvider with $BindingImpl {
-  final Map<String, dynamic> _binding = {
+  final Map<String, dynamic> _binding = {};
+  final Map<String, dynamic> _specialBinding = {
     ...common.provider(),
     ...geometry.provider(),
     ...flow.provider(),
@@ -21,6 +22,10 @@ class BindingProvider with $BindingImpl {
   var _loadedIndex = 0;
 
   dynamic loadTag(String? tag) {
+    var spResult = _specialBinding[tag];
+    if (spResult != null) {
+      return spResult;
+    }
     var result = _binding[tag];
     if (result != null) {
       return result;

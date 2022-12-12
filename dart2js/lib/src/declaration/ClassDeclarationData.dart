@@ -105,10 +105,13 @@ class ClassDeclarationData {
   parseFields(List<FieldDeclarationData> fields) {
     var fieldsLiterval = '';
     fields.where((element) => !element.isStatic).forEach((element) {
-      element.isGetter
-          ? fieldsLiterval +=
-              'this.${element.name} = (function(_this) { with (_this) {${element.initVal ?? 'null'} } })(this);'
-          : fieldsLiterval += 'this.${element.name} = ${element.initVal};';
+      if(element.isGetter){
+        fieldsLiterval += 'this.${element.name} = (function(_this) { with (_this) {${element.initVal ?? 'null'} } })(this);';
+      }else{
+        if(element.initVal!=null){
+          fieldsLiterval += 'this.${element.name} = ${element.initVal};';
+        }
+      }
     });
     return fieldsLiterval;
   }

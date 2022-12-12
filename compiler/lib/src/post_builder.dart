@@ -38,12 +38,12 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
     final jsName = bundleName.replaceFirst('.json', '.js');
 
     await dart2JS(buildStep.inputId.path, jsName);
-    await compileBundle(buildStep, bundleName);
+    var isOutputBin = await compileBundle(buildStep, bundleName);
 
     // 压缩下发产物
     var zipSrcPath = path.join(Directory.current.path, 'build', 'fair');
     var zipDesPath = path.join(Directory.current.path, 'build', 'fair', 'fair_patch.zip');
-    _zip(Directory(zipSrcPath), File(zipDesPath));
+    _zip(Directory(zipSrcPath), File(zipDesPath), isOutputBin);
 
    await stateTransfer();
   }
@@ -64,7 +64,7 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
     }
   }
 
-  Future compileBundle(PostProcessBuildStep buildStep, String bundleName) async {
+  Future<bool> compileBundle(PostProcessBuildStep buildStep, String bundleName) async {
     final bytes = await buildStep.readInputAsBytes();
     final file = File(bundleName)..writeAsBytesSync(bytes);
     if (file.lengthSync() > 0) {
@@ -90,15 +90,20 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
     File('${bundleName.replaceAll('.json', '.metadata')}').writeAsStringSync(buffer.toString());
 
     print('[Fair] New bundle generated => ${file.path}');
+
+    return bin.success;
   }
 
-  void _zip(Directory data, File zipFile) {
+  void _zip(Directory data, File zipFile, bool isOutputBin) {
+    final js_file_extension = '.js';
+    final dsl_file_extension = isOutputBin ? '.bin' : '.json';
+
     final archive = Archive();
     for (var entity in data.listSync(recursive: false)) {
       if (entity is! File) {
         continue;
       }
-      if (entity.path.endsWith('.js') || entity.path.endsWith('.json')) {
+      if (entity.path.endsWith(js_file_extension) || entity.path.endsWith(dsl_file_extension)) {
         final file = entity;
         var filename = file.path.split(Platform.pathSeparator).last;
         final List<int> bytes = file.readAsBytesSync();
