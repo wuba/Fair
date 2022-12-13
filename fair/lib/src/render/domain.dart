@@ -27,7 +27,7 @@ class Domain<E> {
             exp.startsWith("#(\${item"));
   }
 
-  String bindValue(String exp) {
+  dynamic bindValue(String exp) {
     // TODO mapEach
     if (exp == 'item') {
       return exp.replaceAll('item', '${source?[index]}');
@@ -35,6 +35,8 @@ class Domain<E> {
     if (exp == 'index') {
       return exp.replaceAll('index', '$index');
     }
+    // Carrying ”#(“ indicates value conversion to a string
+    final bool isStringValue = exp.startsWith('#(');
     var processed = exp.substring(2, exp.length - 1);
     if (processed.startsWith("\${")) {
       processed = processed.substring(2, processed.length - 1);
@@ -53,10 +55,12 @@ class Domain<E> {
         }
         if(modelValue!=null){
           expList.removeAt(0);
+          dynamic modelValue = json;
           for (String k in expList) {
             modelValue = modelValue[k];
           }
-          processed = "${modelValue}";
+          // If conversion to a string is not explicitly indicated, the original type is returned
+          processed = isStringValue ? "${modelValue}" : modelValue;
         }
       }
     } else {
