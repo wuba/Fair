@@ -55,7 +55,6 @@ class Domain<E> {
         }
         if(modelValue!=null){
           expList.removeAt(0);
-          dynamic modelValue = json;
           for (String k in expList) {
             modelValue = modelValue[k];
           }
