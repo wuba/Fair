@@ -37,7 +37,7 @@ class Domain<E> {
     }
     // Carrying ”#(“ indicates value conversion to a string
     final bool isStringValue = exp.startsWith('#(');
-    var processed = exp.substring(2, exp.length - 1);
+    dynamic processed = exp.substring(2, exp.length - 1);
     if (processed.startsWith("\${")) {
       processed = processed.substring(2, processed.length - 1);
     }
