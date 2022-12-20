@@ -25,7 +25,8 @@ dependencies:
 #  fair_annotation:
 #    path: ../annotation
   http: ^0.13.3
-  fair_dart2dsl: ^1.0.2
+  fair_dart2dsl:
+    path: ../dart2dsl
   fair_dart2js: ^1.3.1
 
 dev_dependencies:
