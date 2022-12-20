@@ -94,8 +94,13 @@ abstract class RuntimeFairDelegate {
       }
       return runtime?.invokeMethod(pageName, funcName, arguments);
     };
-    _bindFunctionsMap['runtimeInvokeMethodSync'] = (funcName) {
-      return runtime?.invokeMethodSync(pageName, funcName, null);
+    _bindFunctionsMap['runtimeInvokeMethodSync'] = (funcName, [props]) {
+      var arguments;
+      if (props != null) {
+        arguments = [];
+        arguments.addAll(props);
+      }
+      return runtime?.invokeMethodSync(pageName, funcName, arguments);
     };
     _bindFunctionsMap['runtimeParseVar'] = (varNames) {
       return runtime?.variablesSync(pageName, varNames);
