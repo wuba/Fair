@@ -1,0 +1,56 @@
+{
+  "templates": [
+    {
+      "path": "login_page",
+      "screenshot": "https://pic6.58cdn.com.cn/nowater/frs/n_v3a6a5bdcd52354ba6a3aba487db8b3822.jpg"
+    },
+    {
+      "path": "detail_page",
+      "screenshot": "https://pic4.58cdn.com.cn/nowater/frs/n_v31767f3b208484076851830b4436d846d.jpg"
+    },
+    {
+      "path": "list_card",
+      "screenshot": "https://pic1.58cdn.com.cn/nowater/frs/n_v35dc5ac951fd9402cbbd26a4ae6a3f21e.jpg"
+    },
+    {
+      "path": "list_page",
+      "screenshot": "https://pic2.58cdn.com.cn/nowater/frs/n_v33a6d038b4f4e49adb0bdd96e76735970.jpg"
+    },
+    {
+      "path": "tabbar_page",
+      "screenshot": "https://pic4.58cdn.com.cn/nowater/frs/n_v3701ad981ae3c406f98626683dfc05178.jpg"
+    },
+    {
+      "path": "hotel_listview",
+      "screenshot": "https://pic2.58cdn.com.cn/nowater/frs/n_v3cb8459dde0434bf099f9784078042a62.jpg"
+    },
+    {
+      "path": "scrollview",
+      "screenshot": "https://pic1.58cdn.com.cn/nowater/frs/n_v380fc28678b0540eea5786cf12ce2c59b.jpg"
+    },
+    {
+      "path": "gridview",
+      "screenshot": "https://pic2.58cdn.com.cn/nowater/frs/n_v36f0ac0f093e7448c913d93b497edf983.jpg"
+    },
+    {
+      "path": "pageview",
+      "screenshot": "https://pic1.58cdn.com.cn/nowater/frs/n_v311866d1f19084ea8a8cd5665b30d17bd.jpg"
+    },
+    {
+      "path": "staggered_view",
+      "screenshot": "https://pic5.58cdn.com.cn/nowater/frs/n_v35bad5e4b96984496adc124c105e0899d.jpg"
+    },
+    {
+      "path": "appbar",
+      "screenshot": "https://pic5.58cdn.com.cn/nowater/frs/n_v3b7c546d9a9c440dd8d83bf4b3cc514b2.jpg"
+    },
+    {
+      "path": "fab",
+      "screenshot": "https://pic7.58cdn.com.cn/nowater/frs/n_v376bc4227587f41c7a707942b67364484.jpg"
+    },
+    {
+      "path": "drawer",
+      "screenshot": "https://pic5.58cdn.com.cn/nowater/frs/n_v39e19c87b53fc43778cc2e90c09ede404.jpg"
+    }
+  ]
+}

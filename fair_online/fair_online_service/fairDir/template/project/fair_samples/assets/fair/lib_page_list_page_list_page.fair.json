@@ -1,0 +1,170 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "elevation": 0,
+        "backgroundColor": "#(Colors.white)",
+        "shadowColor": "#(Colors.white)",
+        "bottom": {
+          "className": "PreferredSize",
+          "na": {
+            "preferredSize": {
+              "className": "Size",
+              "pa": [
+                {
+                  "className": "Sugar.width",
+                  "pa": [
+                    "^(context)"
+                  ]
+                },
+                44
+              ]
+            },
+            "child": {
+              "className": "Material",
+              "na": {
+                "color": "#(Colors.white)",
+                "child": {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.only",
+                      "na": {
+                        "left": 15,
+                        "right": 15,
+                        "bottom": 5
+                      }
+                    },
+                    "child": {
+                      "className": "TextField",
+                      "na": {
+                        "decoration": {
+                          "className": "InputDecoration",
+                          "na": {
+                            "prefixIcon": {
+                              "className": "Icon",
+                              "pa": [
+                                "#(Icons.search)"
+                              ]
+                            },
+                            "suffixIcon": {
+                              "className": "Icon",
+                              "pa": [
+                                "#(Icons.settings_input_component)"
+                              ]
+                            },
+                            "contentPadding": {
+                              "className": "EdgeInsets.only",
+                              "na": {
+                                "top": 0,
+                                "bottom": 0
+                              }
+                            },
+                            "enabledBorder": {
+                              "className": "OutlineInputBorder",
+                              "na": {
+                                "borderSide": {
+                                  "className": "BorderSide",
+                                  "na": {
+                                    "color": "#(Colors.black12)",
+                                    "width": 0.5
+                                  }
+                                },
+                                "borderRadius": {
+                                  "className": "BorderRadius.all",
+                                  "pa": [
+                                    {
+                                      "className": "Radius.circular",
+                                      "pa": [
+                                        10
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            "focusedBorder": {
+                              "className": "OutlineInputBorder",
+                              "na": {
+                                "borderSide": {
+                                  "className": "BorderSide",
+                                  "na": {
+                                    "color": "#(Colors.black12)",
+                                    "width": 0.5
+                                  }
+                                },
+                                "borderRadius": {
+                                  "className": "BorderRadius.all",
+                                  "pa": [
+                                    {
+                                      "className": "Radius.circular",
+                                      "pa": [
+                                        10
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            "border": {
+                              "className": "OutlineInputBorder",
+                              "na": {
+                                "borderSide": {
+                                  "className": "BorderSide",
+                                  "na": {
+                                    "color": "#(Colors.black12)",
+                                    "width": 0.5
+                                  }
+                                },
+                                "borderRadius": {
+                                  "className": "BorderRadius.all",
+                                  "pa": [
+                                    {
+                                      "className": "Radius.circular",
+                                      "pa": [
+                                        10
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "body": {
+      "className": "Container",
+      "na": {
+        "color": "#(Colors.white)",
+        "child": {
+          "className": "Sugar.listBuilder",
+          "na": {
+            "itemCount": 5,
+            "itemBuilder": {
+              "className": "FairWidget",
+              "na": {
+                "name": "item",
+                "path": "assets/fair/lib_page_list_page_list_item.fair.json",
+                "data": {
+                  "": ""
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

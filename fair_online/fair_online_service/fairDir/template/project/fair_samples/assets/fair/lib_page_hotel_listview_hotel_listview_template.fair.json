@@ -1,0 +1,392 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "ListView.builder模版"
+          ]
+        }
+      }
+    },
+    "backgroundColor": {
+      "className": "Color",
+      "pa": [
+        "0xFFFEFEFE"
+      ]
+    },
+    "body": {
+      "className": "Sugar.ifEqualBool",
+      "pa": [
+        "%(isDataEmpty)"
+      ],
+      "na": {
+        "trueValue": {
+          "className": "Center",
+          "na": {
+            "child": {
+              "className": "Text",
+              "pa": [
+                "加载中..."
+              ]
+            }
+          }
+        },
+        "falseValue": {
+          "className": "Container",
+          "na": {
+            "color": {
+              "className": "Color",
+              "pa": [
+                "0xFFFFFFFF"
+              ]
+            },
+            "child": {
+              "className": "ListView",
+              "na": {
+                "children": {
+                  "className": "Sugar.map",
+                  "pa": [
+                    "^(_listData)"
+                  ],
+                  "na": {
+                    "builder": {
+                      "className": "Padding",
+                      "na": {
+                        "padding": {
+                          "className": "EdgeInsets.only",
+                          "na": {
+                            "left": 24,
+                            "right": 24,
+                            "top": 8,
+                            "bottom": 16
+                          }
+                        },
+                        "child": {
+                          "className": "Container",
+                          "na": {
+                            "child": {
+                              "className": "ClipRRect",
+                              "na": {
+                                "borderRadius": {
+                                  "className": "BorderRadius.all",
+                                  "pa": [
+                                    {
+                                      "className": "Radius.circular",
+                                      "pa": [
+                                        16.0
+                                      ]
+                                    }
+                                  ]
+                                },
+                                "child": {
+                                  "className": "Stack",
+                                  "na": {
+                                    "children": [
+                                      {
+                                        "className": "Column",
+                                        "na": {
+                                          "children": [
+                                            {
+                                              "className": "AspectRatio",
+                                              "na": {
+                                                "aspectRatio": 2,
+                                                "child": {
+                                                  "className": "Image.network",
+                                                  "pa": [
+                                                    "$(item.imagePath)"
+                                                  ],
+                                                  "na": {
+                                                    "fit": "#(BoxFit.cover)"
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            {
+                                              "className": "Container",
+                                              "na": {
+                                                "color": {
+                                                  "className": "Color",
+                                                  "pa": [
+                                                    "0xFFFFFFFF"
+                                                  ]
+                                                },
+                                                "child": {
+                                                  "className": "Row",
+                                                  "na": {
+                                                    "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                                    "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                                    "children": [
+                                                      {
+                                                        "className": "Expanded",
+                                                        "na": {
+                                                          "child": {
+                                                            "className": "Container",
+                                                            "na": {
+                                                              "child": {
+                                                                "className": "Padding",
+                                                                "na": {
+                                                                  "padding": {
+                                                                    "className": "EdgeInsets.only",
+                                                                    "na": {
+                                                                      "left": 16,
+                                                                      "top": 8,
+                                                                      "bottom": 8
+                                                                    }
+                                                                  },
+                                                                  "child": {
+                                                                    "className": "Column",
+                                                                    "na": {
+                                                                      "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                                                      "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                                                      "children": [
+                                                                        {
+                                                                          "className": "Text",
+                                                                          "pa": [
+                                                                            "$(item.titleTxt)"
+                                                                          ],
+                                                                          "na": {
+                                                                            "textAlign": "#(TextAlign.left)",
+                                                                            "style": {
+                                                                              "className": "TextStyle",
+                                                                              "na": {
+                                                                                "fontWeight": "#(FontWeight.w600)",
+                                                                                "fontSize": 22
+                                                                              }
+                                                                            }
+                                                                          }
+                                                                        },
+                                                                        {
+                                                                          "className": "Row",
+                                                                          "na": {
+                                                                            "crossAxisAlignment": "#(CrossAxisAlignment.center)",
+                                                                            "mainAxisAlignment": "#(MainAxisAlignment.start)",
+                                                                            "children": [
+                                                                              {
+                                                                                "className": "Text",
+                                                                                "pa": [
+                                                                                  "$(item.subTxt)"
+                                                                                ],
+                                                                                "na": {
+                                                                                  "style": {
+                                                                                    "className": "TextStyle",
+                                                                                    "na": {
+                                                                                      "fontSize": 14,
+                                                                                      "color": "#(Colors.grey)"
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              },
+                                                                              {
+                                                                                "className": "SizedBox",
+                                                                                "na": {
+                                                                                  "width": 4
+                                                                                }
+                                                                              },
+                                                                              {
+                                                                                "className": "Icon",
+                                                                                "pa": [
+                                                                                  "#(Icons.location_on_rounded)"
+                                                                                ],
+                                                                                "na": {
+                                                                                  "size": 12,
+                                                                                  "color": {
+                                                                                    "className": "Color",
+                                                                                    "pa": [
+                                                                                      "0xFF54D3C2"
+                                                                                    ]
+                                                                                  }
+                                                                                }
+                                                                              },
+                                                                              {
+                                                                                "className": "Expanded",
+                                                                                "na": {
+                                                                                  "child": {
+                                                                                    "className": "Text",
+                                                                                    "pa": [
+                                                                                      "$(item.dist)"
+                                                                                    ],
+                                                                                    "na": {
+                                                                                      "overflow": "#(TextOverflow.ellipsis)",
+                                                                                      "style": {
+                                                                                        "className": "TextStyle",
+                                                                                        "na": {
+                                                                                          "fontSize": 14,
+                                                                                          "color": "#(Colors.grey)"
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        },
+                                                                        {
+                                                                          "className": "Padding",
+                                                                          "na": {
+                                                                            "padding": {
+                                                                              "className": "EdgeInsets.only",
+                                                                              "na": {
+                                                                                "top": 4
+                                                                              }
+                                                                            },
+                                                                            "child": {
+                                                                              "className": "Row",
+                                                                              "na": {
+                                                                                "children": [
+                                                                                  {
+                                                                                    "className": "Text",
+                                                                                    "pa": [
+                                                                                      "$(item.reviews)"
+                                                                                    ],
+                                                                                    "na": {
+                                                                                      "style": {
+                                                                                        "className": "TextStyle",
+                                                                                        "na": {
+                                                                                          "fontSize": 14,
+                                                                                          "color": "#(Colors.grey)"
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                ]
+                                                                              }
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      },
+                                                      {
+                                                        "className": "Padding",
+                                                        "na": {
+                                                          "padding": {
+                                                            "className": "EdgeInsets.only",
+                                                            "na": {
+                                                              "right": 16,
+                                                              "top": 8
+                                                            }
+                                                          },
+                                                          "child": {
+                                                            "className": "Column",
+                                                            "na": {
+                                                              "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                                              "crossAxisAlignment": "#(CrossAxisAlignment.end)",
+                                                              "children": [
+                                                                {
+                                                                  "className": "Text",
+                                                                  "pa": [
+                                                                    "$(item.perNight)"
+                                                                  ],
+                                                                  "na": {
+                                                                    "textAlign": "#(TextAlign.left)",
+                                                                    "style": {
+                                                                      "className": "TextStyle",
+                                                                      "na": {
+                                                                        "fontWeight": "#(FontWeight.w600)",
+                                                                        "fontSize": 22
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                },
+                                                                {
+                                                                  "className": "Text",
+                                                                  "pa": [
+                                                                    "/per night"
+                                                                  ],
+                                                                  "na": {
+                                                                    "style": {
+                                                                      "className": "TextStyle",
+                                                                      "na": {
+                                                                        "fontSize": 14,
+                                                                        "color": "#(Colors.grey)"
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              ]
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      {
+                                        "className": "Positioned",
+                                        "na": {
+                                          "top": 8,
+                                          "right": 8,
+                                          "child": {
+                                            "className": "Material",
+                                            "na": {
+                                              "color": "#(Colors.transparent)",
+                                              "child": {
+                                                "className": "GestureDetector",
+                                                "na": {
+                                                  "child": {
+                                                    "className": "Padding",
+                                                    "na": {
+                                                      "padding": {
+                                                        "className": "EdgeInsets.all",
+                                                        "pa": [
+                                                          8.0
+                                                        ]
+                                                      },
+                                                      "child": {
+                                                        "className": "Icon",
+                                                        "pa": [
+                                                          "#(Icons.favorite_border)"
+                                                        ],
+                                                        "na": {
+                                                          "color": {
+                                                            "className": "Color",
+                                                            "pa": [
+                                                              "0xFF54D3C2"
+                                                            ]
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}
