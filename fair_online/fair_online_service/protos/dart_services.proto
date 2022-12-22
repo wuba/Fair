@@ -1,0 +1,609 @@
+syntax = "proto3";
+
+package dart_services.api;
+
+message CompileRequest {
+  // The Dart source.
+  string source = 1;
+
+  // Return the Dart to JS source map; optional (defaults to false).
+  bool returnSourceMap = 2;
+}
+
+message CompileDDCRequest {
+  // The Dart source.
+  string source = 1;
+
+  string pageName = 2;
+
+  // The source type.
+  string type = 3;
+
+  // The run mode.
+  string runMode = 4;
+}
+
+message SourceRequest {
+  // The Dart source.
+  string source = 1;
+
+  // The offset within source to operate at.
+  int32 offset = 2;
+
+  // The Dart file path
+  string filePath = 3;
+
+  // The source type.
+  string type = 4;
+}
+
+message AnalysisResults {
+  repeated AnalysisIssue issues = 1;
+
+  // The package imports parsed from the source.
+  repeated string packageImports = 2;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message AnalysisIssue {
+  string kind = 1;
+  int32 line = 2;
+  string message = 3;
+  string sourceName = 4;
+  bool hasFixes = 5;
+  int32 charStart = 6;
+  int32 charLength = 7;
+  string url = 8;
+  repeated DiagnosticMessage diagnosticMessages = 9;
+  string correction = 10;
+}
+
+message DiagnosticMessage {
+  string message = 1;
+  int32 line = 2;
+  int32 charStart = 3;
+  int32 charLength = 4;
+}
+
+message VersionRequest {}
+
+message CompileResponse {
+  string result = 1;
+  string sourceMap = 2;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message CompileDDCResponse {
+  string result = 1;
+  string modulesBaseUrl = 2;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message DocumentResponse {
+  map<string, string> info = 1;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message CompleteResponse {
+  // The offset of the start of the text to be replaced.
+  int32 replacementOffset = 1;
+
+  // The length of the text to be replaced.
+  int32 replacementLength = 2;
+
+  repeated Completion completions = 3;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message Completion {map<string, string> completion = 1;}
+
+message FixesResponse {
+  repeated ProblemAndFixes fixes = 1;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+// Represents a problem detected during analysis, and a set of possible ways of
+// resolving the problem.
+message ProblemAndFixes {
+  repeated CandidateFix fixes = 1;
+  string problemMessage = 2;
+  int32 offset = 3;
+  int32 length = 4;
+}
+
+// Represents a possible way of solving an Analysis Problem.
+message CandidateFix {
+  string message = 1;
+  repeated SourceEdit edits = 2;
+  int32 selectionOffset = 3;
+  repeated LinkedEditGroup linkedEditGroups = 4;
+}
+
+// Represents a single edit-point change to a source file.
+message SourceEdit {
+  int32 offset = 1;
+  int32 length = 2;
+  string replacement = 3;
+}
+
+message LinkedEditGroup {
+  // The positions of the regions that should be edited simultaneously.
+  repeated int32 positions = 1;
+
+  // The length of the regions that should be edited simultaneously.
+  int32 length = 2;
+
+  // Pre-computed suggestions for what every region might want to be changed to.
+  repeated LinkedEditSuggestion suggestions = 3;
+}
+
+message LinkedEditSuggestion {
+  // The value that could be used to replace all of the linked edit regions.
+  string value = 1;
+
+  // The kind of value being proposed.
+  string kind = 2;
+}
+
+// Represents a reformatting of the code.
+message FormatResponse {
+  // The formatted source code.
+  string newString = 1;
+
+  // The (optional) new offset of the cursor; can be `null`.
+  int32 offset = 2;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+// The response from the `/assists` service call.
+message AssistsResponse {
+  repeated CandidateFix assists = 1;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+// The response from the `/version` service call.
+message VersionResponse {
+  // The Dart SDK version that DartServices is compatible with.
+  string sdkVersion = 1;
+
+  // The full Dart SDK version that DartServices is compatible with.
+  string sdkVersionFull = 2;
+
+  // The Dart SDK version that the server is running on. This will start with a
+  // semver string, and have a space and other build details appended.
+  string runtimeVersion = 3;
+
+  // The App Engine version.
+  string appEngineVersion = 4;
+
+  // The dart-services backend version.
+  string servicesVersion = 5;
+
+  // The Flutter SDK's version.
+  string flutterVersion = 6;
+
+  // The Flutter SDK's Dart version.
+  string flutterDartVersion = 7;
+
+  // The Flutter SDK's full Dart version.
+  string flutterDartVersionFull = 8;
+
+  // Package version numbers.
+  //
+  // Each package found in pubspec.lock is included, mapping the package name
+  // to the package version.
+  //
+  // Deprecated: Use `packageInfo` data if available.
+  map<string, string> packageVersions = 9;
+
+  // Package information.
+  //
+  // Each package found in `pubspec.lock` is included.
+  repeated PackageInfo packageInfo = 10;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message PackageInfo {
+  // The name of this package.
+  string name = 1;
+
+  // The selected version of this package.
+  string version = 2;
+
+  // Whether this package is supported as a directly importable package,
+  // or simply available as a transitive dependency of a supported package.
+  bool supported = 3;
+}
+
+// Response from the server when errors are thrown internally
+message BadRequest {ErrorMessage error = 99;}
+
+// Individual error messages.
+message ErrorMessage {string message = 1;}
+
+message FairCompileResponse {
+  string json = 1;
+  string js = 2;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message FairRunResponse {
+  string result = 1;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message GetProjectRequest {
+  string userId = 1;
+}
+
+message GetProjectResponse {
+  repeated ProjectInfo result = 1;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message ProjectInfo {
+  string name = 1;
+  string modifiedTime = 2;
+  string desc = 3;
+  string screenshot = 4;
+}
+
+message CreateProjectRequest {
+  string userId = 1;
+  string projectName = 2;
+  string templateProject = 3;
+}
+
+message CreateProjectResponse {
+  string result = 1;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message DeleteProjectRequest {
+  string userId = 1;
+  string projectName = 2;
+}
+
+message DeleteProjectResponse {
+  string result = 1;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message CopyPageRequest {
+  string dir = 1;
+  string path = 2;
+}
+
+message CommonResponse {
+  string result = 1;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message GetProjectPagesRequest {
+  string userId = 1;
+  string projectName = 2;
+}
+
+message GetProjectPagesResponse {
+  repeated ProjectPageInfo result = 1;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message GetTemplatePagesRequest {
+  string userId = 1;
+  string projectName = 2;
+}
+
+message GetTemplatePagesResponse {
+  repeated TemplatePageInfo result = 1;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message ProjectPageInfo {
+  string dir = 1;
+  repeated FileInfo files = 2;
+}
+
+message FileInfo {
+  string name = 1;
+  string path = 2;
+}
+
+message TemplatePageInfo {
+  string pageName = 1;
+  string pagePath = 2;
+  string screenshot = 3;
+}
+
+message DeleteProjectPageRequest {
+  string projectName = 1;
+  string pageName = 2;
+  string userId = 3;
+}
+
+message DeleteProjectPageResponse {
+  string result = 1;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message CreateProjectPageRequest {
+  string pagePath = 1;
+  string pageName = 2;
+}
+
+message CreateProjectPageResponse {
+  string result = 1;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message CreateTemplatePageResponse {
+  string result = 1;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message CreateTemplatePageRequest {
+  string pagePath = 1;
+  string pageName = 2;
+  string templatePage = 3;
+}
+
+message GetPageRequest {
+  string pagePath = 1;
+}
+
+message GetPageResponse {
+  string result = 1;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message CommonRequest {
+}
+
+message GetFairDslListResponse {
+  repeated FairDslInfo result = 1;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message FairDslInfo {
+  string jsonPath = 1;
+  string jsPath = 2;
+}
+
+message GetFairDslRequest {
+  string pageName = 1;
+  string jsonPath = 2;
+  string jsPath = 3;
+}
+
+message GetFairDslResponse {
+  string json = 1;
+  string js = 2;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message ApiCallInfo{
+  string name = 1;
+  string method = 2;
+  string url = 3;
+  repeated ApiCallParamsInfo params = 4;
+}
+
+message ApiCallParamsInfo{
+  string key = 1;
+  string type = 2;
+  string value = 3;
+}
+
+message GetApiCallResponse{
+  repeated ApiCallInfo api = 1;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message CommonApiCallRequest{
+  ApiCallInfo api = 1;
+}
+
+message CommonApiCallResponse{
+  string result = 1;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message CustomComponentInfo {
+  string name = 1;
+  string desc = 2;
+  string path = 3;
+  string fairWidgetCode = 4;
+  string screenshot = 5;
+}
+
+message GetCustomComponentsRequest {
+  string projectName = 1;
+  string userId = 2;
+}
+
+message GetCustomComponentsResponse {
+  repeated CustomComponentInfo result = 1;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message CustomActionInfo {
+  string name = 1;
+  string desc = 2;
+  string path = 3;
+}
+
+message GetCustomActionsRequest {
+  string projectName = 1;
+  string userId = 2;
+}
+
+message GetCustomActionsResponse {
+  repeated CustomActionInfo result = 1;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message DeleteCustomCodeItemRequest {
+  string projectName = 1;
+  string userId = 2;
+  string name = 3;
+  string path = 4;
+  string type = 5;
+}
+
+message DeleteCustomCodeItemResponse {
+  string result = 1;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message CreateCustomComponentRequest {
+  string projectName = 1;
+  string userId = 2;
+  string name = 3;
+  string desc = 4;
+  string content = 5;
+  repeated int32 screenshots = 6;
+  string editType = 7;
+}
+
+message CreateCustomComponentResponse {
+  int32 status = 1;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message CreateCustomActionRequest {
+  string projectName = 1;
+  string userId = 2;
+  string name = 3;
+  string desc = 4;
+  string content = 5;
+  string editType = 7;
+}
+
+message CreateCustomActionResponse {
+  int32 status = 1;
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message GetComponentListRequest {
+  string projectName = 1;
+  string projectId = 2;
+  string categoryType = 3;
+}
+
+message GetComponentListResponse {
+  string projectName = 1;
+  string projectId = 2;
+  string categoryType = 3;
+  repeated ComponentItemInfo componentItems = 4;
+  ErrorMessage error = 99;
+}
+
+message ComponentItemInfo {
+  string componentName = 1;
+  string componentId = 2;
+  string categoryType = 3;
+  string type = 4;
+  string content = 5;
+  repeated  string dependencies = 6;
+}
+
+message ExportProjectResponse {
+  string result = 1;
+
+  // Make this response compatible with BadRequest
+  ErrorMessage error = 99;
+}
+
+message DependencyPathRequest {
+  string userId = 1;
+  string projectName = 2;
+}
+
+message DependencyPathResponse {
+  string filePath = 1;
+  ErrorMessage error = 99;
+}
+
+message ChangeDependencyRequest {
+  string type = 1;
+  string name = 2;
+  string version = 3;
+  string userId = 4;
+  string projectName = 5;
+}
+
+message ChangeDependencyResponse {
+  string result = 1;
+  ErrorMessage error = 99;
+}
+
+message DoPubGetRequest {
+  string userId = 1;
+  string projectName = 2;
+}
+
+message DoPubGetResponse {
+  string result = 1;
+  ErrorMessage error = 99;
+}
+
+message UploadPluginRequest{
+  string appId = 1 ;
+  string bundleName = 2;
+  string patchUrl = 3;
+}
+
+message UploadPluginResponse{
+  string result = 1;
+  ErrorMessage error = 99;
+}
+
+message GetQrCodeResponse{
+  string result = 1;
+  ErrorMessage error = 99;
+}

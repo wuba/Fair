@@ -1,0 +1,132 @@
+{
+  "className": "Container",
+  "na": {
+    "height": 140,
+    "child": {
+      "className": "Container",
+      "na": {
+        "decoration": {
+          "className": "BoxDecoration",
+          "na": {
+            "borderRadius": {
+              "className": "BorderRadius.all",
+              "pa": [
+                {
+                  "className": "Radius.circular",
+                  "pa": [
+                    15
+                  ]
+                }
+              ]
+            },
+            "color": "#(Colors.white)"
+          }
+        },
+        "margin": {
+          "className": "EdgeInsets.only",
+          "na": {
+            "left": 20,
+            "right": 20,
+            "top": 15
+          }
+        },
+        "child": {
+          "className": "Row",
+          "na": {
+            "mainAxisAlignment": "#(MainAxisAlignment.spaceBetween)",
+            "children": [
+              {
+                "className": "Row",
+                "na": {
+                  "children": [
+                    {
+                      "className": "Container",
+                      "na": {
+                        "width": 120,
+                        "height": 120,
+                        "padding": {
+                          "className": "EdgeInsets.all",
+                          "pa": [
+                            10
+                          ]
+                        },
+                        "child": {
+                          "className": "ClipRRect",
+                          "na": {
+                            "borderRadius": {
+                              "className": "BorderRadius.circular",
+                              "pa": [
+                                15
+                              ]
+                            },
+                            "child": {
+                              "className": "Image.network",
+                              "pa": [
+                                "%(_getImagePath)"
+                              ],
+                              "na": {
+                                "fit": "#(BoxFit.cover)"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "className": "Container",
+                      "na": {
+                        "padding": {
+                          "className": "EdgeInsets.all",
+                          "pa": [
+                            10
+                          ]
+                        },
+                        "child": {
+                          "className": "Column",
+                          "na": {
+                            "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                            "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                            "children": [
+                              {
+                                "className": "Text",
+                                "pa": [
+                                  "%(_getTitle)"
+                                ],
+                                "na": {
+                                  "style": {
+                                    "className": "TextStyle",
+                                    "na": {
+                                      "fontSize": 16,
+                                      "fontWeight": "#(FontWeight.bold)"
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "className": "SizedBox",
+                                "na": {
+                                  "height": 10
+                                }
+                              },
+                              {
+                                "className": "Text",
+                                "pa": [
+                                  "SubTitle-SubTitle"
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

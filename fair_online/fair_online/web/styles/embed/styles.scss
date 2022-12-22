@@ -1,0 +1,319 @@
+// Copyright (c) 2019, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  overflow: hidden;
+  font-size: 14px;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+// Tab Navigation
+
+#navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  > * {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+}
+
+.tabnav-tab {
+  line-height: 18px;
+}
+
+.tabnav-tab:focus {
+  outline: 0;
+  justify-self: end;
+}
+
+// Code Editor
+
+#user-code-editor, #solution-editor, #test-editor, #html-editor, #solution-editor {
+  @include layout-fit;
+}
+
+.CodeMirror-hints {
+  max-height: 11em;
+}
+
+.CodeMirror-simplescroll-vertical {
+  margin-right: 4px;
+}
+
+// Console
+
+#console-view {
+  font-family: $editor-font;
+  font-size: $embed-editor-font-size;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  display: flex;
+  flex-direction: column;
+}
+
+#flash-container .custom-scrollbar {
+  margin-right: 20px;
+}
+
+.message-container div+div {
+  padding-top: 8px;
+}
+
+// Code annotations
+
+.squiggle-error {
+  border-bottom: 2px solid $dark-squiggle-error-color;
+}
+
+.squiggle-warning {
+  border-bottom: 2px solid $dark-squiggle-warning-color;
+}
+
+.squiggle-info {
+  border-bottom: 2px solid $dark-squiggle-info-color;
+}
+
+// Styling specifically for CodeMirror editor
+
+.CodeMirror {
+  width: 100%;
+  height: 100%;
+  font-family: $editor-font;
+  font-size: $embed-editor-font-size;
+}
+
+// Web output
+
+#web-output {
+  min-width: 180px;
+}
+
+#frame {
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.no-overflow {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+// Splitter
+
+.gutter {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.gutter.gutter-horizontal {
+  background-repeat: repeat-y;
+  cursor: col-resize;
+  height: 100%;
+}
+
+.gutter.gutter-vertical {
+  background-repeat: repeat-x;
+  cursor: row-resize;
+  width: 100%;
+}
+
+// Console Output Footer
+
+#console-output-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+#console-output-footer {
+  display: flex;
+  flex-direction: column;
+  padding-left: 8px;
+  padding-bottom: 8px;
+  overflow: auto;
+}
+
+#console-expand-icon-container, .close-flash-container {
+  height: 32px;
+  width: 32px;
+}
+
+#console-expand-icon, .close-flash-container .close-flash-button {
+  @include mdc-icon-button-size(16px, 16px, 8px);
+}
+
+#console-output-container {
+  margin: 8px;
+  flex: 1;
+  overflow: auto;
+  font-family: $editor-font;
+  font-size: $embed-editor-font-size;
+  white-space: pre-wrap;
+}
+
+.close-flash-container {
+  float: right;
+}
+
+// HTML Mode
+#editor-and-console-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.editor-button-group {
+  position: absolute;
+  right: 0;
+  top: 0;
+  // Set z-index below material dropdown but above the editor
+  z-index: 2;
+  margin-right: 20px;
+  margin-top: 4px;
+}
+
+#editor-container {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+
+  &:hover + #copy-code {
+    display: block;
+  }
+
+  &:hover > #copy-code {
+    display: block;
+  }
+}
+
+#tab-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+// Footer
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 4px 12px 4px 12px;
+  height: 40px;
+}
+
+// Material Design
+#progress-bar {
+  position: absolute;
+}
+
+#menu-button {
+  color: $secondary-color;
+}
+
+#main-menu {
+  width: 204px;
+
+  .mdc-list-item {
+    height: 40px;
+
+    .mdc-list-item__graphic {
+      margin-right: 8px;
+
+      .mdc-select__icon {
+        font-size: 16px;
+      }
+    }
+
+    .mdc-list-item__text {
+      font-size: 14px;
+    }
+  }
+}
+
+.mdc-tab__content {
+  text-transform: none !important;
+}
+
+.mdc-tab--active {
+  .mdc-tab__text-label {
+    font-weight: normal;
+  }
+}
+
+.mdc-button {
+  text-transform: none !important;
+  letter-spacing: normal;
+}
+
+// Misc
+.view-label {
+  margin-left: 8px;
+  font-size: 12px;
+}
+
+.hide {
+  opacity: 0;
+}
+
+
+// Make the dialog show up even without everything initialized (for localStorage check)
+.mdc-dialog {
+  z-index: 1000;
+}
+
+
+.d-flex {
+  display: flex !important;
+}
+
+.flex-auto {
+  flex: 1 1 auto !important;
+}
+
+.flex-row {
+  flex-direction: row !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.console {
+  white-space: pre !important;
+}

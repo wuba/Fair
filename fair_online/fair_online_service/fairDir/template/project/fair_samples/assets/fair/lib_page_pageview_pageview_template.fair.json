@@ -1,0 +1,39 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "PageView模版"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "PageView.builder",
+      "na": {
+        "itemBuilder": "@(_itemBuilder)",
+        "itemCount": 3
+      }
+    }
+  },
+  "methodMap": {
+    "_itemBuilder": {
+      "className": "Container",
+      "na": {
+        "color": "#(Colors.green)",
+        "width": 100,
+        "height": 100,
+        "child": {
+          "className": "Text",
+          "pa": [
+            "#(第$index页)"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+name: fair_online_service
+description: A server app using the shelf package and Docker.
+version: 1.0.0
+# homepage: https://www.example.com
+
+environment:
+  sdk: '>=2.14.0 <3.0.0'
+
+
+dependencies:
+  analysis_server_lib: ^0.2.0
+  analyzer: ^3.2.0
+  args: ^2.0.0
+  bazel_worker: ^1.0.0
+  crypto: ^3.0.1
+  http: ^0.13.3
+  logging: ^1.0.0
+  meta: ^1.1.8
+  path: ^1.6.2
+  protobuf: ^2.0.0
+  quiver: ^3.0.1
+  resp_client: ^1.2.0
+  shelf: ^1.0.0
+  shelf_router: ^1.0.0
+  yaml: ^3.0.0
+  tuple: ^2.0.0
+  analyzer_plugin: any
+  sprintf: ^6.0.0
+
+dev_dependencies:
+  angel3_mock_request: ^2.0.0
+  async: ^2.2.0
+  build_runner: ^2.0.4
+  coverage: ^1.0.3
+  grinder: ^0.9.0
+  lints: ^1.0.1
+  package_config: ^2.0.2
+  shelf_router_generator: ^1.0.0
+  synchronized: ^3.0.0
+  test: ^1.6.4
+  test_descriptor: ^2.0.0

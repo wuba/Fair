@@ -1,0 +1,16 @@
+
+.CodeMirror-hints {
+  max-width: min(80%, 80em);
+}
+  
+.CodeMirror-hint {
+  padding-right: 5px !important;
+  list-style-position: inside;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;   
+}
+  
+.CodeMirror-hint:hover:not(.CodeMirror-hint-active) {
+  background-color: aliceblue;
+}

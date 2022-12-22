@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    Fore more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+  -->
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Fair Online Platform">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="fair.png" />
+
+  <title>Fair Online Platform</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- styles -->
+<!--  <link href="styles/styles.css" rel="stylesheet" media="screen">-->
+
+  <!-- codemirror -->
+  <link href="scripts/codemirror/css/codemirror.css" rel="stylesheet" media="screen">
+  <script src="scripts/codemirror.js" defer></script>
+
+  <!-- codemirror add-ons -->
+  <link href="scripts/codemirror/addon/lint/lint.css" rel="stylesheet" media="screen">
+  <link href="scripts/codemirror/addon/hint/show-hint.css" rel="stylesheet" media="screen">
+<!--  <link href="packages/codemirror/addon/scroll/simplescrollbars.css" rel="stylesheet" media="screen">-->
+  <script src="scripts/codemirror/addon/scroll/simplescrollbars.js" defer></script>
+
+  <!-- codemirror themes -->
+  <link href="styles/cm-scrollbars.css" rel="stylesheet" media="screen">
+  <link href="styles/cm-hints.css" rel="stylesheet" media="screen">
+  <link href="styles/cm-darkpad-dark.css" rel="stylesheet" media="screen">
+  <link href="styles/darcula.css" rel="stylesheet" />
+
+  <!-- fingerPrintJs -->
+  <script src="scripts/finger_print.js" defer></script>
+  <!-- Js Format -->
+  <script src="scripts/jsbeautify.js" defer></script>
+</head>
+<body>
+  <script src="scripts/codemirror/mode/dart/dart.js"></script>
+  <script src="scripts/codemirror/mode/javascript/javascript.js"></script>
+  <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('flutter-first-frame', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js');
+      });
+    }
+  </script>
+  <script src="main.dart.js" type="application/javascript"></script>
+  <script type="text/javascript">window.flutterWebRenderer = "html";</script>
+</body>
+</html>
