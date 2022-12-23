@@ -411,13 +411,16 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
   ListView _buildSugarListBuilder(String name, Domain? superDomain,
       Function mapEach, Map map, Map? methodMap, BuildContext context) {
-    Map propertyTransMap = Map.from(map);
+    var propertyTransMap = Map.from(map);
 
-    Map naOrMap = map['na'];
+    var naOrMap = {};
+    if (map['na'] != null) {
+      naOrMap.addAll(map['na']);
+    }
     var itemBuilder = naOrMap['itemBuilder'];
     naOrMap.remove('itemBuilder');
 
-    var na = _named(name, map['na'], methodMap, context, superDomain);
+    var na = _named(name, naOrMap, methodMap, context, superDomain);
     var pa = _positioned(map['pa'], methodMap, context, superDomain);
     Map naMap = Property.extract(list: pa.data, map: na.data);
 
@@ -425,14 +428,12 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     propertyTransMap['na'] = naMap;
     var propertiesProvider = convert(context, propertyTransMap, methodMap);
 
-    var count = naMap["itemCount"];
+    var count = naMap['itemCount'];
     var source = List<int>.generate(count, (i) => i + 1);
-    Domain domain = Domain(source);
     var list = Domain(source).forEach(($, _) {
       return convert(context, itemBuilder, methodMap, domain: $) as Widget;
     });
-    List<Widget> children = list.map((e) => e as Widget).toList();
-
+    var children = list.map((e) => e as Widget).toList();
     var params = {
       'pa': [children, propertiesProvider]
     };
