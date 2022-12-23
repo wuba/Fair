@@ -1,0 +1,15 @@
+{
+  "className": "Container",
+  "na": {
+    "child": {
+      "className": "Image.network",
+      "pa": [
+        "%(getImagePath)"
+      ],
+      "na": {
+        "fit": "#(BoxFit.scaleDown)"
+      }
+    }
+  },
+  "methodMap": {}
+}

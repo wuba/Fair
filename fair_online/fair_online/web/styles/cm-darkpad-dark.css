@@ -1,0 +1,54 @@
+// dart parser:
+// https://github.com/codemirror/CodeMirror/blob/0f437b9addb3e4308519d208a606c152d42cf0a2/mode/dart/dart.js
+
+.cm-s-darkpad span {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 400;
+}
+
+.cm-s-darkpad .CodeMirror-matchingbracket {color: #FF2D64 !important;}
+.cm-s-darkpad .CodeMirror-selected {background: rgba(38, 59, 84, 1) !important;}
+
+.cm-s-darkpad .CodeMirror-gutters { background: #0E161F !important; border-right: none}
+.cm-s-darkpad .CodeMirror-foldgutter-open, .CodeMirror-foldgutter-folded { color: #909090; }
+.cm-s-darkpad .CodeMirror-linenumber { color: #909090; }
+.cm-s-darkpad .CodeMirror-cursor { border-left: 1px solid white; }
+.cm-s-darkpad .CodeMirror-cursors.CodeMirror-overwrite .CodeMirror-cursor { margin-top: 2px; width: 0.6em; border-left: none; background-color: rgba(255,255,255,0.7); }
+.cm-s-darkpad { background-color: #0E161F; color: #FFFFFF; }
+.cm-s-darkpad span.cm-builtin { color: #FFFFFF; }
+.cm-s-darkpad span.cm-comment { color: #909CC3; }
+.cm-s-darkpad span.cm-keyword { color: #50E191;}
+.cm-s-darkpad span.cm-atom { color: #FF916E; }
+.cm-s-darkpad span.cm-variable { color: #00D2FA; }
+.cm-s-darkpad span.cm-variable-2 { color: #FF916E;}
+.cm-s-darkpad span.cm-string { color: #FA557D; }
+.cm-s-darkpad span.cm-string-2 { color: #FF00FA; }
+.cm-s-darkpad span.cm-number { color: #909090; }
+.cm-s-darkpad span.cm-attribute { color: #00D2FA; }
+.cm-s-darkpad span.cm-qualifier { color: #FF9B00; }
+.cm-s-darkpad span.cm-meta { color: #909090; }
+.cm-s-darkpad span.cm-header { color: #00D2FA; }
+.cm-s-darkpad span.cm-operator { color: #FFFFFF; }
+.cm-s-darkpad span.cm-def { color: #FFFFFF; }
+.cm-s-darkpad span.cm-tag { color: #50E191; }
+.cm-s-darkpad span.cm-property { color: #FF2D64; }
+
+.CodeMirror-simplescroll-horizontal div, .CodeMirror-simplescroll-vertical div {
+  background: #909090;
+}
+
+#editor-host .CodeMirror-scrollbar-filler {
+  background-color: #0E161F !important;
+}
+
+.squiggle-error {
+  border-bottom: 2px solid #EF5350;
+}
+
+.squiggle-warning {
+  border-bottom: 2px solid #d9d077;
+}
+
+.squiggle-info {
+  border-bottom: 2px solid #7EA7D8;
+}

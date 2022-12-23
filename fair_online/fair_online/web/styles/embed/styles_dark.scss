@@ -1,0 +1,130 @@
+// Copyright (c) 2019, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+body {
+  background-color: $dark-code-background-color;
+}
+
+a {
+  color: $dark-blue;
+}
+
+.gutter {
+  background-color: $dark-gutter-background-color;
+}
+
+#web-output {
+  background-color: $dark-code-background-color;
+  border-bottom: 46px solid $dark-border-color;
+}
+
+#console-output-footer {
+  background-color: $dark-code-background-color;
+}
+
+#console-output-container {
+  div.normal {
+    color: #dddddd;
+  }
+
+  .error-output {
+    color: $dark-pink;
+  }
+}
+
+// Helper class for using a border when collapsed
+.footer-top-border {
+  border-top: $border-width solid $dark-border-color;
+}
+
+.info-message {
+  color: $dark-issue-label-color;
+}
+
+// Issues
+#issues {
+  background-color: $dark-issues-background-color;
+  border: 8px solid $dark-issues-background-color;
+}
+
+.issue .issuelabel {
+  color: $dark-issue-label-color;
+}
+
+.issue:hover {
+  background-color: darken($dark-issues-background-color, 3%);
+}
+
+.issue .message {
+  color: $dark-issue-label-color;
+}
+
+.CodeMirror-vscrollbar {
+  opacity: 0.2;
+}
+
+.message-container {
+  color: $dark-flash-text-color;
+}
+
+#navbar {
+  border-bottom: 3px solid $dark-gutter-background-color;
+}
+
+.nav-buttons button {
+  @include mdc-button-ink-color($button-text-color);
+}
+
+.nav-buttons button#execute{
+  @include mdc-button-ink-color($mdc-theme-on-primary);
+}
+
+.mdc-tab {
+  @include mdc-tab-text-label-color($dark-tab-color);
+  @include mdc-tab-active-text-label-color($dark-tab-color-active);
+  @include mdc-tab-indicator-underline-color($dark-tab-color-active);
+}
+
+// Progress bar
+
+.mdc-linear-progress {
+  @include mdc-linear-progress-buffer-color($dark-code-background-color);
+}
+
+// Busy light
+.busylight {
+  background-color: #fff;
+}
+
+// Flashes
+
+.flash {
+  background-color: $dark-flash-info-color;
+}
+
+.flash-success {
+  background-color: $dark-flash-success-color;
+}
+
+.flash-error {
+  background-color: $dark-flash-error-color;
+}
+
+.flash-warn {
+  background-color: $dark-flash-warning-color;
+}
+
+// Labels and scrollbars
+.view-label {
+  color: $dark-label-color;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: $dark-scrollbar-color;
+}
+
+#console-expand-icon, .close-flash-container .close-flash-button {
+  color: $dark-label-color;
+}
+
