@@ -27,7 +27,7 @@ class FairHandler {
       var data = json.decode(message ?? '');
       var funcName = data['funcName']?.toString();
       var pageName = data['pageName'];
-      var args = data['args'];
+      var args = data['args']??{};
 
       if (funcName == null || funcName.isEmpty) {
         return '';
