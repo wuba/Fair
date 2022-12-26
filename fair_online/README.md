@@ -43,13 +43,7 @@ Fair云开发平台还针对Fair一些特殊的语法做了支持，如图就是
 ![image.png](https://cdn.nlark.com/yuque/0/2022/png/26469391/1670574758151-6494a6f7-ef0a-493d-8577-5d33dde1a820.png#averageHue=%23131c27&clientId=u2b0b6c70-d8a1-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=335&id=ucf0e20fd&margin=%5Bobject%20Object%5D&name=image.png&originHeight=710&originWidth=1042&originalType=binary&ratio=1&rotation=0&showTitle=false&size=192107&status=done&style=none&taskId=u754e9035-90ff-4473-a361-4e5cb6d1397&title=&width=491)
 代码编辑器还支持代码辅助功能，对Widget对象使用 **[Control+Enter] **快捷键会有如图所示的提示选项，根据提示可以快捷的包裹常用控件，方便了使用者高效开发。
 ![image.png](https://cdn.nlark.com/yuque/0/2022/png/26469391/1670575119066-68e15942-757b-4425-aad5-a5c9c8d4c0d0.png#averageHue=%23131c25&clientId=u2b0b6c70-d8a1-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=499&id=uf4be96da&margin=%5Bobject%20Object%5D&name=image.png&originHeight=928&originWidth=892&originalType=binary&ratio=1&rotation=0&showTitle=false&size=233418&status=done&style=none&taskId=u09241350-56f1-4eb0-8080-a90b3a39127&title=&width=480)
-#### 常用快捷键
-| **windows**快捷键 | **mac**快捷键 | 动作 |
-| --- | --- | --- |
-| alt-enter  | option+enter | 代码提示 |
-| ctrl-space  | command-space  | 代码补全 |
-| ctrl-enter  | command+enter | 运行 |
-| shift-ctrl-f  | shift+command+f | 格式化  |
+
 
 ### Flutter 编译预览
 开发过程中，可随时点击Run执行Flutter 编译预览，代码编辑阶段为了提升编译速度，快速预览编码效果，采用的是DDC(Dart Development Compiler)编译模式。
