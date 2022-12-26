@@ -118,7 +118,7 @@ Fair云开发平台还针对Fair一些特殊的语法做了支持，如图就是
 
 <html>
 <div align="center">
-<img src="https://cdn.nlark.com/yuque/0/2022/png/26469391/1670575119066-68e15942-757b-4425-aad5-a5c9c8d4c0d0.png#averageHue=%23131c25&clientId=u2b0b6c70-d8a1-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=499&id=uf4be96da&margin=%5Bobject%20Object%5D&name=image.png&originHeight=928&originWidth=892&originalType=binary&ratio=1&rotation=0&showTitle=false&size=233418&status=done&style=none&taskId=u09241350-56f1-4eb0-8080-a90b3a39127&title=&width=480" width="50%">
+<img src="https://cdn.nlark.com/yuque/0/2022/png/26469391/1670575119066-68e15942-757b-4425-aad5-a5c9c8d4c0d0.png#averageHue=%23131c25&clientId=u2b0b6c70-d8a1-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=499&id=uf4be96da&margin=%5Bobject%20Object%5D&name=image.png&originHeight=928&originWidth=892&originalType=binary&ratio=1&rotation=0&showTitle=false&size=233418&status=done&style=none&taskId=u09241350-56f1-4eb0-8080-a90b3a39127&title=&width=480" width="40%">
 </div>
 </html>
 
