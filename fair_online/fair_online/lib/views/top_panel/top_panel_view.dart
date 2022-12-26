@@ -1,4 +1,3 @@
-import 'package:fair_online/app/app_initializer.dart';
 import 'package:fair_online/app/styles.dart';
 import 'package:fair_online/app/themes.dart';
 import 'package:fair_online/base/components/buttons/transparent_btn.dart';
@@ -10,9 +9,7 @@ import 'package:fair_online/base/widget_view.dart';
 import 'package:fair_online/models/app_model.dart';
 import 'package:fair_online/views/project/project_page.dart';
 import 'package:fair_online/views/top_panel/top_panel.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -168,9 +165,8 @@ class TopPanelView extends WidgetView<TopPanel, TopPanelState> {
                   Container(
                     margin: EdgeInsets.only(right: 10),
                     child: TransparentBtn(
-                      onPressed: () => launch(join(
-                          kDebugMode ? DEBUG_RES_URL : RELEASE_RES_URL,
-                          'doc/fair_online_help.pdf')),
+                      onPressed: () => launch(
+                          'https://github.com/wuba/Fair/blob/main/fair_online/README.md'),
                       downColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       contentPadding: EdgeInsets.all(5),

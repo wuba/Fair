@@ -10,10 +10,6 @@ const DEBUG_URL = 'http://127.0.0.1:8082/service/';
 // TODO set release url
 const RELEASE_URL = '';
 
-const DEBUG_RES_URL = 'http://127.0.0.1:8002/resource/';
-// TODO set release resource url
-const RELEASE_RES_URL = '';
-
 class AppInitializer {
   void init() {
     Dependencies.setGlobalInstance(Dependencies());
