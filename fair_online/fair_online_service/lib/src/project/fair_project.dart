@@ -24,6 +24,7 @@ final gFlutterAnalysisWrapper = <String, FlutterAnalysisServerWrapper>{};
 class FairProject {
   static String _userProjectDir() =>
       path.join(Directory.current.path, 'fairDir', 'userProject');
+
   static String userProjectDir() => _userProjectDir();
 
   static String _templateDir() =>
@@ -238,7 +239,7 @@ class FairProject {
         return result;
       }
 
-      final uploadUrl = 'https://xx.xx.xx.xx/app/create_patch';
+      final uploadUrl = 'http://xxx.xx.xx/app/create_patch';
       var request = http.MultipartRequest('POST', Uri.parse(uploadUrl));
       final params = {
         'appId': appId,
@@ -246,7 +247,7 @@ class FairProject {
         'patchUrl': patchUrl,
         'bundleVersion': '1.0.0',
         'status': '1',
-        'remark': ' '
+        'remark': ' ' //不能直接给空串，只能给个空白的字符串
       };
       request.fields.addAll(params);
       request.files.add(await http.MultipartFile.fromPath(
@@ -582,8 +583,6 @@ class FairProject {
     return response;
   }
 
-
-
   Future<GetTemplatePagesResponse> getTemplatePages(
       String projectName, String userId) async {
     try {
@@ -695,7 +694,7 @@ class FairProject {
       }
 
       /// 修改类名
-      var runResult = await Process.run(
+      await Process.run(
           '/bin/sh',
           [
             'page_rename.sh',
@@ -706,12 +705,6 @@ class FairProject {
             tempDirPath
           ],
           workingDirectory: _toolDir());
-      if (runResult.exitCode != 0) {
-        result.error = ErrorMessage(
-            message:
-                'Rename page failed. \n${runResult.stdout} \n${runResult.stderr}');
-        return result;
-      }
       await copyPath(tempDirPath, pageDirPath);
       tempDir.deleteSync(recursive: true);
       return result;
