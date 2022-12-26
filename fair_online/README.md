@@ -270,7 +270,7 @@ Fair 云开发平台支持手机扫码实时预览功能，移动端平台相关
 
 <html>
 <div align="center">
-<img src="https://cdn.nlark.com/yuque/0/2022/png/27688581/1670470729695-f6b5769d-e7b7-4956-8d59-29b90c5346c5.png#averageHue=%23292d31&clientId=ud981bec8-6e71-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=138&id=ubfd5eb4e&margin=%5Bobject%20Object%5D&name=image.png&originHeight=276&originWidth=382&originalType=binary&ratio=1&rotation=0&showTitle=false&size=48598&status=done&style=none&taskId=ub5825c0b-f4fc-45e4-a34e-6fea5ec29eb&title=&width=191" width="40%">
+<img src="https://cdn.nlark.com/yuque/0/2022/png/27688581/1670470729695-f6b5769d-e7b7-4956-8d59-29b90c5346c5.png#averageHue=%23292d31&clientId=ud981bec8-6e71-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=138&id=ubfd5eb4e&margin=%5Bobject%20Object%5D&name=image.png&originHeight=276&originWidth=382&originalType=binary&ratio=1&rotation=0&showTitle=false&size=48598&status=done&style=none&taskId=ub5825c0b-f4fc-45e4-a34e-6fea5ec29eb&title=&width=191" width="30%">
 </div>
 </html>
 
