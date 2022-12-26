@@ -1,6 +1,5 @@
 import 'package:fair/fair.dart';
-import 'package:@@ProjectName@@/fair_preview_annotation.dart';
-import 'package:@@ProjectName@@/plugins/net/fair_net_plugin.dart';
+import '../../fair_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 

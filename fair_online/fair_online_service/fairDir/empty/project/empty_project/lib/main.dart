@@ -3,13 +3,8 @@ import 'dart:convert';
 import 'package:device_preview/device_preview.dart';
 import 'package:fair/fair.dart';
 import 'package:fair_pushy/fair_pushy.dart';
-import 'package:fair_pushy/src/files/fair_file.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'datasource/fair_test_data.dart';
-import 'delegate/listview_common_delegate.dart';
-import 'extension/ext.dart';
 import 'fair_common.dart';
 import 'fair_preview.dart';
 import 'fair_widget_page.dart';
@@ -22,56 +17,16 @@ import 'src/module.fair.dart' as g;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FairPushy.init(debug: true);
-  var devPath = '';
-  if (kIsWeb) {
-    devPath = 'assets/fair';
-  } else {
-    var devDir = await FairFile.getMainFolder();
-    devPath = '${devDir?.path}/files/debug';
-  }
 
-  //这里的path是item的fair bundle产物
   FairDevTools.fairWidgetBuilder = (name, path) {
-    ///纯item模版展示逻辑，一般item不会有decoration，所以套一个scaffold
-    if ((name as String).contains('_item')) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(name),
-        ),
-        body: FairWidget(name: name, path: path, data: {
-          'fairProps': jsonEncode(dataLogicMap.fuzzyMatching(name)),
-        }),
-      );
-    } else if (templateWithNoItem.fuzzyMatching(name)) {
-      ///只有父布局动态化没有动态化item的模版/写死数据的模版以及listview_template展示逻辑
-      return FairWidget(name: name, path: path, data: {
-        'fairProps': jsonEncode(dataLogicMap.fuzzyMatching(name)),
-      });
-    } else {
-      ///其他动态化component模版展示逻辑
-      final dataSource = itemDataLogicMap.fuzzyMatching(name);
-      return FairWidget(
-          name: name,
-          path: path,
-          delegate: dataSource == null
-              ? null
-              : ListviewCommonDelegate(
-                  path:
-                      '$devPath/${name}_item.fair.json', //此处只兼容一种item的情况，后续可能需要扩展
-                  dataSource:
-                      itemDataLogicMap.fuzzyMatching(name)), //对应下标item数据源
-          data: dataSource == null
-              ? null
-              : {
-                  'fairProps': jsonEncode(dataLogicMap.fuzzyMatching(name)),
-                  //外部列表动态化也可能会有数据源，但是目前demo模版没有，暂不处理
-                });
-    }
+    return FairWidget(name: name, path: path, data: {
+      'fairProps': jsonEncode({}),
+    });
   };
   FairDevTools.config = FairDevConfig()
     ..addEnv(OnlineEnvInfo(
         envName: "环境1",
-        updateUrl: "https://fangfe.58.com/fairapp/module_patch_bundle",
+        updateUrl: "https://xxx.xxx.xxx/fairapp/module_patch_bundle",
         readOnly: true))
     ..addEnv(OnlineEnvInfo(envName: "环境2", updateUrl: "", readOnly: false));
 

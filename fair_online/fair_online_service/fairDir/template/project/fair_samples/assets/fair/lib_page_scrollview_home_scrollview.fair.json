@@ -2,107 +2,167 @@
   "className": "Scaffold",
   "na": {
     "body": {
-      "className": "CustomScrollView",
+      "className": "Sugar.ifEqualBool",
+      "pa": [
+        "%(isDataEmpty)"
+      ],
       "na": {
-        "slivers": [
-          {
-            "className": "SliverAppBar",
-            "na": {
-              "title": {
-                "className": "Text",
-                "pa": [
-                  "CustomScrollView模版"
-                ]
-              }
+        "trueValue": {
+          "className": "Center",
+          "na": {
+            "child": {
+              "className": "Text",
+              "pa": [
+                "加载中..."
+              ]
             }
-          },
-          {
-            "className": "SliverToBoxAdapter",
-            "na": {
-              "child": {
-                "className": "Container",
+          }
+        },
+        "falseValue": {
+          "className": "CustomScrollView",
+          "na": {
+            "slivers": [
+              {
+                "className": "SliverAppBar",
                 "na": {
-                  "margin": {
-                    "className": "EdgeInsets.symmetric",
-                    "na": {
-                      "vertical": 15
-                    }
-                  },
-                  "child": {
+                  "title": {
                     "className": "Text",
                     "pa": [
-                      "Flutter Best UI x Fair 最佳实践"
-                    ],
+                      "CustomScrollView模版"
+                    ]
+                  }
+                }
+              },
+              {
+                "className": "SliverToBoxAdapter",
+                "na": {
+                  "child": {
+                    "className": "Container",
                     "na": {
-                      "style": {
-                        "className": "TextStyle",
+                      "margin": {
+                        "className": "EdgeInsets.symmetric",
                         "na": {
-                          "color": "#(Colors.black87)",
-                          "fontWeight": "#(FontWeight.w600)",
-                          "fontSize": 24
+                          "vertical": 15
+                        }
+                      },
+                      "child": {
+                        "className": "Text",
+                        "pa": [
+                          "Flutter Best UI x Fair 最佳实践"
+                        ],
+                        "na": {
+                          "style": {
+                            "className": "TextStyle",
+                            "na": {
+                              "color": "#(Colors.black87)",
+                              "fontWeight": "#(FontWeight.w600)",
+                              "fontSize": 24
+                            }
+                          }
                         }
                       }
                     }
                   }
                 }
-              }
-            }
-          },
-          {
-            "className": "SliverGrid",
-            "na": {
-              "gridDelegate": {
-                "className": "Sugar.sliverGridDelegateWithFixedCrossAxisCount",
+              },
+              {
+                "className": "SliverGrid",
                 "na": {
-                  "crossAxisCount": 2,
-                  "mainAxisSpacing": 10.0,
-                  "crossAxisSpacing": 10.0,
-                  "childAspectRatio": 2.0
+                  "gridDelegate": {
+                    "className": "Sugar.sliverGridDelegateWithFixedCrossAxisCount",
+                    "na": {
+                      "crossAxisCount": 2,
+                      "mainAxisSpacing": 10.0,
+                      "crossAxisSpacing": 10.0,
+                      "childAspectRatio": 2.0
+                    }
+                  },
+                  "delegate": {
+                    "className": "Sugar.sliverChildBuilderDelegate",
+                    "na": {
+                      "builder": {
+                        "className": "AspectRatio",
+                        "na": {
+                          "aspectRatio": 1.5,
+                          "child": {
+                            "className": "ClipRRect",
+                            "na": {
+                              "borderRadius": {
+                                "className": "BorderRadius.all",
+                                "pa": [
+                                  {
+                                    "className": "Radius.circular",
+                                    "pa": [
+                                      4.0
+                                    ]
+                                  }
+                                ]
+                              },
+                              "child": {
+                                "className": "Image.network",
+                                "pa": [
+                                  "%(_getImagePath(^(index)))"
+                                ],
+                                "na": {
+                                  "fit": "#(BoxFit.cover)"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "childCount": 4
+                    }
+                  }
                 }
               },
-              "delegate": {
-                "className": "SliverChildBuilderDelegate",
-                "pa": [
-                  "@(_itemBuilder)"
-                ],
+              {
+                "className": "SliverList",
                 "na": {
-                  "childCount": 3
+                  "delegate": {
+                    "className": "Sugar.sliverChildBuilderDelegate",
+                    "na": {
+                      "builder": {
+                        "className": "AspectRatio",
+                        "na": {
+                          "aspectRatio": 1.5,
+                          "child": {
+                            "className": "ClipRRect",
+                            "na": {
+                              "borderRadius": {
+                                "className": "BorderRadius.all",
+                                "pa": [
+                                  {
+                                    "className": "Radius.circular",
+                                    "pa": [
+                                      4.0
+                                    ]
+                                  }
+                                ]
+                              },
+                              "child": {
+                                "className": "Image.network",
+                                "pa": [
+                                  "%(_getImagePath(^(index)))"
+                                ],
+                                "na": {
+                                  "fit": "#(BoxFit.cover)"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "childCount": 3
+                    }
+                  }
                 }
               }
-            }
-          },
-          {
-            "className": "SliverList",
-            "na": {
-              "delegate": {
-                "className": "SliverChildBuilderDelegate",
-                "pa": [
-                  "@(_itemBuilder)"
-                ],
-                "na": {
-                  "childCount": 3
-                }
-              }
-            }
+            ]
           }
-        ]
+        }
       }
     }
   },
-  "methodMap": {
-    "_itemBuilder": {
-      "className": "Container",
-      "na": {
-        "color": "#(Colors.yellow)",
-        "child": {
-          "className": "Text",
-          "pa": [
-            "#($index)"
-          ]
-        },
-        "width": 100,
-        "height": 100
-      }
-    }
-  }
+  "methodMap": {}
 }
