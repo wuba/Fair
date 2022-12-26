@@ -1,7 +1,7 @@
 {
-  "className": "Container",
+  "className": "Scaffold",
   "na": {
-    "child": {
+    "body": {
       "className": "NestedScrollView",
       "na": {
         "headerSliverBuilder": {
@@ -101,16 +101,301 @@
           "na": {
             "color": "#(Colors.white)",
             "child": {
-              "className": "Sugar.listBuilder",
+              "className": "Sugar.ifEqualBool",
+              "pa": [
+                "%(isDataEmpty)"
+              ],
               "na": {
-                "itemCount": 5,
-                "itemBuilder": {
-                  "className": "FairWidget",
+                "trueValue": {
+                  "className": "Center",
                   "na": {
-                    "name": "item",
-                    "path": "assets/fair/lib_page_list_card_list_card_item.fair.json",
-                    "data": {
-                      "": ""
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "加载中..."
+                      ]
+                    }
+                  }
+                },
+                "falseValue": {
+                  "className": "Sugar.listBuilder",
+                  "na": {
+                    "itemCount": "%(dataLength)",
+                    "itemBuilder": {
+                      "className": "Container",
+                      "na": {
+                        "child": {
+                          "className": "Padding",
+                          "na": {
+                            "padding": {
+                              "className": "EdgeInsets.fromLTRB",
+                              "pa": [
+                                20,
+                                10,
+                                20,
+                                20
+                              ]
+                            },
+                            "child": {
+                              "className": "Column",
+                              "na": {
+                                "children": [
+                                  {
+                                    "className": "Row",
+                                    "na": {
+                                      "children": [
+                                        {
+                                          "className": "Expanded",
+                                          "na": {
+                                            "child": {
+                                              "className": "Row",
+                                              "na": {
+                                                "children": [
+                                                  {
+                                                    "className": "CircleAvatar",
+                                                    "na": {
+                                                      "radius": 30,
+                                                      "backgroundImage": {
+                                                        "className": "NetworkImage",
+                                                        "pa": [
+                                                          "%(_getAvatar(^(index)))"
+                                                        ]
+                                                      }
+                                                    }
+                                                  },
+                                                  {
+                                                    "className": "SizedBox",
+                                                    "na": {
+                                                      "width": 20
+                                                    }
+                                                  },
+                                                  {
+                                                    "className": "Text",
+                                                    "pa": [
+                                                      "%(_getUsername(^(index)))"
+                                                    ],
+                                                    "na": {
+                                                      "style": {
+                                                        "className": "TextStyle",
+                                                        "na": {
+                                                          "fontSize": 15,
+                                                          "fontWeight": "#(FontWeight.bold)",
+                                                          "decoration": "#(TextDecoration.none)",
+                                                          "color": "#(Colors.black)"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                ]
+                                              }
+                                            }
+                                          }
+                                        },
+                                        {
+                                          "className": "Container",
+                                          "na": {
+                                            "width": 30,
+                                            "height": 30,
+                                            "child": {
+                                              "className": "Image.network",
+                                              "pa": [
+                                                "https://pic6.58cdn.com.cn/nowater/frs/n_v33db8caaa95cc4d1eb9426e9b991bed34.png"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "className": "Padding",
+                                    "na": {
+                                      "padding": {
+                                        "className": "EdgeInsets.fromLTRB",
+                                        "pa": [
+                                          10,
+                                          10,
+                                          10,
+                                          10
+                                        ]
+                                      },
+                                      "child": {
+                                        "className": "Row",
+                                        "na": {
+                                          "children": [
+                                            {
+                                              "className": "Expanded",
+                                              "na": {
+                                                "child": {
+                                                  "className": "Text",
+                                                  "pa": [
+                                                    "%(_getContent(^(index)))"
+                                                  ],
+                                                  "na": {
+                                                    "style": {
+                                                      "className": "TextStyle",
+                                                      "na": {
+                                                        "fontSize": 15,
+                                                        "fontWeight": "#(FontWeight.bold)",
+                                                        "decoration": "#(TextDecoration.none)",
+                                                        "color": "#(Colors.black)"
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "className": "Card",
+                                    "na": {
+                                      "child": {
+                                        "className": "Image",
+                                        "na": {
+                                          "image": {
+                                            "className": "NetworkImage",
+                                            "pa": [
+                                              "%(_getPicture(^(index)))"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "className": "Padding",
+                                    "na": {
+                                      "padding": {
+                                        "className": "EdgeInsets.fromLTRB",
+                                        "pa": [
+                                          10,
+                                          10,
+                                          10,
+                                          10
+                                        ]
+                                      },
+                                      "child": {
+                                        "className": "Row",
+                                        "na": {
+                                          "children": [
+                                            {
+                                              "className": "Expanded",
+                                              "na": {
+                                                "child": {
+                                                  "className": "Row",
+                                                  "na": {
+                                                    "children": [
+                                                      {
+                                                        "className": "SizedBox",
+                                                        "na": {
+                                                          "width": 30,
+                                                          "height": 30,
+                                                          "child": {
+                                                            "className": "Image.network",
+                                                            "pa": [
+                                                              "https://pic7.58cdn.com.cn/nowater/frs/n_v35812c5fc830e49d991d5e17633729392.png"
+                                                            ]
+                                                          }
+                                                        }
+                                                      },
+                                                      {
+                                                        "className": "SizedBox",
+                                                        "na": {
+                                                          "width": 15
+                                                        }
+                                                      },
+                                                      {
+                                                        "className": "Text",
+                                                        "pa": [
+                                                          "%(_getLikes(^(index)))"
+                                                        ],
+                                                        "na": {
+                                                          "style": {
+                                                            "className": "TextStyle",
+                                                            "na": {
+                                                              "fontSize": 15,
+                                                              "fontWeight": "#(FontWeight.bold)",
+                                                              "decoration": "#(TextDecoration.none)",
+                                                              "color": "#(Colors.black54)"
+                                                            }
+                                                          }
+                                                        }
+                                                      },
+                                                      {
+                                                        "className": "SizedBox",
+                                                        "na": {
+                                                          "width": 30
+                                                        }
+                                                      },
+                                                      {
+                                                        "className": "SizedBox",
+                                                        "na": {
+                                                          "width": 30,
+                                                          "height": 30,
+                                                          "child": {
+                                                            "className": "Image.network",
+                                                            "pa": [
+                                                              "https://pic4.58cdn.com.cn/nowater/frs/n_v3c264a2d3f9864ecabd8f05ee944ccafe.png"
+                                                            ]
+                                                          }
+                                                        }
+                                                      },
+                                                      {
+                                                        "className": "SizedBox",
+                                                        "na": {
+                                                          "width": 15
+                                                        }
+                                                      },
+                                                      {
+                                                        "className": "Text",
+                                                        "pa": [
+                                                          "%(_getComments(^(index)))"
+                                                        ],
+                                                        "na": {
+                                                          "style": {
+                                                            "className": "TextStyle",
+                                                            "na": {
+                                                              "fontSize": 15,
+                                                              "fontWeight": "#(FontWeight.bold)",
+                                                              "decoration": "#(TextDecoration.none)",
+                                                              "color": "#(Colors.black54)"
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            {
+                                              "className": "SizedBox",
+                                              "na": {
+                                                "width": 30,
+                                                "height": 30,
+                                                "child": {
+                                                  "className": "Image.network",
+                                                  "pa": [
+                                                    "https://pic7.58cdn.com.cn/nowater/frs/n_v33e401d24fa6f44a1ac7a7d3319eef7e6.png"
+                                                  ]
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }

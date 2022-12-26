@@ -4,34 +4,59 @@ import 'package:fair/fair.dart';
 @FairPreviewPage()
 @FairPatch()
 class FairDetail extends StatefulWidget {
-  final dynamic fairProps;
-
-  const FairDetail(
-      {Key? key,
-        this.fairProps = const {
-          'auth': 'Internal Team',
-          'title': 'Kickoff Meeting',
-          'time': '8:00am',
-          'location': 'Kaleo Office - San Starbucks',
-          'des':
-          'Short description goes here and can ben more than one line. Two lines is the best lenth Short description goes here and can ben more than one line. Two lines is the best lenth',
-          'detail':
-          'Drag-and-drop builder and no-code configuration make it easy to add chat to your app. Professionally designed templates and custom styling will take your app to the next level.Drag-and-drop builder and no-code configuration make it easy to add chat to your app. Professionally designed templates and custom styling will take your app to the next level. Drag-and-drop builder and no-code configuration make it easy to add chat to your app. Professionally designed templates and custom styling will take your app to the next level. '
-        }})
-      : super(key: key);
+  const FairDetail({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _FairDetailState();
 }
 
 class _FairDetailState extends State<FairDetail> {
-  @FairProps()
-  var fairProps;
+  final _detailModel = DetailModel();
 
   @override
   void initState() {
+    onLoad();
     super.initState();
-    fairProps = widget.fairProps;
+  }
+
+  /// 生命周期回调，函数名不可修改
+  void onLoad() {
+    requestData();
+  }
+
+  /// 生命周期回调，函数名不可修改
+  void onUnload() {}
+
+  void requestData() {
+    FairNet().request({
+      'pageName': '#FairKey#',
+      'method': 'GET',
+      'url':
+      'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/59383a3efd1554c4c8fbaa8eb3700a44_fair_detail_data.json',
+      'data': {'page': 0},
+      'success': (resp) {
+        if (resp == null) {
+          return;
+        }
+        var data = resp['data'];
+        try {
+          _detailModel.auth = data.auth;
+          _detailModel.title = data.title;
+          _detailModel.des = data.des;
+          _detailModel.time = data.time;
+          _detailModel.location = data.location;
+          _detailModel.detail = data.detail;
+        } catch (e) {
+          _detailModel.auth = data['auth'];
+          _detailModel.title = data['title'];
+          _detailModel.des = data['des'];
+          _detailModel.time = data['time'];
+          _detailModel.location = data['location'];
+          _detailModel.detail = data['detail'];
+        }
+        setState(() {});
+      }
+    });
   }
 
   /// 顶部widget
@@ -39,14 +64,16 @@ class _FairDetailState extends State<FairDetail> {
     return Stack(
       children: [
         Container(
-          child: Image.network('https://pic3.58cdn.com.cn/nowater/frs/n_v327380fe3313c44cb8528c6a7b5fb501c.jpg'),
+          child: Image.network(
+              'https://pic3.58cdn.com.cn/nowater/frs/n_v327380fe3313c44cb8528c6a7b5fb501c.jpg'),
         ),
         Positioned(
           top: 20,
           child: Container(
             height: 72,
             width: 66,
-            child: Image.network('https://pic3.58cdn.com.cn/nowater/frs/n_v378fb424b4182441a9f743c44336ea9f5.png'),
+            child: Image.network(
+                'https://pic3.58cdn.com.cn/nowater/frs/n_v378fb424b4182441a9f743c44336ea9f5.png'),
           ),
         )
       ],
@@ -106,7 +133,8 @@ class _FairDetailState extends State<FairDetail> {
           Container(
             width: 20,
             height: 20,
-            child: Image.network('https://pic7.58cdn.com.cn/nowater/frs/n_v37e6d7991117d417eac9b0214dbc3fb34.png'),
+            child: Image.network(
+                'https://pic7.58cdn.com.cn/nowater/frs/n_v37e6d7991117d417eac9b0214dbc3fb34.png'),
           ),
           Padding(
             padding: EdgeInsets.only(left: 5),
@@ -124,7 +152,8 @@ class _FairDetailState extends State<FairDetail> {
             child: Container(
               width: 26,
               height: 20,
-              child: Image.network('https://pic5.58cdn.com.cn/nowater/frs/n_v3df9d125924c84b129515973e617aebe1.png'),
+              child: Image.network(
+                  'https://pic5.58cdn.com.cn/nowater/frs/n_v3df9d125924c84b129515973e617aebe1.png'),
             ),
           ),
           Expanded(
@@ -166,43 +195,42 @@ class _FairDetailState extends State<FairDetail> {
   }
 
   String _getAuth() {
-    return fairProps['auth'];
+    return _detailModel.auth;
   }
 
   String _getTitle() {
-    return fairProps['title'];
+    return _detailModel.title;
   }
 
   String _getDes() {
-    return fairProps['des'];
+    return _detailModel.des;
   }
 
   String _getTime() {
-    return fairProps['time'];
+    return _detailModel.time;
   }
 
   String _getLocation() {
-    return fairProps['location'];
+    return _detailModel.location;
   }
 
   String _getDetailContent() {
-    return fairProps['detail'];
+    return _detailModel.detail;
   }
 
-  void _onPress(){
+  void _onPress() {
     print('onPressed');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(
         width: Sugar.width(context),
         height: 45,
         margin: EdgeInsets.fromLTRB(50, 0, 50, 15),
         child: ElevatedButton(
-          onPressed:_onPress,
+          onPressed: _onPress,
           child: Text('RSVP to Event'),
         ),
       ),
@@ -218,4 +246,13 @@ class _FairDetailState extends State<FairDetail> {
       ),
     );
   }
+}
+
+class DetailModel extends Object {
+  String auth = '';
+  String title = '';
+  String des = '';
+  String time = '';
+  String location = '';
+  String detail = '';
 }
