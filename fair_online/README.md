@@ -7,11 +7,10 @@ Fair 云开发平台是面向Flutter 开发者，提供从Fair 开发，到实�
 
 目前Fair 云开发平台已在Github 开源：
 [fair-online github](https://github.com/wuba/Fair/tree/main/fair_online)
-
 ### 工程介绍
 - fair_online 前端工程
 - fair_online_service 后端服务
-  - 后端服务运行 [简体中文](./fair_online_service/README-zh.md)|[English](./fair_online_service/README.md)
+    - 后端服务运行 [简体中文](./fair_online_service/README-zh.md)|[English](./fair_online_service/README.md)
 
 ## 快速入门
 ### 工程创建
