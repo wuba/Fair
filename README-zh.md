@@ -150,16 +150,28 @@ faircli create -k carrier -n carrier_project_name
 
 <html>
 <div align="center">
-<img src="fair_tools.gif" width="50%">
+<img src="fair_tools.gif" width="30%">
 </div>
 </html>
 
 更多介绍请查看 [文档](fair_tools.md)  
-  
-*工具集：*  
-Fair脚手架: [Fair CLI](https://pub.dev/packages/faircli)  
-IDEA插件: [jetbrains plugin fairtemplate](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
 
+## ⚙️fair-online云开发平台
+Fair-Online 是面向Flutter 开发者，提供从Flutter 在线开发，到实时编译预览，打包发布、动态下发端侧更新，实现Flutter 线上动态化的一体化云开发平台。
+
+开发者无需配置Flutter 开发环境，在线开发调试代码，即时编译预览，所见即所得，结合58开源团队打造的Flutter 动态化框架 Fair 及热更新平台 FairPushy ，实现Flutter 线上动态化。
+
+<html>
+<div align="center">
+<img src="./fair_online/fair_online.gif" width="90%">
+</div>
+</html>
+
+
+在线体验地址：
+[Fair-Online Platform](https://fair-online.58.com/)
+
+更多介绍请查看 [文档](./fair_online/README.md)
 
 ## 🔨最近版本
 
@@ -352,8 +364,8 @@ Star&Fork 是对我们最大的支持~
 
 对Fair感兴趣的小伙伴，可以加入交流群。技术咨询、讨论，请移步至[![Gitter](https://badges.gitter.im/flutter_fair/community.svg)](https://gitter.im/flutter_fair/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-| 微信                         | 美事（内部）                 |
-| ---------------------------- | ---------------------------- |
+| 微信                       | 美事（内部）                   |
+|--------------------------|--------------------------|
 | ![wechat](./weixin.jpeg) | ![meishi](./meishi.jpeg) |
 
 > 微信入群：请先添加58技术小秘书为好友，备注fair，小秘书邀请进群。
