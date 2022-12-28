@@ -1,13 +1,16 @@
 ## 平台简介
 
-Fair 云开发平台是面向Flutter 开发者，提供从Fair 开发，到实时编译预览，最终打包发布的一体化云开发平台。它主要包含3部分：
+Fair-Online 是面向Flutter 开发者，提供从Flutter 在线开发，到实时编译预览，打包发布、动态下发端侧更新，实现Flutter 线上动态化的一体化云开发平台。它主要包含3部分：
 
 - 云代码编辑器。提供给开发者进行在线代码编辑。
 - 编译预览/打包发布。让开发者所见及所得。并且支持一键打包发布，实现Flutter线上动态化。
 - 配套生态支持。提供常用的组件库、代码模板，用于提升开发效率，规范代码开发。
 
 目前Fair 云开发平台已在Github 开源：
-[fair-online github](https://github.com/wuba/Fair/tree/main/fair_online)
+[Fair-Online Github](https://github.com/wuba/Fair/tree/main/fair_online)
+
+在线体验地址：
+[Fair-Online Platform](https://fair-online.58.com/)
 
 ### 工程介绍
 

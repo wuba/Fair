@@ -142,11 +142,27 @@ After using faircli to configure the local hot update service, open the develope
 
 <html>
 <div align="center">
-<img src="fair_tools.gif" width="50%">
+<img src="fair_tools.gif" width="30%">
 </div>
 </html>
 
 For more details, please refer to [fair_tools](fair_tools.md)
+
+## Fair-Online Platform
+Fair-Online is an integrated cloud development platform for Flutter developers, from online development of Flutter, to real-time compilation and preview, packaging and publishing, and dynamic release of end-side updates, to realize the dynamic online Flutter.
+
+Developers do not need to configure the Flutter development environment, develop and debug code online, compile and preview in real time, and what you see is what you get. Combined with the Flutter dynamic framework Fair and the hot update platform FairPushy created by the 58 open source team, Flutter online dynamics are realized.
+
+<html>
+<div align="center">
+<img src="./fair_online/fair_online.gif" width="90%">
+</div>
+</html>
+
+Online experience URL:
+[Fair-Online Platform](https://fair-online.58.com/)
+
+For more details, please refer to [fair_online](./fair_online/README.md)
 
 ## Documentation
 For more details, please refer to [https://fair.58.com](https://fair.58.com)  
