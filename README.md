@@ -55,7 +55,7 @@ dependencies:
 # add build_runner and compiler dependency
 dev_dependencies:
   build_runner: ^2.0.0
-  fair_compiler: ^1.5.0
+  fair_compiler: ^1.5.1
  
 # switch "fair_version" according to the local Flutter SDK version
 # Flutter SDK 3.3.x(3.3.0、3.3.1、3.3.2、3.3.3、3.3.4、3.3.5、3.3.6) -> flutter_3_3_0
