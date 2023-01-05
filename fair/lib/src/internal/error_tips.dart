@@ -37,7 +37,7 @@ class WarningWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Image(
-                      image: NetworkImage('http://pic1.58cdn.com.cn/nowater/jltx/n_v2e7bc132cc46043d89dd927d9c184d599.png'),
+                      image: AssetImage('packages/fair/assets/images/error.jpg'),
                       width: 80,
                       height: 80,
                     ),
