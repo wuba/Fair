@@ -1,3 +1,7 @@
+## 1.1.0
+
+- The function supports parameter passing.
+
 ## 1.0.2
 
 - bugfix.

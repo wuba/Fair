@@ -1,0 +1,365 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "resizeToAvoidBottomInset": false,
+    "body": {
+      "className": "Container",
+      "na": {
+        "decoration": {
+          "className": "BoxDecoration",
+          "na": {
+            "image": {
+              "className": "DecorationImage",
+              "na": {
+                "fit": "#(BoxFit.fill)",
+                "image": {
+                  "className": "AssetImage",
+                  "pa": [
+                    "assets/images/login_bg.jpg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "child": {
+          "className": "Column",
+          "na": {
+            "children": [
+              {
+                "className": "Container",
+                "na": {
+                  "margin": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "top": 50
+                    }
+                  },
+                  "child": {
+                    "className": "Image.asset",
+                    "pa": [
+                      "assets/images/icon_login.png"
+                    ],
+                    "na": {
+                      "height": 50,
+                      "width": 50
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Container",
+                "na": {
+                  "margin": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "top": 20
+                    }
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "登录页"
+                    ],
+                    "na": {
+                      "style": {
+                        "className": "TextStyle",
+                        "na": {
+                          "color": "#(Colors.white)",
+                          "fontSize": 25,
+                          "fontWeight": "#(FontWeight.bold)"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Container",
+                "na": {
+                  "margin": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "left": 20,
+                      "right": 20,
+                      "top": 20
+                    }
+                  },
+                  "padding": {
+                    "className": "EdgeInsets.symmetric",
+                    "na": {
+                      "horizontal": 10
+                    }
+                  },
+                  "decoration": {
+                    "className": "BoxDecoration",
+                    "na": {
+                      "color": "#(Colors.white)",
+                      "borderRadius": {
+                        "className": "BorderRadius.circular",
+                        "pa": [
+                          10
+                        ]
+                      }
+                    }
+                  },
+                  "child": {
+                    "className": "TextField",
+                    "na": {
+                      "decoration": {
+                        "className": "InputDecoration",
+                        "na": {
+                          "border": "#(InputBorder.none)",
+                          "hintText": "Email Address",
+                          "contentPadding": {
+                            "className": "EdgeInsets.symmetric",
+                            "na": {
+                              "vertical": 20
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Container",
+                "na": {
+                  "margin": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "left": 20,
+                      "right": 20,
+                      "top": 10
+                    }
+                  },
+                  "padding": {
+                    "className": "EdgeInsets.symmetric",
+                    "na": {
+                      "horizontal": 10
+                    }
+                  },
+                  "decoration": {
+                    "className": "BoxDecoration",
+                    "na": {
+                      "color": "#(Colors.white)",
+                      "borderRadius": {
+                        "className": "BorderRadius.circular",
+                        "pa": [
+                          10
+                        ]
+                      }
+                    }
+                  },
+                  "child": {
+                    "className": "TextField",
+                    "na": {
+                      "obscureText": true,
+                      "decoration": {
+                        "className": "InputDecoration",
+                        "na": {
+                          "border": "#(InputBorder.none)",
+                          "hintText": "Password",
+                          "contentPadding": {
+                            "className": "EdgeInsets.symmetric",
+                            "na": {
+                              "vertical": 20
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Container",
+                "na": {
+                  "decoration": {
+                    "className": "BoxDecoration",
+                    "na": {
+                      "color": "#(Colors.greenAccent)",
+                      "borderRadius": {
+                        "className": "BorderRadius.circular",
+                        "pa": [
+                          8
+                        ]
+                      }
+                    }
+                  },
+                  "margin": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "left": 40,
+                      "right": 40,
+                      "top": 20
+                    }
+                  },
+                  "alignment": "#(Alignment.center)",
+                  "height": 60,
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "Login"
+                    ],
+                    "na": {
+                      "style": {
+                        "className": "TextStyle",
+                        "na": {
+                          "fontSize": 16,
+                          "color": "#(Colors.white)"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Container",
+                "na": {
+                  "margin": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "top": 30
+                    }
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "Forget Password?"
+                    ],
+                    "na": {
+                      "style": {
+                        "className": "TextStyle",
+                        "na": {
+                          "fontSize": 18,
+                          "color": "#(Colors.white)",
+                          "fontWeight": "#(FontWeight.bold)"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Container",
+                "na": {
+                  "margin": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "top": 30
+                    }
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "Or use a social account to login"
+                    ],
+                    "na": {
+                      "style": {
+                        "className": "TextStyle",
+                        "na": {
+                          "fontSize": 13,
+                          "color": {
+                            "className": "Sugar.colorsWithOpacity",
+                            "pa": [
+                              "#(Colors.white)",
+                              0.8
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Container",
+                "na": {
+                  "margin": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "top": 20
+                    }
+                  },
+                  "child": {
+                    "className": "Row",
+                    "na": {
+                      "mainAxisSize": "#(MainAxisSize.min)",
+                      "children": [
+                        {
+                          "className": "Image.asset",
+                          "pa": [
+                            "assets/images/icon_google.png"
+                          ],
+                          "na": {
+                            "height": 50,
+                            "width": 50,
+                            "fit": "#(BoxFit.cover)"
+                          }
+                        },
+                        {
+                          "className": "SizedBox",
+                          "na": {
+                            "width": 10
+                          }
+                        },
+                        {
+                          "className": "Image.asset",
+                          "pa": [
+                            "assets/images/icon_dingtalk.png"
+                          ],
+                          "na": {
+                            "height": 50,
+                            "width": 50,
+                            "fit": "#(BoxFit.cover)"
+                          }
+                        },
+                        {
+                          "className": "SizedBox",
+                          "na": {
+                            "width": 10
+                          }
+                        },
+                        {
+                          "className": "Image.asset",
+                          "pa": [
+                            "assets/images/icon_twitter.png"
+                          ],
+                          "na": {
+                            "height": 50,
+                            "width": 50,
+                            "fit": "#(BoxFit.cover)"
+                          }
+                        },
+                        {
+                          "className": "SizedBox",
+                          "na": {
+                            "width": 10
+                          }
+                        },
+                        {
+                          "className": "Image.asset",
+                          "pa": [
+                            "assets/images/icon_amazon.png"
+                          ],
+                          "na": {
+                            "height": 50,
+                            "width": 50,
+                            "fit": "#(BoxFit.cover)"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

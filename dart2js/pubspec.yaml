@@ -1,6 +1,6 @@
 name: fair_dart2js
 description: Convert individual dart file to js.
-version: 1.3.0
+version: 1.3.2
 homepage: https://fair.58.com/
 
 environment:

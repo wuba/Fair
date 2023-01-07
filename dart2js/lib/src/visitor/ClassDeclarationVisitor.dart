@@ -126,8 +126,12 @@ class ClassDeclarationVisitor
         if (!callSuperConstructorImplicitly &&
             !methodDeclaration.isRedirectConstructor &&
             !methodDeclaration.isFactory) {
-          methodDeclaration.abtractedInitializer.insert(0,
-              '${classDeclarationData.parentClass == null || classDeclarationData.parentClass!.isEmpty ? 'Object' : classDeclarationData.parentClass}.prototype.$constructorAlias.call($thisAlias);');
+          // todo ghy_修改
+          if (classDeclarationData.parentClass != null &&
+              !classDeclarationData.parentClass!.isEmpty) {
+            methodDeclaration.abtractedInitializer.insert(0,
+                '''${classDeclarationData.parentClass}.prototype.$constructorAlias.call($thisAlias);''');
+          }
         }
         classDeclarationData.methods.add(methodDeclaration);
       }
@@ -154,7 +158,7 @@ class ClassDeclarationVisitor
           var generator = SimpleFunctionGenerator(
               isArrowFunc: false,
               renamedParameters: methodDeclaration.renamedParameters,
-              parentClass: classDeclarationData?.parentClass);
+              parentClass: classDeclarationData.parentClass);
 
           generator.func
             ?..withContext = true
@@ -176,7 +180,9 @@ class ClassDeclarationVisitor
   void parseByFile(String filePath) {
     var file = File(filePath);
     var result = parseFile(
-        path: file.absolute.uri.normalizePath().path,
+        path: Platform.isWindows
+            ? filePath
+            : file.absolute.uri.normalizePath().path,
         featureSet: FeatureSet.fromEnableFlags([]));
     result.unit.visitChildren(this);
   }

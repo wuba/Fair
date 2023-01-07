@@ -1,0 +1,40 @@
+# Don’t commit the following directories created by pub.
+build/
+.dart_tool/
+.packages
+.pub/
+*.lock
+
+# Or the files created by dart2js.
+#*.dart.js
+#*.js.deps
+#*.js.map
+
+# Other files.
+coverage.json
+lcov.info
+.idea/
+
+# Redis snapshot persistance file
+dump.rdb
+
+# compilation artifacts
+artifacts/
+project_templates/
+flutter-sdks/
+local_pub_cache/
+
+# local configuration
+config.properties
+
+# Editor configuration
+.vscode/
+flutter-sdks/stable/
+
+fairDir/userProject
+fairDir/fair
+#pubspec.lock不需要提交，本地pub get会自动生成
+pubspec.lock
+
+# fvm
+.fvm/

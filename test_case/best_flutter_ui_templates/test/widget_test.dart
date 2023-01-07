@@ -53,7 +53,7 @@ void main() {
             e.substring(0, end), () => e.substring(end + 1).trimRight());
       });
       return nameMap
-          .map((key, value) => MapEntry(key, packagesMap[key] + value))
+          .map((key, value) => MapEntry(key, packagesMap[key]! + value))
           .values.toList();
     }
     return [];

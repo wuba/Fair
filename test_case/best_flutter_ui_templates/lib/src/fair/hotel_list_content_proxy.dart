@@ -8,13 +8,13 @@ import 'package:flutter/widgets.dart';
 class HotelListContentProxy extends FairDelegate {
   final Color primaryColor = HotelAppTheme.buildLightTheme().primaryColor;
   final Color backgroundColor = HotelAppTheme.buildLightTheme().backgroundColor;
-  final VoidCallback callBack;
-  final HotelListData hotelData;
+  final VoidCallback? callBack;
+  final HotelListData? hotelData;
 
   HotelListContentProxy(this.callBack, this.hotelData);
 
   void onItemTap() {
-    callBack();
+    callBack!();
   }
 
   @override
@@ -35,9 +35,9 @@ class HotelListContentProxy extends FairDelegate {
     return fun;
   }
 
-  String perNight() => '${hotelData.perNight}';
+  String perNight() => '${hotelData!.perNight}';
 
-  String reviews() => '${hotelData.reviews} Reviews';
+  String reviews() => '${hotelData!.reviews} Reviews';
 
-  String distance() => '${hotelData.dist.toStringAsFixed(1)} km to city';
+  String distance() => '${hotelData!.dist.toStringAsFixed(1)} km to city';
 }

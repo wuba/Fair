@@ -1,0 +1,144 @@
+{
+  "className": "Padding",
+  "na": {
+    "padding": {
+      "className": "EdgeInsets.only",
+      "na": {
+        "left": 24,
+        "right": 24,
+        "top": 0,
+        "bottom": 24
+      }
+    },
+    "child": {
+      "className": "Stack",
+      "na": {
+        "clipBehavior": "#(Clip.none)",
+        "children": [
+          {
+            "className": "Padding",
+            "na": {
+              "padding": {
+                "className": "EdgeInsets.only",
+                "na": {
+                  "top": 16
+                }
+              },
+              "child": {
+                "className": "Container",
+                "na": {
+                  "decoration": {
+                    "className": "BoxDecoration",
+                    "na": {
+                      "color": {
+                        "className": "Color",
+                        "pa": [
+                          "0xD7E0F9"
+                        ]
+                      },
+                      "borderRadius": {
+                        "className": "BorderRadius.only",
+                        "na": {
+                          "topLeft": {
+                            "className": "Radius.circular",
+                            "pa": [
+                              8.0
+                            ]
+                          },
+                          "bottomLeft": {
+                            "className": "Radius.circular",
+                            "pa": [
+                              8.0
+                            ]
+                          },
+                          "bottomRight": {
+                            "className": "Radius.circular",
+                            "pa": [
+                              8.0
+                            ]
+                          },
+                          "topRight": {
+                            "className": "Radius.circular",
+                            "pa": [
+                              8.0
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "child": {
+                    "className": "Column",
+                    "na": {
+                      "children": [
+                        {
+                          "className": "Padding",
+                          "na": {
+                            "padding": {
+                              "className": "EdgeInsets.only",
+                              "na": {
+                                "left": 68,
+                                "bottom": 12,
+                                "right": 16,
+                                "top": 12
+                              }
+                            },
+                            "child": {
+                              "className": "Text",
+                              "pa": [
+                                "Prepare your stomach for lunch with one or two glass of water"
+                              ],
+                              "na": {
+                                "textAlign": "#(TextAlign.left)",
+                                "style": {
+                                  "className": "TextStyle",
+                                  "na": {
+                                    "fontFamily": "#(FitnessAppTheme.fontName)",
+                                    "fontWeight": "#(FontWeight.w500)",
+                                    "fontSize": 14,
+                                    "letterSpacing": 0.0,
+                                    "color": {
+                                      "className": "Sugar.colorsWithOpacity",
+                                      "pa": [
+                                        "#(FitnessAppTheme.nearlyDarkBlue)",
+                                        0.6
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "className": "Positioned",
+            "na": {
+              "left": 0,
+              "child": {
+                "className": "SizedBox",
+                "na": {
+                  "width": 80,
+                  "height": 80,
+                  "child": {
+                    "className": "Image.asset",
+                    "pa": [
+                      "assets/fitness_app/glass.png"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {}
+}

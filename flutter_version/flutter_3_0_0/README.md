@@ -34,7 +34,7 @@ dependency_overrides:
 
 ```yaml
 dependency_overrides:
-  fair_version: 3.0.0+1
+  fair_version: 3.0.0+2
 ```
 
 - v1.22.4 generated from Flutter SDK 1.22.4
@@ -45,4 +45,4 @@ dependency_overrides:
 - v2.5.0+1 generated from Flutter SDK 2.5.0
 - v2.8.0 generated from Flutter SDK 2.8.0
 - v2.10.0 generated from Flutter SDK 2.10.0
-- v3.0.0 generated from Flutter SDK 3.0.0
+- v3.0.0+2 generated from Flutter SDK 3.0.0

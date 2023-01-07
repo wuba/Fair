@@ -1,0 +1,135 @@
+// Copyright (c) 2019, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+a {
+  color: $button-color;
+}
+
+.gutter {
+  background-color: $light-gutter-background-color;
+}
+
+#web-output {
+  background-color: $light-code-background-color;
+  border-bottom: 46px solid $light-border-color;
+}
+
+#console-output-footer {
+  background-color: $light-code-background-color;
+}
+
+// Helper class for using a border when collapsed
+.footer-top-border {
+  border-top: $border-width solid $light-border-color;
+}
+
+.info-message {
+  color: $light-label-color;
+}
+
+// Issues
+#issues {
+  background-color: $light-secondary-background-color;
+  border: 8px solid $light-secondary-background-color;
+}
+
+.issue .issuelabel {
+  color: $light-label-color;
+}
+
+.issue:hover {
+  background-color: darken($light-secondary-background-color, 5%);
+}
+
+.issue .message {
+  color: $light-label-color;
+}
+
+#navbar {
+  background-color: $light-secondary-background-color;
+  border-bottom: 3px solid $light-gutter-background-color;
+}
+
+.mdc-tab {
+  @include mdc-tab-text-label-color($light-tab-color);
+  @include mdc-tab-active-text-label-color($light-tab-color-active);
+  @include mdc-tab-indicator-underline-color($light-tab-color-active);
+}
+
+// Progress bar
+
+.mdc-linear-progress {
+  @include mdc-linear-progress-buffer-color($light-code-background-color)
+}
+
+// Busy light
+.busylight {
+  background-color: #000;
+}
+
+
+// Flashes
+
+.message-container {
+  color: $light-issue-label-color;
+}
+
+.flash {
+  background-color: $light-flash-info-color;
+}
+
+.flash-success {
+  background-color: $light-flash-success-color;
+}
+
+.flash-error {
+  background-color: $light-flash-error-color;
+}
+
+.flash-warn {
+  background-color: $light-flash-warning-color;
+}
+
+
+// Analysis panel
+.issue .issuelabel.error {
+  color: $light-issue-error-color;
+  border: 1px solid $light-issue-error-color;
+}
+
+.issue .issuelabel.warning {
+  color: $light-issue-warning-color;
+  border: 1px solid $light-issue-warning-color;
+}
+
+.issue .issuelabel.info {
+  color: $light-issue-info-color;
+  border: 1px solid $light-issue-info-color;
+}
+
+// Code annotations
+.squiggle-error {
+  border-bottom: 2px solid $dark-squiggle-error-color;
+}
+
+.squiggle-warning {
+  border-bottom: 2px solid $dark-squiggle-warning-color;
+}
+
+.squiggle-info {
+  border-bottom: 2px solid $dark-squiggle-info-color;
+}
+
+// Labels and scrollbars
+.view-label {
+  color: $light-label-color;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: $light-scrollbar-color;
+}
+
+#console-expand-icon, .close-flash-container .close-flash-button {
+  color: $light-label-color;
+}

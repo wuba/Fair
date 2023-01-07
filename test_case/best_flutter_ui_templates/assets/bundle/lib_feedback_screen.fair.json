@@ -19,7 +19,7 @@
                     "height": {
                       "className": "Sugar.height",
                       "pa": [
-                        "context"
+                        "^(context)"
                       ]
                     },
                     "child": {
@@ -35,7 +35,7 @@
                                   "top": {
                                     "className": "Sugar.paddingTop",
                                     "pa": [
-                                      "context"
+                                      "^(context)"
                                     ]
                                   },
                                   "left": 16,
@@ -165,7 +165,7 @@
                                               "onTap": {
                                                 "className": "Sugar.requestFocus",
                                                 "pa": [
-                                                  "context"
+                                                  "^(context)"
                                                 ]
                                               },
                                               "child": {
@@ -220,5 +220,6 @@
         }
       }
     }
-  }
+  },
+  "methodMap": {}
 }

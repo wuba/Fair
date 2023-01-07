@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair/src/render/domain.dart';
 import 'package:fair_version/fair_version.dart';
 import 'package:flutter/widgets.dart';
 
@@ -50,15 +51,15 @@ class ProxyMirror with P {
   }
 
   W<dynamic> evaluate(
-      BuildContext context, BindingData? bindingData, String text) {
+      BuildContext? context, BindingData? bindingData, String text, {Domain? domain}) {
     var pre = '';
     for (var exp in _expressions) {
       if (!exp.hitTest(text, pre)) {
         continue;
       }
-      var result = exp.onEvaluate(this, bindingData, text, pre);
+      var result = exp.onEvaluate(this, bindingData, domain, text, pre);
       pre = result.exp??'';
-      if (result.valid) {
+      if (result.valid()) {
         return W<dynamic>(result.data, result.needBinding);
       }
     }

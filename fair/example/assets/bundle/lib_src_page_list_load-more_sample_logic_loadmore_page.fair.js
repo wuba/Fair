@@ -27,10 +27,6 @@ GLOBAL['#FairKey#'] = (function (__initProps__) {
         }, _onLoadMore: async function _onLoadMore() {
             const __thiz__ = this;
             with (__thiz__) {
-                // await Future.delayed(Duration({seconds: 2}), function dummy() {
-                //     list.addAll(List.generate(Random().nextInt(5) + 1, (i) => `more Item ${i}`));
-                //     setState('ListLoadMore', {});
-                // });
                 console.log('JS:_onLoadMore');
                 for (var i = 0; i < 4; i++) {
                     list.add(`More Item ${i}`);
@@ -40,28 +36,14 @@ GLOBAL['#FairKey#'] = (function (__initProps__) {
         }, _onRefresh: async function _onRefresh() {
             const __thiz__ = this;
             with (__thiz__) {
-                // await Future.delayed(
-                // Duration({seconds: 3}), function dummy() {
-                    console.log('JS:_onRefresh');
-                    list.insertAll(0, List.generate(2, (i) => `refresh Item ${i}`));
-                    setState('#FairKey#', function dummy() {});
-                // }//);
+                 console.log('JS:_onRefresh');
+                 list.insertAll(0, List.generate(2, (i) => `refresh Item ${i}`));
+                 setState('#FairKey#', function dummy() {});
             }
         }, onLoad: function onLoad() {
             const __thiz__ = this;
             with (__thiz__) {
                 console.log('JS:onLoad');
-                // _onRefresh();
-                // list = List.generate(Random().nextInt(20) + 15, (i) => `Item ${i}`);
-                // _scrollController = (function () {
-                //     let __target__ = ScrollController();
-                //     __target__.addListener(function dummy() {
-                //         if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-                //             onLoadMore();
-                //         }
-                //     });
-                //     return __target__;
-                // })();
                 for (var i = 0; i < 15; i++) {
                     list.add(`Item ${i}`);
                 }

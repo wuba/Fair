@@ -1,0 +1,440 @@
+{
+  "className": "DefaultTabController",
+  "na": {
+    "initialIndex": 1,
+    "length": 3,
+    "child": {
+      "className": "Scaffold",
+      "na": {
+        "appBar": {
+          "className": "AppBar",
+          "na": {
+            "title": {
+              "className": "Text",
+              "pa": [
+                "Fair TabBar"
+              ]
+            },
+            "automaticallyImplyLeading": false,
+            "actions": [
+              {
+                "className": "IconButton",
+                "na": {
+                  "onPressed": {
+                    "className": "Sugar.onTapEmpty"
+                  },
+                  "icon": {
+                    "className": "Icon",
+                    "pa": [
+                      "#(Icons.search)"
+                    ]
+                  }
+                }
+              }
+            ],
+            "bottom": {
+              "className": "TabBar",
+              "na": {
+                "tabs": [
+                  {
+                    "className": "Tab",
+                    "na": {
+                      "child": {
+                        "className": "Text",
+                        "pa": [
+                          "All"
+                        ],
+                        "na": {
+                          "style": {
+                            "className": "TextStyle",
+                            "na": {
+                              "fontSize": 20
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "className": "Tab",
+                    "na": {
+                      "child": {
+                        "className": "Text",
+                        "pa": [
+                          "Active"
+                        ],
+                        "na": {
+                          "style": {
+                            "className": "TextStyle",
+                            "na": {
+                              "fontSize": 20
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "className": "Tab",
+                    "na": {
+                      "child": {
+                        "className": "Text",
+                        "pa": [
+                          "Inactive"
+                        ],
+                        "na": {
+                          "style": {
+                            "className": "TextStyle",
+                            "na": {
+                              "fontSize": 20
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "body": {
+          "className": "Sugar.ifEqualBool",
+          "pa": [
+            "%(isDataEmpty)"
+          ],
+          "na": {
+            "trueValue": {
+              "className": "Center",
+              "na": {
+                "child": {
+                  "className": "Text",
+                  "pa": [
+                    "加载中..."
+                  ]
+                }
+              }
+            },
+            "falseValue": {
+              "className": "TabBarView",
+              "na": {
+                "children": [
+                  "%(_allTabList)",
+                  "%(_getList)",
+                  "%(_allTabList)"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {
+    "_getList": {
+      "className": "Sugar.listBuilder",
+      "na": {
+        "itemCount": 3,
+        "itemBuilder": {
+          "className": "Container",
+          "na": {
+            "height": 140,
+            "child": {
+              "className": "Container",
+              "na": {
+                "decoration": {
+                  "className": "BoxDecoration",
+                  "na": {
+                    "borderRadius": {
+                      "className": "BorderRadius.all",
+                      "pa": [
+                        {
+                          "className": "Radius.circular",
+                          "pa": [
+                            15
+                          ]
+                        }
+                      ]
+                    },
+                    "color": "#(Colors.white)"
+                  }
+                },
+                "margin": {
+                  "className": "EdgeInsets.only",
+                  "na": {
+                    "left": 20,
+                    "right": 20,
+                    "top": 15
+                  }
+                },
+                "child": {
+                  "className": "Row",
+                  "na": {
+                    "mainAxisAlignment": "#(MainAxisAlignment.spaceBetween)",
+                    "children": [
+                      {
+                        "className": "Row",
+                        "na": {
+                          "children": [
+                            {
+                              "className": "Container",
+                              "na": {
+                                "width": 120,
+                                "height": 120,
+                                "padding": {
+                                  "className": "EdgeInsets.all",
+                                  "pa": [
+                                    10
+                                  ]
+                                },
+                                "child": {
+                                  "className": "ClipRRect",
+                                  "na": {
+                                    "borderRadius": {
+                                      "className": "BorderRadius.circular",
+                                      "pa": [
+                                        15
+                                      ]
+                                    },
+                                    "child": {
+                                      "className": "Image",
+                                      "na": {
+                                        "fit": "#(BoxFit.cover)",
+                                        "image": {
+                                          "className": "NetworkImage",
+                                          "pa": [
+                                            "%(_getImagePath(^(index)))"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "className": "Container",
+                              "na": {
+                                "padding": {
+                                  "className": "EdgeInsets.all",
+                                  "pa": [
+                                    10
+                                  ]
+                                },
+                                "child": {
+                                  "className": "Column",
+                                  "na": {
+                                    "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                    "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                    "children": [
+                                      {
+                                        "className": "Text",
+                                        "pa": [
+                                          "%(_getTitle(^(index)))"
+                                        ],
+                                        "na": {
+                                          "style": {
+                                            "className": "TextStyle",
+                                            "na": {
+                                              "fontSize": 16,
+                                              "fontWeight": "#(FontWeight.bold)"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "className": "SizedBox",
+                                        "na": {
+                                          "height": 10
+                                        }
+                                      },
+                                      {
+                                        "className": "Text",
+                                        "pa": [
+                                          "SubTitle-SubTitle"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "_allTabList": {
+      "className": "Container",
+      "na": {
+        "child": {
+          "className": "CustomScrollView",
+          "na": {
+            "slivers": [
+              {
+                "className": "SliverList",
+                "na": {
+                  "delegate": {
+                    "className": "Sugar.sliverChildBuilderDelegate",
+                    "na": {
+                      "builder": {
+                        "className": "Container",
+                        "na": {
+                          "height": 140,
+                          "child": {
+                            "className": "Container",
+                            "na": {
+                              "decoration": {
+                                "className": "BoxDecoration",
+                                "na": {
+                                  "borderRadius": {
+                                    "className": "BorderRadius.all",
+                                    "pa": [
+                                      {
+                                        "className": "Radius.circular",
+                                        "pa": [
+                                          15
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  "color": "#(Colors.white)"
+                                }
+                              },
+                              "margin": {
+                                "className": "EdgeInsets.only",
+                                "na": {
+                                  "left": 20,
+                                  "right": 20,
+                                  "top": 15
+                                }
+                              },
+                              "child": {
+                                "className": "Row",
+                                "na": {
+                                  "mainAxisAlignment": "#(MainAxisAlignment.spaceBetween)",
+                                  "children": [
+                                    {
+                                      "className": "Row",
+                                      "na": {
+                                        "children": [
+                                          {
+                                            "className": "Container",
+                                            "na": {
+                                              "width": 120,
+                                              "height": 120,
+                                              "padding": {
+                                                "className": "EdgeInsets.all",
+                                                "pa": [
+                                                  10
+                                                ]
+                                              },
+                                              "child": {
+                                                "className": "ClipRRect",
+                                                "na": {
+                                                  "borderRadius": {
+                                                    "className": "BorderRadius.circular",
+                                                    "pa": [
+                                                      15
+                                                    ]
+                                                  },
+                                                  "child": {
+                                                    "className": "Image.network",
+                                                    "pa": [
+                                                      "https://gd-hbimg.huaban.com/bb8f4ae6711528dc754799afe6b95d438481265d245ac-ROmreT_fw658"
+                                                    ],
+                                                    "na": {
+                                                      "fit": "#(BoxFit.cover)"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "className": "Container",
+                                            "na": {
+                                              "padding": {
+                                                "className": "EdgeInsets.all",
+                                                "pa": [
+                                                  10
+                                                ]
+                                              },
+                                              "child": {
+                                                "className": "Column",
+                                                "na": {
+                                                  "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                                  "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                                  "children": [
+                                                    {
+                                                      "className": "Text",
+                                                      "pa": [
+                                                        "#($index)"
+                                                      ],
+                                                      "na": {
+                                                        "style": {
+                                                          "className": "TextStyle",
+                                                          "na": {
+                                                            "fontSize": 16,
+                                                            "fontWeight": "#(FontWeight.bold)"
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    {
+                                                      "className": "Text",
+                                                      "pa": [
+                                                        "SubTitle-SubTitle"
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "className": "Container",
+                                      "na": {
+                                        "padding": {
+                                          "className": "EdgeInsets.only",
+                                          "na": {
+                                            "right": 10
+                                          }
+                                        },
+                                        "child": {
+                                          "className": "Icon",
+                                          "pa": [
+                                            "#(Icons.radio_button_on_outlined)"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "childCount": 3
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

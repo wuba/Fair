@@ -229,12 +229,24 @@ dynamic _buildWidgetDsl(
       return '\$(${methodInvocationExpression?.callee?.asIdentifier.name})';
     } else if (fairDslContex?.variableAnnotation
         .containsKey(methodInvocationExpression?.callee?.asIdentifier.name)==true) {
-      return '%(${methodInvocationExpression?.callee?.asIdentifier.name})';
+      if (methodInvocationExpression?.argumentList?.isNotEmpty ?? false) {
+        var args = methodInvocationExpression?.argumentList?.fold('', (previousValue, element) =>
+        '$previousValue,${_buildValueExpression(element, fairDslContex)}').substring(1);
+        return '%(${methodInvocationExpression?.callee?.asIdentifier.name}($args))';
+      } else {
+        return '%(${methodInvocationExpression?.callee?.asIdentifier.name})';
+      }
     }
 
     if (RegExp(r'^[a-z_]')
         .hasMatch(methodInvocationExpression?.callee?.asIdentifier.name??'')) {
-      return '%(${methodInvocationExpression?.callee?.asIdentifier.name})';
+      if (methodInvocationExpression?.argumentList?.isNotEmpty ?? false) {
+        var args = methodInvocationExpression?.argumentList?.fold('', (previousValue, element) =>
+        '$previousValue,${_buildValueExpression(element, fairDslContex)}').substring(1);
+        return '%(${methodInvocationExpression?.callee?.asIdentifier.name}($args))';
+      } else {
+        return '%(${methodInvocationExpression?.callee?.asIdentifier.name})';
+      }
     } else {
       dslMap.putIfAbsent('className',
               () => methodInvocationExpression?.callee?.asIdentifier.name);

@@ -274,7 +274,6 @@ class Sugar {
       childAspectRatio: childAspectRatio,
     );
   }
-
 }
 class SugarSwitchCaseObj<T,K>{
 

@@ -1,0 +1,196 @@
+{
+  "className": "SizedBox",
+  "na": {
+    "height": 90.5,
+    "width": {
+      "className": "Sugar.width",
+      "pa": [
+        "^(context)"
+      ]
+    },
+    "child": {
+      "className": "Column",
+      "na": {
+        "children": [
+          {
+            "className": "Row",
+            "na": {
+              "children": [
+                {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.only",
+                      "na": {
+                        "top": 10,
+                        "left": 15,
+                        "bottom": 10,
+                        "right": 10
+                      }
+                    },
+                    "child": {
+                      "className": "Container",
+                      "na": {
+                        "decoration": {
+                          "className": "BoxDecoration",
+                          "na": {
+                            "borderRadius": {
+                              "className": "BorderRadius.circular",
+                              "pa": [
+                                10
+                              ]
+                            },
+                            "image": {
+                              "className": "DecorationImage",
+                              "na": {
+                                "fit": "#(BoxFit.fitHeight)",
+                                "image": {
+                                  "className": "Sugar.netWorkImage",
+                                  "pa": [
+                                    "https://img.iplaysoft.com/wp-content/uploads/2019/free-images/free_stock_photo.jpg!0x0.webp"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "width": 70,
+                        "height": 70
+                      }
+                    }
+                  }
+                },
+                {
+                  "className": "Material",
+                  "na": {
+                    "color": "#(Colors.white)",
+                    "child": {
+                      "className": "Padding",
+                      "na": {
+                        "padding": {
+                          "className": "EdgeInsets.all",
+                          "pa": [
+                            8.0
+                          ]
+                        },
+                        "child": {
+                          "className": "Column",
+                          "na": {
+                            "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                            "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                            "children": [
+                              {
+                                "className": "Text",
+                                "pa": [
+                                  "Store/Location Name"
+                                ],
+                                "na": {
+                                  "textAlign": "#(TextAlign.left)",
+                                  "style": {
+                                    "className": "TextStyle",
+                                    "na": {
+                                      "fontSize": 15,
+                                      "fontWeight": "#(FontWeight.bold)",
+                                      "color": "#(Colors.black)"
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "className": "Text",
+                                "pa": [
+                                  "123 Address St,City,ST"
+                                ],
+                                "na": {
+                                  "style": {
+                                    "className": "TextStyle",
+                                    "na": {
+                                      "fontSize": 13,
+                                      "fontWeight": "#(FontWeight.normal)",
+                                      "color": "#(Colors.black26)"
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "className": "Text",
+                                "pa": [
+                                  "1.7mi"
+                                ],
+                                "na": {
+                                  "style": {
+                                    "className": "TextStyle",
+                                    "na": {
+                                      "fontSize": 13,
+                                      "fontWeight": "#(FontWeight.w700)",
+                                      "color": "#(Colors.deepPurple)"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "className": "Expanded",
+                  "na": {
+                    "child": {
+                      "className": "SizedBox"
+                    }
+                  }
+                },
+                {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.only",
+                      "na": {
+                        "right": 15
+                      }
+                    },
+                    "child": {
+                      "className": "Icon",
+                      "pa": [
+                        "#(Icons.chevron_right_rounded)"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "className": "Padding",
+            "na": {
+              "padding": {
+                "className": "EdgeInsets.only",
+                "na": {
+                  "left": 15.0,
+                  "right": 15.0
+                }
+              },
+              "child": {
+                "className": "Container",
+                "na": {
+                  "color": "#(Colors.black12)",
+                  "height": 0.5,
+                  "width": {
+                    "className": "Sugar.width",
+                    "pa": [
+                      "^(context)"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {}
+}

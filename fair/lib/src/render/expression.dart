@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair/src/render/domain.dart';
 import 'package:flutter/foundation.dart';
 
 import '../internal/bind_data.dart';
@@ -21,11 +22,19 @@ class R {
     return _empty ?? (_empty = R(null, exp: null, needBinding: false));
   }
 
-  bool get valid => data != null;
+  bool valid() {
+    if (data is String) {
+      String strData = data as String;
+
+      return strData.length > 0;
+    }
+    return data != null;
+  }
 }
 
 abstract class Expression {
-  R onEvaluate(ProxyMirror? proxy, BindingData? binding, String? exp, String? pre);
+  R onEvaluate(
+      ProxyMirror? proxy, BindingData? binding, Domain? domain, String? exp, String? pre);
 
   /// fail-fast
   bool hitTest(String? exp, String? pre);
@@ -33,11 +42,12 @@ abstract class Expression {
 
 class ComponentExpression extends Expression {
   @override
-  R onEvaluate(ProxyMirror? proxy, BindingData? binding, String? exp, String? pre) {
+  R onEvaluate(
+      ProxyMirror? proxy, BindingData? binding,Domain? domain, String? exp, String? pre) {
     var processed = exp?.substring(2, exp.length - 1);
     var widget = proxy?.componentOf(processed);
     if (widget != null) return R(widget, exp: processed);
-    if (processed?.contains('.')==true) {
+    if (processed?.contains('.') == true) {
       var s = processed!.split('.');
       assert(s.length == 2, 'expression is not supported => $exp');
       var obj = s[0];
@@ -45,7 +55,7 @@ class ComponentExpression extends Expression {
       var r = proxy!.componentOf(obj);
       if (r is Map) {
         assert(!(r[prop] is Function),
-        'should be an instance of widget or const value');
+            'should be an instance of widget or const value');
         return R(r[prop], exp: processed);
       }
     }
@@ -54,15 +64,16 @@ class ComponentExpression extends Expression {
 
   @override
   bool hitTest(String? exp, String? pre) {
-    return RegExp('#\\(.+\\)', multiLine: true).hasMatch(exp??'');
+    return RegExp('#\\(.+\\)', multiLine: true).hasMatch(exp ?? '');
   }
 }
 
 class InlineExpression extends Expression {
   @override
-  R onEvaluate(ProxyMirror? proxy, BindingData? binding, String? exp, String? pre) {
+  R onEvaluate(
+      ProxyMirror? proxy, BindingData? binding, Domain? domain, String? exp, String? pre) {
     var regexp = RegExp(r'\$\w+');
-    var matches = regexp.allMatches(pre??'');
+    var matches = regexp.allMatches(pre ?? '');
     var builder = _InlineVariableBuilder(
         matches: matches, data: pre, proxyMirror: proxy, binding: binding);
     binding?.addBindValue(builder);
@@ -71,15 +82,16 @@ class InlineExpression extends Expression {
 
   @override
   bool hitTest(String? exp, String? pre) {
-    return RegExp(r'\$\w+', multiLine: true).hasMatch(pre??'');
+    return RegExp(r'\$\w+', multiLine: true).hasMatch(pre ?? '');
   }
 }
 
 class InlineObjectExpression extends Expression {
   @override
-  R onEvaluate(ProxyMirror? proxy, BindingData? binding, String? exp, String? pre) {
+  R onEvaluate(
+      ProxyMirror? proxy, BindingData? binding, Domain? domain, String? exp, String? pre) {
     var regexp = RegExp(r'\$\{\w.+\}');
-    var matches = regexp.allMatches(pre??'');
+    var matches = regexp.allMatches(pre ?? '');
     var builder = _InlineObjectVariableBuilder(
         matches: matches, data: pre, proxyMirror: proxy, binding: binding);
     binding?.addBindValue(builder);
@@ -88,16 +100,16 @@ class InlineObjectExpression extends Expression {
 
   @override
   bool hitTest(String? exp, String? pre) {
-    return RegExp(r'\$\{\w.+\}', multiLine: true).hasMatch(pre??'');
+    return RegExp(r'\$\{\w.+\}', multiLine: true).hasMatch(pre ?? '');
   }
 }
 
-
 class WidgetParamExpression extends Expression {
   @override
-  R onEvaluate(ProxyMirror? proxy, BindingData? binding, String? exp, String? pre) {
+  R onEvaluate(
+      ProxyMirror? proxy, BindingData? binding, Domain? domain, String? exp, String? pre) {
     var widgetParameter = exp?.substring(9, exp.length - 1);
-    var value = binding?.dataOf(widgetParameter??'');
+    var value = binding?.dataOf(widgetParameter ?? '');
     if (value != null) {
       return R(value, exp: widgetParameter);
     }
@@ -106,17 +118,18 @@ class WidgetParamExpression extends Expression {
 
   @override
   bool hitTest(String? exp, String? pre) {
-    return RegExp('#\\(widget\..+\\)', multiLine: true).hasMatch(exp??'');
+    return RegExp('#\\(widget\..+\\)', multiLine: true).hasMatch(exp ?? '');
   }
 }
 
 class ValueExpression extends Expression {
   @override
-  R onEvaluate(ProxyMirror? proxy, BindingData? binding, String? exp, String? pre) {
-    var prop =
-        binding?.bindDataOf(pre??'') ?? binding?.modules?.moduleOf(pre??'')?.call();
+  R onEvaluate(
+      ProxyMirror? proxy, BindingData? binding, Domain? domain, String? exp, String? pre) {
+    var prop = binding?.bindDataOf(pre ?? '') ??
+        binding?.modules?.moduleOf(pre ?? '')?.call();
     if (prop is ValueNotifier) {
-      var data = _PropBuilder(pre??'', prop, proxy, binding);
+      var data = _PropBuilder(pre ?? '', prop, proxy, binding);
       binding?.addBindValue(data);
       return R(data, exp: exp, needBinding: true);
     }
@@ -131,45 +144,48 @@ class ValueExpression extends Expression {
 
 class FunctionExpression extends Expression {
   @override
-  R onEvaluate(ProxyMirror? proxy, BindingData? binding, String? exp, String? pre) {
-    var regexp = RegExp(r'\%\(\w+\)');
-    var matches = regexp.allMatches(exp??'');
+  R onEvaluate(
+      ProxyMirror? proxy, BindingData? binding, Domain? domain, String? exp, String? pre) {
+    var regexp = RegExp(r'\%\(.+\)');
+    var matches = regexp.allMatches(exp ?? '');
     var builder = _FunctionBuilder(
-        matches: matches, data: exp, proxyMirror: proxy, binding: binding);
+        matches: matches, domain: domain, data: exp, proxyMirror: proxy, binding: binding);
     binding?.addBindValue(builder);
     return R(builder, exp: exp, needBinding: false);
   }
 
   @override
   bool hitTest(String? exp, String? pre) {
-    return RegExp(r'\%\(\w+\)', multiLine: false).hasMatch(exp??'');
+    return RegExp(r'\%\(.+\)', multiLine: false).hasMatch(exp ?? '');
   }
 }
 
 class GestureExpression extends Expression {
   @override
-  R onEvaluate(ProxyMirror? proxy, BindingData? binding, String? exp, String? pre) {
-    var prop = binding?.bindFunctionOf(exp?.substring(2, exp.length - 1)??'');
+  R onEvaluate(
+      ProxyMirror? proxy, BindingData? binding, Domain? domain, String? exp, String? pre) {
+    var prop = binding?.bindFunctionOf(exp?.substring(2, exp.length - 1) ?? '');
     return R(prop, exp: exp, needBinding: false);
   }
 
   @override
   bool hitTest(String? exp, String? pre) {
-    return RegExp(r'\@\(\w+\)', multiLine: false).hasMatch(exp??'');
+    return RegExp(r'\@\(\w+\)', multiLine: false).hasMatch(exp ?? '');
   }
 }
 
 class PropValueExpression extends Expression {
   @override
-  R onEvaluate(ProxyMirror? proxy, BindingData? binding, String? exp, String? pre) {
+  R onEvaluate(
+      ProxyMirror? proxy, BindingData? binding, Domain? domain, String? exp, String? pre) {
     var expression = exp?.substring(2, exp.length - 1);
-    var prop = binding?.bindRuntimeValueOf(expression??'');
+    var prop = binding?.bindRuntimeValueOf(expression ?? '');
     return R(prop, exp: expression, needBinding: false);
   }
 
   @override
   bool hitTest(String? exp, String? pre) {
-    return RegExp(r'\^\(\w+\)', multiLine: false).hasMatch(exp??'');
+    return RegExp(r'\^\(\w+\)', multiLine: false).hasMatch(exp ?? '');
   }
 }
 
@@ -206,7 +222,10 @@ class _InlineVariableBuilder extends _BindValueBuilder<String> {
   final Iterable<RegExpMatch>? matches;
 
   _InlineVariableBuilder(
-      {this.matches, String? data, ProxyMirror? proxyMirror, BindingData? binding})
+      {this.matches,
+      String? data,
+      ProxyMirror? proxyMirror,
+      BindingData? binding})
       : super(data, proxyMirror, binding) {
     matches?.forEach((e) {
       final bindProp = binding?.bindRuntimeValueOf(e.group(0)!.substring(1));
@@ -220,17 +239,18 @@ class _InlineVariableBuilder extends _BindValueBuilder<String> {
   @override
   String get value {
     var extract = data;
-    matches?.map((e) => {
-      '0': binding?.bindRuntimeValueOf(e.group(0)?.substring(1)??''),
-      '1': e.group(0)
-    })
+    matches
+        ?.map((e) => {
+              '0': binding?.bindRuntimeValueOf(e.group(0)?.substring(1) ?? ''),
+              '1': e.group(0)
+            })
         .forEach((e) {
       var first = e['0'] is ValueNotifier ? e['0'].value : e['0'];
       if (first != null) {
         extract = extract?.replaceFirst(e['1'], '$first');
       }
     });
-    return extract??'';
+    return extract ?? '';
   }
 }
 
@@ -238,11 +258,14 @@ class _InlineObjectVariableBuilder extends _BindValueBuilder<String> {
   final Iterable<RegExpMatch>? matches;
 
   _InlineObjectVariableBuilder(
-      {this.matches, String? data, ProxyMirror? proxyMirror, BindingData? binding})
+      {this.matches,
+      String? data,
+      ProxyMirror? proxyMirror,
+      BindingData? binding})
       : super(data, proxyMirror, binding) {
     matches?.forEach((e) {
-      final bindProp =
-      binding?.bindRuntimeValueOf(e.group(0)!.substring(2, e.group(0)!.length - 1));
+      final bindProp = binding?.bindRuntimeValueOf(
+          e.group(0)!.substring(2, e.group(0)!.length - 1));
       if (bindProp is ValueNotifier) {
         _watchedProps.add(bindProp);
       }
@@ -255,19 +278,19 @@ class _InlineObjectVariableBuilder extends _BindValueBuilder<String> {
     var extract = data;
     matches
         ?.map((e) => {
-      '0': binding?.bindRuntimeValueOf(e.group(0)!.substring(2, e.group(0)!.length - 1)),
-      '1': e.group(0)
-    })
+              '0': binding?.bindRuntimeValueOf(
+                  e.group(0)!.substring(2, e.group(0)!.length - 1)),
+              '1': e.group(0)
+            })
         .forEach((e) {
       var first = e['0'] is ValueNotifier ? e['0'].value : e['0'];
       if (first != null) {
         extract = extract?.replaceFirst(e['1'], '$first');
       }
     });
-    return extract??'';
+    return extract ?? '';
   }
 }
-
 
 class _PropBuilder extends _BindValueBuilder {
   _PropBuilder(String data, ValueNotifier prop, ProxyMirror? proxyMirror,
@@ -279,16 +302,16 @@ class _PropBuilder extends _BindValueBuilder {
 
   @override
   dynamic get value {
-    final prop = binding?.bindDataOf(data??'');
+    final prop = binding?.bindDataOf(data ?? '');
     return prop is ValueNotifier ? prop.value : prop;
   }
 }
 
 class _PropValueBuilder extends _BindValueBuilder {
-  final prop ;
+  final prop;
 
-  _PropValueBuilder(String data, this.prop, ProxyMirror proxyMirror,
-      BindingData binding)
+  _PropValueBuilder(
+      String data, this.prop, ProxyMirror proxyMirror, BindingData binding)
       : super(data, proxyMirror, binding) {
     _watchedProps.add(prop);
     attach();
@@ -302,13 +325,18 @@ class _PropValueBuilder extends _BindValueBuilder {
 
 class _FunctionBuilder extends _BindValueBuilder {
   final Iterable<RegExpMatch>? matches;
+  final Domain? domain;
 
   _FunctionBuilder(
-      {this.matches, String? data, ProxyMirror? proxyMirror, BindingData? binding})
+      {this.matches, this.domain,
+      String? data,
+      ProxyMirror? proxyMirror,
+      BindingData? binding})
       : super(data, proxyMirror, binding) {
     matches?.forEach((e) {
-      var bindProp ;
-      bindProp = binding?.runFunctionOf(e.group(0)!.substring(2, e.group(0)!.length - 1));
+      var bindProp;
+      bindProp = binding
+          ?.runFunctionOf(e.group(0)!.substring(2, e.group(0)!.length - 1), proxyMirror, binding, domain);
       if (bindProp is ValueNotifier) {
         _watchedProps.add(bindProp);
       }
@@ -321,9 +349,10 @@ class _FunctionBuilder extends _BindValueBuilder {
     var extract;
     matches
         ?.map((e) => {
-      '0': binding?.runFunctionOf(e.group(0)!.substring(2, e.group(0)!.length - 1)),
-      '1': e.group(0)
-    })
+              '0': binding?.runFunctionOf(
+                  e.group(0)!.substring(2, e.group(0)!.length - 1), proxyMirror, binding, domain),
+              '1': e.group(0)
+            })
         .forEach((e) {
       var first = e['0'] is ValueNotifier ? e['0'].value : e['0'];
       if (first != null) {
@@ -335,7 +364,6 @@ class _FunctionBuilder extends _BindValueBuilder {
     return extract;
   }
 }
-
 
 abstract class LifeCircle {
   void attach();

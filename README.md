@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-2.8.1-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.0.0-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -13,9 +13,9 @@
 
 ---
 
-Fair is a lightweight package for Flutter, which can be used to update widget tree and state dynamically. This package is still at an early stage.
+Fair is a dynamic framework designed for Flutter. Through the automatic conversion of native Dart source files by the Fair Compiler tool, the project can obtain the ability to dynamically update the Widget Tree and State.
 
-We create Fair so we can dispatch any pages changes to users as bundle(s), the way similar to React Native. With Flutter Fair integrated, you can publish your pages without waiting for the next release date of your App. Fair provides standard widget and some logic plugins, it can be used as a new dynamic page or as part of existing Flutter page.
+The goal of creating Fair is to support updates through business bundles and JS distribution without the release of versions (Android, iOS, Web), similar to React Native. After integrating with Flutter Fair, you can quickly publish new pages without waiting for your app's next release date. Fair provides standard widgets, which can be used as a new dynamic page or as part of an existing Flutter page, such as typography/style modification of operation bits, full page replacement, partial replacement, etc.
 
 ![](what-is-fair-en.png)
 
@@ -50,14 +50,15 @@ Assuming that the fair project and your own project are in the same folder:
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 2.8.1
+  fair: 3.0.0
 
 # add build_runner and compiler dependency
 dev_dependencies:
   build_runner: ^2.0.0
-  fair_compiler: ^1.4.0
+  fair_compiler: ^1.5.1
  
 # switch "fair_version" according to the local Flutter SDK version
+# Flutter SDK 3.3.x(3.3.0、3.3.1、3.3.2、3.3.3、3.3.4、3.3.5、3.3.6) -> flutter_3_3_0
 # Flutter SDK 3.0.x(3.0.0、3.0.1、3.0.2、3.0.3、3.0.4、3.0.5) -> flutter_3_0_0
 # Flutter SDK 2.10.x(2.10.0、2.10.1、2.10.2、2.10.3) -> flutter_2_10_0
 # Flutter SDK 2.8.x(2.8.0、2.8.1) -> flutter_2_8_0
@@ -66,7 +67,7 @@ dev_dependencies:
 # Flutter SDK 1.22.6 -> flutter_1_22_6
 dependency_overrides:
   fair_version:
-    path: ../fair/flutter_version/flutter_3_0_0
+    path: ../fair/flutter_version/flutter_3_3_0
 ```
 
 **step3：Wrap your app with FairApp Widget**
@@ -105,11 +106,79 @@ FairWidget(
   data: {"fairProps": json.encode({})}),
 ```
 
+## DevTools
+fair development tools
+### Dart Commandline Tool [faircli](https://pub.dev/packages/faircli)
+
+create fair project
+
+**faircli install**
+```dart
+dart pub global activate faircli
+```
+
+**create fair dynamic project**
+```dart
+faircli create -n dynamic_project_name
+```
+**create fair carrier project**
+```dart
+faircli create -k carrier -n carrier_project_name
+```
+
+### IDEA Plugin [FairTemplate](https://plugins.jetbrains.com/plugin/20323-fairtemplate)
+
+Page/Component Template Code
+
+<html>
+<img src="fair_template.png" width="80%">
+</html>
+
+### DevTools flow chart
+![fair tools](fair_tools.png)
+
+### DevTools demo
+After using faircli to configure the local hot update service, open the developer options on the mobile device, select the local mode, enter the ip of the development machine, then preview fair dynamic effect
+
+<html>
+<div align="center">
+<img src="fair_tools.gif" width="30%">
+</div>
+</html>
+
+For more details, please refer to [fair_tools](fair_tools.md)
+
+## Fair-Online Platform
+Fair-Online is an integrated cloud development platform for Flutter developers, from online development of Flutter, to real-time compilation and preview, packaging and publishing, and dynamic release of end-side updates, to realize the dynamic online Flutter.
+
+Developers do not need to configure the Flutter development environment, develop and debug code online, compile and preview in real time, and what you see is what you get. Combined with the Flutter dynamic framework Fair and the hot update platform FairPushy created by the 58 open source team, Flutter online dynamics are realized.
+
+<html>
+<div align="center">
+<img src="./fair_online/fair_online.gif" width="90%">
+</div>
+</html>
+
+Online experience URL:
+[Fair-Online Platform](https://fair-online.58.com/)
+
+For more details, please refer to [fair_online](./fair_online/README.md)
+
 ## Documentation
 For more details, please refer to [https://fair.58.com](https://fair.58.com)  
-If you need the hot update platform, please follow [FAIR PUSHY](https://github.com/wuba/FairPushy)
+### Tools
+Fair Cli: [Fair_CLI](https://pub.dev/packages/faircli)  
+IEDA plugin: [jetbrains_plugin_fair_template](https://plugins.jetbrains.com/plugin/20323-fairtemplate)  
+Hot update platform: [FAIR PUSHY](https://github.com/wuba/FairPushy)
 
 ## versions
+
+### 3.0.0
+updateDate：2022.11.17
+
+- Fix class constructor parsing exception.
+- Fair Compatible Web.
+- Bindmap logic optimization.
 
 ### 2.8.1
 updateDate：2022.11.01
@@ -259,6 +328,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/itzhaoqian"><img src="https://avatars.githubusercontent.com/u/23277488?v=4?s=100" width="100px;" alt=""/><br /><sub><b>itzhaoqian</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=itzhaoqian" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/xxliang"><img src="https://avatars.githubusercontent.com/u/5005255?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sunlight Xie</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=xxliang" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/a303268287"><img src="https://avatars.githubusercontent.com/u/19368353?v=4?s=100" width="100px;" alt=""/><br /><sub><b>lhdycxgghb</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=a303268287" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/hlwhl"><img src="https://avatars.githubusercontent.com/u/7610615?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Prome</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=hlwhl" title="Code">💻</a></td>
   </tr>
 </table>
 
