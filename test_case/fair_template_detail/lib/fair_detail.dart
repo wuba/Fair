@@ -57,7 +57,7 @@ class _FairDetailState extends State<FairDetail> {
             style: TextStyle(
               color: Color(0xFF3978C4),
               fontWeight: FontWeight.w500,
-              fontSize: 15,
+              fontSize: 15.0,
             ),
           ),
           Padding(
@@ -67,7 +67,7 @@ class _FairDetailState extends State<FairDetail> {
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20),
+                  fontSize: 20.0),
             ),
           ),
           Padding(
@@ -79,7 +79,7 @@ class _FairDetailState extends State<FairDetail> {
               style: TextStyle(
                 color: Colors.grey,
                 fontWeight: FontWeight.w400,
-                fontSize: 14,
+                fontSize: 14.0,
               ),
             ),
           ),
@@ -107,7 +107,7 @@ class _FairDetailState extends State<FairDetail> {
             child: Text(
               _getTime(),
               style: TextStyle(
-                fontSize: 15,
+                fontSize: 15.0,
                 color: Color(0xFF3978C4),
               ),
               maxLines: 1,
@@ -140,7 +140,7 @@ class _FairDetailState extends State<FairDetail> {
       child: Text(
         "Event Details",
         style: TextStyle(
-            color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w500),
+            color: Colors.grey, fontSize: 14.0, fontWeight: FontWeight.w500),
       ),
     );
   }
@@ -155,7 +155,7 @@ class _FairDetailState extends State<FairDetail> {
         _getDetailContent(),
         style: TextStyle(
             color: Color(0xFF121416),
-            fontSize: 15,
+            fontSize: 15.0,
             fontWeight: FontWeight.w500),
       ),
     );
