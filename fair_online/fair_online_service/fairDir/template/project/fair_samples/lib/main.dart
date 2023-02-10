@@ -34,7 +34,7 @@ Future<void> main() async {
   FairDevTools.config = FairDevConfig()
     ..addEnv(OnlineEnvInfo(
         envName: '环境1',
-        updateUrl: 'https://fangfe.58.com/fairapp/module_patch_bundle',
+        updateUrl: 'https://xxx.xx.com/fairapp/module_patch_bundle',
         readOnly: true))
     ..addEnv(OnlineEnvInfo(envName: '环境2', updateUrl: '', readOnly: false));
 
