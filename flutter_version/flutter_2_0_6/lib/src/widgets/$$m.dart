@@ -7381,6 +7381,16 @@ var p = () => {
             clipBehavior: props['clipBehavior'] ?? Clip.none,
             shape: props['shape'],
           ),
+      'TextButton': (props) => TextButton(
+           key: props['key'],
+           onPressed: props['onPressed'],
+           onLongPress: props['onLongPress'],
+           style: props['style'],
+           focusNode: props['focusNode'],
+           autofocus: props['autofocus'] ?? false,
+           clipBehavior: props['clipBehavior'] ?? Clip.none,
+           child: props['child'],
+         ),
       'TextButton.styleFrom': (props) => TextButton.styleFrom(
             primary: props['primary'],
             onSurface: props['onSurface'],

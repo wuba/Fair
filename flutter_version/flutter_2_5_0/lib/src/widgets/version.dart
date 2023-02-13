@@ -383,7 +383,7 @@ const widgetNames = {
   'TooltipThemeData': false,
   'TooltipTheme': false,
   'TooltipTriggerMode': false,
-  'TextButton': false,
+  'TextButton': true,
   'Dialog': true,
   'AlertDialog': true,
   'SimpleDialogOption': true,
