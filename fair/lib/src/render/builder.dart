@@ -129,7 +129,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     // var arguments = map['arguments'];
     final bind = widget && (na.binding == true || pa.binding == true);
     try {
-      fun = FairModule.cast(ctx, fun); 
+      fun = FairModule.cast(ctx, fun);
       if (forceApply || !bind) {
         return Function.apply(
             fun, [Property.extract(list: pa.data, map: na.data)], null);
@@ -159,7 +159,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         } else if (domain != null && e is MapEntry && domain.match(e.value)) {
           pa.add(domain.bindValue(e.value));
         } else if (e is String) {
-          var r = proxyMirror?.evaluate(context, bound, e);
+          var r = proxyMirror?.evaluate(context, bound, e, domain: domain);
           if (r?.binding == true) {
             needBinding = true;
           }
@@ -265,7 +265,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     if ((body = _replaceMethod(methodMap, v)) != null) {
       result = convert(context, body, methodMap, domain: domain);
     } else {
-      var r = proxyMirror?.evaluate(context, bound, v);
+      var r = proxyMirror?.evaluate(context, bound, v, domain: domain);
       if (r?.binding == true) {
         needBinding = true;
       }
@@ -291,7 +291,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     if (!(source is List)) {
       throw Exception('Sugar.mapEach has no valid source array');
     }
-    
+
     if (source is List) {
       source = Domain(source).forEach(($, element) {
         if (element is Map) {
@@ -411,13 +411,16 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
   ListView _buildSugarListBuilder(String name, Domain? superDomain,
       Function mapEach, Map map, Map? methodMap, BuildContext context) {
-    Map propertyTransMap = Map.from(map);
+    var propertyTransMap = Map.from(map);
 
-    Map naOrMap = map['na'];
+    var naOrMap = {};
+    if (map['na'] != null) {
+      naOrMap.addAll(map['na']);
+    }
     var itemBuilder = naOrMap['itemBuilder'];
     naOrMap.remove('itemBuilder');
 
-    var na = _named(name, map['na'], methodMap, context, superDomain);
+    var na = _named(name, naOrMap, methodMap, context, superDomain);
     var pa = _positioned(map['pa'], methodMap, context, superDomain);
     Map naMap = Property.extract(list: pa.data, map: na.data);
 
@@ -425,14 +428,12 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     propertyTransMap['na'] = naMap;
     var propertiesProvider = convert(context, propertyTransMap, methodMap);
 
-    var count = naMap["itemCount"];
+    var count = naMap['itemCount'];
     var source = List<int>.generate(count, (i) => i + 1);
-    Domain domain = Domain(source);
     var list = Domain(source).forEach(($, _) {
       return convert(context, itemBuilder, methodMap, domain: $) as Widget;
     });
-    List<Widget> children = list.map((e) => e as Widget).toList();
-
+    var children = list.map((e) => e as Widget).toList();
     var params = {
       'pa': [children, propertiesProvider]
     };

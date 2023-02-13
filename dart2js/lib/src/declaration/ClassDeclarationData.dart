@@ -108,9 +108,7 @@ class ClassDeclarationData {
       if(element.isGetter){
         fieldsLiterval += 'this.${element.name} = (function(_this) { with (_this) {${element.initVal ?? 'null'} } })(this);';
       }else{
-        if(element.initVal!=null){
           fieldsLiterval += 'this.${element.name} = ${element.initVal};';
-        }
       }
     });
     return fieldsLiterval;

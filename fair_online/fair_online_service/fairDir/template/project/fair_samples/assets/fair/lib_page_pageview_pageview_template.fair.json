@@ -1,0 +1,92 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "PageView模版"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "Sugar.ifEqualBool",
+      "pa": [
+        "%(isDataEmpty)"
+      ],
+      "na": {
+        "trueValue": {
+          "className": "Center",
+          "na": {
+            "child": {
+              "className": "Text",
+              "pa": [
+                "加载中..."
+              ]
+            }
+          }
+        },
+        "falseValue": {
+          "className": "PageView.custom",
+          "na": {
+            "childrenDelegate": {
+              "className": "Sugar.sliverChildBuilderDelegate",
+              "na": {
+                "builder": {
+                  "className": "Column",
+                  "na": {
+                    "crossAxisAlignment": "#(CrossAxisAlignment.center)",
+                    "children": [
+                      {
+                        "className": "AspectRatio",
+                        "na": {
+                          "aspectRatio": 1.5,
+                          "child": {
+                            "className": "ClipRRect",
+                            "na": {
+                              "borderRadius": {
+                                "className": "BorderRadius.all",
+                                "pa": [
+                                  {
+                                    "className": "Radius.circular",
+                                    "pa": [
+                                      4.0
+                                    ]
+                                  }
+                                ]
+                              },
+                              "child": {
+                                "className": "Image.network",
+                                "pa": [
+                                  "%(_getImagePath(^(index)))"
+                                ],
+                                "na": {
+                                  "fit": "#(BoxFit.cover)"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "className": "Text",
+                        "pa": [
+                          "%(_getText(^(index)))"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "childCount": 3
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

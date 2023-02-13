@@ -119,7 +119,7 @@
                         ]
                       },
                       "fontWeight": "#(FontWeight.w500)",
-                      "fontSize": 15
+                      "fontSize": 15.0
                     }
                   }
                 }
@@ -147,7 +147,7 @@
                         "na": {
                           "color": "#(Colors.black)",
                           "fontWeight": "#(FontWeight.bold)",
-                          "fontSize": 20
+                          "fontSize": 20.0
                         }
                       }
                     }
@@ -179,7 +179,7 @@
                         "na": {
                           "color": "#(Colors.grey)",
                           "fontWeight": "#(FontWeight.w400)",
-                          "fontSize": 14
+                          "fontSize": 14.0
                         }
                       }
                     }
@@ -239,7 +239,7 @@
                       "style": {
                         "className": "TextStyle",
                         "na": {
-                          "fontSize": 15,
+                          "fontSize": 15.0,
                           "color": {
                             "className": "Color",
                             "pa": [
@@ -330,7 +330,7 @@
               "className": "TextStyle",
               "na": {
                 "color": "#(Colors.grey)",
-                "fontSize": 14,
+                "fontSize": 14.0,
                 "fontWeight": "#(FontWeight.w500)"
               }
             }
@@ -365,7 +365,7 @@
                     "0xFF121416"
                   ]
                 },
-                "fontSize": 15,
+                "fontSize": 15.0,
                 "fontWeight": "#(FontWeight.w500)"
               }
             }

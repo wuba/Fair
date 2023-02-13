@@ -180,7 +180,9 @@ class ClassDeclarationVisitor
   void parseByFile(String filePath) {
     var file = File(filePath);
     var result = parseFile(
-        path: file.absolute.uri.normalizePath().path,
+        path: Platform.isWindows
+            ? filePath
+            : file.absolute.uri.normalizePath().path,
         featureSet: FeatureSet.fromEnableFlags([]));
     result.unit.visitChildren(this);
   }

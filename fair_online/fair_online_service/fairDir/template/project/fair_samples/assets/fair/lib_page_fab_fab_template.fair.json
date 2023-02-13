@@ -1,0 +1,64 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "body": {
+      "className": "Center",
+      "na": {
+        "child": {
+          "className": "Column",
+          "na": {
+            "mainAxisAlignment": "#(MainAxisAlignment.center)",
+            "children": [
+              {
+                "className": "Text",
+                "pa": [
+                  "You have pushed the button this many times:"
+                ]
+              },
+              {
+                "className": "Text",
+                "pa": [
+                  "#($_counter)"
+                ],
+                "na": {
+                  "style": {
+                    "className": "TextStyle",
+                    "na": {
+                      "fontSize": 40,
+                      "color": {
+                        "className": "Color",
+                        "pa": [
+                          "0xffeb4237"
+                        ]
+                      },
+                      "wordSpacing": 0
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "floatingActionButton": {
+      "className": "FloatingActionButton",
+      "na": {
+        "backgroundColor": "#(Colors.blue)",
+        "focusColor": "#(Colors.blueAccent)",
+        "hoverColor": "#(Colors.lightBlue)",
+        "splashColor": "#(Colors.lightBlueAccent)",
+        "elevation": 0.0,
+        "highlightElevation": 20.0,
+        "onPressed": "@(_incrementCounter)",
+        "child": {
+          "className": "Icon",
+          "pa": [
+            "#(Icons.add)"
+          ]
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}
