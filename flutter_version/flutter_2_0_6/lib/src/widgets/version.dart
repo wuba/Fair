@@ -365,7 +365,7 @@ const widgetNames = {
   'NavigationRailLabelType': false,
   'TooltipThemeData': false,
   'TooltipTheme': false,
-  'TextButton': false,
+  'TextButton': true,
   'Dialog': true,
   'AlertDialog': true,
   'SimpleDialogOption': true,
