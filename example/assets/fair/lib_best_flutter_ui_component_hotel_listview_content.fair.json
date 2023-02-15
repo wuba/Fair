@@ -1,0 +1,372 @@
+{
+  "className": "Padding",
+  "na": {
+    "padding": {
+      "className": "EdgeInsets.only",
+      "na": {
+        "left": 24,
+        "right": 24,
+        "top": 8,
+        "bottom": 16
+      }
+    },
+    "child": {
+      "className": "InkWell",
+      "na": {
+        "splashColor": "#(Colors.transparent)",
+        "child": {
+          "className": "Container",
+          "na": {
+            "decoration": {
+              "className": "BoxDecoration",
+              "na": {
+                "borderRadius": {
+                  "className": "BorderRadius.all",
+                  "pa": [
+                    {
+                      "className": "Radius.circular",
+                      "pa": [
+                        16.0
+                      ]
+                    }
+                  ]
+                },
+                "boxShadow": [
+                  {
+                    "className": "BoxShadow",
+                    "na": {
+                      "color": "#(AppTheme.greyWithOpacity)",
+                      "offset": {
+                        "className": "Offset",
+                        "pa": [
+                          4,
+                          4
+                        ]
+                      },
+                      "blurRadius": 16
+                    }
+                  }
+                ]
+              }
+            },
+            "child": {
+              "className": "ClipRRect",
+              "na": {
+                "borderRadius": {
+                  "className": "BorderRadius.all",
+                  "pa": [
+                    {
+                      "className": "Radius.circular",
+                      "pa": [
+                        16.0
+                      ]
+                    }
+                  ]
+                },
+                "child": {
+                  "className": "Stack",
+                  "na": {
+                    "children": [
+                      {
+                        "className": "Column",
+                        "na": {
+                          "children": [
+                            {
+                              "className": "AspectRatio",
+                              "na": {
+                                "aspectRatio": 2,
+                                "child": {
+                                  "className": "Image.asset",
+                                  "pa": [
+                                    "$(hotelData.imagePath)"
+                                  ],
+                                  "na": {
+                                    "fit": "#(BoxFit.cover)"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "className": "Container",
+                              "na": {
+                                "color": "#(backgroundColor)",
+                                "child": {
+                                  "className": "Row",
+                                  "na": {
+                                    "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                    "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                    "children": [
+                                      {
+                                        "className": "Expanded",
+                                        "na": {
+                                          "child": {
+                                            "className": "Container",
+                                            "na": {
+                                              "child": {
+                                                "className": "Padding",
+                                                "na": {
+                                                  "padding": {
+                                                    "className": "EdgeInsets.only",
+                                                    "na": {
+                                                      "left": 16,
+                                                      "top": 8,
+                                                      "bottom": 8
+                                                    }
+                                                  },
+                                                  "child": {
+                                                    "className": "Column",
+                                                    "na": {
+                                                      "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                                      "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                                      "children": [
+                                                        {
+                                                          "className": "Text",
+                                                          "pa": [
+                                                            "$(hotelData.titleTxt)"
+                                                          ],
+                                                          "na": {
+                                                            "textAlign": "#(TextAlign.left)",
+                                                            "style": {
+                                                              "className": "TextStyle",
+                                                              "na": {
+                                                                "fontWeight": "#(FontWeight.w600)",
+                                                                "fontSize": 22
+                                                              }
+                                                            }
+                                                          }
+                                                        },
+                                                        {
+                                                          "className": "Row",
+                                                          "na": {
+                                                            "crossAxisAlignment": "#(CrossAxisAlignment.center)",
+                                                            "mainAxisAlignment": "#(MainAxisAlignment.start)",
+                                                            "children": [
+                                                              {
+                                                                "className": "Text",
+                                                                "pa": [
+                                                                  "$(hotelData.subTxt)"
+                                                                ],
+                                                                "na": {
+                                                                  "style": {
+                                                                    "className": "TextStyle",
+                                                                    "na": {
+                                                                      "fontSize": 14,
+                                                                      "color": "#(AppTheme.greyWithOpacity)"
+                                                                    }
+                                                                  }
+                                                                }
+                                                              },
+                                                              {
+                                                                "className": "SizedBox",
+                                                                "na": {
+                                                                  "width": 4
+                                                                }
+                                                              },
+                                                              {
+                                                                "className": "Icon",
+                                                                "pa": [
+                                                                  "#(FontAwesomeIcons.mapMarkerAlt)"
+                                                                ],
+                                                                "na": {
+                                                                  "size": 12,
+                                                                  "color": "#(primaryColor)"
+                                                                }
+                                                              },
+                                                              {
+                                                                "className": "Expanded",
+                                                                "na": {
+                                                                  "child": {
+                                                                    "className": "Text",
+                                                                    "pa": [
+                                                                      "%(distance)"
+                                                                    ],
+                                                                    "na": {
+                                                                      "overflow": "#(TextOverflow.ellipsis)",
+                                                                      "style": {
+                                                                        "className": "TextStyle",
+                                                                        "na": {
+                                                                          "fontSize": 14,
+                                                                          "color": "#(AppTheme.greyWithOpacity)"
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            ]
+                                                          }
+                                                        },
+                                                        {
+                                                          "className": "Padding",
+                                                          "na": {
+                                                            "padding": {
+                                                              "className": "EdgeInsets.only",
+                                                              "na": {
+                                                                "top": 4
+                                                              }
+                                                            },
+                                                            "child": {
+                                                              "className": "Row",
+                                                              "na": {
+                                                                "children": [
+                                                                  {
+                                                                    "className": "SmoothStarRating",
+                                                                    "na": {
+                                                                      "allowHalfRating": true,
+                                                                      "starCount": 5,
+                                                                      "rating": "$(hotelData.rating)",
+                                                                      "size": 20,
+                                                                      "color": "#(primaryColor)",
+                                                                      "borderColor": "#(primaryColor)"
+                                                                    }
+                                                                  },
+                                                                  {
+                                                                    "className": "Text",
+                                                                    "pa": [
+                                                                      "%(reviews)"
+                                                                    ],
+                                                                    "na": {
+                                                                      "style": {
+                                                                        "className": "TextStyle",
+                                                                        "na": {
+                                                                          "fontSize": 14,
+                                                                          "color": "#(AppTheme.greyWithOpacity)"
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                ]
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "className": "Padding",
+                                        "na": {
+                                          "padding": {
+                                            "className": "EdgeInsets.only",
+                                            "na": {
+                                              "right": 16,
+                                              "top": 8
+                                            }
+                                          },
+                                          "child": {
+                                            "className": "Column",
+                                            "na": {
+                                              "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                              "crossAxisAlignment": "#(CrossAxisAlignment.end)",
+                                              "children": [
+                                                {
+                                                  "className": "Text",
+                                                  "pa": [
+                                                    "%(perNight)"
+                                                  ],
+                                                  "na": {
+                                                    "textAlign": "#(TextAlign.left)",
+                                                    "style": {
+                                                      "className": "TextStyle",
+                                                      "na": {
+                                                        "fontWeight": "#(FontWeight.w600)",
+                                                        "fontSize": 22
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                {
+                                                  "className": "Text",
+                                                  "pa": [
+                                                    "/per night"
+                                                  ],
+                                                  "na": {
+                                                    "style": {
+                                                      "className": "TextStyle",
+                                                      "na": {
+                                                        "fontSize": 14,
+                                                        "color": "#(AppTheme.greyWithOpacity)"
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "className": "Positioned",
+                        "na": {
+                          "top": 8,
+                          "right": 8,
+                          "child": {
+                            "className": "Material",
+                            "na": {
+                              "color": "#(Colors.transparent)",
+                              "child": {
+                                "className": "InkWell",
+                                "na": {
+                                  "borderRadius": {
+                                    "className": "BorderRadius.all",
+                                    "pa": [
+                                      {
+                                        "className": "Radius.circular",
+                                        "pa": [
+                                          32.0
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  "child": {
+                                    "className": "Padding",
+                                    "na": {
+                                      "padding": {
+                                        "className": "EdgeInsets.all",
+                                        "pa": [
+                                          8.0
+                                        ]
+                                      },
+                                      "child": {
+                                        "className": "Icon",
+                                        "pa": [
+                                          "#(Icons.favorite_border)"
+                                        ],
+                                        "na": {
+                                          "color": "#(primaryColor)"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

@@ -1,0 +1,26 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "leading": {
+          "className": "BackButton"
+        },
+        "title": {
+          "className": "Text",
+          "pa": [
+            "AppBar"
+          ]
+        },
+        "centerTitle": true,
+        "toolbarHeight": 55,
+        "primary": true,
+        "backgroundColor": "#(Colors.blue)",
+        "toolbarOpacity": 1,
+        "actions": []
+      }
+    }
+  },
+  "methodMap": {}
+}
