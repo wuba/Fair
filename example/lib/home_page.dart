@@ -1,5 +1,6 @@
 import 'package:example/best_flutter_ui/best_ui_page.dart';
 import 'package:example/public_widget.dart';
+import 'package:example/template/template_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,24 +15,40 @@ class HomePage extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: Scaffold(
-        appBar: AppBar(title: Text('fair使用和介绍'),),
+        appBar: AppBar(
+          title: Text('fair使用和介绍'),
+        ),
         body: ListView(
           children: [
-            addItem("fair @FairProps 注解的使用", () {
-              showWidget(fairArguments: {"fairText": '路由是个好东西，要进一步封装'},
-                fairPath: 'assets/fair/lib_fair_widget_fair_props_widget.fair.json',);
+            addItem('fair @FairProps 注解的使用', () {
+              showWidget(
+                fairArguments: {'fairText': '路由是个好东西，要进一步封装'},
+                fairPath:
+                    'assets/fair/lib_fair_widget_fair_props_widget.fair.json',
+              );
             }),
-            addItem("fair delegate的使用", () {
-              showWidget(fairArguments: {"fairText": '路由是个好东西，要进一步封装'},
-                fairPath: 'assets/fair/lib_fair_widget_fair_delegate_widget.fair.json',);
+            addItem('fair delegate的使用', () {
+              showWidget(
+                fairArguments: {'fairText': '路由是个好东西，要进一步封装'},
+                fairPath:
+                    'assets/fair/lib_fair_widget_fair_delegate_widget.fair.json',
+              );
             }),
-            addItem("fair plugin的使用", () {
-              showWidget(fairArguments: {"fairText": '路由是个好东西，要进一步封装'},
-                fairPath: 'assets/fair/lib_fair_widget_fair_plugin_widget.fair.json',);
+            addItem('fair plugin的使用', () {
+              showWidget(
+                fairArguments: {'fairText': '路由是个好东西，要进一步封装'},
+                fairPath:
+                    'assets/fair/lib_fair_widget_fair_plugin_widget.fair.json',
+              );
             }),
-            addItem("fair bestUI演示", () {
+            addItem('fair bestUI演示', () {
               Navigator.of(context).push(CupertinoPageRoute(builder: (_) {
                 return BestUiPage();
+              }));
+            }),
+            addItem('fair 模板代码', () {
+              Navigator.of(context).push(CupertinoPageRoute(builder: (_) {
+                return TemplatePage();
               }));
             }),
           ],
@@ -40,7 +57,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  void showWidget({fairPath,fairArguments}) {
+  void showWidget({fairPath, fairArguments}) {
     Navigator.of(context).push(CupertinoPageRoute(builder: (_) {
       return PublicWidget(
         fairArguments: fairArguments,
@@ -53,9 +70,13 @@ class HomePage extends StatelessWidget {
     return GestureDetector(
         child: Container(
             alignment: Alignment.centerLeft,
-            color: Colors.white,
             height: 100,
             padding: const EdgeInsets.only(left: 20.0),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border(
+                    bottom: BorderSide(
+                        color: Colors.grey.withOpacity(0.5), width: 0.5))),
             child: Text(
               itemName,
               style: TextStyle(

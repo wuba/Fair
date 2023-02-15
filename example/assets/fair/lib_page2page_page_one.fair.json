@@ -47,7 +47,7 @@
             "arguments": {
               "path": "assets/fair/lib_page2page_page_two.fair.json",
               "data": {
-                "title": "^(nextPageName)"
+                "title": "PageTwo"
               }
             }
           }
