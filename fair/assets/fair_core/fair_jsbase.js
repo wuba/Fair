@@ -74,6 +74,9 @@ function convertObjectLiteralToSetOrMap(obj) {
 
 Object.prototype.ctor = function () {};
 Object.__inner__ = function () {};
+Object.prototype.__op_idx__ = function (key) {
+   return this[key];
+};
 
 (function () {
   const __global__ = global;
