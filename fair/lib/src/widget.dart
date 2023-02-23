@@ -138,14 +138,21 @@ class FairState extends State<FairWidget> with Loader, AutomaticKeepAliveClientM
   }
 
   void _reload() {
-    var name = state2key;
-    var path = widget.path ?? _fairApp!.pathOfBundle(widget.name??'');
-    bundleType = widget.path != null && widget.path?.startsWith('http')==true ? 'Http' : 'Asset';
-    parse(context, page: name, url: path, data: widget.data??{}).then((value) {
-      if (mounted && value != null) {
-        setState(() => _child = value);
-      }
-    });
+    if (mounted) {
+      var name = state2key;
+      var path = widget.path ?? _fairApp!.pathOfBundle(widget.name ?? '');
+      bundleType =
+          widget.path != null && widget.path?.startsWith('http') == true
+              ? 'Http'
+              : 'Asset';
+
+      parse(context, page: name, url: path, data: widget.data ?? {})
+          .then((value) {
+        if (mounted && value != null) {
+          setState(() => _child = value);
+        }
+      });
+    }
   }
 
   @override
