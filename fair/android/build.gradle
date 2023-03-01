@@ -32,7 +32,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 16
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
