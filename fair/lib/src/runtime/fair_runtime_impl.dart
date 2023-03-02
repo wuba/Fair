@@ -174,7 +174,7 @@ class Runtime implements IRuntime {
        */
       var pluginJsSource = ' ';
       try {
-        var customConfigJson = await rootBundle.loadString('${package != null ? 'packages/$package' : ''}assets/fair_basic_config.json');
+        var customConfigJson = await rootBundle.loadString('${package != null ? 'packages/$package/' : ''}assets/fair_basic_config.json');
         var customConfig = jsonDecode(customConfigJson);
         //加载用户自定义的plugin
         Map<String, dynamic>? plugins = customConfig['plugin'];
