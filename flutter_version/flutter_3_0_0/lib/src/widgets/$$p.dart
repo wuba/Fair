@@ -357,7 +357,7 @@ var p = () => {
     props['pa'][2]?.toDouble(),
   ),
   'Border.all': (props) => Border.all(
-    width : props['width'].toDouble(),
+    width: props['width']?.toDouble() ?? 1.0,
     color : props['color'] ?? const Color(0xFF000000),
     style : props['style'] ?? BorderStyle.solid,
   ),

@@ -349,6 +349,11 @@ var p = () => {
     props['pa'][1],
     props['pa'][2]?.toDouble(),
   ),
+  'Border.all': (props) => Border.all(
+    color: props['color'] ?? const Color(0xFF000000),
+    width: props['width']?.toDouble() ?? 1.0,
+    style: props['style'] ?? BorderStyle.solid,
+  ),  
   'BorderDirectional.merge': (props) => BorderDirectional.merge(
     props['pa'][0],
     props['pa'][1],
