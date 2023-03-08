@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 
+import 'dart:collection';
 import 'package:fair_version/fair_version.dart';
 import 'package:flutter/foundation.dart';
 
@@ -13,16 +14,18 @@ import 'bloc/geometry.dart' as geometry;
 import 'internal/global_state.dart';
 
 class BindingProvider with $BindingImpl {
-  final Map<String, dynamic> _binding = {};
-  final Map<String, dynamic> _specialBinding = {
+  final SplayTreeMap<String, dynamic> _binding =
+      SplayTreeMap<String, dynamic>();
+  static final SplayTreeMap<String, dynamic> specialBinding =
+      SplayTreeMap.from({
     ...common.provider(),
     ...geometry.provider(),
     ...flow.provider(),
-  };
+  });
   var _loadedIndex = 0;
 
   dynamic loadTag(String? tag) {
-    var spResult = _specialBinding[tag];
+    var spResult = specialBinding[tag];
     if (spResult != null) {
       return spResult;
     }
@@ -36,7 +39,11 @@ class BindingProvider with $BindingImpl {
     for (var i = _loadedIndex; i < provider.length; i++) {
       var binder = provider[i]();
       result = binder[tag];
-      _binding.addAll(binder);
+      // do not override bindings from user
+      binder.forEach((key, value) {
+        _binding.putIfAbsent(key, () => value);
+      });
+      // _binding.addAll(binder);
       if (result != null) {
         return result;
       }
