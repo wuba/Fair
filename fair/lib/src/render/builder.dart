@@ -75,7 +75,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       } else if (name == 'Sugar.map') {
         return _buildSugarMap(mapper, map, methodMap, context);
       } else if (name == 'Sugar.switchCase') {
-        dynamic re = _buildSwitchCase(mapper, map, methodMap, context);
+        dynamic re = _buildSwitchCase(mapper, map, methodMap, context, domain);
         return re;
       } else if (name == 'Sugar.listBuilder') {
         return _buildSugarListBuilder(
@@ -295,8 +295,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     if (source is List) {
       source = Domain(source).forEach(($, element) {
         if (element is Map) {
-          if(element[tag] == null){
-            return element;  //直接返回Map对象
+          if (element[tag] == null) {
+            return element; //直接返回Map对象
           }
           return convert(context, element, methodMap, domain: $);
         } else {
@@ -333,7 +333,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     if (source is List) {
       source = Domain(source).forEach(($, element) {
         if (element is Map) {
-          if(element[tag] == null){
+          if (element[tag] == null) {
             return element; //直接返回Map对象
           }
           return convert(context, element, methodMap, domain: $);
@@ -355,12 +355,25 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   dynamic _buildSwitchCase(
-      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+    Function mapEach,
+    Map map,
+    Map? methodMap,
+    BuildContext context,
+    Domain? domain,
+  ) {
     var caseValue = pa0(map);
     var source = pa1(map);
     var defaultValue = pa2(map);
     var children = [];
-
+    if (caseValue != null || defaultValue != null) {
+      var pa =
+          _positioned([caseValue, defaultValue], methodMap, context, domain);
+      var values = Property.extract(
+        list: pa.data,
+      );
+      caseValue = pa0(values);
+      defaultValue = pa1(values);
+    }
     if (!(source is List)) {
       throw Exception('Sugar.SwitchCase has no valid cases array');
     }
@@ -596,20 +609,16 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   SliverChildBuilderDelegate _buildSugarSliverChildBuilderDelegate(
-      Function mapEach,
-      Map map,
-      Map? methodMap,
-      BuildContext context) {
-
+      Function mapEach, Map map, Map? methodMap, BuildContext context) {
     Map na = map['na'];
     var childCount = na['childCount'];
     var builder = na['builder'];
-    Map builderMap = <String,dynamic>{};
+    Map builderMap = <String, dynamic>{};
 
     //函数传入处理
-    if(methodMap != null && methodMap.keys.isNotEmpty){
+    if (methodMap != null && methodMap.keys.isNotEmpty) {
       methodMap.keys.forEach((element) {
-        if(builder is String && builder.contains(element)) {
+        if (builder is String && builder.contains(element)) {
           builderMap = methodMap[element];
         }
       });
@@ -621,14 +630,14 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
     var source = List<int>.generate(childCount, (i) => i + 1);
 
-    var list = Domain(source).forEach(($, _) {//拿到所有itemBuilder对应的数组
-      return convert(context, builderMap, methodMap, domain:$) as Widget;
+    var list = Domain(source).forEach(($, _) {
+      //拿到所有itemBuilder对应的数组
+      return convert(context, builderMap, methodMap, domain: $) as Widget;
     });
     List<Widget> children = list.map((e) => e as Widget).toList();
 
-
     var params = {
-      'pa': [context,children,childCount]
+      'pa': [context, children, childCount]
     };
 
     return mapEach.call(params);
