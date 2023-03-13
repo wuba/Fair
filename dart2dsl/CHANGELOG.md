@@ -1,3 +1,9 @@
+## 1.2.0
+
+- Upgrade analyzer version to 5.5.0.
+- The generation of optional positional parameters is modified to obtain [pa];
+- Fixed missing OptionalPositional default values.
+
 ## 1.1.0
 
 - The function supports parameter passing.

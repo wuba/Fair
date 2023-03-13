@@ -1,3 +1,7 @@
+## [1.6.0]
+* Remove the generation time from the generation.fair. dart comment. 
+* Added the ignore unnecessary_import operation.
+
 ## [1.5.1]
 * bugfix.
 
