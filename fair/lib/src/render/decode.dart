@@ -77,7 +77,7 @@ class Decoder {
       bound.data = data;
     }
     var proxy = app?.proxy;
-    Widget w = DynamicWidgetBuilder(proxy as ProxyMirror?, page, bound, bundle: url).convert(context, map, methodMap) ??
+    Widget w =( app?.dynamicWidgetBuilder?.call(proxy as ProxyMirror?, page, bound, bundle: url) ?? DynamicWidgetBuilder(proxy as ProxyMirror?, page, bound, bundle: url)).convert(context, map, methodMap) ??
                 WarningWidget(parentContext:context,name: page, url: url, error: 'tag name not supported yet');
     return w;
   }
