@@ -25,7 +25,8 @@ class ClassDeclarationVisitor
   ClassDeclarationVisitor? visitClassDeclaration(ClassDeclaration node) {
     var classDeclarationData = ClassDeclarationData();
     classDeclarationData.isDataBean = isDataBean;
-    classDeclarationData.className = node.name.name;
+    // classDeclarationData.className = node.name.name;
+    classDeclarationData.className = node.name.lexeme;
     if (node.extendsClause != null) {
       classDeclarationData.parentClass =
           node.extendsClause!.superclass.toString();
@@ -41,7 +42,8 @@ class ClassDeclarationVisitor
                 : null)
           ..isStatic = element.isStatic);
       } else if (element is MethodDeclaration) {
-        if (isDataBean && ['fromJson', 'toJson'].contains(element.name.name)) {
+        // if (isDataBean && ['fromJson', 'toJson'].contains(element.name.name)) {
+        if (isDataBean && ['fromJson', 'toJson'].contains(element.name.lexeme)) {
           return;
         }
         if (element.isGetter) {
@@ -51,16 +53,20 @@ class ClassDeclarationVisitor
         // var fairWellExp = RegExp(r"@FairWell\('(.+)'\)");
         // if (fairWellExp.allMatches(element.metadata.first.toString()).isNotEmpty) {
         var excludeMethods = ['build'];
-        if (!excludeMethods.contains(element.name.name)) {
+        // if (!excludeMethods.contains(element.name.name)) {
+        if (!excludeMethods.contains(element.name.lexeme)) {
           classDeclarationData.methods.add(MethodDeclarationData(
-              element.name.name,
-              '${element.returnType.toString()} ${element.name.name}${element.parameters.toString()}${element.body.toString()}',
+              // element.name.name,
+              element.name.lexeme,
+              // '${element.returnType.toString()} ${element.name.name}${element.parameters.toString()}${element.body.toString()}',
+              '${element.returnType.toString()} ${element.name.lexeme}${element.parameters.toString()}${element.body.toString()}',
               element.body is ExpressionFunctionBody)
             ..isStatic = element.isStatic);
         }
         // }
       } else if (element is ConstructorDeclaration) {
-        if (isDataBean && ['fromJson', 'toJson'].contains(element.name?.name)) {
+        // if (isDataBean && ['fromJson', 'toJson'].contains(element.name?.name)) {
+        if (isDataBean && ['fromJson', 'toJson'].contains(element.name?.lexeme)) {
           return;
         }
         var idx = 0;
@@ -71,14 +77,16 @@ class ClassDeclarationVisitor
         constructorBody =
             '$constructorAlias${element.parameters.toString()}$constructorBody';
         var methodDeclaration = MethodDeclarationData(
-            element.name?.name ?? constructorAlias,
+            // element.name?.name ?? constructorAlias,
+            element.name?.lexeme ?? constructorAlias,
             constructorBody,
             element.body is ExpressionFunctionBody);
         if (element.factoryKeyword?.stringValue == 'factory') {
           methodDeclaration.isFactory = true;
           methodDeclaration.name = (element.name == null)
               ? factoryConstructorAlias
-              : element.name!.name;
+              // : element.name!.name;
+              : element.name!.lexeme;
         } else {
           methodDeclaration.isGenerativeConstructor = element.name != null;
         }
@@ -91,7 +99,8 @@ class ClassDeclarationVisitor
                   .add('${element.toString()} = $newParamName;');
           } else if (element is DefaultFormalParameter) {
             if (element.parameter is FieldFormalParameter) {
-              var newParamName = element.parameter.identifier.toString();
+              // var newParamName = element.parameter.identifier.toString();
+              var newParamName = element.parameter.name.toString();
               methodDeclaration
                 ..renamedParameters[idx] = newParamName
                 ..abtractedInitializer
@@ -144,13 +153,15 @@ class ClassDeclarationVisitor
         }
         if (element.body is ExpressionFunctionBody) {
           classDeclarationData.fields.add(FieldDeclarationData(
-              element.name.name.trim(),
+              // element.name.name.trim(),
+              element.name.lexeme.trim(),
               "return ${convertExpression(element.body.toString().replaceAll("=>", "").trim())};")
             ..isStatic = element.isStatic
             ..isGetter = true);
         } else {
           var methodDeclaration = MethodDeclarationData(
-              element.name.name.trim(),
+              // element.name.name.trim(),
+              element.name.lexeme.trim(),
               "void test() ${elementBody}",
               element.body is ExpressionFunctionBody);
           var res = parseString(content: methodDeclaration.body);
@@ -166,7 +177,8 @@ class ClassDeclarationVisitor
           res.unit.visitChildren(generator);
 
           classDeclarationData.fields.add(FieldDeclarationData(
-              element.name.name, generator.func?.body.toSource())
+              // element.name.name, generator.func?.body.toSource())
+              element.name.lexeme, generator.func?.body.toSource())
             ..isStatic = element.isStatic
             ..isGetter = true);
         }
@@ -183,7 +195,7 @@ class ClassDeclarationVisitor
         path: Platform.isWindows
             ? filePath
             : file.absolute.uri.normalizePath().path,
-        featureSet: FeatureSet.fromEnableFlags([]));
+        featureSet: FeatureSet.latestLanguageVersion());
     result.unit.visitChildren(this);
   }
 

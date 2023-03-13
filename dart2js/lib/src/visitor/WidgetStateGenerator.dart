@@ -81,7 +81,8 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
     var stateExp = RegExp(r'^State(<.+>)?$');
 
     var tempClassDeclaration = ClassDeclarationData();
-    tempClassDeclaration.className = node.name.name;
+    // tempClassDeclaration.className = node.name.name;
+    tempClassDeclaration.className = node.name.lexeme;
     goThroughMembers(node, tempClassDeclaration);
     if (node.extendsClause != null &&
         stateExp
@@ -112,7 +113,7 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
                 orElse: () => null);
             if (member != null) {
               var expectedStateClassName =
-                  ((member as MethodDeclaration).returnType as TypeName)
+                  ((member as MethodDeclaration).returnType as NamedType)
                       .name
                       .name;
               if (expectedStateClassName == 'State') {
@@ -131,7 +132,8 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
             }
             break;
           case statelessWidgetClassName:
-            classDeclarationData.className = node.name.name;
+            // classDeclarationData.className = node.name.name;
+            classDeclarationData.className = node.name.lexeme;
             goThroughMembers(node, classDeclarationData);
             break;
           default:

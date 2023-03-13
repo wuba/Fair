@@ -20,6 +20,8 @@ dependencies:
   fair:
     path: ../../fair
 
+  dio: ^4.0.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -42,6 +44,8 @@ flutter:
     - assets/fitness_app/
     - assets/hotel/
     - assets/bundle/
+    - assets/
+    - assets/plugin/
   fonts:
     - family: WorkSans
       fonts:

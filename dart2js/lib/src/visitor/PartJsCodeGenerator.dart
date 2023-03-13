@@ -32,7 +32,8 @@ class PartJsCodeGenerator extends SimpleAstVisitor<PartJsCodeGenerator> {
         path: Platform.isWindows
             ? filePath
             : file.absolute.uri.normalizePath().path,
-        featureSet: FeatureSet.fromEnableFlags([]));
+        // featureSet: FeatureSet.fromEnableFlags([]));
+        featureSet: FeatureSet.latestLanguageVersion());
     result.unit.visitChildren(this);
   }
 }

@@ -10,7 +10,8 @@ String convertArrayFuncExpression(FunctionExpression code) {
     var gnNode = ArrowFunctionExpressionNode();
     // TODO: 支持命名参数、可选参数
     code.parameters?.parameters.forEach((element) {
-      gnNode.argumentList.add([element.identifier.toString()]);
+      // gnNode.argumentList.add([element.identifier.toString()]);
+      gnNode.argumentList.add([element.name.toString()]);
     });
     gnNode.body.push(
         GenericStatementNode(convertExpression(body.expression.toString())));

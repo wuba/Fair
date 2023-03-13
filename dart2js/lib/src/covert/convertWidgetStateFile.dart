@@ -48,7 +48,8 @@ String convertWidgetStateFile(String filePath, [bool isCompressed = false]) {
   var stateFilePath =
   Platform.isWindows ? filePath : file.absolute.uri.normalizePath().path;
   var result = parseFile(
-      path: stateFilePath, featureSet: FeatureSet.fromEnableFlags([]));
+      // path: stateFilePath, featureSet: FeatureSet.fromEnableFlags([]));
+      path: stateFilePath, featureSet: FeatureSet.latestLanguageVersion());
   var visitor = WidgetStateGenerator(stateFilePath);
   result.unit.visitChildren(visitor);
 

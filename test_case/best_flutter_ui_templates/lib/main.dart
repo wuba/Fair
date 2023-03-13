@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:best_flutter_ui_templates/app_theme.dart';
+import 'package:best_flutter_ui_templates/plugins/net/fair_net_plugin.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +18,10 @@ void main() async {
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
-  ]).then((_) => FairApp.runApplication(MyApp()));
+  ]).then((_) => FairApp.runApplication(
+        MyApp(),
+        plugins: {'FairNet': FairNet()},
+      ));
 }
 
 class MyApp extends StatelessWidget {
