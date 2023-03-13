@@ -486,7 +486,7 @@ Map<String, dynamic> _writeMethod(StringBuffer buffer, String? name, Method elem
       buffer.write(p.isNamed == true
           ? namedDeclare
           : p.isOptionalPositional == true
-              ? prop
+              ? prop.replaceAll('props[\'${p.name}\']', 'props[\'pa\'][$i]')
               : positionDeclare);
     }
     var params = element.parameters?.fold('', (String? value, p) => ((value ?? '') + (p.isNamed == true ? '${p.type} ${p.name}, ' : '${p.name}, ')));
