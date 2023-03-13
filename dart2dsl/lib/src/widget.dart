@@ -483,7 +483,11 @@ Map<String, dynamic> _writeMethod(StringBuffer buffer, String? name, Method elem
       }
       var namedDeclare = '${p.name}: $prop';
       var positionDeclare = isDouble ? 'props[\'pa\'][$i]?.toDouble(),' : 'props[\'pa\'][$i],';
-      buffer.write(p.isNamed == true ? namedDeclare : positionDeclare);
+      buffer.write(p.isNamed == true
+          ? namedDeclare
+          : p.isOptionalPositional == true
+              ? prop.replaceAll('props[\'${p.name}\']', 'props[\'pa\'][$i]')
+              : positionDeclare);
     }
     var params = element.parameters?.fold('', (String? value, p) => ((value ?? '') + (p.isNamed == true ? '${p.type} ${p.name}, ' : '${p.name}, ')));
     print('➡️ $name({$params})');
@@ -626,7 +630,7 @@ class Parameter {
   final String? type;
   final bool? isNamed;
   final bool? isOptional;
-
+  final bool? isOptionalPositional;
   //暂时为了转化List
   final String? displayName;
   final String? defaultValueCode;
@@ -637,6 +641,7 @@ class Parameter {
     this.displayName,
     this.isNamed = false,
     this.isOptional = true,
+    this.isOptionalPositional = false,
     this.defaultValueCode,
   });
 }
@@ -693,6 +698,7 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
                 isNamed: e.isNamed,
                 isOptional: e.isOptional,
                 defaultValueCode: e.defaultValueCode,
+                isOptionalPositional: e.isOptionalPositional,
               ));
 
               if (e.type.name == null && e.type is FunctionType) {
@@ -749,7 +755,7 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
       if (methodElement.parameters.isNotEmpty) {
         parameters = methodElement.parameters
             .map(
-                (e) => Parameter(type: e.type.name, name: e.name, isNamed: e.isNamed, isOptional: e.isOptional, defaultValueCode: e.defaultValueCode))
+                (e) => Parameter(type: e.type.name, name: e.name, isNamed: e.isNamed, isOptional: e.isOptional, defaultValueCode: e.defaultValueCode, isOptionalPositional: e.isOptionalPositional,))
             .toList(growable: false);
       }
       staticMethods.add(Method(name, parameters: parameters, isWidget: isWidget));
