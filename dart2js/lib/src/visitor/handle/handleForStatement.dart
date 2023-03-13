@@ -42,7 +42,8 @@ void handleForStatement(ForStatement node,FunctionDeclarationNode? func){
     var forLoopParts = node.forLoopParts as ForEachPartsWithDeclaration;
     var gnForInNode = ForInStatementNode();
     gnForInNode.loopVariable =
-        forLoopParts.loopVariable.identifier.toString();
+        // forLoopParts.loopVariable.identifier.toString();
+        forLoopParts.loopVariable.name.toString();
     gnForInNode.iterable = GenericStatementNode(
         convertExpression(forLoopParts.iterable.toString()));
     gnForInNode.body = node.body is Block

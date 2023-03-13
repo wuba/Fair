@@ -297,7 +297,8 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
   ClassDeclarationVisitor? visitClassDeclaration(ClassDeclaration node) {
     var classDeclarationData = ClassDeclarationData();
     classDeclarationData.isDataBean = isDataBean;
-    classDeclarationData.className = node.name.name;
+    // classDeclarationData.className = node.name.name;
+    classDeclarationData.className = node.name.lexeme;
     if (node.extendsClause != null) {
       classDeclarationData.parentClass = node.extendsClause!.superclass.toString();
     }
@@ -307,7 +308,8 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
         classDeclarationData.fields
             .add(FieldDeclarationData(fieldDeclaration[0].trim(), fieldDeclaration.length == 2 ? convertExpression(fieldDeclaration[1].trim()) : null)..isStatic = element.isStatic);
       } else if (element is MethodDeclaration) {
-        if (isDataBean && ['fromJson', 'toJson'].contains(element.name.name)) {
+        // if (isDataBean && ['fromJson', 'toJson'].contains(element.name.name)) {
+        if (isDataBean && ['fromJson', 'toJson'].contains(element.name.lexeme)) {
           return;
         }
         if (element.isGetter) {
@@ -317,14 +319,17 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
         // var fairWellExp = RegExp(r"@FairWell\('(.+)'\)");
         // if (fairWellExp.allMatches(element.metadata.first.toString()).isNotEmpty) {
         var excludeMethods = ['build'];
-        if (!excludeMethods.contains(element.name.name)) {
+        // if (!excludeMethods.contains(element.name.name)) {
+        if (!excludeMethods.contains(element.name.lexeme)) {
           classDeclarationData.methods.add(MethodDeclarationData(
-              element.name.name, '${element.returnType.toString()} ${element.name.name}${element.parameters.toString()}${element.body.toString()}', element.body is ExpressionFunctionBody)
+              // element.name.name, '${element.returnType.toString()} ${element.name.name}${element.parameters.toString()}${element.body.toString()}', element.body is ExpressionFunctionBody)
+              element.name.lexeme, '${element.returnType.toString()} ${element.name.lexeme}${element.parameters.toString()}${element.body.toString()}', element.body is ExpressionFunctionBody)
             ..isStatic = element.isStatic);
         }
         // }
       } else if (element is ConstructorDeclaration) {
-        if (isDataBean && ['fromJson', 'toJson'].contains(element.name?.name)) {
+        // if (isDataBean && ['fromJson', 'toJson'].contains(element.name?.name)) {
+        if (isDataBean && ['fromJson', 'toJson'].contains(element.name?.lexeme)) {
           return;
         }
         var idx = 0;
@@ -333,10 +338,12 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
           constructorBody = '{}';
         }
         constructorBody = '$constructorAlias${element.parameters.toString()}$constructorBody';
-        var methodDeclaration = MethodDeclarationData(element.name?.name ?? constructorAlias, constructorBody, element.body is ExpressionFunctionBody);
+        // var methodDeclaration = MethodDeclarationData(element.name?.name ?? constructorAlias, constructorBody, element.body is ExpressionFunctionBody);
+        var methodDeclaration = MethodDeclarationData(element.name?.lexeme ?? constructorAlias, constructorBody, element.body is ExpressionFunctionBody);
         if (element.factoryKeyword?.stringValue == 'factory') {
           methodDeclaration.isFactory = true;
-          methodDeclaration.name = (element.name == null) ? factoryConstructorAlias : element.name!.name;
+          // methodDeclaration.name = (element.name == null) ? factoryConstructorAlias : element.name!.name;
+          methodDeclaration.name = (element.name == null) ? factoryConstructorAlias : element.name!.lexeme;
         } else {
           methodDeclaration.isGenerativeConstructor = element.name != null;
         }
@@ -348,7 +355,8 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
               ..abtractedInitializer.add('${element.toString()} = $newParamName;');
           } else if (element is DefaultFormalParameter) {
             if (element.parameter is FieldFormalParameter) {
-              var newParamName = element.parameter.identifier.toString();
+              // var newParamName = element.parameter.identifier.toString();
+              var newParamName = element.parameter.name.toString();
               methodDeclaration
                 ..renamedParameters[idx] = newParamName
                 ..abtractedInitializer.add('${element.parameter.toString()} = $newParamName;');
@@ -387,13 +395,15 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
         }
         if (element.body is ExpressionFunctionBody) {
           classDeclarationData.fields.add(FieldDeclarationData(
-              element.name.name.trim(),
+              // element.name.name.trim(),
+              element.name.lexeme.trim(),
               "return ${convertExpression(element.body.toString().replaceAll("=>", "").trim())};")
             ..isStatic = element.isStatic
             ..isGetter = true);
         } else {
           var methodDeclaration = MethodDeclarationData(
-              element.name.name.trim(),
+              // element.name.name.trim(),
+              element.name.lexeme.trim(),
               "void test() ${elementBody}",
               element.body is ExpressionFunctionBody);
           var res = parseString(content: methodDeclaration.body);
@@ -409,7 +419,8 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
           res.unit.visitChildren(generator);
 
           classDeclarationData.fields.add(FieldDeclarationData(
-              element.name.name, generator.func?.body.toSource())
+              // element.name.name, generator.func?.body.toSource())
+              element.name.lexeme, generator.func?.body.toSource())
             ..isStatic = element.isStatic
             ..isGetter = true);
         }
@@ -422,7 +433,8 @@ class ClassDeclarationVisitor extends RecursiveAstVisitor<ClassDeclarationVisito
 
   void parseByFile(String filePath) {
     var file = File(filePath);
-    var result = parseFile(path: file.absolute.uri.normalizePath().path, featureSet: FeatureSet.fromEnableFlags([]));
+    // var result = parseFile(path: file.absolute.uri.normalizePath().path, featureSet: FeatureSet.fromEnableFlags([]));
+    var result = parseFile(path: file.absolute.uri.normalizePath().path, featureSet: FeatureSet.latestLanguageVersion());
     result.unit.visitChildren(this);
   }
 
@@ -492,7 +504,8 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
     var stateExp = RegExp(r'^State(<.+>)?$');
 
     var tempClassDeclaration = ClassDeclarationData();
-    tempClassDeclaration.className = node.name.name;
+    // tempClassDeclaration.className = node.name.name;
+    tempClassDeclaration.className = node.name.lexeme;
     goThroughMembers(node, tempClassDeclaration);
     if (node.extendsClause != null && stateExp.allMatches(node.extendsClause!.superclass.toString()).isNotEmpty) {
       allStates.add(tempClassDeclaration);
@@ -511,7 +524,8 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
           case statefulWidgetClassName:
             var member = node.members.firstWhereOrNull((element) => element is MethodDeclaration && element.name.toString() == 'createState', orElse: () => null);
             if (member != null) {
-              var expectedStateClassName = ((member as MethodDeclaration).returnType as TypeName).name.name;
+              // var expectedStateClassName = ((member as MethodDeclaration).returnType as TypeName).name.name;
+              var expectedStateClassName = ((member as MethodDeclaration).returnType as NamedType).name.name;
               if (expectedStateClassName == 'State') {
                 expectedStateClassName = findCreateStateReturn(member.body);
               }
@@ -526,7 +540,8 @@ class WidgetStateGenerator extends RecursiveAstVisitor<WidgetStateGenerator> {
             }
             break;
           case statelessWidgetClassName:
-            classDeclarationData.className = node.name.name;
+            // classDeclarationData.className = node.name.name;
+            classDeclarationData.className = node.name.lexeme;
             goThroughMembers(node, classDeclarationData);
             break;
           default:
@@ -659,7 +674,8 @@ class PartJsCodeGenerator extends SimpleAstVisitor<PartJsCodeGenerator> {
 
   void parse(String filePath) {
     var file = File(filePath);
-    var result = parseFile(path: Platform.isWindows ? filePath : file.absolute.uri.normalizePath().path, featureSet: FeatureSet.fromEnableFlags([]));
+    // var result = parseFile(path: Platform.isWindows ? filePath : file.absolute.uri.normalizePath().path, featureSet: FeatureSet.fromEnableFlags([]));
+    var result = parseFile(path: Platform.isWindows ? filePath : file.absolute.uri.normalizePath().path, featureSet: FeatureSet.latestLanguageVersion());
     result.unit.visitChildren(this);
   }
 }
@@ -1195,7 +1211,8 @@ class SimpleFunctionGenerator extends GeneralizingAstVisitor<SimpleFunctionGener
   SimpleFunctionGenerator? visitFormalParameterList(FormalParameterList node) {
     var idx = 0;
     node.parameters.forEach((param) {
-      var ident = param.identifier.toString();
+      // var ident = param.identifier.toString();
+      var ident = param.name.toString();
       if (renamedParameters != null && renamedParameters!.containsKey(idx)) {
         ident = renamedParameters![idx]!;
       }
@@ -1485,7 +1502,8 @@ class SimpleFunctionGenerator extends GeneralizingAstVisitor<SimpleFunctionGener
       } else if (node.forLoopParts is ForEachPartsWithDeclaration) {
         var forLoopParts = node.forLoopParts as ForEachPartsWithDeclaration;
         var gnForInNode = ForInStatementNode();
-        gnForInNode.loopVariable = forLoopParts.loopVariable.identifier.toString();
+        // gnForInNode.loopVariable = forLoopParts.loopVariable.identifier.toString();
+        gnForInNode.loopVariable = forLoopParts.loopVariable.name.toString();
         gnForInNode.iterable = GenericStatementNode(convertExpression(forLoopParts.iterable.toString()));
         gnForInNode.body = node.body is Block ? convertBlock(node.body.toString()) : convertStatements(node.body.toString());
         func?.body.push(gnForInNode);
@@ -1598,7 +1616,8 @@ String convertArrayFuncExpression(FunctionExpression code) {
     var gnNode = ArrowFunctionExpressionNode();
     // TODO: 支持命名参数、可选参数
     code.parameters?.parameters.forEach((element) {
-      gnNode.argumentList.add([element.identifier.toString()]);
+      // gnNode.argumentList.add([element.identifier.toString()]);
+      gnNode.argumentList.add([element.name.toString()]);
     });
     gnNode.body.push(GenericStatementNode(convertExpression(body.expression.toString())));
     return gnNode.toSource();
@@ -1686,7 +1705,8 @@ String convertFunction(String code, {bool isArrow = false, bool isClassMethod = 
 String convertWidgetStateFile(String filePath, [bool isCompressed = false]) {
   var file = File(filePath);
   var stateFilePath = Platform.isWindows ? filePath : file.absolute.uri.normalizePath().path;
-  var result = parseFile(path: stateFilePath, featureSet: FeatureSet.fromEnableFlags([]));
+  // var result = parseFile(path: stateFilePath, featureSet: FeatureSet.fromEnableFlags([]));
+  var result = parseFile(path: stateFilePath, featureSet: FeatureSet.latestLanguageVersion());
   var visitor = WidgetStateGenerator(stateFilePath);
   result.unit.visitChildren(visitor);
 
@@ -1695,7 +1715,8 @@ String convertWidgetStateFile(String filePath, [bool isCompressed = false]) {
 }
 
 String convertClassString(String content, [bool isDataBean = false]) {
-  var result = parseString(content: content, featureSet: FeatureSet.fromEnableFlags([]));
+  // var result = parseString(content: content, featureSet: FeatureSet.fromEnableFlags([]));
+  var result = parseString(content: content, featureSet: FeatureSet.latestLanguageVersion());
   var visitor = ClassDeclarationVisitor(isDataBean);
   result.unit.visitChildren(visitor);
   return visitor.genJsCode();

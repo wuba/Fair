@@ -41,7 +41,8 @@ class SimpleFunctionGenerator
   SimpleFunctionGenerator? visitFormalParameterList(FormalParameterList node) {
     var idx = 0;
     node.parameters.forEach((param) {
-      var ident = param.identifier.toString();
+      // var ident = param.identifier.toString();
+      var ident = param.name.toString();
       if (renamedParameters != null && renamedParameters!.containsKey(idx)) {
         ident = renamedParameters![idx]!;
       }

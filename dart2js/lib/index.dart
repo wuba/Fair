@@ -12,7 +12,7 @@ Future<String> convertFile(String input, [bool compress = false]) async {
   return convertWidgetStateFile(input, compress);
 }
 
-void main(List<String> arguments) async {
-  var s = await convertFile('/Users/a58/Desktop/work/flutter_commercial/lib/test/fair_widget/LoupanDetailPage.dart');
-  print(s);
+main()async{
+ var s = await convertFile("/Users/a58/Desktop/work/flutter_commercial/lib/fair/house_detail/house_title_widget.dart");
+ print(s);
 }

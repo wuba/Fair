@@ -1,5 +1,5 @@
 import 'package:fair/fair.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 Future<void> main() async {
   test('测试 fair-permission', () {
