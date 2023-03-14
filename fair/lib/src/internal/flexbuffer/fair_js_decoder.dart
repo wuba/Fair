@@ -30,7 +30,7 @@ class FairJSDecoder with FairBundlePathCheck{
   FairJSDecoder._internal();
 
   static final FairJSDecoder _fairJSDecoder = FairJSDecoder._internal();
-
+  static Future<String> Function(String? jsPath)? resolve;
   factory FairJSDecoder({HttpDecoder? decoder}) {
     _httpDecoder = decoder ?? DefaultHttpDecoder();
     return _fairJSDecoder;
@@ -65,5 +65,5 @@ class FairJSDecoder with FairBundlePathCheck{
   Future<String> _resolveHttp(String? url) async =>
       await _httpDecoder?.decode(url);
 
-  Future<String> decode(String? jsPath) => _resolve(jsPath);
+  Future<String> decode(String? jsPath) => resolve?.call(jsPath) ?? _resolve(jsPath);
 }
