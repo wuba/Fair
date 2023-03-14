@@ -6,6 +6,7 @@
 
 import 'dart:io';
 
+import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -20,13 +21,12 @@ class FairBundle {
   BundleLoader? _provider;
 
   BundleLoader obtain(BuildContext context) {
-    _provider ??= FairApp.of(context)?.bundleProvider ?? _DefaultProvider();
+    _provider ??= FairApp.of(context)?.bundleProvider ?? FairBundleProvider();
     return _provider!;
   }
 }
 
 mixin FairBundlePathCheck {
-
   bool isExternalStoragePath(String? originPath) {
     if (kIsWeb || originPath == null) {
       return false;
@@ -41,7 +41,7 @@ mixin FairBundlePathCheck {
   }
 }
 
-class _DefaultProvider extends BundleLoader with FairBundlePathCheck{
+class FairBundleProvider extends BundleLoader with FairBundlePathCheck {
   var client = http.Client();
   static const JSON = '.json';
   static const FLEX = '.bin';
@@ -50,9 +50,9 @@ class _DefaultProvider extends BundleLoader with FairBundlePathCheck{
   Future<Map?> onLoad(String? path, FairDecoder decoder,
       {bool cache = true, Map<String, String>? h}) {
     bool isFlexBuffer;
-    if (path?.endsWith(FLEX)==true) {
+    if (path?.endsWith(FLEX) == true) {
       isFlexBuffer = true;
-    } else if (path?.endsWith(JSON)==true) {
+    } else if (path?.endsWith(JSON) == true) {
       isFlexBuffer = false;
     } else {
       throw ArgumentError(
@@ -60,70 +60,88 @@ class _DefaultProvider extends BundleLoader with FairBundlePathCheck{
     }
 
     if (path?.startsWith('http') == true) {
-      return _http(path, isFlexBuffer, headers: h, decode: decoder);
+      return _http(
+        path,
+        isFlexBuffer,
+        decoder,
+        headers: h,
+      );
     }
 
     /// iOS 平台无论是 assets 资源还是磁盘资源统一使用 _asset 加载
     if (!kIsWeb && Platform.isIOS) {
-      return _asset(path, isFlexBuffer, cache: cache, decode: decoder);
+      return _asset(
+        path,
+        isFlexBuffer,
+        decoder,
+        cache: cache,
+      );
     }
 
     if (path != null && isExternalStoragePath(path)) {
-      return _externalStorageDirectory(path, isFlexBuffer,
-          cache: cache, decode: decoder);
+      return _externalStorageDirectory(
+        path,
+        isFlexBuffer,
+        decoder,
+        cache: cache,
+      );
     } else {
-      return _asset(path, isFlexBuffer, cache: cache, decode: decoder);
+      return _asset(
+        path,
+        isFlexBuffer,
+        decoder,
+        cache: cache,
+      );
     }
   }
 
-  Future<Map?> _externalStorageDirectory(String key, bool isFlexBuffer,
-      {bool cache = true, FairDecoder? decode}) async {
+  Future<Map?> _externalStorageDirectory(
+    String key,
+    bool isFlexBuffer,
+    FairDecoder decoder, {
+    bool cache = true,
+  }) async {
     var file = File(key);
     var watch = Stopwatch()..start();
     int? end, end2;
     Map? map;
 
-    if (isFlexBuffer) {
-      var data = await file.readAsBytes();
-      end = watch.elapsedMilliseconds;
-      map = await decode?.decode(data, isFlexBuffer);
-      end2 = watch.elapsedMilliseconds;
-    } else {
-      var data = await file.readAsString();
-      end = watch.elapsedMilliseconds;
-      map = await decode?.decode(data, isFlexBuffer);
-      end2 = watch.elapsedMilliseconds;
-    }
+    var data = await file.readAsBytes();
+    end = watch.elapsedMilliseconds;
+    map = await decode(decoder, data, isFlexBuffer);
+    end2 = watch.elapsedMilliseconds;
 
     log('[Fair] $key load: $end ms, stream decode: $end2 ms');
     return map;
   }
 
-  Future<Map?> _asset(String? key, bool isFlexBuffer,
-      {bool cache = true, FairDecoder? decode}) async {
+  Future<Map?> _asset(
+    String? key,
+    bool isFlexBuffer,
+    FairDecoder decoder, {
+    bool cache = true,
+  }) async {
     var watch = Stopwatch()..start();
     int? end, end2;
     Map? map;
-    if (isFlexBuffer) {
-      var data = await rootBundle.load(key??'');
-      end = watch.elapsedMilliseconds;
-      map = await decode?.decode(data.buffer.asUint8List(), isFlexBuffer);
-      end2 = watch.elapsedMilliseconds;
-    } else {
-      var data = await rootBundle.loadString(key??'', cache: cache);
-      end = watch.elapsedMilliseconds;
-      map = await decode?.decode(data, isFlexBuffer);
-      end2 = watch.elapsedMilliseconds;
-    }
+
+    var data = await rootBundle.load(key ?? '');
+    end = watch.elapsedMilliseconds;
+    map = await decode(decoder, data.buffer.asUint8List(), isFlexBuffer);
+    end2 = watch.elapsedMilliseconds;
 
     log('[Fair] $key load: $end ms, stream decode: $end2 ms');
     return map;
   }
 
-  Future<Map?> _http(String? url, bool isFlexBuffer,
-      {Map<String, String>? headers, FairDecoder? decode}) async {
+  Future<Map?> _http(
+    String? url,
+    bool isFlexBuffer,
+    FairDecoder decoder, {
+    Map<String, String>? headers,
+  }) async {
     var start = DateTime.now().millisecondsSinceEpoch;
-    var response = await client.get(Uri.parse(url??''), headers: headers);
+    var response = await client.get(Uri.parse(url ?? ''), headers: headers);
     var end = DateTime.now().millisecondsSinceEpoch;
     if (response.statusCode != 200) {
       throw FlutterError('code=${response.statusCode}, unable to load : $url');
@@ -132,9 +150,13 @@ class _DefaultProvider extends BundleLoader with FairBundlePathCheck{
     // if (data == null) {
     //   throw FlutterError('bodyBytes=null, unable to load : $url');
     // }
-    var map = await decode?.decode(data, isFlexBuffer);
+    var map = await decode(decoder, data, isFlexBuffer);
     var end2 = DateTime.now().millisecondsSinceEpoch;
     log('[Fair] load $url, time: ${end - start} ms, json parsing time: ${end2 - end} ms');
     return map;
   }
+
+  Future<Map<dynamic, dynamic>> decode(
+          FairDecoder decoder, Uint8List data, bool isFlexBuffer) async =>
+      decoder.decode(data, isFlexBuffer);
 }
