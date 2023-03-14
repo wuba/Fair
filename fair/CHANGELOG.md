@@ -1,3 +1,22 @@
+## [3.1.0]
+* Upgrade analyzer library to 5.5.0;
+* Dart function to JS supports parameter passing;
+* JS Object value compatibility;
+* Remove kotlin dependencies from fair/android;
+* Add custom parsing for IconData.
+* The generation of optional positional parameters is modified to obtain pa;
+* Fixed missing OptionalPositional default values
+* Remove the generation time from the generation.fair. dart comment.
+* Added the ignore unnecessary_import operation.
+* Fixed incorrect assignment of Sugar.switchCase key and defaultValue.
+* binding was changed to SplayTreeMap to increase search efficiency, especially for lists, where duplicate tags are searched for a short time.
+* Exposing specialBinding so that users can override a value;
+* When the provider is added to the _binding, the Settings set by the user prevail for quick modification.
+* Fixed the loadCoreJs package splicing problem.
+* Reduced minSdkVersion to 16;
+* runApplication supports specifying the package in which the JS resides;
+* Fixed error in calling context in the _reload method.
+
 ## [3.0.0]
 * Fix class constructor parsing exception.
 * Fair Compatible Web.

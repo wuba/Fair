@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.0.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.1.0-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -50,7 +50,7 @@ Assuming that the fair project and your own project are in the same folder:
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 3.0.0
+  fair: 3.1.0
 
 # add build_runner and compiler dependency
 dev_dependencies:
@@ -172,6 +172,27 @@ IEDA plugin: [jetbrains_plugin_fair_template](https://plugins.jetbrains.com/plug
 Hot update platform: [FAIR PUSHY](https://github.com/wuba/FairPushy)
 
 ## versions
+
+### 3.1.0
+updateDate：2023.03.14
+
+- Upgrade analyzer library to 5.5.0;
+- Dart function to JS supports parameter passing;
+- JS Object value compatibility;
+- Remove kotlin dependencies from fair/android;
+- Add custom parsing for IconData;
+- The generation of optional positional parameters is modified to obtain pa;
+- Fixed missing OptionalPositional default values;
+- Remove the generation time from the generation.fair. dart comment;
+- Added the ignore unnecessary_import operation;
+- Fixed incorrect assignment of Sugar.switchCase key and defaultValue;
+- binding was changed to SplayTreeMap to increase search efficiency, especially for lists, where duplicate tags are searched for a short time;
+- Exposing specialBinding so that users can override a value;
+- When the provider is added to the _binding, the Settings set by the user prevail for quick modification;
+- Fixed the loadCoreJs package splicing problem;
+- Reduced minSdkVersion to 16;
+- runApplication supports specifying the package in which the JS resides;
+- Fixed error in calling context in the _reload method.
 
 ### 3.0.0
 updateDate：2022.11.17

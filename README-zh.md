@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.0.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.1.0-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -58,7 +58,7 @@ git clone https://github.com/wuba/fair.git
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 3.0.0
+  fair: 3.1.0
 
 # add build_runner and compiler dependency
 dev_dependencies:
@@ -174,6 +174,27 @@ Fair-Online 是面向Flutter 开发者，提供从Flutter 在线开发，到实�
 更多介绍请查看 [文档](./fair_online/README.md)
 
 ## 🔨最近版本
+
+### 3.1.0
+更新时间：2023.03.14
+
+- 升级 analyzer 库到 5.5.0 版本；
+- Dart 函数转 JS 支持参数传递；
+- JS Object 取值兼容；
+- 删除 fair/android 中 kotlin 依赖；
+- 添加 IconData 的自定义解析；
+- 可选位置参数的生成修改为 pa 获取；
+- 修复 OptionalPositional 参数默认值丢失问题；
+- 去除 generated.fair.dart 注释中的生成时间；
+- 增加 ignore unnecessary_import 操作；
+- 修复 Sugar.switchCase key 和 defaultValue 赋值错误问题；
+- binding 修改为 SplayTreeMap，增加搜索效率，特别是对于列表，短时间会搜索重复 tag；
+- 暴露出 specialBinding 以便用户能重载某个值；
+- provider 添加到 _binding 中的时候以用户设置的为准，方便用户快速修正；
+- 修复 loadCoreJs package 拼接问题；
+- 降低 minSdkVersion 版本到 16；
+- runApplication 支持指定 JS 所在的 package；
+- 修复 _reload 方法中调用 context 报错问题。
 
 ### 3.0.0
 更新时间：2022.11.17
