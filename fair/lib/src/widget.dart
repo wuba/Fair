@@ -126,9 +126,14 @@ class FairState extends State<FairWidget> with Loader, AutomaticKeepAliveClientM
     } catch (e) {
       print(e);
     }
-    await Future.wait([_mFairApp.runtime.addScript(state2key, resolveJS, widget.data), _mFairApp.register(this)]);
-    delegate.didChangeDependencies();
-    _reload();
+    // if it's not in a tree, it's not unnecessary to load js any more.
+    if(mounted) {
+      await Future.wait([_mFairApp.runtime.addScript(state2key, resolveJS, widget.data), _mFairApp.register(this)]);
+      if(mounted) {
+        delegate.didChangeDependencies();
+        _reload();
+      }
+    }
   }
 
   @override
@@ -170,11 +175,13 @@ class FairState extends State<FairWidget> with Loader, AutomaticKeepAliveClientM
   @override
   bool get wantKeepAlive => widget.wantKeepAlive??false;
 
+  /// Implementations of this method should end with a call to the inherited
+  /// method, as in `super.dispose()`.
   @override
   void dispose() {
-    super.dispose();
     _fairApp?.unregister(this);
     delegate.dispose();
+    super.dispose();
   }
 
   // String get state2key =>
