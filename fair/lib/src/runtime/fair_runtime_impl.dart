@@ -77,6 +77,9 @@ class Runtime implements IRuntime {
     } else {
       fairProps = '{}';
     }
+    if (fairProps is String) {
+      fairProps = fairProps.replaceAll('\\', '\\\\');
+    }
     scriptSource = scriptSource.replaceFirst(RegExp(r'#FairProps#'), fairProps);
     scriptSource = scriptSource.replaceAll(RegExp(r'#FairKey#'), pageName);
     var map = <dynamic, dynamic>{};
