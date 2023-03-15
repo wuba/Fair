@@ -7,6 +7,9 @@
 import 'dart:io';
 
 import 'package:fair/fair.dart';
+import 'package:fair/src/internal/bind_data.dart';
+import 'package:fair/src/render/builder.dart';
+import 'package:fair/src/render/proxy.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -59,6 +62,11 @@ class FairApp extends InheritedWidget with AppState {
   /// checked mode), to turn it off, set the constructor argument to
   /// false. In release mode this has no effect.
   final bool debugShowFairBanner;
+  
+  /// Define a custom DynamicWidgetBuilder to solve special case
+  final DynamicWidgetBuilder Function(ProxyMirror? proxyMirror, String? page, BindingData? bound,
+      {String? bundle})? dynamicWidgetBuilder;
+      
   static final WidgetBuilder _defaultHolder = (BuildContext context) {
     return Container(
       color: Colors.white,
@@ -86,6 +94,7 @@ class FairApp extends InheritedWidget with AppState {
     Map<String, FairModuleBuilder>? modules,
     GeneratedModule? generated,
     this.httpDecoder,
+    this.dynamicWidgetBuilder,
   })  : placeholderBuilder = placeholder ?? _defaultHolder,
         super(key: key, child: child) {
     setup(profile, delegate, generated, modules);

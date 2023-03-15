@@ -60,7 +60,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       if (mapper == null) {
         mapper = bound?.functionOf(name) ?? bound?.valueOf(name);
         if (mapper != null) {
-          return _block(map, methodMap, context, domain, mapper, name, false,
+          return block(map, methodMap, context, domain, mapper, name, false,
               forceApply: true);
         }
       }
@@ -98,11 +98,11 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       var source = map['mapEach'];
       if (source != null && source is List) {
         var children = Domain(source).forEach(($, _) {
-          return _block(map, methodMap, context, $, mapper, name, isWidget);
+          return block(map, methodMap, context, $, mapper, name, isWidget);
         });
         return children.asListOf<Widget>() ?? children;
       }
-      return _block(map, methodMap, context, domain, mapper, name, isWidget);
+      return block(map, methodMap, context, domain, mapper, name, isWidget);
     } catch (e) {
       return WarningWidget(
           parentContext: context,
@@ -114,7 +114,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }
   }
 
-  dynamic _block(
+  dynamic block(
     Map map,
     Map? methodMap,
     BuildContext ctx,
@@ -124,8 +124,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     bool widget, {
     bool forceApply = false,
   }) {
-    var na = _named(name, map['na'], methodMap, ctx, domain);
-    var pa = _positioned(map['pa'], methodMap, ctx, domain);
+    var na = named(name, map['na'], methodMap, ctx, domain);
+    var pa = positioned(map['pa'], methodMap, ctx, domain);
     // var arguments = map['arguments'];
     final bind = widget && (na.binding == true || pa.binding == true);
     try {
@@ -146,7 +146,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }
   }
 
-  W<List> _positioned(
+  W<List> positioned(
       dynamic paMap, Map? methodMap, BuildContext context, Domain? domain) {
     var pa = [];
     var needBinding = false;
@@ -172,7 +172,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return W<List>(pa, needBinding);
   }
 
-  W<Map<String, dynamic>> _named(
+  W<Map<String, dynamic>> named(
     String tag,
     dynamic naMap,
     Map? methodMap,
@@ -184,16 +184,16 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     if (naMap is Map) {
       naMap.entries.forEach((e) {
         if (e.value is Map) {
-          na[e.key] = _namedMap(tag, naMap, methodMap, context, domain, e);
+          na[e.key] = namedMap(tag, naMap, methodMap, context, domain, e);
         } else if (e.value is List) {
           na[e.key] =
-              _namedList(tag, naMap, methodMap, context, domain, e.value);
+              namedList(tag, naMap, methodMap, context, domain, e.value);
         } else if (domain != null && domain.match(e)) {
           na[e.key] = domain.bindValue(e as String);
         } else if (domain != null && e is MapEntry && domain.match(e.value)) {
           na[e.key] = domain.bindValue(e.value);
         } else if (e.value is String) {
-          var w = _namedString(tag, naMap, methodMap, context, domain, e.value);
+          var w = namedString(tag, naMap, methodMap, context, domain, e.value);
           needBinding = w.binding ?? false;
           na[e.key] = w.data;
         } else {
@@ -205,17 +205,17 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return W<Map<String, dynamic>>(na, needBinding);
   }
 
-  dynamic _namedMap(String tag, dynamic naMap, Map? methodMap,
+  dynamic namedMap(String tag, dynamic naMap, Map? methodMap,
       BuildContext context, Domain? domain, MapEntry e) {
     var result;
     if (tag == 'FairWidget' && e.key.toString() == 'data') {
       result = e.value;
     } else {
       var body;
-      if ((body = _replaceMethod(methodMap, e.value['className'])) != null) {
+      if ((body = replaceMethod(methodMap, e.value['className'])) != null) {
         result = convert(context, body, methodMap, domain: domain);
       } else {
-        if (_isSupportedNa(e.value)) {
+        if (isSupportedNa(e.value)) {
           result = convert(context, e.value, methodMap, domain: domain);
         } else {
           result = e.value;
@@ -225,14 +225,14 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return result;
   }
 
-  dynamic _namedList(String tag, dynamic naMap, Map? methodMap,
+  dynamic namedList(String tag, dynamic naMap, Map? methodMap,
       BuildContext context, Domain? domain, List v) {
     var children = [];
     v.forEach((e) {
       var item;
       if (e is Map) {
         var body;
-        item = (body = _replaceMethod(methodMap, e['className'])) != null
+        item = (body = replaceMethod(methodMap, e['className'])) != null
             ? convert(context, body, methodMap, domain: domain)
             : convert(context, e, methodMap, domain: domain);
       } else if (e is String) {
@@ -240,10 +240,10 @@ class DynamicWidgetBuilder extends DynamicBuilder {
           item = domain.bindValue(e);
         } else {
           var body;
-          if ((body = _replaceMethod(methodMap, e)) != null) {
+          if ((body = replaceMethod(methodMap, e)) != null) {
             item = convert(context, body, methodMap, domain: domain);
           } else {
-            item = _namedString(tag, naMap, methodMap, context, domain, e).data;
+            item = namedString(tag, naMap, methodMap, context, domain, e).data;
           }
         }
       } else {
@@ -257,12 +257,12 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return children;
   }
 
-  W _namedString(String tag, dynamic naMap, Map? methodMap,
+  W namedString(String tag, dynamic naMap, Map? methodMap,
       BuildContext context, Domain? domain, String v) {
     var result;
     var needBinding = false;
     var body;
-    if ((body = _replaceMethod(methodMap, v)) != null) {
+    if ((body = replaceMethod(methodMap, v)) != null) {
       result = convert(context, body, methodMap, domain: domain);
     } else {
       var r = proxyMirror?.evaluate(context, bound, v, domain: domain);
@@ -367,7 +367,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var children = [];
     if (caseValue != null || defaultValue != null) {
       var pa =
-          _positioned([caseValue, defaultValue], methodMap, context, domain);
+          positioned([caseValue, defaultValue], methodMap, context, domain);
       var values = Property.extract(
         list: pa.data,
       );
@@ -433,8 +433,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var itemBuilder = naOrMap['itemBuilder'];
     naOrMap.remove('itemBuilder');
 
-    var na = _named(name, naOrMap, methodMap, context, superDomain);
-    var pa = _positioned(map['pa'], methodMap, context, superDomain);
+    var na = named(name, naOrMap, methodMap, context, superDomain);
+    var pa = positioned(map['pa'], methodMap, context, superDomain);
     Map naMap = Property.extract(list: pa.data, map: na.data);
 
     propertyTransMap['className'] = 'ListView';
@@ -583,27 +583,27 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return mapEach.call(params);
   }
 
-  bool _isFuncExp(String exp) {
+  bool isFuncExp(String exp) {
     return FunctionExpression().hitTest(exp, '');
   }
 
-  String _subFunctionName(String expFunc) {
-    if (_isFuncExp(expFunc)) {
+  String subFunctionName(String expFunc) {
+    if (isFuncExp(expFunc)) {
       return expFunc.substring(2, expFunc.length - 1);
     } else {
       return expFunc;
     }
   }
 
-  dynamic _replaceMethod(Map? methodMap, String? exp) {
+  dynamic replaceMethod(Map? methodMap, String? exp) {
     var body;
-    if (methodMap != null && exp != null && _isFuncExp(exp)) {
-      body = methodMap[_subFunctionName(exp)];
+    if (methodMap != null && exp != null && isFuncExp(exp)) {
+      body = methodMap[subFunctionName(exp)];
     }
     return body;
   }
 
-  bool _isSupportedNa(Map map) {
+  bool isSupportedNa(Map map) {
     var name = map[tag];
     return name != null;
   }
