@@ -1,6 +1,7 @@
 {
   "coreJs": {
     "fair_core": "packages/fair/assets/fair_core/fair_core.js",
-    "fair_jsbase": "packages/fair/assets/fair_core/fair_jsbase.js"
+    "fair_jsbase": "packages/fair/assets/fair_core/fair_jsbase.js",
+    "fair_common_plugin": "packages/fair/assets/fair_core/fair_common_plugin.js"
   }
 }

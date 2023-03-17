@@ -6,7 +6,9 @@
 
 import 'dart:convert';
 
-abstract class IFairPlugin {
+import 'package:fair/src/runtime/plugin/fair_common_plugin.dart';
+
+abstract class IFairPlugin with FairCommonPluginMixin {
   Future<dynamic> invoke(dynamic par) async {
     var resp =
         await Function.apply(getRegisterMethods()[getMethodName(par)]!, [par]);
@@ -21,7 +23,7 @@ abstract class IFairPlugin {
       a = jsonDecode(par);
     }
 
-    var name = a['className']?.toString()??'';
+    var name = a['className']?.toString() ?? '';
 
     if (name.contains('#')) {
       var list = name.split('#');
