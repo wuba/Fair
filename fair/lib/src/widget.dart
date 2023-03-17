@@ -77,7 +77,7 @@ class FairWidget extends StatefulWidget {
           }
           return true;
         }(), ''),
-        super(key: key ?? ObjectKey(path ?? name));
+        super(key: key);
 
   @override
   State<StatefulWidget> createState() => FairState();
