@@ -6,7 +6,7 @@ import 'dart:convert';
 /// The plugin name must be 'FairCommonPlugin'
 ///
 /// class FairCommonPlugin extends IFairPlugin
-///     with FairHttpPlugin, FairHPermissionPlugin {
+///     with FairHttpPlugin, FairPermissionPlugin {
 ///   factory FairCommonPlugin() => _fairCommonPlugin;
 ///   FairCommonPlugin._();
 ///   static late final FairCommonPlugin _fairCommonPlugin = FairCommonPlugin._();
@@ -31,7 +31,7 @@ import 'dart:convert';
 /// }
 ///
 ///
-/// mixin FairHPermissionPlugin implements FairCommonPluginMixin {
+/// mixin FairPermissionPlugin implements FairCommonPluginMixin {
 ///   Future<dynamic> requestPermission(dynamic map) => request(map, _run);
 ///   Future<Map?> _run(Map requestMap) async {
 ///     // implements Permission here.
