@@ -81,13 +81,5 @@ FairWidgetBinding provider = () {
         color: props['color'],
         width: props['width'],
         style: props['style'] ?? BorderStyle.solid),
-    'IconData': (props) {
-      // const Map pro = Map.from(props);
-      return IconData(
-        int.parse(props['pa'][0]),
-        fontFamily: props['fontFamily'],
-        fontPackage: props['fontPackage'],
-      );
-    },
   };
 };

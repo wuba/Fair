@@ -657,6 +657,15 @@ bool _invalidElement(Element element) {
   return isVisibleForTesting != null && isVisibleForTesting.isNotEmpty;
 }
 
+/// 跳过的类型
+var _blackList = [
+   /// It has non-constant instances of IconData
+   /// https://github.com/wuba/Fair/issues/244
+   /// IconData 不经常使用，不移除的话，Flutter 没法做 tree-shake-icons, 这会导致包体积进一步增大
+   /// 如果用户真的要用到，自定义 binding 并且使用 --no-tree-shake-icons 命令打包即可
+   'IconData',
+];
+
 ///
 /// We need to compile all of constructions when compile the SDK files.
 ///
@@ -666,6 +675,9 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
   // 枚举与class不同
   var apis = [...unitElement.classes, ...unitElement.enums];
   for (var classElement in apis) {
+    if(classElement is ClassElement && _blackList.contains(classElement.name)) {
+      continue; 
+    }
     if ((classElement is ClassElement && classElement.isAbstract) || _invalidElement(classElement) || classElement.isSynthetic) {
       print('skip ' + classElement.name);
       continue;
