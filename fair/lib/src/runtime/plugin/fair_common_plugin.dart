@@ -9,7 +9,7 @@ import 'dart:convert';
 ///     with FairHttpPlugin, FairPermissionPlugin {
 ///   factory FairCommonPlugin() => _fairCommonPlugin;
 ///   FairCommonPlugin._();
-///   static late final FairCommonPlugin _fairCommonPlugin = FairCommonPlugin._();
+///   static final FairCommonPlugin _fairCommonPlugin = FairCommonPlugin._();
 ///   @override
 ///   Map<String, Function> getRegisterMethods() {
 ///     return <String, Function>{
