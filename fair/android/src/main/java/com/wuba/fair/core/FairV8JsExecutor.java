@@ -73,7 +73,12 @@ public class FairV8JsExecutor extends JSExecutor {
     public Object invokeJSChannel(Object src) {
         V8Array array = new V8Array(v8);
         array.push(src.toString());
-        return v8.executeFunction(FairConstant.INVOKE_JS_FUNC, array);
+        try {
+            return v8.executeFunction(FairConstant.INVOKE_JS_FUNC, array);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
