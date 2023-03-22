@@ -289,7 +289,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }
     }
     else if(source is Map) {
-      source = convert(context, map, methodMap);
+      source = convert(context, source, methodMap);
     }
 
     if (!(source is List)) {
@@ -331,7 +331,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }
     }
     else if(source is Map) {
-      source = convert(context, map, methodMap);
+      source = convert(context, source, methodMap);
     }
 
 
