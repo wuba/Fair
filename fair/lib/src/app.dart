@@ -119,7 +119,7 @@ class FairApp extends InheritedWidget with AppState {
     properties.add(DiagnosticsProperty<Map<String, String>>('bundle', bundleAlias));
   }
 
-  static void runApplication(Widget app, {Map<String, IFairPlugin>? plugins, String? package}) {
+  static void runApplication(Widget app, {Map<String, IFairPlugin>? plugins, Map<String, String>? jsPlugins, String? package}) {
     // WidgetsFlutterBinding.ensureInitialized();
     FairPluginDispatcher.registerPlugins(plugins);
 
@@ -127,11 +127,11 @@ class FairApp extends InheritedWidget with AppState {
       var runtime = Runtime();
       var basicChannel = runtime.getBasicChannel();
       basicChannel.invokeMethod('jsLoadListener').then((value){
-        runtime.loadCoreJs(package:package).then((value) => runApp(app));
+        runtime.loadCoreJs(package:package, jsPlugins: jsPlugins).then((value) => runApp(app));
       });
 
     }else{
-      Runtime().loadCoreJs(package:package).then((value) => runApp(app));
+      Runtime().loadCoreJs(package:package, jsPlugins: jsPlugins).then((value) => runApp(app));
     }
   }
 }
