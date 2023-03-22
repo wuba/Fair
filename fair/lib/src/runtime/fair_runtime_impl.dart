@@ -157,7 +157,7 @@ class Runtime implements IRuntime {
   /*
    * 加载用户的基础配置
    */
-  Future<dynamic> loadCoreJs({String? package}) async {
+  Future<dynamic> loadCoreJs({String? package, Map<String, String>? jsPlugins}) async {
     var map = <dynamic, dynamic>{};
     if (!loadBaseJsConstant[0]) {
       var baseJsSource = '';
@@ -176,23 +176,29 @@ class Runtime implements IRuntime {
        * 例如用户配置的插件，或者用户的其它拓展等，该配置json名称固定
        */
       var pluginJsSource = ' ';
+      //加载用户自定义的plugin
+      var plugins = <String, dynamic>{};
       try {
         var customConfigJson = await rootBundle.loadString('${package != null ? 'packages/$package/' : ''}assets/fair_basic_config.json');
         var customConfig = jsonDecode(customConfigJson);
         //加载用户自定义的plugin
-        Map<String, dynamic>? plugins = customConfig['plugin'];
-
-        if (plugins != null) {
-          var keys = plugins.keys;
-          for (var k in keys) {
-            pluginJsSource = pluginJsSource + ' ; ' + await rootBundle.loadString(plugins[k]);
-          }
+        if (customConfig['plugin'] != null) {
+          plugins.addAll(customConfig['plugin']);
         }
       } catch (e) {
-        //用户可能会自定义js拓展，但是不需要使用dart的功能
-        if (FairPluginDispatcher.pluginMap.isNotEmpty) {
-          print('##没有配置fair_basic_config.json文件,请检查文件是否配置或者名称是否正确##');
+        print(e);
+      }
+
+      if (jsPlugins != null) {
+        plugins.addAll(jsPlugins);
+      }
+      try {
+        var keys = plugins.keys;
+        for (var k in keys) {
+          pluginJsSource = pluginJsSource + ' ; ' + await rootBundle.loadString(plugins[k]);
         }
+      } catch (e) {
+        print(e);
       }
       loadBaseJsConstant[0] = true;
       map[FairMessage.PATH] = baseJsSource + ' ; ' + pluginJsSource;
