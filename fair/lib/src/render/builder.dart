@@ -288,6 +288,10 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         source = r?.data;
       }
     }
+    else if(source is Map) {
+      source = convert(context, source, methodMap);
+    }
+
     if (!(source is List)) {
       throw Exception('Sugar.mapEach has no valid source array');
     }
@@ -326,6 +330,11 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         source = r?.data;
       }
     }
+    else if(source is Map) {
+      source = convert(context, source, methodMap);
+    }
+
+
     if (!(source is List)) {
       throw Exception('Sugar.mapEach has no valid source array');
     }
