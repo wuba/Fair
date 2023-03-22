@@ -288,6 +288,10 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         source = r?.data;
       }
     }
+    else if(source is Map) {
+      source = convert(context, source, methodMap);
+    }
+
     if (!(source is List)) {
       throw Exception('Sugar.mapEach has no valid source array');
     }
@@ -326,6 +330,11 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         source = r?.data;
       }
     }
+    else if(source is Map) {
+      source = convert(context, source, methodMap);
+    }
+
+
     if (!(source is List)) {
       throw Exception('Sugar.mapEach has no valid source array');
     }
@@ -647,30 +656,15 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       _buildSugarSliverGridDelegateWithFixedCrossAxisCount(
           Function mapEach, Map map, Map? methodMap, BuildContext context) {
     Map gridDelegateNa = map['na'];
-    double mainAxisSpacing = 0.0;
-    double crossAxisSpacing = 0.0;
-    double childAspectRatio = 1.0;
-    var crossAxisCount = gridDelegateNa['crossAxisCount'];
-
-    if (gridDelegateNa.containsKey('mainAxisSpacing') == true) {
-      mainAxisSpacing = gridDelegateNa['mainAxisSpacing'];
-    }
-    if (gridDelegateNa.containsKey('crossAxisSpacing') == true) {
-      crossAxisSpacing = gridDelegateNa['crossAxisSpacing'];
-    }
-    if (gridDelegateNa.containsKey('childAspectRatio') == true) {
-      childAspectRatio = gridDelegateNa['childAspectRatio'];
-    }
-    Map<String, dynamic> gridProperty = {
-      'crossAxisCount': crossAxisCount,
-      'mainAxisSpacing': mainAxisSpacing,
-      'crossAxisSpacing': crossAxisSpacing,
-      'childAspectRatio': childAspectRatio,
+    var gridProperty = <String, dynamic>{
+      'crossAxisCount': gridDelegateNa['crossAxisCount'],
+      'mainAxisSpacing': gridDelegateNa['mainAxisSpacing']?.toDouble() ?? 0.0,
+      'crossAxisSpacing': gridDelegateNa['crossAxisSpacing']?.toDouble() ?? 0.0,
+      'childAspectRatio': gridDelegateNa['childAspectRatio']?.toDouble() ?? 1.0,
     };
     var params = {
       'pa': [gridProperty]
     };
-
     return mapEach.call(params);
   }
 }

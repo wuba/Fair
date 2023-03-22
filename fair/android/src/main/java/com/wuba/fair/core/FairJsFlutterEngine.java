@@ -44,10 +44,12 @@ public class FairJsFlutterEngine {
               @Override
               public void runTask() {
                   IJSExecutor executor = FairPlugin.get().getJsExecutor();
-                  Object result= executor.invokeJSChannel(message);
-                  FairThread.runOnUI(() -> {
-                      reply.reply(String.valueOf(result));
-                  });
+                  Object result = executor.invokeJSChannel(message);
+                  if (result != null) {
+                      FairThread.runOnUI(() -> {
+                          reply.reply(String.valueOf(result));
+                      });
+                  }
               }
           });
         } catch (Exception e) {
