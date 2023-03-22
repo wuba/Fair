@@ -12,6 +12,7 @@ import 'dart:async';
 
 /// The operations can be used in DSL.
 class Sugar {
+  Sugar._();
   static K ifRange<T, K>(
     T actual,
     List<T> expect, {
