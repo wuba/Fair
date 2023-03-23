@@ -1,0 +1,4 @@
+[submodule "fair_template"]
+	path = fair_template
+	url = https://github.com/wuba/FairTemplate
+	branch = main
