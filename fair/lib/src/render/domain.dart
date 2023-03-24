@@ -24,15 +24,16 @@ class Domain<E> {
             exp.startsWith("\$(item") ||
             exp.startsWith("\$(index") ||
             exp.startsWith("#(\${index") ||
-            exp.startsWith("#(\${item"));
+            exp.startsWith("#(\${item") ||
+            exp.startsWith('^(index)') ||
+            exp.startsWith('^(item)'));
   }
 
   dynamic bindValue(String exp) {
     // TODO mapEach
     if (exp == 'item') {
       return exp.replaceAll('item', '${source?[index]}');
-    }
-    if (exp == 'index') {
+    } else if (exp == 'index') {
       return exp.replaceAll('index', '$index');
     }
     // Carrying ”#(“ indicates value conversion to a string
@@ -40,6 +41,15 @@ class Domain<E> {
     dynamic processed = exp.substring(2, exp.length - 1);
     if (processed.startsWith("\${")) {
       processed = processed.substring(2, processed.length - 1);
+    }
+
+    // ^(item)
+    if (processed == 'item') {
+      return source?[index];
+    }
+    // ^(index)
+    else if (processed == 'index') {
+      return index;
     }
 
     if (processed.contains('.')) {
@@ -50,10 +60,10 @@ class Domain<E> {
         if (obj is BaseModel) {
           Map<String, dynamic> json = (obj as BaseModel).toJson();
           modelValue = json;
-        }else if(obj is Map){
+        } else if (obj is Map) {
           modelValue = obj;
         }
-        if(modelValue!=null){
+        if (modelValue != null) {
           expList.removeAt(0);
           for (String k in expList) {
             modelValue = modelValue[k];
