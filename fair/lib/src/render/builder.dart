@@ -54,6 +54,14 @@ class DynamicWidgetBuilder extends DynamicBuilder {
           url: bundle);
     }
     try {
+      if (name == 'Sugar.ifEqual') {
+        return _buildIfEqual(map, methodMap, context, domain);
+      } else if (name == 'Sugar.ifEqualBool') {
+        return _buildIfEqualBool(map, methodMap, context, domain);
+      } else if (name == 'Sugar.switchCase') {
+        return _buildSwitchCase(map, methodMap, context, domain);
+      }
+
       var module = bound?.modules?.moduleOf(name)?.call();
       var isWidget = module?.isWidget ?? false;
       dynamic mapper = module;
@@ -74,9 +82,6 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         return _buildSugarMapEach(mapper, map, methodMap, context);
       } else if (name == 'Sugar.map') {
         return _buildSugarMap(mapper, map, methodMap, context);
-      } else if (name == 'Sugar.switchCase') {
-        dynamic re = _buildSwitchCase(mapper, map, methodMap, context, domain);
-        return re;
       } else if (name == 'Sugar.listBuilder') {
         return _buildSugarListBuilder(
             name, domain, mapper, map, methodMap, context);
@@ -364,7 +369,6 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   dynamic _buildSwitchCase(
-    Function mapEach,
     Map map,
     Map? methodMap,
     BuildContext context,
@@ -372,35 +376,25 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   ) {
     var caseValue = pa0(map);
     var source = pa1(map);
-    var defaultValue = pa2(map);
-    var children = [];
-    if (caseValue != null || defaultValue != null) {
-      var pa =
-          positioned([caseValue, defaultValue], methodMap, context, domain);
-      var values = Property.extract(
-        list: pa.data,
-      );
-      caseValue = pa0(values);
-      defaultValue = pa1(values);
+
+    if (caseValue != null) {
+      caseValue = p0Value(caseValue, methodMap, context, domain);
     }
     if (!(source is List)) {
       throw Exception('Sugar.SwitchCase has no valid cases array');
     }
 
     if (source is List) {
-      children = Domain(source).forEach(($, element) {
-        if (element is Map) {
-          return convert(context, element, methodMap, domain: $);
-        } else {
-          return element;
+      for (var caseItem in source) {
+        var na = caseItem['na'];
+        if (p0Value(na['sugarCase'], methodMap, context, domain) == caseValue) {
+          return p0Value(na['reValue'], methodMap, context, domain);
         }
-      });
+      }
     }
-    var params = {
-      'pa': [caseValue, children, defaultValue]
-    };
 
-    return mapEach.call(params);
+    var defaultValue = pa2(map);
+    return p0Value(defaultValue, methodMap, context, domain);
   }
 
   PopupMenuButton _popupMenuBuilder(
@@ -666,5 +660,50 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       'pa': [gridProperty]
     };
     return mapEach.call(params);
+  }
+
+  dynamic _buildIfEqual(
+    Map map,
+    Map? methodMap,
+    BuildContext context,
+    Domain? domain,
+  ) {
+    var na = map['na'];
+
+    var p0 = p0Value(pa0(map), methodMap, context, domain);
+    var p1 = p0Value(pa1(map), methodMap, context, domain);
+    if (p0 == p1) {
+      return p0Value(na['trueValue'], methodMap, context, domain);
+    } else {
+      return p0Value(na['falseValue'], methodMap, context, domain);
+    }
+  }
+
+  dynamic _buildIfEqualBool(
+    Map map,
+    Map? methodMap,
+    BuildContext context,
+    Domain? domain,
+  ) {
+    var na = map['na'];
+
+    if (p0Value(pa0(map), methodMap, context, domain)) {
+      return p0Value(na['trueValue'], methodMap, context, domain);
+    } else {
+      return p0Value(na['falseValue'], methodMap, context, domain);
+    }
+  }
+
+  dynamic p0Value(
+    dynamic input,
+    Map? methodMap,
+    BuildContext context,
+    Domain? domain,
+  ) {
+    var pa = positioned([input], methodMap, context, domain);
+    var values = Property.extract(
+      list: pa.data,
+    );
+    return pa0(values);
   }
 }
