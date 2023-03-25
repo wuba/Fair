@@ -87,14 +87,30 @@ class DynamicWidgetBuilder extends DynamicBuilder {
             name, domain, mapper, map, methodMap, context);
       } else if (name == 'Sugar.isNestedScrollViewHeaderSliversBuilder') {
         return _buildNestedScrollViewHeaderSlivers(
-            mapper, map, methodMap, context);
+          mapper,
+          map,
+          methodMap,
+          context,
+          domain,
+        );
       } else if (name == 'Sugar.isButtonStyle') {
         return _buildSugarButtonStyle(mapper, map, methodMap, context);
       } else if (name == 'Sugar.popMenuButton') {
-        return _popupMenuBuilder(mapper, map, methodMap, context);
+        return _popupMenuBuilder(
+          mapper,
+          map,
+          methodMap,
+          context,
+          domain,
+        );
       } else if (name == 'Sugar.sliverChildBuilderDelegate') {
         return _buildSugarSliverChildBuilderDelegate(
-            mapper, map, methodMap, context);
+          mapper,
+          map,
+          methodMap,
+          context,
+          domain,
+        );
       } else if (name == 'Sugar.sliverGridDelegateWithFixedCrossAxisCount') {
         return _buildSugarSliverGridDelegateWithFixedCrossAxisCount(
             mapper, map, methodMap, context);
@@ -102,7 +118,10 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
       var source = map['mapEach'];
       if (source != null && source is List) {
-        var children = Domain(source).forEach(($, _) {
+        var children = MapEachDomain(
+          source,
+          parent: domain,
+        ).forEach(($, _) {
           return block(map, methodMap, context, $, mapper, name, isWidget);
         });
         return children.asListOf<Widget>() ?? children;
@@ -297,7 +316,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }
 
     if (source is List) {
-      source = Domain(source).forEach(($, element) {
+      source = MapEachDomain(source, parent: domain).forEach(($, element) {
         if (element is Map) {
           if (element[tag] == null) {
             return element; //直接返回Map对象
@@ -312,7 +331,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var children = [];
     //转为Widget
     if (source is List) {
-      children = Domain(source).forEach(($, _) {
+      children = MapEachDomain(source, parent: domain).forEach(($, _) {
         return convert(context, pa1(map), methodMap, domain: $);
       });
     }
@@ -336,7 +355,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }
 
     if (source is List) {
-      source = Domain(source).forEach(($, element) {
+      source = MapEachDomain(source, parent: domain).forEach(($, element) {
         if (element is Map) {
           if (element[tag] == null) {
             return element; //直接返回Map对象
@@ -349,7 +368,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }
     var children = [];
     if (source is List) {
-      children = Domain(source).forEach(($, _) {
+      children = MapEachDomain(source, parent: domain).forEach(($, _) {
         return convert(context, map['na']['builder'], methodMap, domain: $);
       });
     }
@@ -388,8 +407,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return p0Value(defaultValue, methodMap, context, domain);
   }
 
-  PopupMenuButton _popupMenuBuilder(
-      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+  PopupMenuButton _popupMenuBuilder(Function mapEach, Map map, Map? methodMap,
+      BuildContext context, Domain? domain) {
     var propertyTransMap = Map.from(map);
     Map na = map['na'];
     var itemBuilder = na['itemBuilder'];
@@ -403,7 +422,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }
     //第一次解析
     if (itemBuilder is List) {
-      var list = Domain(itemBuilder).forEach(($, element) {
+      var list =
+          MapEachDomain(itemBuilder, parent: domain).forEach(($, element) {
         return convert(context, element, methodMap, domain: $) as Widget;
       });
       var children = list.map((e) => e as PopupMenuEntry<Object>).toList();
@@ -416,8 +436,14 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return mapEach.call(params);
   }
 
-  ListView _buildSugarListBuilder(String name, Domain? superDomain,
-      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+  ListView _buildSugarListBuilder(
+    String name,
+    Domain? domain,
+    Function mapEach,
+    Map map,
+    Map? methodMap,
+    BuildContext context,
+  ) {
     var propertyTransMap = Map.from(map);
 
     var naOrMap = {};
@@ -427,8 +453,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var itemBuilder = naOrMap['itemBuilder'];
     naOrMap.remove('itemBuilder');
 
-    var na = named(name, naOrMap, methodMap, context, superDomain);
-    var pa = positioned(map['pa'], methodMap, context, superDomain);
+    var na = named(name, naOrMap, methodMap, context, domain);
+    var pa = positioned(map['pa'], methodMap, context, domain);
     Map naMap = Property.extract(list: pa.data, map: na.data);
 
     propertyTransMap['className'] = 'ListView';
@@ -437,7 +463,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
     var count = naMap['itemCount'];
     var source = List<int>.generate(count, (i) => i + 1);
-    var list = Domain(source).forEach(($, _) {
+    var list = MapEachDomain(itemBuilder, parent: domain).forEach(($, _) {
       return convert(context, itemBuilder, methodMap, domain: $) as Widget;
     });
     var children = list.map((e) => e as Widget).toList();
@@ -449,13 +475,17 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   NestedScrollViewHeaderSliversBuilder _buildNestedScrollViewHeaderSlivers(
-      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+      Function mapEach,
+      Map map,
+      Map? methodMap,
+      BuildContext context,
+      Domain? domain) {
     var na = map['na'];
     var innerBoxIsScrolled = na['innerBoxIsScrolled'];
     var headerSliverBuilder = na['headerSliverBuilder'];
     var source = List<int>.generate(headerSliverBuilder.length, (i) => i + 1);
 
-    var list = Domain(source).forEach(($, index) {
+    var list = MapEachDomain(source, parent: domain).forEach(($, index) {
       return convert(context, headerSliverBuilder[index - 1], methodMap,
           domain: $) as Widget;
     });
@@ -603,7 +633,11 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   SliverChildBuilderDelegate _buildSugarSliverChildBuilderDelegate(
-      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+      Function mapEach,
+      Map map,
+      Map? methodMap,
+      BuildContext context,
+      Domain? domain) {
     Map na = map['na'];
     var childCount = na['childCount'];
     var builder = na['builder'];
@@ -624,7 +658,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
     var source = List<int>.generate(childCount, (i) => i + 1);
 
-    var list = Domain(source).forEach(($, _) {
+    var list = MapEachDomain(source, parent: domain).forEach(($, _) {
       //拿到所有itemBuilder对应的数组
       return convert(context, builderMap, methodMap, domain: $) as Widget;
     });

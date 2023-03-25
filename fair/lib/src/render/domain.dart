@@ -7,15 +7,32 @@
 import 'package:fair/fair.dart';
 import 'base_model.dart';
 
-class Domain<E> {
-  final List<E>? source;
+abstract class Domain {
   final Domain? parent;
+
+  Domain({required this.parent});
+
+  bool match(dynamic exp);
+
+  dynamic bindValue(String exp);
+}
+
+abstract class IndexDomain extends Domain {
+  IndexDomain({required Domain? parent}) : super(parent: parent);
   int index = 0;
+}
 
-  Domain(this.source, {this.parent});
+class MapEachDomain extends IndexDomain {
+  MapEachDomain(this.source, {required Domain? parent}) : super(parent: parent);
 
+  final List? source;
+
+  @override
   bool match(dynamic exp) {
-    return source != null &&
+    if (parent != null && parent!.match(exp)) {
+      return true;
+    }
+    return (source != null &&
         exp is String &&
         ((RegExp('#\\(.+\\)', multiLine: true).hasMatch(exp) &&
                 (exp.contains('\$item') || exp.contains('\$index'))) ||
@@ -26,15 +43,19 @@ class Domain<E> {
             exp.startsWith("#(\${index") ||
             exp.startsWith("#(\${item") ||
             exp.startsWith('^(index)') ||
-            exp.startsWith('^(item)'));
+            exp.startsWith('^(item)')));
   }
 
+  @override
   dynamic bindValue(String exp) {
-    // TODO mapEach
+    if (parent != null && parent!.match(exp)) {
+      return parent!.bindValue(exp);
+    }
+
     if (exp == 'item') {
-      return exp.replaceAll('item', '${source?[index]}');
+      return source?[index];
     } else if (exp == 'index') {
-      return exp.replaceAll('index', '$index');
+      return index;
     }
     // Carrying ”#(“ indicates value conversion to a string
     final bool isStringValue = exp.startsWith('#(');
@@ -80,7 +101,7 @@ class Domain<E> {
     return processed;
   }
 
-  List forEach(dynamic Function(Domain $, E element) f) {
+  List forEach(dynamic Function(Domain $, dynamic element) f) {
     index = 0;
     var result = <dynamic>[];
     for (var i = 0; i < (source?.length ?? 0); i++) {
