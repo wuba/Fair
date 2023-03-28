@@ -24,17 +24,17 @@ class Sugar {
   static K ifEqual<T, K>(
     T actual,
     T expect, {
-    required K trueValue,
-    required K falseValue,
+    required K Function() trueValue,
+    required K Function() falseValue,
   }) =>
-      expect == actual ? trueValue : falseValue;
+      expect == actual ? trueValue() : falseValue();
 
   static K ifEqualBool<T, K>(
     bool state, {
-    required K trueValue,
-    required K falseValue,
+    required K Function() trueValue,
+    required K Function() falseValue,
   }) =>
-      state ? trueValue : falseValue;
+      state ? trueValue() : falseValue();
 
   /// Map operation with index
   static List<T> mapEach<T, E>(List<E> data, T Function(int index, E item) f) {
@@ -201,13 +201,14 @@ class Sugar {
     );
   }
 
-  static K switchCase<T, K>(T key,List<SugarSwitchCaseObj<T,K>> caseObjects ,K defaultValue){
-    for (SugarSwitchCaseObj<T,K> sugarCase in caseObjects){
-      if(sugarCase.sugarCase == key){
-        return sugarCase.reValue;
+  static K switchCase<T, K>(T key, List<SugarSwitchCaseObj<T, K>> caseObjects,
+      K Function() defaultValue) {
+    for (SugarSwitchCaseObj<T, K> sugarCase in caseObjects) {
+      if (sugarCase.sugarCase() == key) {
+        return sugarCase.reValue();
       }
     }
-    return defaultValue;
+    return defaultValue();
   }
 
   static Color colorWithOpacity = Colors.grey.withOpacity(0.8);
@@ -276,11 +277,10 @@ class Sugar {
     );
   }
 }
-class SugarSwitchCaseObj<T,K>{
 
-  final K reValue;
-  final T sugarCase;
+class SugarSwitchCaseObj<T, K> {
+  final K Function() reValue;
+  final T Function() sugarCase;
 
-  SugarSwitchCaseObj({required this.sugarCase,required this.reValue});
+  SugarSwitchCaseObj({required this.sugarCase, required this.reValue});
 }
-
