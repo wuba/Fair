@@ -32,19 +32,6 @@ FairWidgetBinding provider = () {
       assert(items is List, 'failed to generate list of Sugar.map');
       return (((items as List).asIteratorOf<Widget>() ?? items) as Iterable).toList();
     },
-    'Sugar.ifEqual': (props) {
-      var p0 = pa0(props);
-      var p1 = pa1(props);
-      if (p0.runtimeType != p1.runtimeType) {
-        p0 = '$p0';
-        p1 = '$p1';
-      }
-      return p0 == p1 ? props['trueValue'] : props['falseValue'];
-    },
-    'Sugar.ifEqualBool': (props) {
-      var state = pa0(props);
-      return state ? props['trueValue'] : props['falseValue'];
-    },
     'Sugar.ifRange': (props) {
       var p0 = pa0(props);
       var p1 = pa1(props);
@@ -89,18 +76,6 @@ FairWidgetBinding provider = () {
         sugarCase: p0,
         reValue: p1,
       );
-    },
-    'Sugar.switchCase':(props){
-      var p0 = pa0(props);
-      List p1 = (pa1(props) as List);
-      var p2 = pa2(props);
-      for (var sugarCase in p1){
-        var caseValue = sugarCase as SugarSwitchCaseObj;
-        if (caseValue.sugarCase == p0){
-          return caseValue.reValue;
-        }
-      }
-      return p2;
     },
     'Sugar.popMenuButton': (props) {
       var p0 = pa0(props);
