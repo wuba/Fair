@@ -63,6 +63,34 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         return _buildIfEqualBool(map, methodMap, context, domain);
       } else if (name == 'Sugar.switchCase') {
         return _buildSwitchCase(map, methodMap, context, domain);
+      } else if (name == 'Sugar.nullableIndexedWidgetBuilder') {
+        return _buildSugarNullableIndexedWidgetBuilder(
+          context,
+          map,
+          methodMap,
+          domain: domain,
+        );
+      } else if (name == 'Sugar.indexedWidgetBuilder') {
+        return _buildSugarIndexedWidgetBuilder(
+          context,
+          map,
+          methodMap,
+          domain: domain,
+        );
+      } else if (name == 'Sugar.widgetBuilder') {
+        return _buildSugarWidgetBuilder(
+          context,
+          map,
+          methodMap,
+          domain: domain,
+        );
+      } else if (name == 'Sugar.transitionBuilder') {
+        return _buildSugarTransitionBuilder(
+          context,
+          map,
+          methodMap,
+          domain: domain,
+        );
       }
 
       var module = bound?.modules?.moduleOf(name)?.call();
@@ -117,34 +145,6 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       } else if (name == 'Sugar.sliverGridDelegateWithFixedCrossAxisCount') {
         return _buildSugarSliverGridDelegateWithFixedCrossAxisCount(
             mapper, map, methodMap, context);
-      } else if (name == 'Sugar.nullableIndexedWidgetBuilder') {
-        return _buildSugarNullableIndexedWidgetBuilder(
-          context,
-          map,
-          methodMap,
-          domain: domain,
-        );
-      } else if (name == 'Sugar.indexedWidgetBuilder') {
-        return _buildSugarIndexedWidgetBuilder(
-          context,
-          map,
-          methodMap,
-          domain: domain,
-        );
-      } else if (name == 'Sugar.widgetBuilder') {
-        return _buildSugarWidgetBuilder(
-          context,
-          map,
-          methodMap,
-          domain: domain,
-        );
-      } else if (name == 'Sugar.transitionBuilder') {
-        return _buildSugarTransitionBuilder(
-          context,
-          map,
-          methodMap,
-          domain: domain,
-        );
       }
 
       var source = map['mapEach'];
