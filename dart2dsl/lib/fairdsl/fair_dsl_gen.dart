@@ -391,6 +391,22 @@ dynamic _buildValueExpression(
       naPaValue = _buildValueExpression(
           valueExpression?.asFunctionExpression.body?.body?.last, fairDslContex);
     }
+    if (naPaValue is Map && valueExpression?.asFunctionExpression.parameterList != null &&
+        valueExpression!.asFunctionExpression.parameterList!.isNotEmpty) {
+      var na = [];
+      var pa = [];
+      for (var element in valueExpression.asFunctionExpression.parameterList!) {
+        if (element?.isNamed == true) {
+          na.add(element?.name);
+        } else {
+          pa.add(element?.name);
+        }
+      }
+      naPaValue['functionParameters'] = {
+        if (na.isNotEmpty) 'na': na,
+        if (pa.isNotEmpty) 'pa': pa,
+      };
+    }    
   } else if (valueExpression?.isReturnStatement==true) {
     naPaValue = _buildValueExpression(
         valueExpression?.asReturnStatement.argument, fairDslContex);
