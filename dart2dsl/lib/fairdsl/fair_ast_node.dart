@@ -298,14 +298,16 @@ class MemberExpression extends AstNode {
 class SimpleFormalParameter extends AstNode {
   TypeName? paramType;
   String? name;
+  bool? isNamed;
 
-  SimpleFormalParameter(this.paramType, this.name, {Map? ast}) : super(ast: ast);
+  SimpleFormalParameter(this.paramType, this.name, this.isNamed, {Map? ast})
+      : super(ast: ast);
 
   static SimpleFormalParameter? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.SimpleFormalParameter)) {
       return SimpleFormalParameter(
-          TypeName.fromAst(ast['paramType']), ast['name'],
+          TypeName.fromAst(ast['paramType']), ast['name'], ast['isNamed'],
           ast: ast);
     }
     return null;

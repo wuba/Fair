@@ -42,7 +42,8 @@ class Sugar {
   }
 
   /// Map operation without index
-  static List<T> map<T, E>(List<E> data, {required T Function(E item) builder}) {
+  static List<T> map<T, E>(List<E> data,
+      {required T Function(E item) builder}) {
     return data.mapEach((index, item) => builder(item));
   }
 
@@ -64,14 +65,15 @@ class Sugar {
     double? cacheExtent,
     int? semanticChildCount,
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-    ScrollViewKeyboardDismissBehavior keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+    ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
+        ScrollViewKeyboardDismissBehavior.manual,
     String? restorationId,
     Clip clipBehavior = Clip.hardEdge,
     required IndexedWidgetBuilder itemBuilder,
     int? itemCount,
-  }){
+  }) {
     return ListView.builder(
-      key: key,
+        key: key,
         scrollDirection: scrollDirection,
         reverse: reverse,
         controller: controller,
@@ -91,13 +93,15 @@ class Sugar {
         restorationId: restorationId,
         clipBehavior: clipBehavior,
         itemCount: itemCount,
-        itemBuilder:itemBuilder);
+        itemBuilder: itemBuilder);
   }
-  static NestedScrollViewHeaderSliversBuilder isNestedScrollViewHeaderSliversBuilder({
-    required BuildContext context,
-    required bool innerBoxIsScrolled,
-    required List<Widget> headerSliverBuilder}){
-    return (BuildContext context, bool innerBoxIsScrolled){
+
+  static NestedScrollViewHeaderSliversBuilder
+      isNestedScrollViewHeaderSliversBuilder(
+          {required BuildContext context,
+          required bool innerBoxIsScrolled,
+          required List<Widget> headerSliverBuilder}) {
+    return (BuildContext context, bool innerBoxIsScrolled) {
       return headerSliverBuilder;
     };
   }
@@ -123,7 +127,7 @@ class Sugar {
     bool? enableFeedback,
     AlignmentGeometry? alignment,
     InteractiveInkFeatureFactory? splashFactory,
-  }){
+  }) {
     return ButtonStyle(
       textStyle: MaterialStateProperty.all<TextStyle?>(textStyle),
       backgroundColor: MaterialStateProperty.all(backgroundColor),
@@ -147,40 +151,41 @@ class Sugar {
       splashFactory: splashFactory,
     );
   }
-  static Duration isDuration({
-    int days = 0,
-    int hours = 0,
-    int minutes = 0,
-    int seconds = 0,
-    int milliseconds = 0,
-    int microseconds = 0}){
+
+  static Duration isDuration(
+      {int days = 0,
+      int hours = 0,
+      int minutes = 0,
+      int seconds = 0,
+      int milliseconds = 0,
+      int microseconds = 0}) {
     return Duration(
-        hours:hours,
-        minutes:minutes,
-        seconds:seconds,
-        milliseconds:milliseconds,
-        microseconds:microseconds,
+      hours: hours,
+      minutes: minutes,
+      seconds: seconds,
+      milliseconds: milliseconds,
+      microseconds: microseconds,
     );
   }
+
   ///popmenu
-  static PopupMenuButton popMenuButton<T>({
-    Key? key,
-    required PopupMenuItemBuilder<T> itemBuilder,
-    PopupMenuItemSelected<T>? onSelected,
-    T? initialValue,
-    EdgeInsetsGeometry padding = const EdgeInsets.all(8.0),
-    PopupMenuCanceled? onCanceled,
-    String? tooltip,
-    double? elevation,
-    Widget? child,
-    Widget? icon,
-    double? iconSize,
-    ShapeBorder? shape,
-    Offset offset = Offset.zero ,
-    bool enabled = true,
-    Color? color,
-    bool? enableFeedback
-  }){
+  static PopupMenuButton popMenuButton<T>(
+      {Key? key,
+      required PopupMenuItemBuilder<T> itemBuilder,
+      PopupMenuItemSelected<T>? onSelected,
+      T? initialValue,
+      EdgeInsetsGeometry padding = const EdgeInsets.all(8.0),
+      PopupMenuCanceled? onCanceled,
+      String? tooltip,
+      double? elevation,
+      Widget? child,
+      Widget? icon,
+      double? iconSize,
+      ShapeBorder? shape,
+      Offset offset = Offset.zero,
+      bool enabled = true,
+      Color? color,
+      bool? enableFeedback}) {
     return PopupMenuButton<T>(
       key: key,
       itemBuilder: itemBuilder,
@@ -213,36 +218,41 @@ class Sugar {
 
   static Color colorWithOpacity = Colors.grey.withOpacity(0.8);
 
-  static Color colorsWithOpacity(Color c,double o){
+  static Color colorsWithOpacity(Color c, double o) {
     return c.withOpacity(o);
   }
-  static Color colorsShade( MaterialColor color, int i){
-    var shadeMap={
-      50:color.shade50,
-      100:color.shade100,
-      200:color.shade200,
-      300:color.shade300,
-      400:color.shade400,
-      500:color.shade500,
-      600:color.shade600,
-      700:color.shade700,
-      800:color.shade800,
-      900:color.shade900,
+
+  static Color colorsShade(MaterialColor color, int i) {
+    var shadeMap = {
+      50: color.shade50,
+      100: color.shade100,
+      200: color.shade200,
+      300: color.shade300,
+      400: color.shade400,
+      500: color.shade500,
+      600: color.shade600,
+      700: color.shade700,
+      800: color.shade800,
+      900: color.shade900,
     };
     return shadeMap.remove(i) as Color;
   }
 
-  static String convertToString<T>({required T orginalValue}){
+  static String convertToString<T>({required T orginalValue}) {
     return orginalValue.toString();
   }
 
-  static double height(BuildContext context) => MediaQuery.of(context).size.height;
+  static double height(BuildContext context) =>
+      MediaQuery.of(context).size.height;
 
-  static double width(BuildContext context) => MediaQuery.of(context).size.width;
+  static double width(BuildContext context) =>
+      MediaQuery.of(context).size.width;
 
-  static double paddingTop(BuildContext context) => MediaQuery.of(context).padding.top;
+  static double paddingTop(BuildContext context) =>
+      MediaQuery.of(context).padding.top;
 
-  static double paddingBottom(BuildContext context) => MediaQuery.of(context).padding.bottom;
+  static double paddingBottom(BuildContext context) =>
+      MediaQuery.of(context).padding.bottom;
 
   static Null Function() requestFocus(BuildContext context) => () {
         FocusScope.of(context).requestFocus(FocusNode());
@@ -251,24 +261,21 @@ class Sugar {
   static Null Function() onTapEmpty() => () {};
 
   /*CustomScrollView-common-delegate*/
-  static SliverChildBuilderDelegate sliverChildBuilderDelegate({
-    Key? key,
-    required NullableIndexedWidgetBuilder builder,
-    int? childCount
-  }) {
-    return SliverChildBuilderDelegate((builder),
-        childCount: childCount
-    );
+  static SliverChildBuilderDelegate sliverChildBuilderDelegate(
+      {Key? key,
+      required NullableIndexedWidgetBuilder builder,
+      int? childCount}) {
+    return SliverChildBuilderDelegate((builder), childCount: childCount);
   }
-  /*CustomScrollView-SliverGrid*/
-  static SliverGridDelegateWithFixedCrossAxisCount sliverGridDelegateWithFixedCrossAxisCount(
-      {
-        required int crossAxisCount,
-        double mainAxisSpacing = 0.0,
-        double crossAxisSpacing = 0.0,
-        double childAspectRatio = 1.0,
 
-      }) {
+  /*CustomScrollView-SliverGrid*/
+  static SliverGridDelegateWithFixedCrossAxisCount
+      sliverGridDelegateWithFixedCrossAxisCount({
+    required int crossAxisCount,
+    double mainAxisSpacing = 0.0,
+    double crossAxisSpacing = 0.0,
+    double childAspectRatio = 1.0,
+  }) {
     return SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: crossAxisCount, //Grid按两列显示
       mainAxisSpacing: mainAxisSpacing,
@@ -276,6 +283,19 @@ class Sugar {
       childAspectRatio: childAspectRatio,
     );
   }
+
+  static NullableIndexedWidgetBuilder nullableIndexedWidgetBuilder(
+          NullableIndexedWidgetBuilder builder) =>
+      builder;
+
+  static IndexedWidgetBuilder indexedWidgetBuilder(
+          IndexedWidgetBuilder builder) =>
+      builder;
+
+  static WidgetBuilder widgetBuilder(WidgetBuilder builder) => builder;
+
+  static TransitionBuilder transitionBuilder(TransitionBuilder builder) =>
+      builder;
 }
 
 class SugarSwitchCaseObj<T, K> {

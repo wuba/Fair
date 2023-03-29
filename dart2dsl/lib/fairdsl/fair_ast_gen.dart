@@ -195,7 +195,13 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   Map? visitSimpleFormalParameter(SimpleFormalParameter node) {
     // return _buildSimpleFormalParameter(
     //     _visitNode(node.type), node.identifier?.name);
-    return _buildSimpleFormalParameter(_visitNode(node.type), node.name?.lexeme);
+    return _buildSimpleFormalParameter(_visitNode(node.type), node.name?.lexeme,node.isNamed);
+  }
+
+  @override
+  Map? visitDefaultFormalParameter(DefaultFormalParameter node) {
+    var type= (node.parameter as SimpleFormalParameter?)?.type;
+    return _buildSimpleFormalParameter(_visitNode(type), node.name?.lexeme,node.isNamed);
   }
 
   @override
@@ -383,8 +389,13 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   Map _buildFormalParameterList(List<Map> parameterList) => {'type': 'FormalParameterList', 'parameterList': parameterList};
 
   //函数参数
-  Map _buildSimpleFormalParameter(Map? type, String? name) => {'type': 'SimpleFormalParameter', 'paramType': type, 'name': name};
-
+  //函数参数
+  Map _buildSimpleFormalParameter(Map? type, String? name, bool isNamed) => {
+        'type': 'SimpleFormalParameter',
+        'paramType': type,
+        'name': name,
+        'isNamed': isNamed,
+      };
   //函数参数类型
   Map _buildTypeName(String name) => {
         'type': 'TypeName',

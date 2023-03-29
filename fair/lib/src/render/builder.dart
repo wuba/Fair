@@ -1,3 +1,6 @@
+
+// ignore_for_file: omit_local_variable_types
+
 /*
  * Copyright (C) 2005-present, 58.com.  All rights reserved.
  * Use of this source code is governed by a BSD type license that can be
@@ -60,6 +63,34 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         return _buildIfEqualBool(map, methodMap, context, domain);
       } else if (name == 'Sugar.switchCase') {
         return _buildSwitchCase(map, methodMap, context, domain);
+      } else if (name == 'Sugar.nullableIndexedWidgetBuilder') {
+        return _buildSugarNullableIndexedWidgetBuilder(
+          context,
+          map,
+          methodMap,
+          domain: domain,
+        );
+      } else if (name == 'Sugar.indexedWidgetBuilder') {
+        return _buildSugarIndexedWidgetBuilder(
+          context,
+          map,
+          methodMap,
+          domain: domain,
+        );
+      } else if (name == 'Sugar.widgetBuilder') {
+        return _buildSugarWidgetBuilder(
+          context,
+          map,
+          methodMap,
+          domain: domain,
+        );
+      } else if (name == 'Sugar.transitionBuilder') {
+        return _buildSugarTransitionBuilder(
+          context,
+          map,
+          methodMap,
+          domain: domain,
+        );
       }
 
       var module = bound?.modules?.moduleOf(name)?.call();
@@ -79,22 +110,38 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }
       assert(mapper != null, '$name is not registered!');
       if (name == 'Sugar.mapEach') {
-        return _buildSugarMapEach(mapper, map, methodMap, context);
+        return _buildSugarMapEach(mapper, map, methodMap, context, domain);
       } else if (name == 'Sugar.map') {
-        return _buildSugarMap(mapper, map, methodMap, context);
+        return _buildSugarMap(mapper, map, methodMap, context, domain);
       } else if (name == 'Sugar.listBuilder') {
         return _buildSugarListBuilder(
             name, domain, mapper, map, methodMap, context);
       } else if (name == 'Sugar.isNestedScrollViewHeaderSliversBuilder') {
         return _buildNestedScrollViewHeaderSlivers(
-            mapper, map, methodMap, context);
+          mapper,
+          map,
+          methodMap,
+          context,
+          domain,
+        );
       } else if (name == 'Sugar.isButtonStyle') {
         return _buildSugarButtonStyle(mapper, map, methodMap, context);
       } else if (name == 'Sugar.popMenuButton') {
-        return _popupMenuBuilder(mapper, map, methodMap, context);
+        return _popupMenuBuilder(
+          mapper,
+          map,
+          methodMap,
+          context,
+          domain,
+        );
       } else if (name == 'Sugar.sliverChildBuilderDelegate') {
         return _buildSugarSliverChildBuilderDelegate(
-            mapper, map, methodMap, context);
+          mapper,
+          map,
+          methodMap,
+          context,
+          domain,
+        );
       } else if (name == 'Sugar.sliverGridDelegateWithFixedCrossAxisCount') {
         return _buildSugarSliverGridDelegateWithFixedCrossAxisCount(
             mapper, map, methodMap, context);
@@ -102,7 +149,10 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
       var source = map['mapEach'];
       if (source != null && source is List) {
-        var children = Domain(source).forEach(($, _) {
+        var children = MapEachDomain(
+          source,
+          parent: domain,
+        ).forEach(($, _) {
           return block(map, methodMap, context, $, mapper, name, isWidget);
         });
         return children.asListOf<Widget>() ?? children;
@@ -262,8 +312,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return children;
   }
 
-  W namedString(String tag, dynamic naMap, Map? methodMap,
-      BuildContext context, Domain? domain, String v) {
+  W namedString(String tag, dynamic naMap, Map? methodMap, BuildContext context,
+      Domain? domain, String v) {
     var result;
     var needBinding = false;
     var body;
@@ -284,40 +334,43 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   List<Widget> _buildSugarMapEach(
-      Function mapEach, Map map, Map? methodMap, BuildContext context) {
-    dynamic source = pa0(map);
-    var children = [];
-    if (source is String) {
-      var r = proxyMirror?.evaluate(context, bound, source);
-      if (r?.data != null) {
-        source = r?.data;
-      }
-    }
-    else if(source is Map) {
-      source = convert(context, source, methodMap);
-    }
+    Function mapEach,
+    Map map,
+    Map? methodMap,
+    BuildContext context,
+    Domain? domain,
+  ) {
+    dynamic source = pa0Value(pa0(map), methodMap, context, domain);
 
     if (!(source is List)) {
       throw Exception('Sugar.mapEach has no valid source array');
     }
+    var children = [];
 
-    if (source is List) {
-      source = Domain(source).forEach(($, element) {
-        if (element is Map) {
-          if (element[tag] == null) {
-            return element; //直接返回Map对象
-          }
-          return convert(context, element, methodMap, domain: $);
-        } else {
-          return element;
-        }
-      });
-    }
     //转为Widget
     if (source is List) {
-      children = Domain(source).forEach(($, _) {
-        return convert(context, pa1(map), methodMap, domain: $);
-      });
+      var itemBuilder = pa1(map);
+      // index, item
+      List functionParameters = FunctionDomain.pa(itemBuilder);
+      assert(functionParameters.length == 2, 'Sugar.mapEach 的域入参个数不对');
+
+      for (var i = 0; i < source.length; i++) {
+        var element = source[i];
+        children.add(
+          convert(
+            context,
+            itemBuilder,
+            methodMap,
+            domain: FunctionDomain(
+              {
+                functionParameters[0]: i,
+                functionParameters[1]: element,
+              },
+              parent: domain,
+            ),
+          ),
+        );
+      }
     }
     var params = {
       'pa': [source, children]
@@ -326,41 +379,40 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   List<Widget> _buildSugarMap(
-      Function mapEach, Map map, Map? methodMap, BuildContext context) {
-    var source = pa0(map);
-    var children = [];
-    if (source is String) {
-      var r = proxyMirror?.evaluate(context, bound, source);
-      if (r?.data != null) {
-        source = r?.data;
-      }
-    }
-    else if(source is Map) {
-      source = convert(context, source, methodMap);
-    }
-
+    Function mapEach,
+    Map map,
+    Map? methodMap,
+    BuildContext context,
+    Domain? domain,
+  ) {
+    dynamic source = pa0Value(pa0(map), methodMap, context, domain);
 
     if (!(source is List)) {
       throw Exception('Sugar.mapEach has no valid source array');
     }
 
+    var children = [];
     if (source is List) {
-      source = Domain(source).forEach(($, element) {
-        if (element is Map) {
-          if (element[tag] == null) {
-            return element; //直接返回Map对象
-          }
-          return convert(context, element, methodMap, domain: $);
-        } else {
-          return element;
-        }
-      });
-    }
-
-    if (source is List) {
-      children = Domain(source).forEach(($, _) {
-        return convert(context, map['na']['builder'], methodMap, domain: $);
-      });
+      var itemBuilder = pa1(map);
+      // item
+      var functionParameters = FunctionDomain.pa(itemBuilder);
+      assert(functionParameters.length == 1, 'Sugar.map 的域入参个数不对');
+      for (var i = 0; i < source.length; i++) {
+        var element = source[i];
+        children.add(
+          convert(
+            context,
+            itemBuilder,
+            methodMap,
+            domain: FunctionDomain(
+              {
+                functionParameters[0]: element,
+              },
+              parent: domain,
+            ),
+          ),
+        );
+      }
     }
     var params = {
       'pa': [source, children]
@@ -378,7 +430,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var source = pa1(map);
 
     if (caseValue != null) {
-      caseValue = p0Value(caseValue, methodMap, context, domain);
+      caseValue = pa0Value(caseValue, methodMap, context, domain);
     }
     if (!(source is List)) {
       throw Exception('Sugar.SwitchCase has no valid cases array');
@@ -387,18 +439,18 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     if (source is List) {
       for (var caseItem in source) {
         var na = caseItem['na'];
-        if (p0Value(na['sugarCase'], methodMap, context, domain) == caseValue) {
-          return p0Value(na['reValue'], methodMap, context, domain);
+        if (pa0Value(na['sugarCase'], methodMap, context, domain) == caseValue) {
+          return pa0Value(na['reValue'], methodMap, context, domain);
         }
       }
     }
 
     var defaultValue = pa2(map);
-    return p0Value(defaultValue, methodMap, context, domain);
+    return pa0Value(defaultValue, methodMap, context, domain);
   }
 
-  PopupMenuButton _popupMenuBuilder(
-      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+  PopupMenuButton _popupMenuBuilder(Function mapEach, Map map, Map? methodMap,
+      BuildContext context, Domain? domain) {
     var propertyTransMap = Map.from(map);
     Map na = map['na'];
     var itemBuilder = na['itemBuilder'];
@@ -412,7 +464,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }
     //第一次解析
     if (itemBuilder is List) {
-      var list = Domain(itemBuilder).forEach(($, element) {
+      var list =
+          MapEachDomain(itemBuilder, parent: domain).forEach(($, element) {
         return convert(context, element, methodMap, domain: $) as Widget;
       });
       var children = list.map((e) => e as PopupMenuEntry<Object>).toList();
@@ -425,8 +478,14 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return mapEach.call(params);
   }
 
-  ListView _buildSugarListBuilder(String name, Domain? superDomain,
-      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+  ListView _buildSugarListBuilder(
+    String name,
+    Domain? domain,
+    Function mapEach,
+    Map map,
+    Map? methodMap,
+    BuildContext context,
+  ) {
     var propertyTransMap = Map.from(map);
 
     var naOrMap = {};
@@ -436,8 +495,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var itemBuilder = naOrMap['itemBuilder'];
     naOrMap.remove('itemBuilder');
 
-    var na = named(name, naOrMap, methodMap, context, superDomain);
-    var pa = positioned(map['pa'], methodMap, context, superDomain);
+    var na = named(name, naOrMap, methodMap, context, domain);
+    var pa = positioned(map['pa'], methodMap, context, domain);
     Map naMap = Property.extract(list: pa.data, map: na.data);
 
     propertyTransMap['className'] = 'ListView';
@@ -446,7 +505,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
     var count = naMap['itemCount'];
     var source = List<int>.generate(count, (i) => i + 1);
-    var list = Domain(source).forEach(($, _) {
+    var list = MapEachDomain(itemBuilder, parent: domain).forEach(($, _) {
       return convert(context, itemBuilder, methodMap, domain: $) as Widget;
     });
     var children = list.map((e) => e as Widget).toList();
@@ -458,13 +517,17 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   NestedScrollViewHeaderSliversBuilder _buildNestedScrollViewHeaderSlivers(
-      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+      Function mapEach,
+      Map map,
+      Map? methodMap,
+      BuildContext context,
+      Domain? domain) {
     var na = map['na'];
     var innerBoxIsScrolled = na['innerBoxIsScrolled'];
     var headerSliverBuilder = na['headerSliverBuilder'];
     var source = List<int>.generate(headerSliverBuilder.length, (i) => i + 1);
 
-    var list = Domain(source).forEach(($, index) {
+    var list = MapEachDomain(source, parent: domain).forEach(($, index) {
       return convert(context, headerSliverBuilder[index - 1], methodMap,
           domain: $) as Widget;
     });
@@ -612,7 +675,11 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   SliverChildBuilderDelegate _buildSugarSliverChildBuilderDelegate(
-      Function mapEach, Map map, Map? methodMap, BuildContext context) {
+      Function mapEach,
+      Map map,
+      Map? methodMap,
+      BuildContext context,
+      Domain? domain) {
     Map na = map['na'];
     var childCount = na['childCount'];
     var builder = na['builder'];
@@ -633,7 +700,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
     var source = List<int>.generate(childCount, (i) => i + 1);
 
-    var list = Domain(source).forEach(($, _) {
+    var list = MapEachDomain(source, parent: domain).forEach(($, _) {
       //拿到所有itemBuilder对应的数组
       return convert(context, builderMap, methodMap, domain: $) as Widget;
     });
@@ -670,12 +737,12 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   ) {
     var na = map['na'];
 
-    var p0 = p0Value(pa0(map), methodMap, context, domain);
-    var p1 = p0Value(pa1(map), methodMap, context, domain);
+    var p0 = pa0Value(pa0(map), methodMap, context, domain);
+    var p1 = pa0Value(pa1(map), methodMap, context, domain);
     if (p0 == p1) {
-      return p0Value(na['trueValue'], methodMap, context, domain);
+      return pa0Value(na['trueValue'], methodMap, context, domain);
     } else {
-      return p0Value(na['falseValue'], methodMap, context, domain);
+      return pa0Value(na['falseValue'], methodMap, context, domain);
     }
   }
 
@@ -687,14 +754,14 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   ) {
     var na = map['na'];
 
-    if (p0Value(pa0(map), methodMap, context, domain)) {
-      return p0Value(na['trueValue'], methodMap, context, domain);
+    if (pa0Value(pa0(map), methodMap, context, domain)) {
+      return pa0Value(na['trueValue'], methodMap, context, domain);
     } else {
-      return p0Value(na['falseValue'], methodMap, context, domain);
+      return pa0Value(na['falseValue'], methodMap, context, domain);
     }
   }
 
-  dynamic p0Value(
+  dynamic pa0Value(
     dynamic input,
     Map? methodMap,
     BuildContext context,
@@ -705,5 +772,98 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       list: pa.data,
     );
     return pa0(values);
+  }
+
+  dynamic _buildSugarNullableIndexedWidgetBuilder(
+      BuildContext context, Map map, Map? methodMap,
+      {Domain? domain}) {
+    dynamic source = pa0(map);
+    assert(source is Map);
+    List functionParameters = FunctionDomain.pa(source);            
+    NullableIndexedWidgetBuilder builder = (builderContext, index) {
+      return convert(
+        context,
+        source,
+        methodMap,
+        domain: FunctionDomain(
+          {
+            functionParameters[0]: builderContext,
+            functionParameters[1]: index,
+          },
+          parent: domain,
+        ),
+      );
+    };
+    return builder;
+  }
+
+  dynamic _buildSugarIndexedWidgetBuilder(
+      BuildContext context, Map map, Map? methodMap,
+      {Domain? domain}) {
+    dynamic source = pa0(map);
+    assert(source is Map);
+    List functionParameters = FunctionDomain.pa(source);            
+    IndexedWidgetBuilder builder = (builderContext, index) {
+      return convert(
+        context,
+        source,
+        methodMap,
+        domain: FunctionDomain(
+          {
+            functionParameters[0]: builderContext,
+            functionParameters[1]: index,
+          },
+          parent: domain,
+        ),
+      );
+    };
+    return builder;
+  }
+
+  dynamic _buildSugarWidgetBuilder(
+      BuildContext context, Map map, Map? methodMap,
+      {Domain? domain}) {
+    dynamic source = pa0(map);
+    assert(source is Map);
+    List functionParameters = FunctionDomain.pa(source);    
+    WidgetBuilder builder = (
+      builderContext,
+    ) {
+      return convert(
+        context,
+        source,
+        methodMap,
+        domain: FunctionDomain(
+          {
+            functionParameters[0]: builderContext,
+          },
+          parent: domain,
+        ),
+      );
+    };
+    return builder;
+  }
+
+  dynamic _buildSugarTransitionBuilder(
+      BuildContext context, Map map, Map? methodMap,
+      {Domain? domain}) {
+    dynamic source = pa0(map);
+    assert(source is Map);
+    List functionParameters = FunctionDomain.pa(source);    
+    TransitionBuilder builder = (builderContext, child) {
+      return convert(
+        context,
+        source,
+        methodMap,
+        domain: FunctionDomain(
+          {
+            functionParameters[0]: builderContext,
+            functionParameters[1]: child,
+          },
+          parent: domain,
+        ),
+      );
+    };
+    return builder;
   }
 }

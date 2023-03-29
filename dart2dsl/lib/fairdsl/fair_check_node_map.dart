@@ -6,13 +6,13 @@
 
 // **************************************************************************
 // 如果存在新文件需要更新，建议先执行清除命令：
-// flutter packages pub run build_runner clean 
-// 
+// flutter packages pub run build_runner clean
+//
 // 然后执行下列命令重新生成相应文件：
-// flutter packages pub run build_runner build --delete-conflicting-outputs 
+// flutter packages pub run build_runner build --delete-conflicting-outputs
 // 自动生成请勿修改
 // **************************************************************************
-final checkNode={
+final checkNode = {
   'DeclaredSimpleIdentifier': 'DeclaredSimpleIdentifier',
   'ConstructorDeclarationImpl': 'ConstructorDeclarationImpl',
   'InterpolationStringImpl': 'InterpolationStringImpl',
@@ -39,8 +39,9 @@ final checkNode={
   'ExpressionFunctionBodyImpl': 'visitExpressionFunctionBody',
   'FunctionExpressionImpl': 'visitFunctionExpression',
   'SimpleFormalParameterImpl': 'visitSimpleFormalParameter',
+  'DefaultFormalParameterImpl': 'visitDefaultFormalParameter',
   'FormalParameterListImpl': 'visitFormalParameterList',
-  'TypeNameImpl': 'visitTypeName',
+  'NamedTypeImpl': 'visitNamedType',
   'ReturnStatementImpl': 'visitReturnStatement',
   'MethodDeclarationImpl': 'visitMethodDeclaration',
   'NamedExpressionImpl': 'visitNamedExpression',
@@ -55,6 +56,5 @@ final checkNode={
   'ExtendsClauseImpl': 'visitExtendsClause',
   'ImplementsClauseImpl': 'visitImplementsClause',
   'WithClauseImpl': 'visitWithClause',
-  'PropertyAccessImpl': 'visitPropertyAccess',
-  'IndexExpressionImpl': 'visitIndexExpression'
+  'PropertyAccessImpl': 'visitPropertyAccess'
 };

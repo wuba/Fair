@@ -25,7 +25,8 @@ class BindingData {
   BindingData(this.modules,
       {this.data,
       Map<String, Function>? functions,
-      Map<String, PropertyValue>? values, Map<String, PropertyValue>? delegateValues})
+      Map<String, PropertyValue>? values,
+      Map<String, PropertyValue>? delegateValues})
       : _functions = functions,
         _values = values,
         super();
@@ -46,10 +47,11 @@ class BindingData {
       var result;
       if (RegExp(r'.+\(.+\)', multiLine: false).hasMatch(funcName)) {
         var rFuncName = funcName.substring(0, funcName.indexOf('('));
-        var params =
-        funcName.substring(funcName.indexOf('(') + 1 , funcName.lastIndexOf(')'));
+        var params = funcName.substring(
+            funcName.indexOf('(') + 1, funcName.lastIndexOf(')'));
         var args = params.split(',').map((e) {
-          if (RegExp(r'\^\(index\)', multiLine: false).hasMatch(e)) {
+          if (RegExp(r'\^\(index\)', multiLine: false).hasMatch(e) &&
+              domain is IndexDomain?) {
             return domain?.index;
           } else if (domain != null && domain.match(e)) {
             return domain.bindValue(e);
@@ -75,7 +77,8 @@ class BindingData {
 
   dynamic bindFunctionOf(String funcName) {
     if (_functions?[funcName] == null) {
-      return ([props]) => _functions?['runtimeInvokeMethod']?.call(funcName, props);
+      return ([props]) =>
+          _functions?['runtimeInvokeMethod']?.call(funcName, props);
     } else {
       return _functions?[funcName];
     }
