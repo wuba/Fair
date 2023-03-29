@@ -87,61 +87,42 @@ class BindingGenerator extends GeneratorForAnnotation<FairBinding> {
     var importsBuffer = <String>{};
     var resource =
         annotation.peek('packages')?.listValue.map((e) => e.toStringValue());
-    var list = [];
     if (resource != null && resource.isNotEmpty) {
-      await Future.forEach(
-          resource
-              .where((p) => p?.startsWith('package:')==true && p?.endsWith('.dart')==true),
-          (element) async {
+      for (var element in resource.where((p) =>
+          p?.startsWith('package:') == true && p?.endsWith('.dart') == true)) {
         buffer!.writeln(element);
         var str = element
             .toString()
             .substring(0, element.toString().indexOf('\/') + 1);
         var assetId = FairAssetId.resolve(element as String);
-        await _transitSource(buildStep, assetId, dir).then((value) {
-          var elements = [];
-          final result = parseFile(
-            path: value.path,
-            featureSet: FeatureSet.latestLanguageVersion(),
-          );
+        var file = await _transitSource(buildStep, assetId, dir);
 
-          final astRoot = result.unit;
-          for (final child in astRoot.directives) {
-            if (child is ExportDirective) {
-              var element = child.toString();
-              var package = element.substring(
-                  element.indexOf('\'') + 1, element.lastIndexOf('\''));
-              elements
-                  .add(element.contains('package:') ? package : str + package);
-            } else if (child is ImportDirective) {
-              importsBuffer.add(child.toString());
-            }
-          }
+        final result = parseFile(
+          path: file.path,
+          featureSet: FeatureSet.latestLanguageVersion(),
+        );
 
-          if (elements.isNotEmpty) {
-            list.addAll(elements);
-          }
-        });
-      });
-      if (list.isNotEmpty) {
-        await Future.forEach(
-            list.where((p) => p.startsWith('package:') && p.endsWith('.dart')),
-            (element) async {
-          buffer!.writeln(element);
-          var assetId = FairAssetId.resolve(element as String);
-          await _transitSource(buildStep, assetId, dir).then((value) {
+        final astRoot = result.unit;
+        for (final child in astRoot.directives) {
+          if (child is ExportDirective) {
+            var element = _getImportOrExportUri(child, str);
+            buffer!.writeln(element);
+            var assetId = FairAssetId.resolve(element);
+            var file = await _transitSource(buildStep, assetId, dir);
             final result = parseFile(
-              path: value.path,
+              path: file.path,
               featureSet: FeatureSet.latestLanguageVersion(),
             );
             final astRoot = result.unit;
             for (final child in astRoot.directives) {
               if (child is ImportDirective) {
-                importsBuffer.add(child.toString());
+                importsBuffer.add(_getImportOrExportUri(child, str));
               }
             }
-          });
-        });
+          } else if (child is ImportDirective) {
+            importsBuffer.add(_getImportOrExportUri(child, str));
+          }
+        }
       }
     }
 
@@ -164,6 +145,39 @@ class BindingGenerator extends GeneratorForAnnotation<FairBinding> {
       return '${package.absolute.path}';
     }
     return null;
+  }
+
+  String _getImportOrExportUri(
+    NamespaceDirective child,
+    String packageName,
+  ) {
+    var uri = child.uri.toString();
+    uri = uri.replaceAll('\'', '');
+    // analyzer 有bug，uri 也会返回后面的 as show hide
+    if (!uri.endsWith('.dart') && uri.contains('.dart')) {
+      uri = uri.split('.dart').first + '.dart';
+    }
+
+    var isDartSdk = uri.startsWith('dart:');
+    if (child is ExportDirective) {
+      if (!isDartSdk && !uri.startsWith('package:')) {
+        uri = packageName + uri;
+      }
+      return uri;
+    } else {
+      var full = child.toString();
+      // analyzer 有bug，会返回 'package:collection/src/unmodifiable_wrappers.dart show NonGrowableListMixin'; 这种格式
+      // 统一处理一下
+      full = full.replaceAll('\'', '');
+
+      full = full.replaceAll(uri, '\'$uri\'');
+
+      if (!isDartSdk && !uri.startsWith('package:')) {
+        full = full.replaceAll(uri, packageName + uri);
+      }
+
+      return full;
+    }
   }
 
   Future<File> _transitSource(
