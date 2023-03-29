@@ -136,6 +136,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         );
       } else if (name == 'Sugar.sliverChildBuilderDelegate') {
         return _buildSugarSliverChildBuilderDelegate(
+          name,
           mapper,
           map,
           methodMap,
@@ -675,13 +676,23 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }
 
   SliverChildBuilderDelegate _buildSugarSliverChildBuilderDelegate(
+      String name,
       Function mapEach,
       Map map,
       Map? methodMap,
       BuildContext context,
       Domain? domain) {
+    var naOrMap = {};
+    if (map['na'] != null) {
+      naOrMap.addAll(map['na']);
+    }
+    naOrMap.remove('builder');
+    var naPre = named(name, naOrMap, methodMap, context, domain);
+    var paPre = positioned(map['pa'], methodMap, context, domain);
+    Map naMap = Property.extract(list: paPre.data, map: naPre.data);
+
     Map na = map['na'];
-    var childCount = na['childCount'];
+    var childCount = naMap['childCount'];
     var builder = na['builder'];
     Map builderMap = <String, dynamic>{};
 
