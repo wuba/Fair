@@ -97,37 +97,6 @@ FairWidgetBinding provider = () {
         enableFeedback: p0.enableFeedback,
       );
     },
-    'Sugar.listBuilder':(props){
-      var p0 = pa0(props);
-      var p1 = pa1(props);
-      ListView paramsObj = ListView();
-      if(p1 is ListView){
-        paramsObj = p1 as ListView;
-      }
-
-      SliverChildListDelegate childrenDelegate = paramsObj.childrenDelegate as SliverChildListDelegate;
-      var listView = ListView(
-        scrollDirection:  paramsObj.scrollDirection,
-        reverse:  paramsObj.reverse,
-        controller:  paramsObj.controller,
-        primary:  paramsObj.primary,
-        physics:  paramsObj.physics,
-        shrinkWrap:  paramsObj.shrinkWrap,
-        padding:  paramsObj.padding,
-        itemExtent: paramsObj.itemExtent,
-        prototypeItem: paramsObj.prototypeItem,
-        addAutomaticKeepAlives: childrenDelegate.addAutomaticKeepAlives,
-        addRepaintBoundaries: childrenDelegate.addRepaintBoundaries,
-        addSemanticIndexes: childrenDelegate.addSemanticIndexes,
-        cacheExtent: paramsObj.cacheExtent,
-        semanticChildCount: paramsObj.semanticChildCount,
-        dragStartBehavior: paramsObj.dragStartBehavior,
-        keyboardDismissBehavior: paramsObj.keyboardDismissBehavior,
-        restorationId: paramsObj.restorationId,
-        clipBehavior: paramsObj.clipBehavior,
-        children: p0,);
-      return listView;
-    },
     'Sugar.isButtonStyle':(props){
       var p0 = pa0(props);
       var p1 = pa1(props);
@@ -174,21 +143,6 @@ FairWidgetBinding provider = () {
       if(null!=props['microseconds']){microseconds=props['microseconds'];}
       return Duration(days:days,hours:hours,minutes:minutes,seconds: seconds,milliseconds:milliseconds,microseconds:microseconds);
   },
-
-    'Sugar.sliverChildBuilderDelegate': (props) {
-      var p0 = pa0(props);
-      List<Widget> p1 = pa1(props);
-      var p2 = pa2(props);
-
-      var sliverChildBuilderDelegate = SliverChildBuilderDelegate(
-            (p0, index) {
-          return  p1[index];
-        },
-        childCount: p2,);
-      return sliverChildBuilderDelegate;
-    },
-
-
     'Sugar.sliverGridDelegateWithFixedCrossAxisCount': (props) {
       Map<String, dynamic> p0 = pa0(props);
 
