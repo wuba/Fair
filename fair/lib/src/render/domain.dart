@@ -24,7 +24,6 @@ abstract class IndexDomain extends Domain {
 /// 暂时留着，适配之前的代码
 /// Sugar.popMenuButton
 /// Sugar.listBuilder 现在可以简单支持，看需要移除不
-/// Sugar.isNestedScrollViewHeaderSliversBuilder
 /// Sugar.sliverChildBuilderDelegate 现在可以简单支持，看需要移除不
 class MapEachDomain extends IndexDomain {
   MapEachDomain(this.source, {required Domain? parent}) : super(parent: parent);
@@ -139,14 +138,28 @@ class FunctionDomain extends Domain {
   }
 
   /// 获取 named 参数
+  /// 命名参数的名字不会变化，使用的时候名字相同对应就行了
   static List na(Map map) {
     return _getParameters(map, true);
   }
-
+  
+  /// 获取参数
   static List<dynamic> _getParameters(Map<dynamic, dynamic> map, bool isNamed) {
-    var parameters = map['functionParameters']?[isNamed ? 'na' : 'pa'];
+   
+   assert(map['className']=='FairFunction');
+   assert(map.containsKey('parameters'));
+
+    var parameters = map['parameters']?[isNamed ? 'na' : 'pa'];
     return parameters ?? [];
   }
+  
+  /// 获取 function 的body
+  static dynamic getBody(Map map) {
+    assert(map['className']=='FairFunction');
+    assert(map.containsKey('body'));
+    return map['body'];
+  }
+
 
   @override
   dynamic bindValue(String exp) {

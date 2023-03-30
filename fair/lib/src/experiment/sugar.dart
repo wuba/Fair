@@ -97,13 +97,9 @@ class Sugar {
   }
 
   static NestedScrollViewHeaderSliversBuilder
-      isNestedScrollViewHeaderSliversBuilder(
-          {required BuildContext context,
-          required bool innerBoxIsScrolled,
-          required List<Widget> headerSliverBuilder}) {
-    return (BuildContext context, bool innerBoxIsScrolled) {
-      return headerSliverBuilder;
-    };
+      nestedScrollViewHeaderSliversBuilder(
+          NestedScrollViewHeaderSliversBuilder builder,) {
+    return builder;
   }
 
   static ButtonStyle isButtonStyle({
