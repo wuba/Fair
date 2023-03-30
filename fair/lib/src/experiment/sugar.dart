@@ -47,54 +47,6 @@ class Sugar {
     return data.mapEach((index, item) => builder(item));
   }
 
-  /// ListView.builder()
-  static ListView listBuilder({
-    Key? key,
-    Axis scrollDirection = Axis.vertical,
-    bool reverse = false,
-    ScrollController? controller,
-    bool? primary,
-    ScrollPhysics? physics,
-    bool shrinkWrap = false,
-    EdgeInsetsGeometry? padding,
-    double? itemExtent,
-    Widget? prototypeItem,
-    bool addAutomaticKeepAlives = true,
-    bool addRepaintBoundaries = true,
-    bool addSemanticIndexes = true,
-    double? cacheExtent,
-    int? semanticChildCount,
-    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-    ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
-        ScrollViewKeyboardDismissBehavior.manual,
-    String? restorationId,
-    Clip clipBehavior = Clip.hardEdge,
-    required IndexedWidgetBuilder itemBuilder,
-    int? itemCount,
-  }) {
-    return ListView.builder(
-        key: key,
-        scrollDirection: scrollDirection,
-        reverse: reverse,
-        controller: controller,
-        primary: primary,
-        physics: physics,
-        shrinkWrap: shrinkWrap,
-        padding: padding,
-        itemExtent: itemExtent,
-        prototypeItem: prototypeItem,
-        addAutomaticKeepAlives: addAutomaticKeepAlives,
-        addRepaintBoundaries: addRepaintBoundaries,
-        addSemanticIndexes: addSemanticIndexes,
-        cacheExtent: cacheExtent,
-        semanticChildCount: semanticChildCount,
-        dragStartBehavior: dragStartBehavior,
-        keyboardDismissBehavior: keyboardDismissBehavior,
-        restorationId: restorationId,
-        clipBehavior: clipBehavior,
-        itemCount: itemCount,
-        itemBuilder: itemBuilder);
-  }
 
   static NestedScrollViewHeaderSliversBuilder
       nestedScrollViewHeaderSliversBuilder(
@@ -255,14 +207,6 @@ class Sugar {
       };
 
   static Null Function() onTapEmpty() => () {};
-
-  /*CustomScrollView-common-delegate*/
-  static SliverChildBuilderDelegate sliverChildBuilderDelegate(
-      {Key? key,
-      required NullableIndexedWidgetBuilder builder,
-      int? childCount}) {
-    return SliverChildBuilderDelegate((builder), childCount: childCount);
-  }
 
   /*CustomScrollView-SliverGrid*/
   static SliverGridDelegateWithFixedCrossAxisCount

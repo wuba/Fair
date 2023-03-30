@@ -120,22 +120,10 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         return _buildSugarMapEach(mapper, map, methodMap, context, domain);
       } else if (name == 'Sugar.map') {
         return _buildSugarMap(mapper, map, methodMap, context, domain);
-      } else if (name == 'Sugar.listBuilder') {
-        return _buildSugarListBuilder(
-            name, domain, mapper, map, methodMap, context);
       } else if (name == 'Sugar.isButtonStyle') {
         return _buildSugarButtonStyle(mapper, map, methodMap, context);
       } else if (name == 'Sugar.popMenuButton') {
         return _popupMenuBuilder(
-          mapper,
-          map,
-          methodMap,
-          context,
-          domain,
-        );
-      } else if (name == 'Sugar.sliverChildBuilderDelegate') {
-        return _buildSugarSliverChildBuilderDelegate(
-          name,
           mapper,
           map,
           methodMap,
@@ -478,44 +466,6 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return mapEach.call(params);
   }
 
-  ListView _buildSugarListBuilder(
-    String name,
-    Domain? domain,
-    Function mapEach,
-    Map map,
-    Map? methodMap,
-    BuildContext context,
-  ) {
-    var propertyTransMap = Map.from(map);
-
-    var naOrMap = {};
-    if (map['na'] != null) {
-      naOrMap.addAll(map['na']);
-    }
-    var itemBuilder = naOrMap['itemBuilder'];
-    naOrMap.remove('itemBuilder');
-
-    var na = named(name, naOrMap, methodMap, context, domain);
-    var pa = positioned(map['pa'], methodMap, context, domain);
-    Map naMap = Property.extract(list: pa.data, map: na.data);
-
-    propertyTransMap['className'] = 'ListView';
-    propertyTransMap['na'] = naMap;
-    var propertiesProvider = convert(context, propertyTransMap, methodMap);
-
-    var count = naMap['itemCount'];
-    var source = List<int>.generate(count, (i) => i + 1);
-    var list = MapEachDomain(itemBuilder, parent: domain).forEach(($, _) {
-      return convert(context, itemBuilder, methodMap, domain: $) as Widget;
-    });
-    var children = list.map((e) => e as Widget).toList();
-    var params = {
-      'pa': [children, propertiesProvider]
-    };
-
-    return mapEach.call(params);
-  }
-
   NestedScrollViewHeaderSliversBuilder _buildNestedScrollViewHeaderSlivers(
       Map map,
       Map? methodMap,
@@ -684,54 +634,6 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return name != null;
   }
 
-  SliverChildBuilderDelegate _buildSugarSliverChildBuilderDelegate(
-      String name,
-      Function mapEach,
-      Map map,
-      Map? methodMap,
-      BuildContext context,
-      Domain? domain) {
-    var naOrMap = {};
-    if (map['na'] != null) {
-      naOrMap.addAll(map['na']);
-    }
-    naOrMap.remove('builder');
-    var naPre = named(name, naOrMap, methodMap, context, domain);
-    var paPre = positioned(map['pa'], methodMap, context, domain);
-    Map naMap = Property.extract(list: paPre.data, map: naPre.data);
-
-    Map na = map['na'];
-    var childCount = naMap['childCount'];
-    var builder = na['builder'];
-    Map builderMap = <String, dynamic>{};
-
-    //函数传入处理
-    if (methodMap != null && methodMap.keys.isNotEmpty) {
-      methodMap.keys.forEach((element) {
-        if (builder is String && builder.contains(element)) {
-          builderMap = methodMap[element];
-        }
-      });
-    }
-    // 常规
-    if (builderMap.isEmpty) {
-      builderMap = na['builder'];
-    }
-
-    var source = List<int>.generate(childCount, (i) => i + 1);
-
-    var list = MapEachDomain(source, parent: domain).forEach(($, _) {
-      //拿到所有itemBuilder对应的数组
-      return convert(context, builderMap, methodMap, domain: $) as Widget;
-    });
-    List<Widget> children = list.map((e) => e as Widget).toList();
-
-    var params = {
-      'pa': [context, children, childCount]
-    };
-
-    return mapEach.call(params);
-  }
 
   SliverGridDelegateWithFixedCrossAxisCount
       _buildSugarSliverGridDelegateWithFixedCrossAxisCount(
