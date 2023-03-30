@@ -74,7 +74,11 @@ FairWidgetBinding provider = () {
         suffixIcon: props['suffixIcon'],
         border: props['border'],
         focusedBorder: props['focusedBorder'],
-        enabledBorder: props['enabledBorder']),
+        enabledBorder: props['enabledBorder'],
+        hintText: props['hintText'],
+        hintStyle: props['hintStyle'],
+        hintTextDirection: props['hintTextDirection'],
+        hintMaxLines: props['hintMaxLines']),
     'OutlineInputBorder': (props) => OutlineInputBorder(
         borderRadius: props['borderRadius'], borderSide: props['borderSide']),
     'BorderSide': (props) => BorderSide(
