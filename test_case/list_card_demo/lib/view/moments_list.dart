@@ -15,10 +15,10 @@ class _MomentsListState extends State<MomentsList> {
   Widget build(BuildContext context) {
     return Container(
       child: NestedScrollView(
-        headerSliverBuilder: Sugar.isNestedScrollViewHeaderSliversBuilder(
-            context: context,
-            innerBoxIsScrolled: false,
-            headerSliverBuilder: <Widget>[SliverAppBar(
+        headerSliverBuilder: Sugar.nestedScrollViewHeaderSliversBuilder(
+            (context, innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
               pinned: true,
               stretch: true,
               expandedHeight: 200,
@@ -26,22 +26,29 @@ class _MomentsListState extends State<MomentsList> {
               elevation: 0,
               backgroundColor: Colors.white,
               leading: IconButton(
-                  icon: Image.asset(
-                    'assets/images/left.png',
-                    height: 22,
-                    width: 22,
-                  ),
-                onPressed: (()=>{}),
+                icon: Image.asset(
+                  'assets/images/left.png',
+                  height: 22,
+                  width: 22,
+                ),
+                onPressed: (() => {}),
               ),
               flexibleSpace: FlexibleSpaceBar(
-                title: Row(children: [Padding(padding: EdgeInsets.fromLTRB(50, 10, 10, 2),child: Text(
-                  "欢迎来到妮妮朋友圈",
-                  style: TextStyle(
-                    color: Color(0xFF333333),
-                    fontWeight: FontWeight.w700,
-                    fontSize: 17,
-                  ),
-                ),)],),
+                title: Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(50, 10, 10, 2),
+                      child: Text(
+                        "欢迎来到妮妮朋友圈",
+                        style: TextStyle(
+                          color: Color(0xFF333333),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 17,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
                 //标题居中
                 centerTitle: true,
                 background: Image.network(
@@ -49,22 +56,20 @@ class _MomentsListState extends State<MomentsList> {
                   fit: BoxFit.fill,
                 ),
               ),
-            )]),
+            )
+          ];
+        }),
         body: Container(
-          color: Colors.white,
-          child: Sugar.listBuilder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return
-                  // ListCardItem();
+            color: Colors.white,
+            child: ListView.builder(
+              itemBuilder: Sugar.indexedWidgetBuilder((context, index) =>
                   FairWidget(
-                    name: 'itme',
-                    path: 'assets/bundle/lib_view_list_card_item.fair.json',
-                    data: const {"": ""});
-              }),
-        ),
+                      name: 'itme',
+                      path: 'assets/bundle/lib_view_list_card_item.fair.json',
+                      data: const {"": ""})),
+              itemCount: 5,
+            )),
       ),
     );
   }
 }
-

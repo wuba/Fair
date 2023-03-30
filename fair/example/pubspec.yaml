@@ -31,11 +31,18 @@ dev_dependencies:
 
 # Switch to another stable flutter version
 dependency_overrides:
-   fair_version:
+  fair_version:
      path: ../../flutter_version/flutter_3_3_0
-   collection: 1.17.0
+  fair:
+    path: ../../fair
+  fair_compiler:
+    path: ../../compiler
+  fair_dart2dsl:
+    path: ../../dart2dsl
+  fair_dart2js:
+    path: ../../dart2js   
+  collection: 1.17.0
 
-#dependency_overrides:
 #   fair_version:
 #     path: ../../flutter_version/flutter_2_5_0
 #   analyzer: 2.7.0

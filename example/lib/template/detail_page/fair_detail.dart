@@ -1,5 +1,5 @@
+import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
-import 'package:example/plugins/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -22,13 +22,13 @@ class _FairDetailState extends State<FairDetail> {
   void onUnload() {}
 
   void requestData() {
-    FairNet().request({
+    FairCommonPlugin().http({
       'pageName': '#FairKey#',
       'method': 'GET',
       'url':
           'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/59383a3efd1554c4c8fbaa8eb3700a44_fair_detail_data.json',
       'data': {'page': 0},
-      'success': (resp) {
+      'callback': (resp) {
         if (resp == null) {
           return;
         }

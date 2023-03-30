@@ -5,7 +5,6 @@
  */
 
 import 'package:fair/fair.dart';
-import 'package:fair_example/src/page/plugins/net/fair_net_plugin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

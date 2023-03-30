@@ -21,12 +21,12 @@ dependencies:
       url: https://github.com/wuba/fair.git
       ref: main
       path: fair
-
+  flutter_staggered_grid_view: ^0.6.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^2.0.0
-  flutter_staggered_grid_view: ^0.6.2
+  build_runner: 2.3.3
+
   fair_compiler:
     git:
       url: https://github.com/wuba/fair.git
@@ -34,9 +34,21 @@ dev_dependencies:
       path: compiler
 
 dependency_overrides:
+  build_runner: 2.3.3
+  build_resolvers: 2.2.0
+  source_gen: 1.2.7
+  analyzer: 5.5.0
+  collection: 1.17.0
   fair_version:
     path: ../flutter_version/flutter_3_3_0
-
+  fair:
+    path: ../fair
+  fair_compiler:
+    path: ../compiler
+  fair_dart2dsl:
+    path: ../dart2dsl
+  fair_dart2js:
+    path: ../dart2js              
 flutter:
 
   uses-material-design: true

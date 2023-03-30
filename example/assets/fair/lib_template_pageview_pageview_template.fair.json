@@ -33,53 +33,69 @@
           "className": "PageView.custom",
           "na": {
             "childrenDelegate": {
-              "className": "Sugar.sliverChildBuilderDelegate",
-              "na": {
-                "builder": {
-                  "className": "Column",
-                  "na": {
-                    "crossAxisAlignment": "#(CrossAxisAlignment.center)",
-                    "children": [
-                      {
-                        "className": "AspectRatio",
+              "className": "SliverChildBuilderDelegate",
+              "pa": [
+                {
+                  "className": "Sugar.nullableIndexedWidgetBuilder",
+                  "pa": [
+                    {
+                      "className": "FairFunction",
+                      "body": {
+                        "className": "Column",
                         "na": {
-                          "aspectRatio": 1.5,
-                          "child": {
-                            "className": "ClipRRect",
-                            "na": {
-                              "borderRadius": {
-                                "className": "BorderRadius.all",
-                                "pa": [
-                                  {
-                                    "className": "Radius.circular",
-                                    "pa": [
-                                      4.0
-                                    ]
+                          "crossAxisAlignment": "#(CrossAxisAlignment.center)",
+                          "children": [
+                            {
+                              "className": "AspectRatio",
+                              "na": {
+                                "aspectRatio": 1.5,
+                                "child": {
+                                  "className": "ClipRRect",
+                                  "na": {
+                                    "borderRadius": {
+                                      "className": "BorderRadius.all",
+                                      "pa": [
+                                        {
+                                          "className": "Radius.circular",
+                                          "pa": [
+                                            4.0
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "child": {
+                                      "className": "Image.network",
+                                      "pa": [
+                                        "%(_getImagePath(^(index)))"
+                                      ],
+                                      "na": {
+                                        "fit": "#(BoxFit.cover)"
+                                      }
+                                    }
                                   }
-                                ]
-                              },
-                              "child": {
-                                "className": "Image.network",
-                                "pa": [
-                                  "%(_getImagePath(^(index)))"
-                                ],
-                                "na": {
-                                  "fit": "#(BoxFit.cover)"
                                 }
                               }
+                            },
+                            {
+                              "className": "Text",
+                              "pa": [
+                                "%(_getText(^(index)))"
+                              ]
                             }
-                          }
+                          ]
                         }
                       },
-                      {
-                        "className": "Text",
+                      "parameters": {
                         "pa": [
-                          "%(_getText(^(index)))"
+                          "context",
+                          "index"
                         ]
                       }
-                    ]
-                  }
-                },
+                    }
+                  ]
+                }
+              ],
+              "na": {
                 "childCount": 3
               }
             }

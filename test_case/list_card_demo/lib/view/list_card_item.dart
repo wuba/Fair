@@ -24,8 +24,9 @@ class _ListCardItemState extends State<ListCardItem> {
                   children: [
                     CircleAvatar(
                       radius: 30,
-                      backgroundImage: Sugar.netWorkImage(
-                          "http://c-ssl.duitang.com/uploads/item/202003/26/20200326223552_nayyt.jpeg"),
+                      backgroundImage: NetworkImage(
+                        "http://c-ssl.duitang.com/uploads/item/202003/26/20200326223552_nayyt.jpeg",
+                      ),
                     ),
                     SizedBox(
                       width: 20,
@@ -64,10 +65,8 @@ class _ListCardItemState extends State<ListCardItem> {
               ),
             ),
             Card(
-              child: Image(
-                image: Sugar.netWorkImage(
-                    "https://img2.baidu.com/it/u=4114138728,2649938841&fm=253&fmt=auto&app=138&f=JPEG"),
-              ),
+              child: Image.network(
+                  "https://img2.baidu.com/it/u=4114138728,2649938841&fm=253&fmt=auto&app=138&f=JPEG"),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
