@@ -394,7 +394,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
     var children = [];
     if (source is List) {
-      var itemBuilder = pa1(map);
+      var itemBuilder = map['na']['builder'];
       // item
       var functionParameters = FunctionDomain.pa(itemBuilder);
       assert(functionParameters.length == 1, 'Sugar.map 的域入参个数不对');
