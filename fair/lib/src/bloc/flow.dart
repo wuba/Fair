@@ -128,12 +128,6 @@ FairWidgetBinding provider = () {
         children: p0,);
       return listView;
     },
-    'Sugar.isNestedScrollViewHeaderSliversBuilder':(props){
-      var p2 = pa2(props);
-      var nestedScrollViewHeaderSliversBuilder=(BuildContext context, bool innerBoxIsScrolled){return (p2 as List<Widget>);};
-      return nestedScrollViewHeaderSliversBuilder;
-    },
-
     'Sugar.isButtonStyle':(props){
       var p0 = pa0(props);
       var p1 = pa1(props);
