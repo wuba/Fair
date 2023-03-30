@@ -120,10 +120,10 @@ class JRListState extends State<JRListWidget> {
             displacement: 10.0,
             onRefresh: _onRefresh,
             child: Sugar.ifEqualBool(listIsEmpty(),
-                trueValue: Center(
+                trueValue: ()=>Center(
                   child: CircularProgressIndicator(), //没有数据就转圈
                 ),
-                falseValue: ListView.builder(
+                falseValue: ()=>ListView.builder(
                     controller: _scrollController,
                     itemCount: _itemCount(),
                     itemBuilder: _itemBuilder))),

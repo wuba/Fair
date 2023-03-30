@@ -54,34 +54,42 @@
               ],
               "na": {
                 "builder": {
-                  "className": "AspectRatio",
-                  "na": {
-                    "aspectRatio": "$(item.ratio)",
-                    "child": {
-                      "className": "ClipRRect",
-                      "na": {
-                        "borderRadius": {
-                          "className": "BorderRadius.all",
-                          "pa": [
-                            {
-                              "className": "Radius.circular",
-                              "pa": [
-                                4.0
-                              ]
+                  "className": "FairFunction",
+                  "body": {
+                    "className": "AspectRatio",
+                    "na": {
+                      "aspectRatio": "$(item.ratio)",
+                      "child": {
+                        "className": "ClipRRect",
+                        "na": {
+                          "borderRadius": {
+                            "className": "BorderRadius.all",
+                            "pa": [
+                              {
+                                "className": "Radius.circular",
+                                "pa": [
+                                  4.0
+                                ]
+                              }
+                            ]
+                          },
+                          "child": {
+                            "className": "Image.network",
+                            "pa": [
+                              "$(item.picUrl)"
+                            ],
+                            "na": {
+                              "fit": "#(BoxFit.cover)"
                             }
-                          ]
-                        },
-                        "child": {
-                          "className": "Image.network",
-                          "pa": [
-                            "$(item.picUrl)"
-                          ],
-                          "na": {
-                            "fit": "#(BoxFit.cover)"
                           }
                         }
                       }
                     }
+                  },
+                  "parameters": {
+                    "pa": [
+                      "item"
+                    ]
                   }
                 }
               }

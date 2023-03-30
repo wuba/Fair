@@ -62,8 +62,8 @@ class _State extends State<IfEqualBoolPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Sugar.ifEqualBool(_countCanMod2(),
-                falseValue: Image.asset('assets/image/logo.png'),
-                trueValue: Image.asset('assets/image/logo2.png')),
+                falseValue: ()=>Image.asset('assets/image/logo.png'),
+                trueValue: ()=>Image.asset('assets/image/logo2.png')),
             Padding(
               padding: EdgeInsets.only(top: 20),
               child: Text('_count = $_count'),

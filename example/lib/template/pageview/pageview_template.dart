@@ -1,5 +1,5 @@
+import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
-import 'package:example/plugins/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -22,13 +22,13 @@ class _PageViewTemplateState extends State<PageViewTemplate> {
 
   void requestData() {
     _page++;
-    FairNet().request({
+    FairCommonPlugin().http({
       'pageName': '#FairKey#',
       'method': 'GET',
       'url':
           'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/81900c8ba18b20328389b43c729a251e_tabbar_data.json',
       'data': {'page': _page},
-      'success': (resp) {
+      'callback': (resp) {
         if (resp == null) {
           return;
         }
@@ -64,19 +64,19 @@ class _PageViewTemplateState extends State<PageViewTemplate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('PageView模版'),
+      appBar: AppBar(
+        title: Text('PageView模版'),
+      ),
+      body: Sugar.ifEqualBool(
+        isDataEmpty(),
+        trueValue: () => Center(
+          child: Text(
+            '加载中...',
+          ),
         ),
-        body: Sugar.ifEqualBool(isDataEmpty(),
-            trueValue: Center(
-              child: Text(
-                '加载中...',
-              ),
-            ),
-            falseValue: PageView.custom(
-              childrenDelegate: Sugar.sliverChildBuilderDelegate(
-                builder: (context, index) {
-                  return Column(
+        falseValue: () => PageView.custom(
+          childrenDelegate: SliverChildBuilderDelegate(
+              Sugar.nullableIndexedWidgetBuilder((context, index) => Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       AspectRatio(
@@ -90,11 +90,11 @@ class _PageViewTemplateState extends State<PageViewTemplate> {
                       ),
                       Text(_getText(index)),
                     ],
-                  );
-                },
-                childCount: 3,
-              ),
-            )));
+                  )),
+              childCount: 3),
+        ),
+      ),
+    );
   }
 }
 

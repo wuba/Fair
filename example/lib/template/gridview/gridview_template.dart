@@ -1,5 +1,5 @@
+import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
-import 'package:example/plugins/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -22,13 +22,13 @@ class _GridViewTemplateState extends State<GridViewTemplate> {
 
   void requestData() {
     _page++;
-    FairNet().request({
+    FairCommonPlugin().http({
       'pageName': '#FairKey#',
       'method': 'GET',
       'url':
           'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/6f8e5d9e196cbaa4a46041928770b187_grid_data.json',
       'data': {'page': _page},
-      'success': (resp) {
+      'callback': (resp) {
         if (resp == null) {
           return;
         }
@@ -62,25 +62,26 @@ class _GridViewTemplateState extends State<GridViewTemplate> {
           child: Icon(Icons.add),
         ),
         body: Sugar.ifEqualBool(isDataEmpty(),
-            trueValue: Center(
-              child: Text(
-                '加载中...',
-              ),
-            ),
-            falseValue: GridView.count(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              children: Sugar.map(_listData, builder: (ItemData item) {
-                return AspectRatio(
-                  aspectRatio: 1.5,
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                    child: Image.network(item.picUrl, fit: BoxFit.cover),
+            trueValue: () => Center(
+                  child: Text(
+                    '加载中...',
                   ),
-                );
-              }),
-            )));
+                ),
+            falseValue: () => GridView.count(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  children: Sugar.map(_listData, builder: (ItemData item) {
+                    return AspectRatio(
+                      aspectRatio: 1.5,
+                      child: ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(4.0)),
+                        child: Image.network(item.picUrl, fit: BoxFit.cover),
+                      ),
+                    );
+                  }),
+                )));
   }
 }
 
