@@ -10,8 +10,8 @@ class PopupMenuDemo extends StatefulWidget {
 class PopupMenuState extends State<PopupMenuDemo> {
   String _selectedMenu = '';
 
-  void _onSelected(String item) {
-    setState(() =>_selectedMenu = item);
+  void _onSelected(dynamic item) {
+    setState(() =>_selectedMenu = item.toString());
   }
 
   @override
@@ -19,9 +19,9 @@ class PopupMenuState extends State<PopupMenuDemo> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          Sugar.popMenuButton(
-              onSelected: _onSelected,
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+          PopupMenuButton(itemBuilder:
+            Sugar.popMenuButtonItemBuilder((context){
+            return <PopupMenuEntry<String>>[
               const PopupMenuItem<String>(
                 value: 'Item 1',
                 child: Text('Item 1'),
@@ -38,7 +38,9 @@ class PopupMenuState extends State<PopupMenuDemo> {
                 value: 'Item 4',
                 child: Text('Item 4'),
               ),
-            ],
+            ];
+          }) ,
+            onSelected: _onSelected,
           ),
         ],
       ),

@@ -97,7 +97,15 @@ class DynamicWidgetBuilder extends DynamicBuilder {
           context,
           domain,
         );
+      } else if (name == 'Sugar.popMenuButtonItemBuilder') {
+        return _buildPopMenuButtonItemBuilder(
+          map,
+          methodMap,
+          context,
+          domain,
+        );
       }
+
 
       var module = bound?.modules?.moduleOf(name)?.call();
       var isWidget = module?.isWidget ?? false;
@@ -121,14 +129,6 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         return _buildSugarMap(mapper, map, methodMap, context, domain);
       } else if (name == 'Sugar.isButtonStyle') {
         return _buildSugarButtonStyle(mapper, map, methodMap, context);
-      } else if (name == 'Sugar.popMenuButton') {
-        return _popupMenuBuilder(
-          mapper,
-          map,
-          methodMap,
-          context,
-          domain,
-        );
       } else if (name == 'Sugar.sliverGridDelegateWithFixedCrossAxisCount') {
         return _buildSugarSliverGridDelegateWithFixedCrossAxisCount(
             mapper, map, methodMap, context);
@@ -136,13 +136,17 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
       var source = map['mapEach'];
       if (source != null && source is List) {
-        var children = MapEachDomain(
-          source,
-          parent: domain,
-        ).forEach(($, _) {
-          return block(map, methodMap, context, $, mapper, name, isWidget);
-        });
-        return children.asListOf<Widget>() ?? children;
+        List children=[];
+       for (var i = 0; i < source.length; i++) {
+         var element = source[i];
+         children.add(
+          block(map, methodMap, context, FunctionDomain({
+            'item': element,
+            'index': i,
+          },parent: domain), mapper, name, isWidget)
+         );
+       }      
+       return children.asListOf<Widget>() ?? children;
       }
       return block(map, methodMap, context, domain, mapper, name, isWidget);
     } catch (e) {
@@ -435,35 +439,6 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
     var defaultValue = pa2(map);
     return pa0Value(defaultValue, methodMap, context, domain);
-  }
-
-  PopupMenuButton _popupMenuBuilder(Function mapEach, Map map, Map? methodMap,
-      BuildContext context, Domain? domain) {
-    var propertyTransMap = Map.from(map);
-    Map na = map['na'];
-    var itemBuilder = na['itemBuilder'];
-    propertyTransMap['className'] = 'PopupMenuButton';
-    //刷新时
-    if (itemBuilder is Function) {
-      var propertiesProvider = convert(context, propertyTransMap, methodMap);
-      return mapEach.call({
-        'pa': [propertiesProvider]
-      });
-    }
-    //第一次解析
-    if (itemBuilder is List) {
-      var list =
-          MapEachDomain(itemBuilder, parent: domain).forEach(($, element) {
-        return convert(context, element, methodMap, domain: $) as Widget;
-      });
-      var children = list.map((e) => e as PopupMenuEntry<Object>).toList();
-      na['itemBuilder'] = (BuildContext context) => children;
-    }
-    var propertiesProvider = convert(context, propertyTransMap, methodMap);
-    var params = {
-      'pa': [propertiesProvider]
-    };
-    return mapEach.call(params);
   }
 
   NestedScrollViewHeaderSliversBuilder _buildNestedScrollViewHeaderSlivers(
@@ -784,5 +759,32 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       );
     };
     return builder;
+  }
+  
+  dynamic _buildPopMenuButtonItemBuilder(Map map, Map? methodMap, BuildContext context, Domain? domain) {
+    final dynamic fairFunction = pa0(map);
+    assert(fairFunction is Map);
+    final List functionParameters = FunctionDomain.pa(fairFunction);
+    final PopupMenuItemBuilder<Object> builder =
+        (BuildContext builderContext) {
+      final body = FunctionDomain.getBody(fairFunction);
+      final List<PopupMenuEntry<Object>> list = <PopupMenuEntry<Object>>[];
+      for (final element in body) {
+        final widget = convert(
+          context,
+          element,
+          methodMap,
+          domain: FunctionDomain(
+            {
+              functionParameters[0]: builderContext,
+            },
+            parent: domain,
+          ),
+        );
+        list.add(widget as PopupMenuEntry<Object>);
+      }
+      return list;
+    };
+    return builder;    
   }
 }

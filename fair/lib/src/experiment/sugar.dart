@@ -116,44 +116,6 @@ class Sugar {
     );
   }
 
-  ///popmenu
-  static PopupMenuButton popMenuButton<T>(
-      {Key? key,
-      required PopupMenuItemBuilder<T> itemBuilder,
-      PopupMenuItemSelected<T>? onSelected,
-      T? initialValue,
-      EdgeInsetsGeometry padding = const EdgeInsets.all(8.0),
-      PopupMenuCanceled? onCanceled,
-      String? tooltip,
-      double? elevation,
-      Widget? child,
-      Widget? icon,
-      double? iconSize,
-      ShapeBorder? shape,
-      Offset offset = Offset.zero,
-      bool enabled = true,
-      Color? color,
-      bool? enableFeedback}) {
-    return PopupMenuButton<T>(
-      key: key,
-      itemBuilder: itemBuilder,
-      onSelected: onSelected,
-      initialValue: initialValue,
-      padding: padding,
-      onCanceled: onCanceled,
-      tooltip: tooltip,
-      elevation: elevation,
-      icon: icon,
-      iconSize: iconSize,
-      shape: shape,
-      offset: offset,
-      enabled: enabled,
-      color: color,
-      enableFeedback: enableFeedback,
-      child: child,
-    );
-  }
-
   static K switchCase<T, K>(T key, List<SugarSwitchCaseObj<T, K>> caseObjects,
       K Function() defaultValue) {
     for (SugarSwitchCaseObj<T, K> sugarCase in caseObjects) {
@@ -236,6 +198,8 @@ class Sugar {
 
   static TransitionBuilder transitionBuilder(TransitionBuilder builder) =>
       builder;
+
+  static PopupMenuItemBuilder popMenuButtonItemBuilder(PopupMenuItemBuilder builder) => builder;    
 }
 
 class SugarSwitchCaseObj<T, K> {

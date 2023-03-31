@@ -1524,6 +1524,19 @@ var p = () => {
       'PopupMenuButton#onCanceled': (props) => () {
             return (props['block']);
           },
+      'PopupMenuDivider': (props) => PopupMenuDivider(
+            key: props['key'],
+            height: props['height']?.toDouble() ?? _kMenuDividerHeight,
+          ),
+      'PopupMenuItem': (props) => PopupMenuItem(
+            key: props['key'],
+            value: props['value'],
+            enabled: props['enabled'] ?? true,
+            height: props['height']?.toDouble() ?? kMinInteractiveDimension,
+            textStyle: props['textStyle'],
+            child: props['child'],
+            mouseCursor: props['mouseCursor'],
+          ),          
       'ExpandIcon': (props) => ExpandIcon(
             key: props['key'],
             isExpanded: props['isExpanded'] ?? false,

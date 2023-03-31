@@ -1,0 +1,495 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "SugarDemo"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "SingleChildScrollView",
+      "na": {
+        "child": {
+          "className": "Column",
+          "na": {
+            "children": [
+              {
+                "className": "Column",
+                "na": {
+                  "children": {
+                    "className": "Sugar.mapEach",
+                    "pa": [
+                      [
+                        {
+                          "className": "Person",
+                          "na": {
+                            "name": "kk",
+                            "age": 18,
+                            "wei": 99
+                          }
+                        },
+                        {
+                          "className": "Person",
+                          "na": {
+                            "name": "mm",
+                            "age": 14,
+                            "wei": 88
+                          }
+                        }
+                      ],
+                      {
+                        "className": "FairFunction",
+                        "body": {
+                          "className": "Container",
+                          "na": {
+                            "height": 50,
+                            "width": {
+                              "className": "Sugar.width",
+                              "pa": [
+                                "^(context)"
+                              ]
+                            },
+                            "child": {
+                              "className": "Center",
+                              "na": {
+                                "child": {
+                                  "className": "Row",
+                                  "na": {
+                                    "children": [
+                                      {
+                                        "className": "Text",
+                                        "pa": [
+                                          "$(item.name)"
+                                        ]
+                                      },
+                                      {
+                                        "className": "Text",
+                                        "pa": [
+                                          "#(${item.age})"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "parameters": {
+                          "pa": [
+                            "index",
+                            "item"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "className": "Container",
+                "na": {
+                  "height": 50,
+                  "width": {
+                    "className": "Sugar.width",
+                    "pa": [
+                      "^(context)"
+                    ]
+                  },
+                  "margin": {
+                    "className": "EdgeInsets.only",
+                    "na": {
+                      "top": 5
+                    }
+                  },
+                  "child": {
+                    "className": "Center",
+                    "na": {
+                      "child": {
+                        "className": "Sugar.switchCase",
+                        "pa": [
+                          "^(_value)",
+                          [
+                            {
+                              "className": "SugarSwitchCaseObj",
+                              "na": {
+                                "reValue": {
+                                  "className": "Text",
+                                  "pa": [
+                                    "2-ValueTitle"
+                                  ]
+                                },
+                                "sugarCase": 2
+                              }
+                            },
+                            {
+                              "className": "SugarSwitchCaseObj",
+                              "na": {
+                                "reValue": {
+                                  "className": "Text",
+                                  "pa": [
+                                    "3-ValueTitle"
+                                  ]
+                                },
+                                "sugarCase": 3
+                              }
+                            },
+                            {
+                              "className": "SugarSwitchCaseObj",
+                              "na": {
+                                "reValue": {
+                                  "className": "Text",
+                                  "pa": [
+                                    "4-ValueTitle"
+                                  ]
+                                },
+                                "sugarCase": 4
+                              }
+                            }
+                          ],
+                          {
+                            "className": "Text",
+                            "pa": [
+                              "default-ValueTitle"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "className": "SizedBox",
+                "na": {
+                  "width": {
+                    "className": "Sugar.width",
+                    "pa": [
+                      "^(context)"
+                    ]
+                  },
+                  "child": {
+                    "className": "ListView.builder",
+                    "na": {
+                      "shrinkWrap": true,
+                      "itemBuilder": {
+                        "className": "Sugar.indexedWidgetBuilder",
+                        "pa": [
+                          {
+                            "className": "FairFunction",
+                            "body": {
+                              "className": "Center",
+                              "na": {
+                                "child": {
+                                  "className": "Container",
+                                  "na": {
+                                    "height": 20,
+                                    "child": {
+                                      "className": "Text",
+                                      "pa": [
+                                        "#($index)"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "parameters": {
+                              "pa": [
+                                "context",
+                                "index"
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "itemCount": "%(_getItemCount)"
+                    }
+                  }
+                }
+              },
+              {
+                "className": "FloatingActionButton",
+                "na": {
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      {
+                        "className": "Sugar.switchCase",
+                        "pa": [
+                          "^(_value)",
+                          [
+                            {
+                              "className": "SugarSwitchCaseObj",
+                              "na": {
+                                "reValue": "2",
+                                "sugarCase": 2
+                              }
+                            },
+                            {
+                              "className": "SugarSwitchCaseObj",
+                              "na": {
+                                "reValue": "3",
+                                "sugarCase": 3
+                              }
+                            },
+                            {
+                              "className": "SugarSwitchCaseObj",
+                              "na": {
+                                "reValue": "4",
+                                "sugarCase": 4
+                              }
+                            }
+                          ],
+                          "defaultValue"
+                        ]
+                      }
+                    ]
+                  },
+                  "onPressed": "@(logAction)"
+                }
+              },
+              {
+                "className": "SizedBox",
+                "na": {
+                  "width": {
+                    "className": "Sugar.width",
+                    "pa": [
+                      "^(context)"
+                    ]
+                  },
+                  "height": 50,
+                  "child": {
+                    "className": "ListView.builder",
+                    "na": {
+                      "itemBuilder": {
+                        "className": "Sugar.indexedWidgetBuilder",
+                        "pa": [
+                          {
+                            "className": "FairFunction",
+                            "body": {
+                              "className": "Center",
+                              "na": {
+                                "child": {
+                                  "className": "Container",
+                                  "na": {
+                                    "height": 50,
+                                    "width": 60,
+                                    "child": {
+                                      "className": "Container",
+                                      "na": {
+                                        "color": "#(Colors.amber)",
+                                        "margin": {
+                                          "className": "EdgeInsets.only",
+                                          "na": {
+                                            "left": 10
+                                          }
+                                        },
+                                        "child": {
+                                          "className": "Center",
+                                          "na": {
+                                            "child": {
+                                              "className": "Text",
+                                              "pa": [
+                                                "#($index)"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "parameters": {
+                              "pa": [
+                                "context",
+                                "index"
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "scrollDirection": "#(Axis.horizontal)",
+                      "reverse": true,
+                      "itemCount": 15
+                    }
+                  }
+                }
+              },
+              {
+                "className": "SizedBox",
+                "na": {
+                  "height": 40,
+                  "width": {
+                    "className": "Sugar.width",
+                    "pa": [
+                      "^(context)"
+                    ]
+                  },
+                  "child": {
+                    "className": "Container",
+                    "na": {
+                      "margin": {
+                        "className": "EdgeInsets.only",
+                        "na": {
+                          "left": 0,
+                          "right": 1,
+                          "top": 10
+                        }
+                      },
+                      "color": "#(Colors.green)",
+                      "child": {
+                        "className": "Center",
+                        "na": {
+                          "child": {
+                            "className": "Text",
+                            "pa": [
+                              "CustomScrollView-Sugar"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "className": "SizedBox",
+                "na": {
+                  "width": {
+                    "className": "Sugar.width",
+                    "pa": [
+                      "^(context)"
+                    ]
+                  },
+                  "height": 400,
+                  "child": {
+                    "className": "CustomScrollView",
+                    "na": {
+                      "slivers": [
+                        {
+                          "className": "SliverList",
+                          "na": {
+                            "delegate": {
+                              "className": "SliverChildBuilderDelegate",
+                              "pa": [
+                                {
+                                  "className": "Sugar.nullableIndexedWidgetBuilder",
+                                  "pa": [
+                                    {
+                                      "className": "FairFunction",
+                                      "body": {
+                                        "className": "Container",
+                                        "na": {
+                                          "margin": {
+                                            "className": "EdgeInsets.only",
+                                            "na": {
+                                              "top": 10
+                                            }
+                                          },
+                                          "height": 85,
+                                          "alignment": "#(Alignment.center)",
+                                          "color": "#(Colors.blue)",
+                                          "child": {
+                                            "className": "Text",
+                                            "pa": [
+                                              "#($index)"
+                                            ],
+                                            "na": {
+                                              "style": {
+                                                "className": "TextStyle",
+                                                "na": {
+                                                  "color": "#(Colors.white)",
+                                                  "fontSize": 20
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "parameters": {
+                                        "pa": [
+                                          "context",
+                                          "index"
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              ],
+                              "na": {
+                                "childCount": 3
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "className": "SliverGrid",
+                          "na": {
+                            "gridDelegate": {
+                              "className": "Sugar.sliverGridDelegateWithFixedCrossAxisCount",
+                              "na": {
+                                "crossAxisCount": 2,
+                                "mainAxisSpacing": 10.0,
+                                "crossAxisSpacing": 10.0,
+                                "childAspectRatio": 4.0
+                              }
+                            },
+                            "delegate": {
+                              "className": "SliverChildBuilderDelegate",
+                              "pa": [
+                                {
+                                  "className": "Sugar.nullableIndexedWidgetBuilder",
+                                  "pa": [
+                                    {
+                                      "className": "FairFunction",
+                                      "body": {
+                                        "className": "Container",
+                                        "na": {
+                                          "alignment": "#(Alignment.center)",
+                                          "color": "#(Colors.deepOrange)",
+                                          "child": {
+                                            "className": "Text",
+                                            "pa": [
+                                              "#(是 grid item $index 啊~~)"
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "parameters": {
+                                        "pa": [
+                                          "context",
+                                          "index"
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              ],
+                              "na": {
+                                "childCount": 20
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

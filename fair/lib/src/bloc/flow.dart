@@ -77,26 +77,6 @@ FairWidgetBinding provider = () {
         reValue: p1,
       );
     },
-    'Sugar.popMenuButton': (props) {
-      var p0 = pa0(props);
-      return PopupMenuButton(
-        onSelected: p0.onSelected,
-        itemBuilder: p0.itemBuilder,
-        child: p0.child,
-        padding: p0.padding,
-        initialValue: p0.initialValue,
-        onCanceled: p0.onCanceled,
-        tooltip: p0.tooltip,
-        elevation: p0.elevation,
-        icon: p0.icon,
-        iconSize: p0.iconSize,
-        shape: p0.shape,
-        offset: p0.offset,
-        enabled: p0.enabled,
-        color: p0.color,
-        enableFeedback: p0.enableFeedback,
-      );
-    },
     'Sugar.isButtonStyle':(props){
       var p0 = pa0(props);
       var p1 = pa1(props);
