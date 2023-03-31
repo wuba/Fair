@@ -7,6 +7,7 @@
 import 'dart:convert';
 
 import 'package:fair/fair.dart';
+import 'package:fair_example/assets.dart';
 import 'package:fair_example/src/model/bean/loupan_bean.dart';
 import 'package:fair_example/src/model/bean/list_with_logic_bean.dart';
 import 'package:fair_example/src/page/list/cells/sample_page_stateful_cell.dart';
@@ -20,7 +21,7 @@ class DynamicCellPage extends StatefulWidget {
 }
 
 class _State extends State<DynamicCellPage> {
- late DemoList _response;
+  late DemoList _response;
 
   @override
   void initState() {
@@ -29,8 +30,10 @@ class _State extends State<DynamicCellPage> {
   }
 
   void _initData() {
+    // assets/bundle/lib_src_page_sample_page_stateful_cell.json
+
     var value =
-        '{\"list\": [{ 			\"id\": \"0001\", 			\"type\": \"normal\", 			\"name\": \"58\" 		}, 		{ 			\"id\": \"fair_cell\", 			\"type\": \"fair\", 			\"name\": \"58\", 			\"path\": \"assets/bundle/lib_src_page_sample_page_stateful_cell.json\", 			\"data\": \"{ \\\"_id \\\":  \\\"10000 \\\"}\" 		}, 		{ 			\"id\": \"0001\", 			\"type\": \"normal\", 			\"name\": \"fair\" 		} 	], 	\"total\": 10 }';
+        '{\"list\": [{ 			\"id\": \"0001\", 			\"type\": \"normal\", 			\"name\": \"58\" 		}, 		{ 			\"id\": \"fair_cell\", 			\"type\": \"fair\", 			\"name\": \"58\", 			\"path\": \"${Assets.assets_fair_lib_src_page_list_cells_sample_page_stateful_cell_fair_json}\", 			\"data\": \"{ \\\"_id \\\":  \\\"10000 \\\"}\" 		}, 		{ 			\"id\": \"0001\", 			\"type\": \"normal\", 			\"name\": \"fair\" 		} 	], 	\"total\": 10 }';
     _response = DemoList.fromJson(jsonDecode(value));
   }
 
@@ -44,7 +47,7 @@ class _State extends State<DynamicCellPage> {
             color: Colors.white,
             child: ListView.builder(
                 padding: EdgeInsets.only(left: 20, right: 20),
-                itemCount: _response.list?.length??0,
+                itemCount: _response.list?.length ?? 0,
                 itemBuilder: (BuildContext context, int position) {
                   return getItem(_response.list![position]);
                 })));
@@ -72,8 +75,11 @@ class _State extends State<DynamicCellPage> {
           constraints: BoxConstraints(minHeight: 80),
           child: FairWidget(
             name: item.id,
-            path: 'assets/bundle/lib_src_page_list_cells_sample_page_stateful_cell.fair.json',
-            data: {"fairProps": json.encode({'louPanDetail': louPanDetail})},
+            path: Assets
+                .assets_fair_lib_src_page_list_cells_sample_page_stateful_cell_fair_json,
+            data: {
+              "fairProps": json.encode({'louPanDetail': louPanDetail})
+            },
           ));
 
       // 原生实现效果

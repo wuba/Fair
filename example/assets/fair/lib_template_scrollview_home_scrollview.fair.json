@@ -78,39 +78,55 @@
                     }
                   },
                   "delegate": {
-                    "className": "Sugar.sliverChildBuilderDelegate",
-                    "na": {
-                      "builder": {
-                        "className": "AspectRatio",
-                        "na": {
-                          "aspectRatio": 1.5,
-                          "child": {
-                            "className": "ClipRRect",
-                            "na": {
-                              "borderRadius": {
-                                "className": "BorderRadius.all",
-                                "pa": [
-                                  {
-                                    "className": "Radius.circular",
-                                    "pa": [
-                                      4.0
-                                    ]
+                    "className": "SliverChildBuilderDelegate",
+                    "pa": [
+                      {
+                        "className": "Sugar.nullableIndexedWidgetBuilder",
+                        "pa": [
+                          {
+                            "className": "FairFunction",
+                            "body": {
+                              "className": "AspectRatio",
+                              "na": {
+                                "aspectRatio": 1.5,
+                                "child": {
+                                  "className": "ClipRRect",
+                                  "na": {
+                                    "borderRadius": {
+                                      "className": "BorderRadius.all",
+                                      "pa": [
+                                        {
+                                          "className": "Radius.circular",
+                                          "pa": [
+                                            4.0
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "child": {
+                                      "className": "Image.network",
+                                      "pa": [
+                                        "%(_getImagePath(^(index)))"
+                                      ],
+                                      "na": {
+                                        "fit": "#(BoxFit.cover)"
+                                      }
+                                    }
                                   }
-                                ]
-                              },
-                              "child": {
-                                "className": "Image.network",
-                                "pa": [
-                                  "%(_getImagePath(^(index)))"
-                                ],
-                                "na": {
-                                  "fit": "#(BoxFit.cover)"
                                 }
                               }
+                            },
+                            "parameters": {
+                              "pa": [
+                                "context",
+                                "index"
+                              ]
                             }
                           }
-                        }
-                      },
+                        ]
+                      }
+                    ],
+                    "na": {
                       "childCount": 4
                     }
                   }
@@ -120,39 +136,55 @@
                 "className": "SliverList",
                 "na": {
                   "delegate": {
-                    "className": "Sugar.sliverChildBuilderDelegate",
-                    "na": {
-                      "builder": {
-                        "className": "AspectRatio",
-                        "na": {
-                          "aspectRatio": 1.5,
-                          "child": {
-                            "className": "ClipRRect",
-                            "na": {
-                              "borderRadius": {
-                                "className": "BorderRadius.all",
-                                "pa": [
-                                  {
-                                    "className": "Radius.circular",
-                                    "pa": [
-                                      4.0
-                                    ]
+                    "className": "SliverChildBuilderDelegate",
+                    "pa": [
+                      {
+                        "className": "Sugar.nullableIndexedWidgetBuilder",
+                        "pa": [
+                          {
+                            "className": "FairFunction",
+                            "body": {
+                              "className": "AspectRatio",
+                              "na": {
+                                "aspectRatio": 1.5,
+                                "child": {
+                                  "className": "ClipRRect",
+                                  "na": {
+                                    "borderRadius": {
+                                      "className": "BorderRadius.all",
+                                      "pa": [
+                                        {
+                                          "className": "Radius.circular",
+                                          "pa": [
+                                            4.0
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "child": {
+                                      "className": "Image.network",
+                                      "pa": [
+                                        "%(_getImagePath(^(index)))"
+                                      ],
+                                      "na": {
+                                        "fit": "#(BoxFit.cover)"
+                                      }
+                                    }
                                   }
-                                ]
-                              },
-                              "child": {
-                                "className": "Image.network",
-                                "pa": [
-                                  "%(_getImagePath(^(index)))"
-                                ],
-                                "na": {
-                                  "fit": "#(BoxFit.cover)"
                                 }
                               }
+                            },
+                            "parameters": {
+                              "pa": [
+                                "context",
+                                "index"
+                              ]
                             }
                           }
-                        }
-                      },
+                        ]
+                      }
+                    ],
+                    "na": {
                       "childCount": 3
                     }
                   }

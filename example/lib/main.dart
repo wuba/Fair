@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:example/fair_widget/delegate/test_fair_delegate.dart';
 import 'package:example/fair_widget/plugin/fair_basic_plugin.dart';
 import 'package:example/home_page.dart';
-import 'package:example/plugins/net/fair_net_plugin.dart';
+import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,7 +35,10 @@ void main() async {
     ),
 
     ///需要在此注册需要全局使用的plugin,key名可以随意不做要求
-    plugins: {'FairBasicPlugin': FairBasicPlugin(), 'FairNet': FairNet()},
+    plugins: {
+      'FairBasicPlugin': FairBasicPlugin(),
+      'FairCommonPlugin': FairCommonPlugin()
+    },
   );
 }
 
