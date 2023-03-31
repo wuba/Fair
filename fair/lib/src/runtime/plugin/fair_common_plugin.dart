@@ -70,6 +70,8 @@ import 'dart:convert';
 /// Finally, use it like this:
 ///
 /// FairCommonPlugin().http({
+///   // required
+///   'pageName': '#FairKey#',
 ///   // if need, add a callback
 ///   'callback': (dynamic result) {
 ///     // result is map or null
@@ -101,7 +103,7 @@ mixin FairCommonPluginMixin {
       isDart = false;
       req = jsonDecode(map);
     }
-    final pageName = req['pageName'] ?? '#FairKey#';
+    final pageName = req['pageName'];
     var request = req['request'];
     if (isDart) {
       request = req;
