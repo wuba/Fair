@@ -85,7 +85,7 @@
                 "na": {
                   "arguments": {
                     "name": "动态界面&传值",
-                    "path": "assets/bundle/lib_src_page_logic-page2page_sample_logic_page2page.fair.json",
+                    "path": "assets/fair/lib_src_page_logic-page2page_sample_logic_page2page.fair.json",
                     "data": {
                       "_count": 58
                     }

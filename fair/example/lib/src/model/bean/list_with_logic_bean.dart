@@ -6,11 +6,11 @@
 
 class DemoList extends Object {
   List<DemoItem?>? list;
-  int? total;
+  int total = 0;
 
   DemoList({
     this.list,
-    this.total,
+    this.total = 0,
   });
 
   factory DemoList.fromJson(Map<String, dynamic> json) => DemoList(

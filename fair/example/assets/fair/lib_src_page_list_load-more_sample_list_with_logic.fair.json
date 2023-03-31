@@ -5,8 +5,8 @@
       "className": "EdgeInsets.only",
       "na": {
         "left": 20,
-        "bottom": 60,
-        "top": 60
+        "top": 60,
+        "bottom": 60
       }
     },
     "child": {
@@ -31,5 +31,6 @@
         }
       }
     }
-  }
+  },
+  "methodMap": {}
 }

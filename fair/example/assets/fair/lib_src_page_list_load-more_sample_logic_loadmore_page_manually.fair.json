@@ -7,7 +7,7 @@
         "title": {
           "className": "Text",
           "pa": [
-            "Pull Refresh"
+            "ListLoadMore"
           ]
         }
       }
@@ -19,6 +19,7 @@
           "className": "RefreshIndicator",
           "na": {
             "displacement": 10.0,
+            "onRefresh": "@(_onRefresh)",
             "child": {
               "className": "Sugar.ifEqualBool",
               "pa": [
@@ -36,18 +37,26 @@
                 "falseValue": {
                   "className": "ListView.builder",
                   "na": {
-                    "controller": "#(_scrollController)",
+                    "controller": "^(_scrollController)",
                     "itemCount": "%(_itemCount)",
-                    "itemBuilder": "#(_itemBuilder)"
+                    "itemBuilder": "@(_itemBuilder)"
                   }
                 }
               }
-            },
-            "onRefresh": "#(_refresh)"
+            }
           }
         }
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {
+    "_itemBuilder": {
+      "className": "ListTile",
+      "na": {
+        "title": {
+          "className": "Text"
+        }
+      }
+    }
+  }
 }
