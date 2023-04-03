@@ -320,7 +320,7 @@ Future _generateSdkFile(String? sdkName, String filePath, String output) async {
   await saveIntoFile(buffer.toString(), output, 'fair_${clzName}.dart');
 }
 
-Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool analysisExports = false, bool analysisAllClasses = false}) async {
+Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool analysisExports = false, bool analysisAllClasses = true}) async {
   var session = context.currentSession;
   var result = await session.getUnitElement(path) as UnitElementResult;
   var element = result.element;
@@ -680,7 +680,7 @@ var _blackList = [
 ///
 /// We need to compile all of constructions when compile the SDK files.
 ///
-List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = false, bool analysisAllClasses = false]) {
+List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = false, bool analysisAllClasses = true]) {
   if (unitElement == null) return <ClassExposed>[];
   var exposed = <ClassExposed>[];
   // 枚举与class不同
