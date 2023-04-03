@@ -697,7 +697,7 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
     var functionParameters = <FunctionParameter>[];
     var isWidget = classElement.thisType is InterfaceType ? _matchType(classElement.thisType, baseWidget, classElement: classElement) : false;
     var isAPI = classElement.thisType is InterfaceType ? _matchType(classElement.thisType, baseAPI, classElement: classElement) : false;
-    if (isWidget || isAPI || isSdk || analysisAllClasses) {
+    if (isWidget || isAPI || isSdk || (analysisAllClasses && !classElement.allSupertypes.any((element) => element.element.name =='State'))) {
       print('${classElement.name} 😀');
       if(unitElement.classes.contains(classElement)) {
          print('constructors ➡️');
