@@ -320,7 +320,7 @@ Future _generateSdkFile(String? sdkName, String filePath, String output) async {
   await saveIntoFile(buffer.toString(), output, 'fair_${clzName}.dart');
 }
 
-Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool analysisExports = false}) async {
+Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool analysisExports = false, bool analysisAllClasses = false}) async {
   var session = context.currentSession;
   var result = await session.getUnitElement(path) as UnitElementResult;
   var element = result.element;
@@ -336,7 +336,7 @@ Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool 
 
   var exposedAPI = <ClassExposed>[];
   elementsList.forEach((element) {
-    exposedAPI.addAll(_visit(element, analysisExports));
+    exposedAPI.addAll(_visit(element, analysisExports, analysisAllClasses));
   });
 
   var count = exposedAPI.length;
@@ -368,12 +368,21 @@ Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool 
       });
     } else if (e.fields?.isNotEmpty == true) {
       var name = e.name;
-      buffer.write('\'$name\': {');
-      e.fields?.forEach((e) {
-        var field = e;
-        buffer.write('\'${field.field}\': ${field.name}.${field.field},');
-      });
-      buffer.write('},');
+      var staticFields=  e.fields?.where((element) => element.isStatic);
+      var nonStaticFields=  e.fields?.where((element) => !element.isStatic);
+      if(nonStaticFields!=null && nonStaticFields.isNotEmpty) {
+        buffer.write('\'$name\': {');
+        nonStaticFields.forEach((e) {
+          var field = e;
+          buffer.write('\'${field.field}\': ${field.name}.${field.field},');
+        });
+        buffer.write('},');
+      }
+      if(staticFields!=null && staticFields.isNotEmpty) {
+         for (var field in staticFields) {
+           buffer.write('\'$name.${field.field}\': $name.${field.field},');
+         }
+      }
     }
 
     e.staticMethods?.forEach((element) {
@@ -431,7 +440,8 @@ String _generateFileName(String path) {
 }
 
 Map<String, dynamic> _writeMethod(StringBuffer buffer, String? name, Method element, Map<String, dynamic> defaultCache) {
-  buffer.write('\'$name\': (props) => $name(');
+  final constString = element is Constructor && (element.parameters ==null || element.parameters!.isEmpty) && element.isConst ? 'const': '';
+  buffer.write('\'$name\': (props) => $constString $name(');
   if (element.parameters != null && (element.parameters?.isNotEmpty ?? false)) {
     for (var i = 0; i < element.parameters!.length; i++) {
       var p = element.parameters![i];
@@ -579,8 +589,8 @@ abstract class Exposed {
 }
 
 class Constructor extends Method {
-  Constructor(String name, {List<Parameter>? parameters, bool? isWidget}) : super(name, parameters: parameters, isWidget: isWidget);
-
+  Constructor(String name, {List<Parameter>? parameters, bool? isWidget, this.isConst=false}) : super(name, parameters: parameters, isWidget: isWidget);
+  final bool isConst;
   @override
   String toString() {
     return name ?? '';
@@ -602,8 +612,9 @@ class Method extends Exposed {
 class ConstField extends Exposed {
   final String? field;
   final bool? isWidget;
+  final bool isStatic;
 
-  ConstField(String name, {this.field, this.isWidget = true}) : super(name);
+  ConstField(String name, {this.field, this.isWidget = true, this.isStatic=false}) : super(name);
 
   @override
   String toString() {
@@ -669,7 +680,7 @@ var _blackList = [
 ///
 /// We need to compile all of constructions when compile the SDK files.
 ///
-List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = false]) {
+List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = false, bool analysisAllClasses = false]) {
   if (unitElement == null) return <ClassExposed>[];
   var exposed = <ClassExposed>[];
   // 枚举与class不同
@@ -686,71 +697,74 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
     var functionParameters = <FunctionParameter>[];
     var isWidget = classElement.thisType is InterfaceType ? _matchType(classElement.thisType, baseWidget, classElement: classElement) : false;
     var isAPI = classElement.thisType is InterfaceType ? _matchType(classElement.thisType, baseAPI, classElement: classElement) : false;
-    if (isWidget || isAPI || isSdk) {
+    if (isWidget || isAPI || isSdk || analysisAllClasses) {
       print('${classElement.name} 😀');
-      print('constructors ➡️');
-      for (var constructorElement in classElement.constructors) {
-        if (!_invalidElement(constructorElement)) {
-          String name;
-          if (constructorElement.name == '') {
-            name = classElement.name;
-          } else {
-            name = '${classElement.name}.${constructorElement.name}';
-          }
-          print(' $name');
-          // params
-          var parameters = <Parameter>[];
-          if (constructorElement.parameters.isNotEmpty) {
-            constructorElement.parameters.forEach((e) {
-              parameters.add(Parameter(
-                type: e.type.name,
-                name: e.name,
-                ///此处withNullability待测试
-                displayName: e.type.getDisplayString(withNullability: false),
-                isNamed: e.isNamed,
-                isOptional: e.isOptional,
-                defaultValueCode: e.defaultValueCode,
-                isOptionalPositional: e.isOptionalPositional,
-              ));
-
-              if (e.type.name == null && e.type is FunctionType) {
-                // var parameters = (e.type as FunctionType)
-                //     .parameters
-                //     .map((e) => Parameter(
-                //           type: e.type.name ?? _parseFunctionName(e),
-                //           name: e.name,
-                //           isNamed: e.isNamed,
-                //           isOptional: e.isOptional,
-                //           defaultValueCode: e.defaultValueCode,
-                //         ))
-                //     .toList(growable: false);
-
-                // functionParameters.add(FunctionParameter(e.name,
-                //     className: name,
-                //     parameters: parameters,
-                //     returnType:
-                //         (e.type as FunctionType).returnType.name ?? 'void',
-                //     typeArgument: ((e.type as FunctionType)
-                //                 ?.typeArguments
-                //                 ?.isNotEmpty ??
-                //             false)
-                //         ? (e.type as FunctionType)?.typeArguments?.first?.name
-                //         : null));
-              }
-            });
-          }
-
-          constructors.add(Constructor(name, parameters: parameters, isWidget: isWidget));
-        }
-      }
-      print('constructors ⬅️️');
+      if(unitElement.classes.contains(classElement)) {
+         print('constructors ➡️');
+         // 只有 class 需要生成构造
+         for (var constructorElement in classElement.constructors) {
+           if (!_invalidElement(constructorElement)) {
+             String name;
+             if (constructorElement.name == '') {
+               name = classElement.name;
+             } else {
+               name = '${classElement.name}.${constructorElement.name}';
+             }
+             print(' $name');
+             // params
+             var parameters = <Parameter>[];
+             if (constructorElement.parameters.isNotEmpty) {
+               constructorElement.parameters.forEach((e) {
+                 parameters.add(Parameter(
+                   type: e.type.name,
+                   name: e.name,
+                   ///此处withNullability待测试
+                   displayName: e.type.getDisplayString(withNullability: false),
+                   isNamed: e.isNamed,
+                   isOptional: e.isOptional,
+                   defaultValueCode: e.defaultValueCode,
+                   isOptionalPositional: e.isOptionalPositional,
+                 ));
+   
+                 if (e.type.name == null && e.type is FunctionType) {
+                   // var parameters = (e.type as FunctionType)
+                   //     .parameters
+                   //     .map((e) => Parameter(
+                   //           type: e.type.name ?? _parseFunctionName(e),
+                   //           name: e.name,
+                   //           isNamed: e.isNamed,
+                   //           isOptional: e.isOptional,
+                   //           defaultValueCode: e.defaultValueCode,
+                   //         ))
+                   //     .toList(growable: false);
+   
+                   // functionParameters.add(FunctionParameter(e.name,
+                   //     className: name,
+                   //     parameters: parameters,
+                   //     returnType:
+                   //         (e.type as FunctionType).returnType.name ?? 'void',
+                   //     typeArgument: ((e.type as FunctionType)
+                   //                 ?.typeArguments
+                   //                 ?.isNotEmpty ??
+                   //             false)
+                   //         ? (e.type as FunctionType)?.typeArguments?.first?.name
+                   //         : null));
+                 }
+               });
+             }
+   
+             constructors.add(Constructor(name, parameters: parameters, isWidget: isWidget,isConst: constructorElement.isConst));
+           }
+         }
+         print('constructors ⬅️️');
+      }   
     }
     var fields = <ConstField>[];
     for (var fieldElement in classElement.fields) {
       if (!_invalidElement(fieldElement) && fieldElement.isConst) {
         print('  ❤️${classElement.name}.${fieldElement.name}');
         // 复用class类型（可能不一致）
-        fields.add(ConstField(classElement.name, field: fieldElement.name, isWidget: isWidget));
+        fields.add(ConstField(classElement.name, field: fieldElement.name, isWidget: isWidget, isStatic: fieldElement.isStatic));
       }
     }
 
