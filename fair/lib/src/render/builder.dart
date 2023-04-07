@@ -192,31 +192,51 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       throw ArgumentError('name===$name,fun===$fun, error===$e, map===$map');
     }
   }
-
+  
+  /// 处理多个位置参数
   W<List> positioned(
       dynamic paMap, Map? methodMap, BuildContext context, Domain? domain) {
     var pa = [];
     var needBinding = false;
     if (paMap is List) {
       paMap.forEach((e) {
-        if (e is Map) {
-          pa.add(convert(context, e, methodMap, domain: domain));
-        } else if (domain != null && domain.match(e)) {
-          pa.add(domain.bindValue(e));
-        } else if (domain != null && e is MapEntry && domain.match(e.value)) {
-          pa.add(domain.bindValue(e.value));
-        } else if (e is String) {
-          var r = proxyMirror?.evaluate(context, bound, e, domain: domain);
-          if (r?.binding == true) {
-            needBinding = true;
-          }
-          pa.add(r?.data);
-        } else {
-          pa.add(e);
-        }
+        var value =_position(e, context, methodMap, domain);
+        pa.add(value.data);
+        needBinding = needBinding || (value.binding ?? false);
       });
     }
     return W<List>(pa, needBinding);
+  }
+  
+  /// 处理单个位置参数
+  W<dynamic> _position(dynamic e,BuildContext context, Map? methodMap, Domain? domain) {
+    var pa;
+    var needBinding = false;
+    if (e is Map) {
+      pa = convert(context, e, methodMap, domain: domain);
+    } else if (e is List) {
+      var list = positioned(e,methodMap,context,domain);
+      needBinding = list.binding ?? false;
+      if (list.data.every((element) => element is Widget) == true) {
+        pa = list.data.asIteratorOf<Widget>()?.toList() ?? list.data;
+      }
+      else {
+        pa = list.data;
+      }
+    } else if (domain != null && domain.match(e)) {
+      pa = domain.bindValue(e);
+    } else if (domain != null && e is MapEntry && domain.match(e.value)) {
+      pa = domain.bindValue(e.value);
+    } else if (e is String) {
+      var r = proxyMirror?.evaluate(context, bound, e, domain: domain);
+      if (r?.binding == true) {
+        needBinding = true;
+      }
+      pa = r?.data;
+    } else {
+      pa = e;
+    }
+    return W<dynamic>(pa,needBinding);
   }
 
   W<Map<String, dynamic>> named(
@@ -662,11 +682,12 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     BuildContext context,
     Domain? domain,
   ) {
-    var pa = positioned([input], methodMap, context, domain);
-    var values = Property.extract(
-      list: pa.data,
-    );
-    return pa0(values);
+    var pa = _position(input, context, methodMap, domain);
+    var data = pa.data;
+    if(data is ValueNotifier) {
+      return data.value;
+    }
+    return data;
   }
 
   dynamic _buildSugarNullableIndexedWidgetBuilder(
