@@ -21,3 +21,5 @@ export 'src/runtime/plugin/fair_common_plugin.dart';
 export 'src/runtime/fair_runtime_impl.dart';
 export 'src/runtime/plugin/fair_plugin_suggar.dart';
 export 'src/runtime/plugin/fair_plugin_m.dart';
+export 'src/render/domain.dart';
+export 'src/render/builder.dart';

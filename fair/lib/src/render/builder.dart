@@ -104,8 +104,9 @@ class DynamicWidgetBuilder extends DynamicBuilder {
           context,
           domain,
         );
+      } else if(name == 'FairFunction') {
+        return _buildFairFunction(context, map, methodMap, domain: domain);
       }
-
 
       var module = bound?.modules?.moduleOf(name)?.call();
       var isWidget = module?.isWidget ?? false;
@@ -430,14 +431,14 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     if (source is List) {
       for (var caseItem in source) {
         var na = caseItem['na'];
-        if (pa0Value(na['sugarCase'], methodMap, context, domain) ==
+        if (pa0Value(FunctionDomain.getBody(na['sugarCase']), methodMap, context, domain) ==
             caseValue) {
-          return pa0Value(na['reValue'], methodMap, context, domain);
+          return pa0Value(FunctionDomain.getBody(na['reValue']), methodMap, context, domain);
         }
       }
     }
 
-    var defaultValue = pa2(map);
+    var defaultValue = FunctionDomain.getBody(pa2(map));
     return pa0Value(defaultValue, methodMap, context, domain);
   }
 
@@ -634,9 +635,9 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var p0 = pa0Value(pa0(map), methodMap, context, domain);
     var p1 = pa0Value(pa1(map), methodMap, context, domain);
     if (p0 == p1) {
-      return pa0Value(na['trueValue'], methodMap, context, domain);
+      return pa0Value(FunctionDomain.getBody(na['trueValue']), methodMap, context, domain);
     } else {
-      return pa0Value(na['falseValue'], methodMap, context, domain);
+      return pa0Value(FunctionDomain.getBody(na['falseValue']), methodMap, context, domain);
     }
   }
 
@@ -649,9 +650,9 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var na = map['na'];
 
     if (pa0Value(pa0(map), methodMap, context, domain)) {
-      return pa0Value(na['trueValue'], methodMap, context, domain);
+      return pa0Value(FunctionDomain.getBody(na['trueValue']), methodMap, context, domain);
     } else {
-      return pa0Value(na['falseValue'], methodMap, context, domain);
+      return pa0Value(FunctionDomain.getBody(na['falseValue']), methodMap, context, domain);
     }
   }
 
@@ -786,5 +787,91 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       return list;
     };
     return builder;    
+  }
+
+  dynamic _buildFairFunction(BuildContext context, Map map, Map? methodMap,
+      {Domain? domain}) {
+    var parametersIsEmpty = FunctionDomain.parametersIsEmpty(map);
+    var functionTag = FunctionDomain.getTag(map);
+    assert(parametersIsEmpty,'当前回调为 $functionTag，默认只支持部分无参回调。');
+    var returnType = FunctionDomain.getReturnType(map);
+     T Function() Function<T>() _builder = <T>(){
+      T Function() builder=(){
+        return convert(
+          context,
+          FunctionDomain.getBody(map),
+          methodMap,
+          domain: domain,
+        ) as T;
+      };
+      return builder;
+    };
+
+    List<T> Function() Function<T>() _listBuilder = <T>(){
+      List<T> Function() builder=(){
+        return convert(
+          context,
+          FunctionDomain.getBody(map),
+          methodMap,
+          domain: domain,
+        ) as List<T>;
+      };
+      return builder;
+    };
+    
+    // 不能用 runtime type 判断，项目可能会混淆
+    switch (returnType) {
+      case 'void':
+         return _builder<void>();       
+      case 'int':
+         return _builder<int>();
+      case 'int?':
+         return _builder<int?>();
+      case 'double':
+         return _builder<double>();
+      case 'double?':
+         return _builder<double?>();
+      case 'String':
+         return _builder<String>();
+      case 'String?':
+         return _builder<String?>();
+      case 'bool':
+         return _builder<bool>();
+      case 'bool?':
+         return _builder<bool?>();
+      case 'Widget':
+         return _builder<Widget>();
+      case 'Widget?':
+         return _builder<Widget?>();
+      case 'List<int>':
+         return _listBuilder<int>();
+      case 'List<int?>':
+         return _listBuilder<int?>();
+      case 'List<double>':
+         return _listBuilder<double>();
+      case 'List<double?>':
+         return _listBuilder<double?>();
+      case 'List<String>':
+         return _listBuilder<String>();
+      case 'List<String?>':
+         return _listBuilder<String?>();
+      case 'List<bool>':
+         return _listBuilder<bool>();
+      case 'List<bool?>':
+         return _listBuilder<bool?>();
+      case 'List<Widget>':
+         return _listBuilder<Widget>();
+      case 'List<Widget?>':
+         return _listBuilder<Widget?>();                      
+      default:
+    }
+
+    assert(false,'$functionTag 回调没有找到对应的映射。 如果返回值是个 Widget， 请使用 Sugar.asT<Widget> 包住返回结果');
+    return WarningWidget(
+          parentContext: context,
+          name: 'FairFunction',
+          error: '$functionTag 回调没有找到对应的映射。 如果返回值是个 Widget， 请使用 Sugar.asT<Widget> 包住返回结果',
+          url: bundle,
+    );
   }
 }

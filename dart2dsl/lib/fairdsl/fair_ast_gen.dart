@@ -5,12 +5,12 @@
  */
 
 import 'dart:io';
-import 'dart:convert';
-import 'package:analyzer/dart/analysis/features.dart';
-import 'package:analyzer/dart/analysis/utilities.dart';
+import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
+import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/token.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'fair_ast_check_gen.dart';
 import 'fair_check_node_map.dart';
 
@@ -188,7 +188,13 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
 
   @override
   Map? visitFunctionExpression(FunctionExpression node) {
-    return _buildFunctionExpression(_visitNode(node.parameters), _visitNode(node.body), isAsync: node.body.isAsynchronous);
+    var functionType= node.staticType as  FunctionType?;
+    return _buildFunctionExpression(_visitNode(node.parameters),
+       _visitNode(node.body), 
+       isAsync: node.body.isAsynchronous,
+       tag: functionType?.getDisplayString(withNullability: true),
+       returnType: functionType?.returnType.getDisplayString(withNullability: true),
+     );
   }
 
   @override
@@ -277,7 +283,17 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
         'object': _visitNode(prefixedIdentifier.prefix),
         'property': _visitNode(prefixedIdentifier.identifier),
       };
-    } else {
+    }
+    // 换了用 AnalysisContextCollection 解析之后，
+    // 可以直接拿到构造的名字
+    else if(node.constructorName.name!=null) {
+       callee = {
+        'type': 'MemberExpression',
+        'object': _visitNode(node.constructorName.type.name),
+        'property': _visitNode(node.constructorName.name),
+      };
+    }
+    else {
       //如果不是simpleIdentif 需要特殊处理
       callee = _visitNode(node.constructorName.type.name);
     }
@@ -378,11 +394,13 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
       };
 
   //函数表达式
-  Map _buildFunctionExpression(Map? params, Map? body, {bool isAsync = false}) => {
+  Map _buildFunctionExpression(Map? params, Map? body, {bool isAsync = false,String? tag, String? returnType}) => {
         'type': 'FunctionExpression',
         'parameters': params,
         'body': body,
         'isAsync': isAsync,
+        'tag': tag,
+        'returnType': returnType,
       };
 
   //函数参数列表
@@ -491,8 +509,13 @@ Future<Map> generateAstMap(String path) async {
     if (exitCode == 2) {
       try {
         ///FeatureSet.latestLanguageVersion()方法待测试
-        var parseResult = parseFile(path: path, featureSet: FeatureSet.latestLanguageVersion());
+        // var parseResult = parseFile(path: path, featureSet: FeatureSet.latestLanguageVersion());
+        var collection = AnalysisContextCollection(includedPaths: [path]);
+        // 为了获取 Function 的描述，改用该方法
+        var parseResult = await collection.contextFor(path).currentSession.getResolvedUnit(path) as ResolvedUnitResult;
+         
         var compilationUnit = parseResult.unit;
+       
         //遍历AST
         var astData = compilationUnit.accept(CustomAstVisitor());
 

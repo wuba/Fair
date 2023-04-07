@@ -28,16 +28,26 @@
                 ],
                 "na": {
                   "falseValue": {
-                    "className": "Image.asset",
-                    "pa": [
-                      "assets/image/logo.png"
-                    ]
+                    "className": "FairFunction",
+                    "body": {
+                      "className": "Image.asset",
+                      "pa": [
+                        "assets/image/logo.png"
+                      ]
+                    },
+                    "tag": "Image Function()",
+                    "returnType": "Image"
                   },
                   "trueValue": {
-                    "className": "Image.asset",
-                    "pa": [
-                      "assets/image/logo2.png"
-                    ]
+                    "className": "FairFunction",
+                    "body": {
+                      "className": "Image.asset",
+                      "pa": [
+                        "assets/image/logo2.png"
+                      ]
+                    },
+                    "tag": "Image Function()",
+                    "returnType": "Image"
                   }
                 }
               },

@@ -320,7 +320,7 @@ Future _generateSdkFile(String? sdkName, String filePath, String output) async {
   await saveIntoFile(buffer.toString(), output, 'fair_${clzName}.dart');
 }
 
-Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool analysisExports = false, bool analysisAllClasses = true}) async {
+Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool analysisExports = false, bool analysisAllClasses = false}) async {
   var session = context.currentSession;
   var result = await session.getUnitElement(path) as UnitElementResult;
   var element = result.element;
@@ -349,17 +349,18 @@ Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool 
   var lines = transformer.getLines(clzName, isCupertino);
   // constructor api
   var hasConstructor = false;
+  var functionParameters = <FunctionParameter>[];
   exposedAPI.forEach((e) {
     var hasNamedConstructor = false;
     var defaultCache = <String, dynamic>{};
+    if(e.functionParameters!=null) {
+      functionParameters.addAll(e.functionParameters!);
+    }
     e.constructor?.forEach((element) {
       if (element.parameters != null && (element.parameters?.isNotEmpty ?? false)) {
         hasNamedConstructor = true;
       }
       defaultCache = _writeMethod(buffer, element.name, element, defaultCache);
-    });
-    e.functionParameters?.forEach((element) {
-      _writeFunctionParameter(buffer, element.toString(), element, defaultCache);
     });
     if (hasNamedConstructor) {
       e.fields?.forEach((element) {
@@ -405,6 +406,7 @@ Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool 
     lines: lines,
     isCupertino: isCupertino,
     clzName: clzName,
+    functionParameters: functionParameters,
   );
 }
 
@@ -416,7 +418,7 @@ class ComponentParts {
   String? aliasGroup;
   final String? body;
   final String? clzName;
-
+  final List<FunctionParameter> functionParameters;
   ComponentParts(
     this.components,
     this.body, {
@@ -424,6 +426,7 @@ class ComponentParts {
     this.lines,
     this.isCupertino,
     this.clzName,
+    required this.functionParameters,
   });
 }
 
@@ -508,35 +511,7 @@ Map<String, dynamic> _writeMethod(StringBuffer buffer, String? name, Method elem
   return defaultCache;
 }
 
-Map<String, dynamic> _writeFunctionParameter(StringBuffer buffer, String name, FunctionParameter element, Map<String, dynamic> defaultCache) {
-  buffer.write('\'$name\': ');
-  if (element.typeArgument != null) {
-    buffer.write('<${element.typeArgument}>');
-  }
-  buffer.write('(props) => ');
-  buffer.write('(');
 
-  if (element.parameters != null && element.parameters!.isNotEmpty) {
-    for (var i = 0; i < element.parameters!.length; i++) {
-      var p = element.parameters![i];
-      buffer.write('${p.type} ${p.name}, ');
-    }
-
-    var params = element.parameters?.fold('', (String value, p) => value + (p.isNamed == true ? '${p.type} ${p.name}, ' : '${p.name}, '));
-    print('➡️ $name({$params})');
-  } else {
-    print('➡️ $name()');
-  }
-
-  buffer.write(')');
-  buffer.write('{ return (props[\'block\'])');
-  if (element.returnType != 'void') {
-    buffer.write('as ${element.returnType}');
-  }
-  buffer.write('; },');
-
-  return defaultCache;
-}
 
 var transformer = TransformProxy();
 
@@ -623,16 +598,12 @@ class ConstField extends Exposed {
 }
 
 class FunctionParameter extends Exposed {
-  final String? className;
-  final List<Parameter>? parameters;
-  final String? returnType;
-  final String? typeArgument;
-
-  FunctionParameter(String name, {this.className, this.parameters, this.returnType, this.typeArgument}) : super(name);
+  final FunctionType? functionType;
+  FunctionParameter(String name, {this.functionType}) : super(name);
 
   @override
   String toString() {
-    return '$className#$name';
+    return '$name';
   }
 }
 
@@ -680,7 +651,7 @@ var _blackList = [
 ///
 /// We need to compile all of constructions when compile the SDK files.
 ///
-List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = false, bool analysisAllClasses = true]) {
+List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = false, bool analysisAllClasses = false]) {
   if (unitElement == null) return <ClassExposed>[];
   var exposed = <ClassExposed>[];
   // 枚举与class不同
@@ -699,7 +670,8 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
     var isAPI = classElement.thisType is InterfaceType ? _matchType(classElement.thisType, baseAPI, classElement: classElement) : false;
     if (isWidget || isAPI || isSdk || (analysisAllClasses && !classElement.allSupertypes.any((element) => element.element.name =='State'))) {
       print('${classElement.name} 😀');
-      if(unitElement.classes.contains(classElement)) {
+      // 枚举不去生成构造
+      if(classElement is ClassElement) {
          print('constructors ➡️');
          // 只有 class 需要生成构造
          for (var constructorElement in classElement.constructors) {
@@ -725,31 +697,13 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
                    defaultValueCode: e.defaultValueCode,
                    isOptionalPositional: e.isOptionalPositional,
                  ));
-   
-                 if (e.type.name == null && e.type is FunctionType) {
-                   // var parameters = (e.type as FunctionType)
-                   //     .parameters
-                   //     .map((e) => Parameter(
-                   //           type: e.type.name ?? _parseFunctionName(e),
-                   //           name: e.name,
-                   //           isNamed: e.isNamed,
-                   //           isOptional: e.isOptional,
-                   //           defaultValueCode: e.defaultValueCode,
-                   //         ))
-                   //     .toList(growable: false);
-   
-                   // functionParameters.add(FunctionParameter(e.name,
-                   //     className: name,
-                   //     parameters: parameters,
-                   //     returnType:
-                   //         (e.type as FunctionType).returnType.name ?? 'void',
-                   //     typeArgument: ((e.type as FunctionType)
-                   //                 ?.typeArguments
-                   //                 ?.isNotEmpty ??
-                   //             false)
-                   //         ? (e.type as FunctionType)?.typeArguments?.first?.name
-                   //         : null));
+                 if(e.type is FunctionType) {  
+                    var functionType= e.type as FunctionType;
+                    //if(functionType.parameters.isNotEmpty) {
+                      functionParameters.add(FunctionParameter(functionType.getDisplayString(withNullability: true),functionType: functionType));
+                    //}
                  }
+
                });
              }
    
@@ -781,7 +735,15 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
       if (methodElement.parameters.isNotEmpty) {
         parameters = methodElement.parameters
             .map(
-                (e) => Parameter(type: e.type.name, name: e.name, isNamed: e.isNamed, isOptional: e.isOptional, defaultValueCode: e.defaultValueCode, isOptionalPositional: e.isOptionalPositional,))
+                (e){
+                   if(e.type is FunctionType) {
+                    var functionType = e.type as FunctionType;
+                    //if(functionType.parameters.isNotEmpty) {
+                      functionParameters.add(FunctionParameter(functionType.getDisplayString(withNullability: true),functionType: functionType));
+                    //}
+                   }
+                 return Parameter(type: e.type.name, name: e.name, isNamed: e.isNamed, isOptional: e.isOptional, defaultValueCode: e.defaultValueCode, isOptionalPositional: e.isOptionalPositional,); 
+                })
             .toList(growable: false);
       }
       staticMethods.add(Method(name, parameters: parameters, isWidget: isWidget));

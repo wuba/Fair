@@ -81,7 +81,7 @@ class _Page2PageState extends State<SampleLogicPage2Page> {
 
                 // Assets
                 //     .assets_fair_lib_src_page_logic_page2page_sample_logic_page2page_fair_json,
-                'data': {'_count': 58}
+                'data': {'_count': _count}
               });
             },
           )
