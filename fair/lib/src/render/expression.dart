@@ -23,11 +23,6 @@ class R {
   }
 
   bool valid() {
-    if (data is String) {
-      String strData = data as String;
-
-      return strData.length > 0;
-    }
     return data != null;
   }
 }
