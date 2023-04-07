@@ -217,12 +217,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     } else if (e is List) {
       var list = positioned(e,methodMap,context,domain);
       needBinding = list.binding ?? false;
-      if (list.data.every((element) => element is Widget) == true) {
-        pa = list.data.asIteratorOf<Widget>()?.toList() ?? list.data;
-      }
-      else {
-        pa = list.data;
-      }
+      pa = list.data.asIteratorOf<Widget>()?.toList() ?? list.data;
     } else if (domain != null && domain.match(e)) {
       pa = domain.bindValue(e);
     } else if (domain != null && e is MapEntry && domain.match(e.value)) {
@@ -345,7 +340,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return W(result, needBinding);
   }
 
-  List<Widget> _buildSugarMapEach(
+  List<dynamic> _buildSugarMapEach(
     Function mapEach,
     Map map,
     Map? methodMap,
@@ -369,11 +364,11 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       for (var i = 0; i < source.length; i++) {
         var element = source[i];
         children.add(
-          convert(
-            context,
+          pa0Value(
             FunctionDomain.getBody(fairFunction),
             methodMap,
-            domain: FunctionDomain(
+            context,
+            FunctionDomain(
               {
                 functionParameters[0]: i,
                 functionParameters[1]: element,
@@ -384,13 +379,17 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         );
       }
     }
+
+    
+    children = children.asIteratorOf<Widget>()?.toList() ?? children;
+
     var params = {
       'pa': [source, children]
     };
     return mapEach.call(params);
   }
 
-  List<Widget> _buildSugarMap(
+  List<dynamic> _buildSugarMap(
     Function mapEach,
     Map map,
     Map? methodMap,
@@ -412,11 +411,11 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       for (var i = 0; i < source.length; i++) {
         var element = source[i];
         children.add(
-          convert(
-            context,
+          pa0Value(
             FunctionDomain.getBody(fairFunction),
             methodMap,
-            domain: FunctionDomain(
+            context,
+            FunctionDomain(
               {
                 functionParameters[0]: element,
               },
@@ -426,6 +425,10 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         );
       }
     }
+
+    
+    children = children.asIteratorOf<Widget>()?.toList() ?? children;
+
     var params = {
       'pa': [source, children]
     };
