@@ -391,7 +391,7 @@ dynamic _buildValueExpression(
       naPaValue = _buildValueExpression(
           valueExpression?.asFunctionExpression.body?.body?.last, fairDslContex);
     }
-    if (naPaValue is Map && valueExpression?.asFunctionExpression.parameterList != null &&
+    if (valueExpression?.asFunctionExpression.parameterList != null &&
         valueExpression!.asFunctionExpression.parameterList!.isNotEmpty) {
       var na = [];
       var pa = [];
@@ -402,10 +402,18 @@ dynamic _buildValueExpression(
           pa.add(element?.name);
         }
       }
-      naPaValue['functionParameters'] = {
-        if (na.isNotEmpty) 'na': na,
-        if (pa.isNotEmpty) 'pa': pa,
-      };
+ 
+      naPaValue = {
+        'className': 'FairFunction',
+        'body': naPaValue,
+        'parameters': {
+          // 命名参数的名字不会变化，使用的时候名字相同对应就行了
+          if (na.isNotEmpty) 'na': na,
+          if (pa.isNotEmpty) 'pa': pa,
+        },
+        // 如果找到方法能动态创建 function 的话，或者有用
+        // 'returnType': '',
+      };     
     }    
   } else if (valueExpression?.isReturnStatement==true) {
     naPaValue = _buildValueExpression(

@@ -5,6 +5,7 @@
  */
 
 import 'package:fair/fair.dart';
+import 'package:fair_example/assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,11 @@ class PermissionSamplePageState extends State<PermissionSamplePage> {
   Widget build(BuildContext context) {
     return FairWidget(
       name: 'PermissionSamplePage',
-      path: 'assets/bundle/lib_src_page_plugins_permission_sample_permission_page.fair.json',
+      path:
+          //'assets/fair/lib_src_page_plugins_permission_sample_permission_page.fair.json'
+
+          Assets
+              .assets_fair_lib_src_page_plugins_permission_sample_permission_page_fair_json,
     );
   }
 }

@@ -165,152 +165,177 @@
               }
             },
             "falseValue": {
-              "className": "Sugar.listBuilder",
+              "className": "ListView.builder",
               "na": {
                 "itemCount": "%(dataLength)",
                 "itemBuilder": {
-                  "className": "SizedBox",
-                  "na": {
-                    "height": 90.5,
-                    "width": {
-                      "className": "Sugar.width",
-                      "pa": [
-                        "^(context)"
-                      ]
-                    },
-                    "child": {
-                      "className": "Column",
-                      "na": {
-                        "children": [
-                          {
-                            "className": "Row",
+                  "className": "Sugar.indexedWidgetBuilder",
+                  "pa": [
+                    {
+                      "className": "FairFunction",
+                      "body": {
+                        "className": "SizedBox",
+                        "na": {
+                          "height": 90.5,
+                          "width": {
+                            "className": "Sugar.width",
+                            "pa": [
+                              "^(context)"
+                            ]
+                          },
+                          "child": {
+                            "className": "Column",
                             "na": {
                               "children": [
                                 {
-                                  "className": "Padding",
+                                  "className": "Row",
                                   "na": {
-                                    "padding": {
-                                      "className": "EdgeInsets.only",
-                                      "na": {
-                                        "top": 10,
-                                        "left": 15,
-                                        "bottom": 10,
-                                        "right": 10
-                                      }
-                                    },
-                                    "child": {
-                                      "className": "Container",
-                                      "na": {
-                                        "decoration": {
-                                          "className": "BoxDecoration",
-                                          "na": {
-                                            "borderRadius": {
-                                              "className": "BorderRadius.circular",
-                                              "pa": [
-                                                10
-                                              ]
-                                            },
-                                            "image": {
-                                              "className": "DecorationImage",
-                                              "na": {
-                                                "fit": "#(BoxFit.fitHeight)",
-                                                "image": {
-                                                  "className": "NetworkImage",
-                                                  "pa": [
-                                                    "%(_getIcon(^(index)))"
+                                    "children": [
+                                      {
+                                        "className": "Padding",
+                                        "na": {
+                                          "padding": {
+                                            "className": "EdgeInsets.only",
+                                            "na": {
+                                              "top": 10,
+                                              "left": 15,
+                                              "bottom": 10,
+                                              "right": 10
+                                            }
+                                          },
+                                          "child": {
+                                            "className": "Container",
+                                            "na": {
+                                              "decoration": {
+                                                "className": "BoxDecoration",
+                                                "na": {
+                                                  "borderRadius": {
+                                                    "className": "BorderRadius.circular",
+                                                    "pa": [
+                                                      10
+                                                    ]
+                                                  },
+                                                  "image": {
+                                                    "className": "DecorationImage",
+                                                    "na": {
+                                                      "fit": "#(BoxFit.fitHeight)",
+                                                      "image": {
+                                                        "className": "NetworkImage",
+                                                        "pa": [
+                                                          "%(_getIcon(^(index)))"
+                                                        ]
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "width": 70,
+                                              "height": 70
+                                            }
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "className": "Material",
+                                        "na": {
+                                          "color": "#(Colors.white)",
+                                          "child": {
+                                            "className": "Padding",
+                                            "na": {
+                                              "padding": {
+                                                "className": "EdgeInsets.all",
+                                                "pa": [
+                                                  8.0
+                                                ]
+                                              },
+                                              "child": {
+                                                "className": "Column",
+                                                "na": {
+                                                  "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                                  "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                                                  "children": [
+                                                    {
+                                                      "className": "Text",
+                                                      "pa": [
+                                                        "%(_getTitle(^(index)))"
+                                                      ],
+                                                      "na": {
+                                                        "textAlign": "#(TextAlign.left)",
+                                                        "style": {
+                                                          "className": "TextStyle",
+                                                          "na": {
+                                                            "fontSize": 15,
+                                                            "fontWeight": "#(FontWeight.bold)",
+                                                            "color": "#(Colors.black)"
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    {
+                                                      "className": "Text",
+                                                      "pa": [
+                                                        "%(_getSubTitle(^(index)))"
+                                                      ],
+                                                      "na": {
+                                                        "style": {
+                                                          "className": "TextStyle",
+                                                          "na": {
+                                                            "fontSize": 13,
+                                                            "fontWeight": "#(FontWeight.normal)",
+                                                            "color": "#(Colors.black26)"
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    {
+                                                      "className": "Text",
+                                                      "pa": [
+                                                        "%(_getDistance(^(index)))"
+                                                      ],
+                                                      "na": {
+                                                        "style": {
+                                                          "className": "TextStyle",
+                                                          "na": {
+                                                            "fontSize": 13,
+                                                            "fontWeight": "#(FontWeight.w700)",
+                                                            "color": "#(Colors.deepPurple)"
+                                                          }
+                                                        }
+                                                      }
+                                                    }
                                                   ]
                                                 }
                                               }
                                             }
                                           }
-                                        },
-                                        "width": 70,
-                                        "height": 70
-                                      }
-                                    }
-                                  }
-                                },
-                                {
-                                  "className": "Material",
-                                  "na": {
-                                    "color": "#(Colors.white)",
-                                    "child": {
-                                      "className": "Padding",
-                                      "na": {
-                                        "padding": {
-                                          "className": "EdgeInsets.all",
-                                          "pa": [
-                                            8.0
-                                          ]
-                                        },
-                                        "child": {
-                                          "className": "Column",
-                                          "na": {
-                                            "crossAxisAlignment": "#(CrossAxisAlignment.start)",
-                                            "mainAxisAlignment": "#(MainAxisAlignment.center)",
-                                            "children": [
-                                              {
-                                                "className": "Text",
-                                                "pa": [
-                                                  "%(_getTitle(^(index)))"
-                                                ],
-                                                "na": {
-                                                  "textAlign": "#(TextAlign.left)",
-                                                  "style": {
-                                                    "className": "TextStyle",
-                                                    "na": {
-                                                      "fontSize": 15,
-                                                      "fontWeight": "#(FontWeight.bold)",
-                                                      "color": "#(Colors.black)"
-                                                    }
-                                                  }
-                                                }
-                                              },
-                                              {
-                                                "className": "Text",
-                                                "pa": [
-                                                  "%(_getSubTitle(^(index)))"
-                                                ],
-                                                "na": {
-                                                  "style": {
-                                                    "className": "TextStyle",
-                                                    "na": {
-                                                      "fontSize": 13,
-                                                      "fontWeight": "#(FontWeight.normal)",
-                                                      "color": "#(Colors.black26)"
-                                                    }
-                                                  }
-                                                }
-                                              },
-                                              {
-                                                "className": "Text",
-                                                "pa": [
-                                                  "%(_getDistance(^(index)))"
-                                                ],
-                                                "na": {
-                                                  "style": {
-                                                    "className": "TextStyle",
-                                                    "na": {
-                                                      "fontSize": 13,
-                                                      "fontWeight": "#(FontWeight.w700)",
-                                                      "color": "#(Colors.deepPurple)"
-                                                    }
-                                                  }
-                                                }
-                                              }
+                                        }
+                                      },
+                                      {
+                                        "className": "Expanded",
+                                        "na": {
+                                          "child": {
+                                            "className": "SizedBox"
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "className": "Padding",
+                                        "na": {
+                                          "padding": {
+                                            "className": "EdgeInsets.only",
+                                            "na": {
+                                              "right": 15
+                                            }
+                                          },
+                                          "child": {
+                                            "className": "Icon",
+                                            "pa": [
+                                              "#(Icons.chevron_right_rounded)"
                                             ]
                                           }
                                         }
                                       }
-                                    }
-                                  }
-                                },
-                                {
-                                  "className": "Expanded",
-                                  "na": {
-                                    "child": {
-                                      "className": "SizedBox"
-                                    }
+                                    ]
                                   }
                                 },
                                 {
@@ -319,49 +344,38 @@
                                     "padding": {
                                       "className": "EdgeInsets.only",
                                       "na": {
-                                        "right": 15
+                                        "left": 15.0,
+                                        "right": 15.0
                                       }
                                     },
                                     "child": {
-                                      "className": "Icon",
-                                      "pa": [
-                                        "#(Icons.chevron_right_rounded)"
-                                      ]
+                                      "className": "Container",
+                                      "na": {
+                                        "color": "#(Colors.black12)",
+                                        "height": 0.5,
+                                        "width": {
+                                          "className": "Sugar.width",
+                                          "pa": [
+                                            "^(context)"
+                                          ]
+                                        }
+                                      }
                                     }
                                   }
                                 }
                               ]
                             }
-                          },
-                          {
-                            "className": "Padding",
-                            "na": {
-                              "padding": {
-                                "className": "EdgeInsets.only",
-                                "na": {
-                                  "left": 15.0,
-                                  "right": 15.0
-                                }
-                              },
-                              "child": {
-                                "className": "Container",
-                                "na": {
-                                  "color": "#(Colors.black12)",
-                                  "height": 0.5,
-                                  "width": {
-                                    "className": "Sugar.width",
-                                    "pa": [
-                                      "^(context)"
-                                    ]
-                                  }
-                                }
-                              }
-                            }
                           }
+                        }
+                      },
+                      "parameters": {
+                        "pa": [
+                          "context",
+                          "index"
                         ]
                       }
                     }
-                  }
+                  ]
                 }
               }
             }

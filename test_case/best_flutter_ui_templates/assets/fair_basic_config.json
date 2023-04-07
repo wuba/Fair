@@ -1,5 +1,5 @@
 {
   "plugin": {
-    "fair_net": "assets/plugin/fair_net_plugin.js"
+    "fair_common_plugin": "assets/plugin/fair_common_plugin.js"
   }
 }

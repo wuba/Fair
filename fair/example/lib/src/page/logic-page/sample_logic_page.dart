@@ -33,7 +33,7 @@ class _State extends State<SampleLogicPage> {
   }
 
   void onTapText() {
-    _demoList.total = _demoList.total! + 1;
+    _demoList.total = _demoList.total + 1;
     setState(() {});
   }
 

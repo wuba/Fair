@@ -1,5 +1,5 @@
+import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
-import 'package:example/plugins/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -24,13 +24,13 @@ class _HomeScrollViewState extends State<HomeScrollView> {
 
   void requestData() {
     _page++;
-    FairNet().request({
+    FairCommonPlugin().http({
       'pageName': '#FairKey#',
       'method': 'GET',
       'url':
           'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/3158c2fc5e3ed9bc08b34f8d694c763d_home_scroll_data.json',
       'data': {'page': _page},
-      'success': (resp) {
+      'callback': (resp) {
         if (resp == null) {
           return;
         }
@@ -62,12 +62,12 @@ class _HomeScrollViewState extends State<HomeScrollView> {
     return Scaffold(
         body: Sugar.ifEqualBool(
       isDataEmpty(),
-      trueValue: Center(
+      trueValue: () => Center(
         child: Text(
           '加载中...',
         ),
       ),
-      falseValue: CustomScrollView(
+      falseValue: () => CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
             title: Text('CustomScrollView模版'),
@@ -93,36 +93,36 @@ class _HomeScrollViewState extends State<HomeScrollView> {
               crossAxisSpacing: 10.0,
               childAspectRatio: 2.0,
             ),
-            delegate: Sugar.sliverChildBuilderDelegate(
-                builder: (content, index) {
-                  return AspectRatio(
-                    aspectRatio: 1.5,
-                    child: ClipRRect(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(4.0)),
-                      child: Image.network(_getImagePath(index),
-                          fit: BoxFit.cover),
-                    ),
-                  );
-                },
-                childCount: 4),
+            delegate: SliverChildBuilderDelegate(
+              Sugar.nullableIndexedWidgetBuilder(
+                (context, index) => AspectRatio(
+                  aspectRatio: 1.5,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                    child:
+                        Image.network(_getImagePath(index), fit: BoxFit.cover),
+                  ),
+                ),
+              ),
+              childCount: 4,
+            ),
           ),
 
           ///列表
           SliverList(
-            delegate: Sugar.sliverChildBuilderDelegate(
-                builder: (content, index) {
-                  return AspectRatio(
-                    aspectRatio: 1.5,
-                    child: ClipRRect(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(4.0)),
-                      child: Image.network(_getImagePath(index),
-                          fit: BoxFit.cover),
-                    ),
-                  );
-                },
-                childCount: 3),
+            delegate: SliverChildBuilderDelegate(
+              Sugar.nullableIndexedWidgetBuilder(
+                (context, index) => AspectRatio(
+                  aspectRatio: 1.5,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                    child:
+                        Image.network(_getImagePath(index), fit: BoxFit.cover),
+                  ),
+                ),
+              ),
+              childCount: 3,
+            ),
           ),
         ],
       ),

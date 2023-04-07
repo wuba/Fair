@@ -50,10 +50,7 @@ class BindingData {
         var params = funcName.substring(
             funcName.indexOf('(') + 1, funcName.lastIndexOf(')'));
         var args = params.split(',').map((e) {
-          if (RegExp(r'\^\(index\)', multiLine: false).hasMatch(e) &&
-              domain is IndexDomain?) {
-            return domain?.index;
-          } else if (domain != null && domain.match(e)) {
+          if (domain != null && domain.match(e)) {
             return domain.bindValue(e);
           } else {
             var r = proxyMirror?.evaluate(null, bound, e, domain: domain);

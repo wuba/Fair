@@ -6,6 +6,7 @@
 
 import 'dart:convert';
 
+import 'package:fair_example/assets.dart';
 import 'package:fair_example/src/page/list/cells/sample_list_with_dynamic_cell_page.dart';
 import 'package:fair_example/src/page/list/logic_list_home_page.dart';
 import 'package:fair_example/src/page/logic-page/sample_logic_page.dart';
@@ -30,8 +31,12 @@ class LogicHomePage extends StatelessWidget {
               Navigator.pushNamed(context, 'fair_page', arguments: {
                 'name': '动态界面',
                 'path':
-                    'assets/bundle/lib_src_page_logic-page_sample_logic_page.fair.json',
-                'data': {"fairProps": {'pageName': '动态界面', '_count': 58}}
+                    // 'assets/fair/lib_src_page_logic-page_sample_logic_page.fair.json',
+                    Assets
+                        .assets_fair_lib_src_page_logic_page_sample_logic_page_fair_json,
+                'data': {
+                  "fairProps": {'pageName': '动态界面', '_count': 58}
+                }
               });
               // 原生界面
               // Navigator.push(context, MaterialPageRoute(
@@ -42,13 +47,13 @@ class LogicHomePage extends StatelessWidget {
             addItem('动态界面跳转&传值', () {
               // 动态界面跳转&传值
               // Navigator.pushNamed(context, 'fair_page',
-              //     arguments: {'name': '逻辑动态界面跳转&传值', 'path': 'assets/bundle/lib_src_page_logic-page2page_sample_logic_page2page.fair.json', 'data': {'pageName': '逻辑动态界面跳转&传值'}});
+              //     arguments: {'name': '逻辑动态界面跳转&传值', 'path': 'assets/fair/lib_src_page_logic-page2page_sample_logic_page2page.fair.json', 'data': {'pageName': '逻辑动态界面跳转&传值'}});
               // 原生界面
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        SampleLogicPage2Page({'pageName': '动态界面跳转&传值', '_count': 58}),
+                    builder: (context) => SampleLogicPage2Page(
+                        {'pageName': '动态界面跳转&传值', '_count': 58}),
                   ));
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),

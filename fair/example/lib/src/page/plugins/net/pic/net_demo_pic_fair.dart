@@ -5,6 +5,7 @@
  */
 
 import 'package:fair/fair.dart';
+import 'package:fair_example/assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,9 +16,11 @@ class PicNetDemoFairPage extends StatefulWidget {
 
 class PicNetDemoFairPageState extends State<PicNetDemoFairPage> {
   // String path =
-  //     'assets/bundle/lib_src_page_plugins_net_pic_net_demo_pic.fair.json';
+  //     'assets/fair/lib_src_page_plugins_net_pic_net_demo_pic.fair.json';
   String path =
-      'assets/bundle/lib_src_page_plugins_net_pic_net_demo_pic2.fair.json';
+      //'assets/fair/lib_src_page_plugins_net_pic_net_demo_pic2.fair.json'
+
+      Assets.assets_fair_lib_src_page_plugins_net_pic_net_demo_pic2_fair_json;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +34,9 @@ class PicNetDemoFairPageState extends State<PicNetDemoFairPage> {
         child: Icon(Icons.refresh),
         onPressed: () {
           setState(() {
-            path =
-                'assets/bundle/lib_src_page_plugins_net_pic_net_demo_pic.fair.json';
+            path = Assets
+                .assets_fair_lib_src_page_plugins_net_pic_net_demo_pic_fair_json;
+            // 'assets/fair/lib_src_page_plugins_net_pic_net_demo_pic.fair.json';
           });
         },
       ),

@@ -120,17 +120,17 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Sugar.ifEqualBool(isLogin,
-                trueValue: Container(
-                  margin: const EdgeInsets.only(top: 30),
-                  child: Text(
-                    'Click Login >>> Email >>> $email PWD >>> $pwd',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                falseValue: Container()),
+                trueValue: () => Container(
+                      margin: const EdgeInsets.only(top: 30),
+                      child: Text(
+                        'Click Login >>> Email >>> $email PWD >>> $pwd',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                falseValue: () => Container()),
             Container(
               margin: const EdgeInsets.only(top: 20),
               child: Row(
