@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair/src/render/builder/widget.dart';
 import 'package:fair/src/render/proxy.dart';
 import 'package:fair/src/utils.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,6 @@ import '../internal/error_tips.dart';
 import '../internal/fair_decoder.dart';
 import '../internal/global_state.dart';
 import 'package:fair_version/fair_version.dart';
-import 'builder.dart';
 
 class _DataSource {
   final Map? layout;
