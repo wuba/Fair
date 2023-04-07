@@ -201,20 +201,69 @@ class Sugar {
 
   static PopupMenuItemBuilder popMenuButtonItemBuilder(PopupMenuItemBuilder builder) => builder; 
   
-  /// 用于 function domain 映射的时候，强制 ast 的返回值为 function 对应的值
+  /// 用于 function domain 映射的时候，强制 ast 的返回值为 function 对应的返回类型
   /// 比如 
+  /// class A {
   /// 
-  /// itemBuilder: (context, index) {
-  ///   return Container();
+  /// }
+  /// class B extends A {
+  /// 
   /// }
   /// 
-  /// 会生成这样的， "Container Function(BuildContext, int)"
   /// 
-  /// 但是实际上需要是 "Widget Function(BuildContext, int)"
+  /// callback: () {
+  ///   return B();
+  /// }
   /// 
-  /// 可以通过下面的方式来让 ast 生成对应的数据
-  /// itemBuilder: (context, index) {
-  ///   return Sugar.asT<Widget>(Container());
+  /// 会生成这样的， "B Function()"
+  /// 
+  /// 但是实际上 callback 对应的映射是 "A Function()"
+  /// 
+  /// 可以通过下面的方式来让 ast 生成对应的返回类型
+  /// callback: () {
+  ///   return Sugar.asT<A>(B());
+  /// }
+  /// 
+  /// 对于继承 Widget 的全部返回类型，fair_ast_gen.dart 中做了特殊处理，都会看作为 Widget。
+  /// 应该尽量避免使用返回类型是显式类型(比如返回类型必须是Container)，如果真的需要，请在回调执行的地方再做强转。
+  /// 或者在自定义的 DynamicWidgetBuilder 中做特殊处理
+  /// 
+  /// class SugarCommon {
+  ///   SugarCommon._();
+  ///   static Container Function() returnContainer(Widget Function() input) {
+  ///     Container Function() builder =(){
+  ///       return input() as Container;
+  ///     };
+  ///     return builder;
+  ///   }
+  /// }
+  /// 
+  /// class CustomDynamicWidgetBuilder extends DynamicWidgetBuilder {
+  ///   CustomDynamicWidgetBuilder(
+  ///     super.proxyMirror,
+  ///     super.page,
+  ///     super.bound, {
+  ///     super.bundle,
+  ///   });
+  ///   @override
+  ///   dynamic convert(BuildContext context, Map map, Map? methodMap,
+  ///       {Domain? domain}) {
+  ///     var name = map[tag];
+  ///     if(name =='SugarCommon.returnContainer') {
+  ///        dynamic fairFunction = pa0(map);
+  ///        assert(fairFunction is Map);
+  ///        Container Function() builder = (
+  ///        ) {
+  ///          return convert(
+  ///            context,
+  ///            FunctionDomain.getBody(fairFunction),
+  ///            methodMap,
+  ///          ) as Container;
+  ///        };
+  ///        return builder;
+  ///     }
+  ///     return super.convert(context, map, methodMap, domain:domain);
+  ///   }
   /// }
   static T asT<T>(dynamic value)=> value as T;   
 }

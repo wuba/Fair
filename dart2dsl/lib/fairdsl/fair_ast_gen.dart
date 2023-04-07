@@ -189,11 +189,78 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   @override
   Map? visitFunctionExpression(FunctionExpression node) {
     var functionType= node.staticType as  FunctionType?;
+    String? tagString;
+    String? returnTypeString;
+    if(functionType !=null) {
+       var returnType= functionType.returnType;
+       tagString = functionType.getDisplayString(withNullability: true);
+       returnTypeString = functionType.returnType.getDisplayString(withNullability: true);
+       // 特殊处理一下 Widget
+       // 
+       // itemBuilder: (context, index) {
+       //   return Container();
+       // }
+       // 
+       // 会生成这样的， "Container Function(BuildContext, int)"
+       // 
+       // 但是实际上需要是 "Widget Function(BuildContext, int)"
+       // 
+       // Widget 是符合大部分的场景
+       // 
+       // 应该尽量避免使用返回类型是显式类型(比如返回类型必须是Container)，如果真的需要，请在回调执行的地方再做强转。
+       // 或者在自定义的 DynamicWidgetBuilder 中做特殊处理
+       // 
+       // class SugarCommon {
+       //   SugarCommon._();
+       //   static Container Function() returnContainer(Widget Function() input) {
+       //     Container Function() builder =(){
+       //       return input() as Container;
+       //     };
+       //     return builder;
+       //   }
+       // }
+       // 
+       // class CustomDynamicWidgetBuilder extends DynamicWidgetBuilder {
+       //   CustomDynamicWidgetBuilder(
+       //     super.proxyMirror,
+       //     super.page,
+       //     super.bound, {
+       //     super.bundle,
+       //   });
+       //   @override
+       //   dynamic convert(BuildContext context, Map map, Map? methodMap,
+       //       {Domain? domain}) {
+       //     var name = map[tag];
+       //     if(name =='SugarCommon.returnContainer') {
+       //        dynamic fairFunction = pa0(map);
+       //        assert(fairFunction is Map);
+       //        Container Function() builder = (
+       //        ) {
+       //          return convert(
+       //            context,
+       //            FunctionDomain.getBody(fairFunction),
+       //            methodMap,
+       //          ) as Container;
+       //        };
+       //        return builder;
+       //     }
+       //     return super.convert(context, map, methodMap, domain:domain);
+       //   }
+       // }
+       if(returnType is InterfaceType && 
+       returnType.allSupertypes.any((element) => 
+       element.getDisplayString(withNullability: false) == 'Widget')) {
+        var nullabilityString = returnTypeString.endsWith('?') ? '?':'';
+        tagString = tagString.replaceFirst(returnTypeString, 'Widget'+nullabilityString);
+        returnTypeString = 'Widget'+nullabilityString;
+       }
+    }
+
     return _buildFunctionExpression(_visitNode(node.parameters),
        _visitNode(node.body), 
        isAsync: node.body.isAsynchronous,
-       tag: functionType?.getDisplayString(withNullability: true),
-       returnType: functionType?.returnType.getDisplayString(withNullability: true),
+       tag: tagString,
+       returnType: returnTypeString,
      );
   }
 
@@ -399,7 +466,9 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
         'parameters': params,
         'body': body,
         'isAsync': isAsync,
+        if(tag != null)
         'tag': tag,
+        if(returnType != null)
         'returnType': returnType,
       };
 
