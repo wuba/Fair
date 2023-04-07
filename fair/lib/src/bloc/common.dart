@@ -5,6 +5,7 @@
  */
 
 import 'dart:io';
+import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:fair_version/fair_version.dart';
 import 'package:flutter/widgets.dart';
@@ -85,5 +86,13 @@ FairWidgetBinding provider = () {
         color: props['color'],
         width: props['width'],
         style: props['style'] ?? BorderStyle.solid),
+    'Sugar.enumName': (props)=> Sugar.enumName(pa0(props)),
+    'Sugar.futureValue': (props)=> Sugar.futureValue(pa0(props)),
+    'Sugar.mapGet': (props)=> Sugar.mapGet(pa0(props), pa1(props)),
+    'Sugar.imageChunkEventGet': (props)=> Sugar.imageChunkEventGet(pa0(props), pa1(props)),
+    'Sugar.controlsDetailsGet': (props)=> Sugar.controlsDetailsGet(pa0(props), pa1(props)),
+    'Sugar.animationGet': (props)=> Sugar.animationGet(pa0(props), pa1(props)),
+    'Sugar.boxConstraintsGet': (props)=> Sugar.boxConstraintsGet(pa0(props), pa1(props)),
+    'Sugar.sizeGet': (props)=> Sugar.sizeGet(pa0(props), pa1(props)),
   };
 };

@@ -65,11 +65,11 @@ class FunctionDomain extends Domain {
     return map['tag'];
   }
 
-    /// 获取返回值
-  static String getReturnType(Map map) {
-    assert(map['returnType'] != null,'未找到 FairFunction 的 returnType');
-    return map['returnType'];
-  }
+  /// 获取返回值
+  // static String getReturnType(Map map) {
+  //   assert(map['returnType'] != null,'未找到 FairFunction 的 returnType');
+  //   return map['returnType'];
+  // }
 
    /// 无参数回调
   static bool parametersIsEmpty(Map<dynamic, dynamic> map) {
