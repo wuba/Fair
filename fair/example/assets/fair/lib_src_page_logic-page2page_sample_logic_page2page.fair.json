@@ -77,20 +77,25 @@
               },
               "heroTag": "open_in_new",
               "onPressed": {
-                "className": "Navigator.pushNamed",
-                "pa": [
-                  "^(context)",
-                  "fair_page"
-                ],
-                "na": {
-                  "arguments": {
-                    "name": "动态界面&传值",
-                    "path": "assets/fair/lib_src_page_logic-page2page_sample_logic_page2page.fair.json",
-                    "data": {
-                      "_count": 58
+                "className": "FairFunction",
+                "body": {
+                  "className": "Navigator.pushNamed",
+                  "pa": [
+                    "^(context)",
+                    "fair_page"
+                  ],
+                  "na": {
+                    "arguments": {
+                      "name": "动态界面&传值",
+                      "path": "assets/fair/lib_src_page_logic-page2page_sample_logic_page2page.fair.json",
+                      "data": {
+                        "_count": "^(_count)"
+                      }
                     }
                   }
-                }
+                },
+                "tag": "void Function()",
+                "returnType": "void"
               }
             }
           }

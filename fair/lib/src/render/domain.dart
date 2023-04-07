@@ -40,17 +40,46 @@ class FunctionDomain extends Domain {
   static List<dynamic> _getParameters(Map<dynamic, dynamic> map, bool isNamed) {
    
    assert(map['className']=='FairFunction');
-   assert(map.containsKey('parameters'));
-
-    var parameters = map['parameters']?[isNamed ? 'na' : 'pa'];
-    return parameters ?? [];
+ 
+   var parameters = map['parameters']?[isNamed ? 'na' : 'pa'];
+   return parameters ?? [];
   }
   
   /// 获取 function 的body
   static dynamic getBody(Map map) {
-    assert(map['className']=='FairFunction');
+    if(map['className']!='FairFunction') {
+      return map;
+    }
     assert(map.containsKey('body'));
-    return map['body'];
+
+    var body= map['body'];
+    if(body is Map && body['className']=='Sugar.asT') {
+       return body['pa'][0];
+    }
+    return body;
+  }
+  
+  /// 获取唯一标记
+  static String getTag(Map map) {
+    assert(map['tag'] != null,'未找到 FairFunction 的 tag');
+    return map['tag'];
+  }
+
+    /// 获取返回值
+  static String getReturnType(Map map) {
+    assert(map['returnType'] != null,'未找到 FairFunction 的 returnType');
+    return map['returnType'];
+  }
+
+   /// 无参数回调
+  static bool parametersIsEmpty(Map<dynamic, dynamic> map) {
+   
+   assert(map['className']=='FairFunction');
+   var parameters = map['parameters'];
+   if(parameters is Map) {
+     return parameters.isEmpty;
+   }
+   return true;
   }
 
 

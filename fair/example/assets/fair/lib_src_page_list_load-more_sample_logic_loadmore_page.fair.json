@@ -27,20 +27,30 @@
               ],
               "na": {
                 "trueValue": {
-                  "className": "Center",
-                  "na": {
-                    "child": {
-                      "className": "CircularProgressIndicator"
+                  "className": "FairFunction",
+                  "body": {
+                    "className": "Center",
+                    "na": {
+                      "child": {
+                        "className": "CircularProgressIndicator"
+                      }
                     }
-                  }
+                  },
+                  "tag": "Center Function()",
+                  "returnType": "Center"
                 },
                 "falseValue": {
-                  "className": "ListView.builder",
-                  "na": {
-                    "controller": "^(_scrollController)",
-                    "itemCount": "%(_itemCount)",
-                    "itemBuilder": "@(_itemBuilder)"
-                  }
+                  "className": "FairFunction",
+                  "body": {
+                    "className": "ListView.builder",
+                    "na": {
+                      "controller": "^(_scrollController)",
+                      "itemCount": "%(_itemCount)",
+                      "itemBuilder": "@(_itemBuilder)"
+                    }
+                  },
+                  "tag": "ListView Function()",
+                  "returnType": "ListView"
                 }
               }
             }

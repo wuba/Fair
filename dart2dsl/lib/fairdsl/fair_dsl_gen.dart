@@ -391,30 +391,37 @@ dynamic _buildValueExpression(
       naPaValue = _buildValueExpression(
           valueExpression?.asFunctionExpression.body?.body?.last, fairDslContex);
     }
+
+    var na = [];
+    var pa = [];
     if (valueExpression?.asFunctionExpression.parameterList != null &&
         valueExpression!.asFunctionExpression.parameterList!.isNotEmpty) {
-      var na = [];
-      var pa = [];
       for (var element in valueExpression.asFunctionExpression.parameterList!) {
         if (element?.isNamed == true) {
           na.add(element?.name);
         } else {
           pa.add(element?.name);
         }
-      }
- 
-      naPaValue = {
-        'className': 'FairFunction',
-        'body': naPaValue,
-        'parameters': {
-          // 命名参数的名字不会变化，使用的时候名字相同对应就行了
-          if (na.isNotEmpty) 'na': na,
-          if (pa.isNotEmpty) 'pa': pa,
-        },
-        // 如果找到方法能动态创建 function 的话，或者有用
-        // 'returnType': '',
-      };     
-    }    
+      }      
+    }
+    var tag = valueExpression?.asFunctionExpression.toAst()?['tag'];
+    var returnType = valueExpression?.asFunctionExpression.toAst()?['returnType'];
+    naPaValue = {
+      'className': 'FairFunction',
+      'body': naPaValue,
+      if(na.isNotEmpty || pa.isNotEmpty)
+      'parameters': {
+        // 命名参数的名字不会变化，使用的时候名字相同对应就行了
+        // 回调里面的命名参数名字是不可以更改的
+        if (na.isNotEmpty) 'na': na,
+        if (pa.isNotEmpty) 'pa': pa,
+      },
+      //  "tag": "Widget Function(BuildContext, int)"
+      if(tag!=null)
+      'tag': tag,
+      if(returnType!=null)
+      'returnType':returnType,
+    };    
   } else if (valueExpression?.isReturnStatement==true) {
     naPaValue = _buildValueExpression(
         valueExpression?.asReturnStatement.argument, fairDslContex);

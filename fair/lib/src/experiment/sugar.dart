@@ -29,7 +29,7 @@ class Sugar {
   }) =>
       expect == actual ? trueValue() : falseValue();
 
-  static K ifEqualBool<T, K>(
+  static K ifEqualBool<K>(
     bool state, {
     required K Function() trueValue,
     required K Function() falseValue,
@@ -199,7 +199,24 @@ class Sugar {
   static TransitionBuilder transitionBuilder(TransitionBuilder builder) =>
       builder;
 
-  static PopupMenuItemBuilder popMenuButtonItemBuilder(PopupMenuItemBuilder builder) => builder;    
+  static PopupMenuItemBuilder popMenuButtonItemBuilder(PopupMenuItemBuilder builder) => builder; 
+  
+  /// 用于 function domain 映射的时候，强制 ast 的返回值为 function 对应的值
+  /// 比如 
+  /// 
+  /// itemBuilder: (context, index) {
+  ///   return Container();
+  /// }
+  /// 
+  /// 会生成这样的， "Container Function(BuildContext, int)"
+  /// 
+  /// 但是实际上需要是 "Widget Function(BuildContext, int)"
+  /// 
+  /// 可以通过下面的方式来让 ast 生成对应的数据
+  /// itemBuilder: (context, index) {
+  ///   return Sugar.asT<Widget>(Container());
+  /// }
+  static T asT<T>(dynamic value)=> value as T;   
 }
 
 class SugarSwitchCaseObj<T, K> {
