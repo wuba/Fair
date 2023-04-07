@@ -71,7 +71,7 @@ import 'dart:convert';
 ///
 /// FairCommonPlugin().http({
 ///   // required
-///   'pageName': 'YourPageName',
+///   'pageName': '#FairKey#',
 ///   // if need, add a callback
 ///   'callback': (dynamic result) {
 ///     // result is map or null
