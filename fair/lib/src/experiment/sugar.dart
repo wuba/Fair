@@ -10,6 +10,7 @@ import 'package:flutter/gestures.dart';
 import '../extension.dart';
 import 'dart:async';
 
+
 /// The operations can be used in DSL.
 class Sugar {
   Sugar._();
@@ -265,7 +266,74 @@ class Sugar {
   ///     return super.convert(context, map, methodMap, domain:domain);
   ///   }
   /// }
-  static T asT<T>(dynamic value)=> value as T;   
+  static T asT<T>(dynamic value)=> value as T;
+ 
+  /// 获取枚举的名字
+  static String enumName(dynamic value) => value.name;   
+ 
+  /// 返回 Future.value
+  static Future<T> futureValue<T>(T value)=> Future.value(value);
+  
+  // 方便从 map 中获取值
+  static dynamic mapGet(Map map, String key) => map[key];
+  
+  // typedef ImageLoadingBuilder = Widget Function(BuildContext context, Widget child, ImageChunkEvent? loadingProgress)
+  // package:flutter/src/widgets/image.dart
+  // 方便在回调中获取值
+  static dynamic imageChunkEventGet(ImageChunkEvent imageChunkEvent, String key) {
+    return {
+      'cumulativeBytesLoaded': imageChunkEvent.cumulativeBytesLoaded,
+      'expectedTotalBytes': imageChunkEvent.expectedTotalBytes,
+    }[key];
+  }
+  // typedef ControlsWidgetBuilder = Widget Function(BuildContext context, ControlsDetails details)
+  // package:flutter/src/material/stepper.dart
+  // 方便在回调中获取值
+  static dynamic controlsDetailsGet(ControlsDetails controlsDetails, String key) {
+    return {
+      'currentStep': controlsDetails.currentStep,
+      'isActive': controlsDetails.isActive,
+      'stepIndex': controlsDetails.stepIndex,
+      'onStepCancel': controlsDetails.onStepCancel,
+      'onStepContinue': controlsDetails.onStepContinue,
+    }[key];
+  }
+  
+  // 方便在回调中获取值
+  static dynamic animationGet(Animation animation, String key) {
+    return {
+      'isCompleted': animation.isCompleted,
+      'isDismissed': animation.isDismissed,
+      'status': animation.status,
+      'value': animation.value,
+    }[key];
+  }
+  
+  // typedef LayoutWidgetBuilder = Widget Function(BuildContext context, BoxConstraints constraints); 
+  // package:flutter/src/widgets/layout_builder.dart
+  // 方便在回调中获取值
+  static dynamic boxConstraintsGet(BoxConstraints boxConstraints, String key) {
+    return {
+      'maxWidth': boxConstraints.maxWidth,
+      'maxHeight': boxConstraints.maxHeight,
+      'minWidth': boxConstraints.minWidth,
+      'minHeight': boxConstraints.minHeight,
+    }[key];
+  }
+
+  static dynamic sizeGet(Size size, String key) {
+    return {
+      'width': size.width,
+      'height': size.height,
+      'aspectRatio': size.aspectRatio,
+      'longestSide': size.longestSide,
+      'shortestSide': size.shortestSide,
+      'isEmpty': size.isEmpty,
+      'isFinite': size.isFinite,
+      'isInfinite': size.isInfinite,
+      'flipped': size.flipped,       
+    }[key];
+  }
 }
 
 class SugarSwitchCaseObj<T, K> {

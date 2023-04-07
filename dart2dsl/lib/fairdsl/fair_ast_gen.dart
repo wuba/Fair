@@ -260,7 +260,8 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
        _visitNode(node.body), 
        isAsync: node.body.isAsynchronous,
        tag: tagString,
-       returnType: returnTypeString,
+       // 暂时不需要生成 returnType
+       // returnType: returnTypeString,
      );
   }
 
