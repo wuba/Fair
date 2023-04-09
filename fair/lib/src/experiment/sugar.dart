@@ -280,48 +280,49 @@ class Sugar {
   // typedef ImageLoadingBuilder = Widget Function(BuildContext context, Widget child, ImageChunkEvent? loadingProgress)
   // package:flutter/src/widgets/image.dart
   // 方便在回调中获取值
-  static dynamic imageChunkEventGet(ImageChunkEvent imageChunkEvent, String key) {
+  static Map<String,dynamic> imageChunkEventToMap(ImageChunkEvent imageChunkEvent) {
     return {
       'cumulativeBytesLoaded': imageChunkEvent.cumulativeBytesLoaded,
       'expectedTotalBytes': imageChunkEvent.expectedTotalBytes,
-    }[key];
+    };
   }
   // typedef ControlsWidgetBuilder = Widget Function(BuildContext context, ControlsDetails details)
   // package:flutter/src/material/stepper.dart
   // 方便在回调中获取值
-  static dynamic controlsDetailsGet(ControlsDetails controlsDetails, String key) {
+  static Map<String,dynamic> controlsDetailsToMap(ControlsDetails controlsDetails) {
     return {
       'currentStep': controlsDetails.currentStep,
       'isActive': controlsDetails.isActive,
       'stepIndex': controlsDetails.stepIndex,
       'onStepCancel': controlsDetails.onStepCancel,
       'onStepContinue': controlsDetails.onStepContinue,
-    }[key];
+    };
   }
   
   // 方便在回调中获取值
-  static dynamic animationGet(Animation animation, String key) {
+  static Map<String,dynamic> animationToMap(Animation animation) {
     return {
       'isCompleted': animation.isCompleted,
       'isDismissed': animation.isDismissed,
-      'status': animation.status,
+      // 转换成字符串，方便js中使用
+      'status': animation.status.name,
       'value': animation.value,
-    }[key];
+    };
   }
   
   // typedef LayoutWidgetBuilder = Widget Function(BuildContext context, BoxConstraints constraints); 
   // package:flutter/src/widgets/layout_builder.dart
   // 方便在回调中获取值
-  static dynamic boxConstraintsGet(BoxConstraints boxConstraints, String key) {
+  static Map<String,dynamic> boxConstraintsToMap(BoxConstraints boxConstraints) {
     return {
       'maxWidth': boxConstraints.maxWidth,
       'maxHeight': boxConstraints.maxHeight,
       'minWidth': boxConstraints.minWidth,
       'minHeight': boxConstraints.minHeight,
-    }[key];
+    };
   }
 
-  static dynamic sizeGet(Size size, String key) {
+  static Map<String,dynamic> sizeToMap(Size size) {
     return {
       'width': size.width,
       'height': size.height,
@@ -330,9 +331,8 @@ class Sugar {
       'shortestSide': size.shortestSide,
       'isEmpty': size.isEmpty,
       'isFinite': size.isFinite,
-      'isInfinite': size.isInfinite,
-      'flipped': size.flipped,       
-    }[key];
+      'isInfinite': size.isInfinite,    
+    };
   }
 }
 
