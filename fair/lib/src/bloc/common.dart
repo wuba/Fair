@@ -86,13 +86,63 @@ FairWidgetBinding provider = () {
         color: props['color'],
         width: props['width'],
         style: props['style'] ?? BorderStyle.solid),
-    'Sugar.enumName': (props)=> Sugar.enumName(pa0(props)),
-    'Sugar.futureValue': (props)=> Sugar.futureValue(pa0(props)),
-    'Sugar.mapGet': (props)=> Sugar.mapGet(pa0(props), pa1(props)),
-    'Sugar.imageChunkEventToMap': (props)=> Sugar.imageChunkEventToMap(pa0(props)),
-    'Sugar.controlsDetailsToMap': (props)=> Sugar.controlsDetailsToMap(pa0(props),),
-    'Sugar.animationToMap': (props)=> Sugar.animationToMap(pa0(props)),
-    'Sugar.boxConstraintsToMap': (props)=> Sugar.boxConstraintsToMap(pa0(props)),
-    'Sugar.sizeToMap': (props)=> Sugar.sizeToMap(pa0(props)),
+    'Sugar.enumName': (props) => Sugar.enumName(pa0(props)),
+    'Sugar.futureValue': (props) {
+      var value = pa0(props);
+      // 支持一些常用的
+      if (value is int) {
+        return Future<int>.value(value);
+      } else if (value is int?) {
+        return Future<int?>.value(value);
+      } else if (value is double) {
+        return Future<double>.value(value);
+      } else if (value is double?) {
+        return Future<double?>.value(value);
+      } else if (value is bool) {
+        return Future<bool>.value(value);
+      } else if (value is bool?) {
+        return Future<bool?>.value(value);
+      } else if (value is String) {
+        return Future<String>.value(value);
+      } else if (value is String?) {
+        return Future<String?>.value(value);
+      } else if (value is Widget) {
+        return Future<Widget>.value(value);
+      } else if (value is Widget?) {
+        return Future<Widget?>.value(value);
+      } else if (value is List<int>) {
+        return Future<List<int>>.value(value);
+      } else if (value is List<int?>) {
+        return Future<List<int?>>.value(value);
+      } else if (value is List<double>) {
+        return Future<List<double>>.value(value);
+      } else if (value is List<double?>) {
+        return Future<List<double?>>.value(value);
+      } else if (value is List<bool>) {
+        return Future<List<bool>>.value(value);
+      } else if (value is List<bool?>) {
+        return Future<List<bool?>>.value(value);
+      } else if (value is List<String>) {
+        return Future<List<String>>.value(value);
+      } else if (value is List<String?>) {
+        return Future<List<String?>>.value(value);
+      } else if (value is List<Widget>) {
+        return Future<List<Widget>>.value(value);
+      } else if (value is List<Widget?>) {
+        return Future<List<Widget?>>.value(value);
+      }
+      // Future<dynamic>
+      return Future.value(value);
+    },
+    'Sugar.mapGet': (props) => Sugar.mapGet(pa0(props), pa1(props)),
+    'Sugar.imageChunkEventToMap': (props) =>
+        Sugar.imageChunkEventToMap(pa0(props)),
+    'Sugar.controlsDetailsToMap': (props) => Sugar.controlsDetailsToMap(
+          pa0(props),
+        ),
+    'Sugar.animationToMap': (props) => Sugar.animationToMap(pa0(props)),
+    'Sugar.boxConstraintsToMap': (props) =>
+        Sugar.boxConstraintsToMap(pa0(props)),
+    'Sugar.sizeToMap': (props) => Sugar.sizeToMap(pa0(props)),
   };
 };
