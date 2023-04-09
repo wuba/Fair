@@ -89,10 +89,10 @@ FairWidgetBinding provider = () {
     'Sugar.enumName': (props)=> Sugar.enumName(pa0(props)),
     'Sugar.futureValue': (props)=> Sugar.futureValue(pa0(props)),
     'Sugar.mapGet': (props)=> Sugar.mapGet(pa0(props), pa1(props)),
-    'Sugar.imageChunkEventGet': (props)=> Sugar.imageChunkEventGet(pa0(props), pa1(props)),
-    'Sugar.controlsDetailsGet': (props)=> Sugar.controlsDetailsGet(pa0(props), pa1(props)),
-    'Sugar.animationGet': (props)=> Sugar.animationGet(pa0(props), pa1(props)),
-    'Sugar.boxConstraintsGet': (props)=> Sugar.boxConstraintsGet(pa0(props), pa1(props)),
-    'Sugar.sizeGet': (props)=> Sugar.sizeGet(pa0(props), pa1(props)),
+    'Sugar.imageChunkEventToMap': (props)=> Sugar.imageChunkEventToMap(pa0(props)),
+    'Sugar.controlsDetailsToMap': (props)=> Sugar.controlsDetailsToMap(pa0(props),),
+    'Sugar.animationToMap': (props)=> Sugar.animationToMap(pa0(props)),
+    'Sugar.boxConstraintsToMap': (props)=> Sugar.boxConstraintsToMap(pa0(props)),
+    'Sugar.sizeToMap': (props)=> Sugar.sizeToMap(pa0(props)),
   };
 };
