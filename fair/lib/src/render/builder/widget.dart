@@ -13,6 +13,7 @@ import 'package:fair/src/render/builder/builder.dart';
 import 'package:fair/src/render/builder/common.dart';
 import 'package:fair/src/render/builder/function.dart';
 import 'package:fair/src/render/domain.dart';
+import 'package:fair/src/render/property.dart';
 import 'package:fair/src/render/proxy.dart';
 import 'package:fair/src/type.dart';
 import 'package:fair_version/fair_version.dart';
@@ -89,6 +90,20 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
         );
       } else if(name == 'FairFunction') {
         return buildFairFunction(context, map, methodMap, domain: domain);
+      } else if(name == 'Sugar.futureValue') {
+        return _buildFutureValue(
+          map,
+          methodMap,
+          context,
+          domain,
+        );
+      } else if(name == 'Sugar.createFuture') {
+        return _buildCreateFuture(
+          map,
+          methodMap,
+          context,
+          domain,
+        );
       }
 
       var module = bound?.modules?.moduleOf(name)?.call();
@@ -577,5 +592,46 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
       return list;
     };
     return builder;    
+  }
+  
+  dynamic _buildCreateFuture(Map map, Map? methodMap, BuildContext context, Domain? domain) {
+      var na = named('Sugar.createFuture', map['na'], methodMap, context, domain);
+      var props= Property.extract(map: na.data);
+      // typeArguments
+      var ta = map['ta'];
+      if(ta != null) {
+        // 暂时只支持单泛型
+        var typeArgument= ta.toString().split(',').first;
+        return createTResult(typeArgument, <T>() => Sugar.createFuture<T>(
+            function: props['function'],
+            futureId: props['futureId'],
+            argument: props['argument'],
+            callback: props['callback'],
+        ),
+        // 异步不可能回调 Widget 类型
+        widgetSupport: false,
+        );
+      }
+      return Sugar.createFuture(
+            function: props['function'],
+            futureId: props['futureId'],
+            argument: props['argument'],
+            callback: props['callback'],
+      );
+  }
+  
+  
+  dynamic _buildFutureValue(Map map, Map? methodMap, BuildContext context, Domain? domain) {
+      var pa = map['pa'];
+      var value = pa==null? null: pa0Value(pa0(map), methodMap, context, domain);
+      // typeArguments
+      var ta = map['ta'];
+      if(ta != null) {
+        // 暂时只支持单泛型
+        var typeArgument= ta.toString().split(',').first;
+        return createTResult(typeArgument, <T>() => Future<T>.value(value));
+      }
+      // Future<dynamic>
+      return Future.value(value);
   }
 }

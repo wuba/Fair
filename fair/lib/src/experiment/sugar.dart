@@ -3,13 +3,13 @@
  * Use of this source code is governed by a BSD type license that can be
  * found in the LICENSE file.
  */
+import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/gestures.dart';
 
 import '../extension.dart';
 import 'dart:async';
-
 
 /// The operations can be used in DSL.
 class Sugar {
@@ -48,10 +48,10 @@ class Sugar {
     return data.mapEach((index, item) => builder(item));
   }
 
-
   static NestedScrollViewHeaderSliversBuilder
       nestedScrollViewHeaderSliversBuilder(
-          NestedScrollViewHeaderSliversBuilder builder,) {
+    NestedScrollViewHeaderSliversBuilder builder,
+  ) {
     return builder;
   }
 
@@ -200,35 +200,37 @@ class Sugar {
   static TransitionBuilder transitionBuilder(TransitionBuilder builder) =>
       builder;
 
-  static PopupMenuItemBuilder popMenuButtonItemBuilder(PopupMenuItemBuilder builder) => builder; 
-  
+  static PopupMenuItemBuilder popMenuButtonItemBuilder(
+          PopupMenuItemBuilder builder) =>
+      builder;
+
   /// 用于 function domain 映射的时候，强制 ast 的返回值为 function 对应的返回类型
-  /// 比如 
+  /// 比如
   /// class A {
-  /// 
+  ///
   /// }
   /// class B extends A {
-  /// 
+  ///
   /// }
-  /// 
-  /// 
+  ///
+  ///
   /// callback: () {
   ///   return B();
   /// }
-  /// 
+  ///
   /// 会生成这样的， "B Function()"
-  /// 
+  ///
   /// 但是实际上 callback 对应的映射是 "A Function()"
-  /// 
+  ///
   /// 可以通过下面的方式来让 ast 生成对应的返回类型
   /// callback: () {
   ///   return Sugar.asT<A>(B());
   /// }
-  /// 
+  ///
   /// 对于继承 Widget 的全部返回类型，fair_ast_gen.dart 中做了特殊处理，都会看作为 Widget。
   /// 应该尽量避免使用返回类型是显式类型(比如返回类型必须是Container)，如果真的需要，请在回调执行的地方再做强转。
   /// 或者在自定义的 DynamicWidgetBuilder 中做特殊处理
-  /// 
+  ///
   /// class SugarCommon {
   ///   SugarCommon._();
   ///   static Container Function() returnContainer(Widget Function() input) {
@@ -238,7 +240,7 @@ class Sugar {
   ///     return builder;
   ///   }
   /// }
-  /// 
+  ///
   /// class CustomDynamicWidgetBuilder extends DynamicWidgetBuilder {
   ///   CustomDynamicWidgetBuilder(
   ///     super.proxyMirror,
@@ -266,30 +268,121 @@ class Sugar {
   ///     return super.convert(context, map, methodMap, domain:domain);
   ///   }
   /// }
-  static T asT<T>(dynamic value)=> value as T;
- 
+  static T asT<T>(dynamic value) => value as T;
+
   /// 获取枚举的名字
-  static String enumName(dynamic value) => value.name;   
- 
+  static String enumName(dynamic value) => value.name;
+
   /// 返回 Future.value
-  static Future<T> futureValue<T>(T value)=> Future.value(value);
-  
+  /// 支持常用的泛型类型，int,double,bool,String,Widget, 以及他们的可空类型，List 类型
+  /// [Sugar.futureValue] 和 [Sugar.futureVoid] 为同步操作
+  /// [Sugar.createFuture] 异步操作
+  /// 下面为一个例子
+  /// 
+  /// LikeButton(
+  ///   size: 18.0,
+  ///   isLiked: _getValue('is_favorite', false),
+  ///   likeCount: _getValue('favorites', 0),
+  ///   onTap: (isLiked) =>
+  ///     Sugar.futureValue<bool?>(SugarBool.invert(isLiked))
+  ///   ）
+  static Future<T> futureValue<T>([FutureOr<T>? value]) => Future<T>.value(value);
+
+  /// 返回 Future void
+  /// [Sugar.futureValue] 和 [Sugar.futureVoid] 为同步操作
+  /// [Sugar.createFuture] 异步操作
+  /// 不要异步等待的时候使用
+  /// RefreshIndicator(onRefresh: () => Sugar.futureVoid(function: _onRefresh),)
+  ///
+  /// void _onRefresh() {
+  /// }
+  /// 
+  static Future<void> futureVoid({
+    Function? function,
+    // 多个用数组，别用 Map，会跟解析冲突
+    dynamic argument,
+  }) async {
+    if (argument == null) {
+      function?.call();
+    } else {
+      function?.call(argument);
+    }
+  }
+  /// 支持异步回调
+  /// 这个是一个使用的例子
+  /// 
+  /// RefreshIndicator(
+  ///   onRefresh: 
+  ///   () => Sugar.createFuture<void>(function: _onRefresh),
+  ///   argument: 'test',
+  ///   // 获取异步操作之后的值
+  ///   callback: (result) {}
+  /// )
+  ///
+  /// void _onRefresh(Map input) {
+  ///  String futureId = input['futureId'];
+  ///  // argument 等于 'test'
+  ///  String argument = input['argument'];
+  ///  // 模拟一个耗时的操作，等操作完毕之后，再去完成 Future
+  ///  FairCommonPlugin().http({
+  ///    'method': 'GET',
+  ///    'url': 'xxxx',
+  ///    // required
+  ///    'pageName': '#FairKey#',
+  ///    'callback': (dynamic result) {
+  ///      FairCommonPlugin().futureComplete({
+  ///        // required
+  ///        'pageName': _pageName,
+  ///        'futureId': futureId,
+  ///        'futureValue': null,
+  ///      });
+  ///    }
+  ///  });
+  ///}
+  /// 支持常用的泛型类型，int,double,bool,String, 以及他们的可空类型，List 类型
+  /// [Sugar.futureValue] 和 [Sugar.futureVoid] 为同步操作
+  /// 注意需要使用 [CompleterPlugin] ，具体操作请查看 [FairCommonPluginMixin]
+  static Future<T> createFuture<T>({
+    String? futureId,
+    // 一个入参，结构如下
+    // {
+    //   'futureId': futureId,
+    //   'argument': argument,
+    // }
+    Function? function,
+    // 多个用数组，别用 Map，会跟解析冲突
+    dynamic argument,
+    // 执行完之后的回调
+    Function? callback,
+  }){
+    return CompleterPlugin.createFuture<T>(
+      futureId: futureId,
+      function: function,
+      argument: argument,
+      callback: callback,
+    );
+  }
+
+
   // 方便从 map 中获取值
   static dynamic mapGet(Map map, String key) => map[key];
-  
+
   // typedef ImageLoadingBuilder = Widget Function(BuildContext context, Widget child, ImageChunkEvent? loadingProgress)
   // package:flutter/src/widgets/image.dart
   // 方便在回调中获取值
-  static Map<String,dynamic> imageChunkEventToMap(ImageChunkEvent imageChunkEvent) {
+  static Map<String, dynamic> imageChunkEventToMap(
+      ImageChunkEvent imageChunkEvent) {
     return {
       'cumulativeBytesLoaded': imageChunkEvent.cumulativeBytesLoaded,
       'expectedTotalBytes': imageChunkEvent.expectedTotalBytes,
     };
   }
+
   // typedef ControlsWidgetBuilder = Widget Function(BuildContext context, ControlsDetails details)
   // package:flutter/src/material/stepper.dart
   // 方便在回调中获取值
-  static Map<String,dynamic> controlsDetailsToMap(ControlsDetails controlsDetails) {
+  static Map<String, dynamic> controlsDetailsToMap(
+      ControlsDetails controlsDetails) {
     return {
       'currentStep': controlsDetails.currentStep,
       'isActive': controlsDetails.isActive,
@@ -298,9 +391,9 @@ class Sugar {
       'onStepContinue': controlsDetails.onStepContinue,
     };
   }
-  
+
   // 方便在回调中获取值
-  static Map<String,dynamic> animationToMap(Animation animation) {
+  static Map<String, dynamic> animationToMap(Animation animation) {
     return {
       'isCompleted': animation.isCompleted,
       'isDismissed': animation.isDismissed,
@@ -309,11 +402,12 @@ class Sugar {
       'value': animation.value,
     };
   }
-  
-  // typedef LayoutWidgetBuilder = Widget Function(BuildContext context, BoxConstraints constraints); 
+
+  // typedef LayoutWidgetBuilder = Widget Function(BuildContext context, BoxConstraints constraints);
   // package:flutter/src/widgets/layout_builder.dart
   // 方便在回调中获取值
-  static Map<String,dynamic> boxConstraintsToMap(BoxConstraints boxConstraints) {
+  static Map<String, dynamic> boxConstraintsToMap(
+      BoxConstraints boxConstraints) {
     return {
       'maxWidth': boxConstraints.maxWidth,
       'maxHeight': boxConstraints.maxHeight,
@@ -322,7 +416,7 @@ class Sugar {
     };
   }
 
-  static Map<String,dynamic> sizeToMap(Size size) {
+  static Map<String, dynamic> sizeToMap(Size size) {
     return {
       'width': size.width,
       'height': size.height,
@@ -331,7 +425,7 @@ class Sugar {
       'shortestSide': size.shortestSide,
       'isEmpty': size.isEmpty,
       'isFinite': size.isFinite,
-      'isInfinite': size.isInfinite,    
+      'isInfinite': size.isInfinite,
     };
   }
 }

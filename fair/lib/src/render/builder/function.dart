@@ -21,73 +21,28 @@ mixin FunctionDynamicBuilder on CommonDynamicBuilder {
       throw Exception('这个不是一个 FairFunction 节点！');
     }
     var functionTag = FunctionDomain.getTag(map);
-    T Function() Function<T>() _builder = <T>(){
-      T Function() builder=(){
-        return pa0Value(
-          FunctionDomain.getBody(map),        
-          methodMap,
-          context,
-          domain,
-        ) as T;
-      };
-      return builder;
-    };
- 
-    List<T> Function() Function<T>() _listBuilder = <T>(){
-      List<T> Function() builder=(){
-        return (pa0Value(
-          FunctionDomain.getBody(map),        
-          methodMap,
-          context,
-          domain,
-        ) as List).asListOf<T>()!;
-      };
-      return builder;
-    };
-       
-    switch (functionTag) {
-       case 'void Function()':
-          return _builder<void>();       
-       case 'int Function()':
-          return _builder<int>();
-       case 'int? Function()':
-          return _builder<int?>();
-       case 'double Function()':
-          return _builder<double>();
-       case 'double? Function()':
-          return _builder<double?>();
-       case 'String Function()':
-          return _builder<String>();
-       case 'String? Function()':
-          return _builder<String?>();
-       case 'bool Function()':
-          return _builder<bool>();
-       case 'bool? Function()':
-          return _builder<bool?>();
-       case 'Widget Function()':
-          return _builder<Widget>();
-       case 'Widget? Function()':
-          return _builder<Widget?>();
-       case 'List<int> Function()':
-          return _listBuilder<int>();
-       case 'List<int?> Function()':
-          return _listBuilder<int?>();
-       case 'List<double> Function()':
-          return _listBuilder<double>();
-       case 'List<double?> Function()':
-          return _listBuilder<double?>();
-       case 'List<String> Function()':
-          return _listBuilder<String>();
-       case 'List<String?> Function()':
-          return _listBuilder<String?>();
-       case 'List<bool> Function()':
-          return _listBuilder<bool>();
-       case 'List<bool?> Function()':
-          return _listBuilder<bool?>();
-       case 'List<Widget> Function()':
-          return _listBuilder<Widget>();
-       case 'List<Widget?> Function()':
-          return _listBuilder<Widget?>();                      
+
+
+    var parametersIsEmpty =FunctionDomain.parametersIsEmpty(map);
+
+   
+    if(parametersIsEmpty) {
+      var returnType = FunctionDomain.getReturnType(map);  
+      var tFunction = createTResult(returnType, <T>() =>  () {
+          return pa0Value(
+            FunctionDomain.getBody(map),        
+            methodMap,
+            context,
+            domain,
+          ) as T;
+        }
+       ,);
+      if(tFunction!=null) {
+        return tFunction;
+      }
+    }
+
+    switch (functionTag) {                    
        // typedef WidgetBuilder = Widget Function(BuildContext context)
        // package:flutter/src/widgets/framework.dart
        case 'Widget Function(BuildContext)':
@@ -672,5 +627,101 @@ mixin FunctionDynamicBuilder on CommonDynamicBuilder {
           error: '$functionTag 没有找到对应的映射。请自定义 DynamicWidgetBuilder 并在其中增加对应映射',
           url: bundle,
     );
+
+  
   }  
+
+  /// 根据泛型类型创建不同返回值
+  dynamic createTResult(String type, Function<T>() function, {bool widgetSupport=true}) {
+     switch (type) {
+          case 'void':
+            return function<void>();
+          case 'int':
+            return function<int>();
+          case 'int?':
+            return function<int?>();
+          case 'double':
+            return function<double>();
+          case 'double?':
+            return function<double?>();
+          case 'String':
+            return function<String>();
+          case 'String?':
+            return function<String?>();
+          case 'bool':
+            return function<bool>();
+          case 'bool?':
+            return function<bool?>();
+          case 'Widget':
+           return widgetSupport? function<Widget>(): null;
+          case 'Widget?':
+           return widgetSupport? function<Widget?>(): null;
+          case 'List<int>':
+            return function<List<int>>();
+          case 'List<int?>':
+            return function<List<int?>>();
+          case 'List<double>':
+            return function<List<double>>();
+          case 'List<double?>':
+            return function<List<double?>>();
+          case 'List<String>':
+            return function<List<String>>();
+          case 'List<String?>':
+            return function<List<String?>>();
+          case 'List<bool>':
+            return function<List<bool>>();
+          case 'List<bool?>':
+            return function<List<bool?>>();
+          case 'List<Widget>':
+            return widgetSupport? function<List<Widget>>() : null;
+          case 'List<Widget?>':
+            return widgetSupport? function<List<Widget?>>() : null;
+        // Future 由 Sugar.createFuture 来处理    
+        //  case 'Future<void>':
+        //     return function<Future<void>>();
+        //   case 'Future<int>':
+        //     return function<Future<int>>();
+        //   case 'Future<int?>':
+        //     return function<Future<int?>>();
+        //   case 'Future<double>':
+        //     return function<Future<double>>();
+        //   case 'Future<double?>':
+        //     return function<Future<double?>>();
+        //   case 'Future<String>':
+        //     return function<Future<String>>();
+        //   case 'Future<String?>':
+        //     return function<Future<String?>>();
+        //   case 'Future<bool>':
+        //     return function<Future<bool>>();
+        //   case 'Future<bool?>':
+        //     return function<Future<bool?>>();
+        //   case 'Future<Widget>':
+        //    return function<Future<Widget>>();
+        //   case 'Future<Widget?>':
+        //     return function<Future<Widget?>>();
+        //   case 'Future<List<int>>':
+        //     return function<Future<List<int>>>();
+        //   case 'Future<List<int?>>':
+        //     return function<Future<List<int?>>>();
+        //   case 'Future<List<double>>':
+        //     return function<Future<List<double>>>();
+        //   case 'Future<List<double?>>':
+        //     return function<Future<List<double?>>>();
+        //   case 'Future<List<String>>':
+        //     return function<Future<List<String>>>();
+        //   case 'Future<List<String?>>':
+        //     return function<Future<List<String?>>>();
+        //   case 'Future<List<bool>>':
+        //     return function<Future<List<bool>>>();
+        //   case 'Future<List<bool?>>':
+        //     return function<Future<List<bool?>>>();
+        //   case 'Future<List<Widget>>':
+        //     return function<Future<List<Widget>>>();
+        //   case 'Future<List<Widget?>>':
+        //     return function<Future<List<Widget?>>>();
+          default:
+     }
+
+     return null;
+  }
 }
