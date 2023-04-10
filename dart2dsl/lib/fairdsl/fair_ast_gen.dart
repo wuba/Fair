@@ -191,8 +191,10 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
     var functionType= node.staticType as  FunctionType?;
     String? tagString;
     String? returnTypeString;
+    String? returnTypeTypeArguments;
     if(functionType !=null) {
        var returnType= functionType.returnType;
+       
        tagString = functionType.getDisplayString(withNullability: true);
        returnTypeString = functionType.returnType.getDisplayString(withNullability: true);
        // 特殊处理一下 Widget
@@ -247,12 +249,16 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
        //     return super.convert(context, map, methodMap, domain:domain);
        //   }
        // }
-       if(returnType is InterfaceType && 
-       returnType.allSupertypes.any((element) => 
-       element.getDisplayString(withNullability: false) == 'Widget')) {
-        var nullabilityString = returnTypeString.endsWith('?') ? '?':'';
-        tagString = tagString.replaceFirst(returnTypeString, 'Widget'+nullabilityString);
-        returnTypeString = 'Widget'+nullabilityString;
+       if(returnType is InterfaceType) {
+          if(returnType.allSupertypes.any((element) => 
+          element.getDisplayString(withNullability: false) == 'Widget')) {
+           var nullabilityString = returnTypeString.endsWith('?') ? '?':'';
+           tagString = tagString.replaceFirst(returnTypeString, 'Widget'+nullabilityString);
+           returnTypeString = 'Widget'+nullabilityString;
+          }
+          if(returnType.typeArguments.isNotEmpty) {
+            returnTypeTypeArguments= returnType.typeArguments.map((e) => e.getDisplayString(withNullability: true)).join(',');
+          }
        }
     }
 
@@ -260,8 +266,8 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
        _visitNode(node.body), 
        isAsync: node.body.isAsynchronous,
        tag: tagString,
-       // 暂时不需要生成 returnType
-       // returnType: returnTypeString,
+       returnType: returnTypeString,
+       returnTypeTypeArguments: returnTypeTypeArguments,
      );
   }
 
@@ -409,6 +415,18 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
     return _buildVariableExpression(expression);
   }
 
+  @override
+  Map? visitTypeArgumentList(TypeArgumentList node) {
+    var map={};
+    for (var argument in  node.arguments) {
+      var displayString= argument.type?.getDisplayString(withNullability: true);
+      if(displayString!=null) {
+        map[displayString] = displayString;
+      }
+    }
+    return map;
+  }
+
   ///根节点
   Map? _buildAstRoot(List<Map> body) {
     if (body.isNotEmpty) {
@@ -462,7 +480,7 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
       };
 
   //函数表达式
-  Map _buildFunctionExpression(Map? params, Map? body, {bool isAsync = false,String? tag, String? returnType}) => {
+  Map _buildFunctionExpression(Map? params, Map? body, {bool isAsync = false,String? tag, String? returnType,String? returnTypeTypeArguments}) => {
         'type': 'FunctionExpression',
         'parameters': params,
         'body': body,
@@ -471,6 +489,8 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
         'tag': tag,
         if(returnType != null)
         'returnType': returnType,
+        if(returnTypeTypeArguments != null)
+        'returnTypeTypeArguments':returnTypeTypeArguments,
       };
 
   //函数参数列表

@@ -313,6 +313,11 @@ dynamic _buildWidgetDsl(
     dslMap.putIfAbsent('na', () => naMap);
   }
 
+  var typeArguments = methodInvocationExpression.toAst()?['typeArguments'];
+  if(typeArguments is Map) {
+    dslMap.putIfAbsent('ta', () => typeArguments.keys.join(','));
+  }
+
   return dslMap;
 }
 
@@ -404,8 +409,11 @@ dynamic _buildValueExpression(
         }
       }      
     }
-    var tag = valueExpression?.asFunctionExpression.toAst()?['tag'];
-    var returnType = valueExpression?.asFunctionExpression.toAst()?['returnType'];
+    var ast = valueExpression?.asFunctionExpression.toAst();
+    var tag = ast?['tag'];
+    var returnType = ast?['returnType'];
+    // var returnTypeTypeArguments = ast?['returnTypeTypeArguments'];
+    // var isAsync = ast?['isAsync'];
     naPaValue = {
       'className': 'FairFunction',
       'body': naPaValue,
@@ -420,7 +428,12 @@ dynamic _buildValueExpression(
       if(tag!=null)
       'tag': tag,
       if(returnType!=null)
-      'returnType':returnType,
+      'rt':returnType,
+      // 暂时用不着
+      // if(returnTypeTypeArguments!=null)
+      // 'rtta':returnTypeTypeArguments,
+      // if(isAsync!=null && isAsync)
+      // 'isAsync': isAsync,
     };    
   } else if (valueExpression?.isReturnStatement==true) {
     naPaValue = _buildValueExpression(
