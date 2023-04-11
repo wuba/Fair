@@ -36,8 +36,8 @@
                       }
                     }
                   },
-                  "tag": "Center Function()",
-                  "returnType": "Center"
+                  "tag": "Widget Function()",
+                  "rt": "Widget"
                 },
                 "falseValue": {
                   "className": "FairFunction",
@@ -49,8 +49,8 @@
                       "itemBuilder": "@(_itemBuilder)"
                     }
                   },
-                  "tag": "ListView Function()",
-                  "returnType": "ListView"
+                  "tag": "Widget Function()",
+                  "rt": "Widget"
                 }
               }
             }

@@ -135,8 +135,8 @@
                   "item"
                 ]
               },
-              "tag": "Container Function(Object?)",
-              "returnType": "Container"
+              "tag": "Widget Function(Object?)",
+              "rt": "Widget"
             }
           }
         }

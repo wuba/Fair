@@ -67,7 +67,9 @@
                       "pa": [
                         "context"
                       ]
-                    }
+                    },
+                    "tag": "List<PopupMenuEntry<String>> Function(BuildContext)",
+                    "rt": "List<PopupMenuEntry<String>>"
                   }
                 ]
               },

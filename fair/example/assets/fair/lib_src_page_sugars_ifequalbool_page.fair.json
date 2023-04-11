@@ -29,8 +29,8 @@
                         "assets/image/logo.png"
                       ]
                     },
-                    "tag": "Image Function()",
-                    "returnType": "Image"
+                    "tag": "Widget Function()",
+                    "rt": "Widget"
                   },
                   "trueValue": {
                     "className": "FairFunction",
@@ -40,8 +40,8 @@
                         "assets/image/logo2.png"
                       ]
                     },
-                    "tag": "Image Function()",
-                    "returnType": "Image"
+                    "tag": "Widget Function()",
+                    "rt": "Widget"
                   }
                 }
               },
