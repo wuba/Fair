@@ -19,87 +19,99 @@
       ],
       "na": {
         "trueValue": {
-          "className": "Center",
-          "na": {
-            "child": {
-              "className": "Text",
-              "pa": [
-                "加载中..."
-              ]
+          "className": "FairFunction",
+          "body": {
+            "className": "Center",
+            "na": {
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "加载中..."
+                ]
+              }
             }
-          }
+          },
+          "tag": "Widget Function()",
+          "rt": "Widget"
         },
         "falseValue": {
-          "className": "PageView.custom",
-          "na": {
-            "childrenDelegate": {
-              "className": "SliverChildBuilderDelegate",
-              "pa": [
-                {
-                  "className": "Sugar.nullableIndexedWidgetBuilder",
-                  "pa": [
-                    {
-                      "className": "FairFunction",
-                      "body": {
-                        "className": "Column",
-                        "na": {
-                          "crossAxisAlignment": "#(CrossAxisAlignment.center)",
-                          "children": [
-                            {
-                              "className": "AspectRatio",
-                              "na": {
-                                "aspectRatio": 1.5,
-                                "child": {
-                                  "className": "ClipRRect",
-                                  "na": {
-                                    "borderRadius": {
-                                      "className": "BorderRadius.all",
-                                      "pa": [
-                                        {
-                                          "className": "Radius.circular",
-                                          "pa": [
-                                            4.0
-                                          ]
+          "className": "FairFunction",
+          "body": {
+            "className": "PageView.custom",
+            "na": {
+              "childrenDelegate": {
+                "className": "SliverChildBuilderDelegate",
+                "pa": [
+                  {
+                    "className": "Sugar.nullableIndexedWidgetBuilder",
+                    "pa": [
+                      {
+                        "className": "FairFunction",
+                        "body": {
+                          "className": "Column",
+                          "na": {
+                            "crossAxisAlignment": "#(CrossAxisAlignment.center)",
+                            "children": [
+                              {
+                                "className": "AspectRatio",
+                                "na": {
+                                  "aspectRatio": 1.5,
+                                  "child": {
+                                    "className": "ClipRRect",
+                                    "na": {
+                                      "borderRadius": {
+                                        "className": "BorderRadius.all",
+                                        "pa": [
+                                          {
+                                            "className": "Radius.circular",
+                                            "pa": [
+                                              4.0
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      "child": {
+                                        "className": "Image.network",
+                                        "pa": [
+                                          "%(_getImagePath(^(index)))"
+                                        ],
+                                        "na": {
+                                          "fit": "#(BoxFit.cover)"
                                         }
-                                      ]
-                                    },
-                                    "child": {
-                                      "className": "Image.network",
-                                      "pa": [
-                                        "%(_getImagePath(^(index)))"
-                                      ],
-                                      "na": {
-                                        "fit": "#(BoxFit.cover)"
                                       }
                                     }
                                   }
                                 }
+                              },
+                              {
+                                "className": "Text",
+                                "pa": [
+                                  "%(_getText(^(index)))"
+                                ]
                               }
-                            },
-                            {
-                              "className": "Text",
-                              "pa": [
-                                "%(_getText(^(index)))"
-                              ]
-                            }
+                            ]
+                          }
+                        },
+                        "parameters": {
+                          "pa": [
+                            "context",
+                            "index"
                           ]
-                        }
-                      },
-                      "parameters": {
-                        "pa": [
-                          "context",
-                          "index"
-                        ]
+                        },
+                        "tag": "Widget Function(BuildContext, int)",
+                        "rt": "Widget"
                       }
-                    }
-                  ]
+                    ]
+                  }
+                ],
+                "na": {
+                  "childCount": 3
                 }
-              ],
-              "na": {
-                "childCount": 3
               }
             }
-          }
+          },
+          "tag": "Widget Function()",
+          "rt": "Widget"
         }
       }
     }

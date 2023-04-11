@@ -38,8 +38,8 @@
                         "height": 250
                       }
                     },
-                    "tag": "Image Function()",
-                    "returnType": "Image"
+                    "tag": "Widget Function()",
+                    "rt": "Widget"
                   },
                   "falseValue": {
                     "className": "FairFunction",
@@ -58,8 +58,8 @@
                         "height": 250
                       }
                     },
-                    "tag": "Image Function()",
-                    "returnType": "Image"
+                    "tag": "Widget Function()",
+                    "rt": "Widget"
                   }
                 }
               },

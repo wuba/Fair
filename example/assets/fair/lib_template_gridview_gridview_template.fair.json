@@ -31,70 +31,82 @@
       ],
       "na": {
         "trueValue": {
-          "className": "Center",
-          "na": {
-            "child": {
-              "className": "Text",
-              "pa": [
-                "加载中..."
-              ]
+          "className": "FairFunction",
+          "body": {
+            "className": "Center",
+            "na": {
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "加载中..."
+                ]
+              }
             }
-          }
+          },
+          "tag": "Widget Function()",
+          "rt": "Widget"
         },
         "falseValue": {
-          "className": "GridView.count",
-          "na": {
-            "crossAxisCount": 2,
-            "mainAxisSpacing": 10,
-            "crossAxisSpacing": 10,
-            "children": {
-              "className": "Sugar.map",
-              "pa": [
-                "^(_listData)"
-              ],
-              "na": {
-                "builder": {
-                  "className": "FairFunction",
-                  "body": {
-                    "className": "AspectRatio",
-                    "na": {
-                      "aspectRatio": 1.5,
-                      "child": {
-                        "className": "ClipRRect",
-                        "na": {
-                          "borderRadius": {
-                            "className": "BorderRadius.all",
-                            "pa": [
-                              {
-                                "className": "Radius.circular",
-                                "pa": [
-                                  4.0
-                                ]
+          "className": "FairFunction",
+          "body": {
+            "className": "GridView.count",
+            "na": {
+              "crossAxisCount": 2,
+              "mainAxisSpacing": 10,
+              "crossAxisSpacing": 10,
+              "children": {
+                "className": "Sugar.map",
+                "pa": [
+                  "^(_listData)"
+                ],
+                "na": {
+                  "builder": {
+                    "className": "FairFunction",
+                    "body": {
+                      "className": "AspectRatio",
+                      "na": {
+                        "aspectRatio": 1.5,
+                        "child": {
+                          "className": "ClipRRect",
+                          "na": {
+                            "borderRadius": {
+                              "className": "BorderRadius.all",
+                              "pa": [
+                                {
+                                  "className": "Radius.circular",
+                                  "pa": [
+                                    4.0
+                                  ]
+                                }
+                              ]
+                            },
+                            "child": {
+                              "className": "Image.network",
+                              "pa": [
+                                "$(item.picUrl)"
+                              ],
+                              "na": {
+                                "fit": "#(BoxFit.cover)"
                               }
-                            ]
-                          },
-                          "child": {
-                            "className": "Image.network",
-                            "pa": [
-                              "$(item.picUrl)"
-                            ],
-                            "na": {
-                              "fit": "#(BoxFit.cover)"
                             }
                           }
                         }
                       }
-                    }
-                  },
-                  "parameters": {
-                    "pa": [
-                      "item"
-                    ]
+                    },
+                    "parameters": {
+                      "pa": [
+                        "item"
+                      ]
+                    },
+                    "tag": "Widget Function(ItemData)",
+                    "rt": "Widget"
                   }
                 }
               }
             }
-          }
+          },
+          "tag": "Widget Function()",
+          "rt": "Widget"
         }
       }
     }
