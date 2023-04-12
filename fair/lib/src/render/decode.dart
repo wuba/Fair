@@ -38,7 +38,7 @@ class Decoder {
   bool get hasResolved => _source != null;
 
   Future<void> resolve(BuildContext context) async {
-    var jsonBean = await _loader.obtain(context).onLoad(url, _decoder, cache: true, h: const {'fairVersion': '$fairVersion#$flutterVersion'});
+    var jsonBean = await _loader.obtain(context).onLoad(url, _decoder, cache: true, h:  {'fairVersion': '$fairVersion#$flutterVersion'});
     Map? data = <dynamic, dynamic>{};
     Map? methodMap = <String, dynamic>{};
 

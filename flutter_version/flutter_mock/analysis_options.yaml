@@ -1,0 +1,13 @@
+# Defines a default set of lint rules enforced for
+# projects at Google. For details and rationale,
+# see https://github.com/dart-lang/pedantic#enabled-lints.
+include: package:pedantic/analysis_options.yaml
+
+linter:
+  rules:
+    lowercase_with_underscores: false
+    prefer_single_quotes: false
+    deprecated_member_use: false
+analyzer:
+  exclude:
+    - lib/src/widgets/all.dart
