@@ -320,7 +320,7 @@ Future _generateSdkFile(String? sdkName, String filePath, String output) async {
   await saveIntoFile(buffer.toString(), output, 'fair_${clzName}.dart');
 }
 
-Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool analysisExports = false, bool analysisAllClasses = false}) async {
+Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool analysisExports = false, bool analysisAllClasses = false, Set<String> skips = const <String>{}}) async {
   var session = context.currentSession;
   var result = await session.getUnitElement(path) as UnitElementResult;
   var element = result.element;
@@ -339,8 +339,12 @@ Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool 
     exposedAPI.addAll(_visit(element, analysisExports, analysisAllClasses));
   });
 
+
   var count = exposedAPI.length;
   print('😀 $count widgets found inside $path');
+
+  if (exposedAPI.isEmpty) return null;  
+
   var isCupertino = path.contains('/cupertino/');
 
   var buffer = StringBuffer();
@@ -348,11 +352,10 @@ Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool 
   var imports = transformer.getImports(clzName);
   var lines = transformer.getLines(clzName, isCupertino);
   // constructor api
-  var hasConstructor = false;
+
   var functionParameters = <FunctionParameter>[];
   var components= <Component>[];  
   for (var element in exposedAPI) {
-    var hasNamedConstructor = false;
     var defaultCache = <String, dynamic>{};
 
     var className= element.name;
@@ -366,61 +369,39 @@ Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool 
 
     if(element.constructor != null) {
       for (var ctor in element.constructor!) {
-        components.add(Component(ctor.name ??'', ctor.isWidget));
-        if (ctor.parameters != null && (ctor.parameters?.isNotEmpty ?? false)) {
-          hasNamedConstructor = true;
+        if(ctor.name==null || skips.any((skip) => RegExp(skip).hasMatch(ctor.name!))) {
+          continue;
         }
+        components.add(Component(ctor.name ??'', ctor.isWidget));
         defaultCache = _writeMethod(buffer, ctor.name, ctor, defaultCache);        
       }
     }
 
-    if (hasNamedConstructor) {
-      element.fields?.forEach((element) {
-        var field = element;
-        buffer.write('\'${field.name}.${field.field}\': ${field.name}.${field.field},');
-        components.add(Component(className+'.'+field.field!, field.isWidget));
-      });
-    } else if (element.fields?.isNotEmpty == true) {
-      
-      var staticFields=  element.fields?.where((element) => element.isStatic);
-      var nonStaticFields=  element.fields?.where((element) => !element.isStatic);
-      if(nonStaticFields!=null && nonStaticFields.isNotEmpty) {
-        buffer.write('\'$className\': {');
-        nonStaticFields.forEach((e) {
-          var field = e;
-          buffer.write('\'${field.field}\': ${field.name}.${field.field},');
-        });
-        buffer.write('},');
-      }
-      if(staticFields!=null && staticFields.isNotEmpty) {
-         for (var field in staticFields) {
-           buffer.write('\'$className.${field.field}\': $className.${field.field},');
-           components.add(Component(className+'.'+field.field!, field.isWidget));
-         }
+    // const 和 static 肯定都是 static
+    if(element.fields!=null) {
+      for (var field in element.fields!) {
+        var key = '${field.name}.${field.field}';
+        if(skips.any((skip) => RegExp(skip).hasMatch(key))) {
+          continue;
+        }
+        buffer.write('\'$key\': $key,');
+        components.add(Component(key, field.isWidget));
       }
     }
-
-    element.staticMethods?.forEach((element) {
-      defaultCache = _writeMethod(buffer, element.name, element, defaultCache);
-      components.add(Component(element.name!, element.isWidget));
-    });
-  }
  
-  if (!hasConstructor && exposedAPI.isEmpty) return null;
-  
-
+    if(element.staticMethods !=null) {
+      for (var method in element.staticMethods!) {
+        if(method.name == null || skips.any((skip) => RegExp(skip).hasMatch(method.name!))) {
+          continue;
+        }        
+        defaultCache = _writeMethod(buffer, method.name, method, defaultCache);
+        components.add(Component(method.name!, method.isWidget));
+      }
+    }
+  }
 
   return ComponentParts(
     components,
-    // exposedAPI
-    //     .map((e) => Component(
-    //           e.name,
-    //           e.constructor != null && e.constructor?.isNotEmpty == true
-    //               ? e.constructor![0].isWidget
-    //               : ((e.fields?.isNotEmpty == true && e.fields!.elementAt(0).isWidget == true) ||
-    //                   (e.staticMethods?.isNotEmpty == true && e.staticMethods!.elementAt(0).isWidget == true)),
-    //         ))
-    //     .toList(growable: false),
     buffer.toString(),
     imports: imports,
     lines: lines,
