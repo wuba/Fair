@@ -1,3 +1,7 @@
+## [1.7.0]
+* Fixed an issue with string returned by analyzer ExportDirective, ImportDirective.
+* Fixed binding generation error with import export resolution.
+
 ## [1.6.0]
 * Remove the generation time from the generation.fair. dart comment. 
 * Added the ignore unnecessary_import operation.

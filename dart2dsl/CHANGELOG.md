@@ -1,3 +1,9 @@
+## 1.3.0
+
+- Add FunctionDomain
+- Generate parameters for callback function for FunctionDomain
+- New NullableIndexedWidgetBuilder, IndexedWidgetBuilder WidgetBuilder, commonly used sugar TransitionBuilder support
+
 ## 1.2.0
 
 - Upgrade analyzer version to 5.5.0.
