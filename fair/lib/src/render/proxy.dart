@@ -4,6 +4,8 @@
  * found in the LICENSE file.
  */
 
+import 'dart:collection';
+
 import 'package:fair/src/render/domain.dart';
 import 'package:fair_version/fair_version.dart';
 import 'package:flutter/widgets.dart';
@@ -25,7 +27,7 @@ class ProxyMirror with P {
     PropValueExpression(),
     ValueExpression(),
   ];
-  final _generatedMapping = <String, bool>{};
+  final SplayTreeMap<String,bool>  _generatedMapping = SplayTreeMap();
 
   void addGeneratedBinding(GeneratedModule? generated) {
     if (generated == null) {
@@ -46,8 +48,7 @@ class ProxyMirror with P {
   dynamic componentOf(String? key) => _provider.loadTag(key);
 
   bool isWidget(String? key) {
-    final internal = widgetNames.containsKey(key);
-    return internal ? widgetNames[key]! : _generatedMapping[key]!;
+    return widgetNames[key] ?? _generatedMapping[key] ?? true;
   }
 
   W<dynamic> evaluate(

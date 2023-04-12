@@ -118,8 +118,7 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
       }
       if (mapper == null) {
         mapper = proxyMirror?.componentOf(name);
-        final internal = widgetNames.containsKey(name);
-        isWidget = internal ? (widgetNames[name] ?? false) : true;
+        isWidget = proxyMirror?.isWidget(name) ?? true;
       }
       assert(mapper != null, '$name is not registered!');
       if (name == 'Sugar.mapEach') {

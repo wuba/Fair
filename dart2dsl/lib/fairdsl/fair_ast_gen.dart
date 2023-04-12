@@ -251,7 +251,7 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
        // }
        if(returnType is InterfaceType) {
           if(returnType.allSupertypes.any((element) => 
-          element.getDisplayString(withNullability: false) == 'Widget')) {
+          element.element.name == 'Widget')) {
            var nullabilityString = returnTypeString.endsWith('?') ? '?':'';
            tagString = tagString.replaceFirst(returnTypeString, 'Widget'+nullabilityString);
            returnTypeString = 'Widget'+nullabilityString;
