@@ -350,29 +350,42 @@ Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool 
   // constructor api
   var hasConstructor = false;
   var functionParameters = <FunctionParameter>[];
-  exposedAPI.forEach((e) {
+  var components= <Component>[];  
+  for (var element in exposedAPI) {
     var hasNamedConstructor = false;
     var defaultCache = <String, dynamic>{};
-    if(e.functionParameters!=null) {
-      functionParameters.addAll(e.functionParameters!);
+
+    var className= element.name;
+    if(className ==null) {
+      continue;
     }
-    e.constructor?.forEach((element) {
-      if (element.parameters != null && (element.parameters?.isNotEmpty ?? false)) {
-        hasNamedConstructor = true;
+
+    if(element.functionParameters!=null) {
+      functionParameters.addAll(element.functionParameters!);
+    }
+
+    if(element.constructor != null) {
+      for (var ctor in element.constructor!) {
+        components.add(Component(ctor.name ??'', ctor.isWidget));
+        if (ctor.parameters != null && (ctor.parameters?.isNotEmpty ?? false)) {
+          hasNamedConstructor = true;
+        }
+        defaultCache = _writeMethod(buffer, ctor.name, ctor, defaultCache);        
       }
-      defaultCache = _writeMethod(buffer, element.name, element, defaultCache);
-    });
+    }
+
     if (hasNamedConstructor) {
-      e.fields?.forEach((element) {
+      element.fields?.forEach((element) {
         var field = element;
         buffer.write('\'${field.name}.${field.field}\': ${field.name}.${field.field},');
+        components.add(Component(className+'.'+field.field!, field.isWidget));
       });
-    } else if (e.fields?.isNotEmpty == true) {
-      var name = e.name;
-      var staticFields=  e.fields?.where((element) => element.isStatic);
-      var nonStaticFields=  e.fields?.where((element) => !element.isStatic);
+    } else if (element.fields?.isNotEmpty == true) {
+      
+      var staticFields=  element.fields?.where((element) => element.isStatic);
+      var nonStaticFields=  element.fields?.where((element) => !element.isStatic);
       if(nonStaticFields!=null && nonStaticFields.isNotEmpty) {
-        buffer.write('\'$name\': {');
+        buffer.write('\'$className\': {');
         nonStaticFields.forEach((e) {
           var field = e;
           buffer.write('\'${field.field}\': ${field.name}.${field.field},');
@@ -381,26 +394,33 @@ Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool 
       }
       if(staticFields!=null && staticFields.isNotEmpty) {
          for (var field in staticFields) {
-           buffer.write('\'$name.${field.field}\': $name.${field.field},');
+           buffer.write('\'$className.${field.field}\': $className.${field.field},');
+           components.add(Component(className+'.'+field.field!, field.isWidget));
          }
       }
     }
 
-    e.staticMethods?.forEach((element) {
+    element.staticMethods?.forEach((element) {
       defaultCache = _writeMethod(buffer, element.name, element, defaultCache);
+      components.add(Component(element.name!, element.isWidget));
     });
-  });
+  }
+ 
   if (!hasConstructor && exposedAPI.isEmpty) return null;
+  
+
+
   return ComponentParts(
-    exposedAPI
-        .map((e) => Component(
-              e.name,
-              e.constructor != null && e.constructor?.isNotEmpty == true
-                  ? e.constructor![0].isWidget
-                  : ((e.fields?.isNotEmpty == true && e.fields!.elementAt(0).isWidget == true) ||
-                      (e.staticMethods?.isNotEmpty == true && e.staticMethods!.elementAt(0).isWidget == true)),
-            ))
-        .toList(growable: false),
+    components,
+    // exposedAPI
+    //     .map((e) => Component(
+    //           e.name,
+    //           e.constructor != null && e.constructor?.isNotEmpty == true
+    //               ? e.constructor![0].isWidget
+    //               : ((e.fields?.isNotEmpty == true && e.fields!.elementAt(0).isWidget == true) ||
+    //                   (e.staticMethods?.isNotEmpty == true && e.staticMethods!.elementAt(0).isWidget == true)),
+    //         ))
+    //     .toList(growable: false),
     buffer.toString(),
     imports: imports,
     lines: lines,
@@ -666,9 +686,10 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
     }
     var constructors = <Constructor>[];
     var functionParameters = <FunctionParameter>[];
-    var isWidget = classElement.thisType is InterfaceType ? _matchType(classElement.thisType, baseWidget, classElement: classElement) : false;
+    var isWidget = analysisAllClasses ?  _isWidget(classElement.thisType) :
+    classElement.thisType is InterfaceType ? _matchType(classElement.thisType, baseWidget, classElement: classElement) : false;
     var isAPI = classElement.thisType is InterfaceType ? _matchType(classElement.thisType, baseAPI, classElement: classElement) : false;
-    if (isWidget || isAPI || isSdk || (analysisAllClasses && !classElement.allSupertypes.any((element) => element.element.name =='State'))) {
+    if (isWidget || isAPI || isSdk || (analysisAllClasses && !_isState(classElement.thisType))) {
       print('${classElement.name} 😀');
       // 枚举不去生成构造
       if(classElement is ClassElement) {
@@ -715,10 +736,10 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
     }
     var fields = <ConstField>[];
     for (var fieldElement in classElement.fields) {
-      if (!_invalidElement(fieldElement) && fieldElement.isConst) {
+      if (!_invalidElement(fieldElement) && (fieldElement.isConst || fieldElement.isStatic)) {
         print('  ❤️${classElement.name}.${fieldElement.name}');
         // 复用class类型（可能不一致）
-        fields.add(ConstField(classElement.name, field: fieldElement.name, isWidget: isWidget, isStatic: fieldElement.isStatic));
+        fields.add(ConstField(classElement.name, field: fieldElement.name, isWidget: _isWidget(fieldElement.type), isStatic: fieldElement.isStatic));
       }
     }
 
@@ -746,7 +767,8 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
                 })
             .toList(growable: false);
       }
-      staticMethods.add(Method(name, parameters: parameters, isWidget: isWidget));
+     
+      staticMethods.add(Method(name, parameters: parameters, isWidget: _isWidget(methodElement.returnType)));
     }
 
     if (constructors.isNotEmpty || fields.isNotEmpty || staticMethods.isNotEmpty) {
@@ -760,6 +782,18 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
     }
   }
   return exposed;
+}
+
+bool _isWidget(DartType dartType) => _isType(dartType, 'Widget');
+
+bool _isState(DartType dartType) => _isType(dartType, 'State');
+  
+
+bool _isType(DartType dartType,String type) {
+  if(dartType is InterfaceType) {
+    return dartType.allSupertypes.any((element) => element.element.name == type);
+  }
+  return false;
 }
 
 // String _parseFunctionName(ParameterElement e) {
