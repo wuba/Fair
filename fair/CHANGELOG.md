@@ -1,3 +1,11 @@
+## [3.2.0]
+* Adjust the call sequence of dispose;
+* Fix for #244 IconData making it impossible to make tree-shake-icons.
+* Add js and dart code for the common FairPlugin, reuse the same interaction logic, add example comments;
+* Added exception catching and log printing when calling executeFunction using the V8 engine in Android;
+* Add FunctionDomain;
+* Fixed some known issues.
+
 ## [3.1.0]
 * Upgrade analyzer library to 5.5.0;
 * Dart function to JS supports parameter passing;

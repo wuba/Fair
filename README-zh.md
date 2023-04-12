@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.1.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.2.0-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -58,15 +58,16 @@ git clone https://github.com/wuba/fair.git
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 3.1.0
+  fair: 3.2.0
 
 # add build_runner and compiler dependency
 dev_dependencies:
   build_runner: ^2.0.0
-  fair_compiler: ^1.6.0
+  fair_compiler: ^1.7.0
 
 # switch "fair_version" according to the local Flutter SDK version
-# Flutter SDK 3.3.x(3.3.0、3.3.1、3.3.2、3.3.3、3.3.4、3.3.5、3.3.6) -> flutter_3_3_0
+# Flutter SDK 3.7.x(3.7.0、3.7.1、3.7.2、3.7.3、3.7.4、3.7.5、3.7.6、3.7.7、3.7.8、3.7.9、3.7.10) -> flutter_3_7_0
+# Flutter SDK 3.3.x(3.3.0、3.3.1、3.3.2、3.3.3、3.3.4、3.3.5、3.3.6、3.3.7、3.3.8、3.3.9、3.3.10) -> flutter_3_3_0
 # Flutter SDK 3.0.x(3.0.0、3.0.1、3.0.2、3.0.3、3.0.4、3.0.5) -> flutter_3_0_0
 # Flutter SDK 2.10.x(2.10.0、2.10.1、2.10.2、2.10.3) -> flutter_2_10_0
 # Flutter SDK 2.8.x(2.8.0、2.8.1) -> flutter_2_8_0
@@ -75,7 +76,7 @@ dev_dependencies:
 # Flutter SDK 1.22.6 -> flutter_1_22_6
 dependency_overrides:
   fair_version:
-    path: ../fair/flutter_version/flutter_3_3_0
+    path: ../fair/flutter_version/flutter_3_7_0
 ```
 
 **step3：将App替换为FairApp**
@@ -174,6 +175,25 @@ Fair-Online 是面向Flutter 开发者，提供从Flutter 在线开发，到实�
 更多介绍请查看 [文档](./fair_online/README.md)
 
 ## 🔨最近版本
+
+### 3.2.0
+更新时间：2023.04.12
+
+- 调整 dispose 的调用顺序，不在树上面，后续操作停止
+- 增加通用FairPlugin的js和dart代码，复用相同的交互逻辑，增加例子注释
+- Json解析兼容
+- Android中使用V8引擎调用executeFunction时添加异常捕获及日志打印
+- 修复 SliverGridDelegateWithFixedCrossAxisCount 转换报错
+- SugarMap 和 SugarMapEach 的输入支持其他 Sugar 表达
+- 优化 ifEqual  ifEqualBool switchCase 的性能
+- 修复 Domain 不识别 sugar 中的 index 和 item
+- 让 AOT 也遵循条件达成才执行代码
+- 修复 SugarMap 和 SugarMapEach 集合入参不支持其他 Sugar 语法
+- 抽象 Domain,增加 IndexDomain、MapEachDomain，支持嵌套 Domain
+- 新增 FunctionDomain 通用 Domain，为回调function 生成对应的参数供 FunctionDomain 使用
+- 新增 NullableIndexedWidgetBuilder，IndexedWidgetBuilder，WidgetBuilder，TransitionBuilder 常用的 Sugar 支持
+- 一些已知问题修复
+
 
 ### 3.1.0
 更新时间：2023.03.14
