@@ -54,9 +54,9 @@ class _State extends State<IfEqualPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Sugar.ifEqual(_count, 2,
-                falseValue: Image.asset('assets/image/logo.png'),
-                trueValue: Image.asset('assets/image/logo2.png')),
+            // Sugar.ifEqual(_count, 2,
+            //     falseValue: Image.asset('assets/image/logo.png'),
+            //     trueValue: Image.asset('assets/image/logo2.png')),
             Padding(
               padding: EdgeInsets.only(top: 20),
               child: Text('_count = $_count'),

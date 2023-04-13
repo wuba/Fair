@@ -1,7 +1,7 @@
 ![social preview](social-dark.png)
 
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.2.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.2.1-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -58,7 +58,7 @@ git clone https://github.com/wuba/fair.git
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 3.2.0
+  fair: 3.2.1
 
 # add build_runner and compiler dependency
 dev_dependencies:
@@ -175,6 +175,11 @@ Fair-Online 是面向Flutter 开发者，提供从Flutter 在线开发，到实�
 更多介绍请查看 [文档](./fair_online/README.md)
 
 ## 🔨最近版本
+
+### 3.2.1
+更新时间：2023.04.13
+
+- 修复了一些bug.
 
 ### 3.2.0
 更新时间：2023.04.12

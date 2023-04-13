@@ -1,3 +1,6 @@
+## [3.2.1]
+* Fixed some issues.
+
 ## [3.2.0]
 * Adjust the call sequence of dispose;
 * Fix for #244 IconData making it impossible to make tree-shake-icons.

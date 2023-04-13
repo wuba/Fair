@@ -28,17 +28,17 @@ class PermissionPageState extends State<PermissionPage> {
       body: Container(
         child: Column(
           children: [
-            Sugar.ifEqual(picUrl, '',
-                trueValue: Image.network(
-                  'https://img.58cdn.com.cn/logo/58/252_84/logo-o.png',
-                  width: 500,
-                  height: 250,
-                ),
-                falseValue: Image.file(
-                  File(picUrl),
-                  width: 500,
-                  height: 250,
-                )),
+            // Sugar.ifEqual(picUrl, '',
+            //     trueValue: Image.network(
+            //       'https://img.58cdn.com.cn/logo/58/252_84/logo-o.png',
+            //       width: 500,
+            //       height: 250,
+            //     ),
+            //     falseValue: Image.file(
+            //       File(picUrl),
+            //       width: 500,
+            //       height: 250,
+            //     )),
             Text('点击按钮拍照'),
             MaterialButton(
               color: Colors.grey,
