@@ -401,6 +401,10 @@ var p = () => {
         'accent': ButtonTextTheme.accent,
         'primary': ButtonTextTheme.primary,
       },
+      'Clip.none': Clip.none,
+      'Clip.hardEdge': Clip.hardEdge,
+      'Clip.antiAlias': Clip.antiAlias,
+      'Clip.antiAliasWithSaveLayer': Clip.antiAliasWithSaveLayer,
       'Card': (props) => Card(
             key: props['key'],
             color: props['color'],
