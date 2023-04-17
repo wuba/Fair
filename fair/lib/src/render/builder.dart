@@ -506,7 +506,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
 
     var count = naMap['itemCount'];
     var source = List<int>.generate(count, (i) => i + 1);
-    var list = MapEachDomain(itemBuilder, parent: domain).forEach(($, _) {
+    var list = MapEachDomain(source, parent: domain).forEach(($, _) {
       return convert(context, itemBuilder, methodMap, domain: $) as Widget;
     });
     var children = list.map((e) => e as Widget).toList();
