@@ -1,0 +1,261 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "UrlLauncher Example"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "ListView",
+      "na": {
+        "children": [
+          {
+            "className": "Column",
+            "na": {
+              "mainAxisAlignment": "#(MainAxisAlignment.center)",
+              "children": [
+                {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.only",
+                      "na": {
+                        "top": 16.0,
+                        "left": 16.0,
+                        "right": 16.0
+                      }
+                    },
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Input the phone number/email"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.symmetric",
+                      "na": {
+                        "horizontal": 16.0
+                      }
+                    },
+                    "child": {
+                      "className": "TextField",
+                      "na": {
+                        "onChanged": "@(_onPhoneTextChanged)",
+                        "decoration": {
+                          "className": "InputDecoration",
+                          "na": {
+                            "hintText": "Input the phone number/email"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.only",
+                      "na": {
+                        "top": 16.0,
+                        "left": 16.0,
+                        "right": 16.0
+                      }
+                    },
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Input the message"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.only",
+                      "na": {
+                        "left": 16.0,
+                        "right": 16.0,
+                        "bottom": 16.0
+                      }
+                    },
+                    "child": {
+                      "className": "TextField",
+                      "na": {
+                        "onChanged": "@(_onMessageTextChanged)",
+                        "decoration": {
+                          "className": "InputDecoration",
+                          "na": {
+                            "hintText": "Input the message"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "className": "MaterialButton",
+                  "na": {
+                    "color": "#(Colors.blue)",
+                    "onPressed": "@(_makePhoneCall)",
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Make phone call"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "MaterialButton",
+                  "na": {
+                    "color": "#(Colors.blue)",
+                    "onPressed": "@(_sendSMS)",
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Send SMS"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "MaterialButton",
+                  "na": {
+                    "color": "#(Colors.blue)",
+                    "onPressed": "@(_sendMail)",
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Send Email"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.all",
+                      "pa": [
+                        16.0
+                      ]
+                    },
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "^(_url)"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "MaterialButton",
+                  "na": {
+                    "color": "#(Colors.blue)",
+                    "onPressed": "@(_launchInBrowser)",
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Launch in browser"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "MaterialButton",
+                  "na": {
+                    "color": "#(Colors.blue)",
+                    "onPressed": "@(_launchInWebViewOrVC)",
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Launch in app"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "MaterialButton",
+                  "na": {
+                    "color": "#(Colors.blue)",
+                    "onPressed": "@(_launchInWebViewWithoutJavaScript)",
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Launch in app (JavaScript OFF)"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "MaterialButton",
+                  "na": {
+                    "color": "#(Colors.blue)",
+                    "onPressed": "@(_launchInWebViewWithoutDomStorage)",
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Launch in app (DOM storage OFF)"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.symmetric",
+                      "na": {
+                        "horizontal": 16.0
+                      }
+                    },
+                    "child": {
+                      "className": "MaterialButton",
+                      "na": {
+                        "color": "#(Colors.blue)",
+                        "onPressed": "@(_launchUniversalLinkIos)",
+                        "child": {
+                          "className": "Text",
+                          "pa": [
+                            "Launch a universal link in a native app, fallback to Safari"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "className": "Padding",
+                  "na": {
+                    "padding": {
+                      "className": "EdgeInsets.all",
+                      "pa": [
+                        16.0
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "methodMap": {}
+}
