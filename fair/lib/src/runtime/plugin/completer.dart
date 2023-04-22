@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:fair/fair.dart';
 
- 
 mixin CompleterPlugin implements FairCommonPluginMixin {
   Future<dynamic> futureComplete(dynamic map) => request(
         map,
@@ -26,18 +25,18 @@ mixin CompleterPlugin implements FairCommonPluginMixin {
     String? futureId,
     Function? function,
     dynamic argument,
-    Function? callback, 
+    Function? callback,
   }) {
-    futureId ??= DateTime.now().millisecondsSinceEpoch.toString();
+    futureId ??= DateTime.now().microsecondsSinceEpoch.toString();
     if (function != null) {
       function.call({
         'futureId': futureId,
-        if(argument!=null)
-        'argument': argument,
+        if (argument != null) 'argument': argument,
       });
     }
-    return createCompleter<T>(futureId).future..then((value) {
-      callback?.call(value);
-    });
+    return createCompleter<T>(futureId).future
+      ..then((value) {
+        callback?.call(value);
+      });
   }
 }
