@@ -5,6 +5,7 @@
  */
 
 import 'package:fair/fair.dart';
+import 'package:fair/src/internal/bind_data.dart';
 import 'package:flutter/widgets.dart';
 
 import 'fair_runtime_impl.dart';
@@ -15,7 +16,7 @@ abstract class RuntimeFairDelegate {
 
   final _bindValuesMap = <String, PropertyValue>{};
   final _bindFunctionsMap = <String, Function>{};
-  final _valueMap = <String, ValueNotifier>{};
+  final _valueMap = <String, FairValueNotifier>{};
 
   void setRunTime(Runtime? runtime) {
     this.runtime = runtime;
@@ -74,7 +75,7 @@ abstract class RuntimeFairDelegate {
   }
 
   dynamic createValueNotifier(key, value) {
-    return _valueMap.putIfAbsent(key, () => ValueNotifier(value));
+    return _valueMap.putIfAbsent(key, () => FairValueNotifier(value));
   }
 
   //获取js端的数据，刷新指定数据

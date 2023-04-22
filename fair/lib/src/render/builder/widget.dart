@@ -104,6 +104,8 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
           context,
           domain,
         );
+      } else if(name =='Sugar.nullValue') {
+        return null;
       }
 
       var module = bound?.modules?.moduleOf(name)?.call();

@@ -87,8 +87,8 @@ FairWidgetBinding provider = () {
         width: props['width'],
         style: props['style'] ?? BorderStyle.solid),
     'Sugar.enumName': (props) => Sugar.enumName(pa0(props)),
-    'Sugar.futureVoid': (props) =>
-        Sugar.futureVoid(function: props['function'], argument: props['argument']),
+    'Sugar.futureVoid': (props) => Sugar.futureVoid(
+        function: props['function'], argument: props['argument']),
     'Sugar.mapGet': (props) => Sugar.mapGet(pa0(props), pa1(props)),
     'Sugar.imageChunkEventToMap': (props) =>
         Sugar.imageChunkEventToMap(pa0(props)),
@@ -99,5 +99,9 @@ FairWidgetBinding provider = () {
     'Sugar.boxConstraintsToMap': (props) =>
         Sugar.boxConstraintsToMap(pa0(props)),
     'Sugar.sizeToMap': (props) => Sugar.sizeToMap(pa0(props)),
+    'Sugar.animationControllerToMap': (props) =>
+        Sugar.animationControllerToMap(pa0(props)),
+    'Sugar.dateTimeFromJs': (props) => Sugar.dateTimeFromJs(pa0(props)),
+    'Sugar.durationFromJs': (props) => Sugar.durationFromJs(pa0(props)),
   };
 };

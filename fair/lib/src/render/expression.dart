@@ -123,7 +123,7 @@ class ValueExpression extends Expression {
       ProxyMirror? proxy, BindingData? binding, Domain? domain, String? exp, String? pre) {
     var prop = binding?.bindDataOf(pre ?? '') ??
         binding?.modules?.moduleOf(pre ?? '')?.call();
-    if (prop is ValueNotifier) {
+    if (prop is FairValueNotifier) {
       var data = _PropBuilder(pre ?? '', prop, proxy, binding);
       binding?.addBindValue(data);
       return R(data, exp: exp, needBinding: true);
@@ -184,12 +184,12 @@ class PropValueExpression extends Expression {
   }
 }
 
-class _BindValueBuilder<T> extends ValueNotifier<T?> implements LifeCircle {
+class _BindValueBuilder<T> extends FairValueNotifier<T?> implements LifeCircle {
   final String? data;
   final ProxyMirror? proxyMirror;
   final BindingData? binding;
   VoidCallback? _listener;
-  final List<ValueNotifier> _watchedProps = [];
+  final List<FairValueNotifier> _watchedProps = [];
 
   _BindValueBuilder(this.data, this.proxyMirror, this.binding) : super(null);
 
@@ -224,7 +224,7 @@ class _InlineVariableBuilder extends _BindValueBuilder<String> {
       : super(data, proxyMirror, binding) {
     matches?.forEach((e) {
       final bindProp = binding?.bindRuntimeValueOf(e.group(0)!.substring(1));
-      if (bindProp is ValueNotifier) {
+      if (bindProp is FairValueNotifier) {
         _watchedProps.add(bindProp);
       }
     });
@@ -240,7 +240,7 @@ class _InlineVariableBuilder extends _BindValueBuilder<String> {
               '1': e.group(0)
             })
         .forEach((e) {
-      var first = e['0'] is ValueNotifier ? e['0'].value : e['0'];
+      var first = e['0'] is FairValueNotifier ? e['0'].value : e['0'];
       if (first != null) {
         extract = extract?.replaceFirst(e['1'], '$first');
       }
@@ -261,7 +261,7 @@ class _InlineObjectVariableBuilder extends _BindValueBuilder<String> {
     matches?.forEach((e) {
       final bindProp = binding?.bindRuntimeValueOf(
           e.group(0)!.substring(2, e.group(0)!.length - 1));
-      if (bindProp is ValueNotifier) {
+      if (bindProp is FairValueNotifier) {
         _watchedProps.add(bindProp);
       }
     });
@@ -278,7 +278,7 @@ class _InlineObjectVariableBuilder extends _BindValueBuilder<String> {
               '1': e.group(0)
             })
         .forEach((e) {
-      var first = e['0'] is ValueNotifier ? e['0'].value : e['0'];
+      var first = e['0'] is FairValueNotifier ? e['0'].value : e['0'];
       if (first != null) {
         extract = extract?.replaceFirst(e['1'], '$first');
       }
@@ -288,7 +288,7 @@ class _InlineObjectVariableBuilder extends _BindValueBuilder<String> {
 }
 
 class _PropBuilder extends _BindValueBuilder {
-  _PropBuilder(String data, ValueNotifier prop, ProxyMirror? proxyMirror,
+  _PropBuilder(String data, FairValueNotifier prop, ProxyMirror? proxyMirror,
       BindingData? binding)
       : super(data, proxyMirror, binding) {
     _watchedProps.add(prop);
@@ -298,7 +298,7 @@ class _PropBuilder extends _BindValueBuilder {
   @override
   dynamic get value {
     final prop = binding?.bindDataOf(data ?? '');
-    return prop is ValueNotifier ? prop.value : prop;
+    return prop is FairValueNotifier ? prop.value : prop;
   }
 }
 
@@ -314,7 +314,7 @@ class _PropValueBuilder extends _BindValueBuilder {
 
   @override
   dynamic get value {
-    return prop is ValueNotifier ? prop.value : prop;
+    return prop is FairValueNotifier ? prop.value : prop;
   }
 }
 
@@ -332,7 +332,7 @@ class _FunctionBuilder extends _BindValueBuilder {
       var bindProp;
       bindProp = binding
           ?.runFunctionOf(e.group(0)!.substring(2, e.group(0)!.length - 1), proxyMirror, binding, domain);
-      if (bindProp is ValueNotifier) {
+      if (bindProp is FairValueNotifier) {
         _watchedProps.add(bindProp);
       }
     });
@@ -349,7 +349,7 @@ class _FunctionBuilder extends _BindValueBuilder {
               '1': e.group(0)
             })
         .forEach((e) {
-      var first = e['0'] is ValueNotifier ? e['0'].value : e['0'];
+      var first = e['0'] is FairValueNotifier ? e['0'].value : e['0'];
       if (first != null) {
         extract = first; // extract.replaceFirst(e['1'], '$first');
       } else {

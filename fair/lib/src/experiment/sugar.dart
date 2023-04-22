@@ -278,7 +278,7 @@ class Sugar {
   /// [Sugar.futureValue] 和 [Sugar.futureVoid] 为同步操作
   /// [Sugar.createFuture] 异步操作
   /// 下面为一个例子
-  /// 
+  ///
   /// LikeButton(
   ///   size: 18.0,
   ///   isLiked: _getValue('is_favorite', false),
@@ -286,7 +286,8 @@ class Sugar {
   ///   onTap: (isLiked) =>
   ///     Sugar.futureValue<bool?>(SugarBool.invert(isLiked))
   ///   ）
-  static Future<T> futureValue<T>([FutureOr<T>? value]) => Future<T>.value(value);
+  static Future<T> futureValue<T>([FutureOr<T>? value]) =>
+      Future<T>.value(value);
 
   /// 返回 Future void
   /// [Sugar.futureValue] 和 [Sugar.futureVoid] 为同步操作
@@ -296,7 +297,7 @@ class Sugar {
   ///
   /// void _onRefresh() {
   /// }
-  /// 
+  ///
   static Future<void> futureVoid({
     Function? function,
     // 多个用数组，别用 Map，会跟解析冲突
@@ -308,11 +309,12 @@ class Sugar {
       function?.call(argument);
     }
   }
+
   /// 支持异步回调
   /// 这个是一个使用的例子
-  /// 
+  ///
   /// RefreshIndicator(
-  ///   onRefresh: 
+  ///   onRefresh:
   ///   () => Sugar.createFuture<void>(function: _onRefresh),
   ///   argument: 'test',
   ///   // 获取异步操作之后的值
@@ -354,7 +356,7 @@ class Sugar {
     dynamic argument,
     // 执行完之后的回调
     Function? callback,
-  }){
+  }) {
     return CompleterPlugin.createFuture<T>(
       futureId: futureId,
       function: function,
@@ -362,7 +364,6 @@ class Sugar {
       callback: callback,
     );
   }
-
 
   // 方便从 map 中获取值
   static dynamic mapGet(Map map, String key) => map[key];
@@ -427,6 +428,48 @@ class Sugar {
       'isFinite': size.isFinite,
       'isInfinite': size.isInfinite,
     };
+  }
+
+  /// 生成映射会跳过 null，增加 sugar 来表示 null
+  static dynamic nullValue() => null;
+
+  static Map<String, dynamic> animationControllerToMap(
+      AnimationController controller) {
+    return {
+      'isAnimating': controller.isAnimating,
+      'value': controller.value,
+      'lowerBound': controller.lowerBound,
+      'upperBound': controller.upperBound,
+      'animationBehavior': controller.animationBehavior.name,
+      'isCompleted': controller.isCompleted,
+      'isDismissed': controller.isDismissed,
+      'velocity': controller.velocity,
+    };
+  }
+
+  static Duration durationFromJs(dynamic duration) {
+    if (duration is Duration) {
+      return duration;
+    } else if (duration is Map) {
+      return Duration(microseconds: duration['inMicroseconds']);
+    }
+    assert(false, 'Duration convert failed');
+    return Duration.zero;
+  }
+
+  static DateTime dateTimeFromJs(dynamic dateTime) {
+    if (dateTime is DateTime) {
+      return dateTime;
+    } else if (dateTime is Map) {
+      // var isUtc = dateTime['isUtc'];
+      var dateTimeS = dateTime['__date__'];
+      return DateTime.tryParse(dateTimeS) ?? DateTime.now();
+    }
+    assert(
+      false,
+      'DateTime convert failed',
+    );
+    return DateTime.now();
   }
 }
 

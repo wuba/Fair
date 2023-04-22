@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 import 'package:fair/src/extension.dart';
+import 'package:fair/src/internal/bind_data.dart';
 import 'package:fair/src/module/fair_module.dart';
 import 'package:fair/src/render/base.dart';
 import 'package:fair/src/render/builder/builder.dart';
@@ -227,9 +228,10 @@ dynamic block(
   ) {
     var pa = _position(input, context, methodMap, domain);
     var data = pa.data;
-    if(data is ValueNotifier) {
+    if( data is FairValueNotifier) {
       return data.value;
     }
+
     return data;
   }  
 }
