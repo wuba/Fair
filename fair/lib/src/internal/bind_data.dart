@@ -14,6 +14,12 @@ import '../render/expression.dart';
 import '../render/proxy.dart';
 import '../type.dart';
 
+
+/// 区别于 ValueNotifier
+class FairValueNotifier<T> extends ValueNotifier<T>{
+  FairValueNotifier(T value) : super(value);
+}
+
 class BindingData {
   // none-null
   final FairModuleRegistry? modules;
@@ -57,7 +63,7 @@ class BindingData {
             if (r?.data == null) {
               return e;
             } else {
-              return r?.data is ValueNotifier ? r?.data.value : r?.data;
+              return r?.data is FairValueNotifier ? r?.data.value : r?.data;
             }
           }
         }).toList();
