@@ -409,7 +409,7 @@ class Sugar {
       return {
         'hasClients': dartObject.hasClients,
         'length': dartObject.positions.length,
-        'debugLabel': dartObject.debugLabel,
+        if (dartObject.debugLabel != null) 'debugLabel': dartObject.debugLabel,
         if (dartObject.hasClients) ...{
           if (dartObject.positions.length == 1) ...{
             'offset': dartObject.offset,
@@ -439,7 +439,7 @@ class Sugar {
       };
     } else if (dartObject is AnimationController) {
       return {
-        'debugLabel': dartObject.debugLabel,
+        if (dartObject.debugLabel != null) 'debugLabel': dartObject.debugLabel,
         'isAnimating': dartObject.isAnimating,
         'value': dartObject.value,
         'lowerBound': dartObject.lowerBound,
