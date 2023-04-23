@@ -366,86 +366,12 @@ class Sugar {
   }
 
   // 方便从 map 中获取值
-  static dynamic mapGet(Map map, String key) => map[key];
-
-  // typedef ImageLoadingBuilder = Widget Function(BuildContext context, Widget child, ImageChunkEvent? loadingProgress)
-  // package:flutter/src/widgets/image.dart
-  // 方便在回调中获取值
-  static Map<String, dynamic> imageChunkEventToMap(
-      ImageChunkEvent imageChunkEvent) {
-    return {
-      'cumulativeBytesLoaded': imageChunkEvent.cumulativeBytesLoaded,
-      'expectedTotalBytes': imageChunkEvent.expectedTotalBytes,
-    };
-  }
-
-  // typedef ControlsWidgetBuilder = Widget Function(BuildContext context, ControlsDetails details)
-  // package:flutter/src/material/stepper.dart
-  // 方便在回调中获取值
-  static Map<String, dynamic> controlsDetailsToMap(
-      ControlsDetails controlsDetails) {
-    return {
-      'currentStep': controlsDetails.currentStep,
-      'isActive': controlsDetails.isActive,
-      'stepIndex': controlsDetails.stepIndex,
-      'onStepCancel': controlsDetails.onStepCancel,
-      'onStepContinue': controlsDetails.onStepContinue,
-    };
-  }
-
-  // 方便在回调中获取值
-  static Map<String, dynamic> animationToMap(Animation animation) {
-    return {
-      'isCompleted': animation.isCompleted,
-      'isDismissed': animation.isDismissed,
-      // 转换成字符串，方便js中使用
-      'status': animation.status.name,
-      'value': animation.value,
-    };
-  }
-
-  // typedef LayoutWidgetBuilder = Widget Function(BuildContext context, BoxConstraints constraints);
-  // package:flutter/src/widgets/layout_builder.dart
-  // 方便在回调中获取值
-  static Map<String, dynamic> boxConstraintsToMap(
-      BoxConstraints boxConstraints) {
-    return {
-      'maxWidth': boxConstraints.maxWidth,
-      'maxHeight': boxConstraints.maxHeight,
-      'minWidth': boxConstraints.minWidth,
-      'minHeight': boxConstraints.minHeight,
-    };
-  }
-
-  static Map<String, dynamic> sizeToMap(Size size) {
-    return {
-      'width': size.width,
-      'height': size.height,
-      'aspectRatio': size.aspectRatio,
-      'longestSide': size.longestSide,
-      'shortestSide': size.shortestSide,
-      'isEmpty': size.isEmpty,
-      'isFinite': size.isFinite,
-      'isInfinite': size.isInfinite,
-    };
-  }
+  static dynamic mapGet(Map map, dynamic key) => map[key];
+  static dynamic mapSet(Map map, dynamic key, dynamic value) =>
+      map[key] = value;
 
   /// 生成映射会跳过 null，增加 sugar 来表示 null
   static dynamic nullValue() => null;
-
-  static Map<String, dynamic> animationControllerToMap(
-      AnimationController controller) {
-    return {
-      'isAnimating': controller.isAnimating,
-      'value': controller.value,
-      'lowerBound': controller.lowerBound,
-      'upperBound': controller.upperBound,
-      'animationBehavior': controller.animationBehavior.name,
-      'isCompleted': controller.isCompleted,
-      'isDismissed': controller.isDismissed,
-      'velocity': controller.velocity,
-    };
-  }
 
   static Duration durationFromJs(dynamic duration) {
     if (duration is Duration) {
@@ -470,6 +396,103 @@ class Sugar {
       'DateTime convert failed',
     );
     return DateTime.now();
+  }
+
+  /// 将 dart 对象转成成 map ，以便获取值或者传递到 js 中
+  static Map<String, dynamic> dartObjectToMap(
+    dynamic dartObject, {
+    // 默认枚举返回对应的枚举 name
+    // false, 直接返回枚举类型
+    bool enumName = true,
+  }) {
+    if (dartObject is ScrollController || dartObject is PageController) {
+      return {
+        'hasClients': dartObject.hasClients,
+        'length': dartObject.positions.length,
+        'debugLabel': dartObject.debugLabel,
+        if (dartObject.hasClients) ...{
+          if (dartObject.positions.length == 1) ...{
+            'offset': dartObject.offset,
+            'minScrollExtent': dartObject.position.minScrollExtent,
+            'maxScrollExtent': dartObject.position.maxScrollExtent,
+            if (dartObject is PageController) 'page': dartObject.page,
+          } else
+            for (int i = 0; i < dartObject.positions.length; i++) ...{
+              'offset$i': dartObject.offset,
+              'minScrollExtent$i': dartObject.position.minScrollExtent,
+              'maxScrollExtent$i': dartObject.position.maxScrollExtent,
+              if (dartObject is PageController) 'page$i': dartObject.page,
+            }
+        }
+      };
+    } else if (dartObject is TabController) {
+      return {
+        'index': dartObject.index,
+        'indexIsChanging': dartObject.indexIsChanging,
+        'offset': dartObject.offset,
+        'previousIndex': dartObject.previousIndex,
+        'length': dartObject.length,
+      };
+    } else if (dartObject is ValueNotifier) {
+      return {
+        'value': dartObject.value,
+      };
+    } else if (dartObject is AnimationController) {
+      return {
+        'debugLabel': dartObject.debugLabel,
+        'isAnimating': dartObject.isAnimating,
+        'value': dartObject.value,
+        'lowerBound': dartObject.lowerBound,
+        'upperBound': dartObject.upperBound,
+        'animationBehavior': enumName
+            ? dartObject.animationBehavior.name
+            : dartObject.animationBehavior,
+        'isCompleted': dartObject.isCompleted,
+        'isDismissed': dartObject.isDismissed,
+        'velocity': dartObject.velocity,
+      };
+    } else if (dartObject is Size) {
+      return {
+        'width': dartObject.width,
+        'height': dartObject.height,
+        'aspectRatio': dartObject.aspectRatio,
+        'longestSide': dartObject.longestSide,
+        'shortestSide': dartObject.shortestSide,
+        'isEmpty': dartObject.isEmpty,
+        'isFinite': dartObject.isFinite,
+        'isInfinite': dartObject.isInfinite,
+      };
+    } else if (dartObject is BoxConstraints) {
+      return {
+        'maxWidth': dartObject.maxWidth,
+        'maxHeight': dartObject.maxHeight,
+        'minWidth': dartObject.minWidth,
+        'minHeight': dartObject.minHeight,
+      };
+    } else if (dartObject is Animation) {
+      return {
+        'isCompleted': dartObject.isCompleted,
+        'isDismissed': dartObject.isDismissed,
+        // 转换成字符串，方便js中使用
+        'status': enumName ? dartObject.status.name : dartObject.status,
+        'value': dartObject.value,
+      };
+    } else if (dartObject is ControlsDetails) {
+      return {
+        'currentStep': dartObject.currentStep,
+        'isActive': dartObject.isActive,
+        'stepIndex': dartObject.stepIndex,
+        'onStepCancel': dartObject.onStepCancel,
+        'onStepContinue': dartObject.onStepContinue,
+      };
+    } else if (dartObject is ImageChunkEvent) {
+      return {
+        'cumulativeBytesLoaded': dartObject.cumulativeBytesLoaded,
+        'expectedTotalBytes': dartObject.expectedTotalBytes,
+      };
+    }
+    assert(false, '不支持的类型: $dartObject');
+    return {};
   }
 }
 
