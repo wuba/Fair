@@ -1,4 +1,4 @@
-![social preview](social-dark.png)
+![social preview](resources/social-dark.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <p align="center">
   <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.2.1-orange" alt="pub"></a>
@@ -17,18 +17,18 @@ Fair is a dynamic framework designed for Flutter. Through the automatic conversi
 
 The goal of creating Fair is to support updates through business bundles and JS distribution without the release of versions (Android, iOS, Web), similar to React Native. After integrating with Flutter Fair, you can quickly publish new pages without waiting for your app's next release date. Fair provides standard widgets, which can be used as a new dynamic page or as part of an existing Flutter page, such as typography/style modification of operation bits, full page replacement, partial replacement, etc.
 
-![](what-is-fair-en.png)
+![](resources/what-is-fair-en.png)
 
 Fair's UI rendering is lossless and can be restored at the pixel level. Take a look at the effect of escaping some pages of Best Flutter UI Templates:
 
-![best-ui-template](best-ui-template.png)
+![best-ui-template](resources/best-ui-template.png)
 
 > The project used is from https://github.com/mitesh77/Best-Flutter-UI-Templates </br>
 > location：/example/lib/best_flutter_ui
 
 ## 🏛Architecture
 
-![fair architecture](fair.png)
+![fair architecture](resources/fair.png)
 
 ## 🚀 Running
 Use Flutter Fair require few steps. 
@@ -136,7 +136,7 @@ Page/Component Template Code
 </html>
 
 ### DevTools flow chart
-![fair tools](fair_tools.png)
+![fair tools](resources/fair_tools.png)
 
 ### DevTools demo
 After using faircli to configure the local hot update service, open the developer options on the mobile device, select the local mode, enter the ip of the development machine, then preview fair dynamic effect

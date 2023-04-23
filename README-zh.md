@@ -1,4 +1,4 @@
-![social preview](social-dark.png)
+![social preview](resources/social-dark.png)
 
 <p align="center">
   <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.2.1-orange" alt="pub"></a>
@@ -22,11 +22,11 @@ Fair是为Flutter设计的动态化框架，通过Fair Compiler工具对原生Da
 **如果您需要热更新平台，可关注Fair Pushy**
 > 热更新平台：[FAIR PUSHY](https://github.com/wuba/FairPushy)
 
-![](what-is-fair.png)
+![](resources/what-is-fair.png)
 
 Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转义Best Flutter UI Templates部分页面后的效果：
 
-![best-ui-template](best-ui-template.png)
+![best-ui-template](resources/best-ui-template.png)
 
 > 使用的工程来自 https://github.com/mitesh77/Best-Flutter-UI-Templates </br>
 > 项目位置：/example/lib/best_flutter_ui
@@ -34,7 +34,7 @@ Fair的UI渲染是无损的，可以做到像素级别的还原，看一张转�
 
 ## 🏛 架构
 
-![fair architecture](fair.png)
+![fair architecture](resources/fair.png)
 
 ## 🚀 快速接入
 
@@ -144,7 +144,7 @@ faircli create -k carrier -n carrier_project_name
 </html>
 
 ### 配套工具使用流程
-![fair tools](fair_tools.png)
+![fair tools](resources/fair_tools.png)
 
 ### 配套工具使用效果
 使用faircli配置好本地的热更服务后，在移动设备上打开开发者选项，选择本地模式，输入开发机ip，预览fair动态化效果
@@ -413,7 +413,7 @@ Star&Fork 是对我们最大的支持~
 
 | 微信                       | 美事（内部）                   |
 |--------------------------|--------------------------|
-| ![wechat](./weixin.jpeg) | ![meishi](./meishi.jpeg) |
+| ![wechat](resources/weixin.jpeg) | ![meishi](resources/weixin-group-2.jpeg) |
 
 > 微信入群：请先添加58技术小秘书为好友，备注fair，小秘书邀请进群。
 
