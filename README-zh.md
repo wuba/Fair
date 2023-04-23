@@ -409,11 +409,11 @@ Star&Fork 是对我们最大的支持~
 ## 🔧一起共建
 通过[Issue](https://github.com/wuba/fair/issues)提交问题，贡献代码走Pull Request，管理员将对代码进行审核。
 
-对Fair感兴趣的小伙伴，可以加入交流群。技术咨询、讨论，请移步至[![Gitter](https://badges.gitter.im/flutter_fair/community.svg)](https://gitter.im/flutter_fair/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+对Fair感兴趣的小伙伴，可以加入交流群。技术咨询、讨论，请移步至
 
-| 微信                       | 美事（内部）                   |
+| 微信小秘书                       | 微信群                 |
 |--------------------------|--------------------------|
-| ![wechat](resources/weixin.jpeg) | ![meishi](resources/weixin-group-2.jpeg) |
+| ![wechat](resources/weixin.jpeg) | ![wechat_group](resources/wechat-group-02.png) |
 
 > 微信入群：请先添加58技术小秘书为好友，备注fair，小秘书邀请进群。
 
