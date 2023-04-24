@@ -86,7 +86,9 @@
                             "index",
                             "item"
                           ]
-                        }
+                        },
+                        "tag": "Widget Function(int, Person)",
+                        "rt": "Widget"
                       }
                     ]
                   }
@@ -120,44 +122,79 @@
                               "className": "SugarSwitchCaseObj",
                               "na": {
                                 "reValue": {
-                                  "className": "Text",
-                                  "pa": [
-                                    "2-ValueTitle"
-                                  ]
+                                  "className": "FairFunction",
+                                  "body": {
+                                    "className": "Text",
+                                    "pa": [
+                                      "2-ValueTitle"
+                                    ]
+                                  },
+                                  "tag": "Widget Function()",
+                                  "rt": "Widget"
                                 },
-                                "sugarCase": 2
+                                "sugarCase": {
+                                  "className": "FairFunction",
+                                  "body": 2,
+                                  "tag": "int Function()",
+                                  "rt": "int"
+                                }
                               }
                             },
                             {
                               "className": "SugarSwitchCaseObj",
                               "na": {
                                 "reValue": {
-                                  "className": "Text",
-                                  "pa": [
-                                    "3-ValueTitle"
-                                  ]
+                                  "className": "FairFunction",
+                                  "body": {
+                                    "className": "Text",
+                                    "pa": [
+                                      "3-ValueTitle"
+                                    ]
+                                  },
+                                  "tag": "Widget Function()",
+                                  "rt": "Widget"
                                 },
-                                "sugarCase": 3
+                                "sugarCase": {
+                                  "className": "FairFunction",
+                                  "body": 3,
+                                  "tag": "int Function()",
+                                  "rt": "int"
+                                }
                               }
                             },
                             {
                               "className": "SugarSwitchCaseObj",
                               "na": {
                                 "reValue": {
-                                  "className": "Text",
-                                  "pa": [
-                                    "4-ValueTitle"
-                                  ]
+                                  "className": "FairFunction",
+                                  "body": {
+                                    "className": "Text",
+                                    "pa": [
+                                      "4-ValueTitle"
+                                    ]
+                                  },
+                                  "tag": "Widget Function()",
+                                  "rt": "Widget"
                                 },
-                                "sugarCase": 4
+                                "sugarCase": {
+                                  "className": "FairFunction",
+                                  "body": 4,
+                                  "tag": "int Function()",
+                                  "rt": "int"
+                                }
                               }
                             }
                           ],
                           {
-                            "className": "Text",
-                            "pa": [
-                              "default-ValueTitle"
-                            ]
+                            "className": "FairFunction",
+                            "body": {
+                              "className": "Text",
+                              "pa": [
+                                "default-ValueTitle"
+                              ]
+                            },
+                            "tag": "Widget Function()",
+                            "rt": "Widget"
                           }
                         ]
                       }
@@ -205,7 +242,9 @@
                                 "context",
                                 "index"
                               ]
-                            }
+                            },
+                            "tag": "Widget Function(BuildContext, int)",
+                            "rt": "Widget"
                           }
                         ]
                       },
@@ -228,26 +267,61 @@
                             {
                               "className": "SugarSwitchCaseObj",
                               "na": {
-                                "reValue": "2",
-                                "sugarCase": 2
+                                "reValue": {
+                                  "className": "FairFunction",
+                                  "body": "2",
+                                  "tag": "String Function()",
+                                  "rt": "String"
+                                },
+                                "sugarCase": {
+                                  "className": "FairFunction",
+                                  "body": 2,
+                                  "tag": "int Function()",
+                                  "rt": "int"
+                                }
                               }
                             },
                             {
                               "className": "SugarSwitchCaseObj",
                               "na": {
-                                "reValue": "3",
-                                "sugarCase": 3
+                                "reValue": {
+                                  "className": "FairFunction",
+                                  "body": "3",
+                                  "tag": "String Function()",
+                                  "rt": "String"
+                                },
+                                "sugarCase": {
+                                  "className": "FairFunction",
+                                  "body": 3,
+                                  "tag": "int Function()",
+                                  "rt": "int"
+                                }
                               }
                             },
                             {
                               "className": "SugarSwitchCaseObj",
                               "na": {
-                                "reValue": "4",
-                                "sugarCase": 4
+                                "reValue": {
+                                  "className": "FairFunction",
+                                  "body": "4",
+                                  "tag": "String Function()",
+                                  "rt": "String"
+                                },
+                                "sugarCase": {
+                                  "className": "FairFunction",
+                                  "body": 4,
+                                  "tag": "int Function()",
+                                  "rt": "int"
+                                }
                               }
                             }
                           ],
-                          "defaultValue"
+                          {
+                            "className": "FairFunction",
+                            "body": "defaultValue",
+                            "tag": "String Function()",
+                            "rt": "String"
+                          }
                         ]
                       }
                     ]
@@ -313,7 +387,9 @@
                                 "context",
                                 "index"
                               ]
-                            }
+                            },
+                            "tag": "Widget Function(BuildContext, int)",
+                            "rt": "Widget"
                           }
                         ]
                       },
@@ -420,7 +496,9 @@
                                           "context",
                                           "index"
                                         ]
-                                      }
+                                      },
+                                      "tag": "Widget Function(BuildContext, int)",
+                                      "rt": "Widget"
                                     }
                                   ]
                                 }
@@ -469,7 +547,9 @@
                                           "context",
                                           "index"
                                         ]
-                                      }
+                                      },
+                                      "tag": "Widget Function(BuildContext, int)",
+                                      "rt": "Widget"
                                     }
                                   ]
                                 }

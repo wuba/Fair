@@ -27,29 +27,39 @@
                 ],
                 "na": {
                   "trueValue": {
-                    "className": "Image.network",
-                    "pa": [
-                      "https://img.58cdn.com.cn/logo/58/252_84/logo-o.png"
-                    ],
-                    "na": {
-                      "width": 500,
-                      "height": 250
-                    }
+                    "className": "FairFunction",
+                    "body": {
+                      "className": "Image.network",
+                      "pa": [
+                        "https://img.58cdn.com.cn/logo/58/252_84/logo-o.png"
+                      ],
+                      "na": {
+                        "width": 500,
+                        "height": 250
+                      }
+                    },
+                    "tag": "Widget Function()",
+                    "rt": "Widget"
                   },
                   "falseValue": {
-                    "className": "Image.file",
-                    "pa": [
-                      {
-                        "className": "File",
-                        "pa": [
-                          "^(picUrl)"
-                        ]
+                    "className": "FairFunction",
+                    "body": {
+                      "className": "Image.file",
+                      "pa": [
+                        {
+                          "className": "File",
+                          "pa": [
+                            "^(picUrl)"
+                          ]
+                        }
+                      ],
+                      "na": {
+                        "width": 500,
+                        "height": 250
                       }
-                    ],
-                    "na": {
-                      "width": 500,
-                      "height": 250
-                    }
+                    },
+                    "tag": "Widget Function()",
+                    "rt": "Widget"
                   }
                 }
               },

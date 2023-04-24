@@ -8,7 +8,7 @@ import 'dart:io';
 
 import 'package:fair/fair.dart';
 import 'package:fair/src/internal/bind_data.dart';
-import 'package:fair/src/render/builder.dart';
+import 'package:fair/src/render/builder/widget.dart';
 import 'package:fair/src/render/proxy.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +64,7 @@ class FairApp extends InheritedWidget with AppState {
   final bool debugShowFairBanner;
   
   /// Define a custom DynamicWidgetBuilder to solve special case
-  final DynamicWidgetBuilder Function(ProxyMirror? proxyMirror, String? page, BindingData? bound,
+  final DynamicBuilder Function(ProxyMirror? proxyMirror, String? page, BindingData? bound,
       {String? bundle})? dynamicWidgetBuilder;
       
   static final WidgetBuilder _defaultHolder = (BuildContext context) {

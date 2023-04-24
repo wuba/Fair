@@ -1,43 +1,27 @@
-// ignore_for_file: omit_local_variable_types
-
 /*
  * Copyright (C) 2005-present, 58.com.  All rights reserved.
  * Use of this source code is governed by a BSD type license that can be
  * found in the LICENSE file.
  */
+// ignore_for_file: omit_local_variable_types
 
-import 'package:fair/fair.dart';
+import 'package:fair/src/experiment/sugar.dart';
+import 'package:fair/src/extension.dart';
+import 'package:fair/src/internal/bind_data.dart';
+import 'package:fair/src/internal/error_tips.dart';
+import 'package:fair/src/render/builder/builder.dart';
+import 'package:fair/src/render/builder/common.dart';
+import 'package:fair/src/render/builder/function.dart';
+import 'package:fair/src/render/domain.dart';
+import 'package:fair/src/render/property.dart';
+import 'package:fair/src/render/proxy.dart';
 import 'package:fair/src/type.dart';
+import 'package:fair_version/fair_version.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-import '../extension.dart';
-import '../internal/bind_data.dart';
-import '../internal/error_tips.dart';
-import '../widgets/component.dart';
-import '../widgets/version.dart';
-import 'base.dart';
-import 'domain.dart';
-import 'expression.dart';
-import 'property.dart';
-import 'proxy.dart';
-
-abstract class Binding {}
-
-abstract class DynamicBuilder {
-  final String? tag;
-  final ProxyMirror? proxyMirror;
-  final String? page;
-  final BindingData? bound;
-  final String? bundle;
-
-  DynamicBuilder(this.tag, this.proxyMirror, this.page, this.bound,
-      {this.bundle});
-
-  dynamic convert(BuildContext context, Map map, Map methodMap);
-}
-
-class DynamicWidgetBuilder extends DynamicBuilder {
+/// 特殊处理各种场景
+/// DynamicBuilder 的实现
+class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, FunctionDynamicBuilder {
   DynamicWidgetBuilder(
       ProxyMirror? proxyMirror, String? page, BindingData? bound,
       {String? bundle})
@@ -104,8 +88,25 @@ class DynamicWidgetBuilder extends DynamicBuilder {
           context,
           domain,
         );
+      } else if(name == 'FairFunction') {
+        return buildFairFunction(context, map, methodMap, domain: domain);
+      } else if(name == 'Sugar.futureValue') {
+        return _buildFutureValue(
+          map,
+          methodMap,
+          context,
+          domain,
+        );
+      } else if(name == 'Sugar.createFuture') {
+        return _buildCreateFuture(
+          map,
+          methodMap,
+          context,
+          domain,
+        );
+      } else if(name =='Sugar.nullValue') {
+        return null;
       }
-
 
       var module = bound?.modules?.moduleOf(name)?.call();
       var isWidget = module?.isWidget ?? false;
@@ -119,8 +120,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       }
       if (mapper == null) {
         mapper = proxyMirror?.componentOf(name);
-        final internal = widgetNames.containsKey(name);
-        isWidget = internal ? (widgetNames[name] ?? false) : true;
+        isWidget = proxyMirror?.isWidget(name) ?? true;
       }
       assert(mapper != null, '$name is not registered!');
       if (name == 'Sugar.mapEach') {
@@ -160,171 +160,8 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     }
   }
 
-  dynamic block(
-    Map map,
-    Map? methodMap,
-    BuildContext ctx,
-    Domain? domain,
-    dynamic fun,
-    String name,
-    bool widget, {
-    bool forceApply = false,
-  }) {
-    var na = named(name, map['na'], methodMap, ctx, domain);
-    var pa = positioned(map['pa'], methodMap, ctx, domain);
-    // var arguments = map['arguments'];
-    final bind = widget && (na.binding == true || pa.binding == true);
-    try {
-      fun = FairModule.cast(ctx, fun);
-      if (forceApply || !bind) {
-        return Function.apply(
-            fun, [Property.extract(list: pa.data, map: na.data)], null);
-      }
-      return FairComponent(name, func: fun, na: na.data, pa: pa.data);
-    } catch (e, stack) {
-      FlutterError.reportError(FlutterErrorDetails(
-        exception: e,
-        library: 'Fair Runtime',
-        stack: stack,
-        context: ErrorSummary('while parsing widget of $name, $fun'),
-      ));
-      throw ArgumentError('name===$name,fun===$fun, error===$e, map===$map');
-    }
-  }
-
-  W<List> positioned(
-      dynamic paMap, Map? methodMap, BuildContext context, Domain? domain) {
-    var pa = [];
-    var needBinding = false;
-    if (paMap is List) {
-      paMap.forEach((e) {
-        if (e is Map) {
-          pa.add(convert(context, e, methodMap, domain: domain));
-        } else if (domain != null && domain.match(e)) {
-          pa.add(domain.bindValue(e));
-        } else if (domain != null && e is MapEntry && domain.match(e.value)) {
-          pa.add(domain.bindValue(e.value));
-        } else if (e is String) {
-          var r = proxyMirror?.evaluate(context, bound, e, domain: domain);
-          if (r?.binding == true) {
-            needBinding = true;
-          }
-          pa.add(r?.data);
-        } else {
-          pa.add(e);
-        }
-      });
-    }
-    return W<List>(pa, needBinding);
-  }
-
-  W<Map<String, dynamic>> named(
-    String tag,
-    dynamic naMap,
-    Map? methodMap,
-    BuildContext context,
-    Domain? domain,
-  ) {
-    var na = <String, dynamic>{};
-    var needBinding = false;
-    if (naMap is Map) {
-      naMap.entries.forEach((e) {
-        if (e.value is Map) {
-          na[e.key] = namedMap(tag, naMap, methodMap, context, domain, e);
-        } else if (e.value is List) {
-          na[e.key] =
-              namedList(tag, naMap, methodMap, context, domain, e.value);
-        } else if (domain != null && domain.match(e)) {
-          na[e.key] = domain.bindValue(e as String);
-        } else if (domain != null && e is MapEntry && domain.match(e.value)) {
-          na[e.key] = domain.bindValue(e.value);
-        } else if (e.value is String) {
-          var w = namedString(tag, naMap, methodMap, context, domain, e.value);
-          needBinding = w.binding ?? false;
-          na[e.key] = w.data;
-        } else {
-          na[e.key] = e.value;
-        }
-      });
-    }
-    na['\$'] = context;
-    return W<Map<String, dynamic>>(na, needBinding);
-  }
-
-  dynamic namedMap(String tag, dynamic naMap, Map? methodMap,
-      BuildContext context, Domain? domain, MapEntry e) {
-    var result;
-    if (tag == 'FairWidget' && e.key.toString() == 'data') {
-      result = e.value;
-    } else {
-      var body;
-      if ((body = replaceMethod(methodMap, e.value['className'])) != null) {
-        result = convert(context, body, methodMap, domain: domain);
-      } else {
-        if (isSupportedNa(e.value)) {
-          result = convert(context, e.value, methodMap, domain: domain);
-        } else {
-          result = e.value;
-        }
-      }
-    }
-    return result;
-  }
-
-  dynamic namedList(String tag, dynamic naMap, Map? methodMap,
-      BuildContext context, Domain? domain, List v) {
-    var children = [];
-    v.forEach((e) {
-      var item;
-      if (e is Map) {
-        var body;
-        item = (body = replaceMethod(methodMap, e['className'])) != null
-            ? convert(context, body, methodMap, domain: domain)
-            : convert(context, e, methodMap, domain: domain);
-      } else if (e is String) {
-        if (domain != null && domain.match(e)) {
-          item = domain.bindValue(e);
-        } else {
-          var body;
-          if ((body = replaceMethod(methodMap, e)) != null) {
-            item = convert(context, body, methodMap, domain: domain);
-          } else {
-            item = namedString(tag, naMap, methodMap, context, domain, e).data;
-          }
-        }
-      } else {
-        item = e;
-      }
-      children.add(item);
-    });
-    if (children.every((element) => element is Widget) == true) {
-      return children.asIteratorOf<Widget>()?.toList() ?? children;
-    }
-    return children;
-  }
-
-  W namedString(String tag, dynamic naMap, Map? methodMap, BuildContext context,
-      Domain? domain, String v) {
-    var result;
-    var needBinding = false;
-    var body;
-    if ((body = replaceMethod(methodMap, v)) != null) {
-      result = convert(context, body, methodMap, domain: domain);
-    } else {
-      var r = proxyMirror?.evaluate(context, bound, v, domain: domain);
-      if (r?.binding == true) {
-        needBinding = true;
-      }
-      if (r?.data is FairModule) {
-        result = (r?.data as FairModule).onCreateComponent(context, null);
-      } else {
-        result = r?.data;
-      }
-    }
-    return W(result, needBinding);
-  }
-
-  List<Widget> _buildSugarMapEach(
+ 
+  List<dynamic> _buildSugarMapEach(
     Function mapEach,
     Map map,
     Map? methodMap,
@@ -348,11 +185,11 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       for (var i = 0; i < source.length; i++) {
         var element = source[i];
         children.add(
-          convert(
-            context,
+          pa0Value(
             FunctionDomain.getBody(fairFunction),
             methodMap,
-            domain: FunctionDomain(
+            context,
+            FunctionDomain(
               {
                 functionParameters[0]: i,
                 functionParameters[1]: element,
@@ -363,13 +200,17 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         );
       }
     }
+
+    
+    children = children.asIteratorOf<Widget>()?.toList() ?? children;
+
     var params = {
       'pa': [source, children]
     };
     return mapEach.call(params);
   }
 
-  List<Widget> _buildSugarMap(
+  List<dynamic> _buildSugarMap(
     Function mapEach,
     Map map,
     Map? methodMap,
@@ -391,11 +232,11 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       for (var i = 0; i < source.length; i++) {
         var element = source[i];
         children.add(
-          convert(
-            context,
+          pa0Value(
             FunctionDomain.getBody(fairFunction),
             methodMap,
-            domain: FunctionDomain(
+            context,
+            FunctionDomain(
               {
                 functionParameters[0]: element,
               },
@@ -405,6 +246,10 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         );
       }
     }
+
+    
+    children = children.asIteratorOf<Widget>()?.toList() ?? children;
+
     var params = {
       'pa': [source, children]
     };
@@ -430,14 +275,14 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     if (source is List) {
       for (var caseItem in source) {
         var na = caseItem['na'];
-        if (pa0Value(na['sugarCase'], methodMap, context, domain) ==
+        if (pa0Value(FunctionDomain.getBody(na['sugarCase']), methodMap, context, domain) ==
             caseValue) {
-          return pa0Value(na['reValue'], methodMap, context, domain);
+          return pa0Value(FunctionDomain.getBody(na['reValue']), methodMap, context, domain);
         }
       }
     }
 
-    var defaultValue = pa2(map);
+    var defaultValue = FunctionDomain.getBody(pa2(map));
     return pa0Value(defaultValue, methodMap, context, domain);
   }
 
@@ -581,31 +426,6 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     return mapEach.call(params);
   }
 
-  bool isFuncExp(String exp) {
-    return FunctionExpression().hitTest(exp, '');
-  }
-
-  String subFunctionName(String expFunc) {
-    if (isFuncExp(expFunc)) {
-      return expFunc.substring(2, expFunc.length - 1);
-    } else {
-      return expFunc;
-    }
-  }
-
-  dynamic replaceMethod(Map? methodMap, String? exp) {
-    var body;
-    if (methodMap != null && exp != null && isFuncExp(exp)) {
-      body = methodMap[subFunctionName(exp)];
-    }
-    return body;
-  }
-
-  bool isSupportedNa(Map map) {
-    var name = map[tag];
-    return name != null;
-  }
-
 
   SliverGridDelegateWithFixedCrossAxisCount
       _buildSugarSliverGridDelegateWithFixedCrossAxisCount(
@@ -634,9 +454,9 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var p0 = pa0Value(pa0(map), methodMap, context, domain);
     var p1 = pa0Value(pa1(map), methodMap, context, domain);
     if (p0 == p1) {
-      return pa0Value(na['trueValue'], methodMap, context, domain);
+      return pa0Value(FunctionDomain.getBody(na['trueValue']), methodMap, context, domain);
     } else {
-      return pa0Value(na['falseValue'], methodMap, context, domain);
+      return pa0Value(FunctionDomain.getBody(na['falseValue']), methodMap, context, domain);
     }
   }
 
@@ -649,23 +469,10 @@ class DynamicWidgetBuilder extends DynamicBuilder {
     var na = map['na'];
 
     if (pa0Value(pa0(map), methodMap, context, domain)) {
-      return pa0Value(na['trueValue'], methodMap, context, domain);
+      return pa0Value(FunctionDomain.getBody(na['trueValue']), methodMap, context, domain);
     } else {
-      return pa0Value(na['falseValue'], methodMap, context, domain);
+      return pa0Value(FunctionDomain.getBody(na['falseValue']), methodMap, context, domain);
     }
-  }
-
-  dynamic pa0Value(
-    dynamic input,
-    Map? methodMap,
-    BuildContext context,
-    Domain? domain,
-  ) {
-    var pa = positioned([input], methodMap, context, domain);
-    var values = Property.extract(
-      list: pa.data,
-    );
-    return pa0(values);
   }
 
   dynamic _buildSugarNullableIndexedWidgetBuilder(
@@ -786,5 +593,46 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       return list;
     };
     return builder;    
+  }
+  
+  dynamic _buildCreateFuture(Map map, Map? methodMap, BuildContext context, Domain? domain) {
+      var na = named('Sugar.createFuture', map['na'], methodMap, context, domain);
+      var props= Property.extract(map: na.data);
+      // typeArguments
+      var ta = map['ta'];
+      if(ta != null) {
+        // 暂时只支持单泛型
+        var typeArgument= ta.toString().split(',').first;
+        return createTResult(typeArgument, <T>() => Sugar.createFuture<T>(
+            function: props['function'],
+            futureId: props['futureId'],
+            argument: props['argument'],
+            callback: props['callback'],
+        ),
+        // 异步不可能回调 Widget 类型
+        widgetSupport: false,
+        );
+      }
+      return Sugar.createFuture(
+            function: props['function'],
+            futureId: props['futureId'],
+            argument: props['argument'],
+            callback: props['callback'],
+      );
+  }
+  
+  
+  dynamic _buildFutureValue(Map map, Map? methodMap, BuildContext context, Domain? domain) {
+      var pa = map['pa'];
+      var value = pa==null? null: pa0Value(pa0(map), methodMap, context, domain);
+      // typeArguments
+      var ta = map['ta'];
+      if(ta != null) {
+        // 暂时只支持单泛型
+        var typeArgument= ta.toString().split(',').first;
+        return createTResult(typeArgument, <T>() => Future<T>.value(value));
+      }
+      // Future<dynamic>
+      return Future.value(value);
   }
 }

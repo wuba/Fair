@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair/src/internal/bind_data.dart';
 import 'package:flutter/widgets.dart';
 
 class Property {
@@ -28,14 +29,14 @@ class Property {
     final pa = list ?? data?['pa'];
     final result = <String, dynamic>{};
     na?.forEach((key, value) {
-      if (value is ValueNotifier) {
+      if (value is FairValueNotifier) {
         result[key] = value.value;
       } else {
         result[key] = value;
       }
     });
     if (pa is List) {
-      result['pa'] = pa.map((e) => e is ValueNotifier ? e.value : e).toList();
+      result['pa'] = pa.map((e) => e is FairValueNotifier ? e.value : e).toList();
     } else {
       result['pa'] = pa;
     }

@@ -22,16 +22,26 @@
                 ],
                 "na": {
                   "falseValue": {
-                    "className": "Image.asset",
-                    "pa": [
-                      "assets/image/logo.png"
-                    ]
+                    "className": "FairFunction",
+                    "body": {
+                      "className": "Image.asset",
+                      "pa": [
+                        "assets/image/logo.png"
+                      ]
+                    },
+                    "tag": "Widget Function()",
+                    "rt": "Widget"
                   },
                   "trueValue": {
-                    "className": "Image.asset",
-                    "pa": [
-                      "assets/image/logo2.png"
-                    ]
+                    "className": "FairFunction",
+                    "body": {
+                      "className": "Image.asset",
+                      "pa": [
+                        "assets/image/logo2.png"
+                      ]
+                    },
+                    "tag": "Widget Function()",
+                    "rt": "Widget"
                   }
                 }
               },

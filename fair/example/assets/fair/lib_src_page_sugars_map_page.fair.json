@@ -134,7 +134,9 @@
                 "pa": [
                   "item"
                 ]
-              }
+              },
+              "tag": "Widget Function(Object?)",
+              "rt": "Widget"
             }
           }
         }

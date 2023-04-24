@@ -320,7 +320,7 @@ Future _generateSdkFile(String? sdkName, String filePath, String output) async {
   await saveIntoFile(buffer.toString(), output, 'fair_${clzName}.dart');
 }
 
-Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool analysisExports = false, bool analysisAllClasses = false}) async {
+Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool analysisExports = false, bool analysisAllClasses = false, Set<String> skips = const <String>{}}) async {
   var session = context.currentSession;
   var result = await session.getUnitElement(path) as UnitElementResult;
   var element = result.element;
@@ -339,8 +339,12 @@ Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool 
     exposedAPI.addAll(_visit(element, analysisExports, analysisAllClasses));
   });
 
+
   var count = exposedAPI.length;
   print('😀 $count widgets found inside $path');
+
+  if (exposedAPI.isEmpty) return null;  
+
   var isCupertino = path.contains('/cupertino/');
 
   var buffer = StringBuffer();
@@ -348,63 +352,62 @@ Future<ComponentParts?> processFile(AnalysisContext context, String path, {bool 
   var imports = transformer.getImports(clzName);
   var lines = transformer.getLines(clzName, isCupertino);
   // constructor api
-  var hasConstructor = false;
-  exposedAPI.forEach((e) {
-    var hasNamedConstructor = false;
+
+  var functionParameters = <FunctionParameter>[];
+  var components= <Component>[];  
+  for (var element in exposedAPI) {
     var defaultCache = <String, dynamic>{};
-    e.constructor?.forEach((element) {
-      if (element.parameters != null && (element.parameters?.isNotEmpty ?? false)) {
-        hasNamedConstructor = true;
-      }
-      defaultCache = _writeMethod(buffer, element.name, element, defaultCache);
-    });
-    e.functionParameters?.forEach((element) {
-      _writeFunctionParameter(buffer, element.toString(), element, defaultCache);
-    });
-    if (hasNamedConstructor) {
-      e.fields?.forEach((element) {
-        var field = element;
-        buffer.write('\'${field.name}.${field.field}\': ${field.name}.${field.field},');
-      });
-    } else if (e.fields?.isNotEmpty == true) {
-      var name = e.name;
-      var staticFields=  e.fields?.where((element) => element.isStatic);
-      var nonStaticFields=  e.fields?.where((element) => !element.isStatic);
-      if(nonStaticFields!=null && nonStaticFields.isNotEmpty) {
-        buffer.write('\'$name\': {');
-        nonStaticFields.forEach((e) {
-          var field = e;
-          buffer.write('\'${field.field}\': ${field.name}.${field.field},');
-        });
-        buffer.write('},');
-      }
-      if(staticFields!=null && staticFields.isNotEmpty) {
-         for (var field in staticFields) {
-           buffer.write('\'$name.${field.field}\': $name.${field.field},');
-         }
+
+    var className= element.name;
+    if(className ==null) {
+      continue;
+    }
+
+    if(element.functionParameters!=null) {
+      functionParameters.addAll(element.functionParameters!);
+    }
+
+    if(element.constructor != null) {
+      for (var ctor in element.constructor!) {
+        if(ctor.name==null || skips.any((skip) => RegExp(skip).hasMatch(ctor.name!))) {
+          continue;
+        }
+        components.add(Component(ctor.name ??'', ctor.isWidget));
+        defaultCache = _writeMethod(buffer, ctor.name, ctor, defaultCache);        
       }
     }
 
-    e.staticMethods?.forEach((element) {
-      defaultCache = _writeMethod(buffer, element.name, element, defaultCache);
-    });
-  });
-  if (!hasConstructor && exposedAPI.isEmpty) return null;
+    // const 和 static 肯定都是 static
+    if(element.fields!=null) {
+      for (var field in element.fields!) {
+        var key = '${field.name}.${field.field}';
+        if(skips.any((skip) => RegExp(skip).hasMatch(key))) {
+          continue;
+        }
+        buffer.write('\'$key\': $key,');
+        components.add(Component(key, field.isWidget));
+      }
+    }
+ 
+    if(element.staticMethods !=null) {
+      for (var method in element.staticMethods!) {
+        if(method.name == null || skips.any((skip) => RegExp(skip).hasMatch(method.name!))) {
+          continue;
+        }        
+        defaultCache = _writeMethod(buffer, method.name, method, defaultCache);
+        components.add(Component(method.name!, method.isWidget));
+      }
+    }
+  }
+
   return ComponentParts(
-    exposedAPI
-        .map((e) => Component(
-              e.name,
-              e.constructor != null && e.constructor?.isNotEmpty == true
-                  ? e.constructor![0].isWidget
-                  : ((e.fields?.isNotEmpty == true && e.fields!.elementAt(0).isWidget == true) ||
-                      (e.staticMethods?.isNotEmpty == true && e.staticMethods!.elementAt(0).isWidget == true)),
-            ))
-        .toList(growable: false),
+    components,
     buffer.toString(),
     imports: imports,
     lines: lines,
     isCupertino: isCupertino,
     clzName: clzName,
+    functionParameters: functionParameters,
   );
 }
 
@@ -416,7 +419,7 @@ class ComponentParts {
   String? aliasGroup;
   final String? body;
   final String? clzName;
-
+  final List<FunctionParameter> functionParameters;
   ComponentParts(
     this.components,
     this.body, {
@@ -424,6 +427,7 @@ class ComponentParts {
     this.lines,
     this.isCupertino,
     this.clzName,
+    required this.functionParameters,
   });
 }
 
@@ -496,7 +500,7 @@ Map<String, dynamic> _writeMethod(StringBuffer buffer, String? name, Method elem
       buffer.write(p.isNamed == true
           ? namedDeclare
           : p.isOptionalPositional == true
-              ? prop.replaceAll('props[\'${p.name}\']', 'props[\'pa\'][$i]')
+              ? prop.replaceAll('props[\'${p.name}\']', '(props[\'pa\'].length > $i ? props[\'pa\'][$i]: null)')
               : positionDeclare);
     }
     var params = element.parameters?.fold('', (String? value, p) => ((value ?? '') + (p.isNamed == true ? '${p.type} ${p.name}, ' : '${p.name}, ')));
@@ -508,35 +512,7 @@ Map<String, dynamic> _writeMethod(StringBuffer buffer, String? name, Method elem
   return defaultCache;
 }
 
-Map<String, dynamic> _writeFunctionParameter(StringBuffer buffer, String name, FunctionParameter element, Map<String, dynamic> defaultCache) {
-  buffer.write('\'$name\': ');
-  if (element.typeArgument != null) {
-    buffer.write('<${element.typeArgument}>');
-  }
-  buffer.write('(props) => ');
-  buffer.write('(');
 
-  if (element.parameters != null && element.parameters!.isNotEmpty) {
-    for (var i = 0; i < element.parameters!.length; i++) {
-      var p = element.parameters![i];
-      buffer.write('${p.type} ${p.name}, ');
-    }
-
-    var params = element.parameters?.fold('', (String value, p) => value + (p.isNamed == true ? '${p.type} ${p.name}, ' : '${p.name}, '));
-    print('➡️ $name({$params})');
-  } else {
-    print('➡️ $name()');
-  }
-
-  buffer.write(')');
-  buffer.write('{ return (props[\'block\'])');
-  if (element.returnType != 'void') {
-    buffer.write('as ${element.returnType}');
-  }
-  buffer.write('; },');
-
-  return defaultCache;
-}
 
 var transformer = TransformProxy();
 
@@ -623,16 +599,12 @@ class ConstField extends Exposed {
 }
 
 class FunctionParameter extends Exposed {
-  final String? className;
-  final List<Parameter>? parameters;
-  final String? returnType;
-  final String? typeArgument;
-
-  FunctionParameter(String name, {this.className, this.parameters, this.returnType, this.typeArgument}) : super(name);
+  final FunctionType? functionType;
+  FunctionParameter(String name, {this.functionType}) : super(name);
 
   @override
   String toString() {
-    return '$className#$name';
+    return '$name';
   }
 }
 
@@ -695,11 +667,13 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
     }
     var constructors = <Constructor>[];
     var functionParameters = <FunctionParameter>[];
-    var isWidget = classElement.thisType is InterfaceType ? _matchType(classElement.thisType, baseWidget, classElement: classElement) : false;
+    var isWidget = analysisAllClasses ?  _isWidget(classElement.thisType) :
+    classElement.thisType is InterfaceType ? _matchType(classElement.thisType, baseWidget, classElement: classElement) : false;
     var isAPI = classElement.thisType is InterfaceType ? _matchType(classElement.thisType, baseAPI, classElement: classElement) : false;
-    if (isWidget || isAPI || isSdk || (analysisAllClasses && !classElement.allSupertypes.any((element) => element.element.name =='State'))) {
+    if (isWidget || isAPI || isSdk || (analysisAllClasses && !_isState(classElement.thisType))) {
       print('${classElement.name} 😀');
-      if(unitElement.classes.contains(classElement)) {
+      // 枚举不去生成构造
+      if(classElement is ClassElement) {
          print('constructors ➡️');
          // 只有 class 需要生成构造
          for (var constructorElement in classElement.constructors) {
@@ -725,31 +699,13 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
                    defaultValueCode: e.defaultValueCode,
                    isOptionalPositional: e.isOptionalPositional,
                  ));
-   
-                 if (e.type.name == null && e.type is FunctionType) {
-                   // var parameters = (e.type as FunctionType)
-                   //     .parameters
-                   //     .map((e) => Parameter(
-                   //           type: e.type.name ?? _parseFunctionName(e),
-                   //           name: e.name,
-                   //           isNamed: e.isNamed,
-                   //           isOptional: e.isOptional,
-                   //           defaultValueCode: e.defaultValueCode,
-                   //         ))
-                   //     .toList(growable: false);
-   
-                   // functionParameters.add(FunctionParameter(e.name,
-                   //     className: name,
-                   //     parameters: parameters,
-                   //     returnType:
-                   //         (e.type as FunctionType).returnType.name ?? 'void',
-                   //     typeArgument: ((e.type as FunctionType)
-                   //                 ?.typeArguments
-                   //                 ?.isNotEmpty ??
-                   //             false)
-                   //         ? (e.type as FunctionType)?.typeArguments?.first?.name
-                   //         : null));
+                 if(e.type is FunctionType) {  
+                    var functionType= e.type as FunctionType;
+                    //if(functionType.parameters.isNotEmpty) {
+                      functionParameters.add(FunctionParameter(functionType.getDisplayString(withNullability: true),functionType: functionType));
+                    //}
                  }
+
                });
              }
    
@@ -761,10 +717,10 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
     }
     var fields = <ConstField>[];
     for (var fieldElement in classElement.fields) {
-      if (!_invalidElement(fieldElement) && fieldElement.isConst) {
+      if (!_invalidElement(fieldElement) && (fieldElement.isConst || fieldElement.isStatic)) {
         print('  ❤️${classElement.name}.${fieldElement.name}');
         // 复用class类型（可能不一致）
-        fields.add(ConstField(classElement.name, field: fieldElement.name, isWidget: isWidget, isStatic: fieldElement.isStatic));
+        fields.add(ConstField(classElement.name, field: fieldElement.name, isWidget: _isWidget(fieldElement.type), isStatic: fieldElement.isStatic));
       }
     }
 
@@ -781,10 +737,19 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
       if (methodElement.parameters.isNotEmpty) {
         parameters = methodElement.parameters
             .map(
-                (e) => Parameter(type: e.type.name, name: e.name, isNamed: e.isNamed, isOptional: e.isOptional, defaultValueCode: e.defaultValueCode, isOptionalPositional: e.isOptionalPositional,))
+                (e){
+                   if(e.type is FunctionType) {
+                    var functionType = e.type as FunctionType;
+                    //if(functionType.parameters.isNotEmpty) {
+                      functionParameters.add(FunctionParameter(functionType.getDisplayString(withNullability: true),functionType: functionType));
+                    //}
+                   }
+                 return Parameter(type: e.type.name, name: e.name, isNamed: e.isNamed, isOptional: e.isOptional, defaultValueCode: e.defaultValueCode, isOptionalPositional: e.isOptionalPositional,); 
+                })
             .toList(growable: false);
       }
-      staticMethods.add(Method(name, parameters: parameters, isWidget: isWidget));
+     
+      staticMethods.add(Method(name, parameters: parameters, isWidget: _isWidget(methodElement.returnType)));
     }
 
     if (constructors.isNotEmpty || fields.isNotEmpty || staticMethods.isNotEmpty) {
@@ -798,6 +763,18 @@ List<ClassExposed> _visit(CompilationUnitElement? unitElement, [bool isSdk = fal
     }
   }
   return exposed;
+}
+
+bool _isWidget(DartType dartType) => _isType(dartType, 'Widget');
+
+bool _isState(DartType dartType) => _isType(dartType, 'State');
+  
+
+bool _isType(DartType dartType,String type) {
+  if(dartType is InterfaceType) {
+    return dartType.allSupertypes.any((element) => element.element.name == type);
+  }
+  return false;
 }
 
 // String _parseFunctionName(ParameterElement e) {

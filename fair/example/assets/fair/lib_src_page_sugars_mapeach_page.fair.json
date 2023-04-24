@@ -133,7 +133,9 @@
                   "index",
                   "e"
                 ]
-              }
+              },
+              "tag": "Widget Function(int, Object?)",
+              "rt": "Widget"
             }
           ]
         }

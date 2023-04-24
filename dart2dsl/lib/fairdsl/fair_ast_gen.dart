@@ -5,12 +5,12 @@
  */
 
 import 'dart:io';
-import 'dart:convert';
-import 'package:analyzer/dart/analysis/features.dart';
-import 'package:analyzer/dart/analysis/utilities.dart';
+import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
+import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/token.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'fair_ast_check_gen.dart';
 import 'fair_check_node_map.dart';
 
@@ -188,7 +188,87 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
 
   @override
   Map? visitFunctionExpression(FunctionExpression node) {
-    return _buildFunctionExpression(_visitNode(node.parameters), _visitNode(node.body), isAsync: node.body.isAsynchronous);
+    var functionType= node.staticType as  FunctionType?;
+    String? tagString;
+    String? returnTypeString;
+    String? returnTypeTypeArguments;
+    if(functionType !=null) {
+       var returnType= functionType.returnType;
+       
+       tagString = functionType.getDisplayString(withNullability: true);
+       returnTypeString = functionType.returnType.getDisplayString(withNullability: true);
+       // 特殊处理一下 Widget
+       // 
+       // itemBuilder: (context, index) {
+       //   return Container();
+       // }
+       // 
+       // 会生成这样的， "Container Function(BuildContext, int)"
+       // 
+       // 但是实际上需要是 "Widget Function(BuildContext, int)"
+       // 
+       // Widget 是符合大部分的场景
+       // 
+       // 应该尽量避免使用返回类型是显式类型(比如返回类型必须是Container)，如果真的需要，请在回调执行的地方再做强转。
+       // 或者在自定义的 DynamicWidgetBuilder 中做特殊处理
+       // 
+       // class SugarCommon {
+       //   SugarCommon._();
+       //   static Container Function() returnContainer(Widget Function() input) {
+       //     Container Function() builder =(){
+       //       return input() as Container;
+       //     };
+       //     return builder;
+       //   }
+       // }
+       // 
+       // class CustomDynamicWidgetBuilder extends DynamicWidgetBuilder {
+       //   CustomDynamicWidgetBuilder(
+       //     super.proxyMirror,
+       //     super.page,
+       //     super.bound, {
+       //     super.bundle,
+       //   });
+       //   @override
+       //   dynamic convert(BuildContext context, Map map, Map? methodMap,
+       //       {Domain? domain}) {
+       //     var name = map[tag];
+       //     if(name =='SugarCommon.returnContainer') {
+       //        dynamic fairFunction = pa0(map);
+       //        assert(fairFunction is Map);
+       //        Container Function() builder = (
+       //        ) {
+       //          return convert(
+       //            context,
+       //            FunctionDomain.getBody(fairFunction),
+       //            methodMap,
+       //          ) as Container;
+       //        };
+       //        return builder;
+       //     }
+       //     return super.convert(context, map, methodMap, domain:domain);
+       //   }
+       // }
+       if(returnType is InterfaceType) {
+          if(returnType.allSupertypes.any((element) => 
+          element.element.name == 'Widget')) {
+           var nullabilityString = returnTypeString.endsWith('?') ? '?':'';
+           tagString = tagString.replaceFirst(returnTypeString, 'Widget'+nullabilityString);
+           returnTypeString = 'Widget'+nullabilityString;
+          }
+          if(returnType.typeArguments.isNotEmpty) {
+            returnTypeTypeArguments= returnType.typeArguments.map((e) => e.getDisplayString(withNullability: true)).join(',');
+          }
+       }
+    }
+
+    return _buildFunctionExpression(_visitNode(node.parameters),
+       _visitNode(node.body), 
+       isAsync: node.body.isAsynchronous,
+       tag: tagString,
+       returnType: returnTypeString,
+       returnTypeTypeArguments: returnTypeTypeArguments,
+     );
   }
 
   @override
@@ -277,7 +357,17 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
         'object': _visitNode(prefixedIdentifier.prefix),
         'property': _visitNode(prefixedIdentifier.identifier),
       };
-    } else {
+    }
+    // 换了用 AnalysisContextCollection 解析之后，
+    // 可以直接拿到构造的名字
+    else if(node.constructorName.name!=null) {
+       callee = {
+        'type': 'MemberExpression',
+        'object': _visitNode(node.constructorName.type.name),
+        'property': _visitNode(node.constructorName.name),
+      };
+    }
+    else {
       //如果不是simpleIdentif 需要特殊处理
       callee = _visitNode(node.constructorName.type.name);
     }
@@ -323,6 +413,18 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   Map? visitPropertyAccess(PropertyAccess node) {
     var expression = node.parent?.toSource();
     return _buildVariableExpression(expression);
+  }
+
+  @override
+  Map? visitTypeArgumentList(TypeArgumentList node) {
+    var map={};
+    for (var argument in  node.arguments) {
+      var displayString= argument.type?.getDisplayString(withNullability: true);
+      if(displayString!=null) {
+        map[displayString] = displayString;
+      }
+    }
+    return map;
   }
 
   ///根节点
@@ -378,11 +480,17 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
       };
 
   //函数表达式
-  Map _buildFunctionExpression(Map? params, Map? body, {bool isAsync = false}) => {
+  Map _buildFunctionExpression(Map? params, Map? body, {bool isAsync = false,String? tag, String? returnType,String? returnTypeTypeArguments}) => {
         'type': 'FunctionExpression',
         'parameters': params,
         'body': body,
         'isAsync': isAsync,
+        if(tag != null)
+        'tag': tag,
+        if(returnType != null)
+        'returnType': returnType,
+        if(returnTypeTypeArguments != null)
+        'returnTypeTypeArguments':returnTypeTypeArguments,
       };
 
   //函数参数列表
@@ -491,8 +599,13 @@ Future<Map> generateAstMap(String path) async {
     if (exitCode == 2) {
       try {
         ///FeatureSet.latestLanguageVersion()方法待测试
-        var parseResult = parseFile(path: path, featureSet: FeatureSet.latestLanguageVersion());
+        // var parseResult = parseFile(path: path, featureSet: FeatureSet.latestLanguageVersion());
+        var collection = AnalysisContextCollection(includedPaths: [path]);
+        // 为了获取 Function 的描述，改用该方法
+        var parseResult = await collection.contextFor(path).currentSession.getResolvedUnit(path) as ResolvedUnitResult;
+         
         var compilationUnit = parseResult.unit;
+       
         //遍历AST
         var astData = compilationUnit.accept(CustomAstVisitor());
 
