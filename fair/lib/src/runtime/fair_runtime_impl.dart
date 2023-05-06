@@ -157,7 +157,7 @@ class Runtime implements IRuntime {
   /*
    * 加载用户的基础配置
    */
-  Future<dynamic> loadCoreJs({String? package, Map<String, String>? jsPlugins}) async {
+  Future<dynamic> loadCoreJs({String? package, Map<String, String>? jsPlugins, List<String>? baseJsSources}) async {
     var map = <dynamic, dynamic>{};
     if (!loadBaseJsConstant[0]) {
       var baseJsSource = '';
@@ -170,7 +170,11 @@ class Runtime implements IRuntime {
       for (var key in coreKeys) {
         baseJsSource += '${await rootBundle.loadString(coreConfig[key])} ;';
       }
-
+      if (baseJsSources != null) {
+        baseJsSources.forEach((element) {
+          baseJsSource += '$element ;';
+        });
+      }
       /*
        * 读取用户配置的内容
        * 例如用户配置的插件，或者用户的其它拓展等，该配置json名称固定
