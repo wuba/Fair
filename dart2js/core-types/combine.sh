@@ -3,7 +3,7 @@
  # found in the LICENSE file.
  #
 #文件合并先后顺序
-fileArr=(duration.js iterable.js date.js list.js map.js set.js number.js regex.js string.js bigInt.js symbol.js)
+fileArr=(duration.js iterable.js date.js list.js map.js set.js number.js regex.js string.js symbol.js)
 echo "开始合并..."
 readPath=$(pwd)/
 # echo $readPath
