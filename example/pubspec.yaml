@@ -36,6 +36,7 @@ dev_dependencies:
 dependency_overrides:
   fair_version:
     path: ../flutter_version/flutter_3_3_0
+  collection: 1.17.0
 
 flutter:
 

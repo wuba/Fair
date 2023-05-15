@@ -22,7 +22,7 @@ class _GridViewTemplateState extends State<GridViewTemplate> {
 
   void requestData() {
     _page++;
-    FairNet().request({
+    FairNet().requestData({
       'pageName': '#FairKey#',
       'method': 'GET',
       'url':
@@ -62,12 +62,12 @@ class _GridViewTemplateState extends State<GridViewTemplate> {
           child: Icon(Icons.add),
         ),
         body: Sugar.ifEqualBool(isDataEmpty(),
-            trueValue: Center(
+            trueValue: () => Center(
               child: Text(
                 '加载中...',
               ),
             ),
-            falseValue: GridView.count(
+            falseValue: () => GridView.count(
               crossAxisCount: 2,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,

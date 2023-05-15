@@ -26,7 +26,7 @@ class _SugarTabBarPageState extends State<SugarTabBarPage> {
 
   void requestData() {
     _page++;
-    FairNet().request({
+    FairNet().requestData({
       'pageName': '#FairKey#',
       'method': 'GET',
       'url':
@@ -93,12 +93,12 @@ class _SugarTabBarPageState extends State<SugarTabBarPage> {
               ),
             ),
             body: Sugar.ifEqualBool(isDataEmpty(),
-                trueValue: Center(
+                trueValue: () => Center(
                   child: Text(
                     '加载中...',
                   ),
                 ),
-                falseValue: TabBarView(
+                falseValue: () => TabBarView(
                   children: <Widget>[
                     _allTabList(),
                     _getList(),
