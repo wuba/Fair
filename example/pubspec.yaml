@@ -15,12 +15,11 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   smooth_star_rating_nsafe: ^1.0.0+1
   intl: ^0.17.0
-  dio: ^4.0.0
+  dio: ^5.0.3
   fair:
-    git:
-      url: https://github.com/wuba/fair.git
-      ref: main
-      path: fair
+    path: ../fair
+  fair_extension:
+    path: ../fair_extension
 
 dev_dependencies:
   flutter_test:
@@ -37,6 +36,8 @@ dependency_overrides:
   fair_version:
     path: ../flutter_version/flutter_3_3_0
   collection: 1.17.0
+  fair:
+    path: ../fair
 
 flutter:
 

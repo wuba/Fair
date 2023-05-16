@@ -1,5 +1,7 @@
 import 'package:fair/fair.dart';
-import 'package:example/plugins/net/fair_net_plugin.dart';
+import 'package:fair_extension/log/log.dart';
+import 'package:fair_extension/navigator/fair_navigator_plugin.dart';
+import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -24,29 +26,25 @@ class _HomeScrollViewState extends State<HomeScrollView> {
 
   void requestData() {
     _page++;
-    FairNet().requestData({
-      'pageName': '#FairKey#',
-      'method': 'GET',
-      'url':
-          'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/3158c2fc5e3ed9bc08b34f8d694c763d_home_scroll_data.json',
-      'data': {'page': _page},
-      'success': (resp) {
-        if (resp == null) {
-          return;
-        }
-        var data = resp['data'];
-        data.forEach((item) {
-          var dataItem = HomeItemData();
-          try {
-            dataItem.imagePath = item.imageUrl;
-          } catch (e) {
-            dataItem.imagePath = item['imageUrl'];
+    FairNet.requestData(
+        method: FairNet.GET,
+        url:
+            'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/3158c2fc5e3ed9bc08b34f8d694c763d_home_scroll_data.json',
+        data: {'page': _page},
+        success: (resp) {
+          if (resp == null) {
+            return;
           }
-          _listData.add(dataItem);
+          var data = resp['data'];
+          data.forEach((item) {
+            var dataItem = HomeItemData();
+            try {
+              dataItem.imagePath = item['imageUrl'];
+            } catch (e) {}
+            _listData.add(dataItem);
+          });
+          setState(() {});
         });
-        setState(() {});
-      }
-    });
   }
 
   bool isDataEmpty() {
@@ -95,13 +93,16 @@ class _HomeScrollViewState extends State<HomeScrollView> {
             ),
             delegate: Sugar.sliverChildBuilderDelegate(
                 builder: (content, index) {
-                  return AspectRatio(
-                    aspectRatio: 1.5,
-                    child: ClipRRect(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(4.0)),
-                      child: Image.network(_getImagePath(index),
-                          fit: BoxFit.cover),
+                  return GestureDetector(
+                    onTap: _onTapIndex(index),
+                    child: AspectRatio(
+                      aspectRatio: 1.5,
+                      child: ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(4.0)),
+                        child: Image.network(_getImagePath(index),
+                            fit: BoxFit.cover),
+                      ),
                     ),
                   );
                 },
@@ -127,6 +128,14 @@ class _HomeScrollViewState extends State<HomeScrollView> {
         ],
       ),
     ));
+  }
+
+  _onTapIndex(int index) {
+    FairLog.log('点击index >>> $index');
+    FairNavigator.pushFairPath(
+        fairPath:
+            'assets/fair/lib_template_hotel_listview_hotel_listview_template.fair.json',
+        fairName: 'lib_template_hotel_listview_hotel_listview_template');
   }
 }
 
