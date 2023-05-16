@@ -1,5 +1,5 @@
 import 'package:fair/fair.dart';
-import 'package:example/plugins/net/fair_net_plugin.dart';
+import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -22,35 +22,27 @@ class _FairDetailState extends State<FairDetail> {
   void onUnload() {}
 
   void requestData() {
-    FairNet().requestData({
-      'pageName': '#FairKey#',
-      'method': 'GET',
-      'url':
-          'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/59383a3efd1554c4c8fbaa8eb3700a44_fair_detail_data.json',
-      'data': {'page': 0},
-      'success': (resp) {
-        if (resp == null) {
-          return;
-        }
-        var data = resp['data'];
-        try {
-          _detailModel.auth = data.auth;
-          _detailModel.title = data.title;
-          _detailModel.des = data.des;
-          _detailModel.time = data.time;
-          _detailModel.location = data.location;
-          _detailModel.detail = data.detail;
-        } catch (e) {
-          _detailModel.auth = data['auth'];
-          _detailModel.title = data['title'];
-          _detailModel.des = data['des'];
-          _detailModel.time = data['time'];
-          _detailModel.location = data['location'];
-          _detailModel.detail = data['detail'];
-        }
-        setState(() {});
-      }
-    });
+    FairNet.requestData(
+        method: FairNet.GET,
+        url:
+        'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/59383a3efd1554c4c8fbaa8eb3700a44_fair_detail_data.json',
+        data: {'page': 0},
+        success: (resp) {
+          if (resp == null) {
+            return;
+          }
+          var data = resp['data'];
+          try {
+            _detailModel.auth = data['auth'];
+            _detailModel.title = data['title'];
+            _detailModel.des = data['des'];
+            _detailModel.time = data['time'];
+            _detailModel.location = data['location'];
+            _detailModel.detail = data['detail'];
+          } catch (e) {
+          }
+          setState(() {});
+        });
   }
 
   /// 顶部widget

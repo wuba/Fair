@@ -1,5 +1,5 @@
 import 'package:fair/fair.dart';
-import 'package:example/plugins/net/fair_net_plugin.dart';
+import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -22,31 +22,26 @@ class _PageViewTemplateState extends State<PageViewTemplate> {
 
   void requestData() {
     _page++;
-    FairNet().requestData({
-      'pageName': '#FairKey#',
-      'method': 'GET',
-      'url':
-          'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/81900c8ba18b20328389b43c729a251e_tabbar_data.json',
-      'data': {'page': _page},
-      'success': (resp) {
-        if (resp == null) {
-          return;
-        }
-        var data = resp['data'];
-        data.forEach((item) {
-          var dataItem = PageViewModel();
-          try {
-            dataItem.imagePath = item.imageUrl;
-            dataItem.title = item.title;
-          } catch (e) {
-            dataItem.imagePath = item['imageUrl'];
-            dataItem.title = item['title'];
+    FairNet.requestData(
+        method: FairNet.GET,
+        url:
+            'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/81900c8ba18b20328389b43c729a251e_tabbar_data.json',
+        data: {'page': _page},
+        success: (resp) {
+          if (resp == null) {
+            return;
           }
-          _listData.add(dataItem);
+          var data = resp['data'];
+          data.forEach((item) {
+            var dataItem = PageViewModel();
+            try {
+              dataItem.imagePath = item['imageUrl'];
+              dataItem.title = item['title'];
+            } catch (e) {}
+            _listData.add(dataItem);
+          });
+          setState(() {});
         });
-        setState(() {});
-      }
-    });
   }
 
   bool isDataEmpty() {
@@ -69,32 +64,32 @@ class _PageViewTemplateState extends State<PageViewTemplate> {
         ),
         body: Sugar.ifEqualBool(isDataEmpty(),
             trueValue: () => Center(
-              child: Text(
-                '加载中...',
-              ),
-            ),
+                  child: Text(
+                    '加载中...',
+                  ),
+                ),
             falseValue: () => PageView.custom(
-              childrenDelegate: Sugar.sliverChildBuilderDelegate(
-                builder: (context, index) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      AspectRatio(
-                        aspectRatio: 1.5,
-                        child: ClipRRect(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(4.0)),
-                          child: Image.network(_getImagePath(index),
-                              fit: BoxFit.cover),
-                        ),
-                      ),
-                      Text(_getText(index)),
-                    ],
-                  );
-                },
-                childCount: 3,
-              ),
-            )));
+                  childrenDelegate: Sugar.sliverChildBuilderDelegate(
+                    builder: (context, index) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          AspectRatio(
+                            aspectRatio: 1.5,
+                            child: ClipRRect(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(4.0)),
+                              child: Image.network(_getImagePath(index),
+                                  fit: BoxFit.cover),
+                            ),
+                          ),
+                          Text(_getText(index)),
+                        ],
+                      );
+                    },
+                    childCount: 3,
+                  ),
+                )));
   }
 }
 

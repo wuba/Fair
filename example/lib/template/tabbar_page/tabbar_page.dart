@@ -1,7 +1,7 @@
 import 'dart:core';
 
 import 'package:fair/fair.dart';
-import 'package:example/plugins/net/fair_net_plugin.dart';
+import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -26,31 +26,26 @@ class _SugarTabBarPageState extends State<SugarTabBarPage> {
 
   void requestData() {
     _page++;
-    FairNet().requestData({
-      'pageName': '#FairKey#',
-      'method': 'GET',
-      'url':
-          'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/81900c8ba18b20328389b43c729a251e_tabbar_data.json',
-      'data': {'page': _page},
-      'success': (resp) {
-        if (resp == null) {
-          return;
-        }
-        var data = resp['data'];
-        data.forEach((item) {
-          var dataItem = TabBarModel();
-          try {
-            dataItem.imagePath = item.imageUrl;
-            dataItem.title = item.title;
-          } catch (e) {
-            dataItem.imagePath = item['imageUrl'];
-            dataItem.title = item['title'];
+    FairNet.requestData(
+        method: FairNet.GET,
+        url:
+            'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/81900c8ba18b20328389b43c729a251e_tabbar_data.json',
+        data: {'page': _page},
+        success: (resp) {
+          if (resp == null) {
+            return;
           }
-          _listData.add(dataItem);
+          var data = resp['data'];
+          data.forEach((item) {
+            var dataItem = TabBarModel();
+            try {
+              dataItem.imagePath = item['imageUrl'];
+              dataItem.title = item['title'];
+            } catch (e) {}
+            _listData.add(dataItem);
+          });
+          setState(() {});
         });
-        setState(() {});
-      }
-    });
   }
 
   bool isDataEmpty() {
@@ -94,17 +89,17 @@ class _SugarTabBarPageState extends State<SugarTabBarPage> {
             ),
             body: Sugar.ifEqualBool(isDataEmpty(),
                 trueValue: () => Center(
-                  child: Text(
-                    '加载中...',
-                  ),
-                ),
+                      child: Text(
+                        '加载中...',
+                      ),
+                    ),
                 falseValue: () => TabBarView(
-                  children: <Widget>[
-                    _allTabList(),
-                    _getList(),
-                    _allTabList(),
-                  ],
-                ))));
+                      children: <Widget>[
+                        _allTabList(),
+                        _getList(),
+                        _allTabList(),
+                      ],
+                    ))));
   }
 
   Widget _getList() {

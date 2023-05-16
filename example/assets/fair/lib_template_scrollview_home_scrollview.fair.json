@@ -81,30 +81,36 @@
                     "className": "Sugar.sliverChildBuilderDelegate",
                     "na": {
                       "builder": {
-                        "className": "AspectRatio",
+                        "className": "GestureDetector",
                         "na": {
-                          "aspectRatio": 1.5,
+                          "onTap": "@(_onTapIndex(^(index)))",
                           "child": {
-                            "className": "ClipRRect",
+                            "className": "AspectRatio",
                             "na": {
-                              "borderRadius": {
-                                "className": "BorderRadius.all",
-                                "pa": [
-                                  {
-                                    "className": "Radius.circular",
-                                    "pa": [
-                                      4.0
-                                    ]
-                                  }
-                                ]
-                              },
+                              "aspectRatio": 1.5,
                               "child": {
-                                "className": "Image.network",
-                                "pa": [
-                                  "%(_getImagePath(^(index)))"
-                                ],
+                                "className": "ClipRRect",
                                 "na": {
-                                  "fit": "#(BoxFit.cover)"
+                                  "borderRadius": {
+                                    "className": "BorderRadius.all",
+                                    "pa": [
+                                      {
+                                        "className": "Radius.circular",
+                                        "pa": [
+                                          4.0
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  "child": {
+                                    "className": "Image.network",
+                                    "pa": [
+                                      "%(_getImagePath(^(index)))"
+                                    ],
+                                    "na": {
+                                      "fit": "#(BoxFit.cover)"
+                                    }
+                                  }
                                 }
                               }
                             }
