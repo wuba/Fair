@@ -240,12 +240,13 @@ dynamic _buildWidgetDsl(
 
     if (RegExp(r'^[a-z_]')
         .hasMatch(methodInvocationExpression?.callee?.asIdentifier.name??'')) {
+      var isFairLogicUnit = FairLogicUnit().functions.containsKey(methodInvocationExpression?.callee?.asIdentifier.name);
       if (methodInvocationExpression?.argumentList?.isNotEmpty ?? false) {
         var args = methodInvocationExpression?.argumentList?.fold('', (previousValue, element) =>
         '$previousValue,${_buildValueExpression(element, fairDslContex)}').substring(1);
-        return '%(${methodInvocationExpression?.callee?.asIdentifier.name}($args))';
+        return '${isFairLogicUnit ? '@' : '%'}(${methodInvocationExpression?.callee?.asIdentifier.name}($args))';
       } else {
-        return '%(${methodInvocationExpression?.callee?.asIdentifier.name})';
+        return '${isFairLogicUnit ? '@' : '%'}(${methodInvocationExpression?.callee?.asIdentifier.name})';
       }
     } else {
       dslMap.putIfAbsent('className',
