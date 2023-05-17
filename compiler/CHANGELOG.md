@@ -1,3 +1,6 @@
+## [1.7.2]
+* bugfix.
+
 ## [1.7.1]
 * Fixed an issue with widget function contains parameters.
 

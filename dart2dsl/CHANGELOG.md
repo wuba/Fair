@@ -1,3 +1,8 @@
+## 1.3.2
+
+- bugfix.
+
+
 ## 1.3.1
 
 - Widget function support parameters.
