@@ -1,5 +1,5 @@
 import 'package:fair/fair.dart';
-import 'package:example/plugins/net/fair_net_plugin.dart';
+import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -23,31 +23,26 @@ class _StaggeredItemViewState extends State<StaggeredItemView> {
 
   void requestData() {
     _page++;
-    FairNet().request({
-      'pageName': '#FairKey#',
-      'method': 'GET',
-      'url':
-          'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/3a0809703d09800b54491c4d1fc710da_staggeredview_data.json',
-      'data': {'page': _page},
-      'success': (resp) {
-        if (resp == null) {
-          return;
-        }
-        var data = resp['data'];
-        data.forEach((item) {
-          var dataItem = StaggeredViewModel();
-          try {
-            dataItem.picUrl = item.imagePath;
-            dataItem.ratio = item.ratio;
-          } catch (e) {
-            dataItem.picUrl = item['imagePath'];
-            dataItem.ratio = item['ratio'];
+    FairNet.requestData(
+        method: FairNet.GET,
+        url:
+            'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/3a0809703d09800b54491c4d1fc710da_staggeredview_data.json',
+        data: {'page': _page},
+        success: (resp) {
+          if (resp == null) {
+            return;
           }
-          _listData.add(dataItem);
+          var data = resp['data'];
+          data.forEach((item) {
+            var dataItem = StaggeredViewModel();
+            try {
+              dataItem.picUrl = item['imagePath'];
+              dataItem.ratio = item['ratio'];
+            } catch (e) {}
+            _listData.add(dataItem);
+          });
+          setState(() {});
         });
-        setState(() {});
-      }
-    });
   }
 
   bool isDataEmpty() {
@@ -66,12 +61,12 @@ class _StaggeredItemViewState extends State<StaggeredItemView> {
         ),
         body: Sugar.ifEqualBool(
           isDataEmpty(),
-          trueValue: Center(
+          trueValue: () => Center(
             child: Text(
               '加载中...',
             ),
           ),
-          falseValue: StaggeredGrid.count(
+          falseValue: () => StaggeredGrid.count(
               crossAxisCount: 2,
               mainAxisSpacing: 10,
               crossAxisSpacing: 5,

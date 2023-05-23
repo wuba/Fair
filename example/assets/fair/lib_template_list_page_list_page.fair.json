@@ -361,6 +361,12 @@
                         ]
                       }
                     }
+                  },
+                  "functionParameters": {
+                    "pa": [
+                      "context",
+                      "index"
+                    ]
                   }
                 }
               }

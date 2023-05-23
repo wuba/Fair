@@ -1,3 +1,9 @@
+## [1.7.2]
+* bugfix.
+
+## [1.7.1]
+* Fixed an issue with widget function contains parameters.
+
 ## [1.7.0]
 * Fixed an issue with string returned by analyzer ExportDirective, ImportDirective.
 * Fixed binding generation error with import export resolution.
