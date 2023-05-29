@@ -7,6 +7,8 @@
  * found in the LICENSE file.
  */
 
+import 'dart:convert';
+import 'dart:developer' as developer;
 import 'package:fair/fair.dart';
 import 'package:fair/src/type.dart';
 import 'package:flutter/material.dart';
@@ -159,12 +161,14 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         return children.asListOf<Widget>() ?? children;
       }
       return block(map, methodMap, context, domain, mapper, name, isWidget);
-    } catch (e) {
+    } catch (e, stack) {
       return WarningWidget(
           parentContext: context,
           name: name,
           error: e,
           url: bundle,
+          stackTrace: stack.toString(),
+          errorBlock: map,
           solution:
               "Tag name not supported yet,You need to use the @FairBinding annotation to tag the local Widget component");
     }
@@ -198,8 +202,31 @@ class DynamicWidgetBuilder extends DynamicBuilder {
         stack: stack,
         context: ErrorSummary('while parsing widget of $name, $fun'),
       ));
-      throw ArgumentError('name===$name,fun===$fun, error===$e, map===$map');
+
+      //print StackTrack in console
+      _dumpErrorToConsole(name, map, e, stack);
+
+      rethrow;
     }
+  }
+
+  void _dumpErrorToConsole(String name, Map map, Object e, StackTrace stack) {
+    var encoder = JsonEncoder.withIndent('  ');
+    final formattedJson = encoder.convert(map);
+
+    final errorFormatText = '''
+      
+      ══╡ EXCEPTION CAUGHT BY FAIR RUNTIME ╞══════════════════════════════════════════════════════════════
+      Error Tag:$name, while parsing:
+      
+$formattedJson
+      
+      $e
+      
+      When the exception was thrown, this was the stack:
+      ''';
+
+    developer.log('', error: errorFormatText, level: 900, stackTrace: stack);
   }
 
   W<List> positioned(
