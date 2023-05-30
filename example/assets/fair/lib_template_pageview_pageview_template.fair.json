@@ -78,6 +78,12 @@
                         ]
                       }
                     ]
+                  },
+                  "functionParameters": {
+                    "pa": [
+                      "context",
+                      "index"
+                    ]
                   }
                 },
                 "childCount": 3

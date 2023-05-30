@@ -300,7 +300,11 @@ dynamic _buildWidgetDsl(
         continue;
       }
       var naValue = _buildValueExpression(valueExpression, fairDslContex);
-
+      if (bindFunctions.contains(nameExpression.label ?? '')) {
+        if (naValue is String && naValue.startsWith('%')) {
+          naValue = naValue.replaceFirst('%', '@');
+        }
+      }
       naMap.putIfAbsent(nameExpression.label, () => naValue);
     }
   }
@@ -406,7 +410,7 @@ dynamic _buildValueExpression(
         if (na.isNotEmpty) 'na': na,
         if (pa.isNotEmpty) 'pa': pa,
       };
-    }    
+    }
   } else if (valueExpression?.isReturnStatement==true) {
     naPaValue = _buildValueExpression(
         valueExpression?.asReturnStatement.argument, fairDslContex);
@@ -427,3 +431,12 @@ dynamic _buildValueExpression(
   }
   return naPaValue;
 }
+
+var bindFunctions = [
+  'onTap',
+  'onTapDown',
+  'onTapCancel',
+  'onDoubleTap',
+  'onPressed',
+  'onLongPress',
+];
