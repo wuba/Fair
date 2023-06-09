@@ -14,6 +14,7 @@ import 'package:crypto/crypto.dart' show md5;
 import 'package:fair_compiler/src/state_transfer.dart';
 import 'package:path/path.dart' as path;
 import 'package:fair_dart2js/index.dart' as dart2js;
+import 'package:yaml/yaml.dart';
 import 'helper.dart' show FlatCompiler, ModuleNameHelper;
 
 class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
@@ -56,7 +57,24 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
     print('\u001b[33m [Fair Dart2JS] partPath => ${partPath} \u001b[0m');
     if (File(partPath).existsSync()) {
       try {
-        var result = await dart2js.convertFile(partPath, true);
+        var uglify = true;
+
+        var optionsYamlPath =
+            path.join(Directory.current.path, 'fair_compiler_options.yaml');
+
+        var optionYamlFile = File(optionsYamlPath);
+        if (optionYamlFile.existsSync()) {
+          var optionsYaml =
+              loadYaml(optionYamlFile.readAsStringSync()) as YamlMap?;
+
+          if (optionsYaml != null && optionsYaml.containsKey('uglify')) {
+            uglify = optionsYaml['uglify'];
+          }
+        }
+
+        print('\u001b[33m [Fair Dart2JS] uglify option: => $uglify \u001b[0m');
+
+        var result = await dart2js.convertFile(partPath, uglify);
         File(jsName)..writeAsStringSync(result);
       } catch (e) {
         print('[Fair Dart2JS] e => ${e}');

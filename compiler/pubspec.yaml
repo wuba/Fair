@@ -22,6 +22,7 @@ dependencies:
   glob: ^2.0.1
   pedantic: ^1.11.1
   http: ^0.13.3
+  yaml: ^3.0.0
 
   fair_annotation: ^2.3.0
 #  fair_annotation:
@@ -31,9 +32,9 @@ dependencies:
 #  fair_dart2dsl:
 #    path: ../dart2dsl
 
-  fair_dart2js: ^1.4.0
-#  fair_dart2js:
-#    path: ../dart2js
+#  fair_dart2js: ^1.4.0
+  fair_dart2js:
+    path: ../dart2js
 
 #dependency_overrides:
 #  collection: 1.17.0
