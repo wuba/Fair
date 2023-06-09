@@ -50,7 +50,6 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   dynamic convert(BuildContext context, Map map, Map? methodMap,
       {Domain? domain}) {
     var name = map[tag];
-    print('name:$name');
     if (name == null) {
       return WarningWidget(
           parentContext: context,
