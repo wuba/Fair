@@ -68,8 +68,12 @@ class BindingData {
       } else {
         result = _functions?['runtimeInvokeMethodSync']?.call(funcName);
       }
-      var value = jsonDecode(result);
-      return value['result']['result'];
+      try {
+        var value = jsonDecode(result);
+        return value['result']['result'];
+      } catch (e) {
+        throw RuntimeError(errorMsg: result);
+      }
     } else {
       return _functions?[funcName];
     }
@@ -156,5 +160,16 @@ class BindingData {
     _boundValue.clear();
     _values?.clear();
     _functions?.clear();
+  }
+}
+
+class RuntimeError extends Error {
+  final String errorMsg;
+
+  RuntimeError({required this.errorMsg});
+
+  @override
+  String toString() {
+    return errorMsg;
   }
 }

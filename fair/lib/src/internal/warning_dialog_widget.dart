@@ -60,14 +60,16 @@ class DialogWidget extends Dialog {
 
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            'Tag: $name',
-                             style:  TextStyle(
-                               fontWeight: FontWeight.bold,
-                               color: Color(0xffff0000),
-                               fontSize: 20.0,
-                            ),
-                          ),
+                          Visibility(
+                              visible: name != null,
+                              child: Text(
+                                'Tag: $name',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xffff0000),
+                                  fontSize: 20.0,
+                                ),
+                              )),
                           SizedBox(height: 10),
                           Text(
                             'Bundle: $url',

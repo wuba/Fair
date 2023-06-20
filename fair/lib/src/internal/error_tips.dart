@@ -6,7 +6,6 @@
 
 import 'package:fair/src/internal/stack_trace_detail.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'warning_dialog_widget.dart';
 
@@ -18,6 +17,7 @@ class WarningWidget extends StatelessWidget {
   final BuildContext?  parentContext;
   final String? stackTrace;
   final Map? errorBlock;
+  final List<int>? highlightLines;
 
 
   const WarningWidget(
@@ -28,7 +28,8 @@ class WarningWidget extends StatelessWidget {
       this.solution,
       this.parentContext,
       this.stackTrace,
-      this.errorBlock})
+      this.errorBlock,
+      this.highlightLines})
       : super(key: key);
 
   @override
@@ -87,6 +88,7 @@ class WarningWidget extends StatelessWidget {
                             name: name,
                             errorJson: errorBlock,
                             error: error,
+                            highlightLines: highlightLines,
                           )));
             },
           );

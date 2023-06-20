@@ -11,6 +11,7 @@ import com.eclipsesource.v8.V8;
 import com.eclipsesource.v8.V8Array;
 import com.eclipsesource.v8.V8Function;
 import com.eclipsesource.v8.V8Object;
+import com.eclipsesource.v8.V8ScriptCompilationException;
 import com.wuba.fair.FairPlugin;
 import com.wuba.fair.callback.JsResultCallback;
 import com.wuba.fair.constant.Constant;
@@ -125,6 +126,22 @@ public class FairV8JsLoader extends FairJsLoader {
             getV8JsExecutor().loadJS(jsName, jsLocalPath, callback);
         } catch (Exception e) {
             e.printStackTrace();
+            //avoid loading all the time
+            if (callback != null) {
+                try {
+                    JSONObject errorResult = new JSONObject();
+                    errorResult.put("status","error");
+                    if (e instanceof V8ScriptCompilationException){
+                        errorResult.put("errorInfo",e.toString());
+                        errorResult.put("lineNumber",((V8ScriptCompilationException) e).getLineNumber());
+                    }else{
+                        errorResult.put("errorInfo",e.getLocalizedMessage());
+                    }
+                    callback.call(errorResult.toString());
+                } catch (JSONException ex) {
+
+                }
+            }
         }
     }
 
