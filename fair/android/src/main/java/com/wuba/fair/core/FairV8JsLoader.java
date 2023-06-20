@@ -139,7 +139,7 @@ public class FairV8JsLoader extends FairJsLoader {
                     }
                     callback.call(errorResult.toString());
                 } catch (JSONException ex) {
-
+                    callback.call("result");
                 }
             }
         }
