@@ -392,6 +392,16 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 [![Forkers repo roster for @wuba/fair](https://reporoster.com/forks/wuba/fair)](https://github.com/wuba/fair/network/members)
 
+## 🔧Build together
+Submit issues through [Issue](https://github.com/wuba/fair/issues), contribute code through Pull Request, and the administrator will review the code.
+
+Friends who are interested in Fair can join the exchange group. For technical consultation and discussion, please go to
+
+| WeChat secretary | WeChat group |
+|--------------------------|---------------------- ----|
+| ![wechat](resources/weixin.jpeg) | ![wechat_group](resources/wechat-group-02.png) |
+
+
 ## License
 
 Copyright (C) 2005-present, 58.com.  All rights reserved.
