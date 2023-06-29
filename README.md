@@ -398,7 +398,7 @@ Submit issues through [Issue](https://github.com/wuba/fair/issues), contribute c
 Friends who are interested in Fair can join the exchange group. For technical consultation and discussion, please go to
 
 | WeChat secretary | WeChat group |
-|--------------------------|---------------------- ----|
+|--------------------------|--------------------------|
 | ![wechat](resources/weixin.jpeg) | ![wechat_group](resources/wechat-group-02.png) |
 
 
