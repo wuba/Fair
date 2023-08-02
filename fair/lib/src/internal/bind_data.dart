@@ -71,7 +71,7 @@ class BindingData {
       var value = jsonDecode(result);
       return value['result']['result'];
     } else {
-      return _functions?[funcName];
+      return _functions?[funcName]?.call();
     }
   }
 
