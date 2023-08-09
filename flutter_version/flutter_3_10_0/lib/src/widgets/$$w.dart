@@ -1676,7 +1676,6 @@ var p = () => {
             curve: props['curve'] ?? Curves.linear,
             duration: props['duration'],
             reverseDuration: props['reverseDuration'],
-            vsync: props['vsync'],
             clipBehavior: props['clipBehavior'] ?? Clip.hardEdge,
           ),
       'GridPaper': (props) => GridPaper(
