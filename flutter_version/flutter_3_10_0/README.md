@@ -51,6 +51,13 @@ dependency_overrides:
   fair_version: 3.7.0
 ```
 
+- If your Flutter SDK is 3.10.0/3.10.1/3.10.2/3.10.3/3.10.4/3.10.5/3.10.6, we recommend that you use fair_version 3.10.0, like this:
+
+```yaml
+dependency_overrides:
+  fair_version: 3.10.0
+```
+
 - v1.22.4 generated from Flutter SDK 1.22.4
 - v1.22.6 generated from Flutter SDK 1.22.6
 - v2.0.6+1 generated from Flutter SDK 2.0.6
@@ -62,3 +69,4 @@ dependency_overrides:
 - v3.0.0 generated from Flutter SDK 3.0.0
 - v3.3.0 generated from Flutter SDK 3.3.0
 - v3.7.0 generated from Flutter SDK 3.7.0
+- v3.10.0 generated from Flutter SDK 3.10.0
