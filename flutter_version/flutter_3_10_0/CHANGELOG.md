@@ -1,3 +1,6 @@
+## 3.10.0
+* Generated from flutter 3.10.0
+
 ## 3.7.0
 * Generated from flutter 3.7.0
 

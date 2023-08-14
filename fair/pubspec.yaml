@@ -16,7 +16,7 @@ dependencies:
 #  fair_annotation:
 #    path: ../annotation
 
-  fair_version: ^3.10.0
+  fair_version: ^3.0.0
 #  fair_version:
 #    path: ../flutter_version/flutter_2_5_0
   flat_buffers: ^2.0.5
