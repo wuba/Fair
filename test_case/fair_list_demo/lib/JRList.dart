@@ -13,10 +13,10 @@ class JRListWidget extends StatefulWidget {
 class JRListState extends State<JRListWidget>
 {
   @FairWell("list")
-  List list = List();
+  var list = <String>[];
   // 监听listview的滑动
   @FairWell("_scrollController")
-  ScrollController _scrollController;
+  late ScrollController _scrollController;
 
   @override
   void initState() {
