@@ -22,6 +22,7 @@ dependencies:
   glob: ^2.0.1
   pedantic: ^1.11.1
   http: ^0.13.3
+  yaml: ^3.0.0
 
   fair_annotation: ^2.3.0
 #  fair_annotation:
