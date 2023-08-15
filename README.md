@@ -174,6 +174,12 @@ Hot update platform: [FAIR PUSHY](https://github.com/wuba/FairPushy)
 
 ## versions
 
+## 3.10.0
+updateDate: 2023.08.15
+
+- Adapted to Flutter 3.10.0, released Fair Version 3.10
+- Fix known bugs, fix DSL parser issues
+
 ### 3.2.1
 updateDate：2023.04.13
 
