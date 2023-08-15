@@ -1,3 +1,6 @@
+## [1.7.4]
+* bugfix.
+
 ## [1.7.3]
 * Fixed an issue with JS file was not being regenerated.
 
