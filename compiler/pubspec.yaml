@@ -1,6 +1,6 @@
 name: fair_compiler
 description: A complier which can generate Fair bundle for widget with annotation.
-version: 1.7.3
+version: 1.7.4
 homepage: https://fair.58.com/
 
 environment:
