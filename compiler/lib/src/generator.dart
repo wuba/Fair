@@ -52,7 +52,7 @@ class BundleGenerator extends GeneratorForAnnotation<FairPatch>
 
     final tmp = await temp;
     tmp.writeAsBytesSync(await buildStep.readAsBytes(buildStep.inputId));
-    var r = await compile(buildStep, ['-f', tmp.absolute.path]);
+    var r = await compile(buildStep, ['-f', tmp.absolute.path, '-p', buildStep.inputId.uri.toString()]);
     tmp.deleteSync();
     if (r.success) {
       // TODO support multiple annotated widgets in one dart file

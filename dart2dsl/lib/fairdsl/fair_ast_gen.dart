@@ -24,11 +24,76 @@ class NodeCheckAstVisitor extends GeneralizingAstVisitor<Map> {
 }
 
 class CustomAstVisitor extends SimpleAstVisitor<Map> {
+
+  ///构造函数接收字符串类型的dart源码
+  CustomAstVisitor(this.path, this.source){
+    lines = source.split('\n');
+  }
+
+  // 源码路径
+  String? path;
+  // 源码
+  String source;
+  // 源码按行拆分
+  var lines;
+  // 是否正在访问build方法
+  var _isBuildMethodVisiting = false;
+  // 是否正在访问build方法的return语句
+  var _isBuildMethodReturnStatementVisiting = false;
+
+  /// 检查节点合法性
+  /// [AstNode] 抽象语法树节点
+  void _checkNodeValid(AstNode node){
+    if(!_isBuildMethodVisiting){
+      //不在build方法内部则不检查合法性
+      return;
+    }
+    if (_isBuildMethodReturnStatementVisiting) {//在return语句内部
+      if(!checkNode.containsKey(node.runtimeType.toString())){//通过支持的节点类型检查是否识别
+        printWarningMessage(node, '警告: 不识别的语法节点类型');
+      }
+    } else if (node is Statement
+        && !(node is Block)
+        && !(node is ReturnStatement)) { //不在return语句内部判定不合法
+      printWarningMessage(node, '警告: 无效的代码语句，不在dart2dsl解析范围内');
+    }
+  }
+
+  /// 打印警告信息，包含行号、列号、节点类型、节点源码
+  /// [AstNode] 抽象语法树节点
+  /// [message] 警告信息
+  void printWarningMessage(AstNode node, String message){
+    var totalOffset = 0;
+    var line = 0;
+    var lineOffset = 0;
+    for (var i = 0; i < lines.length; i++) {
+      int lineLength = lines[i].length + 1; // 加1是因为每行结尾有一个换行符
+      totalOffset += lineLength;
+      if (totalOffset > node.offset) {
+        line = i+1;
+        lineOffset = node.offset - (totalOffset - lineLength) + 1;
+        break;
+      }
+    }
+    stderr.writeln('[Fair] $message ${node.runtimeType} $path:$line:$lineOffset: ${node.toSource()}');
+  }
+
+  /// 是否是构造Widget的方法，根据返回类型是否Widget判断
+  /// [AstNode] 抽象语法树节点
+  bool _isWidgetMethod(AstNode node) {
+    if (node is MethodDeclaration) {
+      var returnType = node.returnType;
+      if (returnType != null &&
+          returnType.toString() == 'Widget') {
+        return true;
+      }
+    }
+    return false;
+  }
+
   Map? _visitNode(AstNode? node) {
     if (node != null) {
-      if (!checkNode.containsKey(node.runtimeType.toString())) {
-        stdout.writeln('不支持的节点${node.runtimeType}<---->${node.parent?.toSource()}---->${node.toSource()} ');
-      }
+      _checkNodeValid(node);
       return node.accept(this);
     }
     return null;
@@ -53,12 +118,19 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
       var size = nodes.length;
       for (var i = 0; i < size; i++) {
         var node = nodes[i];
-        if (!checkNode.containsKey(node.runtimeType.toString())) {
-          stdout.writeln('不支持的节点${node.runtimeType}<---->${node.parent?.toSource()}---->${node.toSource()}');
+        final isBuildMethod = _isWidgetMethod(node);
+        if (!_isBuildMethodVisiting && isBuildMethod) {
+          //dart2dsl语法合法性检查开始
+          _isBuildMethodVisiting = true;
         }
+        _checkNodeValid(node);
         var res = node.accept(this);
         if (res != null) {
           maps.add(res);
+        }
+        if (_isBuildMethodVisiting && isBuildMethod) {
+          //dart2dsl语法合法性检查完毕
+          _isBuildMethodVisiting = false;
         }
       }
     }
@@ -219,9 +291,23 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
     return _buildTypeName(node.name.name);
   }
 
+  /// 当前记录的return语句深度
+  var returnStatementDeepCount = 0;
+
   @override
   Map? visitReturnStatement(ReturnStatement node) {
-    return _buildReturnStatement(_visitNode(node.expression));
+    if (_isBuildMethodVisiting && returnStatementDeepCount == 0) {
+      // 标记进入build方法的return语句
+      _isBuildMethodReturnStatementVisiting = true;
+    }
+    returnStatementDeepCount++;
+    var map = _buildReturnStatement(_visitNode(node.expression));
+    returnStatementDeepCount--;
+    if (_isBuildMethodReturnStatementVisiting && returnStatementDeepCount == 0) {
+      // 标记退出build方法的return语句
+      _isBuildMethodReturnStatementVisiting = false;
+    }
+    return map;
   }
 
   @override
@@ -483,7 +569,7 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   Map _buildMapLiteralEntry(Map? key, Map? expression) => {'type': 'MapLiteralEntry', 'key': key, 'value': expression};
 }
 
-Future<Map> generateAstMap(String path) async {
+Future<Map> generateAstMap(String path, {String? sourcePath}) async {
   if (path.isEmpty) {
     stdout.writeln('File not found');
   } else {
@@ -494,7 +580,8 @@ Future<Map> generateAstMap(String path) async {
         var parseResult = parseFile(path: path, featureSet: FeatureSet.latestLanguageVersion());
         var compilationUnit = parseResult.unit;
         //遍历AST
-        var astData = compilationUnit.accept(CustomAstVisitor());
+        //buildStep.inputId.uri
+        var astData = compilationUnit.accept(CustomAstVisitor(sourcePath, await File(path).readAsString()));
 
         // var encode = json.encode(astData);
         // print(encode);
