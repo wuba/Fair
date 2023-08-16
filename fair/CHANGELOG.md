@@ -1,3 +1,9 @@
+## [3.3.0]
+* Runtime log optimization, covering Dart/JS logs;
+* Compiler log optimization, removal of redundant/error logs, and enhanced log output;
+* Adaptation to Flutter 3.10;
+* Fixed some known issues.
+
 ## [3.2.1]
 * Fixed some issues.
 
