@@ -19,6 +19,7 @@ import 'package:fair_compiler/src/fair_asset.dart';
 import 'package:glob/glob.dart';
 import 'package:path/path.dart' as path;
 import 'package:source_gen/source_gen.dart';
+import 'package:crypto/crypto.dart' show md5;
 
 import 'helper.dart';
 
@@ -51,7 +52,9 @@ class BundleGenerator extends GeneratorForAnnotation<FairPatch>
     }
 
     final tmp = await temp;
-    tmp.writeAsBytesSync(await buildStep.readAsBytes(buildStep.inputId));
+    var bytes = await buildStep.readAsBytes(buildStep.inputId);
+    tmp.writeAsBytesSync(bytes);
+    var digest = md5.convert(bytes).toString();
     var r = await compile(buildStep, ['-f', tmp.absolute.path, '-p', buildStep.inputId.uri.toString()]);
     tmp.deleteSync();
     if (r.success) {
@@ -63,6 +66,12 @@ class BundleGenerator extends GeneratorForAnnotation<FairPatch>
             'Both ${e.name} and ${element.name} exist inside ${e.source?.uri}\n'
             'Please spilt them into separated .dart file',
             element: element);
+      }
+      if (r.data?.isNotEmpty ?? false) {
+        var encoder = JsonEncoder.withIndent('  ');
+        var rData = jsonDecode(r.data ?? '{}');
+        rData['digest'] = digest;
+        return encoder.convert(rData);
       }
     } else {
       print('[Fair] Failed to generate bundle for $element');
