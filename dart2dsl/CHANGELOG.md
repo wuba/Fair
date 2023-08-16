@@ -1,3 +1,7 @@
+## 1.4.0
+
+- Log optimized.
+
 ## 1.3.2
 
 - bugfix.

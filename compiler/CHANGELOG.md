@@ -1,3 +1,6 @@
+## [1.8.0]
+* Compiler log optimized.
+
 ## [1.7.4]
 * bugfix.
 
