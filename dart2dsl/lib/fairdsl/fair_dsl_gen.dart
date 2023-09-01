@@ -426,6 +426,26 @@ dynamic _buildValueExpression(
   } else if (valueExpression?.isVariableExpression==true) {
     var expression = valueExpression?.asVariableExpression.expression??'';
     naPaValue = '\$(' + expression + ')';
+  } else if (valueExpression?.isPrefixExpression == true) {
+    var argument = _buildValueExpression(
+        valueExpression?.asPrefixExpression.argument, fairDslContex);
+    if (valueExpression?.asPrefixExpression.prefix ?? true) {
+      if (argument is num) {
+        if (valueExpression?.asPrefixExpression.operator == '-') {
+          naPaValue = -argument;
+        } else {
+          naPaValue = argument;
+        }
+      } else {
+        naPaValue = '${valueExpression?.asPrefixExpression.prefix}$argument';
+      }
+    } else {
+      if (argument is num) {
+        naPaValue = argument;
+      } else {
+        naPaValue = '$argument${valueExpression?.asPrefixExpression.prefix}';
+      }
+    }
   } else {
     naPaValue = _buildWidgetDsl(valueExpression, fairDslContex);
   }

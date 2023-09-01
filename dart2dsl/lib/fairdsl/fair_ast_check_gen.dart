@@ -30,6 +30,7 @@ class AstNodeMapGenerator extends GeneratorForAnnotation<AstNodeCheck> {
       'DeclaredSimpleIdentifier':'DeclaredSimpleIdentifier',
       'ConstructorDeclarationImpl':'ConstructorDeclarationImpl',
       'InterpolationStringImpl':'InterpolationStringImpl',
+      'PrefixExpressionImpl': 'visitPrefixExpression'
     };
     if (!(rootExpression?.isProgram??false)) {
       return null;
