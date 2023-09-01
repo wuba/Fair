@@ -411,6 +411,11 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
     return _buildVariableExpression(expression);
   }
 
+  @override
+  Map? visitPrefixExpression(PrefixExpression node){
+    return _buildPrefixExpression(_visitNode(node.operand), node.operator.toString(), true);
+  }
+
   ///根节点
   Map? _buildAstRoot(List<Map> body) {
     if (body.isNotEmpty) {

@@ -481,7 +481,7 @@ class NamedExpression extends AstNode {
 
 class PrefixExpression extends AstNode {
   ///操作的变量名称
-  String? argument;
+  Expression? argument;
 
   ///操作符
   String? operator;
@@ -495,7 +495,7 @@ class PrefixExpression extends AstNode {
   static PrefixExpression? fromAst(Map? ast) {
     if (ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.PrefixExpression)) {
-      return PrefixExpression(Identifier.fromAst(ast['argument'])?.name,
+      return PrefixExpression(Expression.fromAst(ast['argument']),
           ast['operator'], ast['prefix'] as bool,
           ast: ast);
     }
