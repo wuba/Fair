@@ -37,7 +37,7 @@ void showFairAboutDialog(BuildContext context) {
                   'Flutter Fair is an OTA package for Flutter Apps. With Fair you can update widgets of the app through DSL bundle.'
                   ' Learn more about Fair at '),
           TextSpan(
-              style: textStyle.copyWith(color: Theme.of(context).accentColor),
+              style: textStyle.copyWith(color: Theme.of(context).colorScheme.secondary),
               recognizer: TapGestureRecognizer()..onTap = () => _openUrl(url),
               text: url),
           TextSpan(style: textStyle, text: '.'),

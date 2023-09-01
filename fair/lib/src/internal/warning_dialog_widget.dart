@@ -6,6 +6,8 @@ class DialogWidget extends Dialog {
   final String? solution ; //是否须要"取消"按钮
   final dynamic error ; //错误
   void Function()? cancelFun; //取消
+  void Function()? viewStackTrace; //查看堆栈
+  final bool? stackTraceVisible;//堆栈按钮是否可见
 
 
   DialogWidget({
@@ -15,6 +17,8 @@ class DialogWidget extends Dialog {
     this.solution,
     this.error,
     this.cancelFun,
+    this.viewStackTrace,
+    this.stackTraceVisible,
   }) : super(key: key);
 
   @override
@@ -56,14 +60,16 @@ class DialogWidget extends Dialog {
 
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            'Tag: $name',
-                             style:  TextStyle(
-                               fontWeight: FontWeight.bold,
-                               color: Color(0xffff0000),
-                               fontSize: 20.0,
-                            ),
-                          ),
+                          Visibility(
+                              visible: name != null,
+                              child: Text(
+                                'Tag: $name',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xffff0000),
+                                  fontSize: 20.0,
+                                ),
+                              )),
                           SizedBox(height: 10),
                           Text(
                             'Bundle: $url',
@@ -111,9 +117,11 @@ class DialogWidget extends Dialog {
     var widgets = <Widget>[];
     widgets.add(_buildBottomCancelButton());
     widgets.add(_buildBottomOnline());
+    widgets.add(_buildBottomStackTraceButton());
 
     return Flex(
       direction: Axis.horizontal,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: widgets,
     );
   }
@@ -128,7 +136,7 @@ class DialogWidget extends Dialog {
 
   Widget _buildBottomCancelButton() {
     return Flexible(
-      fit: FlexFit.tight,
+      fit: FlexFit.loose,
       child:InkWell(
         onTap: this.cancelFun,
         child: Text('Cancel', style: TextStyle(color: Color(0xff666666))),
@@ -136,4 +144,16 @@ class DialogWidget extends Dialog {
     );
   }
 
+  Widget _buildBottomStackTraceButton() {
+    if (stackTraceVisible == null || !stackTraceVisible!) {
+      return Container();
+    }
+    return Flexible(
+      fit: FlexFit.loose,
+      child: InkWell(
+        onTap: viewStackTrace,
+        child: Text('StackTrace', style: TextStyle(color: Color(0xFF6888DE))),
+      ),
+    );
+  }
 }

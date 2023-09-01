@@ -4,8 +4,8 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair/src/internal/stack_trace_detail.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'warning_dialog_widget.dart';
 
@@ -15,9 +15,21 @@ class WarningWidget extends StatelessWidget {
   final String? solution;
   final dynamic error;
   final BuildContext?  parentContext;
+  final String? stackTrace;
+  final Map? errorBlock;
+  final List<int>? highlightLines;
 
 
-  const WarningWidget({Key? key, this.name, this.url, this.error, this.solution,this.parentContext})
+  const WarningWidget(
+      {Key? key,
+      this.name,
+      this.url,
+      this.error,
+      this.solution,
+      this.parentContext,
+      this.stackTrace,
+      this.errorBlock,
+      this.highlightLines})
       : super(key: key);
 
   @override
@@ -64,6 +76,20 @@ class WarningWidget extends StatelessWidget {
             error: error,
             cancelFun: (){
               Navigator.pop(parentContext!);
+            },
+            stackTraceVisible: stackTrace != null,
+            viewStackTrace: () {
+              Navigator.push(
+                  parentContext!,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          StackTraceDetailPage(
+                            stackTrace: stackTrace!,
+                            name: name,
+                            errorJson: errorBlock,
+                            error: error,
+                            highlightLines: highlightLines,
+                          )));
             },
           );
         }

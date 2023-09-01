@@ -6,6 +6,7 @@
 
 import 'dart:convert';
 
+import 'package:fair/src/internal/error_tips.dart';
 import 'package:fair/src/runtime/fair_message_dispatcher.dart';
 import 'package:fair/src/runtime/runtime_fair_delegate.dart';
 import 'package:flutter/foundation.dart';
@@ -98,6 +99,11 @@ class FairState extends State<FairWidget> with Loader, AutomaticKeepAliveClientM
   FairApp? _fairApp;
   String? bundleType;
   late String state2key;
+  bool isLoadJsError = false;
+  String? loadJsErrorInfo;
+  String? jsSource;
+  String? rawJsPath;
+  int? loadJsErrorLineNumber;
 
   // None nullable
   late FairDelegate delegate;
@@ -128,7 +134,36 @@ class FairState extends State<FairWidget> with Loader, AutomaticKeepAliveClientM
     }
     // if it's not in a tree, it's not unnecessary to load js any more.
     if(mounted) {
-      await Future.wait([_mFairApp.runtime.addScript(state2key, resolveJS, widget.data), _mFairApp.register(this)]);
+      final results = await Future.wait([
+        _mFairApp.runtime.addScript(state2key, resolveJS, widget.data),
+        _mFairApp.register(this)
+      ]);
+
+      //debug mode throw error message to WarningWidget
+      if (!kReleaseMode && results.isNotEmpty) {
+        print('addScript Result:${results.first}');
+        try {
+          final addScriptResult = results.first.toString();
+          var errorResult = jsonDecode(addScriptResult);
+          isLoadJsError = (errorResult['status'] == 'error');
+
+          if (isLoadJsError) {
+            loadJsErrorInfo = errorResult['errorInfo'] ?? '';
+            loadJsErrorLineNumber = errorResult['lineNumber'];
+
+            //debug mode use json
+            if(widget.path?.endsWith('.fair.json') == true){
+              rawJsPath = widget.path?.replaceFirst('.fair.json', '.fair.js') ??
+                  widget.path;
+
+              jsSource = await rootBundle.loadString(rawJsPath!);
+            }
+          }
+        } catch (e) {
+          print(e);
+        }
+      }
+
       if(mounted) {
         delegate.didChangeDependencies();
         _reload();
@@ -164,6 +199,19 @@ class FairState extends State<FairWidget> with Loader, AutomaticKeepAliveClientM
   Widget build(BuildContext context) {
     super.build(context);
     assert(_fairApp != null, 'FairWidget must be descendant of FairApp');
+    if (!kReleaseMode && isLoadJsError) {
+      return Scaffold(
+        body: WarningWidget(
+          parentContext: context,
+          url: rawJsPath,
+          error: loadJsErrorInfo,
+          stackTrace: jsSource,
+          highlightLines: [loadJsErrorLineNumber ?? -1],
+          solution:
+              'Unsupported JavaScript syntax, please check and correct your Dart method coding!',
+        ),
+      );
+    }
     var builder = widget.holder ?? _fairApp?.placeholderBuilder;
     var result = _child ?? builder?.call(context);
     if (!kReleaseMode && _fairApp!.debugShowFairBanner) {

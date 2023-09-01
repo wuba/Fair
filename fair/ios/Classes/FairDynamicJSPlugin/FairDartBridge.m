@@ -69,6 +69,24 @@ FairSingletonM(FairDartBridge);
         if ([method isEqualToString:@"loadMainJs"]) {
             if ([strongSelf.delegate respondsToSelector:@selector(injectionJSScriptWtihJSScript: callback:)]) {
                 [strongSelf.delegate injectionJSScriptWtihJSScript:model.path callback:^(id result, NSError *error) {
+                    JSValue *value = result;
+                    if (value && [value isKindOfClass:[JSValue class]]) {
+                        NSString *str = value.toString;
+                        if([str isEqualToString:@"undefined"]){
+                            NSMutableDictionary *result=[NSMutableDictionary dictionary];
+                            result[@"status"] = @"error";
+                            result[@"errorInfo"]=@"load JavaScript error";
+                            result[@"lineNumber"]=@-1;
+                            
+                            NSError *error = nil;
+                            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingPrettyPrinted error:&error];
+                            NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                              
+                            
+                            callback(jsonStr);
+                            return;
+                        }
+                    }
                     callback(@"success");
                 }];
             }
@@ -163,6 +181,23 @@ FairSingletonM(FairDartBridge);
     }
     NSString *result = [NSString stringWithFormat:@"%@", obj.toString];
     FairLog(@"result:%@", result);
+    if([result isEqualToString:@"undefined"]){
+        //取args中的funcName字段
+        //arg ===> "{\"pageName\":\"null#0\",\"type\":\"method\",\"args\":{\"funcName\":\"_getAuth\",\"args\":null}}"
+        NSString *str = [NSString stringWithUTF8String:args];
+        NSData *jsonData = [str dataUsingEncoding:NSUTF8StringEncoding];
+
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+        
+        NSDictionary *args = dic[@"args"];
+        NSString *funcName = args[@"funcName"];
+        
+        FairLog(@"invoke funcName:%@",funcName);
+        
+        NSString *errorResult = [NSString stringWithFormat:@"Runtime error while invoke JavaScript method:%@()", funcName];
+        
+        return errorResult.UTF8String;
+    }
     return result.UTF8String;
 }
 
