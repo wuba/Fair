@@ -177,21 +177,13 @@ class FairState extends State<FairWidget> with Loader, AutomaticKeepAliveClientM
     delegate.didUpdateWidget(oldWidget);
   }
 
-  String? _replacePathJsWithBin(String? input) {
-    if (input?.endsWith(".js") == true) {
-      // 替换字符串后缀
-      return input!.substring(0, input!.length - 3) + ".bin";
-    } else {
-      // 如果字符串没有.js后缀，不做任何更改
-      return input;
-    }
-  }
-
   void _reload() {
     if (mounted) {
       var name = state2key;
       var path = widget.path ?? _fairApp!.pathOfBundle(widget.name ?? '');
-      path = _replacePathJsWithBin(path);
+      if (path?.endsWith('.js') == true) {
+        path = path?.replaceFirst(RegExp(r"\.(js)$"), ".bin");
+      }
       bundleType =
       widget.path != null && widget.path?.startsWith('http') == true
           ? 'Http'
