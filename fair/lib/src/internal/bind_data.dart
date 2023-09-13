@@ -105,10 +105,10 @@ class BindingData {
         return ([props]) {
           var arguments = [];
           if (props != null) {
-            arguments.add(props);
+            arguments.addAll(props);
           }
           if (args != null) {
-            arguments.add(args);
+            arguments.addAll(args);
           }
           _functions?['runtimeInvokeMethod']?.call(rFuncName, arguments);
         };
