@@ -30,7 +30,7 @@ class _StaggeredItemViewState extends State<StaggeredItemView> {
 
   void requestData() {
     _page++;
-    FairNet().request({
+    FairNet().requestData({
       'pageName': '#FairKey#',
       'method': 'GET',
       'url':
@@ -71,12 +71,12 @@ class _StaggeredItemViewState extends State<StaggeredItemView> {
         ),
         body: Sugar.ifEqualBool(
           isDataEmpty(),
-          trueValue: Center(
+          trueValue: () => Center(
             child: Text(
               '加载中...',
             ),
           ),
-          falseValue: StaggeredGrid.count(
+          falseValue: () => StaggeredGrid.count(
               crossAxisCount: 2,
               mainAxisSpacing: 10,
               crossAxisSpacing: 5,

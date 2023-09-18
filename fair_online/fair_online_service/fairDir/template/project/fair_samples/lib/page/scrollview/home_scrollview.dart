@@ -32,7 +32,7 @@ class _HomeScrollViewState extends State<HomeScrollView> {
 
   void requestData() {
     _page++;
-    FairNet().request({
+    FairNet().requestData({
       'pageName': '#FairKey#',
       'method': 'GET',
       'url':
@@ -70,12 +70,12 @@ class _HomeScrollViewState extends State<HomeScrollView> {
     return Scaffold(
         body: Sugar.ifEqualBool(
       isDataEmpty(),
-      trueValue: Center(
+      trueValue: () => Center(
         child: Text(
           '加载中...',
         ),
       ),
-      falseValue: CustomScrollView(
+      falseValue: () => CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
             title: Text('CustomScrollView模版'),
