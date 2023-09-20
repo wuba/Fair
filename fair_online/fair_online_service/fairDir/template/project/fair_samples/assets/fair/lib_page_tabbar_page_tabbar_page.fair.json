@@ -267,6 +267,12 @@
                 }
               }
             }
+          },
+          "functionParameters": {
+            "pa": [
+              "context",
+              "index"
+            ]
           }
         }
       }
@@ -424,6 +430,12 @@
                               }
                             }
                           }
+                        },
+                        "functionParameters": {
+                          "pa": [
+                            "content",
+                            "index"
+                          ]
                         }
                       },
                       "childCount": 3
@@ -436,5 +448,6 @@
         }
       }
     }
-  }
+  },
+  "digest": "717afee55ab7a6a0aec98fdbbe1dd7cf"
 }

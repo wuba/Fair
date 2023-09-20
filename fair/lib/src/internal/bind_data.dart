@@ -108,16 +108,16 @@ class BindingData {
         return ([props]) {
           var arguments = [];
           if (props != null) {
-            arguments.addAll(props);
+            arguments.add(props);
           }
           if (args != null) {
             arguments.addAll(args);
           }
-          _functions?['runtimeInvokeMethod']?.call(rFuncName, arguments);
+          _functions?['runtimeInvokeMethod']?.call(rFuncName, true, arguments);
         };
       } else {
         return ([props]) =>
-            _functions?['runtimeInvokeMethod']?.call(funcName, props);
+            _functions?['runtimeInvokeMethod']?.call(funcName, false, props);
       }
     } else {
       return _functions?[funcName];
