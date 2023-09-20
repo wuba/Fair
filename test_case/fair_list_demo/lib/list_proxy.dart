@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ListDelegate extends FairDelegate {
-  List list = List();
-  ScrollController _scrollController;
+  var list = <String>[];
+  late ScrollController _scrollController;
 
   @override
   Map<String, Function> bindFunction() {

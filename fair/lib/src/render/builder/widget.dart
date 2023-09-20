@@ -21,7 +21,8 @@ import 'package:flutter/material.dart';
 
 /// 特殊处理各种场景
 /// DynamicBuilder 的实现
-class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, FunctionDynamicBuilder {
+class DynamicWidgetBuilder extends DynamicBuilder
+    with CommonDynamicBuilder, FunctionDynamicBuilder {
   DynamicWidgetBuilder(
       ProxyMirror? proxyMirror, String? page, BindingData? bound,
       {String? bundle})
@@ -31,7 +32,7 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
   dynamic convert(BuildContext context, Map map, Map? methodMap,
       {Domain? domain}) {
     var name = map[tag];
-    print('name:$name');
+
     if (name == null) {
       return WarningWidget(
           parentContext: context,
@@ -88,23 +89,23 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
           context,
           domain,
         );
-      } else if(name == 'FairFunction') {
+      } else if (name == 'FairFunction') {
         return buildFairFunction(context, map, methodMap, domain: domain);
-      } else if(name == 'Sugar.futureValue') {
+      } else if (name == 'Sugar.futureValue') {
         return _buildFutureValue(
           map,
           methodMap,
           context,
           domain,
         );
-      } else if(name == 'Sugar.createFuture') {
+      } else if (name == 'Sugar.createFuture') {
         return _buildCreateFuture(
           map,
           methodMap,
           context,
           domain,
         );
-      } else if(name =='Sugar.nullValue') {
+      } else if (name == 'Sugar.nullValue') {
         return null;
       }
 
@@ -136,31 +137,37 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
 
       var source = map['mapEach'];
       if (source != null && source is List) {
-        List children=[];
-       for (var i = 0; i < source.length; i++) {
-         var element = source[i];
-         children.add(
-          block(map, methodMap, context, FunctionDomain({
-            'item': element,
-            'index': i,
-          },parent: domain), mapper, name, isWidget)
-         );
-       }      
-       return children.asListOf<Widget>() ?? children;
+        List children = [];
+        for (var i = 0; i < source.length; i++) {
+          var element = source[i];
+          children.add(block(
+              map,
+              methodMap,
+              context,
+              FunctionDomain({
+                'item': element,
+                'index': i,
+              }, parent: domain),
+              mapper,
+              name,
+              isWidget));
+        }
+        return children.asListOf<Widget>() ?? children;
       }
       return block(map, methodMap, context, domain, mapper, name, isWidget);
-    } catch (e) {
+    } catch (e, stack) {
       return WarningWidget(
           parentContext: context,
           name: name,
           error: e,
           url: bundle,
+          stackTrace: stack.toString(),
+          errorBlock: map,
           solution:
               "Tag name not supported yet,You need to use the @FairBinding annotation to tag the local Widget component");
     }
   }
 
- 
   List<dynamic> _buildSugarMapEach(
     Function mapEach,
     Map map,
@@ -201,7 +208,6 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
       }
     }
 
-    
     children = children.asIteratorOf<Widget>()?.toList() ?? children;
 
     var params = {
@@ -247,7 +253,6 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
       }
     }
 
-    
     children = children.asIteratorOf<Widget>()?.toList() ?? children;
 
     var params = {
@@ -275,9 +280,11 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
     if (source is List) {
       for (var caseItem in source) {
         var na = caseItem['na'];
-        if (pa0Value(FunctionDomain.getBody(na['sugarCase']), methodMap, context, domain) ==
+        if (pa0Value(FunctionDomain.getBody(na['sugarCase']), methodMap,
+                context, domain) ==
             caseValue) {
-          return pa0Value(FunctionDomain.getBody(na['reValue']), methodMap, context, domain);
+          return pa0Value(FunctionDomain.getBody(na['reValue']), methodMap,
+              context, domain);
         }
       }
     }
@@ -426,7 +433,6 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
     return mapEach.call(params);
   }
 
-
   SliverGridDelegateWithFixedCrossAxisCount
       _buildSugarSliverGridDelegateWithFixedCrossAxisCount(
           Function mapEach, Map map, Map? methodMap, BuildContext context) {
@@ -454,9 +460,11 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
     var p0 = pa0Value(pa0(map), methodMap, context, domain);
     var p1 = pa0Value(pa1(map), methodMap, context, domain);
     if (p0 == p1) {
-      return pa0Value(FunctionDomain.getBody(na['trueValue']), methodMap, context, domain);
+      return pa0Value(
+          FunctionDomain.getBody(na['trueValue']), methodMap, context, domain);
     } else {
-      return pa0Value(FunctionDomain.getBody(na['falseValue']), methodMap, context, domain);
+      return pa0Value(
+          FunctionDomain.getBody(na['falseValue']), methodMap, context, domain);
     }
   }
 
@@ -469,9 +477,11 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
     var na = map['na'];
 
     if (pa0Value(pa0(map), methodMap, context, domain)) {
-      return pa0Value(FunctionDomain.getBody(na['trueValue']), methodMap, context, domain);
+      return pa0Value(
+          FunctionDomain.getBody(na['trueValue']), methodMap, context, domain);
     } else {
-      return pa0Value(FunctionDomain.getBody(na['falseValue']), methodMap, context, domain);
+      return pa0Value(
+          FunctionDomain.getBody(na['falseValue']), methodMap, context, domain);
     }
   }
 
@@ -567,13 +577,13 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
     };
     return builder;
   }
-  
-  dynamic _buildPopMenuButtonItemBuilder(Map map, Map? methodMap, BuildContext context, Domain? domain) {
+
+  dynamic _buildPopMenuButtonItemBuilder(
+      Map map, Map? methodMap, BuildContext context, Domain? domain) {
     final dynamic fairFunction = pa0(map);
     assert(fairFunction is Map);
     final List functionParameters = FunctionDomain.pa(fairFunction);
-    final PopupMenuItemBuilder<Object> builder =
-        (BuildContext builderContext) {
+    final PopupMenuItemBuilder<Object> builder = (BuildContext builderContext) {
       final body = FunctionDomain.getBody(fairFunction);
       final List<PopupMenuEntry<Object>> list = <PopupMenuEntry<Object>>[];
       for (final element in body) {
@@ -592,47 +602,51 @@ class DynamicWidgetBuilder extends DynamicBuilder with CommonDynamicBuilder, Fun
       }
       return list;
     };
-    return builder;    
+    return builder;
   }
-  
-  dynamic _buildCreateFuture(Map map, Map? methodMap, BuildContext context, Domain? domain) {
-      var na = named('Sugar.createFuture', map['na'], methodMap, context, domain);
-      var props= Property.extract(map: na.data);
-      // typeArguments
-      var ta = map['ta'];
-      if(ta != null) {
-        // 暂时只支持单泛型
-        var typeArgument= ta.toString().split(',').first;
-        return createTResult(typeArgument, <T>() => Sugar.createFuture<T>(
-            function: props['function'],
-            futureId: props['futureId'],
-            argument: props['argument'],
-            callback: props['callback'],
+
+  dynamic _buildCreateFuture(
+      Map map, Map? methodMap, BuildContext context, Domain? domain) {
+    var na = named('Sugar.createFuture', map['na'], methodMap, context, domain);
+    var props = Property.extract(map: na.data);
+    // typeArguments
+    var ta = map['ta'];
+    if (ta != null) {
+      // 暂时只支持单泛型
+      var typeArgument = ta.toString().split(',').first;
+      return createTResult(
+        typeArgument,
+        <T>() => Sugar.createFuture<T>(
+          function: props['function'],
+          futureId: props['futureId'],
+          argument: props['argument'],
+          callback: props['callback'],
         ),
         // 异步不可能回调 Widget 类型
         widgetSupport: false,
-        );
-      }
-      return Sugar.createFuture(
-            function: props['function'],
-            futureId: props['futureId'],
-            argument: props['argument'],
-            callback: props['callback'],
       );
+    }
+    return Sugar.createFuture(
+      function: props['function'],
+      futureId: props['futureId'],
+      argument: props['argument'],
+      callback: props['callback'],
+    );
   }
-  
-  
-  dynamic _buildFutureValue(Map map, Map? methodMap, BuildContext context, Domain? domain) {
-      var pa = map['pa'];
-      var value = pa==null? null: pa0Value(pa0(map), methodMap, context, domain);
-      // typeArguments
-      var ta = map['ta'];
-      if(ta != null) {
-        // 暂时只支持单泛型
-        var typeArgument= ta.toString().split(',').first;
-        return createTResult(typeArgument, <T>() => Future<T>.value(value));
-      }
-      // Future<dynamic>
-      return Future.value(value);
+
+  dynamic _buildFutureValue(
+      Map map, Map? methodMap, BuildContext context, Domain? domain) {
+    var pa = map['pa'];
+    var value =
+        pa == null ? null : pa0Value(pa0(map), methodMap, context, domain);
+    // typeArguments
+    var ta = map['ta'];
+    if (ta != null) {
+      // 暂时只支持单泛型
+      var typeArgument = ta.toString().split(',').first;
+      return createTResult(typeArgument, <T>() => Future<T>.value(value));
+    }
+    // Future<dynamic>
+    return Future.value(value);
   }
 }

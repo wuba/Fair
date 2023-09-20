@@ -1,5 +1,6 @@
 import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
+import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -24,35 +25,28 @@ class _ListDemoPageState extends State<ListDemoPage> {
 
   void requestData() {
     _page++;
-    FairCommonPlugin().http({
-      'pageName': '#FairKey#',
-      'method': 'GET',
-      'url':
-          'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/3b8ae7a4e0884b4d75b8094f6c83cd8c_list_page_data.json',
-      'data': {'page': _page},
-      'callback': (resp) {
-        if (resp == null) {
-          return;
-        }
-        var data = resp['data'];
-        data.forEach((item) {
-          var dataItem = ItemData();
-          try {
-            dataItem.icon = item.icon;
-            dataItem.title = item.title;
-            dataItem.subTitle = item.subTitle;
-            dataItem.distance = item.distance;
-          } catch (e) {
-            dataItem.icon = item['icon'];
-            dataItem.title = item['title'];
-            dataItem.subTitle = item['subTitle'];
-            dataItem.distance = item['distance'];
+    FairNet.requestData(
+        method: FairNet.GET,
+        url:
+            'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/3b8ae7a4e0884b4d75b8094f6c83cd8c_list_page_data.json',
+        data: {'page': _page},
+        success: (resp) {
+          if (resp == null) {
+            return;
           }
-          _listData.add(dataItem);
+          var data = resp['data'];
+          data.forEach((item) {
+            var dataItem = ItemData();
+            try {
+              dataItem.icon = item['icon'];
+              dataItem.title = item['title'];
+              dataItem.subTitle = item['subTitle'];
+              dataItem.distance = item['distance'];
+            } catch (e) {}
+            _listData.add(dataItem);
+          });
+          setState(() {});
         });
-        setState(() {});
-      }
-    });
   }
 
   int dataLength() {
@@ -116,24 +110,48 @@ class _ListDemoPageState extends State<ListDemoPage> {
                   ),
                 ),
               ),
-            )),
-        body: Container(
-            color: Colors.white,
-            child: Sugar.ifEqualBool(isDataEmpty(),
-                trueValue: () => Center(
-                      child: Text(
-                        '加载中...',
-                      ),
-                    ),
-                falseValue: () => ListView.builder(
-                      itemCount: dataLength(),
-                      itemBuilder: Sugar.indexedWidgetBuilder(
-                          (context, index) => SizedBox(
-                              height: 90.5,
-                              width: Sugar.width(context),
-                              child: Column(
-                                children: [
-                                  Row(
+            ),
+          )),
+      body: Container(
+        color: Colors.white,
+        child: Sugar.ifEqualBool(isDataEmpty(),
+            trueValue: () => Center(
+                  child: Text(
+                    '加载中...',
+                  ),
+                ),
+            falseValue: () => Sugar.listBuilder(
+                itemCount: dataLength(),
+                itemBuilder: (context, index) {
+                  return SizedBox(
+                      height: 90.5,
+                      width: Sugar.width(context),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 10, left: 15, bottom: 10, right: 10),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                          fit: BoxFit.fitHeight,
+                                          image:
+                                              NetworkImage(_getIcon(index)))),
+                                  width: 70,
+                                  height: 70,
+                                ),
+                              ),
+                              Material(
+                                color: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.only(

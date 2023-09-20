@@ -1,5 +1,6 @@
 import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
+import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -24,39 +25,30 @@ class _MomentsListState extends State<MomentsList> {
 
   void requestData() {
     _page++;
-    FairCommonPlugin().http({
-      'pageName': '#FairKey#',
-      'method': 'GET',
-      'url':
-          'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/ed04fcaf655b79b1ae81ad2836ce67e9_moments_data.json',
-      'data': {'page': _page},
-      'callback': (resp) {
-        if (resp == null) {
-          return;
-        }
-        var data = resp['data'];
-        data.forEach((item) {
-          var dataItem = MomentsModel();
-          try {
-            dataItem.avatar = item.avatar;
-            dataItem.username = item.username;
-            dataItem.content = item.content;
-            dataItem.picture = item.picture;
-            dataItem.likes = item.likes;
-            dataItem.comments = item.comments;
-          } catch (e) {
-            dataItem.avatar = item['avatar'];
-            dataItem.username = item['username'];
-            dataItem.content = item['content'];
-            dataItem.picture = item['picture'];
-            dataItem.likes = item['likes'];
-            dataItem.comments = item['comments'];
+    FairNet.requestData(
+        method: FairNet.GET,
+        url:
+            'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/ed04fcaf655b79b1ae81ad2836ce67e9_moments_data.json',
+        data: {'page': _page},
+        success: (resp) {
+          if (resp == null) {
+            return;
           }
-          _listData.add(dataItem);
+          var data = resp['data'];
+          data.forEach((item) {
+            var dataItem = MomentsModel();
+            try {
+              dataItem.avatar = item['avatar'];
+              dataItem.username = item['username'];
+              dataItem.content = item['content'];
+              dataItem.picture = item['picture'];
+              dataItem.likes = item['likes'];
+              dataItem.comments = item['comments'];
+            } catch (e) {}
+            _listData.add(dataItem);
+          });
+          setState(() {});
         });
-        setState(() {});
-      }
-    });
   }
 
   int dataLength() {
@@ -147,13 +139,15 @@ class _MomentsListState extends State<MomentsList> {
                 '加载中...',
               ),
             ),
-            falseValue: () => ListView.builder(
-              itemCount: dataLength(),
-              itemBuilder:
-                  Sugar.indexedWidgetBuilder((context, index) => Container(
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
-                          child: Column(
+            falseValue: () => Sugar.listBuilder(
+                itemCount: dataLength(),
+                itemBuilder: (context, index) {
+                  return Container(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
+                      child: Column(
+                        children: [
+                          Row(
                             children: [
                               Row(
                                 children: [

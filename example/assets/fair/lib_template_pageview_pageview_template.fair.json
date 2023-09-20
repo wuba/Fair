@@ -102,6 +102,12 @@
                         "rt": "Widget"
                       }
                     ]
+                  },
+                  "functionParameters": {
+                    "pa": [
+                      "context",
+                      "index"
+                    ]
                   }
                 ],
                 "na": {

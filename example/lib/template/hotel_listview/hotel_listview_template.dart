@@ -1,5 +1,6 @@
 import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
+import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -24,39 +25,30 @@ class _HotelListViewState extends State<HotelListView> {
 
   void requestData() {
     _page++;
-    FairCommonPlugin().http({
-      'pageName': '#FairKey#',
-      'method': 'GET',
-      'url':
-          'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/3be6c61070d3b48c8165af5d18464c0e_hotel_list_data.json',
-      'data': {'page': _page},
-      'callback': (resp) {
-        if (resp == null) {
-          return;
-        }
-        var data = resp['data'];
-        data.forEach((item) {
-          var dataItem = HotelModel();
-          try {
-            dataItem.imagePath = item.imagePath;
-            dataItem.titleTxt = item.titleTxt;
-            dataItem.subTxt = item.subTxt;
-            dataItem.dist = item.dist + ' km';
-            dataItem.reviews = item.reviews + ' reviews';
-            dataItem.perNight = item.perNight + '';
-          } catch (e) {
-            dataItem.imagePath = item['imagePath'];
-            dataItem.titleTxt = item['titleTxt'];
-            dataItem.subTxt = item['subTxt'];
-            dataItem.dist = item['dist'] + ' km';
-            dataItem.reviews = item['reviews'] + ' reviews';
-            dataItem.perNight = item['perNight'] + '';
+    FairNet.requestData(
+        method: FairNet.GET,
+        url:
+            'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/3be6c61070d3b48c8165af5d18464c0e_hotel_list_data.json',
+        data: {'page': _page},
+        success: (resp) {
+          if (resp == null) {
+            return;
           }
-          _listData.add(dataItem);
+          var data = resp['data'];
+          data.forEach((item) {
+            var dataItem = HotelModel();
+            try {
+              dataItem.imagePath = item['imagePath'];
+              dataItem.titleTxt = item['titleTxt'];
+              dataItem.subTxt = item['subTxt'];
+              dataItem.dist = item['dist'] + ' km';
+              dataItem.reviews = item['reviews'] + ' reviews';
+              dataItem.perNight = item['perNight'] + '';
+            } catch (e) {}
+            _listData.add(dataItem);
+          });
+          setState(() {});
         });
-        setState(() {});
-      }
-    });
   }
 
   bool isDataEmpty() {

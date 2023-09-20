@@ -1,0 +1,92 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "Log Example"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "Column",
+      "na": {
+        "children": [
+          {
+            "className": "Image.network",
+            "pa": [
+              "https://img.58cdn.com.cn/logo/58/252_84/logo-o.png"
+            ],
+            "na": {
+              "width": 500,
+              "height": 250
+            }
+          },
+          {
+            "className": "Text",
+            "pa": [
+              "#(点击打印日志: count value: $_count)"
+            ],
+            "na": {
+              "style": {
+                "className": "TextStyle",
+                "na": {
+                  "fontSize": 15
+                }
+              }
+            }
+          },
+          {
+            "className": "Padding",
+            "na": {
+              "padding": {
+                "className": "EdgeInsets.only",
+                "na": {
+                  "top": 15
+                }
+              }
+            }
+          },
+          {
+            "className": "MaterialButton",
+            "na": {
+              "color": "#(Colors.grey)",
+              "onPressed": "@(showLog)",
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "Click Show Log"
+                ],
+                "na": {
+                  "style": {
+                    "className": "TextStyle",
+                    "na": {
+                      "fontSize": 19
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "floatingActionButton": {
+      "className": "FloatingActionButton",
+      "na": {
+        "onPressed": "@(plusCount)",
+        "child": {
+          "className": "Icon",
+          "pa": [
+            "#(Icons.add)"
+          ]
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

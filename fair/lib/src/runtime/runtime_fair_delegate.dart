@@ -91,7 +91,7 @@ abstract class RuntimeFairDelegate {
       var arguments;
       if (props != null) {
         arguments = [];
-        arguments.add(props);
+        arguments.addAll(props);
       }
       return runtime?.invokeMethod(pageName, funcName, arguments);
     };

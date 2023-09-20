@@ -1,7 +1,7 @@
-![social preview](social-dark.png)
+![social preview](resources/social-dark.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <p align="center">
-  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.1.0-orange" alt="pub"></a>
+  <a href="https://pub.dev/packages/fair"><img src="https://img.shields.io/badge/pub-3.2.1-orange" alt="pub"></a>
   <a href="https://github.com/wuba/fair"><img src="https://img.shields.io/badge/platform-flutter-blue.svg" alt="github"></a>
   <a href="https://fair.58.com/"><img src="https://img.shields.io/badge/doc-fair.58.com-green.svg" alt="doc"></a>
   <a href="https://github.com/wuba/fair/LICENSE"><img src="https://img.shields.io/badge/license-BSD-green.svg" alt="license"></a>
@@ -17,18 +17,18 @@ Fair is a dynamic framework designed for Flutter. Through the automatic conversi
 
 The goal of creating Fair is to support updates through business bundles and JS distribution without the release of versions (Android, iOS, Web), similar to React Native. After integrating with Flutter Fair, you can quickly publish new pages without waiting for your app's next release date. Fair provides standard widgets, which can be used as a new dynamic page or as part of an existing Flutter page, such as typography/style modification of operation bits, full page replacement, partial replacement, etc.
 
-![](what-is-fair-en.png)
+![](resources/what-is-fair-en.png)
 
 Fair's UI rendering is lossless and can be restored at the pixel level. Take a look at the effect of escaping some pages of Best Flutter UI Templates:
 
-![best-ui-template](best-ui-template.png)
+![best-ui-template](resources/best-ui-template.png)
 
 > The project used is from https://github.com/mitesh77/Best-Flutter-UI-Templates </br>
 > location：/example/lib/best_flutter_ui
 
 ## 🏛Architecture
 
-![fair architecture](fair.png)
+![fair architecture](resources/fair.png)
 
 ## 🚀 Running
 Use Flutter Fair require few steps. 
@@ -50,15 +50,16 @@ Assuming that the fair project and your own project are in the same folder:
 ```yaml
 # add Fair dependency
 dependencies:
-  fair: 3.1.0
+  fair: 3.2.1
 
 # add build_runner and compiler dependency
 dev_dependencies:
   build_runner: ^2.0.0
-  fair_compiler: ^1.6.0
+  fair_compiler: ^1.7.0
  
 # switch "fair_version" according to the local Flutter SDK version
-# Flutter SDK 3.3.x(3.3.0、3.3.1、3.3.2、3.3.3、3.3.4、3.3.5、3.3.6) -> flutter_3_3_0
+# Flutter SDK 3.7.x(3.7.0、3.7.1、3.7.2、3.7.3、3.7.4、3.7.5、3.7.6、3.7.7、3.7.8、3.7.9、3.7.10) -> flutter_3_7_0
+# Flutter SDK 3.3.x(3.3.0、3.3.1、3.3.2、3.3.3、3.3.4、3.3.5、3.3.6、3.3.7、3.3.8、3.3.9、3.3.10) -> flutter_3_3_0
 # Flutter SDK 3.0.x(3.0.0、3.0.1、3.0.2、3.0.3、3.0.4、3.0.5) -> flutter_3_0_0
 # Flutter SDK 2.10.x(2.10.0、2.10.1、2.10.2、2.10.3) -> flutter_2_10_0
 # Flutter SDK 2.8.x(2.8.0、2.8.1) -> flutter_2_8_0
@@ -67,7 +68,7 @@ dev_dependencies:
 # Flutter SDK 1.22.6 -> flutter_1_22_6
 dependency_overrides:
   fair_version:
-    path: ../fair/flutter_version/flutter_3_3_0
+    path: ../fair/flutter_version/flutter_3_7_0
 ```
 
 **step3：Wrap your app with FairApp Widget**
@@ -131,18 +132,18 @@ faircli create -k carrier -n carrier_project_name
 Page/Component Template Code
 
 <html>
-<img src="fair_template.png" width="80%">
+<img src="resources/fair_template.png" width="80%">
 </html>
 
 ### DevTools flow chart
-![fair tools](fair_tools.png)
+![fair tools](resources/fair_tools.png)
 
 ### DevTools demo
 After using faircli to configure the local hot update service, open the developer options on the mobile device, select the local mode, enter the ip of the development machine, then preview fair dynamic effect
 
 <html>
 <div align="center">
-<img src="fair_tools.gif" width="30%">
+<img src="resources/fair_tools.gif" width="30%">
 </div>
 </html>
 
@@ -172,6 +173,35 @@ IEDA plugin: [jetbrains_plugin_fair_template](https://plugins.jetbrains.com/plug
 Hot update platform: [FAIR PUSHY](https://github.com/wuba/FairPushy)
 
 ## versions
+
+## 3.10.0
+updateDate: 2023.08.15
+
+- Adapted to Flutter 3.10.0, released Fair Version 3.10
+- Fix known bugs, fix DSL parser issues
+
+### 3.2.1
+updateDate：2023.04.13
+
+- Fixed some issues.
+
+### 3.2.0
+updateDate：2023.04.12
+
+- Adjust the order of dispose calls, not above the tree, subsequent operations stop
+- Add generic FairPlugin js and dart code, reuse the same interaction logic, add example comments
+- Json parsing compatibility
+- Add exception catching and log printing when executeFunction is called with V8 engine in Android
+- Fix SliverGridDelegateWithFixedCrossAxisCount conversion error.
+- SugarMap and SugarMapEach inputs support other Sugar expressions
+- Optimize the performance of ifEqual ifEqualBool switchCase
+- Fix Domain not recognizing index and item in sugar
+- Make AOT also follow conditions before executing code
+- Fix SugarMap and SugarMapEach set input does not support other Sugar syntax
+- Abstract Domain, add IndexDomain, MapEachDomain, support nested Domains
+- New FunctionDomain generic Domain, generate corresponding parameters for function callbacks for FunctionDomain to use.
+- Added NullableIndexedWidgetBuilder, IndexedWidgetBuilder, WidgetBuilder, TransitionBuilder common Sugar support
+- Some known issues fixed
 
 ### 3.1.0
 updateDate：2023.03.14
@@ -278,7 +308,7 @@ Supplement the iOS runtime environment in the sample project
    * Flutter 2.10.0 version adaptation, is expected to be launched in early June  ✅
    * Flutter 3.0 version adaptation               ✅
    * IDE syntax detection and hint plugin ✅
-   * Rich syntactic sugar
+   * Rich syntactic sugar                 ✅
 * Hot update platform
    * Dart Server project construction ✅
    * Flutter Web project construction ✅
@@ -288,17 +318,17 @@ Supplement the iOS runtime environment in the sample project
 * Online dynamic
    * Flutter Web project construction ✅
    * Dart Server project construction ✅
-   * ActionEdit
+   * ActionEdit                       ✅
    * Code editing                     ✅
-   * Component editing
-   * Page editing
-   * Engineering editor
-   * Flutter effect preview
-   * Fair DSL preview
+   * Component editing                ✅
+   * Page editing                     ✅
+   * Engineering editor               ✅
+   * Flutter effect preview           ✅
+   * Fair DSL preview                 ✅
 * IDE plug-in
-   * Fair project generation
-   * Fair template generation
-   * Fair syntax detection
+   * Fair project generation          ✅
+   * Fair template generation         ✅
+   * Fair syntax detection            ✅
 
 
 ## 📱Accessed APPs
@@ -367,6 +397,16 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 [![Stargazers repo roster for @wuba/fair](https://reporoster.com/stars/wuba/fair)](https://github.com/wuba/fair/stargazers)
 
 [![Forkers repo roster for @wuba/fair](https://reporoster.com/forks/wuba/fair)](https://github.com/wuba/fair/network/members)
+
+## 🔧Build together
+Submit issues through [Issue](https://github.com/wuba/fair/issues), contribute code through Pull Request, and the administrator will review the code.
+
+Friends who are interested in Fair can join the exchange group. For technical consultation and discussion, please go to
+
+| WeChat secretary | WeChat group |
+|--------------------------|--------------------------|
+| ![wechat](resources/weixin.jpeg) | ![wechat_group](resources/wechat-group-02.png) |
+
 
 ## License
 

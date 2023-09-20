@@ -1,3 +1,22 @@
+## [1.8.0]
+* Compiler log optimized.
+
+## [1.7.4]
+* bugfix.
+
+## [1.7.3]
+* Fixed an issue with JS file was not being regenerated.
+
+## [1.7.2]
+* bugfix.
+
+## [1.7.1]
+* Fixed an issue with widget function contains parameters.
+
+## [1.7.0]
+* Fixed an issue with string returned by analyzer ExportDirective, ImportDirective.
+* Fixed binding generation error with import export resolution.
+
 ## [1.6.0]
 * Remove the generation time from the generation.fair. dart comment. 
 * Added the ignore unnecessary_import operation.

@@ -23,7 +23,6 @@ class JRListWidget extends StatefulWidget {
 }
 
 class JRListState extends State<JRListWidget> {
-
   @FairProps()
   var fairProps;
 
@@ -31,8 +30,6 @@ class JRListState extends State<JRListWidget> {
 
 // 监听listview的滑动
   late ScrollController _scrollController;
-
-  
 
   bool listIsEmpty() {
     return list.isEmpty;
@@ -50,9 +47,7 @@ class JRListState extends State<JRListWidget> {
     await Future.delayed(Duration(seconds: 1), () {
       list.insertAll(
           0, List.generate(Random().nextInt(5) + 5, (i) => 'refresh Item $i'));
-      setState(() {
-
-      });
+      setState(() {});
     });
   }
 
@@ -60,8 +55,7 @@ class JRListState extends State<JRListWidget> {
     Future.delayed(Duration(seconds: 1), () {
       list.insertAll(
           0, List.generate(Random().nextInt(5) + 15, (i) => 'Item $i'));
-      setState(() {
-      });
+      setState(() {});
     });
 
     // 监听滑动
@@ -118,17 +112,19 @@ class JRListState extends State<JRListWidget> {
       ),
       body: Center(
         child: RefreshIndicator(
-            //下拉刷新
-            displacement: 10.0,
-            onRefresh: _onRefresh,
-            child: Sugar.ifEqualBool(listIsEmpty(),
-                trueValue: ()=>Center(
-                  child: CircularProgressIndicator(), //没有数据就转圈
-                ),
-                falseValue: ()=>ListView.builder(
-                    controller: _scrollController,
-                    itemCount: _itemCount(),
-                    itemBuilder: _itemBuilder))),
+          //下拉刷新
+          displacement: 10.0,
+          onRefresh: _onRefresh,
+          child: Text('123'),
+          // child: Sugar.ifEqualBool(listIsEmpty(),
+          //     trueValue: Center(
+          //       child: CircularProgressIndicator(), //没有数据就转圈
+          //     ),
+          //     falseValue: ListView.builder(
+          //         controller: _scrollController,
+          //         itemCount: _itemCount(),
+          //         itemBuilder: _itemBuilder))
+        ),
       ),
     );
   }

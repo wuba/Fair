@@ -159,13 +159,13 @@ class GestureExpression extends Expression {
   @override
   R onEvaluate(
       ProxyMirror? proxy, BindingData? binding, Domain? domain, String? exp, String? pre) {
-    var prop = binding?.bindFunctionOf(exp?.substring(2, exp.length - 1) ?? '');
+    var prop = binding?.bindFunctionOf(exp?.substring(2, exp.length - 1) ?? '', proxy, binding, domain, exp: exp);
     return R(prop, exp: exp, needBinding: false);
   }
 
   @override
   bool hitTest(String? exp, String? pre) {
-    return RegExp(r'\@\(\w+\)', multiLine: false).hasMatch(exp ?? '');
+    return RegExp(r'\@\(.+\)', multiLine: false).hasMatch(exp ?? '');
   }
 }
 

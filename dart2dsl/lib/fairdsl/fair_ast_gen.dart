@@ -24,11 +24,78 @@ class NodeCheckAstVisitor extends GeneralizingAstVisitor<Map> {
 }
 
 class CustomAstVisitor extends SimpleAstVisitor<Map> {
+  ///构造函数接收字符串类型的dart源码
+  CustomAstVisitor(this.path, this.source) {
+    lines = source.split('\n');
+  }
+
+  // 源码路径
+  String? path;
+  // 源码
+  String source;
+  // 源码按行拆分
+  var lines;
+  // 是否正在访问build方法
+  var _isBuildMethodVisiting = false;
+  // 是否正在访问build方法的return语句
+  var _isBuildMethodReturnStatementVisiting = false;
+
+  /// 检查节点合法性
+  /// [AstNode] 抽象语法树节点
+  void _checkNodeValid(AstNode node) {
+    if (!_isBuildMethodVisiting) {
+      //不在build方法内部则不检查合法性
+      return;
+    }
+    if (_isBuildMethodReturnStatementVisiting) {
+      //在return语句内部
+      if (!checkNode.containsKey(node.runtimeType.toString())) {
+        //通过支持的节点类型检查是否识别
+        printWarningMessage(node, '警告: 不识别的语法节点类型');
+      }
+    } else if (node is Statement &&
+        !(node is Block) &&
+        !(node is ReturnStatement)) {
+      //不在return语句内部判定不合法
+      printWarningMessage(node, '警告: 无效的代码语句，不在dart2dsl解析范围内');
+    }
+  }
+
+  /// 打印警告信息，包含行号、列号、节点类型、节点源码
+  /// [AstNode] 抽象语法树节点
+  /// [message] 警告信息
+  void printWarningMessage(AstNode node, String message) {
+    var totalOffset = 0;
+    var line = 0;
+    var lineOffset = 0;
+    for (var i = 0; i < lines.length; i++) {
+      int lineLength = lines[i].length + 1; // 加1是因为每行结尾有一个换行符
+      totalOffset += lineLength;
+      if (totalOffset > node.offset) {
+        line = i + 1;
+        lineOffset = node.offset - (totalOffset - lineLength) + 1;
+        break;
+      }
+    }
+    stderr.writeln(
+        '[Fair] $message ${node.runtimeType} $path:$line:$lineOffset: ${node.toSource()}');
+  }
+
+  /// 是否是构造Widget的方法，根据返回类型是否Widget判断
+  /// [AstNode] 抽象语法树节点
+  bool _isWidgetMethod(AstNode node) {
+    if (node is MethodDeclaration) {
+      var returnType = node.returnType;
+      if (returnType != null && returnType.toString() == 'Widget') {
+        return true;
+      }
+    }
+    return false;
+  }
+
   Map? _visitNode(AstNode? node) {
     if (node != null) {
-      if (!checkNode.containsKey(node.runtimeType.toString())) {
-        stdout.writeln('不支持的节点${node.runtimeType}<---->${node.parent?.toSource()}---->${node.toSource()} ');
-      }
+      _checkNodeValid(node);
       return node.accept(this);
     }
     return null;
@@ -40,7 +107,8 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
       //   stdout.writeln('不支持的节点${token.runtimeType}<---->${token.parent?.toSource()}---->${node.toSource()} ');
       // }
       return {
-        'type': '${token.type.lexeme.substring(0,1).toUpperCase()}${token.type.lexeme.substring(1)}',
+        'type':
+            '${token.type.lexeme.substring(0, 1).toUpperCase()}${token.type.lexeme.substring(1)}',
         'name': token.lexeme,
       };
     }
@@ -53,12 +121,19 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
       var size = nodes.length;
       for (var i = 0; i < size; i++) {
         var node = nodes[i];
-        if (!checkNode.containsKey(node.runtimeType.toString())) {
-          stdout.writeln('不支持的节点${node.runtimeType}<---->${node.parent?.toSource()}---->${node.toSource()}');
+        final isBuildMethod = _isWidgetMethod(node);
+        if (!_isBuildMethodVisiting && isBuildMethod) {
+          //dart2dsl语法合法性检查开始
+          _isBuildMethodVisiting = true;
         }
+        _checkNodeValid(node);
         var res = node.accept(this);
         if (res != null) {
           maps.add(res);
+        }
+        if (_isBuildMethodVisiting && isBuildMethod) {
+          //dart2dsl语法合法性检查完毕
+          _isBuildMethodVisiting = false;
         }
       }
     }
@@ -87,17 +162,25 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
 
   @override
   Map? visitInterpolationExpression(InterpolationExpression node) {
-    return {'type': 'InterpolationExpression', 'id': _visitNode(node.expression)};
+    return {
+      'type': 'InterpolationExpression',
+      'id': _visitNode(node.expression)
+    };
   }
 
   @override
   Map? visitStringInterpolation(StringInterpolation node) {
-    return {'type': 'StringInterpolation', 'elements': _visitNodeList(node.elements), 'sourceString': node.toSource()};
+    return {
+      'type': 'StringInterpolation',
+      'elements': _visitNodeList(node.elements),
+      'sourceString': node.toSource()
+    };
   }
 
   @override
   Map? visitPostfixExpression(PostfixExpression node) {
-    return _buildPrefixExpression(_visitNode(node.operand), node.operator.toString(), false);
+    return _buildPrefixExpression(
+        _visitNode(node.operand), node.operator.toString(), false);
   }
 
   @override
@@ -109,7 +192,10 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   //node.fields子节点类型 VariableDeclarationList
   Map? visitFieldDeclaration(FieldDeclaration node) {
     return _buildVariableDeclarationList(
-        _visitNode(node.fields.type), _visitNodeList(node.fields.variables), _visitNodeList(node.metadata), node.toSource());
+        _visitNode(node.fields.type),
+        _visitNodeList(node.fields.variables),
+        _visitNodeList(node.metadata),
+        node.toSource());
   }
 
   @override
@@ -131,7 +217,8 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   Map? visitVariableDeclaration(VariableDeclaration node) {
     // return _buildVariableDeclaration(
     //     _visitNode(node.name), _visitNode(node.initializer));
-    return _buildVariableDeclaration(_visitIdentifierToken(node.name), _visitNode(node.initializer));
+    return _buildVariableDeclaration(
+        _visitIdentifierToken(node.name), _visitNode(node.initializer));
   }
 
   @override
@@ -141,7 +228,11 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
 
   @override
   Map? visitVariableDeclarationList(VariableDeclarationList node) {
-    return _buildVariableDeclarationList(_visitNode(node.type), _visitNodeList(node.variables), _visitNodeList(node.metadata), node.toSource());
+    return _buildVariableDeclarationList(
+        _visitNode(node.type),
+        _visitNodeList(node.variables),
+        _visitNodeList(node.metadata),
+        node.toSource());
   }
 
   @override
@@ -172,7 +263,8 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   Map? visitFunctionDeclaration(FunctionDeclaration node) {
     // return _buildFunctionDeclaration(
     //     _visitNode(node.name), _visitNode(node.functionExpression));
-    return _buildFunctionDeclaration(_visitIdentifierToken(node.name), _visitNode(node.functionExpression));
+    return _buildFunctionDeclaration(
+        _visitIdentifierToken(node.name), _visitNode(node.functionExpression));
   }
 
   @override
@@ -188,100 +280,107 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
 
   @override
   Map? visitFunctionExpression(FunctionExpression node) {
-    var functionType= node.staticType as  FunctionType?;
+    var functionType = node.staticType as FunctionType?;
     String? tagString;
     String? returnTypeString;
     String? returnTypeTypeArguments;
-    if(functionType !=null) {
-       var returnType= functionType.returnType;
-       
-       tagString = functionType.getDisplayString(withNullability: true);
-       returnTypeString = functionType.returnType.getDisplayString(withNullability: true);
-       // 特殊处理一下 Widget
-       // 
-       // itemBuilder: (context, index) {
-       //   return Container();
-       // }
-       // 
-       // 会生成这样的， "Container Function(BuildContext, int)"
-       // 
-       // 但是实际上需要是 "Widget Function(BuildContext, int)"
-       // 
-       // Widget 是符合大部分的场景
-       // 
-       // 应该尽量避免使用返回类型是显式类型(比如返回类型必须是Container)，如果真的需要，请在回调执行的地方再做强转。
-       // 或者在自定义的 DynamicWidgetBuilder 中做特殊处理
-       // 
-       // class SugarCommon {
-       //   SugarCommon._();
-       //   static Container Function() returnContainer(Widget Function() input) {
-       //     Container Function() builder =(){
-       //       return input() as Container;
-       //     };
-       //     return builder;
-       //   }
-       // }
-       // 
-       // class CustomDynamicWidgetBuilder extends DynamicWidgetBuilder {
-       //   CustomDynamicWidgetBuilder(
-       //     super.proxyMirror,
-       //     super.page,
-       //     super.bound, {
-       //     super.bundle,
-       //   });
-       //   @override
-       //   dynamic convert(BuildContext context, Map map, Map? methodMap,
-       //       {Domain? domain}) {
-       //     var name = map[tag];
-       //     if(name =='SugarCommon.returnContainer') {
-       //        dynamic fairFunction = pa0(map);
-       //        assert(fairFunction is Map);
-       //        Container Function() builder = (
-       //        ) {
-       //          return convert(
-       //            context,
-       //            FunctionDomain.getBody(fairFunction),
-       //            methodMap,
-       //          ) as Container;
-       //        };
-       //        return builder;
-       //     }
-       //     return super.convert(context, map, methodMap, domain:domain);
-       //   }
-       // }
-       if(returnType is InterfaceType) {
-          if(returnType.allSupertypes.any((element) => 
-          element.element.name == 'Widget')) {
-           var nullabilityString = returnTypeString.endsWith('?') ? '?':'';
-           tagString = tagString.replaceFirst(returnTypeString, 'Widget'+nullabilityString);
-           returnTypeString = 'Widget'+nullabilityString;
-          }
-          if(returnType.typeArguments.isNotEmpty) {
-            returnTypeTypeArguments= returnType.typeArguments.map((e) => e.getDisplayString(withNullability: true)).join(',');
-          }
-       }
+    if (functionType != null) {
+      var returnType = functionType.returnType;
+
+      tagString = functionType.getDisplayString(withNullability: true);
+      returnTypeString =
+          functionType.returnType.getDisplayString(withNullability: true);
+      // 特殊处理一下 Widget
+      //
+      // itemBuilder: (context, index) {
+      //   return Container();
+      // }
+      //
+      // 会生成这样的， "Container Function(BuildContext, int)"
+      //
+      // 但是实际上需要是 "Widget Function(BuildContext, int)"
+      //
+      // Widget 是符合大部分的场景
+      //
+      // 应该尽量避免使用返回类型是显式类型(比如返回类型必须是Container)，如果真的需要，请在回调执行的地方再做强转。
+      // 或者在自定义的 DynamicWidgetBuilder 中做特殊处理
+      //
+      // class SugarCommon {
+      //   SugarCommon._();
+      //   static Container Function() returnContainer(Widget Function() input) {
+      //     Container Function() builder =(){
+      //       return input() as Container;
+      //     };
+      //     return builder;
+      //   }
+      // }
+      //
+      // class CustomDynamicWidgetBuilder extends DynamicWidgetBuilder {
+      //   CustomDynamicWidgetBuilder(
+      //     super.proxyMirror,
+      //     super.page,
+      //     super.bound, {
+      //     super.bundle,
+      //   });
+      //   @override
+      //   dynamic convert(BuildContext context, Map map, Map? methodMap,
+      //       {Domain? domain}) {
+      //     var name = map[tag];
+      //     if(name =='SugarCommon.returnContainer') {
+      //        dynamic fairFunction = pa0(map);
+      //        assert(fairFunction is Map);
+      //        Container Function() builder = (
+      //        ) {
+      //          return convert(
+      //            context,
+      //            FunctionDomain.getBody(fairFunction),
+      //            methodMap,
+      //          ) as Container;
+      //        };
+      //        return builder;
+      //     }
+      //     return super.convert(context, map, methodMap, domain:domain);
+      //   }
+      // }
+      if (returnType is InterfaceType) {
+        if (returnType.allSupertypes
+            .any((element) => element.element.name == 'Widget')) {
+          var nullabilityString = returnTypeString.endsWith('?') ? '?' : '';
+          tagString = tagString.replaceFirst(
+              returnTypeString, 'Widget' + nullabilityString);
+          returnTypeString = 'Widget' + nullabilityString;
+        }
+        if (returnType.typeArguments.isNotEmpty) {
+          returnTypeTypeArguments = returnType.typeArguments
+              .map((e) => e.getDisplayString(withNullability: true))
+              .join(',');
+        }
+      }
     }
 
-    return _buildFunctionExpression(_visitNode(node.parameters),
-       _visitNode(node.body), 
-       isAsync: node.body.isAsynchronous,
-       tag: tagString,
-       returnType: returnTypeString,
-       returnTypeTypeArguments: returnTypeTypeArguments,
-     );
+    return _buildFunctionExpression(
+      _visitNode(node.parameters),
+      _visitNode(node.body),
+      isAsync: node.body.isAsynchronous,
+      tag: tagString,
+      returnType: returnTypeString,
+      returnTypeTypeArguments: returnTypeTypeArguments,
+    );
   }
 
   @override
   Map? visitSimpleFormalParameter(SimpleFormalParameter node) {
     // return _buildSimpleFormalParameter(
     //     _visitNode(node.type), node.identifier?.name);
-    return _buildSimpleFormalParameter(_visitNode(node.type), node.name?.lexeme,node.isNamed);
+    return _buildSimpleFormalParameter(
+        _visitNode(node.type), node.name?.lexeme, node.isNamed);
   }
 
   @override
   Map? visitDefaultFormalParameter(DefaultFormalParameter node) {
-    var type= (node.parameter as SimpleFormalParameter?)?.type;
-    return _buildSimpleFormalParameter(_visitNode(type), node.name?.lexeme,node.isNamed);
+    var type = (node.parameter as SimpleFormalParameter?)?.type;
+    return _buildSimpleFormalParameter(
+        _visitNode(type), node.name?.lexeme, node.isNamed);
   }
 
   @override
@@ -299,28 +398,50 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
     return _buildTypeName(node.name.name);
   }
 
+  /// 当前记录的return语句深度
+  var returnStatementDeepCount = 0;
+
   @override
   Map? visitReturnStatement(ReturnStatement node) {
-    return _buildReturnStatement(_visitNode(node.expression));
+    if (_isBuildMethodVisiting && returnStatementDeepCount == 0) {
+      // 标记进入build方法的return语句
+      _isBuildMethodReturnStatementVisiting = true;
+    }
+    returnStatementDeepCount++;
+    var map = _buildReturnStatement(_visitNode(node.expression));
+    returnStatementDeepCount--;
+    if (_isBuildMethodReturnStatementVisiting &&
+        returnStatementDeepCount == 0) {
+      // 标记退出build方法的return语句
+      _isBuildMethodReturnStatementVisiting = false;
+    }
+    return map;
   }
 
   @override
   Map? visitMethodDeclaration(MethodDeclaration node) {
     return _buildMethodDeclaration(
         // _visitNode(node.name),
-        _visitIdentifierToken(node.name), _visitNode(node.parameters), _visitNode(node.typeParameters), _visitNode(node.body), _visitNode(node.returnType),
-        _visitNodeList(node.metadata), node.toSource(),
+        _visitIdentifierToken(node.name),
+        _visitNode(node.parameters),
+        _visitNode(node.typeParameters),
+        _visitNode(node.body),
+        _visitNode(node.returnType),
+        _visitNodeList(node.metadata),
+        node.toSource(),
         isAsync: node.body.isAsynchronous);
   }
 
   @override
   Map? visitNamedExpression(NamedExpression node) {
-    return _buildNamedExpression(_visitNode(node.name), _visitNode(node.expression));
+    return _buildNamedExpression(
+        _visitNode(node.name), _visitNode(node.expression));
   }
 
   @override
   Map? visitPrefixedIdentifier(PrefixedIdentifier node) {
-    return _buildPrefixedIdentifier(_visitNode(node.identifier), _visitNode(node.prefix));
+    return _buildPrefixedIdentifier(
+        _visitNode(node.identifier), _visitNode(node.prefix));
   }
 
   @override
@@ -336,14 +457,19 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
     } else {
       callee = _visitNode(node.methodName);
     }
-    return _buildMethodInvocation(callee, _visitNode(node.typeArguments), _visitNode(node.argumentList));
+    return _buildMethodInvocation(
+        callee, _visitNode(node.typeArguments), _visitNode(node.argumentList));
   }
 
   @override
   Map? visitClassDeclaration(ClassDeclaration node) {
     return _buildClassDeclaration(
         // _visitNode(node.name),
-        _visitIdentifierToken(node.name), _visitNode(node.extendsClause), _visitNode(node.implementsClause), _visitNode(node.withClause), _visitNodeList(node.metadata),
+        _visitIdentifierToken(node.name),
+        _visitNode(node.extendsClause),
+        _visitNode(node.implementsClause),
+        _visitNode(node.withClause),
+        _visitNodeList(node.metadata),
         _visitNodeList(node.members));
   }
 
@@ -351,7 +477,8 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   Map? visitInstanceCreationExpression(InstanceCreationExpression node) {
     Map? callee;
     if (node.constructorName.type.name is PrefixedIdentifier) {
-      var prefixedIdentifier = node.constructorName.type.name as PrefixedIdentifier;
+      var prefixedIdentifier =
+          node.constructorName.type.name as PrefixedIdentifier;
       callee = {
         'type': 'MemberExpression',
         'object': _visitNode(prefixedIdentifier.prefix),
@@ -360,14 +487,13 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
     }
     // 换了用 AnalysisContextCollection 解析之后，
     // 可以直接拿到构造的名字
-    else if(node.constructorName.name!=null) {
-       callee = {
+    else if (node.constructorName.name != null) {
+      callee = {
         'type': 'MemberExpression',
         'object': _visitNode(node.constructorName.type.name),
         'property': _visitNode(node.constructorName.name),
       };
-    }
-    else {
+    } else {
       //如果不是simpleIdentif 需要特殊处理
       callee = _visitNode(node.constructorName.type.name);
     }
@@ -417,14 +543,21 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
 
   @override
   Map? visitTypeArgumentList(TypeArgumentList node) {
-    var map={};
-    for (var argument in  node.arguments) {
-      var displayString= argument.type?.getDisplayString(withNullability: true);
-      if(displayString!=null) {
+    var map = {};
+    for (var argument in node.arguments) {
+      var displayString =
+          argument.type?.getDisplayString(withNullability: true);
+      if (displayString != null) {
         map[displayString] = displayString;
       }
     }
     return map;
+  }
+
+  @override
+  Map? visitPrefixExpression(PrefixExpression node) {
+    return _buildPrefixExpression(
+        _visitNode(node.operand), node.operator.toString(), true);
   }
 
   ///根节点
@@ -458,7 +591,9 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
       };
 
   //变量声明列表
-  Map _buildVariableDeclarationList(Map? typeAnnotation, List<Map> declarations, List<Map> annotations, String source) => {
+  Map _buildVariableDeclarationList(Map? typeAnnotation, List<Map> declarations,
+          List<Map> annotations, String source) =>
+      {
         'type': 'VariableDeclarationList',
         'typeAnnotation': typeAnnotation,
         'declarations': declarations,
@@ -470,7 +605,8 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   Map _buildIdentifier(String name) => {'type': 'Identifier', 'name': name};
 
   //数值定义
-  Map _buildNumericLiteral(num? value) => {'type': 'NumericLiteral', 'value': value};
+  Map _buildNumericLiteral(num? value) =>
+      {'type': 'NumericLiteral', 'value': value};
 
   //函数声明
   Map _buildFunctionDeclaration(Map? id, Map? expression) => {
@@ -480,21 +616,25 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
       };
 
   //函数表达式
-  Map _buildFunctionExpression(Map? params, Map? body, {bool isAsync = false,String? tag, String? returnType,String? returnTypeTypeArguments}) => {
+  Map _buildFunctionExpression(Map? params, Map? body,
+          {bool isAsync = false,
+          String? tag,
+          String? returnType,
+          String? returnTypeTypeArguments}) =>
+      {
         'type': 'FunctionExpression',
         'parameters': params,
         'body': body,
         'isAsync': isAsync,
-        if(tag != null)
-        'tag': tag,
-        if(returnType != null)
-        'returnType': returnType,
-        if(returnTypeTypeArguments != null)
-        'returnTypeTypeArguments':returnTypeTypeArguments,
+        if (tag != null) 'tag': tag,
+        if (returnType != null) 'returnType': returnType,
+        if (returnTypeTypeArguments != null)
+          'returnTypeTypeArguments': returnTypeTypeArguments,
       };
 
   //函数参数列表
-  Map _buildFormalParameterList(List<Map> parameterList) => {'type': 'FormalParameterList', 'parameterList': parameterList};
+  Map _buildFormalParameterList(List<Map> parameterList) =>
+      {'type': 'FormalParameterList', 'parameterList': parameterList};
 
   //函数参数
   //函数参数
@@ -517,7 +657,8 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
       };
 
   //方法声明
-  Map _buildMethodDeclaration(Map? id, Map? parameters, Map? typeParameters, Map? body, Map? returnType, List<Map> annotations, String source,
+  Map _buildMethodDeclaration(Map? id, Map? parameters, Map? typeParameters,
+          Map? body, Map? returnType, List<Map> annotations, String source,
           {bool isAsync = false}) =>
       {
         'type': 'MethodDeclaration',
@@ -543,14 +684,18 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
         'prefix': prefix,
       };
 
-  Map _buildMethodInvocation(Map? callee, Map? typeArguments, Map? argumentList) => {
+  Map _buildMethodInvocation(
+          Map? callee, Map? typeArguments, Map? argumentList) =>
+      {
         'type': 'MethodInvocation',
         'callee': callee,
         'typeArguments': typeArguments,
         'argumentList': argumentList,
       };
 
-  Map _buildClassDeclaration(Map? id, Map? superClause, Map? implementsClause, Map? mixinClause, List<Map> metadata, List<Map> body) => {
+  Map _buildClassDeclaration(Map? id, Map? superClause, Map? implementsClause,
+          Map? mixinClause, List<Map> metadata, List<Map> body) =>
+      {
         'type': 'ClassDeclaration',
         'id': id,
         'superClause': superClause,
@@ -560,13 +705,17 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
         'body': body,
       };
 
-  Map _buildArgumentList(List<Map> argumentList) => {'type': 'ArgumentList', 'argumentList': argumentList};
+  Map _buildArgumentList(List<Map> argumentList) =>
+      {'type': 'ArgumentList', 'argumentList': argumentList};
 
-  Map _buildStringLiteral(String value) => {'type': 'StringLiteral', 'value': value};
+  Map _buildStringLiteral(String value) =>
+      {'type': 'StringLiteral', 'value': value};
 
-  Map _buildBooleanLiteral(bool value) => {'type': 'BooleanLiteral', 'value': value};
+  Map _buildBooleanLiteral(bool value) =>
+      {'type': 'BooleanLiteral', 'value': value};
 
-  Map _buildImplementsClause(List<Map> implementList) => {'type': 'ImplementsClause', 'implements': implementList};
+  Map _buildImplementsClause(List<Map> implementList) =>
+      {'type': 'ImplementsClause', 'implements': implementList};
 
   Map _buildPropertyAccess(Map id, Map expression) => {
         'type': 'PropertyAccess',
@@ -574,24 +723,33 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
         'expression': expression,
       };
 
-  Map _buildVariableExpression(String? expression) => {'type': 'VariableExpression', 'expression': expression};
+  Map _buildVariableExpression(String? expression) =>
+      {'type': 'VariableExpression', 'expression': expression};
 
 //  Map _buildPostfixExpression(Map operand, String operator) =>
 //      {'type': 'PostfixExpression', 'operand': operand, 'operator': operator};
 
-  Map _buildPrefixExpression(Map? argument, String oprator, bool prefix) =>
-      {'type': 'PrefixExpression', 'argument': argument, 'prefix': prefix, 'operator': oprator};
+  Map _buildPrefixExpression(Map? argument, String oprator, bool prefix) => {
+        'type': 'PrefixExpression',
+        'argument': argument,
+        'prefix': prefix,
+        'operator': oprator
+      };
 
-  Map _buildVisitListLiteral(List<Map> literal) => {'type': 'ListLiteral', 'elements': literal};
+  Map _buildVisitListLiteral(List<Map> literal) =>
+      {'type': 'ListLiteral', 'elements': literal};
 
-  Map _buildAnnotation(Map? name, Map? argumentList) => {'type': 'Annotation', 'id': name, 'argumentList': argumentList};
+  Map _buildAnnotation(Map? name, Map? argumentList) =>
+      {'type': 'Annotation', 'id': name, 'argumentList': argumentList};
 
-  Map _buildSetOrMapLiteral(List<Map> elements) => {'type': 'SetOrMapLiteral', 'elements': elements};
+  Map _buildSetOrMapLiteral(List<Map> elements) =>
+      {'type': 'SetOrMapLiteral', 'elements': elements};
 
-  Map _buildMapLiteralEntry(Map? key, Map? expression) => {'type': 'MapLiteralEntry', 'key': key, 'value': expression};
+  Map _buildMapLiteralEntry(Map? key, Map? expression) =>
+      {'type': 'MapLiteralEntry', 'key': key, 'value': expression};
 }
 
-Future<Map> generateAstMap(String path) async {
+Future<Map> generateAstMap(String path, {String? sourcePath}) async {
   if (path.isEmpty) {
     stdout.writeln('File not found');
   } else {
@@ -602,12 +760,17 @@ Future<Map> generateAstMap(String path) async {
         // var parseResult = parseFile(path: path, featureSet: FeatureSet.latestLanguageVersion());
         var collection = AnalysisContextCollection(includedPaths: [path]);
         // 为了获取 Function 的描述，改用该方法
-        var parseResult = await collection.contextFor(path).currentSession.getResolvedUnit(path) as ResolvedUnitResult;
-         
+        var parseResult = await collection
+            .contextFor(path)
+            .currentSession
+            .getResolvedUnit(path) as ResolvedUnitResult;
+
         var compilationUnit = parseResult.unit;
-       
+
         //遍历AST
-        var astData = compilationUnit.accept(CustomAstVisitor());
+        //buildStep.inputId.uri
+        var astData = compilationUnit.accept(
+            CustomAstVisitor(sourcePath, await File(path).readAsString()));
 
         // var encode = json.encode(astData);
         // print(encode);

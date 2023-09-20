@@ -387,14 +387,12 @@
                               }
                             }
                           }
-                        },
-                        "parameters": {
-                          "pa": [
-                            "item"
-                          ]
-                        },
-                        "tag": "Widget Function(HotelModel)",
-                        "rt": "Widget"
+                        }
+                      },
+                      "functionParameters": {
+                        "pa": [
+                          "item"
+                        ]
                       }
                     }
                   }

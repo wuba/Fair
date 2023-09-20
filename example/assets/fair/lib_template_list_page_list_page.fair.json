@@ -384,6 +384,12 @@
                         "tag": "Widget Function(BuildContext, int)",
                         "rt": "Widget"
                       }
+                    }
+                  },
+                  "functionParameters": {
+                    "pa": [
+                      "context",
+                      "index"
                     ]
                   }
                 }

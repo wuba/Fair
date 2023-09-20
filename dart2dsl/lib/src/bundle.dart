@@ -7,7 +7,7 @@
 import '../fairdsl/fair_ast_gen.dart';
 import '../fairdsl/fair_dsl_gen.dart';
 
-Future<String> parseFile(String filePath) async {
-  var ast = await generateAstMap(filePath);
+Future<String> parseFile(String filePath, {String? sourcePath}) async {
+  var ast = await generateAstMap(filePath, sourcePath: sourcePath);
   return ast != null ? fairDsl(ast) : 'Failed parse ast';
 }

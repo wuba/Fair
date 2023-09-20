@@ -3,6 +3,8 @@
  * Use of this source code is governed by a BSD type license that can be
  * found in the LICENSE file.
  */
+import 'dart:convert';
+import 'dart:developer' as developer;
 import 'package:fair/src/extension.dart';
 import 'package:fair/src/internal/bind_data.dart';
 import 'package:fair/src/module/fair_module.dart';
@@ -16,7 +18,7 @@ import 'package:flutter/material.dart';
 
 /// 通用逻辑处理
 mixin CommonDynamicBuilder on DynamicBuilder {
-dynamic block(
+  dynamic block(
     Map map,
     Map? methodMap,
     BuildContext ctx,
@@ -38,16 +40,32 @@ dynamic block(
       }
       return FairComponent(name, func: fun, na: na.data, pa: pa.data);
     } catch (e, stack) {
-      FlutterError.reportError(FlutterErrorDetails(
-        exception: e,
-        library: 'Fair Runtime',
-        stack: stack,
-        context: ErrorSummary('while parsing widget of $name, $fun'),
-      ));
-      throw ArgumentError('name===$name,fun===$fun, error===$e, map===$map');
+      //print StackTrack in console
+      _dumpErrorToConsole(name, map, e, stack);
+
+      rethrow;
     }
   }
-  
+
+  void _dumpErrorToConsole(String name, Map map, Object e, StackTrace stack) {
+    var encoder = JsonEncoder.withIndent('  ');
+    final formattedJson = encoder.convert(map);
+
+    final errorFormatText = '''
+      
+      ══╡ EXCEPTION CAUGHT BY FAIR RUNTIME ╞══════════════════════════════════════════════════════════════
+      Error Tag:$name, while parsing:
+      
+$formattedJson
+      
+      $e
+      
+      When the exception was thrown, this was the stack:
+      ''';
+
+    developer.log('', error: errorFormatText, level: 900, stackTrace: stack);
+  }
+
   /// 处理多个位置参数
   W<List> positioned(
       dynamic paMap, Map? methodMap, BuildContext context, Domain? domain) {
@@ -55,22 +73,23 @@ dynamic block(
     var needBinding = false;
     if (paMap is List) {
       paMap.forEach((e) {
-        var value =_position(e, context, methodMap, domain);
+        var value = _position(e, context, methodMap, domain);
         pa.add(value.data);
         needBinding = needBinding || (value.binding ?? false);
       });
     }
     return W<List>(pa, needBinding);
   }
-  
+
   /// 处理单个位置参数
-  W<dynamic> _position(dynamic e,BuildContext context, Map? methodMap, Domain? domain) {
+  W<dynamic> _position(
+      dynamic e, BuildContext context, Map? methodMap, Domain? domain) {
     var pa;
     var needBinding = false;
     if (e is Map) {
       pa = convert(context, e, methodMap, domain: domain);
     } else if (e is List) {
-      var list = positioned(e,methodMap,context,domain);
+      var list = positioned(e, methodMap, context, domain);
       needBinding = list.binding ?? false;
       pa = list.data.asIteratorOf<Widget>()?.toList() ?? list.data;
     } else if (domain != null && domain.match(e)) {
@@ -86,7 +105,7 @@ dynamic block(
     } else {
       pa = e;
     }
-    return W<dynamic>(pa,needBinding);
+    return W<dynamic>(pa, needBinding);
   }
 
   W<Map<String, dynamic>> named(
@@ -228,10 +247,10 @@ dynamic block(
   ) {
     var pa = _position(input, context, methodMap, domain);
     var data = pa.data;
-    if( data is FairValueNotifier) {
+    if (data is FairValueNotifier) {
       return data.value;
     }
 
     return data;
-  }  
+  }
 }

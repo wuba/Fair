@@ -292,9 +292,14 @@
               "tag": "Widget Function(BuildContext, int)",
               "rt": "Widget"
             }
-          ]
-        },
-        "itemCount": 3
+          },
+          "functionParameters": {
+            "pa": [
+              "context",
+              "index"
+            ]
+          }
+        }
       }
     },
     "_allTabList": {
@@ -466,10 +471,14 @@
                             "tag": "Widget Function(BuildContext, int)",
                             "rt": "Widget"
                           }
-                        ]
-                      }
-                    ],
-                    "na": {
+                        },
+                        "functionParameters": {
+                          "pa": [
+                            "content",
+                            "index"
+                          ]
+                        }
+                      },
                       "childCount": 3
                     }
                   }

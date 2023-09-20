@@ -1,5 +1,6 @@
 import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
+import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -22,29 +23,25 @@ class _GridViewTemplateState extends State<GridViewTemplate> {
 
   void requestData() {
     _page++;
-    FairCommonPlugin().http({
-      'pageName': '#FairKey#',
-      'method': 'GET',
-      'url':
-          'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/6f8e5d9e196cbaa4a46041928770b187_grid_data.json',
-      'data': {'page': _page},
-      'callback': (resp) {
-        if (resp == null) {
-          return;
-        }
-        var data = resp['data'];
-        data.forEach((item) {
-          var dataItem = ItemData();
-          try {
-            dataItem.picUrl = item.imagePath;
-          } catch (e) {
-            dataItem.picUrl = item['imagePath'];
+    FairNet.requestData(
+        method: FairNet.GET,
+        url:
+            'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/6f8e5d9e196cbaa4a46041928770b187_grid_data.json',
+        data: {'page': _page},
+        success: (resp) {
+          if (resp == null) {
+            return;
           }
-          _listData.add(dataItem);
+          var data = resp['data'];
+          data.forEach((item) {
+            var dataItem = ItemData();
+            try {
+              dataItem.picUrl = item['imagePath'];
+            } catch (e) {}
+            _listData.add(dataItem);
+          });
+          setState(() {});
         });
-        setState(() {});
-      }
-    });
   }
 
   bool isDataEmpty() {

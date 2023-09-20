@@ -92,14 +92,12 @@
                           }
                         }
                       }
-                    },
-                    "parameters": {
-                      "pa": [
-                        "item"
-                      ]
-                    },
-                    "tag": "Widget Function(StaggeredViewModel)",
-                    "rt": "Widget"
+                    }
+                  },
+                  "functionParameters": {
+                    "pa": [
+                      "item"
+                    ]
                   }
                 }
               }

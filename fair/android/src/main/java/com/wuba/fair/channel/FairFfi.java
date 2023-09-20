@@ -14,6 +14,9 @@ import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.Keep;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * dart ffi
  */
@@ -65,6 +68,18 @@ public class FairFfi {
             if (result[0] != null) {
                 return result[0].toString();
             }
+        }
+        try {
+            //when an exception occurs, return the function name
+            JSONObject jsonObject = new JSONObject(args);
+            if (jsonObject.has("args")) {
+                JSONObject funObject = new JSONObject(jsonObject.optString("args"));
+                if(funObject.has("funcName")){
+                    return String.format("Runtime error while invoke JavaScript method:%s()", funObject.optString("funcName"));
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         return "jsAppObj is null";

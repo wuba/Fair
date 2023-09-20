@@ -1,0 +1,116 @@
+{
+  "className": "MaterialApp",
+  "na": {
+    "home": {
+      "className": "Scaffold",
+      "na": {
+        "appBar": {
+          "className": "AppBar",
+          "na": {
+            "title": {
+              "className": "Container",
+              "na": {
+                "child": {
+                  "className": "Sugar.ifEqualBool",
+                  "pa": [
+                    "%(isPageNameNull)"
+                  ],
+                  "na": {
+                    "trueValue": {
+                      "className": "Text",
+                      "pa": [
+                        "Fair动态化页面"
+                      ]
+                    },
+                    "falseValue": {
+                      "className": "Text",
+                      "pa": [
+                        "^(pageName)"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "body": {
+          "className": "Center",
+          "na": {
+            "child": {
+              "className": "Column",
+              "na": {
+                "children": [
+                  {
+                    "className": "Padding",
+                    "na": {
+                      "padding": {
+                        "className": "EdgeInsets.all",
+                        "pa": [
+                          10.0
+                        ]
+                      },
+                      "child": {
+                        "className": "ElevatedButton",
+                        "na": {
+                          "onPressed": "@(back)",
+                          "child": {
+                            "className": "Text",
+                            "pa": [
+                              "返回"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "className": "Column",
+                    "na": {
+                      "children": {
+                        "className": "Sugar.mapEach",
+                        "pa": [
+                          "^(list)",
+                          {
+                            "className": "Padding",
+                            "na": {
+                              "padding": {
+                                "className": "EdgeInsets.all",
+                                "pa": [
+                                  10.0
+                                ]
+                              },
+                              "child": {
+                                "className": "ElevatedButton",
+                                "na": {
+                                  "onPressed": null,
+                                  "child": {
+                                    "className": "Text",
+                                    "pa": [
+                                      "#($item)"
+                                    ]
+                                  }
+                                }
+                              }
+                            },
+                            "functionParameters": {
+                              "pa": [
+                                "index",
+                                "item"
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {}
+}

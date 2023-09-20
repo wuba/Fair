@@ -14,9 +14,8 @@ import '../render/expression.dart';
 import '../render/proxy.dart';
 import '../type.dart';
 
-
 /// 区别于 ValueNotifier
-class FairValueNotifier<T> extends ValueNotifier<T>{
+class FairValueNotifier<T> extends ValueNotifier<T> {
   FairValueNotifier(T value) : super(value);
 }
 
@@ -71,17 +70,55 @@ class BindingData {
       } else {
         result = _functions?['runtimeInvokeMethodSync']?.call(funcName);
       }
-      var value = jsonDecode(result);
-      return value['result']['result'];
+      try {
+        var value = jsonDecode(result);
+        return value['result']['result'];
+      } catch (e) {
+        throw RuntimeError(errorMsg: result);
+      }
     } else {
-      return _functions?[funcName];
+      return _functions?[funcName]?.call();
     }
   }
 
-  dynamic bindFunctionOf(String funcName) {
+  dynamic bindFunctionOf(String funcName, ProxyMirror? proxyMirror,
+      BindingData? bound, Domain? domain,
+      {String? exp}) {
     if (_functions?[funcName] == null) {
-      return ([props]) =>
-          _functions?['runtimeInvokeMethod']?.call(funcName, props);
+      if (RegExp(r'.+\(.+\)', multiLine: false).hasMatch(funcName)) {
+        var rFuncName = funcName.substring(0, funcName.indexOf('('));
+        var params = funcName.substring(
+            funcName.indexOf('(') + 1, funcName.lastIndexOf(')'));
+        var args = params.split(',').map((e) {
+          // if (RegExp(r'\^\(index\)', multiLine: false).hasMatch(e) &&
+          //     domain is IndexDomain?) {
+          //   return domain?.index;
+          // } else
+          if (domain != null && domain.match(e)) {
+            return domain.bindValue(e);
+          } else {
+            var r = proxyMirror?.evaluate(null, bound, e, domain: domain);
+            if (r?.data == null) {
+              return e;
+            } else {
+              return r?.data is ValueNotifier ? r?.data.value : r?.data;
+            }
+          }
+        }).toList();
+        return ([props]) {
+          var arguments = [];
+          if (props != null) {
+            arguments.addAll(props);
+          }
+          if (args != null) {
+            arguments.addAll(args);
+          }
+          _functions?['runtimeInvokeMethod']?.call(rFuncName, arguments);
+        };
+      } else {
+        return ([props]) =>
+            _functions?['runtimeInvokeMethod']?.call(funcName, props);
+      }
     } else {
       return _functions?[funcName];
     }
@@ -126,5 +163,16 @@ class BindingData {
     _boundValue.clear();
     _values?.clear();
     _functions?.clear();
+  }
+}
+
+class RuntimeError extends Error {
+  final String errorMsg;
+
+  RuntimeError({required this.errorMsg});
+
+  @override
+  String toString() {
+    return errorMsg;
   }
 }
