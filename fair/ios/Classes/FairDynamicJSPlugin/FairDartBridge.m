@@ -87,7 +87,7 @@ FairSingletonM(FairDartBridge);
                             return;
                         }
                     }
-                    callback(@"success");
+                    callback(@{@"status":@"success"});
                 }];
             }
         }
