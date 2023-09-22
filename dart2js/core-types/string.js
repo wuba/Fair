@@ -27,7 +27,7 @@ Object.defineProperties(String.prototype, {
   },
   isNotEmpty: {
     get: function () {
-      return this.length;
+      return !this.isEmpty;
     },
   },
   // runes: {
