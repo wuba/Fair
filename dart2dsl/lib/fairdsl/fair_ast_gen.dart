@@ -413,6 +413,9 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
 
   @override
   Map? visitPrefixExpression(PrefixExpression node){
+    if(node.operator.type == TokenType.MINUS && (node.operand is DoubleLiteral || node.operand is IntegerLiteral)){
+      return _buildNumericLiteral(num.parse(node.operand.toSource()) * -1);
+    }
     return _buildPrefixExpression(_visitNode(node.operand), node.operator.toString(), true);
   }
 

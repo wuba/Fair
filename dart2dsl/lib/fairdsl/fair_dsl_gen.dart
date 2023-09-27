@@ -5,6 +5,7 @@
  */
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:fair_dart2dsl/fairdsl/fair_ast_logic_unit.dart';
 
@@ -320,6 +321,20 @@ dynamic _buildWidgetDsl(
   return dslMap;
 }
 
+bool isDoubleProperty(PrefixedIdentifier? node) {
+  if (!(node is PrefixedIdentifier) || node.prefix != 'double') {
+    return false;
+  }
+
+  switch (node.identifier) {
+    case 'infinity':
+      return true;
+    default:
+      stdout.writeln('Fair 不支持该 常量 double ${node.identifier}');
+      return false;
+  }
+}
+
 dynamic _buildValueExpression(
     Expression? valueExpression, FairDslContex? fairDslContex) {
   var naPaValue;
@@ -349,7 +364,7 @@ dynamic _buildValueExpression(
     naPaValue = valueExpression?.asBooleanLiteral.value;
   } else if (valueExpression?.isPrefixedIdentifier==true) {
     if (RegExp(r'^[a-z_]') // widget.** 参数类的特殊处理成#(),兼容1期
-        .hasMatch(valueExpression?.asPrefixedIdentifier.prefix??'') && ('widget' != valueExpression?.asPrefixedIdentifier.prefix)) {
+        .hasMatch(valueExpression?.asPrefixedIdentifier.prefix??'') && ('widget' != valueExpression?.asPrefixedIdentifier.prefix) && !isDoubleProperty(valueExpression?.asPrefixedIdentifier)) {
       naPaValue = '\$(' +
           (valueExpression?.asPrefixedIdentifier.prefix??'') +
           '.' +
