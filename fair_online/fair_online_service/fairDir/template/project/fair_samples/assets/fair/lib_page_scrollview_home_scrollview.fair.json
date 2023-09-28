@@ -109,6 +109,12 @@
                               }
                             }
                           }
+                        },
+                        "functionParameters": {
+                          "pa": [
+                            "content",
+                            "index"
+                          ]
                         }
                       },
                       "childCount": 4
@@ -151,6 +157,12 @@
                               }
                             }
                           }
+                        },
+                        "functionParameters": {
+                          "pa": [
+                            "content",
+                            "index"
+                          ]
                         }
                       },
                       "childCount": 3
@@ -164,5 +176,6 @@
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {},
+  "digest": "865eefda58d732e23e4bf704a5dc7da0"
 }

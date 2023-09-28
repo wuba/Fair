@@ -181,10 +181,13 @@ class FairState extends State<FairWidget> with Loader, AutomaticKeepAliveClientM
     if (mounted) {
       var name = state2key;
       var path = widget.path ?? _fairApp!.pathOfBundle(widget.name ?? '');
+      if (path?.endsWith('.js') == true) {
+        path = path?.replaceFirst(RegExp(r"\.(js)$"), ".bin");
+      }
       bundleType =
-          widget.path != null && widget.path?.startsWith('http') == true
-              ? 'Http'
-              : 'Asset';
+      widget.path != null && widget.path?.startsWith('http') == true
+          ? 'Http'
+          : 'Asset';
 
       parse(context, page: name, url: path, data: widget.data ?? {})
           .then((value) {
@@ -208,20 +211,21 @@ class FairState extends State<FairWidget> with Loader, AutomaticKeepAliveClientM
           stackTrace: jsSource,
           highlightLines: [loadJsErrorLineNumber ?? -1],
           solution:
-              'Unsupported JavaScript syntax, please check and correct your Dart method coding!',
+          'Unsupported JavaScript syntax, please check and correct your Dart method coding!',
         ),
       );
     }
     var builder = widget.holder ?? _fairApp?.placeholderBuilder;
     var result = _child ?? builder?.call(context);
     if (!kReleaseMode && _fairApp!.debugShowFairBanner) {
-      result = _CheckedModeBanner(bundleType??'', child: result??Container());
+      result =
+          _CheckedModeBanner(bundleType ?? '', child: result ?? Container());
     }
-    return result??Container();
+    return result ?? Container();
   }
 
   @override
-  bool get wantKeepAlive => widget.wantKeepAlive??false;
+  bool get wantKeepAlive => widget.wantKeepAlive ?? false;
 
   /// Implementations of this method should end with a call to the inherited
   /// method, as in `super.dispose()`.
@@ -237,9 +241,9 @@ class FairState extends State<FairWidget> with Loader, AutomaticKeepAliveClientM
 
   @override
   void call(String t) {
-    var params={};
+    var params = {};
     try {
-      params= jsonDecode(t);
+      params = jsonDecode(t);
     } catch (e) {
       print(e);
     }
@@ -253,7 +257,7 @@ class FairState extends State<FairWidget> with Loader, AutomaticKeepAliveClientM
 /// Delegate for business logic. The delegate share similar life-circle with [State].
 class FairDelegate extends RuntimeFairDelegate {
   FairState? _state;
- late String _key;
+  late String _key;
 
   void _bindState(FairState? state) {
     assert(state != null, 'FairState should not be null');

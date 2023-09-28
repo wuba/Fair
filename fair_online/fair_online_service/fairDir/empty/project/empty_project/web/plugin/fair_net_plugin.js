@@ -5,12 +5,12 @@ let callBackId = 0;
 
 let FairNet = function () {
     return {
-        request: function (resp) {
+        requestData: function (resp) {
             let respMap = {};
             respMap = mapOrSetToObject(resp);
             let id = 'FairNet$' + (++callBackId);
             let requestParameter = {};
-            requestParameter['className'] = "FairNet#request";
+            requestParameter['className'] = "FairNet#requestData";
             callBack[id] = [respMap['complete'], respMap['error'], respMap['success']];
             respMap['callId'] = id;
             requestParameter['funcName'] = 'invokePlugin';
