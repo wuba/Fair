@@ -29,7 +29,7 @@ class _@@PageName@@State extends State<@@PageName@@> {
 
   void requestData() {
     _page++;
-    FairNet().request({
+    FairNet().requestData({
       'pageName': '#FairKey#',
       'method': 'GET',
       'url':
@@ -75,12 +75,12 @@ class _@@PageName@@State extends State<@@PageName@@> {
           title: Text('PageView模版'),
         ),
         body: Sugar.ifEqualBool(isDataEmpty(),
-            trueValue: Center(
+            trueValue: () => Center(
               child: Text(
                 '加载中...',
               ),
             ),
-            falseValue: PageView.custom(
+            falseValue: () => PageView.custom(
               childrenDelegate: Sugar.sliverChildBuilderDelegate(
                 builder: (context, index) {
                   return Column(

@@ -52,11 +52,16 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   fair_compiler:
     path: ../../../fair/compiler
-  build_runner: ^2.0.0
+  build_runner: ^2.1.2
 
 dependency_overrides:
   fair_version:
     path: ../../../fair/flutter_version/flutter_3_3_0
+  collection: 1.17.0
+  permission_handler: ^10.2.0
+  analyzer: 5.6.0
+  dart_style: 2.2.5
+  dio: 4.0.6
 
 
 # For information on the generic Dart part of this file, see the
