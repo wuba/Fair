@@ -1772,7 +1772,7 @@ Object.prototype.__op_idx__ = function (key) {
     },
     isNotEmpty: {
       get: function () {
-        return this.length;
+        return !this.isEmpty;
       },
     },
     // runes: {

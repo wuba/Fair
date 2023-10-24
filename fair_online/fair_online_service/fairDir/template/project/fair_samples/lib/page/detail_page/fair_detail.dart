@@ -28,7 +28,7 @@ class _FairDetailState extends State<FairDetail> {
   void onUnload() {}
 
   void requestData() {
-    FairNet().request({
+    FairNet().requestData({
       'pageName': '#FairKey#',
       'method': 'GET',
       'url':

@@ -86,11 +86,15 @@ abstract class RuntimeFairDelegate {
   }
 
   void bindBaseFunc() {
-    _bindFunctionsMap['runtimeInvokeMethod'] = (funcName, [props]) {
+    _bindFunctionsMap['runtimeInvokeMethod'] = (funcName, isMultiParams, [props]) {
       var arguments;
       if (props != null) {
         arguments = [];
-        arguments.add(props);
+        if (isMultiParams) {
+          arguments.addAll(props);
+        } else {
+          arguments.add(props);
+        }
       }
       return runtime?.invokeMethod(pageName, funcName, arguments);
     };
