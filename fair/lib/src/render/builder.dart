@@ -47,6 +47,7 @@ class DynamicWidgetBuilder extends DynamicBuilder {
       : super('className', proxyMirror, page, bound, bundle: bundle);
 
   @override
+  @mustCallSuper
   dynamic convert(BuildContext context, Map map, Map? methodMap,
       {Domain? domain}) {
     var name = map[tag];
@@ -185,13 +186,23 @@ class DynamicWidgetBuilder extends DynamicBuilder {
   }) {
     var na = named(name, map['na'], methodMap, ctx, domain);
     var pa = positioned(map['pa'], methodMap, ctx, domain);
+    var ta = map['typeArgumentList'];
     // var arguments = map['arguments'];
     final bind = widget && (na.binding == true || pa.binding == true);
     try {
       fun = FairModule.cast(ctx, fun);
       if (forceApply || !bind) {
-        return Function.apply(
-            fun, [Property.extract(list: pa.data, map: na.data)], null);
+        if (ta != null) {
+          var properties = <String, dynamic>{};
+          properties['pa'] = pa.data;
+          properties.addAll(na.data);
+          properties['ta'] = ta;
+          return Function.apply(
+              fun, [Property.extract(data: properties)], null);
+        } else {
+          return Function.apply(
+              fun, [Property.extract(list: pa.data, map: na.data)], null);
+        }
       }
       return FairComponent(name, func: fun, na: na.data, pa: pa.data);
     } catch (e, stack) {
