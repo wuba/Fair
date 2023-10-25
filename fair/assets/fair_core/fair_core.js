@@ -58,6 +58,18 @@ function _invokeMethod(par) {
     if (isNull(func)) {
         methodResult = '';
     } else {
+        if (Array.isArray(args)) {
+            for (let key in args) {
+                if (args.hasOwnProperty(key)) {
+                    const value = args[key];
+                    if (typeof value === 'object') {
+                        invokeMethodArgsInterceptorManager.handle(value)
+                    }
+                }
+            }
+        } else {
+            console.log('_invokeMethod intercept failed, args is not array');
+        }
         methodResult = func.apply(mClass, args);
     }
     let result = {
@@ -183,4 +195,29 @@ const invokeFlutterCommonChannel = (invokeData, callback) => {
     });
 };
 
+class InvokeMethodArgsInterceptorManager {
+    constructor() {
+        this.interceptors = [];
+    }
 
+    // 注册拦截器
+    use(interceptor) {
+        if (typeof interceptor === 'function') {
+            this.interceptors.push(interceptor);
+        }
+    }
+
+    // 处理对象
+    handle(object) {
+        for (const interceptor of this.interceptors) {
+            // 如果有拦截器返回 true，则停止处理并返回结果
+            if (interceptor(object) === true) {
+                return object;
+            }
+        }
+        return object;
+    }
+}
+
+// 创建一个拦截器管理器实例
+const invokeMethodArgsInterceptorManager = new InvokeMethodArgsInterceptorManager();
