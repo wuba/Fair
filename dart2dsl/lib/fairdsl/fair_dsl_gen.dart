@@ -219,6 +219,7 @@ dynamic _buildWidgetDsl(
   var dslMap = {};
   var paMap = [];
   var naMap = {};
+  var taMap =[];
 
   var methodInvocationExpression = widgetExpression?.asMethodInvocation;
   //普通类
@@ -309,12 +310,23 @@ dynamic _buildWidgetDsl(
     }
   }
 
+  //3.ta
+  if (methodInvocationExpression.typeArgumentList?.isNotEmpty ?? false) {
+    taMap.addAll(methodInvocationExpression.typeArgumentList
+            ?.map((ta) => ta?.asTypeNameExpression.name) ??
+        []);
+  }
+
   if (paMap.isNotEmpty) {
     dslMap.putIfAbsent('pa', () => paMap);
   }
 
   if (naMap.isNotEmpty) {
     dslMap.putIfAbsent('na', () => naMap);
+  }
+
+  if(taMap.isNotEmpty){
+    dslMap.putIfAbsent('typeArgumentList', () => taMap);
   }
 
   return dslMap;
