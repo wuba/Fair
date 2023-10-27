@@ -17,6 +17,9 @@ class FairJSFairJSDecoderHelper {
       return beforePath;
     }
     if (beforePath.startsWith('http')) {
+      if (beforePath.endsWith('.json') || beforePath.endsWith('.bin')) {
+        beforePath = beforePath.replaceFirst(RegExp(r"\.(json|bin)$"), ".js");
+      }
       return beforePath;
     } else {
       //加载其它路径判断待定

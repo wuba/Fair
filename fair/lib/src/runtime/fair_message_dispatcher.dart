@@ -55,7 +55,7 @@ class FairHandler {
   }
 
   void register(FairMessageCallback<String> state) {
-    log('register state: ${state.getMessageKey}');
+    log('register state: ${state.getMessageKey()}');
     pageHistories[state.getMessageKey()] = state;
   }
 

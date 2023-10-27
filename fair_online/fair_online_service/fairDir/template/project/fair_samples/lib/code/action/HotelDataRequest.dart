@@ -2,7 +2,7 @@ import '../../fair_common.dart';
 
 void requestData() {
   var listData = <HotelModel>[];
-  FairNet().request({
+  FairNet().requestData({
     'pageName': '#FairKey#',
     'method': 'GET',
     'url':

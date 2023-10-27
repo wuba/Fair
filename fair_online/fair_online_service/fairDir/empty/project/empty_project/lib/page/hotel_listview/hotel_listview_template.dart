@@ -31,7 +31,7 @@ class _HotelListViewState extends State<HotelListView> {
 
   void requestData() {
     _page++;
-    FairNet().request({
+    FairNet().requestData({
       'pageName': '#FairKey#',
       'method': 'GET',
       'url':
@@ -74,17 +74,17 @@ class _HotelListViewState extends State<HotelListView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('ListView.builder模版'),
+          title: const Text('ListView.builder模版'),
         ),
-        backgroundColor: Color(0xFFFEFEFE),
+        backgroundColor: const Color(0xFFFEFEFE),
         body: Sugar.ifEqualBool(isDataEmpty(),
-            trueValue: Center(
+            trueValue: () => const Center(
               child: Text(
                 '加载中...',
               ),
             ),
-            falseValue: Container(
-              color: Color(0xFFFFFFFF),
+            falseValue: () => Container(
+              color: const Color(0xFFFFFFFF),
               child: ListView(
                 children: Sugar.map(_listData, builder: (HotelModel item) {
                   return Padding(
@@ -104,7 +104,7 @@ class _HotelListViewState extends State<HotelListView> {
                                       fit: BoxFit.cover),
                                 ),
                                 Container(
-                                  color: Color(0xFFFFFFFF),
+                                  color: const Color(0xFFFFFFFF),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
