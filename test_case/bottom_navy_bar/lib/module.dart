@@ -11,9 +11,9 @@ class BottomNavyBarModule extends FairModule<BottomNavyBarItem>{
   BottomNavyBarModule() : super(tagName);
 
   @override
-  BottomNavyBarItem onCreateComponent(BuildContext ctx, Map<String, dynamic> props) {
+  BottomNavyBarItem onCreateComponent(BuildContext ctx, Map<String, dynamic>? props) {
     return BottomNavyBarItem(
-      title: props['title'],
+      title: props!['title'],
       icon: props['icon']
     );
   }

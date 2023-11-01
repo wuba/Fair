@@ -6,7 +6,6 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_component/slidable_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:animated_text_kit/src/rotate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -37,7 +36,11 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
-    _putPhotoCheck();
+    // _putPhotoCheck();
+  }
+
+  _onPressed(){
+
   }
 
   @override
@@ -62,13 +65,17 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_check',
               style: ThemeStyle.headline4(context),
             ),
-
-            CustomWidget(
-              title: "Test",
-            ),
+            Sugar.listBuilder(
+                itemCount: 1,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return CustomWidget(
+                    title: "Test",
+                  );
+                }),
             IconButton(
               // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-                icon: FaIcon(FontAwesomeIcons.solidCircle), onPressed: () {  },
+                icon: FaIcon(FontAwesomeIcons.solidCircle), onPressed: _onPressed,
             ),
             RotateAnimatedTextKit(
                 text: ["AWESOME", "OPTIMISTIC", "DIFFERENT"],
@@ -101,23 +108,23 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-//@FairWell('_putPhotoCheck')
-  void _putPhotoCheck() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('survey_permission_check1', true);
-    _getPhotoCheck();
-  }
-
-//@FairWell('_getPhotoCheck')
-  void _getPhotoCheck() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if(prefs.getBool('survey_permission_check1') != null) {
-      _check = prefs.getBool('survey_permission_check1')!;
-    }
-    setState(() {
-      _check = _check;
-    });
-  }
+// //@FairWell('_putPhotoCheck')
+//   void _putPhotoCheck() async {
+//     SharedPreferences prefs = await SharedPreferences.getInstance();
+//     prefs.setBool('survey_permission_check1', true);
+//     _getPhotoCheck();
+//   }
+//
+// //@FairWell('_getPhotoCheck')
+//   void _getPhotoCheck() async {
+//     SharedPreferences prefs = await SharedPreferences.getInstance();
+//     if(prefs.getBool('survey_permission_check1') != null) {
+//       _check = prefs.getBool('survey_permission_check1')!;
+//     }
+//     setState(() {
+//       _check = _check;
+//     });
+//   }
 
   @FairWell('onItemSelect')
   void onItemSelect(index) {

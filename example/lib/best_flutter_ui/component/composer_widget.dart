@@ -1,8 +1,7 @@
+import 'package:example/best_flutter_ui/app_theme.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
-import '../app_theme.dart';
 
 @FairBinding()
 class ComposerWidget extends StatelessWidget {

@@ -29,6 +29,13 @@ class AppGeneratedModule extends GeneratedModule {
           ) {
         return (props['block']);
       },
+      'BottomNavyBarItem': (props) => BottomNavyBarItem(
+        icon: props['icon'],
+        title: props['title'],
+        activeColor: props['activeColor'] ?? Colors.blue,
+        textAlign: props['textAlign'],
+        inactiveColor: props['inactiveColor'],
+      ),
     };
   }
 
@@ -36,6 +43,7 @@ class AppGeneratedModule extends GeneratedModule {
   Map<String, bool> mapping() {
     return const {
       'BottomNavyBar': true,
+      'BottomNavyBarItem':true,
     };
   }
 }

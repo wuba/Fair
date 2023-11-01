@@ -3,10 +3,17 @@ import 'package:flutter/widgets.dart';
 
 @FairBinding()//
 class ItemWidget extends StatelessWidget {
-  final String value;
-  final String label;
+  final String? value;
+  final String? label;
 
-  const ItemWidget({Key key, this.value, this.label}) : super(key: key);
+  const ItemWidget({Key? key, this.value, this.label}) : super(key: key);
+
+  dynamic getValueWithDefault(dynamic value, dynamic defaultValue) {
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,7 @@ class ItemWidget extends StatelessWidget {
                 width: 47.0,
                 height: 20.0,
                 child: Text(
-                  value,
+                  getValueWithDefault(value,''),
                   style: TextStyle(
                     fontFamily: 'Helvetica',
                     fontSize: 20,
@@ -45,7 +52,7 @@ class ItemWidget extends StatelessWidget {
                 width: 47.0,
                 height: 11.0,
                 child: Text(
-                  label,
+                  getValueWithDefault(label,''),
                   style: TextStyle(
                     fontFamily: 'Helvetica',
                     fontSize: 11,

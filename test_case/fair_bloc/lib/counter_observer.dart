@@ -6,8 +6,8 @@ import 'package:bloc/bloc.dart';
 /// {@endtemplate}
 class CounterObserver extends BlocObserver {
   @override
-  void onChange(Cubit cubit, Change change) {
-    print('${cubit.runtimeType} $change');
-    super.onChange(cubit, change);
+  void onChange(BlocBase bloc, Change change) {
+    print('${bloc.runtimeType} $change');
+    super.onChange(bloc, change);
   }
 }

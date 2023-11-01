@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(FairApp(child: MyApp()));
+  FairApp.runApplication(FairApp(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

@@ -1,4 +1,3 @@
-import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
 import 'hotel_app_theme.dart';

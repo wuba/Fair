@@ -33,12 +33,12 @@ class HotelListView extends StatelessWidget {
               // name should be unique
               name: 'card-${hotelData.hashCode}',
               path:
-                  'assets/bundle/lib_component_hotel_listview_content.fair.bin',
+                  'assets/bundle/lib_component_hotel_listview_content.fair.json',
               data: {
-                'hotelData.imagePath': hotelData!.imagePath,
-                'hotelData.titleTxt': hotelData!.titleTxt,
-                'hotelData.subTxt': hotelData!.subTxt,
-                'hotelData.rating': hotelData!.rating
+                'hotelData.imagePath': hotelData?.imagePath,
+                'hotelData.titleTxt': hotelData?.titleTxt,
+                'hotelData.subTxt': hotelData?.subTxt,
+                'hotelData.rating': hotelData?.rating
               },
               delegate: HotelListContentProxy(callback, hotelData),
             ),

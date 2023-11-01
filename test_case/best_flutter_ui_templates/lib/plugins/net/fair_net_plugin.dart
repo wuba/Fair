@@ -14,8 +14,8 @@ class FairNet extends IFairPlugin {
     return _fairNet;
   }
 
-  Future<dynamic> request(dynamic map) async {
-    log('===================request');
+  Future<dynamic> doRequest(dynamic map) async {
+    log('===================doRequest');
     if (map == null) {
       return;
     }
@@ -100,7 +100,7 @@ class FairNet extends IFairPlugin {
   @override
   Map<String, Function> getRegisterMethods() {
     var functions = <String, Function>{};
-    functions.putIfAbsent('request', () => request);
+    functions.putIfAbsent('doRequest', () => doRequest);
     return functions;
   }
 

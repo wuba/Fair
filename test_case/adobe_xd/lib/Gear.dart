@@ -9,17 +9,24 @@ import 'package:flutter_svg/flutter_svg.dart';
 @FairPatch()
 class Gear extends StatelessWidget {
   @FairWell('svg_6z8g0n')
-  final String svg_6z8g0n;
+  final String? svg_6z8g0n;
 
   @FairWell('svg_d9sdjy')
-  final String svg_d9sdjy;
+  final String? svg_d9sdjy;
 
   @FairWell('svg_munyoe')
-  final String svg_munyoe;
+  final String? svg_munyoe;
 
   Gear({
-    Key key, this.svg_6z8g0n, this.svg_d9sdjy, this.svg_munyoe,
+    Key? key, this.svg_6z8g0n, this.svg_d9sdjy, this.svg_munyoe,
   }) : super(key: key);
+
+  dynamic getValueWithDefault(dynamic value, dynamic defaultValue) {
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +157,7 @@ class Gear extends StatelessWidget {
                   child:
                       // Adobe XD layer: 'send icon' (shape)
                       SvgPicture.string(
-                    svg_6z8g0n,
+                        getValueWithDefault(svg_6z8g0n,''),
                     allowDrawingOutsideViewBox: true,
                     fit: BoxFit.fill,
                   ),
@@ -165,7 +172,7 @@ class Gear extends StatelessWidget {
                   child:
                       // Adobe XD layer: 'search icon' (shape)
                       SvgPicture.string(
-                    svg_d9sdjy,
+                        getValueWithDefault(svg_d9sdjy,''),
                     allowDrawingOutsideViewBox: true,
                     fit: BoxFit.fill,
                   ),
@@ -184,7 +191,7 @@ class Gear extends StatelessWidget {
                       PageLinkInfo(),
                     ],
                     child: SvgPicture.string(
-                      svg_munyoe,
+                      getValueWithDefault(svg_munyoe, ''),
                       allowDrawingOutsideViewBox: true,
                       fit: BoxFit.fill,
                     ),

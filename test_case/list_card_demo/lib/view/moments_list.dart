@@ -1,10 +1,9 @@
 import 'package:fair/fair.dart';
-import 'package:fairbloc/view/list_card_item.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
 class MomentsList extends StatefulWidget {
-  const MomentsList({Key key}) : super(key: key);
+  const MomentsList({Key? key}) : super(key: key);
 
   @override
   State<MomentsList> createState() => _MomentsListState();

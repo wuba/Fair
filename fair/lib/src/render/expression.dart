@@ -189,14 +189,14 @@ class PropValueExpression extends Expression {
   }
 }
 
-class _BindValueBuilder<T> extends ValueNotifier<T?> implements LifeCircle {
+class BindValueBuilder<T> extends ValueNotifier<T?> implements LifeCircle {
   final String? data;
   final ProxyMirror? proxyMirror;
   final BindingData? binding;
   VoidCallback? _listener;
   final List<ValueNotifier> _watchedProps = [];
 
-  _BindValueBuilder(this.data, this.proxyMirror, this.binding) : super(null);
+  BindValueBuilder(this.data, this.proxyMirror, this.binding) : super(null);
 
   @override
   void attach() {
@@ -218,7 +218,7 @@ class _BindValueBuilder<T> extends ValueNotifier<T?> implements LifeCircle {
   }
 }
 
-class _InlineVariableBuilder extends _BindValueBuilder<String> {
+class _InlineVariableBuilder extends BindValueBuilder<String> {
   final Iterable<RegExpMatch>? matches;
 
   _InlineVariableBuilder(
@@ -254,7 +254,7 @@ class _InlineVariableBuilder extends _BindValueBuilder<String> {
   }
 }
 
-class _InlineObjectVariableBuilder extends _BindValueBuilder<String> {
+class _InlineObjectVariableBuilder extends BindValueBuilder<String> {
   final Iterable<RegExpMatch>? matches;
 
   _InlineObjectVariableBuilder(
@@ -292,7 +292,7 @@ class _InlineObjectVariableBuilder extends _BindValueBuilder<String> {
   }
 }
 
-class _PropBuilder extends _BindValueBuilder {
+class _PropBuilder extends BindValueBuilder {
   _PropBuilder(String data, ValueNotifier prop, ProxyMirror? proxyMirror,
       BindingData? binding)
       : super(data, proxyMirror, binding) {
@@ -307,7 +307,7 @@ class _PropBuilder extends _BindValueBuilder {
   }
 }
 
-class _PropValueBuilder extends _BindValueBuilder {
+class _PropValueBuilder extends BindValueBuilder {
   final prop;
 
   _PropValueBuilder(
@@ -323,7 +323,7 @@ class _PropValueBuilder extends _BindValueBuilder {
   }
 }
 
-class _FunctionBuilder extends _BindValueBuilder {
+class _FunctionBuilder extends BindValueBuilder {
   final Iterable<RegExpMatch>? matches;
   final Domain? domain;
 

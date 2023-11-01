@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:example/best_flutter_ui/hotel_booking/calendar_popup_view.dart';
 import 'package:example/best_flutter_ui/hotel_booking/hotel_list_view.dart';
 import 'package:example/best_flutter_ui/hotel_booking/model/hotel_list_data.dart';

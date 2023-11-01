@@ -2,7 +2,6 @@ import 'package:example/best_flutter_ui/app_theme.dart';
 import 'package:example/best_flutter_ui/hotel_booking/hotel_app_theme.dart';
 import 'package:example/best_flutter_ui/hotel_booking/model/hotel_list_data.dart';
 import 'package:fair/fair.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smooth_star_rating_nsafe/smooth_star_rating.dart';

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 @FairPatch()
 class MyHomePage extends StatelessWidget {
-  MyHomePage({Key key, this.count}) : super(key: key);
+  MyHomePage({Key? key, required this.count}) : super(key: key);
 
   @FairWell('count')
   int count;

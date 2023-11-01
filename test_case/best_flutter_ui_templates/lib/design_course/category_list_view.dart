@@ -1,12 +1,12 @@
 import 'package:best_flutter_ui_templates/design_course/design_course_app_theme.dart';
 import 'package:best_flutter_ui_templates/design_course/models/category.dart';
-import 'package:best_flutter_ui_templates/main.dart';
+import 'package:best_flutter_ui_templates/hex_color.dart';
 import 'package:flutter/material.dart';
 
 class CategoryListView extends StatefulWidget {
   const CategoryListView({Key? key, this.callBack}) : super(key: key);
 
-  final Function()? callBack;
+  final Function? callBack;
   @override
   _CategoryListViewState createState() => _CategoryListViewState();
 }
@@ -61,13 +61,15 @@ class _CategoryListViewState extends State<CategoryListView>
                               parent: animationController!,
                               curve: Interval((1 / count) * index, 1.0,
                                   curve: Curves.fastOutSlowIn)));
-                  animationController?.forward();
+                  animationController!.forward();
 
                   return CategoryView(
                     category: Category.categoryList[index],
                     animation: animation,
-                    animationController: animationController,
-                    callback: widget.callBack,
+                    animationController: animationController!,
+                    callback: () {
+                      widget.callBack?.call();
+                    },
                   );
                 },
               );
@@ -105,7 +107,9 @@ class CategoryView extends StatelessWidget {
                 100 * (1.0 - animation!.value), 0.0, 0.0),
             child: InkWell(
               splashColor: Colors.transparent,
-              onTap: callback,
+              onTap: () {
+                callback?.call();
+              },
               child: SizedBox(
                 width: 280,
                 child: Stack(
@@ -161,7 +165,7 @@ class CategoryView extends StatelessWidget {
                                                   CrossAxisAlignment.center,
                                               children: <Widget>[
                                                 Text(
-                                                  '${category!.lessonCount} lesson',
+                                                  '${category?.lessonCount} lesson',
                                                   textAlign: TextAlign.left,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w200,
@@ -175,7 +179,7 @@ class CategoryView extends StatelessWidget {
                                                   child: Row(
                                                     children: <Widget>[
                                                       Text(
-                                                        '${category!.rating}',
+                                                        '${category?.rating}',
                                                         textAlign:
                                                             TextAlign.left,
                                                         style: TextStyle(
@@ -212,7 +216,7 @@ class CategoryView extends StatelessWidget {
                                                   CrossAxisAlignment.start,
                                               children: <Widget>[
                                                 Text(
-                                                  '\$${category!.money}',
+                                                  '\$${category?.money}',
                                                   textAlign: TextAlign.left,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w600,

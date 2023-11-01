@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:example/best_flutter_ui/hotel_booking/hotel_app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

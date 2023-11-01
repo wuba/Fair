@@ -16,7 +16,7 @@ class PageBuilderModule extends FairModule<Function> {
   PageBuilderModule() : super(tagName);
 
   @override
-  Function onCreateComponent(BuildContext ctx, Map<String, dynamic> props) {
+  Function onCreateComponent(BuildContext ctx, Map<String, dynamic>? props) {
     return () => FairWidget(
           name: 'gear',
           path: 'assets/bundle/lib_Gear.fair.bin',
@@ -35,9 +35,9 @@ class PageLinkModule extends FairModule<PageLinkInfo> {
   PageLinkModule() : super(tagName);
 
   @override
-  PageLinkInfo onCreateComponent(BuildContext ctx, Map<String, dynamic> props) {
+  PageLinkInfo onCreateComponent(BuildContext ctx, Map<String, dynamic>? props) {
     return PageLinkInfo(
-      pageBuilder: props['pageBuilder'],
+      pageBuilder: props!['pageBuilder'],
       trigger: props['trigger'] ?? LinkTrigger.Tap,
       transition: props['transition'] ?? LinkTransition.Fade,
       ease: props['ease'],
