@@ -1,5 +1,4 @@
 import 'package:best_flutter_ui_templates/app_theme.dart';
-import 'package:best_flutter_ui_templates/fair_state.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 

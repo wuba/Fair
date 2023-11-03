@@ -16,77 +16,89 @@
       "className": "Center",
       "na": {
         "child": {
-          "className": "Column",
+          "className": "Sugar.listBuilder",
           "na": {
-            "mainAxisAlignment": "#(MainAxisAlignment.center)",
-            "children": [
-              {
-                "className": "Slidable",
-                "na": {
-                  "actionPane": {
-                    "className": "SlidableScrollActionPane"
-                  },
-                  "actionExtentRatio": 0.25,
-                  "child": {
-                    "className": "Container",
+            "itemCount": 1,
+            "shrinkWrap": true,
+            "itemBuilder": {
+              "className": "Slidable",
+              "na": {
+                "actionPane": {
+                  "className": "SlidableScrollActionPane"
+                },
+                "actionExtentRatio": 0.25,
+                "child": {
+                  "className": "Container",
+                  "na": {
+                    "height": 60,
+                    "decoration": {
+                      "className": "BoxDecoration",
+                      "na": {
+                        "color": "#(Colors.green)"
+                      }
+                    },
+                    "width": {
+                      "className": "Sugar.width",
+                      "pa": [
+                        "^(context)"
+                      ]
+                    }
+                  }
+                },
+                "actions": [
+                  {
+                    "className": "IconSlideAction",
                     "na": {
-                      "height": 60,
-                      "decoration": {
-                        "className": "BoxDecoration",
-                        "na": {
-                          "color": "#(Colors.green)"
-                        }
-                      },
-                      "width": "#(double.infinity)"
+                      "caption": "title",
+                      "color": "#(Colors.blue)",
+                      "icon": "#(Icons.archive)",
+                      "onTap": "#(onTagClick)"
                     }
                   },
-                  "actions": [
-                    {
-                      "className": "IconSlideAction",
-                      "na": {
-                        "caption": "title",
-                        "color": "#(Colors.blue)",
-                        "icon": "#(Icons.archive)",
-                        "onTap": "#(onTagClick)"
-                      }
-                    },
-                    {
-                      "className": "IconSlideAction",
-                      "na": {
-                        "caption": "Share",
-                        "color": "#(Colors.indigo)",
-                        "icon": "#(Icons.share)",
-                        "onTap": "#(onTagClick)"
-                      }
+                  {
+                    "className": "IconSlideAction",
+                    "na": {
+                      "caption": "Share",
+                      "color": "#(Colors.indigo)",
+                      "icon": "#(Icons.share)",
+                      "onTap": "#(onTagClick)"
                     }
-                  ],
-                  "secondaryActions": [
-                    {
-                      "className": "IconSlideAction",
-                      "na": {
-                        "caption": "More",
-                        "color": "#(Colors.black45)",
-                        "icon": "#(Icons.more_horiz)",
-                        "onTap": "#(onTagClick)"
-                      }
-                    },
-                    {
-                      "className": "IconSlideAction",
-                      "na": {
-                        "caption": "Delete",
-                        "color": "#(Colors.red)",
-                        "icon": "#(Icons.delete)",
-                        "closeOnTap": false,
-                        "onTap": "#(onTagClick)"
-                      }
+                  }
+                ],
+                "secondaryActions": [
+                  {
+                    "className": "IconSlideAction",
+                    "na": {
+                      "caption": "More",
+                      "color": "#(Colors.black45)",
+                      "icon": "#(Icons.more_horiz)",
+                      "onTap": "#(onTagClick)"
                     }
-                  ]
-                }
+                  },
+                  {
+                    "className": "IconSlideAction",
+                    "na": {
+                      "caption": "Delete",
+                      "color": "#(Colors.red)",
+                      "icon": "#(Icons.delete)",
+                      "closeOnTap": false,
+                      "onTap": "#(onTagClick)"
+                    }
+                  }
+                ]
+              },
+              "functionParameters": {
+                "pa": [
+                  "context",
+                  "index"
+                ]
               }
-            ]
+            }
           }
         }
       }
     }
-  }
+  },
+  "methodMap": {},
+  "digest": "aa463484cabe4ec526f1dcb95fdde7ea"
 }

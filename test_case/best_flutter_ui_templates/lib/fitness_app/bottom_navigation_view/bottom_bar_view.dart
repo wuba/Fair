@@ -1,11 +1,8 @@
 import 'dart:math' as math;
 import 'package:best_flutter_ui_templates/fitness_app/fitness_app_theme.dart';
 import 'package:best_flutter_ui_templates/fitness_app/models/tabIcon_data.dart';
-import 'package:best_flutter_ui_templates/main.dart';
+import 'package:best_flutter_ui_templates/hex_color.dart';
 import 'package:flutter/material.dart';
-
-import '../../main.dart';
-import '../models/tabIcon_data.dart';
 
 class BottomBarView extends StatefulWidget {
   const BottomBarView(
@@ -13,7 +10,7 @@ class BottomBarView extends StatefulWidget {
       : super(key: key);
 
   final Function(int index)? changeIndex;
-  final Function()? addClick;
+  final Function? addClick;
   final List<TabIconData>? tabIconsList;
   @override
   _BottomBarViewState createState() => _BottomBarViewState();
@@ -21,7 +18,7 @@ class BottomBarView extends StatefulWidget {
 
 class _BottomBarViewState extends State<BottomBarView>
     with TickerProviderStateMixin {
-  AnimationController? animationController;
+ late AnimationController animationController;
 
   @override
   void initState() {
@@ -29,7 +26,7 @@ class _BottomBarViewState extends State<BottomBarView>
       vsync: this,
       duration: const Duration(milliseconds: 1000),
     );
-    animationController?.forward();
+    animationController.forward();
     super.initState();
   }
 
@@ -39,7 +36,7 @@ class _BottomBarViewState extends State<BottomBarView>
       alignment: AlignmentDirectional.bottomCenter,
       children: <Widget>[
         AnimatedBuilder(
-          animation: animationController!,
+          animation: animationController,
           builder: (BuildContext context, Widget? child) {
             return Transform(
               transform: Matrix4.translationValues(0.0, 0.0, 0.0),
@@ -49,7 +46,7 @@ class _BottomBarViewState extends State<BottomBarView>
                 clipper: TabClipper(
                     radius: Tween<double>(begin: 0.0, end: 1.0)
                             .animate(CurvedAnimation(
-                                parent: animationController!,
+                                parent: animationController,
                                 curve: Curves.fastOutSlowIn))
                             .value *
                         38.0),
@@ -64,45 +61,45 @@ class _BottomBarViewState extends State<BottomBarView>
                           children: <Widget>[
                             Expanded(
                               child: TabIcons(
-                                  tabIconData: widget.tabIconsList?[0],
+                                  tabIconData: widget.tabIconsList![0],
                                   removeAllSelect: () {
                                     setRemoveAllSelection(
-                                        widget.tabIconsList?[0]);
-                                    widget.changeIndex!(0);
+                                        widget.tabIconsList![0]);
+                                    widget.changeIndex?.call(0);
                                   }),
                             ),
                             Expanded(
                               child: TabIcons(
-                                  tabIconData: widget.tabIconsList?[1],
+                                  tabIconData: widget.tabIconsList![1],
                                   removeAllSelect: () {
                                     setRemoveAllSelection(
-                                        widget.tabIconsList?[1]);
+                                        widget.tabIconsList![1]);
                                     widget.changeIndex!(1);
                                   }),
                             ),
                             SizedBox(
                               width: Tween<double>(begin: 0.0, end: 1.0)
                                       .animate(CurvedAnimation(
-                                          parent: animationController!,
+                                          parent: animationController,
                                           curve: Curves.fastOutSlowIn))
                                       .value *
                                   64.0,
                             ),
                             Expanded(
                               child: TabIcons(
-                                  tabIconData: widget.tabIconsList?[2],
+                                  tabIconData: widget.tabIconsList![2],
                                   removeAllSelect: () {
                                     setRemoveAllSelection(
-                                        widget.tabIconsList?[2]);
+                                        widget.tabIconsList![2]);
                                     widget.changeIndex!(2);
                                   }),
                             ),
                             Expanded(
                               child: TabIcons(
-                                  tabIconData: widget.tabIconsList?[3],
+                                  tabIconData: widget.tabIconsList![3],
                                   removeAllSelect: () {
                                     setRemoveAllSelection(
-                                        widget.tabIconsList?[3]);
+                                        widget.tabIconsList![3]);
                                     widget.changeIndex!(3);
                                   }),
                             ),
@@ -137,7 +134,7 @@ class _BottomBarViewState extends State<BottomBarView>
                     alignment: Alignment.center,
                     scale: Tween<double>(begin: 0.0, end: 1.0).animate(
                         CurvedAnimation(
-                            parent: animationController!,
+                            parent: animationController,
                             curve: Curves.fastOutSlowIn)),
                     child: Container(
                       // alignment: Alignment.center,s
@@ -165,7 +162,9 @@ class _BottomBarViewState extends State<BottomBarView>
                           splashColor: Colors.white.withOpacity(0.1),
                           highlightColor: Colors.transparent,
                           focusColor: Colors.transparent,
-                          onTap: widget.addClick,
+                          onTap: () {
+                            widget.addClick!();
+                          },
                           child: Icon(
                             Icons.add,
                             color: FitnessAppTheme.white,
@@ -184,12 +183,12 @@ class _BottomBarViewState extends State<BottomBarView>
     );
   }
 
-  void setRemoveAllSelection(TabIconData? tabIconData) {
+  void setRemoveAllSelection(TabIconData tabIconData) {
     if (!mounted) return;
     setState(() {
-      widget.tabIconsList?.forEach((TabIconData tab) {
+      widget.tabIconsList!.forEach((TabIconData tab) {
         tab.isSelected = false;
-        if (tabIconData!.index == tab.index) {
+        if (tabIconData.index == tab.index) {
           tab.isSelected = true;
         }
       });
@@ -202,7 +201,7 @@ class TabIcons extends StatefulWidget {
       : super(key: key);
 
   final TabIconData? tabIconData;
-  final Function()? removeAllSelect;
+  final Function? removeAllSelect;
   @override
   _TabIconsState createState() => _TabIconsState();
 }
@@ -217,7 +216,7 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
         if (status == AnimationStatus.completed) {
           if (!mounted) return;
           widget.removeAllSelect!();
-          widget.tabIconData?.animationController?.reverse();
+          widget.tabIconData!.animationController!.reverse();
         }
       });
     super.initState();

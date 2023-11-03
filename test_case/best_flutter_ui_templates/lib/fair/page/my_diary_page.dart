@@ -1,9 +1,7 @@
-import 'package:best_flutter_ui_templates/fair/component/my_diary/mediterranean_diet.dart';
 import 'package:best_flutter_ui_templates/fitness_app/fitness_app_theme.dart';
+import 'package:best_flutter_ui_templates/fitness_app/ui_view/title_view.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
-
-import '../component/fair_uiview/title_view.dart';
 
 @FairPatch()
 class MyDiaryPage extends StatefulWidget {

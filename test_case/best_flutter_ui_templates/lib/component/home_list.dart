@@ -1,18 +1,15 @@
-import 'package:best_flutter_ui_templates/model/homelist.dart';
+import 'package:best_flutter_ui_templates/app_theme.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
-import '../app_theme.dart';
 
 @FairPatch()
 class HomeListView extends StatelessWidget {
-  const HomeListView({Key? key, this.imagePath, this.callBack}) : super(key: key);
+  const HomeListView({Key? key,required this.imagePath,required this.callBack}) : super(key: key);
 
   @FairWell('imagePath')
-  final String? imagePath;
+  final String imagePath;
   @FairWell('callBack')
-  final VoidCallback? callBack;
+  final VoidCallback callBack;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +20,7 @@ class HomeListView extends StatelessWidget {
         child: Stack(
           alignment: AlignmentDirectional.center,
           children: <Widget>[
-            Image.asset(imagePath ?? '', fit: BoxFit.cover),
+            Image.asset(imagePath, fit: BoxFit.cover),
             Material(
               color: Colors.transparent,
               child: InkWell(

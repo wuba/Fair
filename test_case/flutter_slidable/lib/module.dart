@@ -10,7 +10,7 @@ class SlidableModule extends FairModule<SlidableScrollActionPane>{
   SlidableModule() : super(tagName);
 
   @override
-  SlidableScrollActionPane onCreateComponent(BuildContext ctx, Map<String, dynamic> props) {
+  SlidableScrollActionPane onCreateComponent(BuildContext ctx, Map<String, dynamic>? props) {
     return SlidableScrollActionPane();
   }
 

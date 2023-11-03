@@ -1,4 +1,4 @@
-import 'package:best_flutter_ui_templates/main.dart';
+import 'package:best_flutter_ui_templates/hex_color.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 

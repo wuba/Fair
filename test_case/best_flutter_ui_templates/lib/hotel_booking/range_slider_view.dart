@@ -37,7 +37,7 @@ class _RangeSliderViewState extends State<RangeSliderView> {
                   Container(
                     width: 54,
                     child: Text(
-                      '\$${_values!.start.round()}',
+                      '\$${_values?.start.round()}',
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -56,7 +56,7 @@ class _RangeSliderViewState extends State<RangeSliderView> {
                   Container(
                     width: 54,
                     child: Text(
-                      '\$${_values!.end.round()}',
+                      '\$${_values?.end.round()}',
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -84,7 +84,7 @@ class _RangeSliderViewState extends State<RangeSliderView> {
                   setState(() {
                     _values = values;
                   });
-                  widget.onChangeRangeValues!(_values!);
+                  widget.onChangeRangeValues?.call(_values!);
                 } catch (_) {}
               },
             ),
@@ -113,18 +113,18 @@ class CustomRangeThumbShape extends RangeSliderThumbShape {
 
   @override
   void paint(
-      PaintingContext context,
-      Offset center, {
-        required Animation<double> activationAnimation,
-        required Animation<double> enableAnimation,
-        bool isDiscrete = false,
-        bool isEnabled = false,
-        bool? isOnTop,
-        bool? isPressed,
-        required SliderThemeData sliderTheme,
-        TextDirection textDirection = TextDirection.ltr,
-        Thumb thumb = Thumb.start,
-      }) {
+    PaintingContext context,
+    Offset center, {
+    required Animation<double> activationAnimation,
+    required Animation<double> enableAnimation,
+    bool isDiscrete = false,
+    bool isEnabled = false,
+    bool? isOnTop,
+    bool? isPressed,
+    required SliderThemeData sliderTheme,
+    TextDirection? textDirection,
+    Thumb? thumb,
+  }) {
     final Canvas canvas = context.canvas;
     final ColorTween colorTween = ColorTween(
       begin: sliderTheme.disabledThumbColor,
@@ -132,7 +132,7 @@ class CustomRangeThumbShape extends RangeSliderThumbShape {
     );
 
     final double size = _thumbSize * sizeTween.evaluate(enableAnimation);
-    Path thumbPath;
+    Path? thumbPath=null;
     switch (textDirection) {
       case TextDirection.rtl:
         switch (thumb) {
@@ -164,7 +164,7 @@ class CustomRangeThumbShape extends RangeSliderThumbShape {
         Paint()
           ..color = Colors.black.withOpacity(0.5)
           ..maskFilter =
-          MaskFilter.blur(BlurStyle.normal, convertRadiusToSigma(8)));
+              MaskFilter.blur(BlurStyle.normal, convertRadiusToSigma(8)));
 
     final Paint cPaint = Paint();
     cPaint..color = Colors.white;
@@ -172,7 +172,7 @@ class CustomRangeThumbShape extends RangeSliderThumbShape {
     canvas.drawCircle(Offset(center.dx, center.dy), 12, cPaint);
     cPaint..color = colorTween.evaluate(enableAnimation)!;
     canvas.drawCircle(Offset(center.dx, center.dy), 10, cPaint);
-    canvas.drawPath(thumbPath, Paint()..color = Colors.white);
+    canvas.drawPath(thumbPath!, Paint()..color = Colors.white);
   }
 
   double convertRadiusToSigma(double radius) {

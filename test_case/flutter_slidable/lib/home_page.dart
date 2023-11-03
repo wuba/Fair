@@ -9,7 +9,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 @FairPatch()
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -25,55 +25,55 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Slidable(
-              actionPane: SlidableScrollActionPane(),
-              //滑出选项的面板 动画
-              actionExtentRatio: 0.25,
-              child: Container(
-                height: 60,
-                decoration: new BoxDecoration(
-                  color: Colors.green,
+        //must wrap with scrollable widget
+        child: Sugar.listBuilder(
+            itemCount: 1,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return Slidable(
+                actionPane: SlidableScrollActionPane(),
+                //滑出选项的面板 动画
+                actionExtentRatio: 0.25,
+                child: Container(
+                  height: 60,
+                  decoration: new BoxDecoration(
+                    color: Colors.green,
+                  ),
+                  width: Sugar.width(context),
                 ),
-                width: double.infinity,
-              ),
-              actions: <Widget>[
-                //左侧按钮列表
-                IconSlideAction(
-                  caption: "title",
-                  color: Colors.blue,
-                  icon: Icons.archive,
-                  onTap: onTagClick,
-                ),
-                IconSlideAction(
-                  caption: 'Share',
-                  color: Colors.indigo,
-                  icon: Icons.share,
-                  onTap: onTagClick,
-                ),
-              ],
-              secondaryActions: <Widget>[
-                //右侧按钮列表
-                IconSlideAction(
-                  caption: 'More',
-                  color: Colors.black45,
-                  icon: Icons.more_horiz,
-                  onTap: onTagClick,
-                ),
-                IconSlideAction(
-                  caption: 'Delete',
-                  color: Colors.red,
-                  icon: Icons.delete,
-                  closeOnTap: false,
-                  onTap: onTagClick,
-                ),
-              ],
-            )
-            //AnimateWidget(),
-          ],
-        ),
+                actions: <Widget>[
+                  //左侧按钮列表
+                  IconSlideAction(
+                    caption: "title",
+                    color: Colors.blue,
+                    icon: Icons.archive,
+                    onTap: onTagClick,
+                  ),
+                  IconSlideAction(
+                    caption: 'Share',
+                    color: Colors.indigo,
+                    icon: Icons.share,
+                    onTap: onTagClick,
+                  ),
+                ],
+                secondaryActions: <Widget>[
+                  //右侧按钮列表
+                  IconSlideAction(
+                    caption: 'More',
+                    color: Colors.black45,
+                    icon: Icons.more_horiz,
+                    onTap: onTagClick,
+                  ),
+                  IconSlideAction(
+                    caption: 'Delete',
+                    color: Colors.red,
+                    icon: Icons.delete,
+                    closeOnTap: false,
+                    onTap: onTagClick,
+                  ),
+                ],
+              );
+            })
       ),
     );
   }

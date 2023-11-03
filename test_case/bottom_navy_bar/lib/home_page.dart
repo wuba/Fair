@@ -9,7 +9,7 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 @FairPatch()
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override

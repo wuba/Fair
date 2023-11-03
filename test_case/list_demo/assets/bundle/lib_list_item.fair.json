@@ -45,7 +45,7 @@
                               "na": {
                                 "fit": "#(BoxFit.fitHeight)",
                                 "image": {
-                                  "className": "Sugar.netWorkImage",
+                                  "className": "NetworkImage",
                                   "pa": [
                                     "https://img.iplaysoft.com/wp-content/uploads/2019/free-images/free_stock_photo.jpg!0x0.webp"
                                   ]
@@ -192,5 +192,6 @@
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {},
+  "digest": "73d80752f64aff517d52c27f0208a9ff"
 }

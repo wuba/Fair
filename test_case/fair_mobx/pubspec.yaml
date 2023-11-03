@@ -6,7 +6,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -17,7 +17,7 @@ dependencies:
   mobx: ^2.0.0
   flutter_mobx: ^2.0.0
   build_runner: ^2.0.0
-  mobx_codegen: ^2.0.0
+  mobx_codegen: ^2.1.1
 
 
   fair:
@@ -35,8 +35,17 @@ dev_dependencies:
     path: ../../compiler
 
 dependency_overrides:
+  analyzer: 5.6.0
+  dart_style: 2.2.5
+  collection: 1.17.0
+  watcher: 1.1.0
+  build_runner: 2.4.6
+  build_resolvers: 2.2.1
+  source_gen: 1.3.2
+  file: 6.1.4
+  pub_semver: 2.1.4
   fair_version:
-    path: ../../flutter_version/flutter_3_0_0
+    path: ../../flutter_version/flutter_3_13_0
 
 
 flutter:

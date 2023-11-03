@@ -16,7 +16,7 @@ class HomeListProxy extends FairDelegate {
   @override
   Map<String, PropertyValue> bindValue() {
     var value = super.bindValue();
-    value['imagePath'] = () => listData!.imagePath;
+    value['imagePath'] = () => listData?.imagePath;
     return value;
   }
 

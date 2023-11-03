@@ -3,29 +3,29 @@ import 'package:best_flutter_ui_templates/hotel_booking/hotel_app_theme.dart';
 import 'package:best_flutter_ui_templates/hotel_booking/model/hotel_list_data.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:smooth_star_rating_nsafe/smooth_star_rating.dart';
 
 @FairPatch()
 class HotelListViewContent extends StatelessWidget {
-  final VoidCallback? callback;
+  final VoidCallback callback;
   @FairWell('hotelData')
-  final HotelListData? hotelData;
+  final HotelListData hotelData;
   @FairWell('primaryColor')
   final Color primaryColor = HotelAppTheme.buildLightTheme().primaryColor;
   @FairWell('backgroundColor')
   final Color backgroundColor = HotelAppTheme.buildLightTheme().backgroundColor;
 
   @FairWell('onItemTap')
-  void onItemTap() => {callback!()};
+  void onItemTap() => {callback()};
 
-  String perNight() => '${hotelData!.perNight}';
+  String perNight() => '${hotelData.perNight}';
 
-  String reviews() => '${hotelData!.reviews} Reviews';
+  String reviews() => '${hotelData.reviews} Reviews';
 
-  String distance() => '${hotelData!.dist.toStringAsFixed(1)} km to city';
+  String distance() => '${hotelData.dist.toStringAsFixed(1)} km to city';
 
-  HotelListViewContent({Key? key, this.callback, this.hotelData})
+  HotelListViewContent({Key? key,required this.callback,required this.hotelData})
       : super(key: key);
 
   @override
@@ -44,7 +44,6 @@ class HotelListViewContent extends StatelessWidget {
                     AppTheme.greyWithOpacity /*Colors.grey.withOpacity(0.6)*/,
                 offset: const Offset(4, 4),
                 blurRadius: 16,
-                spreadRadius: 0
               ),
             ],
           ),
@@ -57,7 +56,7 @@ class HotelListViewContent extends StatelessWidget {
                     AspectRatio(
                       aspectRatio: 2,
                       child:
-                          Image.asset(hotelData!.imagePath, fit: BoxFit.cover),
+                          Image.asset(hotelData.imagePath, fit: BoxFit.cover),
                     ),
                     Container(
                       color: backgroundColor,
@@ -75,7 +74,7 @@ class HotelListViewContent extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      hotelData!.titleTxt,
+                                      hotelData.titleTxt,
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
@@ -89,7 +88,7 @@ class HotelListViewContent extends StatelessWidget {
                                           MainAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
-                                          hotelData!.subTxt,
+                                          hotelData.subTxt,
                                           style: TextStyle(
                                               fontSize: 14,
                                               color: AppTheme.greyWithOpacity
@@ -121,39 +120,13 @@ class HotelListViewContent extends StatelessWidget {
                                       padding: const EdgeInsets.only(top: 4),
                                       child: Row(
                                         children: <Widget>[
-                                          RatingBar(
-                                            initialRating:
-                                            hotelData!.rating,
-                                            direction: Axis.horizontal,
+                                          SmoothStarRating(
                                             allowHalfRating: true,
-                                            itemCount: 5,
-                                            itemSize: 24,
-                                            ratingWidget: RatingWidget(
-                                              full: Icon(
-                                                Icons.star_rate_rounded,
-                                                color: HotelAppTheme
-                                                    .buildLightTheme()
-                                                    .primaryColor,
-                                              ),
-                                              half: Icon(
-                                                Icons.star_half_rounded,
-                                                color: HotelAppTheme
-                                                    .buildLightTheme()
-                                                    .primaryColor,
-                                              ),
-                                              empty: Icon(
-                                                Icons
-                                                    .star_border_rounded,
-                                                color: HotelAppTheme
-                                                    .buildLightTheme()
-                                                    .primaryColor,
-                                              ),
-                                            ),
-                                            itemPadding:
-                                            EdgeInsets.zero,
-                                            onRatingUpdate: (rating) {
-                                              print(rating);
-                                            },
+                                            starCount: 5,
+                                            rating: hotelData.rating,
+                                            size: 20,
+                                            color: primaryColor,
+                                            borderColor: primaryColor,
                                           ),
                                           Text(
                                             reviews(),

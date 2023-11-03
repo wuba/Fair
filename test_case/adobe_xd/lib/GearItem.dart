@@ -8,7 +8,7 @@ class GearItem extends StatelessWidget {
   final String label;
   final ImageProvider icon;
   GearItem({
-    Key key,
+    Key? key,
     this.description =
         'Warm, dry, cool, and comfortable: Our favorite all-weather outer shell.',
     this.label = 'Outerwear',
