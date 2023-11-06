@@ -1,3 +1,4 @@
+import 'package:example/entity/top_model.dart';
 import 'package:fair/fair.dart';
 import 'package:fair_provider/fair_provider.dart';
 import 'package:flutter/material.dart';
@@ -6,16 +7,27 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   FairApp.runApplication(
-    FairApp(
-      generated: FairAppModule(),
-      child: const MyApp(),
-      dynamicWidgetBuilder: (proxyMirror, page, bound, {bundle}) =>
-          ProviderDynamicWidgetBuilder(proxyMirror, page, bound,
-              bundle: bundle),
-    ),
-    plugins: {'FairProvider': FairProvider()},
-    jsPlugins: {'fair_provider': 'packages/fair_provider/assets/plugin/fair_provider_plugin.js'}
-  );
+      FairApp(
+        generated: FairProviderModule(),
+        child: FairChangeNotifierProvider<TopModel>(
+          initialJson: '''
+{
+    "intField":99
+}        
+        ''',
+          child: const MyApp(),
+        ),
+        dynamicWidgetBuilder: (proxyMirror, page, bound, {bundle}) =>
+            ProviderDynamicWidgetBuilder(proxyMirror, page, bound,
+                bundle: bundle),
+      ),
+      plugins: {
+        'FairProvider': FairProvider()
+      },
+      jsPlugins: {
+        'fair_provider':
+            'packages/fair_provider/assets/plugin/fair_provider_plugin.js'
+      });
 }
 
 class MyApp extends StatelessWidget {
@@ -37,14 +49,36 @@ class MyApp extends StatelessWidget {
                 body: Builder(
                   builder: (context) => ListView(
                     children: [
-                      addItem("CounterProvider Fair", () {
+                      addItem("计数器示例", () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => FairWidget(
-                                name: "CounterProvider",
+                                name: "lib_ui_counter_page",
                                 path:
-                                    "assets/fair/lib_ui_counter_page_provider.fair.json",
+                                    "assets/fair/lib_ui_counter_page.fair.json",
+                              ),
+                            ));
+                      }),
+                      addItem("基本使用示例", () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FairWidget(
+                                name: "lib_ui_example_page",
+                                path:
+                                    "assets/fair/lib_ui_example_page.fair.json",
+                              ),
+                            ));
+                      }),
+                      addItem("跨页面共享状态", () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FairWidget(
+                                name: "lib_ui_example_page2",
+                                path:
+                                    "assets/fair/lib_ui_example_page2.fair.json",
                               ),
                             ));
                       }),

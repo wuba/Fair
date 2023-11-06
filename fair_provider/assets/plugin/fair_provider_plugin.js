@@ -10,7 +10,7 @@ let FairProviderPlugin = class FairProviderPlugin {
             } catch (e) {
                 fairChangeNotifier = {}
             }
-            console.log("miseryy 创建model key = " + key)
+            console.log(fairChangeNotifier)
             FairChangeNotifierPool[key] = fairChangeNotifier;
             fairChangeNotifier.fairRuntimeTypeKey = key;
             fairChangeNotifier.notify = function () {

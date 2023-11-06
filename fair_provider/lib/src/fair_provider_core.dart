@@ -8,6 +8,8 @@ import 'package:collection/collection.dart';
 
 import 'utils/time_record.dart';
 
+var providerLogOn = false;
+
 final Map<String, FairChangeNotifier> _fairModelPool = {};
 
 class FairProviderPlugin {
@@ -78,10 +80,9 @@ class FairContextBuilder extends StatelessWidget {
   /// Creates a widget that delegates its build to a callback.
   ///
   /// The [builder] argument must not be null.
-  const FairContextBuilder({
-    super.key,
+  const FairContextBuilder({Key? key,
     required this.builder,
-  }) : assert(builder != null);
+  }) : super(key: key);
 
   /// Called to obtain the child widget.
   ///
@@ -152,8 +153,10 @@ typedef FairSelectorSelector = dynamic Function(
     dynamic value,
     );
 
-class FairSugarProvider {
-  FairSugarProvider._();
+typedef OnValueChanged = void Function(dynamic value);
+
+class SugarProvider {
+  SugarProvider._();
 
   /// Provider消费者Builder，用于Consumer
   static FairConsumerBuilder consumerBuilder(FairConsumerBuilder builder) =>
@@ -167,18 +170,96 @@ class FairSugarProvider {
   static FairSelectorSelector selector(FairSelectorSelector selector) =>
       selector;
 
-  ///用于从
-  static dynamic valueReader(
-    FairChangeNotifier model,
-    String key,
-  ) =>
-      model[key] ?? 'null';
+  static String readString(
+      FairChangeNotifier model,
+      String key,
+      ) {
+    return model[key] ?? 'null';
+  }
 
-  static String stringValueReader(
-    FairChangeNotifier model,
-    String key,
-  ) =>
-      (model[key] ?? 'null').toString();
+  static String readAsString(
+      FairChangeNotifier model,
+      String key,
+      ) {
+    return model[key].toString() ?? 'null';
+  }
+
+  static int readInt(
+      FairChangeNotifier model,
+      String key,
+      ) {
+    return model[key] ?? 0;
+  }
+
+  static double readDouble(
+      FairChangeNotifier model,
+      String key,
+      ) {
+    return model[key].toDouble() ?? 0.0;
+  }
+
+  static bool readBool(
+      FairChangeNotifier model,
+      String key,
+      ) {
+    return model[key] ?? false;
+  }
+
+  static dynamic readDynamic(
+      FairChangeNotifier model,
+      String key,
+      ) {
+    return model[key] ?? null;
+  }
+
+  static List readList(
+      FairChangeNotifier model,
+      String key,
+      ) {
+    return model[key] ?? null;
+  }
+
+  static String readStringInList(
+      FairChangeNotifier model,
+      String key,
+      int index) {
+    return model[key][index] ?? "null";
+  }
+
+  static String readAsStringInList(
+      FairChangeNotifier model,
+      String key,
+      int index) {
+    return model[key][index].toString() ?? "null";
+  }
+
+  static int readIntInList(
+      FairChangeNotifier model,
+      String key,
+      int index) {
+    return model[key] ?? 0;
+  }
+
+  static double readDoubleInList(
+      FairChangeNotifier model,
+      String key,
+      int index) {
+    return model[key] ?? 0.0;
+  }
+
+  static bool readBoolInList(
+      FairChangeNotifier model,
+      String key,
+      int index) {
+    return model[key] ?? false;
+  }
+
+  static dynamic readDynamicInList(
+      FairChangeNotifier model,
+      String key,
+      int index) {
+    return model[key] ?? null;
+  }
 
   static dynamic anyToString(dynamic value) {
     return value.toString();
@@ -188,7 +269,43 @@ class FairSugarProvider {
     FairChangeNotifier model,
     String expression,
   ) =>
-      (model.evaluation(expression) ?? 'null').toString();
+      model.evaluation(expression) ?? 'null';
+
+  static String evaluationAsString(
+    FairChangeNotifier model,
+    String expression,
+  ) =>
+      model.evaluation(expression).toString() ?? 'null';
+
+  static int evaluationToInt(
+    FairChangeNotifier model,
+    String expression,
+  ) =>
+      model.evaluation(expression) ?? 0;
+
+  static double evaluationToDouble(
+    FairChangeNotifier model,
+    String expression,
+  ) =>
+      model.evaluation(expression) ?? 0.0;
+
+  static bool evaluationToBool(
+    FairChangeNotifier model,
+    String expression,
+  ) =>
+      model.evaluation(expression) ?? false;
+
+  static List evaluationToList(
+    FairChangeNotifier model,
+    String expression,
+  ) =>
+      model.evaluation(expression) ?? null;
+
+  static dynamic evaluationToDynamic(
+    FairChangeNotifier model,
+    String expression,
+  ) =>
+      model.evaluation(expression) ?? null;
 
   static FairContextWidgetBuilder widgetBuilder(
           FairContextWidgetBuilder builder) =>
@@ -197,6 +314,21 @@ class FairSugarProvider {
   static FairContextWidgetBuilder2 widgetBuilder2(
           FairContextWidgetBuilder2 builder) =>
       builder;
+
+  /// Creates a new string by concatenating this string with [other].
+  ///
+  /// Example:
+  /// ```dart
+  /// const string = 'dart' + 'lang'; // 'dartlang'
+  /// ```
+  static String concatenates(String input, String other) => input + other;
+
+  static OnValueChanged onValueChangeWithFairContext(
+      {required Function function,required FairContext fairContext}) {
+    return (value) {
+      function.call([value, fairContext]);
+    };
+  }
 }
 
 class FairChangeNotifierProvider<T extends FairChangeNotifier>
@@ -213,7 +345,7 @@ class FairChangeNotifierProvider<T extends FairChangeNotifier>
 
   final Runtime _runtime = Runtime();
 
-  String? fairRuntimeTypeKey;
+  String? fairRuntimeTypeKey = T.toString();
 
   List<dynamic>? typeArgumentList;
 

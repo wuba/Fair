@@ -17,29 +17,29 @@ class ProviderDynamicWidgetBuilder extends DynamicWidgetBuilder {
   dynamic convert(BuildContext context, Map map, Map? methodMap,
       {Domain? domain}) {
     var name = map[tag];
-    if (name == 'FairSugarProvider.consumerBuilder' ||
-        name == 'FairSugarProvider.selectorBuilder') {
+    if (name == 'SugarProvider.consumerBuilder' ||
+        name == 'SugarProvider.selectorBuilder') {
       return _buildFairSugarConsumerBuilder(
         context,
         map,
         methodMap,
         domain: domain,
       );
-    } else if (name == 'FairSugarProvider.selector') {
+    } else if (name == 'SugarProvider.selector') {
       return _buildFairSugarSelector(
         context,
         map,
         methodMap,
         domain: domain,
       );
-    } else if (name == 'FairSugarProvider.widgetBuilder') {
+    } else if (name == 'SugarProvider.widgetBuilder') {
       return _buildFairSugarWidgetBuilder(
         context,
         map,
         methodMap,
         domain: domain,
       );
-    } else if (name == 'FairSugarProvider.widgetBuilder2') {
+    } else if (name == 'SugarProvider.widgetBuilder2') {
       return _buildFairSugarWidgetBuilder2(
         context,
         map,

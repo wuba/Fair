@@ -1,5 +1,6 @@
-class TimeRecord {
+import 'package:fair_provider/fair_provider.dart';
 
+class TimeRecord {
   TimeRecord(this.tag);
 
   String? tag;
@@ -15,7 +16,8 @@ class TimeRecord {
     _endTime = DateTime.now();
     final duration = _endTime.difference(_startTime);
     final milliseconds = duration.inMilliseconds;
-    print('耗时统计 Time elapsed: $milliseconds milliseconds');
+    if (providerLogOn) {
+      print('耗时统计 Time elapsed: $milliseconds milliseconds');
+    }
   }
-
 }

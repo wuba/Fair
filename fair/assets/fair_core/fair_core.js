@@ -64,6 +64,16 @@ function _invokeMethod(par) {
                     const value = args[key];
                     if (typeof value === 'object') {
                         invokeMethodArgsInterceptorManager.handle(value)
+                        //入参被压缩为数组时，确保数组内所有元素经拦截器处理
+                        const innerArgs = value;
+                        for (let innerKey in innerArgs) {
+                            if (innerArgs.hasOwnProperty(innerKey)) {
+                                const innerValue = innerArgs[innerKey];
+                                if (typeof innerValue === 'object') {
+                                    invokeMethodArgsInterceptorManager.handle(innerValue)
+                                }
+                            }
+                        }
                     }
                 }
             }

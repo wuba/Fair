@@ -1,0 +1,106 @@
+{
+  "className": "FairChangeNotifierProvider",
+  "na": {
+    "initialJson": "^(counterModelJson)",
+    "child": {
+      "className": "Scaffold",
+      "na": {
+        "appBar": {
+          "className": "AppBar",
+          "na": {
+            "title": {
+              "className": "Text",
+              "pa": [
+                "计数器示例"
+              ]
+            }
+          }
+        },
+        "body": {
+          "className": "Center",
+          "na": {
+            "child": {
+              "className": "Column",
+              "na": {
+                "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                "children": [
+                  {
+                    "className": "Text",
+                    "pa": [
+                      "You have pushed the button this many times:"
+                    ]
+                  },
+                  {
+                    "className": "FairConsumer",
+                    "na": {
+                      "builder": {
+                        "className": "SugarProvider.consumerBuilder",
+                        "pa": [
+                          {
+                            "className": "Text",
+                            "pa": [
+                              {
+                                "className": "SugarProvider.readAsString",
+                                "pa": [
+                                  "^(value)",
+                                  "count"
+                                ]
+                              }
+                            ],
+                            "functionParameters": {
+                              "pa": [
+                                "context",
+                                "value",
+                                "child"
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "typeArgumentList": [
+                      "CounterModel"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "floatingActionButton": {
+          "className": "FairContextBuilder",
+          "na": {
+            "builder": {
+              "className": "SugarProvider.widgetBuilder",
+              "pa": [
+                {
+                  "className": "FloatingActionButton",
+                  "na": {
+                    "onPressed": "@(_incrementCounter(^(context)))",
+                    "tooltip": "Increment",
+                    "child": {
+                      "className": "Icon",
+                      "pa": [
+                        "#(Icons.add)"
+                      ]
+                    }
+                  },
+                  "functionParameters": {
+                    "pa": [
+                      "context"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "typeArgumentList": [
+    "CounterModel"
+  ],
+  "methodMap": {},
+  "digest": "61dcca0ca25598d884689e6aa5679d0f"
+}
