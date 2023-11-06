@@ -74,7 +74,6 @@ class FairContext {
 }
 
 typedef FairContextWidgetBuilder = Widget Function(FairContext context);
-typedef FairContextWidgetBuilder2 = Widget Function(String context);
 
 class FairContextBuilder extends StatelessWidget {
   /// Creates a widget that delegates its build to a callback.
@@ -309,10 +308,6 @@ class SugarProvider {
 
   static FairContextWidgetBuilder widgetBuilder(
           FairContextWidgetBuilder builder) =>
-      builder;
-
-  static FairContextWidgetBuilder2 widgetBuilder2(
-          FairContextWidgetBuilder2 builder) =>
       builder;
 
   /// Creates a new string by concatenating this string with [other].
