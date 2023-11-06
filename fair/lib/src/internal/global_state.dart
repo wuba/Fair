@@ -39,6 +39,23 @@ class GlobalState {
     _builder = builder;
   }
 
+  void addExtBuilder(Map<String, FairDelegateBuilder>? extBuilder) {
+    if (extBuilder != null) {
+      try {
+        if (_builder != null) {
+          _builder?.addAll(extBuilder);
+        } else {
+          //when _builder is uninitialized
+          _builder = extBuilder;
+        }
+      } catch (e) {
+        //caught when thrown “_builder is an unmodifiable map”
+        extBuilder.addAll(_builder!);
+        _builder = extBuilder;
+      }
+    }
+  }
+
   static String id(String? prefix) {
     return '$prefix#${GlobalState._counter++}';
   }
