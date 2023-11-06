@@ -76,8 +76,17 @@ class Decoder {
       bound ??= BindingData(app?.modules);
       bound.data = data;
     }
+
+    var dynamicBuilder;
     var proxy = app?.proxy;
-    Widget w =( app?.dynamicWidgetBuilder?.call(proxy as ProxyMirror?, page, bound, bundle: url) ?? DynamicWidgetBuilder(proxy as ProxyMirror?, page, bound, bundle: url)).convert(context, map, methodMap) ??
+    final dynamicBuilders = app?.dynamicWidgetBuilder?.map((e) => e?.call(proxy as ProxyMirror?, page, bound, bundle: url));
+    if (dynamicBuilders == null || dynamicBuilders.isEmpty) {
+      dynamicBuilder = DynamicWidgetBuilder(proxy as ProxyMirror?, page, bound, bundle: url);
+    } else {
+      dynamicBuilder =
+          dynamicBuilders.map((e) => e?.convert(context, map, methodMap)).toList().firstWhere((element) => element != null, orElse: () => null);
+    }
+    Widget w =(dynamicBuilder ?? DynamicWidgetBuilder(proxy as ProxyMirror?, page, bound, bundle: url)).convert(context, map, methodMap) ??
                 WarningWidget(parentContext:context,name: page, url: url, error: 'tag name not supported yet');
     return w;
   }
