@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair/src/render/expression.dart';
 import 'package:flutter/widgets.dart';
 
 class Property {
@@ -29,7 +30,11 @@ class Property {
     final result = <String, dynamic>{};
     na?.forEach((key, value) {
       if (value is ValueNotifier) {
-        result[key] = value.value;
+        if (value is BindValueBuilder) {
+          result[key] = value.value;
+        } else {
+          result[key] = value;
+        }
       } else {
         result[key] = value;
       }

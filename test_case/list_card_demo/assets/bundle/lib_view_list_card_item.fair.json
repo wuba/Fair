@@ -33,7 +33,7 @@
                                 "na": {
                                   "radius": 30,
                                   "backgroundImage": {
-                                    "className": "Sugar.netWorkImage",
+                                    "className": "NetworkImage",
                                     "pa": [
                                       "http://c-ssl.duitang.com/uploads/item/202003/26/20200326223552_nayyt.jpeg"
                                     ]
@@ -134,7 +134,7 @@
                     "className": "Image",
                     "na": {
                       "image": {
-                        "className": "Sugar.netWorkImage",
+                        "className": "NetworkImage",
                         "pa": [
                           "https://img2.baidu.com/it/u=4114138728,2649938841&fm=253&fmt=auto&app=138&f=JPEG"
                         ]
@@ -273,5 +273,6 @@
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {},
+  "digest": "032fd34d6a9d44cfd69824a29e29bdfa"
 }

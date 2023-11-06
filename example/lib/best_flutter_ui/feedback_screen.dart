@@ -1,9 +1,9 @@
 import 'package:example/best_flutter_ui/app_theme.dart';
+import 'package:example/best_flutter_ui/fair_state.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
 import 'component/composer_widget.dart';
-import 'fair_state.dart';
 
 @FairPatch()
 class FeedbackScreen extends StatefulWidget {

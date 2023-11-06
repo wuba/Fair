@@ -1,17 +1,15 @@
 import 'package:best_flutter_ui_templates/fitness_app/fitness_app_theme.dart';
 import 'package:best_flutter_ui_templates/fitness_app/models/meals_list_data.dart';
-import 'package:best_flutter_ui_templates/main.dart';
+import 'package:best_flutter_ui_templates/hex_color.dart';
 import 'package:flutter/material.dart';
-
-import '../../main.dart';
 
 class MealsListView extends StatefulWidget {
   const MealsListView(
-      {Key? key, this.mainScreenAnimationController, this.mainScreenAnimation})
+      {Key? key,required this.mainScreenAnimationController,required this.mainScreenAnimation})
       : super(key: key);
 
-  final AnimationController? mainScreenAnimationController;
-  final Animation<double>? mainScreenAnimation;
+  final AnimationController mainScreenAnimationController;
+  final Animation<double> mainScreenAnimation;
 
   @override
   _MealsListViewState createState() => _MealsListViewState();
@@ -19,7 +17,7 @@ class MealsListView extends StatefulWidget {
 
 class _MealsListViewState extends State<MealsListView>
     with TickerProviderStateMixin {
-  AnimationController? animationController;
+ late AnimationController animationController;
   List<MealsListData> mealsListData = MealsListData.tabIconsList;
 
   @override
@@ -36,20 +34,20 @@ class _MealsListViewState extends State<MealsListView>
 
   @override
   void dispose() {
-    animationController?.dispose();
+    animationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: widget.mainScreenAnimationController!,
+      animation: widget.mainScreenAnimationController,
       builder: (BuildContext context, Widget? child) {
         return FadeTransition(
           opacity: widget.mainScreenAnimation!,
           child: Transform(
             transform: Matrix4.translationValues(
-                0.0, 30 * (1.0 - widget.mainScreenAnimation!.value), 0.0),
+                0.0, 30 * (1.0 - widget.mainScreenAnimation.value), 0.0),
             child: Container(
               height: 216,
               width: double.infinity,
@@ -64,15 +62,15 @@ class _MealsListViewState extends State<MealsListView>
                   final Animation<double> animation =
                       Tween<double>(begin: 0.0, end: 1.0).animate(
                           CurvedAnimation(
-                              parent: animationController!,
+                              parent: animationController,
                               curve: Interval((1 / count) * index, 1.0,
                                   curve: Curves.fastOutSlowIn)));
-                  animationController?.forward();
+                  animationController.forward();
 
                   return MealsView(
                     mealsListData: mealsListData[index],
                     animation: animation,
-                    animationController: animationController!,
+                    animationController: animationController,
                   );
                 },
               ),
@@ -174,7 +172,7 @@ class MealsView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            mealsListData?.kacl != 0
+                            mealsListData!.kacl != 0
                                 ? Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.end,

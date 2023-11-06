@@ -1,6 +1,5 @@
+import 'package:best_flutter_ui_templates/fitness_app/fitness_app_theme.dart';
 import 'package:flutter/material.dart';
-
-import '../fitness_app_theme.dart';
 
 class AreaListView extends StatefulWidget {
   const AreaListView(
@@ -67,7 +66,7 @@ class _AreaListViewState extends State<AreaListView>
                               curve: Curves.fastOutSlowIn),
                         ),
                       );
-                      animationController?.forward();
+                      animationController!.forward();
                       return AreaView(
                         imagepath: areaListData[index],
                         animation: animation,

@@ -60,13 +60,13 @@
                                 {
                                   "className": "Text",
                                   "pa": [
-                                    "$(item.name)"
+                                    "%(getValueOrEmpty($(item.name),))"
                                   ]
                                 },
                                 {
                                   "className": "Text",
                                   "pa": [
-                                    "#(${item.age})"
+                                    "%(getValueOrEmpty($(item.age),18))"
                                   ]
                                 }
                               ]
@@ -74,6 +74,12 @@
                           }
                         }
                       }
+                    },
+                    "functionParameters": {
+                      "pa": [
+                        "index",
+                        "item"
+                      ]
                     }
                   }
                 ]
@@ -148,6 +154,52 @@
                         ]
                       }
                     ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "className": "SizedBox",
+            "na": {
+              "width": {
+                "className": "Sugar.width",
+                "pa": [
+                  "^(context)"
+                ]
+              },
+              "height": {
+                "className": "Sugar.height",
+                "pa": [
+                  "^(context)"
+                ]
+              },
+              "child": {
+                "className": "Sugar.listBuilder",
+                "na": {
+                  "itemCount": "%(_getItemCount)",
+                  "itemBuilder": {
+                    "className": "Center",
+                    "na": {
+                      "child": {
+                        "className": "Container",
+                        "na": {
+                          "height": 20,
+                          "child": {
+                            "className": "Text",
+                            "pa": [
+                              "#($item)"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "functionParameters": {
+                      "pa": [
+                        "context",
+                        "item"
+                      ]
+                    }
                   }
                 }
               }
@@ -243,6 +295,12 @@
                           }
                         }
                       }
+                    },
+                    "functionParameters": {
+                      "pa": [
+                        "context",
+                        "item"
+                      ]
                     }
                   }
                 }
@@ -333,6 +391,12 @@
                                     }
                                   }
                                 }
+                              },
+                              "functionParameters": {
+                                "pa": [
+                                  "content",
+                                  "index"
+                                ]
                               }
                             },
                             "childCount": 3
@@ -366,6 +430,12 @@
                                     "#(是 grid item $index 啊~~)"
                                   ]
                                 }
+                              },
+                              "functionParameters": {
+                                "pa": [
+                                  "context",
+                                  "index"
+                                ]
                               }
                             },
                             "childCount": 20
@@ -382,5 +452,10 @@
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {
+    "getValueOrEmpty": {
+      "className": "val.toString"
+    }
+  },
+  "digest": "c80a906c739b353dde7f3a46b1fba24e"
 }

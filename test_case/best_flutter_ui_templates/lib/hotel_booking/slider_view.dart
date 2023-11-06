@@ -1,6 +1,6 @@
+import 'package:best_flutter_ui_templates/hotel_booking/hotel_app_theme.dart';
 import 'package:flutter/material.dart';
 
-import 'hotel_app_theme.dart';
 
 class SliderView extends StatefulWidget {
   const SliderView({Key? key, this.onChangedistValue, this.distValue})
@@ -18,7 +18,7 @@ class _SliderViewState extends State<SliderView> {
 
   @override
   void initState() {
-    distValue = widget.distValue!;
+    distValue = widget.distValue??0;
     super.initState();
   }
 
@@ -30,7 +30,7 @@ class _SliderViewState extends State<SliderView> {
           Row(
             children: <Widget>[
               Expanded(
-                flex: distValue.round(),
+                flex: distValue!.round(),
                 child: const SizedBox(),
               ),
               Container(
@@ -56,7 +56,7 @@ class _SliderViewState extends State<SliderView> {
                   distValue = value;
                 });
                 try {
-                  widget.onChangedistValue!(distValue);
+                  widget.onChangedistValue?.call(distValue);
                 } catch (_) {}
               },
               min: 0,
@@ -91,19 +91,19 @@ class CustomThumbShape extends SliderComponentShape {
 
   @override
   void paint(
-      PaintingContext context,
-      Offset thumbCenter, {
-        Animation<double>? activationAnimation,
-        Animation<double>? enableAnimation,
-        bool? isDiscrete,
-        TextPainter? labelPainter,
-        RenderBox? parentBox,
-        Size? sizeWithOverflow,
-        SliderThemeData? sliderTheme,
-        TextDirection textDirection = TextDirection.ltr,
-        double? textScaleFactor,
-        double? value,
-      }) {
+    PaintingContext context,
+    Offset thumbCenter, {
+    Animation<double>? activationAnimation,
+    Animation<double>? enableAnimation,
+    bool? isDiscrete,
+    TextPainter? labelPainter,
+    RenderBox? parentBox,
+    Size? sizeWithOverflow,
+    SliderThemeData? sliderTheme,
+    TextDirection? textDirection,
+    double? textScaleFactor,
+    double? value,
+  }) {
     final Canvas canvas = context.canvas;
     final ColorTween colorTween = ColorTween(
       begin: sliderTheme?.disabledThumbColor,
@@ -118,7 +118,7 @@ class CustomThumbShape extends SliderComponentShape {
         Paint()
           ..color = Colors.black.withOpacity(0.5)
           ..maskFilter =
-          MaskFilter.blur(BlurStyle.normal, convertRadiusToSigma(8)));
+              MaskFilter.blur(BlurStyle.normal, convertRadiusToSigma(8)));
 
     final Paint cPaint = Paint();
     cPaint..color = Colors.white;

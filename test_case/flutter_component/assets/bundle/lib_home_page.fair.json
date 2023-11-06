@@ -44,7 +44,7 @@
                   "style": {
                     "className": "ThemeStyle.headline4",
                     "pa": [
-                      "context"
+                      "^(context)"
                     ]
                   }
                 }
@@ -58,15 +58,28 @@
                   "style": {
                     "className": "ThemeStyle.headline4",
                     "pa": [
-                      "context"
+                      "^(context)"
                     ]
                   }
                 }
               },
               {
-                "className": "CustomWidget",
+                "className": "Sugar.listBuilder",
                 "na": {
-                  "title": "Test"
+                  "itemCount": 1,
+                  "shrinkWrap": true,
+                  "itemBuilder": {
+                    "className": "CustomWidget",
+                    "na": {
+                      "title": "Test"
+                    },
+                    "functionParameters": {
+                      "pa": [
+                        "context",
+                        "index"
+                      ]
+                    }
+                  }
                 }
               },
               {
@@ -77,7 +90,8 @@
                     "pa": [
                       "#(FontAwesomeIcons.solidCircle)"
                     ]
-                  }
+                  },
+                  "onPressed": "@(_onPressed)"
                 }
               },
               {
@@ -194,5 +208,7 @@
         ]
       }
     }
-  }
+  },
+  "methodMap": {},
+  "digest": "60e45cfd214616eb07a41a598792426c"
 }

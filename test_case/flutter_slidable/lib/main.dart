@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidables/src/generated.fair.dart';
 
 import 'delegate.dart';
-import 'home_page.dart';
-import 'module.dart';
 
 @FairBinding(packages: [
   'package:flutter_slidable/flutter_slidable.dart',])
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(FairApp(
+  FairApp.runApplication(FairApp(
     child: MyApp(),
     // modules: {
     //   SlidableModule.tagName:() => SlidableModule(),

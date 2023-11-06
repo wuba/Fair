@@ -1,6 +1,18 @@
 {
   "className": "Scaffold",
   "na": {
+    "floatingActionButton": {
+      "className": "ElevatedButton",
+      "na": {
+        "onPressed": "@(_incrementCounter)",
+        "child": {
+          "className": "Text",
+          "pa": [
+            "Map View"
+          ]
+        }
+      }
+    },
     "appBar": {
       "className": "AppBar",
       "na": {
@@ -19,7 +31,7 @@
                     "^(context)"
                   ]
                 },
-                8
+                10
               ]
             },
             "child": {
@@ -159,6 +171,12 @@
                 "data": {
                   "": ""
                 }
+              },
+              "functionParameters": {
+                "pa": [
+                  "context",
+                  "index"
+                ]
               }
             }
           }
@@ -166,5 +184,6 @@
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {},
+  "digest": "705003bb62cfb22930abb9ab6df6bddb"
 }

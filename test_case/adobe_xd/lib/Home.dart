@@ -10,28 +10,28 @@ import 'ItemWidget.dart';
 @FairPatch()
 class Home extends StatelessWidget {
   @FairWell('svg_il6hf2')
-  final String svg_il6hf2;
+  final String? svg_il6hf2;
 
   @FairWell('svg_uvjlj2')
-  final String svg_uvjlj2;
+  final String? svg_uvjlj2;
 
   @FairWell('svg_6o6tx4')
-  final String svg_6o6tx4;
+  final String? svg_6o6tx4;
 
   @FairWell('svg_emmxj3')
-  final String svg_emmxj3;
+  final String? svg_emmxj3;
 
   @FairWell('svg_dzwujb')
-  final String svg_dzwujb;
+  final String? svg_dzwujb;
 
   @FairWell('svg_p45gdo')
-  final String svg_p45gdo;
+  final String? svg_p45gdo;
 
   @FairWell('svg_20idv2')
-  final String svg_20idv2;
+  final String? svg_20idv2;
 
   Home({
-    Key key,
+    Key? key,
     this.svg_il6hf2,
     this.svg_uvjlj2,
     this.svg_6o6tx4,
@@ -246,7 +246,7 @@ class Home extends StatelessWidget {
                         child:
                             // Adobe XD layer: 'mountains 2' (shape)
                             SvgPicture.string(
-                          svg_il6hf2,
+                          getValueWithDefault(svg_il6hf2, ''),
                           allowDrawingOutsideViewBox: true,
                           fit: BoxFit.fill,
                         ),
@@ -278,7 +278,7 @@ class Home extends StatelessWidget {
                         child:
                             // Adobe XD layer: 'mountains 1' (shape)
                             SvgPicture.string(
-                          svg_uvjlj2,
+                              getValueWithDefault(svg_uvjlj2,''),
                           allowDrawingOutsideViewBox: true,
                           fit: BoxFit.fill,
                         ),
@@ -392,7 +392,7 @@ class Home extends StatelessWidget {
                         child:
                             // Adobe XD layer: 'ellipse' (shape)
                             SvgPicture.string(
-                          svg_6o6tx4,
+                              getValueWithDefault(svg_6o6tx4,''),
                           allowDrawingOutsideViewBox: true,
                           fit: BoxFit.fill,
                         ),
@@ -405,7 +405,7 @@ class Home extends StatelessWidget {
                         child:
                             // Adobe XD layer: 'path' (shape)
                             SvgPicture.string(
-                          svg_emmxj3,
+                              getValueWithDefault(svg_emmxj3,''),
                           allowDrawingOutsideViewBox: true,
                           fit: BoxFit.fill,
                         ),
@@ -525,7 +525,7 @@ class Home extends StatelessWidget {
                   child:
                       // Adobe XD layer: 'blue divider line' (shape)
                       SvgPicture.string(
-                    svg_dzwujb,
+                        getValueWithDefault(svg_dzwujb,''),
                     allowDrawingOutsideViewBox: true,
                     fit: BoxFit.fill,
                   ),
@@ -559,7 +559,7 @@ class Home extends StatelessWidget {
                   child:
                       // Adobe XD layer: 'search icon' (shape)
                       SvgPicture.string(
-                    svg_20idv2,
+                        getValueWithDefault(svg_20idv2,''),
                     allowDrawingOutsideViewBox: true,
                     fit: BoxFit.fill,
                   ),
@@ -574,7 +574,7 @@ class Home extends StatelessWidget {
                   child:
                       // Adobe XD layer: 'tent icon' (shape)
                       SvgPicture.string(
-                    svg_p45gdo,
+                        getValueWithDefault(svg_p45gdo,''),
                     allowDrawingOutsideViewBox: true,
                     fit: BoxFit.fill,
                   ),
@@ -585,6 +585,13 @@ class Home extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  dynamic getValueWithDefault(dynamic value, dynamic defaultValue) {
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
   }
 
   @FairWell('pageBuilder')

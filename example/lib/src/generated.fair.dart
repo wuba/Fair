@@ -25,12 +25,13 @@
 //
 // ignore_for_file: implementation_imports, unused_import, depend_on_referenced_packages, unused_shown_name, duplicate_import, always_specify_types, unnecessary_import
 
+import 'package:example/best_flutter_ui/best_ui_page.dart';
 import 'package:example/best_flutter_ui/component/composer_widget.dart';
 import 'package:example/fair_widget/fairbinding/fair_binding_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_staggered_grid_view/src/widgets/staggered_grid.dart';
-import 'package:flutter_staggered_grid_view/src/widgets/masonry_grid_view.dart';
 import 'package:example/best_flutter_ui/app_theme.dart';
+import 'package:flutter_staggered_grid_view/src/widgets/masonry_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:font_awesome_flutter/src/fa_icon.dart';
 import 'package:example/best_flutter_ui/hotel_booking/hotel_app_theme.dart';
@@ -43,8 +44,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:fair/fair.dart';
 import 'package:fair_version/fair_version.dart';
-
-import '../best_flutter_ui/best_ui_page.dart';
 
 class AppGeneratedModule extends GeneratedModule {
   @override

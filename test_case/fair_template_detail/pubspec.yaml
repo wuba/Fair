@@ -45,8 +45,11 @@ dev_dependencies:
     path: ../../compiler
 
 dependency_overrides:
+  watcher: 1.1.0
+  analyzer: 5.6.0
+  dart_style: 2.2.5
   fair_version:
-    path: ../../flutter_version/flutter_2_8_0
+    path: ../../flutter_version/flutter_3_13_0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

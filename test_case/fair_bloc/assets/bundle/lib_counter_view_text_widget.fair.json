@@ -1,9 +1,11 @@
 {
   "className": "Text",
   "pa": [
-    "#($state)"
+    "#(state)"
   ],
   "na": {
     "style": "#(headline2)"
-  }
+  },
+  "methodMap": {},
+  "digest": "5b5ad22bedc9a2db14c23326f8d7198f"
 }

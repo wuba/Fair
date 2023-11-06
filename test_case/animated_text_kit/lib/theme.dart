@@ -10,6 +10,6 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 
 class ThemeStyle {
-  static TextStyle headline4(BuildContext context) =>
+  static TextStyle? headline4(BuildContext context) =>
       Theme.of(context).textTheme.headline4;
 }
