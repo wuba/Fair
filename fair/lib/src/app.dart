@@ -122,6 +122,12 @@ class FairApp extends InheritedWidget with AppState {
     List<String>? baseJsSources,
     List<IFairLibraryAdapter>? adapters,
   }) {
+    if (plugins == null) {
+      plugins = {};
+    }
+    if (jsPlugins == null) {
+      jsPlugins = {};
+    }
     //init 3rd-library adapter
     initFairLibraryAdapter(app, plugins: plugins, jsPlugins: jsPlugins, adapters: adapters);
 

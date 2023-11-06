@@ -84,10 +84,10 @@ class Decoder {
       dynamicBuilder = DynamicWidgetBuilder(proxy as ProxyMirror?, page, bound, bundle: url);
     } else {
       dynamicBuilder =
-          dynamicBuilders.map((e) => e?.convert(context, map, methodMap)).toList().firstWhere((element) => element != null, orElse: () => null);
+          dynamicBuilders.firstWhere((element) => element?.convert(context, map, methodMap) != null, orElse: () => null);
     }
     Widget w =(dynamicBuilder ?? DynamicWidgetBuilder(proxy as ProxyMirror?, page, bound, bundle: url)).convert(context, map, methodMap) ??
-                WarningWidget(parentContext:context,name: page, url: url, error: 'tag name not supported yet');
+        WarningWidget(parentContext:context,name: page, url: url, error: 'tag name not supported yet');
     return w;
   }
 }

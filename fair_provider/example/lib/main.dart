@@ -7,27 +7,18 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   FairApp.runApplication(
-      FairApp(
-        generated: FairProviderModule(),
-        child: FairChangeNotifierProvider<TopModel>(
-          initialJson: '''
+    FairApp(
+      child: FairChangeNotifierProvider<TopModel>(
+        initialJson: '''
 {
     "intField":99
 }        
         ''',
-          child: const MyApp(),
-        ),
-        dynamicWidgetBuilder: (proxyMirror, page, bound, {bundle}) =>
-            ProviderDynamicWidgetBuilder(proxyMirror, page, bound,
-                bundle: bundle),
+        child: const MyApp(),
       ),
-      plugins: {
-        'FairProvider': FairProvider()
-      },
-      jsPlugins: {
-        'fair_provider':
-            'packages/fair_provider/assets/plugin/fair_provider_plugin.js'
-      });
+    ),
+    adapters: [FairProviderAdapter()],
+  );
 }
 
 class MyApp extends StatelessWidget {
