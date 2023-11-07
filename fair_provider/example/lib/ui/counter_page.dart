@@ -50,6 +50,13 @@ class _CounterPageState extends State<CounterPage> {
                     (context, value, child) =>
                         Text(SugarProvider.readAsString(value, 'count'))),
               ),
+              FairSelector<CounterModel, int>(
+                  builder:
+                      SugarProvider.selectorBuilder((context, value, child) {
+                    return Text(SugarProvider.anyToString(value));
+                  }),
+                  selector: SugarProvider.selector((context, value) =>
+                      SugarProvider.readInt(value, 'count'))),
             ],
           ),
         ),

@@ -52,13 +52,21 @@ class CounterModel extends FairChangeNotifier {
     );
   }
 ```
-使用 `FairConsumer`/`FairSelector` 配合语法糖来观察状态变更
+使用 `FairConsumer`/`FairSelector` 配合语法糖来观察状态变更，注意由于 `fair` DSL布局的特性，匿名函数是不支持的（后续计划支持优化），所以其中的builder函数还需要语法糖来包装下。最后从自定义的 `FairChangeNotifier` 状态管理对象中取值同样也需要借助语法糖来完成，目前已经提供了大量的取值语法糖，可以满足大多数场景的使用，详细说明可参考进阶使用部分。
 ```dart
   FairConsumer<CounterModel>(
     builder: SugarProvider.consumerBuilder(
         (context, value, child) =>
             Text(SugarProvider.readAsString(value, 'count'))),
   )
+```
+```dart
+  FairSelector<CounterModel, int>(
+    builder: SugarProvider.selectorBuilder(
+        (context, value, child) =>
+            Text(SugarProvider.anyToString(value))),
+    selector: SugarProvider.selector((context, value) =>
+        SugarProvider.readInt(value, 'count'))),
 ```
 编写事件处理函数，更新状态
 注意read函数的泛型即是状态管理类的类型，参数需要手动输入该类的字符串
@@ -116,7 +124,7 @@ FairConsumer<ExampleModel>(
 - **readList** 使用key从model中读取数组类型的值
 - **readDynamic** 使用key从model中读取任意类型的值
 
-还支持表达式取值，使用规则如 `a.b.c`
+还支持表达式取值，使用规则如 `a.b.c`，基本原理则是将表达式发送到 `js` 侧使用 `eval` 函数进行取值，具体使用如下，也可参考 [基本使用示例]()
 ```dart
 FairSelector<ExampleModel, String>(
     builder: SugarProvider.selectorBuilder((context, value, child) => Text(value)),

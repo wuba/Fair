@@ -39,13 +39,6 @@ class ProviderDynamicWidgetBuilder extends DynamicWidgetBuilder {
         methodMap,
         domain: domain,
       );
-    } else if (name == 'SugarProvider.widgetBuilder2') {
-      return _buildFairSugarWidgetBuilder2(
-        context,
-        map,
-        methodMap,
-        domain: domain,
-      );
     }
     return super.convert(
       context,
@@ -122,24 +115,4 @@ class ProviderDynamicWidgetBuilder extends DynamicWidgetBuilder {
     return builder;
   }
 
-  dynamic _buildFairSugarWidgetBuilder2(BuildContext context, Map map, Map? methodMap,
-      {Domain? domain}) {
-    dynamic source = pa0(map);
-    assert(source is Map);
-    List functionParameters = FunctionDomain.pa(source);
-    FairContextWidgetBuilder2 builder = (builderContext) {
-      return convert(
-        context,
-        source,
-        methodMap,
-        domain: FunctionDomain(
-          {
-            functionParameters[0]: builderContext,
-          },
-          parent: domain,
-        ),
-      );
-    };
-    return builder;
-  }
 }

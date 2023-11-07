@@ -61,6 +61,56 @@
                     "typeArgumentList": [
                       "CounterModel"
                     ]
+                  },
+                  {
+                    "className": "FairSelector",
+                    "na": {
+                      "builder": {
+                        "className": "SugarProvider.selectorBuilder",
+                        "pa": [
+                          {
+                            "className": "Text",
+                            "pa": [
+                              {
+                                "className": "SugarProvider.anyToString",
+                                "pa": [
+                                  "^(value)"
+                                ]
+                              }
+                            ],
+                            "functionParameters": {
+                              "pa": [
+                                "context",
+                                "value",
+                                "child"
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "selector": {
+                        "className": "SugarProvider.selector",
+                        "pa": [
+                          {
+                            "className": "SugarProvider.readInt",
+                            "pa": [
+                              "^(value)",
+                              "count"
+                            ],
+                            "functionParameters": {
+                              "pa": [
+                                "context",
+                                "value"
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "typeArgumentList": [
+                      "CounterModel",
+                      "int"
+                    ]
                   }
                 ]
               }
@@ -102,5 +152,5 @@
     "CounterModel"
   ],
   "methodMap": {},
-  "digest": "61dcca0ca25598d884689e6aa5679d0f"
+  "digest": "2a50f76be88274617782a4aaf287fae5"
 }
