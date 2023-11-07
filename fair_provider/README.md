@@ -77,7 +77,7 @@ class CounterModel extends FairChangeNotifier {
     counterModel.notify();
   }
 ```
-由于fair中的逻辑函数会经 `dart2js` 编译器转换为js，所以是不支持 `BuildContext` 上下文的，这里需要使用经过特殊处理的 `FairContext`，`FairContext` 的构造需要 `FairContextBuilder` 配合语法糖 `SugarProvider.widgetBuilder` 来获取
+这里需要使用经过特殊处理的 `FairContext`，`FairContext` 的构造需要 `FairContextBuilder` 配合语法糖 `SugarProvider.widgetBuilder` 来获取
 ```dart
 FairContextBuilder(
     builder: SugarProvider.widgetBuilder((context) => FloatingActionButton(
@@ -124,7 +124,7 @@ FairConsumer<ExampleModel>(
 - **readList** 使用key从model中读取数组类型的值
 - **readDynamic** 使用key从model中读取任意类型的值
 
-还支持表达式取值，使用规则如 `a.b.c`，基本原理则是将表达式发送到 `js` 侧使用 `eval` 函数进行取值，具体使用如下，也可参考 [基本使用示例]()
+还支持表达式取值，使用规则如 `a.b.c`，以上面的ExampleModel为例，如果想读取成员 `innerModel` 中的 `innerBoolField` 字段，使用表达式取值可以这么写
 ```dart
 FairSelector<ExampleModel, String>(
     builder: SugarProvider.selectorBuilder((context, value, child) => Text(value)),
@@ -138,3 +138,5 @@ FairSelector<ExampleModel, String>(
 - **evaluationToBool** 使用表达式从model中读取布尔型的值
 - **evaluationToList** 使用表达式从model中读取数组类型的值
 - **evaluationToDynamic** 使用表达式从model中读取任意类型的值
+
+## 更多示例请见 [example]()
