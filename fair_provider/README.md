@@ -28,9 +28,11 @@ void main() {
 }
 ```
 
-## 基本使用
+## 简单使用
 以计数器举例
+
 首先声明状态管理类，继承 `FairChangeNotifier`
+
 ```dart
 class CounterModel extends FairChangeNotifier {
   int count = 0;
@@ -90,10 +92,12 @@ FairContextBuilder(
 ),
 ```
 
-## 进阶使用
-由于 `fair` 的布局动态化特性，在构建布局时不支持随意编写取值代码，这里需要借助 [SugarProvider]() 中的一系列语法糖来完成
+## 使用说明
 
-这里以example中的基本示例代码举例
+### 1. FairChangeNotifier的使用限制
+
+注意 `FairChangeNotifier` 的定义有一些限制，这里以 [example]() 中的ExampleModel举例
+
 ```dart
 class ExampleModel extends FairChangeNotifier {
   String? stringField;
@@ -108,6 +112,22 @@ class ExampleInnerModel {
   bool? innerBoolField;
 }
 ```
+
+1. 支持的类型为基本类型和数组、字典
+   - int
+   - double
+   - String
+   - bool
+   - List
+   - Map
+2. 目前只支持基本类型或者简单的嵌套对象（内部也是基本类型），不支持自定义函数（Function）
+3. 当需要通知状态更新时需要手动调用`notify`/`notifyListeners`
+4. 暂时不支持定义在`bean`结尾的包中
+
+### 2. 在布局中取值需使用语法糖
+
+由于 `fair` 的布局动态化特性，在构建布局时不支持随意编写取值代码，这里需要借助 [SugarProvider]() 中的一系列语法糖来完成
+
 语法糖提供了基本类型和数组的取值api，具体使用细节可以参考example中的 [基本使用示例]()
 ```dart
 ///一个读取字符串的例子
