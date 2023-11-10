@@ -113,13 +113,12 @@ class ExampleInnerModel {
 }
 ```
 
-1. 支持的类型为基本类型和数组、字典
+1. 支持的类型为基本类型和数组
    - int
    - double
    - String
    - bool
    - List
-   - Map
 2. 目前只支持基本类型或者简单的嵌套对象（内部也是基本类型），不支持自定义函数（Function）
 3. 当需要通知状态更新时需要手动调用`notify`/`notifyListeners`
 4. 暂时不支持定义在`bean`结尾的包中
