@@ -32,24 +32,24 @@ class FairToast {
 
 }
 
-class Toast {
-    static LENGTH_SHORT = "LENGTH_SHORT";
-    static LENGTH_LONG = "LENGTH_LONG";
-}
+const Toast = {
+    LENGTH_SHORT: "LENGTH_SHORT",
+    LENGTH_LONG: "LENGTH_LONG",
+};
 
-class ToastGravity {
-    static TOP = "TOP";
-    static BOTTOM = "BOTTOM";
-    static CENTER = "CENTER";
-    static TOP_LEFT = "TOP_LEFT";
-    static TOP_RIGHT = "TOP_RIGHT";
-    static BOTTOM_LEFT = "BOTTOM_LEFT";
-    static BOTTOM_RIGHT = "BOTTOM_RIGHT";
-    static CENTER_LEFT = "CENTER_LEFT";
-    static CENTER_RIGHT = "CENTER_RIGHT";
-    static SNACKBAR = "SNACKBAR";
-    static NONE = "NONE";
-}
+const ToastGravity = {
+    TOP: "TOP",
+    BOTTOM: "BOTTOM",
+    CENTER: "CENTER",
+    TOP_LEFT: "TOP_LEFT",
+    TOP_RIGHT: "TOP_RIGHT",
+    BOTTOM_LEFT: "BOTTOM_LEFT",
+    BOTTOM_RIGHT: "BOTTOM_RIGHT",
+    CENTER_LEFT: "CENTER_LEFT",
+    CENTER_RIGHT: "CENTER_RIGHT",
+    SNACKBAR: "SNACKBAR",
+    NONE: "NONE",
+};
 
 function Color(color){
     return color;
