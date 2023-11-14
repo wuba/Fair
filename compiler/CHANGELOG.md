@@ -1,3 +1,8 @@
+## [1.9.0]
+* Support TypeArgumentList.
+* Support negative value.
+* Fix js isNotEmpty bug.
+
 ## [1.8.0]
 * Compiler log optimized.
 
