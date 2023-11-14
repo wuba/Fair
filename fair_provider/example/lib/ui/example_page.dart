@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:example/entity/example_model.dart';
 import 'package:fair/fair.dart';
 import 'package:fair_provider/fair_provider.dart';
@@ -7,7 +5,7 @@ import 'package:flutter/material.dart';
 
 @FairPatch()
 class ExamplePage extends StatefulWidget {
-  const ExamplePage({super.key});
+  const ExamplePage({Key? key}) : super(key: key);
 
   @override
   State<ExamplePage> createState() => _ExamplePageState();
