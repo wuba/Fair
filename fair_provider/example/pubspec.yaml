@@ -27,7 +27,7 @@ dev_dependencies:
 dependency_overrides:
   collection: 1.17.0
   fair_version:
-    path: ../../../fair/flutter_version/flutter_3_7_0
+    path: ../../../fair/flutter_version/flutter_3_10_0
   fair_compiler:
     path: ../../../fair/compiler
   fair_dart2dsl:
