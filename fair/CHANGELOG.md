@@ -1,3 +1,8 @@
+## [3.4.0]
+* Publish Fair Provider;
+* Adaptation to Flutter 3.13;
+* Fixed some known issues.
+
 ## [3.3.0]
 * Runtime log optimization, covering Dart/JS logs;
 * Compiler log optimization, removal of redundant/error logs, and enhanced log output;
