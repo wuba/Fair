@@ -14,24 +14,18 @@ dependencies:
   fair_provider:
     path: ../../fair_provider
 
-  fair:
-    path: ../../../fair/fair
+  fair: ^3.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
   build_runner: ^2.1.2
-  fair_compiler: ^1.8.0
+  fair_compiler: ^1.9.0
 
 dependency_overrides:
   collection: 1.17.0
-  fair_version:
-    path: ../../../fair/flutter_version/flutter_3_10_0
-  fair_compiler:
-    path: ../../../fair/compiler
-  fair_dart2dsl:
-    path: ../../../fair/dart2dsl
+  fair_version: 3.10.0
 
 flutter:
   uses-material-design: true
