@@ -24,6 +24,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  /// 获取路由传递的参数
+  dynamic _getParams(BuildContext context, String key) =>
+      (ModalRoute.of(context)?.settings.arguments is Map)
+          ? (ModalRoute.of(context)?.settings.arguments as Map)[key]
+          : null;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,46 +37,55 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Scaffold(
-            appBar: AppBar(
-              title: const Text('Flutter Lab'),
-            ),
-            body: Builder(
-              builder: (context) => ListView(
-                children: [
-                  addItem("计数器示例", () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FairWidget(
-                            name: "lib_ui_counter_page",
-                            path: "assets/fair/lib_ui_counter_page.fair.json",
-                          ),
-                        ));
-                  }),
-                  addItem("基本使用示例", () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FairWidget(
-                            name: "lib_ui_example_page",
-                            path: "assets/fair/lib_ui_example_page.fair.json",
-                          ),
-                        ));
-                  }),
-                  addItem("跨页面共享状态", () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FairWidget(
-                            name: "lib_ui_example_page2",
-                            path: "assets/fair/lib_ui_example_page2.fair.json",
-                          ),
-                        ));
-                  }),
-                ],
+        routes: {
+          'fair_page_two': (context) => FairWidget(
+                path: _getParams(context, 'path'),
               ),
-            )));
+        },
+        home:
+            Scaffold(
+                appBar: AppBar(
+                  title: const Text('Flutter Lab'),
+                ),
+                body: Builder(
+                  builder: (context) => ListView(
+                    children: [
+                      addItem("计数器示例", () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FairWidget(
+                                name: "lib_ui_counter_page",
+                                path:
+                                    "assets/fair/lib_ui_counter_page.fair.json",
+                              ),
+                            ));
+                      }),
+                      addItem("基本使用示例", () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FairWidget(
+                                name: "lib_ui_example_page",
+                                path:
+                                    "assets/fair/lib_ui_example_page.fair.json",
+                              ),
+                            ));
+                      }),
+                      addItem("跨页面共享状态", () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FairWidget(
+                                name: "lib_ui_example_page2",
+                                path:
+                                    "assets/fair/lib_ui_example_page2.fair.json",
+                              ),
+                            ));
+                      }),
+                    ],
+                  ),
+                )));
   }
 }
 
