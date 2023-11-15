@@ -1,7 +1,7 @@
 name: fair_provider
 description: An extension library for Fair on the Provider framework.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.0.0+1
+homepage: https://fair.58.com/
+version: 0.0.1+1
 
 environment:
   sdk: ">=2.12.0 <4.0.0"
@@ -11,28 +11,20 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  #  fair: 3.3.0
-  fair:
-    path: ../../fair/fair
+  fair: ^3.4.0
   provider: ^6.0.5
+  collection: 1.7.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
   build_runner: ^2.1.2
-  fair_compiler: ^1.8.0
+  fair_compiler: ^1.9.0
 
 dependency_overrides:
   collection: 1.17.0
-  fair_version:
-    path: ../../fair/flutter_version/flutter_3_7_0
-  fair_dart2dsl:
-    path: ../../fair/dart2dsl
-  fair_dart2js:
-    path: ../../fair/dart2js
-  fair_compiler:
-    path: ../../fair/compiler
+  fair_version: 3.10.0
 
 flutter:
   uses-material-design: true

@@ -22,7 +22,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,51 +31,46 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home:
-            // MyHomePage(title: "dasdasdsa",),
-            Scaffold(
-                appBar: AppBar(
-                  title: const Text('Flutter Lab'),
-                ),
-                body: Builder(
-                  builder: (context) => ListView(
-                    children: [
-                      addItem("计数器示例", () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => FairWidget(
-                                name: "lib_ui_counter_page",
-                                path:
-                                    "assets/fair/lib_ui_counter_page.fair.json",
-                              ),
-                            ));
-                      }),
-                      addItem("基本使用示例", () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => FairWidget(
-                                name: "lib_ui_example_page",
-                                path:
-                                    "assets/fair/lib_ui_example_page.fair.json",
-                              ),
-                            ));
-                      }),
-                      addItem("跨页面共享状态", () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => FairWidget(
-                                name: "lib_ui_example_page2",
-                                path:
-                                    "assets/fair/lib_ui_example_page2.fair.json",
-                              ),
-                            ));
-                      }),
-                    ],
-                  ),
-                )));
+        home: Scaffold(
+            appBar: AppBar(
+              title: const Text('Flutter Lab'),
+            ),
+            body: Builder(
+              builder: (context) => ListView(
+                children: [
+                  addItem("计数器示例", () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FairWidget(
+                            name: "lib_ui_counter_page",
+                            path: "assets/fair/lib_ui_counter_page.fair.json",
+                          ),
+                        ));
+                  }),
+                  addItem("基本使用示例", () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FairWidget(
+                            name: "lib_ui_example_page",
+                            path: "assets/fair/lib_ui_example_page.fair.json",
+                          ),
+                        ));
+                  }),
+                  addItem("跨页面共享状态", () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FairWidget(
+                            name: "lib_ui_example_page2",
+                            path: "assets/fair/lib_ui_example_page2.fair.json",
+                          ),
+                        ));
+                  }),
+                ],
+              ),
+            )));
   }
 }
 
@@ -101,56 +96,4 @@ Widget addItem(String itemName, dynamic onPress) {
             maxLines: 1,
             textAlign: TextAlign.left,
           )));
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            test(),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-
-  Widget test() {
-    return Container();
-  }
 }
