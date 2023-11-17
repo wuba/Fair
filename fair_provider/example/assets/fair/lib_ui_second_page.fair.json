@@ -1,0 +1,111 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "状态共享-页面2"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "Container",
+      "na": {
+        "color": "#(Colors.white)",
+        "child": {
+          "className": "Center",
+          "na": {
+            "child": {
+              "className": "Column",
+              "na": {
+                "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                "children": [
+                  {
+                    "className": "Row",
+                    "na": {
+                      "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                      "children": [
+                        {
+                          "className": "Text",
+                          "pa": [
+                            "监听TopModel中的intFiled:"
+                          ]
+                        },
+                        {
+                          "className": "FairConsumer",
+                          "na": {
+                            "builder": {
+                              "className": "SugarProvider.consumerBuilder",
+                              "pa": [
+                                {
+                                  "className": "Text",
+                                  "pa": [
+                                    {
+                                      "className": "SugarProvider.readAsString",
+                                      "pa": [
+                                        "^(value)",
+                                        "intField"
+                                      ]
+                                    }
+                                  ],
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context",
+                                      "value",
+                                      "child"
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "typeArgumentList": [
+                            "TopModel"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "floatingActionButton": {
+      "className": "FairContextBuilder",
+      "na": {
+        "builder": {
+          "className": "SugarProvider.widgetBuilder",
+          "pa": [
+            {
+              "className": "FloatingActionButton",
+              "na": {
+                "onPressed": "@(_incrementCounter(^(context)))",
+                "tooltip": "Increment",
+                "child": {
+                  "className": "Icon",
+                  "pa": [
+                    "#(Icons.add)"
+                  ]
+                }
+              },
+              "functionParameters": {
+                "pa": [
+                  "context"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "methodMap": {},
+  "digest": "5e7cd6297fd4cca54ff47dc3369bc035"
+}

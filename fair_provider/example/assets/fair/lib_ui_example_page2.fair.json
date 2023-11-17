@@ -7,7 +7,7 @@
         "title": {
           "className": "Text",
           "pa": [
-            "跨组件共享状态"
+            "状态共享-页面1"
           ]
         }
       }
@@ -21,42 +21,73 @@
             "mainAxisAlignment": "#(MainAxisAlignment.center)",
             "children": [
               {
-                "className": "Text",
-                "pa": [
-                  "监听TopModel中的intFiled:"
-                ]
-              },
-              {
-                "className": "FairConsumer",
+                "className": "Row",
                 "na": {
-                  "builder": {
-                    "className": "SugarProvider.consumerBuilder",
-                    "pa": [
-                      {
-                        "className": "Text",
-                        "pa": [
-                          {
-                            "className": "SugarProvider.readAsString",
-                            "pa": [
-                              "^(value)",
-                              "intField"
-                            ]
-                          }
-                        ],
-                        "functionParameters": {
+                  "mainAxisAlignment": "#(MainAxisAlignment.center)",
+                  "children": [
+                    {
+                      "className": "Text",
+                      "pa": [
+                        "监听TopModel中的intFiled:"
+                      ]
+                    },
+                    {
+                      "className": "FairConsumer",
+                      "na": {
+                        "builder": {
+                          "className": "SugarProvider.consumerBuilder",
                           "pa": [
-                            "context",
-                            "value",
-                            "child"
+                            {
+                              "className": "Text",
+                              "pa": [
+                                {
+                                  "className": "SugarProvider.readAsString",
+                                  "pa": [
+                                    "^(value)",
+                                    "intField"
+                                  ]
+                                }
+                              ],
+                              "functionParameters": {
+                                "pa": [
+                                  "context",
+                                  "value",
+                                  "child"
+                                ]
+                              }
+                            }
                           ]
                         }
+                      },
+                      "typeArgumentList": [
+                        "TopModel"
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "className": "ElevatedButton",
+                "na": {
+                  "onPressed": {
+                    "className": "Navigator.pushNamed",
+                    "pa": [
+                      "^(context)",
+                      "fair_page_two"
+                    ],
+                    "na": {
+                      "arguments": {
+                        "path": "assets/fair/lib_ui_second_page.fair.json"
                       }
+                    }
+                  },
+                  "child": {
+                    "className": "Text",
+                    "pa": [
+                      "点击跳转二级页面"
                     ]
                   }
-                },
-                "typeArgumentList": [
-                  "TopModel"
-                ]
+                }
               }
             ]
           }
@@ -93,5 +124,5 @@
     }
   },
   "methodMap": {},
-  "digest": "2411e8da388fc4af26fa00d0278de484"
+  "digest": "fa93eea4a8aed0095b7cd960eb827e9e"
 }

@@ -74,8 +74,11 @@ class CounterModel extends FairChangeNotifier {
 注意read函数的泛型即是状态管理类的类型，参数需要手动输入该类的字符串
 ```dart
   void _incrementCounter(FairContext context) {
+    //通过FairContext获取状态对象
     var counterModel = context.read<CounterModel>("CounterModel");
+    //修改对象中的value
     counterModel.count++;
+    //调用notify通知观察者
     counterModel.notify();
   }
 ```

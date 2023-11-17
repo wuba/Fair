@@ -27,20 +27,33 @@ class _ExamplePage2State extends State<ExamplePage2> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "跨组件共享状态",
+          "状态共享-页面1",
         ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              '监听TopModel中的intFiled:',
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  '监听TopModel中的intFiled:',
+                ),
+                FairConsumer<TopModel>(
+                  builder: SugarProvider.consumerBuilder(
+                      (context, value, child) =>
+                          Text(SugarProvider.readAsString(value, 'intField'))),
+                ),
+              ],
             ),
-            FairConsumer<TopModel>(
-              builder: SugarProvider.consumerBuilder((context, value, child) =>
-                  Text(SugarProvider.readAsString(value, 'intField'))),
-            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'fair_page_two', arguments: {
+                    'path': 'assets/fair/lib_ui_second_page.fair.json',
+                  });
+                },
+                child: const Text("点击跳转二级页面")),
           ],
         ),
       ),
