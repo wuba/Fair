@@ -386,6 +386,11 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   }
 
   @override
+  Map visitTypeArgumentList(TypeArgumentList node) {
+    return _buildTypeArgumentList(_visitNodeList(node.arguments));
+  }
+
+  @override
   Map? visitLabel(Label node) {
     return _visitNode(node.label);
   }
@@ -542,6 +547,9 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
         'metadata': metadata,
         'body': body,
       };
+
+  Map _buildTypeArgumentList(List<Map> typeArgumentList) =>
+      {'type': 'TypeArgumentList', 'typeArgumentList': typeArgumentList};
 
   Map _buildArgumentList(List<Map> argumentList) => {'type': 'ArgumentList', 'argumentList': argumentList};
 

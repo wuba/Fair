@@ -1,0 +1,867 @@
+{
+  "className": "FairChangeNotifierProvider",
+  "na": {
+    "initialJson": "^(exampleModelJson)",
+    "child": {
+      "className": "Scaffold",
+      "na": {
+        "appBar": {
+          "className": "AppBar",
+          "na": {
+            "title": {
+              "className": "Text",
+              "pa": [
+                "基本使用示例"
+              ]
+            }
+          }
+        },
+        "body": {
+          "className": "Padding",
+          "na": {
+            "padding": {
+              "className": "EdgeInsets.only",
+              "na": {
+                "left": 16.0
+              }
+            },
+            "child": {
+              "className": "ListView",
+              "na": {
+                "scrollDirection": "#(Axis.vertical)",
+                "children": [
+                  {
+                    "className": "Text",
+                    "pa": [
+                      "初始化json信息👇🏻"
+                    ]
+                  },
+                  {
+                    "className": "Text",
+                    "pa": [
+                      "^(exampleModelJson)"
+                    ],
+                    "na": {
+                      "style": {
+                        "className": "TextStyle",
+                        "na": {
+                          "color": "#(Colors.green)"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "className": "Row",
+                    "na": {
+                      "children": [
+                        {
+                          "className": "Text",
+                          "pa": [
+                            "读取stringField: "
+                          ]
+                        },
+                        {
+                          "className": "FairConsumer",
+                          "na": {
+                            "builder": {
+                              "className": "SugarProvider.consumerBuilder",
+                              "pa": [
+                                {
+                                  "className": "Text",
+                                  "pa": [
+                                    {
+                                      "className": "SugarProvider.readString",
+                                      "pa": [
+                                        "^(value)",
+                                        "stringField"
+                                      ]
+                                    }
+                                  ],
+                                  "na": {
+                                    "style": {
+                                      "className": "TextStyle",
+                                      "na": {
+                                        "color": "#(Colors.red)"
+                                      }
+                                    }
+                                  },
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context",
+                                      "value",
+                                      "child"
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "typeArgumentList": [
+                            "ExampleModel"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "className": "Row",
+                    "na": {
+                      "children": [
+                        {
+                          "className": "Text",
+                          "pa": [
+                            "读取intField: "
+                          ]
+                        },
+                        {
+                          "className": "FairConsumer",
+                          "na": {
+                            "builder": {
+                              "className": "SugarProvider.consumerBuilder",
+                              "pa": [
+                                {
+                                  "className": "Text",
+                                  "pa": [
+                                    {
+                                      "className": "SugarProvider.anyToString",
+                                      "pa": [
+                                        {
+                                          "className": "SugarProvider.readInt",
+                                          "pa": [
+                                            "^(value)",
+                                            "intField"
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "na": {
+                                    "style": {
+                                      "className": "TextStyle",
+                                      "na": {
+                                        "color": "#(Colors.red)"
+                                      }
+                                    }
+                                  },
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context",
+                                      "value",
+                                      "child"
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "typeArgumentList": [
+                            "ExampleModel"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "className": "Row",
+                    "na": {
+                      "children": [
+                        {
+                          "className": "Text",
+                          "pa": [
+                            "读取doubleField: "
+                          ]
+                        },
+                        {
+                          "className": "FairConsumer",
+                          "na": {
+                            "builder": {
+                              "className": "SugarProvider.consumerBuilder",
+                              "pa": [
+                                {
+                                  "className": "Text",
+                                  "pa": [
+                                    {
+                                      "className": "SugarProvider.anyToString",
+                                      "pa": [
+                                        {
+                                          "className": "SugarProvider.readDouble",
+                                          "pa": [
+                                            "^(value)",
+                                            "doubleField"
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "na": {
+                                    "style": {
+                                      "className": "TextStyle",
+                                      "na": {
+                                        "color": "#(Colors.red)"
+                                      }
+                                    }
+                                  },
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context",
+                                      "value",
+                                      "child"
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "typeArgumentList": [
+                            "ExampleModel"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "className": "Row",
+                    "na": {
+                      "children": [
+                        {
+                          "className": "Text",
+                          "pa": [
+                            "读取boolField: "
+                          ]
+                        },
+                        {
+                          "className": "FairConsumer",
+                          "na": {
+                            "builder": {
+                              "className": "SugarProvider.consumerBuilder",
+                              "pa": [
+                                {
+                                  "className": "Text",
+                                  "pa": [
+                                    {
+                                      "className": "SugarProvider.anyToString",
+                                      "pa": [
+                                        {
+                                          "className": "SugarProvider.readBool",
+                                          "pa": [
+                                            "^(value)",
+                                            "boolField"
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "na": {
+                                    "style": {
+                                      "className": "TextStyle",
+                                      "na": {
+                                        "color": "#(Colors.red)"
+                                      }
+                                    }
+                                  },
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context",
+                                      "value",
+                                      "child"
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "typeArgumentList": [
+                            "ExampleModel"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "className": "Row",
+                    "na": {
+                      "children": [
+                        {
+                          "className": "Text",
+                          "pa": [
+                            "读取listField: "
+                          ]
+                        },
+                        {
+                          "className": "FairConsumer",
+                          "na": {
+                            "builder": {
+                              "className": "SugarProvider.consumerBuilder",
+                              "pa": [
+                                {
+                                  "className": "Text",
+                                  "pa": [
+                                    {
+                                      "className": "SugarProvider.anyToString",
+                                      "pa": [
+                                        {
+                                          "className": "SugarProvider.readList",
+                                          "pa": [
+                                            "^(value)",
+                                            "listField"
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "na": {
+                                    "style": {
+                                      "className": "TextStyle",
+                                      "na": {
+                                        "color": "#(Colors.red)"
+                                      }
+                                    }
+                                  },
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context",
+                                      "value",
+                                      "child"
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "typeArgumentList": [
+                            "ExampleModel"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "className": "Row",
+                    "na": {
+                      "children": [
+                        {
+                          "className": "Text",
+                          "pa": [
+                            "读取数组下标为1字段："
+                          ]
+                        },
+                        {
+                          "className": "FairConsumer",
+                          "na": {
+                            "builder": {
+                              "className": "SugarProvider.consumerBuilder",
+                              "pa": [
+                                {
+                                  "className": "Text",
+                                  "pa": [
+                                    {
+                                      "className": "SugarProvider.readAsStringInList",
+                                      "pa": [
+                                        "^(value)",
+                                        "listField",
+                                        1
+                                      ]
+                                    }
+                                  ],
+                                  "na": {
+                                    "style": {
+                                      "className": "TextStyle",
+                                      "na": {
+                                        "color": "#(Colors.red)"
+                                      }
+                                    }
+                                  },
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context",
+                                      "value",
+                                      "child"
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "typeArgumentList": [
+                            "ExampleModel"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "className": "Row",
+                    "na": {
+                      "children": [
+                        {
+                          "className": "Text",
+                          "pa": [
+                            "读取innerModel.innerBoolField: "
+                          ]
+                        },
+                        {
+                          "className": "FairSelector",
+                          "na": {
+                            "builder": {
+                              "className": "SugarProvider.selectorBuilder",
+                              "pa": [
+                                {
+                                  "className": "Text",
+                                  "pa": [
+                                    "^(value)"
+                                  ],
+                                  "na": {
+                                    "style": {
+                                      "className": "TextStyle",
+                                      "na": {
+                                        "color": "#(Colors.red)"
+                                      }
+                                    }
+                                  },
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context",
+                                      "value",
+                                      "child"
+                                    ]
+                                  }
+                                }
+                              ]
+                            },
+                            "selector": {
+                              "className": "SugarProvider.selector",
+                              "pa": [
+                                {
+                                  "className": "SugarProvider.evaluationAsString",
+                                  "pa": [
+                                    "^(value)",
+                                    "innerModel.innerBoolField"
+                                  ],
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context",
+                                      "value"
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "typeArgumentList": [
+                            "ExampleModel",
+                            "String"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "className": "Wrap",
+                    "na": {
+                      "spacing": 8,
+                      "runSpacing": 8,
+                      "children": [
+                        {
+                          "className": "FairContextBuilder",
+                          "na": {
+                            "builder": {
+                              "className": "SugarProvider.widgetBuilder",
+                              "pa": [
+                                {
+                                  "className": "ElevatedButton",
+                                  "na": {
+                                    "onPressed": "@(_updateStringField(^(context)))",
+                                    "child": {
+                                      "className": "Text",
+                                      "pa": [
+                                        "改变stringField"
+                                      ]
+                                    }
+                                  },
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context"
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "className": "FairContextBuilder",
+                          "na": {
+                            "builder": {
+                              "className": "SugarProvider.widgetBuilder",
+                              "pa": [
+                                {
+                                  "className": "ElevatedButton",
+                                  "na": {
+                                    "onPressed": "@(_updateIntField(^(context)))",
+                                    "child": {
+                                      "className": "Text",
+                                      "pa": [
+                                        "改变intField"
+                                      ]
+                                    }
+                                  },
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context"
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "className": "FairContextBuilder",
+                          "na": {
+                            "builder": {
+                              "className": "SugarProvider.widgetBuilder",
+                              "pa": [
+                                {
+                                  "className": "ElevatedButton",
+                                  "na": {
+                                    "onPressed": "@(_updateDoubleField(^(context)))",
+                                    "child": {
+                                      "className": "Text",
+                                      "pa": [
+                                        "改变doubleField"
+                                      ]
+                                    }
+                                  },
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context"
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "className": "FairContextBuilder",
+                          "na": {
+                            "builder": {
+                              "className": "SugarProvider.widgetBuilder",
+                              "pa": [
+                                {
+                                  "className": "ElevatedButton",
+                                  "na": {
+                                    "onPressed": "@(_updateBoolField(^(context)))",
+                                    "child": {
+                                      "className": "Text",
+                                      "pa": [
+                                        "改变boolField"
+                                      ]
+                                    }
+                                  },
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context"
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "className": "FairContextBuilder",
+                          "na": {
+                            "builder": {
+                              "className": "SugarProvider.widgetBuilder",
+                              "pa": [
+                                {
+                                  "className": "ElevatedButton",
+                                  "na": {
+                                    "onPressed": "@(_updateListField(^(context)))",
+                                    "child": {
+                                      "className": "Text",
+                                      "pa": [
+                                        "改变listField"
+                                      ]
+                                    }
+                                  },
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context"
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "className": "FairContextBuilder",
+                          "na": {
+                            "builder": {
+                              "className": "SugarProvider.widgetBuilder",
+                              "pa": [
+                                {
+                                  "className": "ElevatedButton",
+                                  "na": {
+                                    "onPressed": "@(_updateInnerField(^(context)))",
+                                    "child": {
+                                      "className": "Text",
+                                      "pa": [
+                                        "改变innerModel.innerBoolField"
+                                      ]
+                                    }
+                                  },
+                                  "functionParameters": {
+                                    "pa": [
+                                      "context"
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "className": "FairConsumer",
+                    "na": {
+                      "builder": {
+                        "className": "SugarProvider.consumerBuilder",
+                        "pa": [
+                          {
+                            "className": "Text",
+                            "pa": [
+                              {
+                                "className": "SugarProvider.concatenates",
+                                "pa": [
+                                  "是否选中:",
+                                  {
+                                    "className": "SugarProvider.readAsString",
+                                    "pa": [
+                                      "^(value)",
+                                      "boolField"
+                                    ]
+                                  }
+                                ]
+                              }
+                            ],
+                            "functionParameters": {
+                              "pa": [
+                                "context",
+                                "value",
+                                "child"
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "typeArgumentList": [
+                      "ExampleModel"
+                    ]
+                  },
+                  {
+                    "className": "Align",
+                    "na": {
+                      "alignment": "#(Alignment.centerLeft)",
+                      "child": {
+                        "className": "FairConsumer",
+                        "na": {
+                          "builder": {
+                            "className": "SugarProvider.consumerBuilder",
+                            "pa": [
+                              {
+                                "className": "FairContextBuilder",
+                                "na": {
+                                  "builder": {
+                                    "className": "SugarProvider.widgetBuilder",
+                                    "pa": [
+                                      {
+                                        "className": "Switch",
+                                        "na": {
+                                          "value": {
+                                            "className": "SugarProvider.readBool",
+                                            "pa": [
+                                              "^(value)",
+                                              "boolField"
+                                            ]
+                                          },
+                                          "onChanged": {
+                                            "className": "SugarProvider.onValueChangeWithFairContext",
+                                            "na": {
+                                              "function": "@(_toggleBoolChange)",
+                                              "fairContext": "^(fairContext)"
+                                            }
+                                          }
+                                        },
+                                        "functionParameters": {
+                                          "pa": [
+                                            "fairContext"
+                                          ]
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                "functionParameters": {
+                                  "pa": [
+                                    "context",
+                                    "value",
+                                    "child"
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "typeArgumentList": [
+                          "ExampleModel"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "className": "Align",
+                    "na": {
+                      "alignment": "#(Alignment.centerLeft)",
+                      "child": {
+                        "className": "FairConsumer",
+                        "na": {
+                          "builder": {
+                            "className": "SugarProvider.consumerBuilder",
+                            "pa": [
+                              {
+                                "className": "Text",
+                                "pa": [
+                                  {
+                                    "className": "SugarProvider.concatenates",
+                                    "pa": [
+                                      "进度:",
+                                      {
+                                        "className": "SugarProvider.readAsString",
+                                        "pa": [
+                                          "^(value)",
+                                          "doubleField"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "functionParameters": {
+                                  "pa": [
+                                    "context",
+                                    "value",
+                                    "child"
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "typeArgumentList": [
+                          "ExampleModel"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "className": "FairConsumer",
+                    "na": {
+                      "builder": {
+                        "className": "SugarProvider.consumerBuilder",
+                        "pa": [
+                          {
+                            "className": "FairContextBuilder",
+                            "na": {
+                              "builder": {
+                                "className": "SugarProvider.widgetBuilder",
+                                "pa": [
+                                  {
+                                    "className": "Slider",
+                                    "na": {
+                                      "max": 100,
+                                      "value": {
+                                        "className": "SugarProvider.readDouble",
+                                        "pa": [
+                                          "^(value)",
+                                          "doubleField"
+                                        ]
+                                      },
+                                      "onChanged": {
+                                        "className": "SugarProvider.onValueChangeWithFairContext",
+                                        "na": {
+                                          "function": "@(_onSliderChange)",
+                                          "fairContext": "^(fairContext)"
+                                        }
+                                      }
+                                    },
+                                    "functionParameters": {
+                                      "pa": [
+                                        "fairContext"
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "functionParameters": {
+                              "pa": [
+                                "context",
+                                "value",
+                                "child"
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "typeArgumentList": [
+                      "ExampleModel"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "floatingActionButton": {
+          "className": "FairContextBuilder",
+          "na": {
+            "builder": {
+              "className": "SugarProvider.widgetBuilder",
+              "pa": [
+                {
+                  "className": "FloatingActionButton",
+                  "na": {
+                    "onPressed": "@(_updateAll(^(context),^(context)))",
+                    "tooltip": "Increment",
+                    "child": {
+                      "className": "Icon",
+                      "pa": [
+                        "#(Icons.add)"
+                      ]
+                    }
+                  },
+                  "functionParameters": {
+                    "pa": [
+                      "context"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "typeArgumentList": [
+    "ExampleModel"
+  ],
+  "methodMap": {},
+  "digest": "4822d9ccf383c2962f94493efc6197ac"
+}

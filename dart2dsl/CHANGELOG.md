@@ -1,3 +1,8 @@
+## 1.5.0
+
+- Support TypeArgumentList.
+- Support Negative Value.
+
 ## 1.4.0
 
 - Log optimized.

@@ -20,6 +20,8 @@ typedef FairDelegateBuilder = FairDelegate Function(
 typedef FairModuleBuilder = FairModule Function();
 typedef PropertyValue<T> = T Function();
 
+typedef DynamicWidgetBuilderFunction = DynamicWidgetBuilder Function(ProxyMirror? proxyMirror, String? page, BindingData? bound, {String? bundle});
+
 /// Interface of bundle loader
 abstract class BundleLoader {
   /// Load resource data into json object; The path can be either assets key or
