@@ -121,5 +121,6 @@ abstract class RuntimeFairDelegate {
 
   void dispose() {
     runtime?.invokeMethod(pageName, 'onUnload', null);
+    runtime?.invokeMethod(pageName, 'releaseJS', null);
   }
 }
