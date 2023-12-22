@@ -380,7 +380,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/xxliang"><img src="https://avatars.githubusercontent.com/u/5005255?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sunlight Xie</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=xxliang" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/a303268287"><img src="https://avatars.githubusercontent.com/u/19368353?v=4?s=100" width="100px;" alt=""/><br /><sub><b>lhdycxgghb</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=a303268287" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/hlwhl"><img src="https://avatars.githubusercontent.com/u/7610615?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Prome</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=hlwhl" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/hlwhl"><img src="https://avatars.githubusercontent.com/u/16477333?v=4" width="100px;" alt=""/><br /><sub><b>zmtzawqlp</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=zmtzawqlp" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/woshixiaohuhu"><img src="https://avatars.githubusercontent.com/u/152966201?v=4?s=100" width="100px;" alt=""/><br /><sub><b>woshixiaohuhu</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=woshixiaohuhu" title="Code">💻</a></td>
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/hc2088"><img src="https://avatars.githubusercontent.com/u/6659505?v=4?s=100" width="100px;" alt=""/><br /><sub><b>woshixiaohuhu</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=hc2088" title="Code">💻</a></td>
@@ -389,6 +389,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/JOYINF1189"><img src="https://avatars.githubusercontent.com/u/46019591?v=4?s=100" width="100px;" alt=""/><br /><sub><b>JOYINF1189</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=JOYINF1189" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Blues9527"><img src="https://avatars.githubusercontent.com/u/35455720?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Blues9527</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=Blues9527" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/miserydx"><img src="https://avatars.githubusercontent.com/u/17892391?v=4?s=100" width="100px;" alt=""/><br /><sub><b>miserydx</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=miserydx" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/CindyMini"><img src="https://avatars.githubusercontent.com/u/16411182?v=4?s=100" width="100px;" alt=""/><br /><sub><b>CICI Chan</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=CindyMini" title="Code">💻</a></td>
   </tr>
 </table>
 
