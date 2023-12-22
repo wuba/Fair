@@ -382,6 +382,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/hlwhl"><img src="https://avatars.githubusercontent.com/u/7610615?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Prome</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=hlwhl" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/woshixiaohuhu"><img src="https://avatars.githubusercontent.com/u/152966201?v=4?s=100" width="100px;" alt=""/><br /><sub><b>woshixiaohuhu</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=woshixiaohuhu" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/hc2088"><img src="https://avatars.githubusercontent.com/u/6659505?v=4?s=100" width="100px;" alt=""/><br /><sub><b>woshixiaohuhu</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=hc2088" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
