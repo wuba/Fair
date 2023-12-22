@@ -387,6 +387,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/yukixut"><img src="https://avatars.githubusercontent.com/u/45286155?v=4?s=100" width="100px;" alt=""/><br /><sub><b>yukixut</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=yukixut" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/pearone"><img src="https://avatars.githubusercontent.com/u/23350428?v=4?s=100" width="100px;" alt=""/><br /><sub><b>pearone</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=pearone" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/JOYINF1189"><img src="https://avatars.githubusercontent.com/u/46019591?v=4?s=100" width="100px;" alt=""/><br /><sub><b>JOYINF1189</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=JOYINF1189" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Blues9527"><img src="https://avatars.githubusercontent.com/u/35455720?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Blues9527</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=Blues9527" title="Code">💻</a></td>
   </tr>
 </table>
 
