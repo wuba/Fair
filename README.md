@@ -384,6 +384,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/hc2088"><img src="https://avatars.githubusercontent.com/u/6659505?v=4?s=100" width="100px;" alt=""/><br /><sub><b>woshixiaohuhu</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=hc2088" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/yukixut"><img src="https://avatars.githubusercontent.com/u/45286155?v=4?s=100" width="100px;" alt=""/><br /><sub><b>yukixut</b></sub></a><br /><a href="https://github.com/wuba/fair/commits?author=yukixut" title="Code">💻</a></td>
   </tr>
 </table>
 
