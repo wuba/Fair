@@ -1,4 +1,5 @@
 import 'package:example/fair_widget/plugin/fair_basic_plugin.dart';
+import 'package:example/fair_widget/plugin/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
@@ -19,14 +20,21 @@ class _FairPluginWidgetState extends State<FairPluginWidget> {
       ),
       body: Container(
         child: Center(
-          child: GestureDetector(
-            onTap: callPhone,
-            child: Container(
-              height: 50,
-              width: 100,
-              alignment: Alignment.center,
-              child: Text('拨打电话'),
-            ),
+          child: Column(
+            children: [
+              Container(
+                alignment: Alignment.center,
+                child: ElevatedButton(
+                    onPressed: callPhone,
+                    child: Text('拨打电话-基于FairBasicPlugin')),
+              ),
+              Container(
+                alignment: Alignment.center,
+                child: ElevatedButton(
+                    onPressed: commonHttp,
+                    child: Text('网络请求-基于FairCommonPlugin')),
+              ),
+            ],
           ),
         ),
       ),
@@ -45,4 +53,25 @@ class _FairPluginWidgetState extends State<FairPluginWidget> {
       }
     });
   }
+
+  commonHttp() {
+    FairCommonPlugin().http({
+      'method': 'GET',
+      'url':
+          'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/3b8ae7a4e0884b4d75b8094f6c83cd8c_list_page_data.json',
+      'callback': (dynamic result) {
+        if (result != null) {
+          var statusCode = result['statusCode'];
+          if (statusCode == 200) {
+            var list = result['data']['data'];
+            list.forEach((item) {
+              var icon = item['icon'];
+              print('icon = $icon');
+            });
+          }
+        }
+      }
+    });
+  }
+
 }

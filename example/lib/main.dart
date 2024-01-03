@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:example/fair_widget/delegate/test_fair_delegate.dart';
 import 'package:example/fair_widget/plugin/fair_basic_plugin.dart';
+import 'package:example/fair_widget/plugin/fair_common_plugin.dart';
 import 'package:example/home_page.dart';
 import 'package:fair/fair.dart';
 import 'package:fair_extension/fair_extension.dart';
@@ -36,9 +37,11 @@ void main() async {
 
     ///需要在此注册需要全局使用的plugin,key名可以随意不做要求
       plugins: FairExtension.plugins
-      ..addAll({'FairBasicPlugin': FairBasicPlugin()}),
-      jsPlugins: FairExtension.jsPlugins
-  );
+        ..addAll({
+          'FairBasicPlugin': FairBasicPlugin(),
+          'FairCommonPlugin': FairCommonPlugin(),
+        }),
+      jsPlugins: FairExtension.jsPlugins);
 }
 
 class MyApp extends StatelessWidget {
