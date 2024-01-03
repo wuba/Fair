@@ -7,13 +7,13 @@ let fairCommonPluginRequest = function (resp, methodName) {
     respMap = mapOrSetToObject(resp);
     let id = 'FairCommonPlugin$' + (++_callBackId);
     let requestParameter = {};
+    requestParameter['pageName'] = '#FairKey#';
     // 类名 + 方法名
     requestParameter['className'] = "FairCommonPlugin#" + methodName;
     _callBack[id] = respMap['callback'];
     respMap['callId'] = id;
     // 代码里面有判断 funcName 必填
     requestParameter['funcName'] = 'invokePlugin';
-    requestParameter['pageName'] = respMap['pageName'];
     requestParameter['request'] = respMap;
     let map = JSON.stringify(requestParameter);
     console.log('FairCommonPlugin请求参数：' + map);

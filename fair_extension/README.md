@@ -1,4 +1,4 @@
-## 背景
+## 简介
 关于Fair 的动态化能力支持，涉及到如下几个方面：
 - 平台相关能力，如打电话、定位、权限申请、相机等
 - 业务逻辑相关，路由、埋点等
@@ -7,15 +7,43 @@
 为了避免出现上述问题，我们希望在Fair 接入阶段，就内置常用的业务逻辑。并且我们把通用的业务逻辑以扩展包的形式提供给开发者。开发者在Fair 接入阶段，通过依赖扩展包，经过简单的配置，就可以实现常用业务逻辑的支持。
 
 ## 目前支持
-#### Log
-示例：
+
+* Log
+* Toast
+* 网络请求
+* 权限申请
+* 图片选择/调用相机
+* url_launcher(电话、短信、邮件、web等)
+* 页面跳转
+
+## 接入说明
+### 添加fair_extension 依赖
+
+```
+fair_extension: 1.0.0
+```
+
+### fair_extension 初始化
+fair 初始化中，设置plugins 及 jsPlugins。
+
+```
+FairApp.runApplication(
+      FairApp(
+        child: const MyApp(),
+      ),
+      plugins: FairExtension.plugins,
+      jsPlugins: FairExtension.jsPlugins);
+```
+
+### fair_extension 使用
+
+#### Log示例：
 
 ```
 FairLog.log('点击展示 Count Value:: $_count');
 ```
 
-#### Toast
-示例：
+#### Toast示例：
 
 ```
 FairToast.show(
@@ -24,8 +52,7 @@ FairToast.show(
     );
 ```
 
-#### 网络请求
-示例：
+#### 网络请求示例：
 
 ```
 FairNet.requestData(
@@ -47,8 +74,7 @@ FairNet.requestData(
         });
 ```
 
-#### 权限申请
-示例：
+#### 权限申请示例：
 
 ```
 FairPermission.requestPermission(
@@ -63,8 +89,7 @@ FairPermission.requestPermission(
         });
 ```
 
-#### 图片选择/调用相机
-示例：
+#### 图片选择/调用相机示例：
 
 ```
 FairImagePicker.getImage(
@@ -78,8 +103,7 @@ FairImagePicker.getImage(
         });
 ```
 
-#### url_launcher(电话、短信、邮件、web等)
-示例：
+#### url_launcher(电话、短信、邮件、web等)示例：
 
 ```
 // 打电话
@@ -88,8 +112,7 @@ FairUrlLauncher.makePhoneCall(_phone);
 FairUrlLauncher.launchInBrowser(_url);
 ```
 
-#### 页面跳转
-示例：
+#### 页面跳转示例：
 
 ```
 FairNavigator.pushNamed(
@@ -107,25 +130,3 @@ FairNavigator.pushNamed(
 ```
 
 #### 持续更新中...
-
-## 接入说明
-#### 添加fair_extension 依赖
-
-```
-fair_extension: 1.0.0
-```
-
-#### fair_extension 初始化
-fair 初始化中，设置plugins 及 jsPlugins。
-
-```
-FairApp.runApplication(
-      FairApp(
-        child: const MyApp(),
-      ),
-      plugins: FairExtension.plugins,
-      jsPlugins: FairExtension.jsPlugins);
-```
-
-#### fair_extension 使用
-详见[example](./example)  
