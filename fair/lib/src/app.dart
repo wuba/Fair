@@ -7,16 +7,12 @@
 import 'dart:io';
 
 import 'package:fair/fair.dart';
-import 'package:fair/src/internal/bind_data.dart';
-import 'package:fair/src/render/builder/widget.dart';
-import 'package:fair/src/render/proxy.dart';
+import 'package:fair/src/internal/global_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'internal/flexbuffer/fair_js_decoder_http_decoder.dart';
 import 'state.dart';
-import 'type.dart';
 
 /// Application which can update the widget tree through bundle file.
 ///
@@ -62,11 +58,10 @@ class FairApp extends InheritedWidget with AppState {
   /// checked mode), to turn it off, set the constructor argument to
   /// false. In release mode this has no effect.
   final bool debugShowFairBanner;
-  
+
   /// Define a custom DynamicWidgetBuilder to solve special case
-  final DynamicBuilder Function(ProxyMirror? proxyMirror, String? page, BindingData? bound,
-      {String? bundle})? dynamicWidgetBuilder;
-      
+  List<DynamicWidgetBuilderFunction?>? dynamicWidgetBuilder;
+
   static final WidgetBuilder _defaultHolder = (BuildContext context) {
     return Container(
       color: Colors.white,
@@ -101,7 +96,9 @@ class FairApp extends InheritedWidget with AppState {
   }
 
   static FairApp? of(BuildContext? context, {bool rebuild = false}) {
-    return rebuild ? context?.dependOnInheritedWidgetOfExactType<FairApp>() : context?.findAncestorWidgetOfExactType<FairApp>();
+    return rebuild
+        ? context?.dependOnInheritedWidgetOfExactType<FairApp>()
+        : context?.findAncestorWidgetOfExactType<FairApp>();
   }
 
   String? pathOfBundle(String tag) {
@@ -116,27 +113,99 @@ class FairApp extends InheritedWidget with AppState {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, String>>('bundle', bundleAlias));
+    properties
+        .add(DiagnosticsProperty<Map<String, String>>('bundle', bundleAlias));
   }
 
-  static void runApplication(Widget app, {
-  Map<String, IFairPlugin>? plugins, 
-  Map<String, String>? jsPlugins, 
-  String? package, 
-  List<String>? baseJsSources,
+  static void runApplication(
+    Widget app, {
+    Map<String, IFairPlugin>? plugins,
+    Map<String, String>? jsPlugins,
+    String? package,
+    List<String>? baseJsSources,
+    List<IFairLibraryAdapter>? adapters,
   }) {
+    if (plugins == null) {
+      plugins = {};
+    }
+    if (jsPlugins == null) {
+      jsPlugins = {};
+    }
+    //init 3rd-library adapter
+    initFairLibraryAdapter(app,
+        plugins: plugins, jsPlugins: jsPlugins, adapters: adapters);
+
     // WidgetsFlutterBinding.ensureInitialized();
     FairPluginDispatcher.registerPlugins(plugins);
 
-    if(!kIsWeb && Platform.isAndroid){
+    if (!kIsWeb && Platform.isAndroid) {
       var runtime = Runtime();
       var basicChannel = runtime.getBasicChannel();
-      basicChannel.invokeMethod('jsLoadListener').then((value){
-        runtime.loadCoreJs(package: package, jsPlugins: jsPlugins, baseJsSources: baseJsSources).then((value) => runApp(app));
+      basicChannel.invokeMethod('jsLoadListener').then((value) {
+        runtime
+            .loadCoreJs(
+                package: package,
+                jsPlugins: jsPlugins,
+                baseJsSources: baseJsSources)
+            .then((value) => runApp(app));
       });
+    } else {
+      Runtime()
+          .loadCoreJs(
+              package: package,
+              jsPlugins: jsPlugins,
+              baseJsSources: baseJsSources)
+          .then((value) => runApp(app));
+    }
+  }
 
-    }else{
-      Runtime().loadCoreJs(package: package, jsPlugins: jsPlugins, baseJsSources: baseJsSources).then((value) => runApp(app));
+  ///[app] FairApp
+  ///[plugins] Fair plugin code with Dart
+  ///[jsPlugins] Fair plugin code with JavaScript
+  ///[adapters] 3rd-party libraries which adapted Fair
+  static void initFairLibraryAdapter(
+    Widget app, {
+    Map<String, IFairPlugin>? plugins,
+    Map<String, String>? jsPlugins,
+    List<IFairLibraryAdapter>? adapters,
+  }) {
+    if (adapters != null && adapters.isNotEmpty) {
+      adapters.forEach((element) {
+        if (element.provideFairPlugins()?.isNotEmpty == true) {
+          plugins?.addAll(element.provideFairPlugins()!);
+        }
+
+        if (element.provideJSPlugins()?.isNotEmpty == true) {
+          jsPlugins?.addAll(element.provideJSPlugins()!);
+        }
+
+        if (app is FairApp) {
+          if (element.provideFairModule() != null) {
+            app.modules.addAll(element.provideFairModule());
+          }
+
+          if (element.provideGeneratedModule() != null &&
+              app.proxy is ProxyMirror) {
+            (app.proxy as ProxyMirror)
+                .addGeneratedBinding(element.provideGeneratedModule()!);
+          }
+
+          if (element.provideFairDelegate() != null) {
+            GlobalState.instance().addExtBuilder(element.provideFairDelegate());
+          }
+
+          if (element.provideDynamicWidgetBuilder() != null) {
+            if (app.dynamicWidgetBuilder == null) {
+              app.dynamicWidgetBuilder = [
+                element.provideDynamicWidgetBuilder()
+              ];
+            } else {
+              app.dynamicWidgetBuilder!
+                  .add(element.provideDynamicWidgetBuilder());
+            }
+          }
+        }
+      });
     }
   }
 }

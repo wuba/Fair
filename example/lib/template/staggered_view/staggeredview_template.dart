@@ -11,7 +11,9 @@ class StaggeredItemView extends StatefulWidget {
 }
 
 class _StaggeredItemViewState extends State<StaggeredItemView> {
-  final List<StaggeredViewModel> _listData = <StaggeredViewModel>[];
+  final List<StaggeredViewModel> _listData = <StaggeredViewModel>[
+    StaggeredViewModel('https://pic5.58cdn.com.cn/nowater/frs/n_v31ea165ec1cb846ca89a334fde9b78f2d.png',1.5)
+  ];
   int _page = 0;
 
   /// 生命周期回调，函数名不可修改
@@ -35,7 +37,7 @@ class _StaggeredItemViewState extends State<StaggeredItemView> {
           }
           var data = resp['data'];
           data.forEach((item) {
-            var dataItem = StaggeredViewModel();
+            var dataItem = StaggeredViewModel('',1.5);
             try {
               dataItem.picUrl = item['imagePath'];
               dataItem.ratio = item['ratio'];
@@ -91,4 +93,6 @@ class _StaggeredItemViewState extends State<StaggeredItemView> {
 class StaggeredViewModel extends Object {
   String picUrl = '';
   double ratio = 1.5;
+
+  StaggeredViewModel(this.picUrl, this.ratio);
 }

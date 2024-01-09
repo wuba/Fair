@@ -1,7 +1,6 @@
+import 'package:example/best_flutter_ui/fitness_app/fintness_app_theme.dart';
 import 'package:example/best_flutter_ui/hex_color.dart';
 import 'package:flutter/material.dart';
-
-import '../fintness_app_theme.dart';
 
 class GlassView extends StatelessWidget {
   final AnimationController? animationController;

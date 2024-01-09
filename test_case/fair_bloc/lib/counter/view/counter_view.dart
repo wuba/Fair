@@ -20,7 +20,7 @@ class CounterView extends StatelessWidget {
             return FairWidget(
               key: Key('counterState$state'),
               path: 'assets/bundle/lib_counter_view_text_widget.fair.json',
-              data: {'state': state,'headline2': textTheme.headline2},
+              data: {'state': '$state','headline2': textTheme.headline2},
             );
           },
         ),

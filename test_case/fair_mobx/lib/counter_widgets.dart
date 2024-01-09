@@ -39,7 +39,7 @@ class CounterExampleState extends State<CounterExample> {
                   name: "lib_text_widget",
                   key: Key('counterState$state'),
                   path: 'assets/bundle/lib_text_widget.fair.json',
-                  data: {'state': state, 'headline2': textTheme.headline2},
+                  data: {'state': '$state', 'headline2': textTheme.headline2},
                 );
               }),
             ],

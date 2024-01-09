@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 @FairPatch()
 class ListCardItem extends StatefulWidget {
-  const ListCardItem({Key key}) : super(key: key);
+  const ListCardItem({Key? key}) : super(key: key);
 
   @override
   State<ListCardItem> createState() => _ListCardItemState();
@@ -25,8 +25,7 @@ class _ListCardItemState extends State<ListCardItem> {
                     CircleAvatar(
                       radius: 30,
                       backgroundImage: NetworkImage(
-                        "http://c-ssl.duitang.com/uploads/item/202003/26/20200326223552_nayyt.jpeg",
-                      ),
+                          "http://c-ssl.duitang.com/uploads/item/202003/26/20200326223552_nayyt.jpeg"),
                     ),
                     SizedBox(
                       width: 20,
@@ -65,8 +64,10 @@ class _ListCardItemState extends State<ListCardItem> {
               ),
             ),
             Card(
-              child: Image.network(
-                  "https://img2.baidu.com/it/u=4114138728,2649938841&fm=253&fmt=auto&app=138&f=JPEG"),
+              child: Image(
+                image: NetworkImage(
+                    "https://img2.baidu.com/it/u=4114138728,2649938841&fm=253&fmt=auto&app=138&f=JPEG"),
+              ),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(10, 10, 10, 10),

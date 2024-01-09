@@ -36,7 +36,7 @@ dependencies:
   device_info: ^2.0.3
   package_info: ^2.0.2
 
-  google_fonts: 2.1.1
+  google_fonts: ^4.0.4
 
   convex_bottom_bar: ^3.0.0
 
@@ -50,8 +50,13 @@ dev_dependencies:
     path: ../../compiler
 
 dependency_overrides:
+  analyzer: 5.6.0
+  dart_style: 2.2.5
+  collection: 1.17.0
+  watcher: 1.1.0
+  file: 6.1.4
   fair_version:
-    path: ../../flutter_version/flutter_3_0_0
+    path: ../../flutter_version/flutter_3_13_0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

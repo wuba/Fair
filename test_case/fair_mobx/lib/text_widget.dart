@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 @FairPatch()
 class TextWidget extends StatelessWidget {
   @FairWell('state')
-  int state;
+  String state;
   @FairWell('headline2')
   TextStyle headline2;
 
@@ -12,6 +12,6 @@ class TextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('$state', style: headline2);
+    return Text(state, style: headline2);
   }
 }

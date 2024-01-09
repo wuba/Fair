@@ -516,6 +516,25 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   }
 
   @override
+  Map visitTypeArgumentList(TypeArgumentList node) {
+    var map = {};
+    for (var argument in node.arguments) {
+      var displayString =
+          argument.type?.getDisplayString(withNullability: true);
+      var list = [];
+      if (displayString != null) {
+        // map[displayString] = displayString;
+        list.add(displayString);
+      }
+      if (list.isNotEmpty) {
+        map['typeArgumentListDisplayString'] = list;
+      }
+    }
+    map.addAll(_buildTypeArgumentList(_visitNodeList(node.arguments)));
+    return map;
+  }
+
+  @override
   Map? visitLabel(Label node) {
     return _visitNode(node.label);
   }
@@ -539,19 +558,6 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
   Map? visitPropertyAccess(PropertyAccess node) {
     var expression = node.parent?.toSource();
     return _buildVariableExpression(expression);
-  }
-
-  @override
-  Map? visitTypeArgumentList(TypeArgumentList node) {
-    var map = {};
-    for (var argument in node.arguments) {
-      var displayString =
-          argument.type?.getDisplayString(withNullability: true);
-      if (displayString != null) {
-        map[displayString] = displayString;
-      }
-    }
-    return map;
   }
 
   @override
@@ -704,6 +710,9 @@ class CustomAstVisitor extends SimpleAstVisitor<Map> {
         'metadata': metadata,
         'body': body,
       };
+
+  Map _buildTypeArgumentList(List<Map> typeArgumentList) =>
+      {'type': 'TypeArgumentList', 'typeArgumentList': typeArgumentList};
 
   Map _buildArgumentList(List<Map> argumentList) =>
       {'type': 'ArgumentList', 'argumentList': argumentList};

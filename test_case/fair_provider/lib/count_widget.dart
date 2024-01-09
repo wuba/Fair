@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class Count extends StatelessWidget {
   final int count;
 
-  const Count({Key key, this.count}) : super(key: key);
+  const Count({Key? key, required this.count}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

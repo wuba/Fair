@@ -13,7 +13,7 @@ import 'module.dart';
   'package:font_awesome_flutter/font_awesome_flutter.dart'])
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(FairApp(
+  FairApp.runApplication(FairApp(
     child: MyApp(),
 
     modules: {

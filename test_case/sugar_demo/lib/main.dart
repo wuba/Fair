@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
-import 'package:sugar_demo/assets.dart';
-import 'package:sugar_demo/sugar_elseif_test_page.dart';
 import 'person.dart';
 
 void main() {
@@ -11,40 +9,31 @@ void main() {
   FairApp.runApplication(
     getApp(),
   );
-
 }
 
-class TestGeneratedModule implements GeneratedModule{
+class TestGeneratedModule implements GeneratedModule {
   @override
   Map<String, dynamic> components() {
-    return {
-      'Person': Person.from
-    };
+    return {'Person': Person.from};
   }
 
   @override
   Map<String, bool> mapping() {
-    return const {
-      'Person':false
-    };
+    return const {'Person': false};
   }
-
 }
 
 FairApp getApp() => FairApp(
-  modules: const {
-  },
-  delegate: const {
-  },
-  generated: TestGeneratedModule(),
-  child: MaterialApp(
-    color: Colors.blue,
-    home:
-    // SugarElseIfPage(fairProps: json.encode({'value':1}),)
-    FairWidget(
-        name: 'DynamicWidget',
-        path: Assets.assets_fair_lib_sugar_menu_fair_json,
-        data: {"fairProps": json.encode({'value':1})}),
-  ),
-);
-
+      modules: const {},
+      delegate: const {},
+      generated: TestGeneratedModule(),
+      child: MaterialApp(
+        color: Colors.blue,
+        home: FairWidget(
+            name: 'DynamicWidget',
+            path: Assets.assets_fair_lib_sugar_menu_fair_json,
+            data: {
+              "fairProps": json.encode({'value': 1})
+            }),
+      ),
+    );

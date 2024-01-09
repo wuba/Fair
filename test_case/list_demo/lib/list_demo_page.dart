@@ -1,6 +1,5 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
-import 'package:list_demo/list_item.dart';
 
 @FairPatch()
 class ListDemoPage extends StatefulWidget {
@@ -17,7 +16,6 @@ class _ListDemoPageState extends State<ListDemoPage> {
     return Scaffold(
       floatingActionButton: ElevatedButton(
         onPressed: _incrementCounter,
-        style: Sugar.isButtonStyle(backgroundColor: Colors.deepPurple),
         child: const Text("Map View"),
       ),
       appBar: AppBar(
@@ -25,7 +23,7 @@ class _ListDemoPageState extends State<ListDemoPage> {
           backgroundColor: Colors.white,
           shadowColor: Colors.white,
           bottom: PreferredSize(
-            preferredSize: Size(Sugar.width(context), 8),
+            preferredSize: Size(Sugar.width(context), 10),
             child: const Material(
               color: Colors.white,
               child: Padding(

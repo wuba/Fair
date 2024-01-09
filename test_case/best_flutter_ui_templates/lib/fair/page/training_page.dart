@@ -1,8 +1,8 @@
+import 'package:best_flutter_ui_templates/fitness_app/fitness_app_theme.dart';
+import 'package:best_flutter_ui_templates/fitness_app/ui_view/title_view.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
-import '../../fitness_app/fintness_app_theme.dart';
-import '../component/fair_uiview/title_view.dart';
 
 @FairPatch()
 class TrainingPage extends StatefulWidget {

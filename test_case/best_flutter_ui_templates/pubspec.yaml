@@ -15,6 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.1.0
   flutter_rating_bar: ^4.0.1
+  smooth_star_rating_nsafe: ^1.0.0+1
 
   intl: ^0.17.0
   fair:
@@ -30,21 +31,12 @@ dev_dependencies:
     path: ../../compiler
 
 dependency_overrides:
-  build_runner: 2.3.3
-  build_resolvers: 2.2.0
-  source_gen: 1.2.7
-  analyzer: 5.5.0
+  analyzer: 5.6.0
+  dart_style: 2.2.5
   collection: 1.17.0
+  watcher: 1.1.0
   fair_version:
-    path: ../../flutter_version/flutter_3_3_0
-  fair:
-    path: ../../fair
-  fair_compiler:
-    path: ../../compiler
-  fair_dart2dsl:
-    path: ../../dart2dsl
-  fair_dart2js:
-    path: ../../dart2js   
+    path: ../../flutter_version/flutter_3_13_0
 
 # The following section is specific to Flutter.
 flutter:

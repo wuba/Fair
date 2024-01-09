@@ -117,10 +117,11 @@ abstract class RuntimeFairDelegate {
   }
 
   void didChangeDependencies() {
-    runtime?.invokeMethod(pageName, 'onLoad', null);
+    runtime?.invokeMethodSync(pageName, 'onLoad', null);
   }
 
   void dispose() {
     runtime?.invokeMethod(pageName, 'onUnload', null);
+    runtime?.invokeMethod(pageName, 'releaseJS', null);
   }
 }

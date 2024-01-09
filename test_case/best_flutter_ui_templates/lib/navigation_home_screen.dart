@@ -1,9 +1,10 @@
 import 'package:best_flutter_ui_templates/app_theme.dart';
 import 'package:best_flutter_ui_templates/custom_drawer/drawer_user_controller.dart';
-import 'package:best_flutter_ui_templates/custom_drawer/home_drawer.dart';
 import 'package:best_flutter_ui_templates/home_screen.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
+
+import 'custom_drawer/home_drawer.dart';
 
 class NavigationHomeScreen extends StatefulWidget {
   @override
@@ -11,8 +12,8 @@ class NavigationHomeScreen extends StatefulWidget {
 }
 
 class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
-  Widget? screenView;
-  DrawerIndex? drawerIndex;
+  late Widget screenView;
+  late DrawerIndex drawerIndex;
 
   @override
   void initState() {
@@ -24,7 +25,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppTheme.white,
+      color: AppTheme.nearlyWhite,
       child: SafeArea(
         top: false,
         bottom: false,
@@ -57,7 +58,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
           // screenView = HelpScreen();
           screenView = FairWidget(
             name: 'help',
-            path: 'assets/bundle/lib_help_screen.fair.bin',
+            path: 'assets/bundle/lib_help_screen.fair.json',
           );
         });
       } else if (drawerIndex == DrawerIndex.FeedBack) {
@@ -65,7 +66,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
           // screenView = FeedbackScreen();
           screenView = FairWidget(
             name: 'feedback',
-            path: 'assets/bundle/lib_feedback_screen.fair.bin',
+            path: 'assets/bundle/lib_feedback_screen.fair.json',
           );
         });
       } else if (drawerIndex == DrawerIndex.Invite) {
@@ -73,19 +74,10 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
           // screenView = InviteFriend();
           screenView = FairWidget(
             name: 'invite',
-            path: 'assets/bundle/lib_invite_friend_screen.fair.bin',
+            path: 'assets/bundle/lib_invite_friend_screen.fair.json',
           );
         });
-      } else if (drawerIndex == DrawerIndex.About) {
-        setState(() {
-          // screenView = InviteFriend();
-          screenView = FairWidget(
-            name: 'grid_template',
-            path: 'assets/bundle/lib_fair_component_grid_gridview_template.fair.json',
-          );
-        });
-      }
-      else {
+      } else {
         //do in your way......
       }
     }

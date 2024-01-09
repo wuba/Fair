@@ -96,5 +96,5 @@ class AppTheme {
     color: lightText, // was lightText
   );
 
-  static Color greyWithOpacity = Colors.grey.withOpacity(0.8);
+  static const Color greyWithOpacity = Color(0xD99E9E9E);
 }

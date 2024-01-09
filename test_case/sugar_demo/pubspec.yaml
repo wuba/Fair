@@ -57,17 +57,12 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 dependency_overrides:
-  fair_version:
-     path: ../../flutter_version/flutter_3_3_0
-  fair:
-    path: ../../fair
-  fair_compiler:
-    path: ../../compiler
-  fair_dart2dsl:
-    path: ../../dart2dsl
-  fair_dart2js:
-    path: ../../dart2js   
+  analyzer: 5.6.0
+  dart_style: 2.2.5
   collection: 1.17.0
+  watcher: 1.1.0
+  fair_version:
+    path: ../../flutter_version/flutter_3_13_0
 flutter:
 
   # The following line ensures that the Material Icons font is

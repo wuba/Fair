@@ -51,6 +51,6 @@ final checkNode = {
   'ImplementsClauseImpl': 'visitImplementsClause',
   'WithClauseImpl': 'visitWithClause',
   'PropertyAccessImpl': 'visitPropertyAccess',
-  'TypeArgumentListImpl': 'visitTypeArgumentList',
-  'PrefixExpressionImpl': 'visitPrefixExpression'
+  'PrefixExpressionImpl': 'visitPrefixExpression',
+  'TypeArgumentListImpl': 'visitTypeArgumentList'
 };

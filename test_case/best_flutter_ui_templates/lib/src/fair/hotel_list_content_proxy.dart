@@ -14,7 +14,7 @@ class HotelListContentProxy extends FairDelegate {
   HotelListContentProxy(this.callBack, this.hotelData);
 
   void onItemTap() {
-    callBack!();
+    callBack?.call();
   }
 
   @override
@@ -35,9 +35,9 @@ class HotelListContentProxy extends FairDelegate {
     return fun;
   }
 
-  String perNight() => '${hotelData!.perNight}';
+  String perNight() => '${hotelData?.perNight}';
 
-  String reviews() => '${hotelData!.reviews} Reviews';
+  String reviews() => '${hotelData?.reviews} Reviews';
 
-  String distance() => '${hotelData!.dist.toStringAsFixed(1)} km to city';
+  String distance() => '${hotelData?.dist.toStringAsFixed(1)} km to city';
 }

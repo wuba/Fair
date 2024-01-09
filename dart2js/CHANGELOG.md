@@ -1,3 +1,6 @@
+## 1.5.0
+- fix js isNotEmpty bug.
+
 ## 1.4.0
 
 - 升级 analyzer 版本为 5.5.0；

@@ -268,8 +268,7 @@
                                             "begin": {
                                               "className": "Alignment",
                                               "pa": [
-                                                0.0,
-                                                -1.0
+                                                0.0
                                               ]
                                             },
                                             "end": {
@@ -342,7 +341,7 @@
                         "child": {
                           "className": "SvgPicture.string",
                           "pa": [
-                            "#(svg_6z8g0n)"
+                            "%(getValueWithDefault(#(svg_6z8g0n),))"
                           ],
                           "na": {
                             "allowDrawingOutsideViewBox": true,
@@ -377,7 +376,7 @@
                         "child": {
                           "className": "SvgPicture.string",
                           "pa": [
-                            "#(svg_d9sdjy)"
+                            "%(getValueWithDefault(#(svg_d9sdjy),))"
                           ],
                           "na": {
                             "allowDrawingOutsideViewBox": true,
@@ -420,7 +419,7 @@
                             "child": {
                               "className": "SvgPicture.string",
                               "pa": [
-                                "#(svg_munyoe)"
+                                "%(getValueWithDefault(#(svg_munyoe),))"
                               ],
                               "na": {
                                 "allowDrawingOutsideViewBox": true,
@@ -536,5 +535,7 @@
         ]
       }
     }
-  }
+  },
+  "methodMap": {},
+  "digest": "f626853100f9e81f248f63fba3e1f1d5"
 }

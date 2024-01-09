@@ -432,8 +432,10 @@ class MethodInvocation extends AstNode {
   Expression? callee;
   List<Expression?>? argumentList;
   SelectAstClass? selectAstClass;
+  List<Expression?>? typeArgumentList;
 
   MethodInvocation(this.callee, this.argumentList, this.selectAstClass,
+      this.typeArgumentList,
       {Map? ast})
       : super(ast: ast);
 
@@ -444,6 +446,7 @@ class MethodInvocation extends AstNode {
           Expression.fromAst(ast['callee']),
           _parseArgumentList(ast['argumentList']),
           SelectAstClass.fromAst(ast['selectAstClass']),
+          _parseTypeArgumentList(ast['typeArguments']),
           ast: ast);
     }
     return null;
@@ -1097,6 +1100,7 @@ class Expression extends AstNode {
   bool? isVariableDeclaration;
   bool? isVariableExpression;
   bool? isFuncParam;
+  bool? isTypeName;
 
   @override
   Map? toAst() => _ast;
@@ -1137,6 +1141,7 @@ class Expression extends AstNode {
     this.isVariableDeclaration = false,
     this.isVariableExpression = false,
     this.isFuncParam =false,
+    this.isTypeName = false,
     Map? ast,
   }) : super(ast: ast);
 
@@ -1237,6 +1242,8 @@ class Expression extends AstNode {
           isInterpolationExpression: true, ast: ast);
     } else if (astType == astNodeNameValue(AstNodeName.VariableExpression)) {
       return Expression(VariableExpression.fromAst(ast), isVariableExpression: true, ast: ast);
+    } else if (astType == astNodeNameValue(AstNodeName.TypeName)) {
+      return Expression(TypeName.fromAst(ast), isTypeName: true, ast: ast);
     }
     return null;
   }
@@ -1311,6 +1318,8 @@ class Expression extends AstNode {
       _expression as InterpolationExpression;
 
   VariableExpression get asVariableExpression => _expression as VariableExpression;
+
+  TypeName get asTypeNameExpression => _expression as TypeName;
 }
 
 class SelectAstClass {
@@ -1346,6 +1355,19 @@ List<Expression?> _parseArgumentList(Map? ast) {
         arguments.add(Expression.fromAst(arg));
       }
     }
+  }
+  return arguments;
+}
+
+///解析TypeArgumentList 字段
+List<Expression?> _parseTypeArgumentList(Map? ast) {
+  var arguments = <Expression?>[];
+  if (ast != null) {
+    var astTypeArgumentList = ast['typeArgumentList'] as List?;
+    return astTypeArgumentList
+            ?.map((arg) => Expression.fromAst(arg))
+            .toList() ??
+        arguments;
   }
   return arguments;
 }

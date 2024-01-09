@@ -19,23 +19,46 @@
           "className": "Center",
           "na": {
             "child": {
-              "className": "GestureDetector",
+              "className": "Column",
               "na": {
-                "onTap": "@(callPhone)",
-                "child": {
-                  "className": "Container",
-                  "na": {
-                    "height": 50,
-                    "width": 100,
-                    "alignment": "#(Alignment.center)",
-                    "child": {
-                      "className": "Text",
-                      "pa": [
-                        "拨打电话"
-                      ]
+                "children": [
+                  {
+                    "className": "Container",
+                    "na": {
+                      "alignment": "#(Alignment.center)",
+                      "child": {
+                        "className": "ElevatedButton",
+                        "na": {
+                          "onPressed": "@(callPhone)",
+                          "child": {
+                            "className": "Text",
+                            "pa": [
+                              "拨打电话-基于FairBasicPlugin"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "className": "Container",
+                    "na": {
+                      "alignment": "#(Alignment.center)",
+                      "child": {
+                        "className": "ElevatedButton",
+                        "na": {
+                          "onPressed": "@(commonHttp)",
+                          "child": {
+                            "className": "Text",
+                            "pa": [
+                              "网络请求-基于FairCommonPlugin"
+                            ]
+                          }
+                        }
+                      }
                     }
                   }
-                }
+                ]
               }
             }
           }

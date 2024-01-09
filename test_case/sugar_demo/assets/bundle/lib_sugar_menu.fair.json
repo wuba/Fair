@@ -1,0 +1,81 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "actions": [
+          {
+            "className": "Sugar.popMenuButton",
+            "na": {
+              "onSelected": "@(_onSelected)",
+              "itemBuilder": [
+                {
+                  "className": "PopupMenuItem",
+                  "na": {
+                    "value": "Item 1",
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Item 1"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "PopupMenuItem",
+                  "na": {
+                    "value": "Item 2",
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Item 2"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "PopupMenuItem",
+                  "na": {
+                    "value": "Item 3",
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Item 3"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "PopupMenuItem",
+                  "na": {
+                    "value": "Item 4",
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "Item 4"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "body": {
+      "className": "Center",
+      "na": {
+        "child": {
+          "className": "Text",
+          "pa": [
+            "#(_selectedMenu:$_selectedMenu)"
+          ]
+        }
+      }
+    }
+  },
+  "methodMap": {},
+  "digest": "7d4f16e4302e0b7332c75a367ac9be28"
+}
