@@ -1,5 +1,6 @@
 import 'dart:core';
 
+import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
 import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
@@ -103,57 +104,58 @@ class _SugarTabBarPageState extends State<SugarTabBarPage> {
   }
 
   Widget _getList() {
-    return Sugar.listBuilder(
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return Container(
-            height: 140,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: Colors.white,
-              ),
-              margin: EdgeInsets.only(left: 20, right: 20, top: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                          width: 120,
-                          height: 120,
-                          padding: EdgeInsets.all(10),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(_getImagePath(index)),
-                            ),
-                          )),
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        // color: Colors.blue,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(_getTitle(index),
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold)),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text('SubTitle-SubTitle'),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+    return ListView.builder(
+      itemBuilder: Sugar.indexedWidgetBuilder(
+        (context, index) => Container(
+          height: 140,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+              color: Colors.white,
             ),
-          );
-        });
+            margin: EdgeInsets.only(left: 20, right: 20, top: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                        width: 120,
+                        height: 120,
+                        padding: EdgeInsets.all(10),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(_getImagePath(index)),
+                          ),
+                        )),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      // color: Colors.blue,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(_getTitle(index),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold)),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text('SubTitle-SubTitle'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      itemCount: 3,
+    );
   }
 
   /// All && Inactive customScrollView
@@ -163,9 +165,9 @@ class _SugarTabBarPageState extends State<SugarTabBarPage> {
       child: CustomScrollView(
         slivers: <Widget>[
           SliverList(
-            delegate: Sugar.sliverChildBuilderDelegate(
-              builder: (content, index) {
-                return Container(
+            delegate: SliverChildBuilderDelegate(
+              Sugar.nullableIndexedWidgetBuilder(
+                (context, index) => Container(
                   height: 140,
                   child: Container(
                     decoration: BoxDecoration(
@@ -214,9 +216,9 @@ class _SugarTabBarPageState extends State<SugarTabBarPage> {
                       ],
                     ),
                   ),
-                );
-              },
-              childCount: 3, //findChildIndexCallback
+                ),
+              ),
+              childCount: 3,
             ),
           ),
         ],

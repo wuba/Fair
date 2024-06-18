@@ -1,3 +1,4 @@
+import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
 import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class _FairDetailState extends State<FairDetail> {
     FairNet.requestData(
         method: FairNet.GET,
         url:
-        'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/59383a3efd1554c4c8fbaa8eb3700a44_fair_detail_data.json',
+            'https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/59383a3efd1554c4c8fbaa8eb3700a44_fair_detail_data.json',
         data: {'page': 0},
         success: (resp) {
           if (resp == null) {
@@ -39,8 +40,7 @@ class _FairDetailState extends State<FairDetail> {
             _detailModel.time = data['time'];
             _detailModel.location = data['location'];
             _detailModel.detail = data['detail'];
-          } catch (e) {
-          }
+          } catch (e) {}
           setState(() {});
         });
   }

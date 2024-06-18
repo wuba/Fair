@@ -5,6 +5,7 @@
  */
 
 import 'package:fair/fair.dart';
+import 'package:fair/src/internal/bind_data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,7 @@ class FairComponent extends StatelessWidget {
   }
 }
 
-class _MergedValuedListenable extends ValueNotifier<Map<String, dynamic>> {
+class _MergedValuedListenable extends FairValueNotifier<Map<String, dynamic>> {
   final List<dynamic>? pa;
   final Map<String, dynamic>? na;
   VoidCallback? _listener;
@@ -59,9 +60,9 @@ class _MergedValuedListenable extends ValueNotifier<Map<String, dynamic>> {
   _MergedValuedListenable(this.pa, this.na) : super(Property.combined(pa, na));
 
   void forEachListenable(List<dynamic>? pa, Map<String, dynamic>? na,
-      void Function(ValueNotifier element) f) {
-    pa?.whereType<ValueNotifier>().forEach(f);
-    na?.values.whereType<ValueNotifier>().forEach(f);
+      void Function(FairValueNotifier element) f) {
+    pa?.whereType<FairValueNotifier>().forEach(f);
+    na?.values.whereType<FairValueNotifier>().forEach(f);
   }
 
   @override

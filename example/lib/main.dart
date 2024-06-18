@@ -24,18 +24,18 @@ void main() async {
   ]);
 
   FairApp.runApplication(
-    FairApp(
-      child: MyApp(),
-      delegate: {
-        ///此处delegate注册的key名必须与fairwidget页面name的名字一致,
-        ///TestFairDelegate只作用于相同名字的fairwidget
-        'assets/fair/lib_fair_widget_fair_delegate_widget.fair.json':
-            (ctx, _) => TestFairDelegate(),
-      },
-      generated: g.FairAppModule(),
-    ),
+      FairApp(
+        child: MyApp(),
+        delegate: {
+          ///此处delegate注册的key名必须与fairwidget页面name的名字一致,
+          ///TestFairDelegate只作用于相同名字的fairwidget
+          'assets/fair/lib_fair_widget_fair_delegate_widget.fair.json':
+              (ctx, _) => TestFairDelegate(),
+        },
+        generated: g.FairAppModule(),
+      ),
 
-    ///需要在此注册需要全局使用的plugin,key名可以随意不做要求
+      ///需要在此注册需要全局使用的plugin,key名可以随意不做要求
       plugins: FairExtension.plugins
         ..addAll({
           'FairBasicPlugin': FairBasicPlugin(),

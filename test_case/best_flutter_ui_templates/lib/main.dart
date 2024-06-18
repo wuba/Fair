@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:best_flutter_ui_templates/app_theme.dart';
-import 'package:best_flutter_ui_templates/plugins/net/fair_net_plugin.dart';
+import 'package:best_flutter_ui_templates/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,7 +20,7 @@ void main() async {
     DeviceOrientation.portraitDown
   ]).then((_) => FairApp.runApplication(
         MyApp(),
-        plugins: {'FairNet': FairNet()},
+        plugins: {'FairCommonPlugin': FairCommonPlugin()},
       ));
 }
 

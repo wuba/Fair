@@ -58,10 +58,10 @@ class FairApp extends InheritedWidget with AppState {
   /// checked mode), to turn it off, set the constructor argument to
   /// false. In release mode this has no effect.
   final bool debugShowFairBanner;
-  
+
   /// Define a custom DynamicWidgetBuilder to solve special case
   List<DynamicWidgetBuilderFunction?>? dynamicWidgetBuilder;
-      
+
   static final WidgetBuilder _defaultHolder = (BuildContext context) {
     return Container(
       color: Colors.white,
@@ -96,7 +96,9 @@ class FairApp extends InheritedWidget with AppState {
   }
 
   static FairApp? of(BuildContext? context, {bool rebuild = false}) {
-    return rebuild ? context?.dependOnInheritedWidgetOfExactType<FairApp>() : context?.findAncestorWidgetOfExactType<FairApp>();
+    return rebuild
+        ? context?.dependOnInheritedWidgetOfExactType<FairApp>()
+        : context?.findAncestorWidgetOfExactType<FairApp>();
   }
 
   String? pathOfBundle(String tag) {
@@ -111,7 +113,8 @@ class FairApp extends InheritedWidget with AppState {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, String>>('bundle', bundleAlias));
+    properties
+        .add(DiagnosticsProperty<Map<String, String>>('bundle', bundleAlias));
   }
 
   static void runApplication(
@@ -129,20 +132,30 @@ class FairApp extends InheritedWidget with AppState {
       jsPlugins = {};
     }
     //init 3rd-library adapter
-    initFairLibraryAdapter(app, plugins: plugins, jsPlugins: jsPlugins, adapters: adapters);
+    initFairLibraryAdapter(app,
+        plugins: plugins, jsPlugins: jsPlugins, adapters: adapters);
 
     // WidgetsFlutterBinding.ensureInitialized();
     FairPluginDispatcher.registerPlugins(plugins);
 
-    if(!kIsWeb && Platform.isAndroid){
+    if (!kIsWeb && Platform.isAndroid) {
       var runtime = Runtime();
       var basicChannel = runtime.getBasicChannel();
-      basicChannel.invokeMethod('jsLoadListener').then((value){
-        runtime.loadCoreJs(package: package, jsPlugins: jsPlugins, baseJsSources: baseJsSources).then((value) => runApp(app));
+      basicChannel.invokeMethod('jsLoadListener').then((value) {
+        runtime
+            .loadCoreJs(
+                package: package,
+                jsPlugins: jsPlugins,
+                baseJsSources: baseJsSources)
+            .then((value) => runApp(app));
       });
-
-    }else{
-      Runtime().loadCoreJs(package: package, jsPlugins: jsPlugins, baseJsSources: baseJsSources).then((value) => runApp(app));
+    } else {
+      Runtime()
+          .loadCoreJs(
+              package: package,
+              jsPlugins: jsPlugins,
+              baseJsSources: baseJsSources)
+          .then((value) => runApp(app));
     }
   }
 
@@ -156,10 +169,8 @@ class FairApp extends InheritedWidget with AppState {
     Map<String, String>? jsPlugins,
     List<IFairLibraryAdapter>? adapters,
   }) {
-
     if (adapters != null && adapters.isNotEmpty) {
       adapters.forEach((element) {
-
         if (element.provideFairPlugins()?.isNotEmpty == true) {
           plugins?.addAll(element.provideFairPlugins()!);
         }
@@ -173,8 +184,10 @@ class FairApp extends InheritedWidget with AppState {
             app.modules.addAll(element.provideFairModule());
           }
 
-          if (element.provideGeneratedModule() != null && app.proxy is ProxyMirror) {
-            (app.proxy as ProxyMirror).addGeneratedBinding(element.provideGeneratedModule()!);
+          if (element.provideGeneratedModule() != null &&
+              app.proxy is ProxyMirror) {
+            (app.proxy as ProxyMirror)
+                .addGeneratedBinding(element.provideGeneratedModule()!);
           }
 
           if (element.provideFairDelegate() != null) {
@@ -183,9 +196,12 @@ class FairApp extends InheritedWidget with AppState {
 
           if (element.provideDynamicWidgetBuilder() != null) {
             if (app.dynamicWidgetBuilder == null) {
-              app.dynamicWidgetBuilder = [element.provideDynamicWidgetBuilder()];
+              app.dynamicWidgetBuilder = [
+                element.provideDynamicWidgetBuilder()
+              ];
             } else {
-              app.dynamicWidgetBuilder!.add(element.provideDynamicWidgetBuilder());
+              app.dynamicWidgetBuilder!
+                  .add(element.provideDynamicWidgetBuilder());
             }
           }
         }

@@ -577,4 +577,7 @@ const widgetNames = {
   'AnimationStatus': false,
   'CatmullRomCurve': false,
   'Curves': false,
+  'PopupMenuDivider': false,
+  'PopupMenuItem': false,
+  'SliverChildBuilderDelegate': false,  
 };

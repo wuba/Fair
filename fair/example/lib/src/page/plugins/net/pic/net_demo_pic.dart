@@ -5,7 +5,7 @@
  */
 
 import 'package:fair/fair.dart';
-import 'package:fair_example/src/page/plugins/net/fair_net_plugin.dart';
+import 'package:fair_example/src/page/plugins/fair_common_plugin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -21,13 +21,17 @@ class _PicNetDemoPageStateful extends State {
   final _picData = PicData();
 
   void onClick() {
-    var order_id=10;
-    FairNet().request({
+    var order_id = 10;
+    FairCommonPlugin().http({
       'pageName': '#FairKey#',
       'method': 'GET',
       'url': 'https://www.wanandroid.com/banner/json',
-      'data': {'order_id': order_id, 'content': 'test','aa':['hello','world']},
-      'success': (resp) {
+      'data': {
+        'order_id': order_id,
+        'content': 'test',
+        'aa': ['hello', 'world']
+      },
+      'callback': (resp) {
         if (resp == null) {
           return;
         }
@@ -35,8 +39,7 @@ class _PicNetDemoPageStateful extends State {
         String u = data[0]['imagePath'];
         _picData.picUrl = u;
         _picData.title = data[0]['title'];
-        setState(() {
-        });
+        setState(() {});
       }
     });
   }
@@ -68,7 +71,8 @@ class _PicNetDemoPageStateful extends State {
 }
 
 class PicData extends Object {
-  String picUrl = 'https://www.youxinpai.com/public/home/widget/services/4s/img/img_4s_4_0943ac1.jpg';
+  String picUrl =
+      'https://www.youxinpai.com/public/home/widget/services/4s/img/img_4s_4_0943ac1.jpg';
   String title = '';
   String content = '';
 }

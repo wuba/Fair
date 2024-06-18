@@ -38,7 +38,7 @@ FairDslContex? _prepareVariableAnnotation(Map rootAst) {
   var annotationMap = {};
   var methodAnnotationMap = {};
   var rootExpression = Expression.fromAst(rootAst);
-  if (!(rootExpression?.isProgram??false)) {
+  if (!(rootExpression?.isProgram ?? false)) {
     return null;
   }
   var bodyList = rootExpression?.asProgram.body;
@@ -46,23 +46,23 @@ FairDslContex? _prepareVariableAnnotation(Map rootAst) {
     return null;
   }
   for (var body in bodyList!) {
-    if (body?.isClassDeclaration==true) {
+    if (body?.isClassDeclaration == true) {
       var classBodyList = body!.asClassDeclaration.body;
       for (var bodyNode in classBodyList!) {
         //只处理变量声明
         var annotaions = [];
-        if (bodyNode?.isVariableDeclarationList==true) {
-          annotaions = bodyNode!.asVariableDeclarationList.annotationList??[];
-        } else if (bodyNode?.isMethodDeclaration==true) {
-          annotaions = bodyNode?.asMethodDeclaration.annotationList??[];
+        if (bodyNode?.isVariableDeclarationList == true) {
+          annotaions = bodyNode!.asVariableDeclarationList.annotationList ?? [];
+        } else if (bodyNode?.isMethodDeclaration == true) {
+          annotaions = bodyNode?.asMethodDeclaration.annotationList ?? [];
         }
         for (var annotation in annotaions) {
           if (annotation.name == kFairWellAnnotaion) {
             var arg = annotation.argumentList.first.asStringLiteral;
-            if (bodyNode?.isVariableDeclarationList==true) {
+            if (bodyNode?.isVariableDeclarationList == true) {
               annotationMap.putIfAbsent(
                   arg.value, () => bodyNode?.asVariableDeclarationList);
-            } else if (bodyNode?.isMethodDeclaration==true) {
+            } else if (bodyNode?.isMethodDeclaration == true) {
               methodAnnotationMap.putIfAbsent(
                   arg.value, () => bodyNode?.asMethodDeclaration);
             }
@@ -82,7 +82,7 @@ String? _genProxy(Map rootAst, FairDslContex fairDslContex) {
   ''';
   String? className;
   var rootExpression = Expression.fromAst(rootAst);
-  if (!(rootExpression?.isProgram??false)) {
+  if (!(rootExpression?.isProgram ?? false)) {
     return null;
   }
   var bodyList = rootExpression?.asProgram.body;
@@ -92,10 +92,10 @@ String? _genProxy(Map rootAst, FairDslContex fairDslContex) {
 
   //获取类名
   for (var body in bodyList!) {
-    if (body?.isClassDeclaration==true) {
+    if (body?.isClassDeclaration == true) {
       if (body!.asClassDeclaration.superClause == 'StatefulWidget' ||
           body.asClassDeclaration.superClause == 'StatelessWidget') {
-        className = '\$' + (body.asClassDeclaration.name??'') + 'Proxy';
+        className = '\$' + (body.asClassDeclaration.name ?? '') + 'Proxy';
         break;
       }
     }
@@ -108,9 +108,9 @@ String? _genProxy(Map rootAst, FairDslContex fairDslContex) {
   var methodAno = '';
   fairDslContex.variableAnnotation.forEach((key, value) {
     if (value is VariableDeclarationList) {
-      variableAnnotation += (value.sourceCode??'') + '\n';
+      variableAnnotation += (value.sourceCode ?? '') + '\n';
       property +=
-      '''pros['${value.declarationList?.first?.name}'] =() => ${value.declarationList?.first?.name};\n''';
+          '''pros['${value.declarationList?.first?.name}'] =() => ${value.declarationList?.first?.name};\n''';
     }
   });
 
@@ -120,11 +120,11 @@ String? _genProxy(Map rootAst, FairDslContex fairDslContex) {
         func += ''' functions['${value.name}'] = ${value.name};\n''';
       } else if (value.returnType?.name == 'Widget') {
         component +=
-        '''plugins['${value.name}'] = (props) => ${value.name};\n ''';
+            '''plugins['${value.name}'] = (props) => ${value.name};\n ''';
       } else {
         property += '''pros['${value.name}'] = ${value.name};\n''';
       }
-      methodAno += (value.source??'');
+      methodAno += (value.source ?? '');
     }
   });
 
@@ -160,7 +160,7 @@ String? _genProxy(Map rootAst, FairDslContex fairDslContex) {
 // ignore: missing_return
 Map? _parseRootAst(Map rootAst, FairDslContex? fairDslContex) {
   var rootExpression = Expression.fromAst(rootAst);
-  if (!(rootExpression?.isProgram??false)) {
+  if (!(rootExpression?.isProgram ?? false)) {
     return null;
   }
   var bodyList = rootExpression!.asProgram.body;
@@ -172,22 +172,24 @@ Map? _parseRootAst(Map rootAst, FairDslContex? fairDslContex) {
   var methods = {};
 
   for (var body in bodyList!) {
-    if (body?.isClassDeclaration==true) {
+    if (body?.isClassDeclaration == true) {
       var classBodyList = body!.asClassDeclaration.body;
       for (var bodyNode in classBodyList!) {
         //只处理build函数
-        if (bodyNode?.isMethodDeclaration==true) {
+        if (bodyNode?.isMethodDeclaration == true) {
           // if(bodyNode.isMethodDeclaration && bodyNode.asMethodDeclaration.name == 'build'){
           var buildBodyReturn = bodyNode?.asMethodDeclaration.body?.body;
-          if (buildBodyReturn?.isNotEmpty==true &&
-              buildBodyReturn?.last?.isReturnStatement==true &&
+          if (buildBodyReturn?.isNotEmpty == true &&
+              buildBodyReturn?.last?.isReturnStatement == true &&
               buildBodyReturn?.last?.asReturnStatement.argument != null) {
             //解析build中widgetExpression
             if (bodyNode?.asMethodDeclaration.name == 'build') {
               tmpMap = _buildWidgetDsl(
                   buildBodyReturn?.last?.asReturnStatement.argument,
                   fairDslContex);
-            } else if (buildBodyReturn?.last?.asReturnStatement.argument?.isMethodInvocation==true) {
+            } else if (buildBodyReturn
+                    ?.last?.asReturnStatement.argument?.isMethodInvocation ==
+                true) {
               //混编逻辑处理
               var methodMap = {
                 bodyNode?.asMethodDeclaration.name: _buildWidgetDsl(
@@ -197,12 +199,13 @@ Map? _parseRootAst(Map rootAst, FairDslContex? fairDslContex) {
               methods.addAll(methodMap);
             }
           }
-        } else if (body.isFunctionDeclaration==true) {
+        } else if (body.isFunctionDeclaration == true) {
           var functionDeclaration = body.asFunctionDeclaration;
           var buildBodyReturn = functionDeclaration.expression?.body?.body;
           var methodMap = {
             functionDeclaration.name: _buildWidgetDsl(
-                buildBodyReturn?.last?.asReturnStatement.argument, fairDslContex)
+                buildBodyReturn?.last?.asReturnStatement.argument,
+                fairDslContex)
           };
           // methodList.add(methodMap);
           methods.addAll(methodMap);
@@ -219,50 +222,61 @@ dynamic _buildWidgetDsl(
   var dslMap = {};
   var paMap = [];
   var naMap = {};
-  var taMap =[];
+  var taMap = [];
 
   var methodInvocationExpression = widgetExpression?.asMethodInvocation;
   //普通类
-  if (methodInvocationExpression?.callee?.isIdentifier==true) {
+  if (methodInvocationExpression?.callee?.isIdentifier == true) {
     //注册的方法不再使用className
-    if (fairDslContex?.methodAnnotation
-        .containsKey(methodInvocationExpression?.callee?.asIdentifier.name)==true) {
+    if (fairDslContex?.methodAnnotation.containsKey(
+            methodInvocationExpression?.callee?.asIdentifier.name) ==
+        true) {
       return '\$(${methodInvocationExpression?.callee?.asIdentifier.name})';
-    } else if (fairDslContex?.variableAnnotation
-        .containsKey(methodInvocationExpression?.callee?.asIdentifier.name)==true) {
+    } else if (fairDslContex?.variableAnnotation.containsKey(
+            methodInvocationExpression?.callee?.asIdentifier.name) ==
+        true) {
       if (methodInvocationExpression?.argumentList?.isNotEmpty ?? false) {
-        var args = methodInvocationExpression?.argumentList?.fold('', (previousValue, element) =>
-        '$previousValue,${_buildValueExpression(element, fairDslContex)}').substring(1);
+        var args = methodInvocationExpression?.argumentList
+            ?.fold(
+                '',
+                (previousValue, element) =>
+                    '$previousValue,${_buildValueExpression(element, fairDslContex)}')
+            .substring(1);
         return '%(${methodInvocationExpression?.callee?.asIdentifier.name}($args))';
       } else {
         return '%(${methodInvocationExpression?.callee?.asIdentifier.name})';
       }
     }
 
-    if (RegExp(r'^[a-z_]')
-        .hasMatch(methodInvocationExpression?.callee?.asIdentifier.name??'')) {
+    if (RegExp(r'^[a-z_]').hasMatch(
+        methodInvocationExpression?.callee?.asIdentifier.name ?? '')) {
       if (methodInvocationExpression?.argumentList?.isNotEmpty ?? false) {
-        var args = methodInvocationExpression?.argumentList?.fold('', (previousValue, element) =>
-        '$previousValue,${_buildValueExpression(element, fairDslContex)}').substring(1);
+        var args = methodInvocationExpression?.argumentList
+            ?.fold(
+                '',
+                (previousValue, element) =>
+                    '$previousValue,${_buildValueExpression(element, fairDslContex)}')
+            .substring(1);
         return '%(${methodInvocationExpression?.callee?.asIdentifier.name}($args))';
       } else {
         return '%(${methodInvocationExpression?.callee?.asIdentifier.name})';
       }
     } else {
       dslMap.putIfAbsent('className',
-              () => methodInvocationExpression?.callee?.asIdentifier.name);
+          () => methodInvocationExpression?.callee?.asIdentifier.name);
     }
-  } else if (methodInvocationExpression?.callee?.isMemberExpression==true) {
+  } else if (methodInvocationExpression?.callee?.isMemberExpression == true) {
     //方法类
 
-    var memberExpression = methodInvocationExpression?.callee?.asMemberExpression;
+    var memberExpression =
+        methodInvocationExpression?.callee?.asMemberExpression;
     try {
       dslMap.putIfAbsent(
-              'className',
-                  () =>
-                  (memberExpression?.object?.asIdentifier.name??'') +
-                  '.' +
-                      (memberExpression?.property??''));
+          'className',
+          () =>
+              (memberExpression?.object?.asIdentifier.name ?? '') +
+              '.' +
+              (memberExpression?.property ?? ''));
     } catch (e) {
       // dslMap.putIfAbsent(
       //     'className',
@@ -278,7 +292,7 @@ dynamic _buildWidgetDsl(
 
   //1.pa
   for (var arg in methodInvocationExpression!.argumentList!) {
-    if (arg?.isNamedExpression==true) {
+    if (arg?.isNamedExpression == true) {
       break;
     }
     //pa 常量处理
@@ -290,7 +304,7 @@ dynamic _buildWidgetDsl(
 
   //2.na
   for (var arg in methodInvocationExpression.argumentList!) {
-    if (arg?.isNamedExpression==true) {
+    if (arg?.isNamedExpression == true) {
       var nameExpression = arg?.asNamedExpression;
       if (nameExpression == null) {
         continue;
@@ -325,7 +339,13 @@ dynamic _buildWidgetDsl(
     dslMap.putIfAbsent('na', () => naMap);
   }
 
-  if(taMap.isNotEmpty){
+  var typeArguments = methodInvocationExpression.toAst()?['typeArguments'];
+  if (typeArguments is Map &&
+      typeArguments['typeArgumentListDisplayString'] is List) {
+    dslMap.putIfAbsent(
+        'ta', () => typeArguments['typeArgumentListDisplayString'].join(','));
+  }
+  if (taMap.isNotEmpty) {
     dslMap.putIfAbsent('typeArgumentList', () => taMap);
   }
 
@@ -336,47 +356,53 @@ dynamic _buildValueExpression(
     Expression? valueExpression, FairDslContex? fairDslContex) {
   var naPaValue;
 
-  if (valueExpression?.isIdentifier==true) {
+  if (valueExpression?.isIdentifier == true) {
     //映射变量声明
     if (fairDslContex?.variableAnnotation
-        .containsKey(valueExpression?.asIdentifier.name)==true ||
+                .containsKey(valueExpression?.asIdentifier.name) ==
+            true ||
         fairDslContex?.methodAnnotation
-            .containsKey(valueExpression?.asIdentifier.name)==true) {
-      naPaValue = '#(' + (valueExpression?.asIdentifier.name??'') + ')';
+                .containsKey(valueExpression?.asIdentifier.name) ==
+            true) {
+      naPaValue = '#(' + (valueExpression?.asIdentifier.name ?? '') + ')';
     }
     // else if (fairDslContex.variables
     //     .containsKey(valueExpression.asIdentifier.name)) {
     //   naPaValue = '\$(' + valueExpression.asIdentifier.name + ')';
     // }
-    else if (FairLogicUnit().functions.containsKey(valueExpression?.asIdentifier.name)) {
-      naPaValue = '@(' + (valueExpression?.asIdentifier.name??'') + ')';
+    else if (FairLogicUnit()
+        .functions
+        .containsKey(valueExpression?.asIdentifier.name)) {
+      naPaValue = '@(' + (valueExpression?.asIdentifier.name ?? '') + ')';
     } else {
-      naPaValue = '^(' + (valueExpression?.asIdentifier.name??'') + ')';
+      naPaValue = '^(' + (valueExpression?.asIdentifier.name ?? '') + ')';
     }
-  } else if (valueExpression?.isNumericLiteral==true) {
+  } else if (valueExpression?.isNumericLiteral == true) {
     naPaValue = valueExpression?.asNumericLiteral.value;
-  } else if (valueExpression?.isStringLiteral==true) {
+  } else if (valueExpression?.isStringLiteral == true) {
     naPaValue = valueExpression?.asStringLiteral.value;
-  } else if (valueExpression?.isBooleanLiteral==true) {
+  } else if (valueExpression?.isBooleanLiteral == true) {
     naPaValue = valueExpression?.asBooleanLiteral.value;
-  } else if (valueExpression?.isPrefixedIdentifier==true) {
+  } else if (valueExpression?.isPrefixedIdentifier == true) {
     if (RegExp(r'^[a-z_]') // widget.** 参数类的特殊处理成#(),兼容1期
-        .hasMatch(valueExpression?.asPrefixedIdentifier.prefix??'') && ('widget' != valueExpression?.asPrefixedIdentifier.prefix)) {
+            .hasMatch(valueExpression?.asPrefixedIdentifier.prefix ?? '') &&
+        ('widget' != valueExpression?.asPrefixedIdentifier.prefix)) {
       naPaValue = '\$(' +
-          (valueExpression?.asPrefixedIdentifier.prefix??'') +
+          (valueExpression?.asPrefixedIdentifier.prefix ?? '') +
           '.' +
-          (valueExpression?.asPrefixedIdentifier.identifier??'') +
+          (valueExpression?.asPrefixedIdentifier.identifier ?? '') +
           ')';
     } else {
       naPaValue = '#(' +
-          (valueExpression?.asPrefixedIdentifier.prefix??'') +
+          (valueExpression?.asPrefixedIdentifier.prefix ?? '') +
           '.' +
-          (valueExpression?.asPrefixedIdentifier.identifier??'') +
+          (valueExpression?.asPrefixedIdentifier.identifier ?? '') +
           ')';
     }
-  } else if (valueExpression?.isPropertyAccess==true) {
+  } else if (valueExpression?.isPropertyAccess == true) {
     if (valueExpression?.asPropertyAccess.expression != null &&
-        valueExpression?.asPropertyAccess.expression?.isPrefixedIdentifier==true) {
+        valueExpression?.asPropertyAccess.expression?.isPrefixedIdentifier ==
+            true) {
       var prefixedIdentifier =
           valueExpression?.asPropertyAccess.expression?.asPrefixedIdentifier;
       naPaValue = '\$(${prefixedIdentifier?.prefix}' +
@@ -387,30 +413,33 @@ dynamic _buildValueExpression(
     } else {
       naPaValue = '';
     }
-  } else if (valueExpression?.isMapLiteral==true) {
+  } else if (valueExpression?.isMapLiteral == true) {
     var retMap = <String, dynamic>{};
     valueExpression?.asMapLiteral.elements?.forEach((key, value) {
-      retMap.putIfAbsent(key, () => _buildValueExpression(value,fairDslContex));
+      retMap.putIfAbsent(
+          key, () => _buildValueExpression(value, fairDslContex));
     });
     naPaValue = retMap;
-  } else if (valueExpression?.isListLiteral==true) {
+  } else if (valueExpression?.isListLiteral == true) {
     var widgetExpressionList = [];
     for (var itemWidgetExpression in valueExpression!.asListLiteral.elements!) {
       widgetExpressionList
           .add(_buildValueExpression(itemWidgetExpression, fairDslContex));
     }
     naPaValue = widgetExpressionList;
-  } else if (valueExpression?.isFunctionExpression==true) {
+  } else if (valueExpression?.isFunctionExpression == true) {
     naPaValue = '';
     if (valueExpression?.asFunctionExpression.body != null &&
-        valueExpression?.asFunctionExpression.body?.body?.isNotEmpty==true) {
+        valueExpression?.asFunctionExpression.body?.body?.isNotEmpty == true) {
       naPaValue = _buildValueExpression(
-          valueExpression?.asFunctionExpression.body?.body?.last, fairDslContex);
+          valueExpression?.asFunctionExpression.body?.body?.last,
+          fairDslContex);
     }
-    if (naPaValue is Map && valueExpression?.asFunctionExpression.parameterList != null &&
+
+    var na = [];
+    var pa = [];
+    if (valueExpression?.asFunctionExpression.parameterList != null &&
         valueExpression!.asFunctionExpression.parameterList!.isNotEmpty) {
-      var na = [];
-      var pa = [];
       for (var element in valueExpression.asFunctionExpression.parameterList!) {
         if (element?.isNamed == true) {
           na.add(element?.name);
@@ -418,16 +447,37 @@ dynamic _buildValueExpression(
           pa.add(element?.name);
         }
       }
-      naPaValue['functionParameters'] = {
-        if (na.isNotEmpty) 'na': na,
-        if (pa.isNotEmpty) 'pa': pa,
-      };
     }
-  } else if (valueExpression?.isReturnStatement==true) {
+    var ast = valueExpression?.asFunctionExpression.toAst();
+    var tag = ast?['tag'];
+    var returnType = ast?['returnType'];
+    // var returnTypeTypeArguments = ast?['returnTypeTypeArguments'];
+    // var isAsync = ast?['isAsync'];
+    naPaValue = {
+      'className': 'FairFunction',
+      'body': naPaValue,
+      if (na.isNotEmpty || pa.isNotEmpty)
+        'parameters': {
+          // 命名参数的名字不会变化，使用的时候名字相同对应就行了
+          // 回调里面的命名参数名字是不可以更改的
+          if (na.isNotEmpty) 'na': na,
+          if (pa.isNotEmpty) 'pa': pa,
+        },
+      //  "tag": "Widget Function(BuildContext, int)"
+      if (tag != null) 'tag': tag,
+      if (returnType != null) 'rt': returnType,
+      // 暂时用不着
+      // if(returnTypeTypeArguments!=null)
+      // 'rtta':returnTypeTypeArguments,
+      // if(isAsync!=null && isAsync)
+      // 'isAsync': isAsync,
+    };
+  } else if (valueExpression?.isReturnStatement == true) {
     naPaValue = _buildValueExpression(
         valueExpression?.asReturnStatement.argument, fairDslContex);
-  } else if (valueExpression?.isStringInterpolation==true) {
-    var sourceString = valueExpression?.asStringInterpolation.sourceString??'';
+  } else if (valueExpression?.isStringInterpolation == true) {
+    var sourceString =
+        valueExpression?.asStringInterpolation.sourceString ?? '';
     if (sourceString.length >= 2) {
       if (sourceString.startsWith('\'') && sourceString.endsWith('\'') ||
           sourceString.startsWith('\"') && sourceString.endsWith('\"')) {
@@ -435,8 +485,8 @@ dynamic _buildValueExpression(
       }
     }
     naPaValue = '#(' + sourceString + ')';
-  } else if (valueExpression?.isVariableExpression==true) {
-    var expression = valueExpression?.asVariableExpression.expression??'';
+  } else if (valueExpression?.isVariableExpression == true) {
+    var expression = valueExpression?.asVariableExpression.expression ?? '';
     naPaValue = '\$(' + expression + ')';
   } else if (valueExpression?.isPrefixExpression == true) {
     var argument = _buildValueExpression(

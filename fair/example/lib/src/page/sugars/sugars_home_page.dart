@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair_example/assets.dart';
 import 'package:fair_example/src/page/logic-page/sample_logic_page.dart';
 import 'package:fair_example/src/page/logic-page2page/sample_logic_page2page.dart';
 import 'package:fair_example/src/page/sugars/ifequal_page.dart';
@@ -24,8 +25,14 @@ class SugerListPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             addItem('Sugar.ifEqual', () {
-              Navigator.pushNamed(context, 'fair_page',
-                  arguments: {'name': 'ifEqual', 'path': 'assets/bundle/lib_src_page_sugars_ifequal_page.fair.json', 'data': {'pageName': 'ifEqual'}});
+              Navigator.pushNamed(context, 'fair_page', arguments: {
+                'name': 'ifEqual',
+                'path':
+                    // 'assets/fair/lib_src_page_sugars_ifequal_page.fair.json',
+                    Assets
+                        .assets_fair_lib_src_page_sugars_ifequal_page_fair_json,
+                'data': {'pageName': 'ifEqual'}
+              });
 
               // 原生界面
               // Navigator.push(
@@ -43,8 +50,14 @@ class SugerListPage extends StatelessWidget {
               //       builder: (context) =>
               //           IfEqualBoolPage({'pageName': 'ifEqualBool'}),
               //     ));
-              Navigator.pushNamed(context, 'fair_page',
-                  arguments: {'name': 'ifEqualBool', 'path': 'assets/bundle/lib_src_page_sugars_ifequalbool_page.fair.json', 'data': {'pageName': 'ifEqualBool'}});
+              Navigator.pushNamed(context, 'fair_page', arguments: {
+                'name': 'ifEqualBool',
+                'path':
+                    //'assets/fair/lib_src_page_sugars_ifequalbool_page.fair.json',
+                    Assets
+                        .assets_fair_lib_src_page_sugars_ifequalbool_page_fair_json,
+                'data': {'pageName': 'ifEqualBool'}
+              });
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('Sugar.ifRange', () {
@@ -54,8 +67,14 @@ class SugerListPage extends StatelessWidget {
               //     MaterialPageRoute(
               //       builder: (context) => IfRangePage({'pageName': 'ifRange'}),
               //     ));
-              Navigator.pushNamed(context, 'fair_page',
-                  arguments: {'name': 'ifRange', 'path': 'assets/bundle/lib_src_page_sugars_ifrange_page.fair.json', 'data': {'pageName': 'ifRange'}});
+              Navigator.pushNamed(context, 'fair_page', arguments: {
+                'name': 'ifRange',
+                'path':
+                    // 'assets/fair/lib_src_page_sugars_ifrange_page.fair.json',
+                    Assets
+                        .assets_fair_lib_src_page_sugars_ifrange_page_fair_json,
+                'data': {'pageName': 'ifRange'}
+              });
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('Sugar.mapEach', () {
@@ -65,8 +84,14 @@ class SugerListPage extends StatelessWidget {
               //     MaterialPageRoute(
               //       builder: (context) => MapEachPage({'pageName': 'mapEach'}),
               //     ));
-              Navigator.pushNamed(context, 'fair_page',
-                  arguments: {'name': 'mapeach', 'path': 'assets/bundle/lib_src_page_sugars_mapeach_page.fair.json', 'data': {'pageName': 'mapeach'}});
+              Navigator.pushNamed(context, 'fair_page', arguments: {
+                'name': 'mapeach',
+                'path':
+                    // 'assets/fair/lib_src_page_sugars_mapeach_page.fair.json',
+                    Assets
+                        .assets_fair_lib_src_page_sugars_mapeach_page_fair_json,
+                'data': {'pageName': 'mapeach'}
+              });
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('Sugar.map', () {
@@ -76,8 +101,13 @@ class SugerListPage extends StatelessWidget {
               //     MaterialPageRoute(
               //       builder: (context) => MapPage({'pageName': 'map'}),
               //     ));
-              Navigator.pushNamed(context, 'fair_page',
-                  arguments: {'name': 'map', 'path': 'assets/bundle/lib_src_page_sugars_map_page.fair.json', 'data': {'pageName': 'map'}});
+              Navigator.pushNamed(context, 'fair_page', arguments: {
+                'name': 'map',
+                'path':
+                    //'assets/fair/lib_src_page_sugars_map_page.fair.json'
+                    Assets.assets_fair_lib_src_page_sugars_map_page_fair_json,
+                'data': {'pageName': 'map'}
+              });
             }),
           ],
         ));

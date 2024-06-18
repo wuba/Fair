@@ -5,7 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 import 'utils.dart';
-
+part "../part/w.part.dart";
 const Color _kColor = Color(0xA0B71C1C);
 const double _kHeight = 12.0; // height of banner
 const TextStyle _kTextStyle = TextStyle(
@@ -4026,4 +4026,15 @@ var p = () => {
           ) {
             return (props['block']) as Widget;
           },
+      'SliverChildBuilderDelegate': (props) => SliverChildBuilderDelegate(
+            props['pa'][0],
+            findChildIndexCallback: props['findChildIndexCallback'],
+            childCount: props['childCount'],
+            addAutomaticKeepAlives: props['addAutomaticKeepAlives'] ?? true,
+            addRepaintBoundaries: props['addRepaintBoundaries'] ?? true,
+            addSemanticIndexes: props['addSemanticIndexes'] ?? true,
+            semanticIndexCallback: props['semanticIndexCallback'] ??
+                _kDefaultSemanticIndexCallback,
+            semanticIndexOffset: props['semanticIndexOffset'] ?? 0,
+          ),             
     };

@@ -31,53 +31,64 @@
       ],
       "na": {
         "trueValue": {
-          "className": "Center",
-          "na": {
-            "child": {
-              "className": "Text",
-              "pa": [
-                "加载中..."
-              ]
+          "className": "FairFunction",
+          "body": {
+            "className": "Center",
+            "na": {
+              "child": {
+                "className": "Text",
+                "pa": [
+                  "加载中..."
+                ]
+              }
             }
-          }
+          },
+          "tag": "Widget Function()",
+          "rt": "Widget"
         },
         "falseValue": {
-          "className": "GridView.count",
-          "na": {
-            "crossAxisCount": 2,
-            "mainAxisSpacing": 10,
-            "crossAxisSpacing": 10,
-            "children": {
-              "className": "Sugar.map",
-              "pa": [
-                "^(_listData)"
-              ],
-              "na": {
-                "builder": {
-                  "className": "AspectRatio",
-                  "na": {
-                    "aspectRatio": 1.5,
-                    "child": {
-                      "className": "ClipRRect",
+          "className": "FairFunction",
+          "body": {
+            "className": "GridView.count",
+            "na": {
+              "crossAxisCount": 2,
+              "mainAxisSpacing": 10,
+              "crossAxisSpacing": 10,
+              "children": {
+                "className": "Sugar.map",
+                "pa": [
+                  "^(_listData)"
+                ],
+                "na": {
+                  "builder": {
+                    "className": "FairFunction",
+                    "body": {
+                      "className": "AspectRatio",
                       "na": {
-                        "borderRadius": {
-                          "className": "BorderRadius.all",
-                          "pa": [
-                            {
-                              "className": "Radius.circular",
-                              "pa": [
-                                4.0
-                              ]
-                            }
-                          ]
-                        },
+                        "aspectRatio": 1.5,
                         "child": {
-                          "className": "Image.network",
-                          "pa": [
-                            "$(item.picUrl)"
-                          ],
+                          "className": "ClipRRect",
                           "na": {
-                            "fit": "#(BoxFit.cover)"
+                            "borderRadius": {
+                              "className": "BorderRadius.all",
+                              "pa": [
+                                {
+                                  "className": "Radius.circular",
+                                  "pa": [
+                                    4.0
+                                  ]
+                                }
+                              ]
+                            },
+                            "child": {
+                              "className": "Image.network",
+                              "pa": [
+                                "$(item.picUrl)"
+                              ],
+                              "na": {
+                                "fit": "#(BoxFit.cover)"
+                              }
+                            }
                           }
                         }
                       }
@@ -91,7 +102,9 @@
                 }
               }
             }
-          }
+          },
+          "tag": "Widget Function()",
+          "rt": "Widget"
         }
       }
     }

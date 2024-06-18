@@ -5,6 +5,7 @@
  */
 
 import 'dart:io';
+import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:fair_version/fair_version.dart';
 import 'package:flutter/widgets.dart';
@@ -85,5 +86,16 @@ FairWidgetBinding provider = () {
         color: props['color'],
         width: props['width'],
         style: props['style'] ?? BorderStyle.solid),
+    'Sugar.enumName': (props) => Sugar.enumName(pa0(props)),
+    'Sugar.futureVoid': (props) => Sugar.futureVoid(
+        function: props['function'], argument: props['argument']),
+    'Sugar.mapGet': (props) => Sugar.mapGet(pa0(props), pa1(props)),
+    'Sugar.mapSet': (props) => Sugar.mapSet(pa0(props), pa1(props), pa2(props)),
+    'Sugar.dateTimeFromJs': (props) => Sugar.dateTimeFromJs(pa0(props)),
+    'Sugar.durationFromJs': (props) => Sugar.durationFromJs(pa0(props)),
+    'Sugar.dartObjectToMap': (props) => Sugar.dartObjectToMap(
+          pa0(props),
+          enumName: props['enumName'] ?? true,
+        ),
   };
 };

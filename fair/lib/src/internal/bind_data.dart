@@ -14,6 +14,11 @@ import '../render/expression.dart';
 import '../render/proxy.dart';
 import '../type.dart';
 
+/// 区别于 ValueNotifier
+class FairValueNotifier<T> extends ValueNotifier<T> {
+  FairValueNotifier(T value) : super(value);
+}
+
 class BindingData {
   // none-null
   final FairModuleRegistry? modules;
@@ -50,17 +55,14 @@ class BindingData {
         var params = funcName.substring(
             funcName.indexOf('(') + 1, funcName.lastIndexOf(')'));
         var args = params.split(',').map((e) {
-          if (RegExp(r'\^\(index\)', multiLine: false).hasMatch(e) &&
-              domain is IndexDomain?) {
-            return domain?.index;
-          } else if (domain != null && domain.match(e)) {
+          if (domain != null && domain.match(e)) {
             return domain.bindValue(e);
           } else {
             var r = proxyMirror?.evaluate(null, bound, e, domain: domain);
             if (r?.data == null) {
               return e;
             } else {
-              return r?.data is ValueNotifier ? r?.data.value : r?.data;
+              return r?.data is FairValueNotifier ? r?.data.value : r?.data;
             }
           }
         }).toList();
@@ -88,10 +90,11 @@ class BindingData {
         var params = funcName.substring(
             funcName.indexOf('(') + 1, funcName.lastIndexOf(')'));
         var args = params.split(',').map((e) {
-          if (RegExp(r'\^\(index\)', multiLine: false).hasMatch(e) &&
-              domain is IndexDomain?) {
-            return domain?.index;
-          } else if (domain != null && domain.match(e)) {
+          // if (RegExp(r'\^\(index\)', multiLine: false).hasMatch(e) &&
+          //     domain is IndexDomain?) {
+          //   return domain?.index;
+          // } else
+          if (domain != null && domain.match(e)) {
             return domain.bindValue(e);
           } else {
             var r = proxyMirror?.evaluate(null, bound, e, domain: domain);

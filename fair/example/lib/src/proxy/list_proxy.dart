@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:fair/fair.dart';
+import 'package:fair_example/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -62,13 +63,19 @@ class ListDelegate extends FairDelegate {
   }
 
   Widget _itemBuilder(context, index) {
-    var result = runtime?.invokeMethodSync(pageName, '_onItemByIndex', [index])??'';
+    var result =
+        runtime?.invokeMethodSync(pageName, '_onItemByIndex', [index]) ?? '';
     var value = jsonDecode(result);
     var itemData = value['result']['result'];
     return FairWidget(
       name: itemData,
-      path: 'assets/bundle/lib_src_page_list_sample_list_with_logic.fair.json',
-      data: {'fairProps': jsonEncode({'item': '${itemData}'})},
+      path:
+          // 'assets/fair/lib_src_page_list_sample_list_with_logic.fair.json'
+          Assets
+              .assets_fair_lib_src_page_list_load_more_sample_list_with_logic_fair_json,
+      data: {
+        'fairProps': jsonEncode({'item': '${itemData}'})
+      },
     );
   }
 }

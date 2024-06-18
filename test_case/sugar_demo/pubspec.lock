@@ -160,7 +160,7 @@ packages:
       sha256: "0f08b14755d163f6e2134cb58222dd25ea2a2ee8a195e53983d57c075324d592"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.1.1"
+    version: "3.1.0"
   crypto:
     dependency: transitive
     description:
@@ -208,7 +208,7 @@ packages:
     source: path
     version: "1.8.0"
   fair_dart2dsl:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: fair_dart2dsl
       sha256: a4e859678c0dcad711d688c0e82998fde5e75d2f5f5620d9b2c6d7426d22acbd
@@ -216,7 +216,7 @@ packages:
     source: hosted
     version: "1.4.0"
   fair_dart2js:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: fair_dart2js
       sha256: f9b14f1fc887866238fb0c446667611bcd8896f889cd18950ce4b3cd7a3cfad2

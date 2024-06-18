@@ -1,0 +1,72 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "AppBar",
+      "na": {
+        "title": {
+          "className": "Text",
+          "pa": [
+            "ListLoadMore"
+          ]
+        }
+      }
+    },
+    "body": {
+      "className": "Center",
+      "na": {
+        "child": {
+          "className": "RefreshIndicator",
+          "na": {
+            "displacement": 10.0,
+            "onRefresh": "@(_onRefresh)",
+            "child": {
+              "className": "Sugar.ifEqualBool",
+              "pa": [
+                "%(listIsEmpty)"
+              ],
+              "na": {
+                "trueValue": {
+                  "className": "FairFunction",
+                  "body": {
+                    "className": "Center",
+                    "na": {
+                      "child": {
+                        "className": "CircularProgressIndicator"
+                      }
+                    }
+                  },
+                  "tag": "Widget Function()",
+                  "rt": "Widget"
+                },
+                "falseValue": {
+                  "className": "FairFunction",
+                  "body": {
+                    "className": "ListView.builder",
+                    "na": {
+                      "controller": "^(_scrollController)",
+                      "itemCount": "%(_itemCount)",
+                      "itemBuilder": "@(_itemBuilder)"
+                    }
+                  },
+                  "tag": "Widget Function()",
+                  "rt": "Widget"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {
+    "_itemBuilder": {
+      "className": "ListTile",
+      "na": {
+        "title": {
+          "className": "Text"
+        }
+      }
+    }
+  }
+}

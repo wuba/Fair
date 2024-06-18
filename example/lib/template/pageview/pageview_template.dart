@@ -1,3 +1,4 @@
+import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
 import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
@@ -59,8 +60,15 @@ class _PageViewTemplateState extends State<PageViewTemplate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('PageView模版'),
+      appBar: AppBar(
+        title: Text('PageView模版'),
+      ),
+      body: Sugar.ifEqualBool(
+        isDataEmpty(),
+        trueValue: () => Center(
+          child: Text(
+            '加载中...',
+          ),
         ),
         body: Sugar.ifEqualBool(isDataEmpty(),
             trueValue: () => Center(

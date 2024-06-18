@@ -54,16 +54,16 @@ class _ListDemoPageState extends State<ListDemoPage> {
             ),
           )),
       body: Container(
-        color: Colors.white,
-        child: Sugar.listBuilder(
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return FairWidget(
+          color: Colors.white,
+          child: ListView.builder(
+            itemBuilder: Sugar.indexedWidgetBuilder(
+              (context, index) => FairWidget(
                   name: 'itme',
                   path: 'assets/bundle/lib_list_item.fair.json',
-                  data: const {"": ""});
-            }),
-      ),
+                  data: const {"": ""}),
+            ),
+            itemCount: 5,
+          )),
     );
   }
 }

@@ -34,8 +34,7 @@ class _State extends State<IfEqualPage> {
 
   void onTapText() {
     _count = _count + 1;
-    setState(() {
-    });
+    setState(() {});
   }
 
   @override

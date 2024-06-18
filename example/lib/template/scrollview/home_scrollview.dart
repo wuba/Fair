@@ -1,3 +1,4 @@
+import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
 import 'package:fair_extension/log/log.dart';
 import 'package:fair_extension/navigator/fair_navigator_plugin.dart';
@@ -111,19 +112,19 @@ class _HomeScrollViewState extends State<HomeScrollView> {
 
           ///列表
           SliverList(
-            delegate: Sugar.sliverChildBuilderDelegate(
-                builder: (content, index) {
-                  return AspectRatio(
-                    aspectRatio: 1.5,
-                    child: ClipRRect(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(4.0)),
-                      child: Image.network(_getImagePath(index),
-                          fit: BoxFit.cover),
-                    ),
-                  );
-                },
-                childCount: 3),
+            delegate: SliverChildBuilderDelegate(
+              Sugar.nullableIndexedWidgetBuilder(
+                (context, index) => AspectRatio(
+                  aspectRatio: 1.5,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                    child:
+                        Image.network(_getImagePath(index), fit: BoxFit.cover),
+                  ),
+                ),
+              ),
+              childCount: 3,
+            ),
           ),
         ],
       ),

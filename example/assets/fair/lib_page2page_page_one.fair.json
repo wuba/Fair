@@ -38,19 +38,24 @@
       "className": "FloatingActionButton",
       "na": {
         "onPressed": {
-          "className": "Navigator.pushNamed",
-          "pa": [
-            "^(context)",
-            "fair_page_two"
-          ],
-          "na": {
-            "arguments": {
-              "path": "assets/fair/lib_page2page_page_two.fair.json",
-              "data": {
-                "title": "PageTwo"
+          "className": "FairFunction",
+          "body": {
+            "className": "Navigator.pushNamed",
+            "pa": [
+              "^(context)",
+              "fair_page_two"
+            ],
+            "na": {
+              "arguments": {
+                "path": "assets/fair/lib_page2page_page_two.fair.json",
+                "data": {
+                  "title": "PageTwo"
+                }
               }
             }
-          }
+          },
+          "tag": "void Function()",
+          "rt": "void"
         },
         "tooltip": "Increment",
         "child": {

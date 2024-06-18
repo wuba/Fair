@@ -74,7 +74,7 @@ packages:
     source: hosted
     version: "4.0.0"
   build_resolvers:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: build_resolvers
       sha256: "64e12b0521812d1684b1917bc80945625391cb9bdd4312536b1d69dcb6133ed8"
@@ -136,7 +136,7 @@ packages:
       sha256: cb6d7f03e1de671e34607e909a7213e31d7752be4fb66a86d29fe1eb14bfb5cf
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.1.1"
+    version: "1.1.0"
   code_builder:
     dependency: transitive
     description:
@@ -160,7 +160,7 @@ packages:
       sha256: "0f08b14755d163f6e2134cb58222dd25ea2a2ee8a195e53983d57c075324d592"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.1.1"
+    version: "3.1.0"
   crypto:
     dependency: transitive
     description:
@@ -208,7 +208,7 @@ packages:
     source: path
     version: "1.8.0"
   fair_dart2dsl:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: fair_dart2dsl
       sha256: a4e859678c0dcad711d688c0e82998fde5e75d2f5f5620d9b2c6d7426d22acbd
@@ -216,7 +216,7 @@ packages:
     source: hosted
     version: "1.4.0"
   fair_dart2js:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: fair_dart2js
       sha256: f9b14f1fc887866238fb0c446667611bcd8896f889cd18950ce4b3cd7a3cfad2
@@ -237,7 +237,7 @@ packages:
       sha256: "511392330127add0b769b75a987850d136345d9227c6b94c96a04cf4a391bf78"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.3.1"
+    version: "1.3.0"
   ffi:
     dependency: transitive
     description:
@@ -523,7 +523,7 @@ packages:
     source: sdk
     version: "0.0.99"
   source_gen:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: source_gen
       sha256: fc0da689e5302edb6177fdd964efcb7f58912f43c28c2047a808f5bfff643d16
@@ -577,7 +577,7 @@ packages:
       sha256: a29248a84fbb7c79282b40b8c72a1209db169a2e0542bce341da992fe1bc7e84
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.2.1"
+    version: "1.2.0"
   test_api:
     dependency: transitive
     description:

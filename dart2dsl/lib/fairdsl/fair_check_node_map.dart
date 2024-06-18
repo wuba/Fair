@@ -1,9 +1,3 @@
-/*
- * Copyright (C) 2005-present, 58.com.  All rights reserved.
- * Use of this source code is governed by a BSD type license that can be
- * found in the LICENSE file.
- */
-
 // **************************************************************************
 // 如果存在新文件需要更新，建议先执行清除命令：
 // flutter packages pub run build_runner clean
@@ -58,5 +52,5 @@ final checkNode = {
   'WithClauseImpl': 'visitWithClause',
   'PropertyAccessImpl': 'visitPropertyAccess',
   'PrefixExpressionImpl': 'visitPrefixExpression',
-  'TypeArgumentListImpl':'visitTypeArgumentList'
+  'TypeArgumentListImpl': 'visitTypeArgumentList'
 };

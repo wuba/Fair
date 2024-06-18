@@ -5,6 +5,7 @@
  */
 
 import 'package:fair/fair.dart';
+import 'package:fair_example/assets.dart';
 import 'package:flutter/material.dart';
 
 @FairPatch()
@@ -76,8 +77,11 @@ class _Page2PageState extends State<SampleLogicPage2Page> {
               Navigator.pushNamed(context, 'fair_page', arguments: {
                 'name': '动态界面&传值',
                 'path':
-                    'assets/bundle/lib_src_page_logic-page2page_sample_logic_page2page.fair.json',
-                'data': {'_count': 58}
+                    'assets/fair/lib_src_page_logic-page2page_sample_logic_page2page.fair.json',
+
+                // Assets
+                //     .assets_fair_lib_src_page_logic_page2page_sample_logic_page2page_fair_json,
+                'data': {'_count': _count}
               });
             },
           )

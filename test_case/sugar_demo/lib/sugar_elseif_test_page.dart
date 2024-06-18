@@ -30,7 +30,7 @@ class _SugarElseIfPageState extends State<SugarElseIfPage> {
   // List<String> li = ['kk','ddd','dddd'];
 
   String getValueOrEmpty(dynamic val, String defaultVal) {
-    if(val == null){
+    if (val == null) {
       return defaultVal;
     }
     return val.toString();
@@ -43,7 +43,10 @@ class _SugarElseIfPageState extends State<SugarElseIfPage> {
         body: Column(
           children: [
             Column(
-              children: Sugar.mapEach([Person(name: "kk", age: 18, wei: 99), Person(name: "mm", age: 14, wei: 88)], (index, Person item) {
+              children: Sugar.mapEach([
+                Person(name: "kk", age: 18, wei: 99),
+                Person(name: "mm", age: 14, wei: 88)
+              ], (index, Person item) {
                 return Container(
                     height: 50,
                     width: Sugar.width(context),
@@ -57,19 +60,38 @@ class _SugarElseIfPageState extends State<SugarElseIfPage> {
               }),
             ),
             Container(
-                height: 50,
-                width: Sugar.width(context),
-                margin: EdgeInsets.only(top: 5),
-                child: Center(
-                  child: Sugar.switchCase(
-                      _value,
-                      [
-                        SugarSwitchCaseObj(reValue: () => Text("2-ValueTitle"), sugarCase: () => 2),
-                        SugarSwitchCaseObj(reValue: () => Text("3-ValueTitle"), sugarCase: () => 3),
-                        SugarSwitchCaseObj(reValue: () => Text("4-ValueTitle"), sugarCase: () => 4)
-                      ],
-                      () => Text("default-ValueTitle")),
-                )),
+              height: 50,
+              width: Sugar.width(context),
+
+              // height: Sugar.height(context),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemBuilder:
+                    Sugar.indexedWidgetBuilder((context, index) => Center(
+                          child: Container(
+                            height: 20,
+                            child: Text("$index"),
+                          ),
+                        )),
+                itemCount: _getItemCount(),
+              ),
+            ),
+            FloatingActionButton(
+                child: Text(
+              Sugar.switchCase(
+                  _value,
+                  [
+                    SugarSwitchCaseObj(
+                        reValue: () => Text("2-ValueTitle"),
+                        sugarCase: () => 2),
+                    SugarSwitchCaseObj(
+                        reValue: () => Text("3-ValueTitle"),
+                        sugarCase: () => 3),
+                    SugarSwitchCaseObj(
+                        reValue: () => Text("4-ValueTitle"), sugarCase: () => 4)
+                  ],
+                  () => Text("default-ValueTitle")),
+            )),
             SizedBox(
                 width: Sugar.width(context),
                 height: Sugar.height(context),
@@ -88,8 +110,10 @@ class _SugarElseIfPageState extends State<SugarElseIfPage> {
                 Sugar.switchCase(
                     _value,
                     [
-                      SugarSwitchCaseObj(reValue: () => "2", sugarCase: () => 2),
-                      SugarSwitchCaseObj(reValue: () => "3", sugarCase: () => 3),
+                      SugarSwitchCaseObj(
+                          reValue: () => "2", sugarCase: () => 2),
+                      SugarSwitchCaseObj(
+                          reValue: () => "3", sugarCase: () => 3),
                       SugarSwitchCaseObj(reValue: () => "4", sugarCase: () => 4)
                     ],
                     () => "defaultValue"),
@@ -144,20 +168,30 @@ class _SugarElseIfPageState extends State<SugarElseIfPage> {
                             color: Colors.blue,
                             child: Text(
                               '$index',
-                              style: const TextStyle(color: Colors.white, fontSize: 20),
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 20),
                             ),
                           );
                         },
                         childCount: 3, //findChildIndexCallback
                       ),
-                    ),
-                    SliverGrid(
-                      //Grid
-                      gridDelegate: Sugar.sliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, //Grid按两列显示
-                        mainAxisSpacing: 10.0,
-                        crossAxisSpacing: 10.0,
-                        childAspectRatio: 4.0,
+                      SliverGrid(
+                        //Grid
+                        gridDelegate:
+                            Sugar.sliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, //Grid按两列显示
+                          mainAxisSpacing: 10.0,
+                          crossAxisSpacing: 10.0,
+                          childAspectRatio: 4.0,
+                        ),
+                        delegate: SliverChildBuilderDelegate(
+                            Sugar.nullableIndexedWidgetBuilder(
+                                (context, index) => Container(
+                                      alignment: Alignment.center,
+                                      color: Colors.deepOrange,
+                                      child: Text('是 grid item $index 啊~~'),
+                                    )),
+                            childCount: 20),
                       ),
                       delegate: Sugar.sliverChildBuilderDelegate(
                         builder: (context, index) {

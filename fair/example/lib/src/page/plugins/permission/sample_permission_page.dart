@@ -7,8 +7,7 @@
 import 'dart:io';
 
 import 'package:fair/fair.dart';
-import 'package:fair_example/src/page/plugins/permission/fair_permission_plugin.dart';
-import 'package:fair_example/src/page/plugins/pick-image/fair_take_photo.dart';
+import 'package:fair_example/src/page/plugins/fair_common_plugin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -70,50 +69,39 @@ class PermissionPageState extends State<PermissionPage> {
   String picUrl = '';
 
   void requestPermission() {
-    WBPermission().requestPermission({
+    FairCommonPlugin().requestPermission({
       'pageName': '#FairKey#',
-      'args': {
-        'type': 'Permission_Photo',
-        'Granted': (resp) {
-          isGranted = true;
-          takePhoto();
-        },
-        'Restricted': (resp) {
-          isGranted = false;
-          takePhoto();
-        },
+      'type': 'Permission_Photo',
+      'Granted': (resp) {
+        isGranted = true;
+        takePhoto();
+      },
+      'Restricted': (resp) {
+        isGranted = false;
+        takePhoto();
+      },
+      'callback': (resp) {
+        var isGranted = resp['isGranted'];
       }
     });
   }
 
   void selectFromAlbum() {
-    FairPhotoSelector().getPhoto({
+    FairCommonPlugin().selectPhoto({
       'pageName': '#FairKey#',
-      'args': {
-        'type': 'album',
-        'success': (resp) {
-          picUrl = resp;
-          setState(() {});
-        },
-        'failure': () {
-          //用户获取图片失败
-        },
+      'type': 'album',
+      'callback': (resp) {
+        var photoPath = resp['photoPath'];
       }
     });
   }
 
   void takePhoto() {
-    FairPhotoSelector().getPhoto({
+    FairCommonPlugin().selectPhoto({
       'pageName': '#FairKey#',
-      'args': {
-        'type': 'photo',
-        'success': (resp) {
-          picUrl = resp;
-          setState(() {});
-        },
-        'failure': () {
-          //用户获取图片失败
-        },
+      'type': 'photo',
+      'callback': (resp) {
+        var photoPath = resp['photoPath'];
       }
     });
   }

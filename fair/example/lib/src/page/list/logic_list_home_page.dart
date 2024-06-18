@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 
+import 'package:fair_example/assets.dart';
 import 'package:fair_example/src/page/list/cells/sample_list_with_dynamic_cell_page.dart';
 import 'package:flutter/material.dart';
 import 'load-more/sample_logic_loadmore_page.dart';
@@ -27,8 +28,15 @@ class LogicListPage extends StatelessWidget {
             }),
             Container(height: 0.5, color: Color(0xFFE7EBEE)),
             addItem('LoadMore & PullRefresh', () {
-              Navigator.pushNamed(context, 'fair_page',
-                  arguments: {'name': 'ListLoadMore', 'path': 'assets/bundle/lib_src_page_list_load-more_sample_logic_loadmore_page.fair.json', 'data': {'pageName': 'ListLoadMore'}});
+              Navigator.pushNamed(context, 'fair_page', arguments: {
+                'name': 'ListLoadMore',
+                'path':
+                    // 'assets/fair/lib_src_page_list_load-more_sample_logic_loadmore_page.fair.json',
+                    // js 是人工写的，不是生成的
+                    Assets
+                        .assets_fair_lib_src_page_list_load_more_sample_logic_loadmore_page_manually_fair_json,
+                'data': {'pageName': 'ListLoadMore'}
+              });
 
               // 原生界面
               // Navigator.push(
@@ -48,7 +56,7 @@ class LogicListPage extends StatelessWidget {
             //   //           IfEqualBoolPage({'pageName': 'ifEqualBool'}),
             //   //     ));
             //   Navigator.pushNamed(context, 'fair_page',
-            //       arguments: {'name': 'ifEqualBool', 'path': 'assets/bundle/lib_src_page_sugars_ifequalbool_page.fair.json', 'data': {'pageName': 'ifEqualBool'}});
+            //       arguments: {'name': 'ifEqualBool', 'path': 'assets/fair/lib_src_page_sugars_ifequalbool_page.fair.json', 'data': {'pageName': 'ifEqualBool'}});
             // }),
             // Container(height: 0.5, color: Color(0xFFE7EBEE)),
           ],

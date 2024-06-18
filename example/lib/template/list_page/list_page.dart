@@ -1,3 +1,4 @@
+import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
 import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
@@ -75,37 +76,38 @@ class _ListDemoPageState extends State<ListDemoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          shadowColor: Colors.white,
-          bottom: PreferredSize(
-            preferredSize: Size(Sugar.width(context), 44),
-            child: const Material(
-              color: Colors.white,
-              child: Padding(
-                padding: EdgeInsets.only(left: 15, right: 15, bottom: 5),
-                child: TextField(
-                  controller: null,
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      suffixIcon: Icon(Icons.settings_input_component),
-                      contentPadding: EdgeInsets.only(top: 0, bottom: 0),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.black12, width: 0.5),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.black12, width: 0.5),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.black12, width: 0.5),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      )),
+        appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.white,
+            shadowColor: Colors.white,
+            bottom: PreferredSize(
+              preferredSize: Size(Sugar.width(context), 44),
+              child: const Material(
+                color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 15, right: 15, bottom: 5),
+                  child: TextField(
+                    controller: null,
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.search),
+                        suffixIcon: Icon(Icons.settings_input_component),
+                        contentPadding: EdgeInsets.only(top: 0, bottom: 0),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black12, width: 0.5),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black12, width: 0.5),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black12, width: 0.5),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        )),
+                  ),
                 ),
               ),
             ),
@@ -151,53 +153,81 @@ class _ListDemoPageState extends State<ListDemoPage> {
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
-                                        _getTitle(index),
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 10,
+                                            left: 15,
+                                            bottom: 10,
+                                            right: 10),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              image: DecorationImage(
+                                                  fit: BoxFit.fitHeight,
+                                                  image: NetworkImage(
+                                                      _getIcon(index)))),
+                                          width: 70,
+                                          height: 70,
+                                        ),
                                       ),
-                                      Text(
-                                        _getSubTitle(index),
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.black26),
+                                      Material(
+                                        color: Colors.white,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                _getTitle(index),
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.black),
+                                              ),
+                                              Text(
+                                                _getSubTitle(index),
+                                                style: TextStyle(
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: Colors.black26),
+                                              ),
+                                              Text(
+                                                _getDistance(index),
+                                                style: TextStyle(
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: Colors.deepPurple),
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ),
-                                      Text(
-                                        _getDistance(index),
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w700,
-                                            color: Colors.deepPurple),
+                                      const Expanded(child: SizedBox()),
+                                      const Padding(
+                                        padding: EdgeInsets.only(right: 15),
+                                        child:
+                                            Icon(Icons.chevron_right_rounded),
                                       )
                                     ],
                                   ),
-                                ),
-                              ),
-                              const Expanded(child: SizedBox()),
-                              const Padding(
-                                padding: EdgeInsets.only(right: 15),
-                                child: Icon(Icons.chevron_right_rounded),
-                              )
-                            ],
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 15.0, right: 15.0),
-                            child: Container(
-                              color: Colors.black12,
-                              height: 0.5,
-                              width: Sugar.width(context),
-                            ),
-                          ),
-                        ],
-                      ));
-                })),
-      ),
-    );
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15.0, right: 15.0),
+                                    child: Container(
+                                      color: Colors.black12,
+                                      height: 0.5,
+                                      width: Sugar.width(context),
+                                    ),
+                                  ),
+                                ],
+                              ))),
+                    ))));
   }
 }
 

@@ -33,6 +33,11 @@ dev_dependencies:
       path: compiler
 
 dependency_overrides:
+  build_runner: 2.3.3
+  build_resolvers: 2.2.0
+  source_gen: 1.2.7
+  analyzer: 5.5.0
+  collection: 1.17.0
   fair_version:
     path: ../flutter_version/flutter_3_13_0
   collection: 1.17.0

@@ -584,5 +584,8 @@ const widgetNames = {
   'NeverScrollableScrollPhysics': false,
   'PageScrollPhysics': false,
   'RangeMaintainingScrollPhysics': false,
-  'BouncingScrollPhysics': false
+  'BouncingScrollPhysics': false,
+  'PopupMenuDivider': false,
+  'PopupMenuItem': false,
+  'SliverChildBuilderDelegate': false,  
 };

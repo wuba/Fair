@@ -7,6 +7,7 @@
 import 'dart:convert';
 
 import 'package:fair/fair.dart';
+import 'package:fair_example/assets.dart';
 import 'package:fair_example/src/model/bean/loupan_bean.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,6 @@ class SampleWanAndroidPageSrc extends StatefulWidget {
 }
 
 class SampleWanAndroidPageSrcState extends State<SampleWanAndroidPageSrc> {
-
   var resultMap = [];
 
   void requestNet(RespCallback respCallback) {
@@ -61,7 +61,7 @@ class SampleWanAndroidPageSrcState extends State<SampleWanAndroidPageSrc> {
         type: 0,
         goodsId: 111,
         imgUrl:
-        'http://pic1.ajkimg.com/display/anjuke/d6e675-%E5%8E%A6%E9%97%A8%E6%B5%8B%E8%AF%95%E5%85%AC%E5%8F%B8/3ed05d79ec1de21e4fbbaf146573985a-800x570.jpg',
+            'http://pic1.ajkimg.com/display/anjuke/d6e675-%E5%8E%A6%E9%97%A8%E6%B5%8B%E8%AF%95%E5%85%AC%E5%8F%B8/3ed05d79ec1de21e4fbbaf146573985a-800x570.jpg',
         goodsDesc: goodsList);
 
     // 动态化效果
@@ -73,8 +73,8 @@ class SampleWanAndroidPageSrcState extends State<SampleWanAndroidPageSrc> {
           constraints: BoxConstraints(minHeight: 80),
           child: FairWidget(
             name: 'fairPage$id',
-            path:
-            'assets/bundle/lib_src_page_sample_page_stateful_cell.fair.json',
+            path: Assets
+                .assets_fair_lib_src_page_list_cells_sample_page_stateful_cell_fair_json,
             data: {'fairProps': json.encode(louPanDetail)},
           )),
     );
@@ -91,7 +91,9 @@ class SampleWanAndroidPageSrcState extends State<SampleWanAndroidPageSrc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:AppBar(title: Text('建议release或profile模式'),),
+        appBar: AppBar(
+          title: Text('建议release或profile模式'),
+        ),
         body: Container(
           color: Colors.amber[0],
           child: ListView.builder(
