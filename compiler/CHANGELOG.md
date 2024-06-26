@@ -1,3 +1,7 @@
+## [2.0.0]
+* Extended FunctionDomain, support FairFunction.
+* Fixed some known issues.
+
 ## [1.9.0]
 * Support TypeArgumentList.
 * Support negative value.

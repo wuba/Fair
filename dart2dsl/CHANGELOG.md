@@ -1,3 +1,7 @@
+## 1.6.0
+- Support FairFunction.
+- Fixed some known issues.
+
 ## 1.5.0
 
 - Support TypeArgumentList.

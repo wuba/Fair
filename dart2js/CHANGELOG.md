@@ -1,3 +1,6 @@
+## 1.6.0
+- Fixed some known issues.
+
 ## 1.5.0
 - fix js isNotEmpty bug.
 
