@@ -1,3 +1,8 @@
+## [4.0.0]
+* Extended FunctionDomain, support FairFunction;
+* Extended syntactic sugar;
+* Fixed some known issues.
+
 ## [3.4.0]
 * Publish Fair Provider;
 * Adaptation to Flutter 3.13;
