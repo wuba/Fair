@@ -3,7 +3,7 @@ import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-@FairBinding()
+// @FairBinding()
 class ComposerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,3 @@
-import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
 import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';

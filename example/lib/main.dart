@@ -8,14 +8,13 @@ import 'package:fair/fair.dart';
 import 'package:fair_extension/fair_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'src/module.fair.dart' as g;
 
-@FairBinding(packages: [
-  'package:example/fair_widget/fairbinding/fair_binding_widget.dart',
-  'package:flutter_staggered_grid_view/src/widgets/staggered_grid.dart',
-  'package:flutter_staggered_grid_view/src/widgets/masonry_grid_view.dart'
-])
+// @FairBinding(packages: [
+//   'package:example/fair_widget/fairbinding/fair_binding_widget.dart',
+//   'package:flutter_staggered_grid_view/src/widgets/staggered_grid.dart',
+//   'package:flutter_staggered_grid_view/src/widgets/masonry_grid_view.dart'
+// ])
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[

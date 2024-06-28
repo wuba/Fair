@@ -71,63 +71,73 @@
                       }
                     }
                   }
-                }
-              },
-              {
-                "className": "SliverGrid",
-                "na": {
-                  "gridDelegate": {
-                    "className": "Sugar.sliverGridDelegateWithFixedCrossAxisCount",
-                    "na": {
-                      "crossAxisCount": 2,
-                      "mainAxisSpacing": 10.0,
-                      "crossAxisSpacing": 10.0,
-                      "childAspectRatio": 2.0
-                    }
-                  },
-                  "delegate": {
-                    "className": "Sugar.sliverChildBuilderDelegate",
-                    "na": {
-                      "builder": {
-                        "className": "GestureDetector",
-                        "na": {
-                          "onTap": "@(_onTapIndex(^(index)))",
-                          "child": {
-                            "className": "AspectRatio",
-                            "na": {
-                              "aspectRatio": 1.5,
-                              "child": {
-                                "className": "ClipRRect",
+                },
+                {
+                  "className": "SliverGrid",
+                  "na": {
+                    "gridDelegate": {
+                      "className": "Sugar.sliverGridDelegateWithFixedCrossAxisCount",
+                      "na": {
+                        "crossAxisCount": 2,
+                        "mainAxisSpacing": 10.0,
+                        "crossAxisSpacing": 10.0,
+                        "childAspectRatio": 2.0
+                      }
+                    },
+                    "delegate": {
+                      "className": "SliverChildBuilderDelegate",
+                      "pa": [
+                        {
+                          "className": "Sugar.nullableIndexedWidgetBuilder",
+                          "pa": [
+                            {
+                              "className": "FairFunction",
+                              "body": {
+                                "className": "GestureDetector",
                                 "na": {
-                                  "borderRadius": {
-                                    "className": "BorderRadius.all",
-                                    "pa": [
-                                      {
-                                        "className": "Radius.circular",
-                                        "pa": [
-                                          4.0
-                                        ]
-                                      }
-                                    ]
-                                  },
+                                  "onTap": "@(_onTapIndex(^(index)))",
                                   "child": {
-                                    "className": "Image.network",
-                                    "pa": [
-                                      "%(_getImagePath(^(index)))"
-                                    ],
+                                    "className": "AspectRatio",
                                     "na": {
-                                      "fit": "#(BoxFit.cover)"
+                                      "aspectRatio": 1.5,
+                                      "child": {
+                                        "className": "ClipRRect",
+                                        "na": {
+                                          "borderRadius": {
+                                            "className": "BorderRadius.all",
+                                            "pa": [
+                                              {
+                                                "className": "Radius.circular",
+                                                "pa": [
+                                                  4.0
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          "child": {
+                                            "className": "Image.network",
+                                            "pa": [
+                                              "%(_getImagePath(^(index)))"
+                                            ],
+                                            "na": {
+                                              "fit": "#(BoxFit.cover)"
+                                            }
+                                          }
+                                        }
+                                      }
                                     }
                                   }
                                 }
-                              }
+                              },
+                              "parameters": {
+                                "pa": [
+                                  "context",
+                                  "index"
+                                ]
+                              },
+                              "tag": "Widget Function(BuildContext, int)",
+                              "rt": "Widget"
                             }
-                          }
-                        },
-                        "functionParameters": {
-                          "pa": [
-                            "content",
-                            "index"
                           ]
                         }
                       ],
@@ -197,60 +207,15 @@
                     }
                   }
                 }
-              },
-              {
-                "className": "SliverList",
-                "na": {
-                  "delegate": {
-                    "className": "Sugar.sliverChildBuilderDelegate",
-                    "na": {
-                      "builder": {
-                        "className": "AspectRatio",
-                        "na": {
-                          "aspectRatio": 1.5,
-                          "child": {
-                            "className": "ClipRRect",
-                            "na": {
-                              "borderRadius": {
-                                "className": "BorderRadius.all",
-                                "pa": [
-                                  {
-                                    "className": "Radius.circular",
-                                    "pa": [
-                                      4.0
-                                    ]
-                                  }
-                                ]
-                              },
-                              "child": {
-                                "className": "Image.network",
-                                "pa": [
-                                  "%(_getImagePath(^(index)))"
-                                ],
-                                "na": {
-                                  "fit": "#(BoxFit.cover)"
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "functionParameters": {
-                          "pa": [
-                            "content",
-                            "index"
-                          ]
-                        }
-                      },
-                      "childCount": 3
-                    }
-                  }
-                }
-              }
-            ]
-          }
+              ]
+            }
+          },
+          "tag": "Widget Function()",
+          "rt": "Widget"
         }
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {},
+  "digest": "d0b6d7690805169e29a892e55c287b2e"
 }

@@ -6,7 +6,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -28,8 +28,8 @@ dev_dependencies:
   flutter_staggered_grid_view: ^0.7.0
   fair_compiler:
     git:
-      url: https://github.com/wuba/fair.git
-      ref: main
+      url: git@github.com:wuba/Fair.git
+      ref: release-4.0
       path: compiler
 
 dependency_overrides:
@@ -39,8 +39,7 @@ dependency_overrides:
   analyzer: 5.5.0
   collection: 1.17.0
   fair_version:
-    path: ../flutter_version/flutter_3_13_0
-  collection: 1.17.0
+    path: ../flutter_version/flutter_mock
   watcher: 1.1.0
   fair:
     path: ../fair

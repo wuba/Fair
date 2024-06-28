@@ -1,21 +1,26 @@
-import 'package:flutter/material.dart';
+import 'package:example/src/generated_module/app.bindings.dart';
+import 'package:example/src/generated_module/flutter.bindings.dart';
+import 'package:example/src/generated_module/packages.bindings.dart';
+import 'package:fair/fair.dart';
 
-import 'generated.fair.dart';
-
-class FairAppModule extends AppGeneratedModule {
+class FairAppModule extends GeneratedModule {
   @override
   Map<String, dynamic> components() {
-    return super.components()
-      ..addAll({
-        'SliverChildBuilderDelegate': (props) => SliverChildBuilderDelegate(
-              props['pa'][0],
-              childCount: props['childCount'],
-              addAutomaticKeepAlives: props['addAutomaticKeepAlives'] ?? true,
-              addRepaintBoundaries: props['addRepaintBoundaries'] ?? true,
-              addSemanticIndexes: props['addSemanticIndexes'] ?? true,
-              semanticIndexOffset: props['semanticIndexOffset'] ?? 0,
-            ),
-        'InputBorder.none': InputBorder.none,
-      });
+    return <String, dynamic>{
+      ...appComponents,
+      ...packagesComponents,
+      ...flutterComponents,
+      // add your cases here.
+    };
+  }
+
+  @override
+  Map<String, bool> mapping() {
+    return <String, bool>{
+      ...appMapping,
+      ...packagesMapping,
+      ...flutterMapping,
+      // remember add your cases here too.
+    };
   }
 }
