@@ -43,71 +43,60 @@
                 "className": "SliverChildBuilderDelegate",
                 "pa": [
                   {
-                    "className": "Sugar.nullableIndexedWidgetBuilder",
-                    "pa": [
-                      {
-                        "className": "FairFunction",
-                        "body": {
-                          "className": "Column",
-                          "na": {
-                            "crossAxisAlignment": "#(CrossAxisAlignment.center)",
-                            "children": [
-                              {
-                                "className": "AspectRatio",
+                    "className": "FairFunction",
+                    "body": {
+                      "className": "Column",
+                      "na": {
+                        "crossAxisAlignment": "#(CrossAxisAlignment.center)",
+                        "children": [
+                          {
+                            "className": "AspectRatio",
+                            "na": {
+                              "aspectRatio": 1.5,
+                              "child": {
+                                "className": "ClipRRect",
                                 "na": {
-                                  "aspectRatio": 1.5,
-                                  "child": {
-                                    "className": "ClipRRect",
-                                    "na": {
-                                      "borderRadius": {
-                                        "className": "BorderRadius.all",
+                                  "borderRadius": {
+                                    "className": "BorderRadius.all",
+                                    "pa": [
+                                      {
+                                        "className": "Radius.circular",
                                         "pa": [
-                                          {
-                                            "className": "Radius.circular",
-                                            "pa": [
-                                              4.0
-                                            ]
-                                          }
+                                          4.0
                                         ]
-                                      },
-                                      "child": {
-                                        "className": "Image.network",
-                                        "pa": [
-                                          "%(_getImagePath(^(index)))"
-                                        ],
-                                        "na": {
-                                          "fit": "#(BoxFit.cover)"
-                                        }
                                       }
+                                    ]
+                                  },
+                                  "child": {
+                                    "className": "Image.network",
+                                    "pa": [
+                                      "%(_getImagePath(^(index)))"
+                                    ],
+                                    "na": {
+                                      "fit": "#(BoxFit.cover)"
                                     }
                                   }
                                 }
-                              },
-                              {
-                                "className": "Text",
-                                "pa": [
-                                  "%(_getText(^(index)))"
-                                ]
                               }
+                            }
+                          },
+                          {
+                            "className": "Text",
+                            "pa": [
+                              "%(_getText(^(index)))"
                             ]
                           }
-                        },
-                        "parameters": {
-                          "pa": [
-                            "context",
-                            "index"
-                          ]
-                        },
-                        "tag": "Widget Function(BuildContext, int)",
-                        "rt": "Widget"
+                        ]
                       }
-                    ]
-                  },
-                  "functionParameters": {
-                    "pa": [
-                      "context",
-                      "index"
-                    ]
+                    },
+                    "parameters": {
+                      "pa": [
+                        "context",
+                        "index"
+                      ]
+                    },
+                    "tag": "Widget Function(BuildContext, int)",
+                    "rt": "Widget"
                   }
                 ],
                 "na": {
@@ -122,5 +111,6 @@
       }
     }
   },
-  "methodMap": {}
+  "methodMap": {},
+  "digest": "80674ed64aea66f25427bcb5c9ac0c1f"
 }

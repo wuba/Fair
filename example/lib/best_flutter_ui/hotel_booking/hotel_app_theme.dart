@@ -2,7 +2,7 @@ import 'package:example/best_flutter_ui/hex_color.dart';
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
-@FairBinding()
+//@FairBinding()
 class HotelAppTheme {
   static TextTheme _buildTextTheme(TextTheme base) {
     const String fontName = 'WorkSans';

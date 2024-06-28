@@ -1,10 +1,8 @@
+// 由 bin/fair_common_plugin.dart 生成
 let FairCommonPlugin = function () {
     return {
-        http: function (resp) {
-             fairCommonPluginRequest(resp, 'http');
-        },
-        phoneCall: function (resp) {
-             fairCommonPluginRequest(resp, 'phoneCall');
-        },
+        futureComplete: function (resp) {
+             fairCommonPluginRequest(resp, 'futureComplete');
+        }                     
     }
 }

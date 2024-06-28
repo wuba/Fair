@@ -1,8 +1,7 @@
 import 'package:fair/fair.dart';
 import 'package:flutter/material.dart';
 
-//
-@FairBinding()
+// @FairBinding()
 class AppTheme {
   AppTheme._();
 

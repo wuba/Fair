@@ -1,4 +1,3 @@
-import 'package:example/plugins/fair_common_plugin.dart';
 import 'package:fair/fair.dart';
 import 'package:fair_extension/net/fair_net_plugin.dart';
 import 'package:flutter/material.dart';
@@ -139,128 +138,125 @@ class _MomentsListState extends State<MomentsList> {
                 '加载中...',
               ),
             ),
-            falseValue: () => Sugar.listBuilder(
+            falseValue: () => ListView.builder(
                 itemCount: dataLength(),
                 itemBuilder: (context, index) {
                   return Container(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
-                      child: Column(
-                        children: [
-                          Row(
+                      child: Padding(
+                    padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                                child: Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage:
+                                      NetworkImage(_getAvatar(index)),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  _getUsername(index),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.none,
+                                      color: Colors.black),
+                                )
+                              ],
+                            )),
+                            Container(
+                              width: 30,
+                              height: 30,
+                              child: Image.network(
+                                  'https://pic6.58cdn.com.cn/nowater/frs/n_v33db8caaa95cc4d1eb9426e9b991bed34.png'),
+                            )
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                          child: Row(
                             children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                      child: Row(
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 30,
-                                        backgroundImage:
-                                            NetworkImage(_getAvatar(index)),
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Text(
-                                        _getUsername(index),
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
-                                            decoration: TextDecoration.none,
-                                            color: Colors.black),
-                                      )
-                                    ],
-                                  )),
-                                  Container(
-                                    width: 30,
-                                    height: 30,
-                                    child: Image.network(
-                                        'https://pic6.58cdn.com.cn/nowater/frs/n_v33db8caaa95cc4d1eb9426e9b991bed34.png'),
-                                  )
-                                ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                        child: Text(
-                                      _getContent(index),
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                          decoration: TextDecoration.none,
-                                          color: Colors.black),
-                                    ))
-                                  ],
-                                ),
-                              ),
-                              Card(
-                                child: Image(
-                                  image: NetworkImage(_getPicture(index)),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                        child: Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 30,
-                                          height: 30,
-                                          child: Image.network(
-                                              'https://pic7.58cdn.com.cn/nowater/frs/n_v35812c5fc830e49d991d5e17633729392.png'),
-                                        ),
-                                        SizedBox(
-                                          width: 15,
-                                        ),
-                                        Text(
-                                          _getLikes(index),
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold,
-                                              decoration: TextDecoration.none,
-                                              color: Colors.black54),
-                                        ),
-                                        SizedBox(
-                                          width: 30,
-                                        ),
-                                        SizedBox(
-                                          width: 30,
-                                          height: 30,
-                                          child: Image.network(
-                                              'https://pic4.58cdn.com.cn/nowater/frs/n_v3c264a2d3f9864ecabd8f05ee944ccafe.png'),
-                                        ),
-                                        SizedBox(
-                                          width: 15,
-                                        ),
-                                        Text(
-                                          _getComments(index),
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold,
-                                              decoration: TextDecoration.none,
-                                              color: Colors.black54),
-                                        ),
-                                      ],
-                                    )),
-                                    SizedBox(
-                                      width: 30,
-                                      height: 30,
-                                      child: Image.network(
-                                          'https://pic7.58cdn.com.cn/nowater/frs/n_v33e401d24fa6f44a1ac7a7d3319eef7e6.png'),
-                                    )
-                                  ],
-                                ),
-                              )
+                              Expanded(
+                                  child: Text(
+                                _getContent(index),
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.none,
+                                    color: Colors.black),
+                              ))
                             ],
                           ),
                         ),
-                      )),
-            ),
+                        Card(
+                          child: Image(
+                            image: NetworkImage(_getPicture(index)),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 30,
+                                    height: 30,
+                                    child: Image.network(
+                                        'https://pic7.58cdn.com.cn/nowater/frs/n_v35812c5fc830e49d991d5e17633729392.png'),
+                                  ),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                  Text(
+                                    _getLikes(index),
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.none,
+                                        color: Colors.black54),
+                                  ),
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  SizedBox(
+                                    width: 30,
+                                    height: 30,
+                                    child: Image.network(
+                                        'https://pic4.58cdn.com.cn/nowater/frs/n_v3c264a2d3f9864ecabd8f05ee944ccafe.png'),
+                                  ),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                  Text(
+                                    _getComments(index),
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.none,
+                                        color: Colors.black54),
+                                  ),
+                                ],
+                              )),
+                              SizedBox(
+                                width: 30,
+                                height: 30,
+                                child: Image.network(
+                                    'https://pic7.58cdn.com.cn/nowater/frs/n_v33e401d24fa6f44a1ac7a7d3319eef7e6.png'),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ));
+                }),
           ),
         ),
       ),
