@@ -1,0 +1,624 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "CommomAppBar",
+      "na": {
+        "title": "%(_getRouteName)",
+        "asset": "#(Assets.assets_page_simple_function_domain_dart)"
+      }
+    },
+    "body": {
+      "className": "NestedScrollView",
+      "na": {
+        "headerSliverBuilder": {
+          "className": "FairFunction",
+          "body": [
+            {
+              "className": "SliverPinnedToBoxAdapter",
+              "na": {
+                "child": {
+                  "className": "Container",
+                  "na": {
+                    "height": 100,
+                    "alignment": "#(Alignment.center)",
+                    "color": {
+                      "className": "Sugar.ifEqualBool",
+                      "pa": [
+                        "^(innerBoxIsScrolled)"
+                      ],
+                      "na": {
+                        "trueValue": {
+                          "className": "FairFunction",
+                          "body": "#(Colors.red)",
+                          "tag": "MaterialColor Function()",
+                          "rt": "MaterialColor"
+                        },
+                        "falseValue": {
+                          "className": "FairFunction",
+                          "body": "#(Colors.blue)",
+                          "tag": "MaterialColor Function()",
+                          "rt": "MaterialColor"
+                        }
+                      }
+                    },
+                    "child": {
+                      "className": "Text",
+                      "pa": [
+                        "#(作用域演示, innerBoxIsScrolled: $innerBoxIsScrolled)"
+                      ],
+                      "na": {
+                        "style": {
+                          "className": "TextStyle",
+                          "na": {
+                            "color": "#(Colors.white)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "parameters": {
+            "pa": [
+              "context",
+              "innerBoxIsScrolled"
+            ]
+          },
+          "tag": "List<Widget> Function(BuildContext, bool)",
+          "rt": "List<Widget>"
+        },
+        "body": {
+          "className": "RefreshIndicator",
+          "na": {
+            "onRefresh": {
+              "className": "FairFunction",
+              "body": {
+                "className": "Sugar.createFuture",
+                "na": {
+                  "function": "@(_onRefresh)",
+                  "argument": "可以传一些参数过去，多个参数用数组"
+                },
+                "ta": "void",
+                "typeArgumentList": [
+                  "void"
+                ]
+              },
+              "tag": "Future<void> Function()",
+              "rt": "Future<void>"
+            },
+            "child": {
+              "className": "DefaultTextStyle",
+              "na": {
+                "style": {
+                  "className": "TextStyle",
+                  "na": {
+                    "height": 1,
+                    "color": "#(Colors.black)"
+                  }
+                },
+                "child": {
+                  "className": "CustomScrollView",
+                  "na": {
+                    "slivers": [
+                      {
+                        "className": "SliverToBoxAdapter",
+                        "na": {
+                          "child": {
+                            "className": "ListTile",
+                            "na": {
+                              "title": {
+                                "className": "Text",
+                                "pa": [
+                                  "Fair当中支持的回调如下"
+                                ],
+                                "na": {
+                                  "style": {
+                                    "className": "TextStyle",
+                                    "na": {
+                                      "color": "#(Colors.blue)"
+                                    }
+                                  }
+                                }
+                              },
+                              "subtitle": {
+                                "className": "Text",
+                                "pa": [
+                                  "三方支持请参考 'fair_gallery/lib/src/utils/dynamic_widget_builder.dart' 中的实现。"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "className": "SliverToBoxAdapter",
+                        "na": {
+                          "child": {
+                            "className": "Padding",
+                            "na": {
+                              "padding": {
+                                "className": "EdgeInsets.all",
+                                "pa": [
+                                  8.0
+                                ]
+                              },
+                              "child": {
+                                "className": "Row",
+                                "na": {
+                                  "mainAxisAlignment": "#(MainAxisAlignment.start)",
+                                  "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                  "children": [
+                                    {
+                                      "className": "Text",
+                                      "pa": [
+                                        "0."
+                                      ]
+                                    },
+                                    {
+                                      "className": "SizedBox",
+                                      "na": {
+                                        "width": 5
+                                      }
+                                    },
+                                    {
+                                      "className": "Expanded",
+                                      "na": {
+                                        "child": {
+                                          "className": "Column",
+                                          "na": {
+                                            "mainAxisAlignment": "#(MainAxisAlignment.start)",
+                                            "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                            "children": [
+                                              {
+                                                "className": "Text",
+                                                "pa": [
+                                                  "无入参回调，int,double,bool,String,Widget，以及它们的空类型和List类型，"
+                                                ]
+                                              },
+                                              {
+                                                "className": "SizedBox",
+                                                "na": {
+                                                  "height": 5
+                                                }
+                                              },
+                                              {
+                                                "className": "Text",
+                                                "pa": [
+                                                  "比如 int Function()"
+                                                ],
+                                                "na": {
+                                                  "style": {
+                                                    "className": "TextStyle",
+                                                    "na": {
+                                                      "color": "#(Colors.grey)"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "className": "SliverList",
+                        "na": {
+                          "delegate": {
+                            "className": "SliverChildBuilderDelegate",
+                            "pa": [
+                              {
+                                "className": "FairFunction",
+                                "body": {
+                                  "className": "Padding",
+                                  "na": {
+                                    "padding": {
+                                      "className": "EdgeInsets.all",
+                                      "pa": [
+                                        8.0
+                                      ]
+                                    },
+                                    "child": {
+                                      "className": "Row",
+                                      "na": {
+                                        "mainAxisAlignment": "#(MainAxisAlignment.start)",
+                                        "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                        "children": [
+                                          {
+                                            "className": "Text",
+                                            "pa": [
+                                              {
+                                                "className": "SugarString.concatenates",
+                                                "pa": [
+                                                  {
+                                                    "className": "SugarNum.numToString",
+                                                    "pa": [
+                                                      {
+                                                        "className": "SugarNum.adds",
+                                                        "pa": [
+                                                          "^(index)",
+                                                          1
+                                                        ]
+                                                      }
+                                                    ]
+                                                  },
+                                                  "."
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "className": "SizedBox",
+                                            "na": {
+                                              "width": 5
+                                            }
+                                          },
+                                          {
+                                            "className": "Expanded",
+                                            "na": {
+                                              "child": {
+                                                "className": "Column",
+                                                "na": {
+                                                  "mainAxisAlignment": "#(MainAxisAlignment.start)",
+                                                  "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                                  "children": [
+                                                    {
+                                                      "className": "HighlightView",
+                                                      "pa": [
+                                                        "%(_supportCaseTitle(^(index),0))"
+                                                      ],
+                                                      "na": {
+                                                        "language": "dart",
+                                                        "theme": {
+                                                          "className": "SugarCommon.vsTheme"
+                                                        },
+                                                        "textStyle": {
+                                                          "className": "TextStyle",
+                                                          "na": {
+                                                            "height": 1
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    {
+                                                      "className": "SizedBox",
+                                                      "na": {
+                                                        "height": 5
+                                                      }
+                                                    },
+                                                    {
+                                                      "className": "Text",
+                                                      "pa": [
+                                                        "%(_supportCaseTitle(^(index),1))"
+                                                      ],
+                                                      "na": {
+                                                        "style": {
+                                                          "className": "TextStyle",
+                                                          "na": {
+                                                            "color": "#(Colors.grey)"
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                },
+                                "parameters": {
+                                  "pa": [
+                                    "context",
+                                    "index"
+                                  ]
+                                },
+                                "tag": "Widget Function(BuildContext, int)",
+                                "rt": "Widget"
+                              }
+                            ],
+                            "na": {
+                              "childCount": {
+                                "className": "SugarList.length",
+                                "pa": [
+                                  "^(_supportCases)"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "className": "SliverToBoxAdapter",
+                        "na": {
+                          "child": {
+                            "className": "ListTile",
+                            "na": {
+                              "title": {
+                                "className": "Text",
+                                "pa": [
+                                  "多层作用域的演示"
+                                ],
+                                "na": {
+                                  "style": {
+                                    "className": "TextStyle",
+                                    "na": {
+                                      "color": "#(Colors.blue)"
+                                    }
+                                  }
+                                }
+                              },
+                              "subtitle": {
+                                "className": "Text",
+                                "pa": [
+                                  "多层作用域，参数尽量不要写成相似的，FunctionDomain 的实现是字符串匹配"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "className": "SliverList",
+                        "na": {
+                          "delegate": {
+                            "className": "SliverChildBuilderDelegate",
+                            "pa": [
+                              {
+                                "className": "FairFunction",
+                                "body": {
+                                  "className": "Padding",
+                                  "na": {
+                                    "padding": {
+                                      "className": "EdgeInsets.all",
+                                      "pa": [
+                                        8.0
+                                      ]
+                                    },
+                                    "child": {
+                                      "className": "Column",
+                                      "na": {
+                                        "mainAxisAlignment": "#(MainAxisAlignment.start)",
+                                        "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                        "children": [
+                                          {
+                                            "className": "Row",
+                                            "na": {
+                                              "mainAxisAlignment": "#(MainAxisAlignment.start)",
+                                              "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                              "children": [
+                                                {
+                                                  "className": "Text",
+                                                  "pa": [
+                                                    {
+                                                      "className": "SugarString.concatenates",
+                                                      "pa": [
+                                                        {
+                                                          "className": "SugarInt.intToString",
+                                                          "pa": [
+                                                            "^(index)"
+                                                          ]
+                                                        },
+                                                        "."
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "className": "SizedBox",
+                                                  "na": {
+                                                    "width": 5
+                                                  }
+                                                },
+                                                {
+                                                  "className": "Expanded",
+                                                  "na": {
+                                                    "child": {
+                                                      "className": "Wrap",
+                                                      "na": {
+                                                        "spacing": 10,
+                                                        "runSpacing": 10,
+                                                        "children": {
+                                                          "className": "Sugar.mapEach",
+                                                          "pa": [
+                                                            {
+                                                              "className": "SugarList.generate",
+                                                              "pa": [
+                                                                {
+                                                                  "className": "SugarNum.toInt",
+                                                                  "pa": [
+                                                                    {
+                                                                      "className": "SugarNum.adds",
+                                                                      "pa": [
+                                                                        "^(index)",
+                                                                        1
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "className": "FairFunction",
+                                                                  "body": {
+                                                                    "className": "Sugar.asT",
+                                                                    "pa": [
+                                                                      {
+                                                                        "className": "Color.fromARGB",
+                                                                        "pa": [
+                                                                          255,
+                                                                          {
+                                                                            "className": "SugarNum.toInt",
+                                                                            "pa": [
+                                                                              {
+                                                                                "className": "SugarNum.multiplies",
+                                                                                "pa": [
+                                                                                  30,
+                                                                                  {
+                                                                                    "className": "SugarNum.adds",
+                                                                                    "pa": [
+                                                                                      "^(index)",
+                                                                                      1
+                                                                                    ]
+                                                                                  }
+                                                                                ]
+                                                                              }
+                                                                            ]
+                                                                          },
+                                                                          {
+                                                                            "className": "SugarNum.toInt",
+                                                                            "pa": [
+                                                                              {
+                                                                                "className": "SugarNum.multiplies",
+                                                                                "pa": [
+                                                                                  10,
+                                                                                  {
+                                                                                    "className": "SugarNum.adds",
+                                                                                    "pa": [
+                                                                                      "^(p0)",
+                                                                                      1
+                                                                                    ]
+                                                                                  }
+                                                                                ]
+                                                                              }
+                                                                            ]
+                                                                          },
+                                                                          {
+                                                                            "className": "SugarNum.toInt",
+                                                                            "pa": [
+                                                                              {
+                                                                                "className": "SugarNum.multiplies",
+                                                                                "pa": [
+                                                                                  10,
+                                                                                  {
+                                                                                    "className": "SugarNum.adds",
+                                                                                    "pa": [
+                                                                                      {
+                                                                                        "className": "SugarNum.adds",
+                                                                                        "pa": [
+                                                                                          "^(index)",
+                                                                                          "^(p0)"
+                                                                                        ]
+                                                                                      },
+                                                                                      1
+                                                                                    ]
+                                                                                  }
+                                                                                ]
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        ]
+                                                                      }
+                                                                    ],
+                                                                    "ta": "dynamic",
+                                                                    "typeArgumentList": [
+                                                                      "dynamic"
+                                                                    ]
+                                                                  },
+                                                                  "parameters": {
+                                                                    "pa": [
+                                                                      "p0"
+                                                                    ]
+                                                                  },
+                                                                  "tag": "dynamic Function(int)",
+                                                                  "rt": "dynamic"
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "className": "FairFunction",
+                                                              "body": {
+                                                                "className": "Container",
+                                                                "na": {
+                                                                  "width": 50,
+                                                                  "height": 50,
+                                                                  "color": "^(item)",
+                                                                  "alignment": "#(Alignment.center)",
+                                                                  "child": {
+                                                                    "className": "Text",
+                                                                    "pa": [
+                                                                      "#($mapIndex)"
+                                                                    ],
+                                                                    "na": {
+                                                                      "style": {
+                                                                        "className": "TextStyle",
+                                                                        "na": {
+                                                                          "color": {
+                                                                            "className": "SugarCommon.getLuminanceColor",
+                                                                            "pa": [
+                                                                              {
+                                                                                "className": "SugarCommon.colorComputeLuminance",
+                                                                                "pa": [
+                                                                                  "^(item)"
+                                                                                ]
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              },
+                                                              "parameters": {
+                                                                "pa": [
+                                                                  "mapIndex",
+                                                                  "item"
+                                                                ]
+                                                              },
+                                                              "tag": "Widget Function(int, dynamic)",
+                                                              "rt": "Widget"
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                },
+                                "parameters": {
+                                  "pa": [
+                                    "context",
+                                    "index"
+                                  ]
+                                },
+                                "tag": "Widget Function(BuildContext, int)",
+                                "rt": "Widget"
+                              }
+                            ],
+                            "na": {
+                              "childCount": 10
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {},
+  "digest": "e50475b160e42ee1ed78ac71c0cd288b"
+}

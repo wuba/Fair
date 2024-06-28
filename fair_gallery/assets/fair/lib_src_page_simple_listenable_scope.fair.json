@@ -1,0 +1,756 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "CommomAppBar",
+      "na": {
+        "title": "%(_getRouteName)",
+        "asset": "#(Assets.assets_page_simple_listenable_scope_dart)"
+      }
+    },
+    "body": {
+      "className": "ListenableScope",
+      "na": {
+        "addListener": "@(_addListener)",
+        "onCreateKey": "@(_onCreateKey)",
+        "uniqueKey": "ListenableScopeDemo",
+        "configs": [
+          {
+            "className": "ListenableScopeConfig",
+            "na": {
+              "type": "ScrollController"
+            }
+          },
+          {
+            "className": "ListenableScopeConfig",
+            "na": {
+              "type": "AnimationController",
+              "addListener": true
+            }
+          },
+          {
+            "className": "ListenableScopeConfig",
+            "na": {
+              "type": "TabController",
+              "addListener": true,
+              "tag": "0"
+            }
+          },
+          {
+            "className": "ListenableScopeConfig",
+            "na": {
+              "type": "ValueNotifier",
+              "addListener": true
+            }
+          },
+          {
+            "className": "ListenableScopeConfig",
+            "na": {
+              "type": "TabController",
+              "tag": "1"
+            }
+          }
+        ],
+        "onCreate": {
+          "className": "FairFunction",
+          "body": {
+            "className": "Sugar.switchCase",
+            "pa": [
+              "^(key)",
+              [
+                {
+                  "className": "SugarSwitchCaseObj",
+                  "na": {
+                    "sugarCase": {
+                      "className": "FairFunction",
+                      "body": "ScrollController",
+                      "tag": "String Function()",
+                      "rt": "String"
+                    },
+                    "reValue": {
+                      "className": "FairFunction",
+                      "body": {
+                        "className": "ScrollController"
+                      },
+                      "tag": "ScrollController Function()",
+                      "rt": "ScrollController"
+                    }
+                  }
+                },
+                {
+                  "className": "SugarSwitchCaseObj",
+                  "na": {
+                    "sugarCase": {
+                      "className": "FairFunction",
+                      "body": "AnimationController",
+                      "tag": "String Function()",
+                      "rt": "String"
+                    },
+                    "reValue": {
+                      "className": "FairFunction",
+                      "body": {
+                        "className": "AnimationController",
+                        "na": {
+                          "vsync": "^(vsync)",
+                          "value": 50.0,
+                          "lowerBound": 50.0,
+                          "upperBound": 100.0,
+                          "duration": {
+                            "className": "Duration",
+                            "na": {
+                              "seconds": 2
+                            }
+                          },
+                          "reverseDuration": {
+                            "className": "Duration",
+                            "na": {
+                              "seconds": 2
+                            }
+                          }
+                        }
+                      },
+                      "tag": "AnimationController Function()",
+                      "rt": "AnimationController"
+                    }
+                  }
+                },
+                {
+                  "className": "SugarSwitchCaseObj",
+                  "na": {
+                    "sugarCase": {
+                      "className": "FairFunction",
+                      "body": "TabController0",
+                      "tag": "String Function()",
+                      "rt": "String"
+                    },
+                    "reValue": {
+                      "className": "FairFunction",
+                      "body": {
+                        "className": "TabController",
+                        "na": {
+                          "vsync": "^(vsync)",
+                          "length": 2
+                        }
+                      },
+                      "tag": "TabController Function()",
+                      "rt": "TabController"
+                    }
+                  }
+                },
+                {
+                  "className": "SugarSwitchCaseObj",
+                  "na": {
+                    "sugarCase": {
+                      "className": "FairFunction",
+                      "body": "ValueNotifier",
+                      "tag": "String Function()",
+                      "rt": "String"
+                    },
+                    "reValue": {
+                      "className": "FairFunction",
+                      "body": {
+                        "className": "ValueNotifier",
+                        "pa": [
+                          1.0
+                        ]
+                      },
+                      "tag": "ValueNotifier<double> Function()",
+                      "rt": "ValueNotifier<double>"
+                    }
+                  }
+                },
+                {
+                  "className": "SugarSwitchCaseObj",
+                  "na": {
+                    "sugarCase": {
+                      "className": "FairFunction",
+                      "body": "TabController1",
+                      "tag": "String Function()",
+                      "rt": "String"
+                    },
+                    "reValue": {
+                      "className": "FairFunction",
+                      "body": {
+                        "className": "TabController",
+                        "na": {
+                          "vsync": "^(vsync)",
+                          "length": 3
+                        }
+                      },
+                      "tag": "TabController Function()",
+                      "rt": "TabController"
+                    }
+                  }
+                }
+              ],
+              {
+                "className": "FairFunction",
+                "body": {
+                  "className": "Sugar.nullValue"
+                },
+                "tag": "Listenable? Function()",
+                "rt": "Listenable?"
+              }
+            ]
+          },
+          "parameters": {
+            "pa": [
+              "key",
+              "vsync"
+            ]
+          },
+          "tag": "Listenable? Function(String, TickerProvider)",
+          "rt": "Listenable?"
+        },
+        "builder": {
+          "className": "FairFunction",
+          "body": {
+            "className": "Column",
+            "na": {
+              "children": [
+                {
+                  "className": "Wrap",
+                  "na": {
+                    "runSpacing": 8,
+                    "spacing": 8,
+                    "children": [
+                      {
+                        "className": "TextButton",
+                        "na": {
+                          "onPressed": {
+                            "className": "SugarCommon.voidCallBack",
+                            "na": {
+                              "function": "@(_onTabControllerSetIndex)",
+                              "value": 1
+                            }
+                          },
+                          "child": {
+                            "className": "Text",
+                            "pa": [
+                              "设置 TabController index"
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "className": "TextButton",
+                        "na": {
+                          "onPressed": {
+                            "className": "SugarCommon.voidCallBack",
+                            "na": {
+                              "function": "@(_onTabControllerAnimateTo)",
+                              "value": 1
+                            }
+                          },
+                          "child": {
+                            "className": "Text",
+                            "pa": [
+                              "调用 TabController animateTo"
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "className": "TextButton",
+                        "na": {
+                          "onPressed": {
+                            "className": "SugarCommon.voidCallBack",
+                            "na": {
+                              "function": "@(_onScrollControllerAnimateTo)",
+                              "value": 300.0
+                            }
+                          },
+                          "child": {
+                            "className": "Text",
+                            "pa": [
+                              "调用 ScrollController animateTo"
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "className": "TextButton",
+                        "na": {
+                          "onPressed": {
+                            "className": "SugarCommon.voidCallBack",
+                            "na": {
+                              "function": "@(_onValueNotifierSetValue)",
+                              "value": 666.0
+                            }
+                          },
+                          "child": {
+                            "className": "Text",
+                            "pa": [
+                              "设置 ValueNotifier 的值"
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "className": "ValueListenableBuilder",
+                  "na": {
+                    "valueListenable": {
+                      "className": "ListenableScope.of",
+                      "pa": [
+                        "^(context)",
+                        "ValueNotifier"
+                      ],
+                      "ta": "ValueNotifier<dynamic>",
+                      "typeArgumentList": [
+                        "ValueNotifier"
+                      ]
+                    },
+                    "builder": {
+                      "className": "FairFunction",
+                      "body": {
+                        "className": "Text",
+                        "pa": [
+                          {
+                            "className": "SugarString.concatenates",
+                            "pa": [
+                              "ValueNotifier 的值为:",
+                              "#($value)"
+                            ]
+                          }
+                        ]
+                      },
+                      "parameters": {
+                        "pa": [
+                          "context",
+                          "value",
+                          "child"
+                        ]
+                      },
+                      "tag": "Widget Function(BuildContext, dynamic, Widget?)",
+                      "rt": "Widget"
+                    }
+                  }
+                },
+                {
+                  "className": "GestureDetector",
+                  "na": {
+                    "onTap": "@(_onAnimationControllerStart)",
+                    "child": {
+                      "className": "Center",
+                      "na": {
+                        "child": {
+                          "className": "AnimatedBuilder",
+                          "na": {
+                            "animation": {
+                              "className": "ListenableScope.of",
+                              "pa": [
+                                "^(context)",
+                                "AnimationController"
+                              ],
+                              "ta": "AnimationController",
+                              "typeArgumentList": [
+                                "AnimationController"
+                              ]
+                            },
+                            "builder": {
+                              "className": "FairFunction",
+                              "body": {
+                                "className": "Container",
+                                "na": {
+                                  "padding": {
+                                    "className": "EdgeInsets.all",
+                                    "pa": [
+                                      8
+                                    ]
+                                  },
+                                  "alignment": "#(Alignment.center)",
+                                  "height": 50,
+                                  "width": {
+                                    "className": "Sugar.mapGet",
+                                    "pa": [
+                                      {
+                                        "className": "Sugar.dartObjectToMap",
+                                        "pa": [
+                                          {
+                                            "className": "ListenableScope.of",
+                                            "pa": [
+                                              "^(context)",
+                                              "AnimationController"
+                                            ],
+                                            "ta": "AnimationController",
+                                            "typeArgumentList": [
+                                              "AnimationController"
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      "value"
+                                    ]
+                                  },
+                                  "color": "#(Colors.blue)",
+                                  "child": {
+                                    "className": "Text",
+                                    "pa": [
+                                      "点我开始动画!"
+                                    ],
+                                    "na": {
+                                      "style": {
+                                        "className": "TextStyle",
+                                        "na": {
+                                          "color": "#(Colors.white)"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "parameters": {
+                                "pa": [
+                                  "context",
+                                  "child"
+                                ]
+                              },
+                              "tag": "Widget Function(BuildContext, Widget?)",
+                              "rt": "Widget"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "className": "TabBar",
+                  "na": {
+                    "tabs": [
+                      {
+                        "className": "Tab",
+                        "na": {
+                          "child": {
+                            "className": "Text",
+                            "pa": [
+                              "Tab0"
+                            ],
+                            "na": {
+                              "style": {
+                                "className": "TextStyle",
+                                "na": {
+                                  "color": "#(Colors.black)"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "className": "Tab",
+                        "na": {
+                          "child": {
+                            "className": "Text",
+                            "pa": [
+                              "Tab1"
+                            ],
+                            "na": {
+                              "style": {
+                                "className": "TextStyle",
+                                "na": {
+                                  "color": "#(Colors.black)"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "controller": {
+                      "className": "ListenableScope.of",
+                      "pa": [
+                        "^(context)",
+                        "TabController0"
+                      ],
+                      "ta": "TabController",
+                      "typeArgumentList": [
+                        "TabController"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "className": "Expanded",
+                  "na": {
+                    "child": {
+                      "className": "ExtendedTabBarView",
+                      "na": {
+                        "controller": {
+                          "className": "ListenableScope.of",
+                          "pa": [
+                            "^(context)",
+                            "TabController0"
+                          ],
+                          "ta": "TabController",
+                          "typeArgumentList": [
+                            "TabController"
+                          ]
+                        },
+                        "children": [
+                          {
+                            "className": "Column",
+                            "na": {
+                              "children": [
+                                {
+                                  "className": "Container",
+                                  "na": {
+                                    "alignment": "#(Alignment.center)",
+                                    "child": {
+                                      "className": "Text",
+                                      "pa": [
+                                        "Tab0"
+                                      ],
+                                      "na": {
+                                        "style": {
+                                          "className": "TextStyle",
+                                          "na": {
+                                            "color": "#(Colors.white)"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "color": "#(Colors.red)"
+                                  }
+                                },
+                                {
+                                  "className": "Expanded",
+                                  "na": {
+                                    "child": {
+                                      "className": "ListView.builder",
+                                      "na": {
+                                        "itemExtent": 60,
+                                        "controller": {
+                                          "className": "ListenableScope.of",
+                                          "pa": [
+                                            "^(context)",
+                                            "ScrollController"
+                                          ],
+                                          "ta": "ScrollController",
+                                          "typeArgumentList": [
+                                            "ScrollController"
+                                          ]
+                                        },
+                                        "itemBuilder": {
+                                          "className": "FairFunction",
+                                          "body": {
+                                            "className": "Center",
+                                            "na": {
+                                              "child": {
+                                                "className": "Text",
+                                                "pa": [
+                                                  "#($index)"
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          "parameters": {
+                                            "pa": [
+                                              "context",
+                                              "index"
+                                            ]
+                                          },
+                                          "tag": "Widget Function(BuildContext, int)",
+                                          "rt": "Widget"
+                                        },
+                                        "itemCount": 100
+                                      }
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "className": "Column",
+                            "na": {
+                              "children": [
+                                {
+                                  "className": "TabBar",
+                                  "na": {
+                                    "tabs": [
+                                      {
+                                        "className": "Tab",
+                                        "na": {
+                                          "child": {
+                                            "className": "Text",
+                                            "pa": [
+                                              "Tab10"
+                                            ],
+                                            "na": {
+                                              "style": {
+                                                "className": "TextStyle",
+                                                "na": {
+                                                  "color": "#(Colors.black)"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "className": "Tab",
+                                        "na": {
+                                          "child": {
+                                            "className": "Text",
+                                            "pa": [
+                                              "Tab11"
+                                            ],
+                                            "na": {
+                                              "style": {
+                                                "className": "TextStyle",
+                                                "na": {
+                                                  "color": "#(Colors.black)"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "className": "Tab",
+                                        "na": {
+                                          "child": {
+                                            "className": "Text",
+                                            "pa": [
+                                              "Tab12"
+                                            ],
+                                            "na": {
+                                              "style": {
+                                                "className": "TextStyle",
+                                                "na": {
+                                                  "color": "#(Colors.black)"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "controller": {
+                                      "className": "ListenableScope.of",
+                                      "pa": [
+                                        "^(context)",
+                                        "TabController1"
+                                      ],
+                                      "ta": "TabController",
+                                      "typeArgumentList": [
+                                        "TabController"
+                                      ]
+                                    }
+                                  }
+                                },
+                                {
+                                  "className": "Expanded",
+                                  "na": {
+                                    "child": {
+                                      "className": "ExtendedTabBarView",
+                                      "na": {
+                                        "controller": {
+                                          "className": "ListenableScope.of",
+                                          "pa": [
+                                            "^(context)",
+                                            "TabController1"
+                                          ],
+                                          "ta": "TabController",
+                                          "typeArgumentList": [
+                                            "TabController"
+                                          ]
+                                        },
+                                        "children": [
+                                          {
+                                            "className": "Container",
+                                            "na": {
+                                              "alignment": "#(Alignment.center)",
+                                              "child": {
+                                                "className": "Text",
+                                                "pa": [
+                                                  "Tab10"
+                                                ],
+                                                "na": {
+                                                  "style": {
+                                                    "className": "TextStyle",
+                                                    "na": {
+                                                      "color": "#(Colors.white)"
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "color": "#(Colors.green)"
+                                            }
+                                          },
+                                          {
+                                            "className": "Container",
+                                            "na": {
+                                              "alignment": "#(Alignment.center)",
+                                              "child": {
+                                                "className": "Text",
+                                                "pa": [
+                                                  "Tab11"
+                                                ],
+                                                "na": {
+                                                  "style": {
+                                                    "className": "TextStyle",
+                                                    "na": {
+                                                      "color": "#(Colors.white)"
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "color": "#(Colors.yellow)"
+                                            }
+                                          },
+                                          {
+                                            "className": "Container",
+                                            "na": {
+                                              "alignment": "#(Alignment.center)",
+                                              "child": {
+                                                "className": "Text",
+                                                "pa": [
+                                                  "Tab12"
+                                                ],
+                                                "na": {
+                                                  "style": {
+                                                    "className": "TextStyle",
+                                                    "na": {
+                                                      "color": "#(Colors.white)"
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "color": "#(Colors.amber)"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "parameters": {
+            "pa": [
+              "context"
+            ]
+          },
+          "tag": "Widget Function(BuildContext)",
+          "rt": "Widget"
+        }
+      }
+    }
+  },
+  "methodMap": {},
+  "digest": "30dccee35301e60fda51a76c77f0f95e"
+}

@@ -1,0 +1,296 @@
+{
+  "className": "Material",
+  "na": {
+    "color": "#(Colors.transparent)",
+    "shadowColor": "#(Colors.transparent)",
+    "child": {
+      "className": "ExtendedImageSlidePage",
+      "na": {
+        "key": "^(_slidePagekey)",
+        "slideAxis": "#(SlideAxis.both)",
+        "slideType": "#(SlideType.wholePage)",
+        "child": {
+          "className": "Stack",
+          "na": {
+            "children": [
+              {
+                "className": "Positioned.fill",
+                "na": {
+                  "child": {
+                    "className": "ExtendedImageGesturePageView.builder",
+                    "na": {
+                      "itemBuilder": {
+                        "className": "FairFunction",
+                        "body": {
+                          "className": "GestureDetector",
+                          "na": {
+                            "onTap": "@(_onImageTap)",
+                            "child": {
+                              "className": "HeroWidget",
+                              "na": {
+                                "tag": "%(_getImageUrl(^(index)))",
+                                "slidePagekey": "^(_slidePagekey)",
+                                "slideType": "#(SlideType.wholePage)",
+                                "child": {
+                                  "className": "ExtendedImage.network",
+                                  "pa": [
+                                    "%(_getImageUrl(^(index)))"
+                                  ],
+                                  "na": {
+                                    "fit": "#(BoxFit.contain)",
+                                    "enableSlideOutPage": true,
+                                    "mode": "#(ExtendedImageMode.gesture)"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "parameters": {
+                          "pa": [
+                            "context",
+                            "index"
+                          ]
+                        },
+                        "tag": "Widget Function(BuildContext, int)",
+                        "rt": "Widget"
+                      },
+                      "controller": {
+                        "className": "ExtendedPageController",
+                        "na": {
+                          "initialPage": "^(initialPage)",
+                          "pageSpacing": 50,
+                          "shouldIgnorePointerWhenScrolling": false
+                        }
+                      },
+                      "scrollDirection": "#(Axis.horizontal)",
+                      "physics": {
+                        "className": "BouncingScrollPhysics"
+                      },
+                      "onPageChanged": "@(_onPageChanged)",
+                      "itemCount": {
+                        "className": "SugarList.length",
+                        "pa": [
+                          "^(images)"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "className": "Positioned",
+                "na": {
+                  "top": 0,
+                  "left": 0,
+                  "right": 0,
+                  "child": {
+                    "className": "Sugar.ifEqualBool",
+                    "pa": [
+                      "^(_showHeader)"
+                    ],
+                    "na": {
+                      "trueValue": {
+                        "className": "FairFunction",
+                        "body": {
+                          "className": "DefaultTextStyle",
+                          "na": {
+                            "style": {
+                              "className": "TextStyle",
+                              "na": {
+                                "color": "#(Colors.blue)"
+                              }
+                            },
+                            "child": {
+                              "className": "Container",
+                              "na": {
+                                "margin": {
+                                  "className": "EdgeInsets.only",
+                                  "na": {
+                                    "top": {
+                                      "className": "Sugar.paddingTop",
+                                      "pa": [
+                                        "^(context)"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "height": 50.0,
+                                "width": {
+                                  "className": "Sugar.width",
+                                  "pa": [
+                                    "^(context)"
+                                  ]
+                                },
+                                "color": {
+                                  "className": "Sugar.colorsWithOpacity",
+                                  "pa": [
+                                    "#(Colors.grey)",
+                                    0.2
+                                  ]
+                                },
+                                "child": {
+                                  "className": "Row",
+                                  "na": {
+                                    "children": [
+                                      {
+                                        "className": "Container",
+                                        "na": {
+                                          "width": 10.0
+                                        }
+                                      },
+                                      {
+                                        "className": "Text.rich",
+                                        "pa": [
+                                          {
+                                            "className": "TextSpan",
+                                            "na": {
+                                              "children": [
+                                                {
+                                                  "className": "TextSpan",
+                                                  "na": {
+                                                    "text": {
+                                                      "className": "SugarNum.numToString",
+                                                      "pa": [
+                                                        {
+                                                          "className": "SugarNum.adds",
+                                                          "pa": [
+                                                            "^(index)",
+                                                            1
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  }
+                                                },
+                                                {
+                                                  "className": "TextSpan",
+                                                  "na": {
+                                                    "text": " / "
+                                                  }
+                                                },
+                                                {
+                                                  "className": "TextSpan",
+                                                  "na": {
+                                                    "text": {
+                                                      "className": "SugarInt.intToString",
+                                                      "pa": [
+                                                        {
+                                                          "className": "SugarList.length",
+                                                          "pa": [
+                                                            "^(images)"
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "className": "SizedBox",
+                                        "na": {
+                                          "width": 10.0
+                                        }
+                                      },
+                                      {
+                                        "className": "Expanded",
+                                        "na": {
+                                          "child": {
+                                            "className": "Text",
+                                            "pa": [
+                                              "%(_getImagedescription(^(index)))"
+                                            ],
+                                            "na": {
+                                              "maxLines": 1,
+                                              "overflow": "#(TextOverflow.ellipsis)",
+                                              "style": {
+                                                "className": "TextStyle",
+                                                "na": {
+                                                  "fontSize": 16.0,
+                                                  "color": "#(Colors.blue)"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "className": "SizedBox",
+                                        "na": {
+                                          "width": 10.0
+                                        }
+                                      },
+                                      {
+                                        "className": "GestureDetector",
+                                        "na": {
+                                          "child": {
+                                            "className": "Container",
+                                            "na": {
+                                              "padding": {
+                                                "className": "EdgeInsets.only",
+                                                "na": {
+                                                  "right": 10.0
+                                                }
+                                              },
+                                              "alignment": "#(Alignment.center)",
+                                              "child": {
+                                                "className": "Icon",
+                                                "pa": [
+                                                  "#(Icons.save)"
+                                                ],
+                                                "na": {
+                                                  "color": "#(Colors.blue)"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "onTap": "@(_onImageSaveTap)"
+                                        }
+                                      },
+                                      {
+                                        "className": "SourceCodeViewButton",
+                                        "na": {
+                                          "asset": "#(Assets.assets_page_complex_photo_swiper_dart)"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "tag": "Widget Function()",
+                        "rt": "Widget"
+                      },
+                      "falseValue": {
+                        "className": "FairFunction",
+                        "body": {
+                          "className": "Container"
+                        },
+                        "tag": "Widget Function()",
+                        "rt": "Widget"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "onSlidingPage": {
+          "className": "SugarCommon.onSlidingPage",
+          "pa": [
+            "@(_onSlidingPage)"
+          ]
+        }
+      }
+    }
+  },
+  "methodMap": {},
+  "digest": "bf3c8ba41b833a414da09fb4ebe55266"
+}

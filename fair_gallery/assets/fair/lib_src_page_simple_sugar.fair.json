@@ -1,0 +1,534 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "CommomAppBar",
+      "na": {
+        "title": "%(_getRouteName)",
+        "asset": "#(Assets.assets_page_simple_sugar_dart)"
+      }
+    },
+    "body": {
+      "className": "Sugar.ifEqualBool",
+      "pa": [
+        {
+          "className": "SugarCommon.isNull",
+          "pa": [
+            "^(_data)"
+          ]
+        }
+      ],
+      "na": {
+        "trueValue": {
+          "className": "FairFunction",
+          "body": {
+            "className": "Center",
+            "na": {
+              "child": {
+                "className": "CircularProgressIndicator",
+                "na": {
+                  "strokeWidth": 2.0
+                }
+              }
+            }
+          },
+          "tag": "Widget Function()",
+          "rt": "Widget"
+        },
+        "falseValue": {
+          "className": "FairFunction",
+          "body": {
+            "className": "Padding",
+            "na": {
+              "padding": {
+                "className": "EdgeInsets.all",
+                "pa": [
+                  8.0
+                ]
+              },
+              "child": {
+                "className": "Column",
+                "na": {
+                  "mainAxisAlignment": "#(MainAxisAlignment.start)",
+                  "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                  "children": [
+                    {
+                      "className": "Row",
+                      "na": {
+                        "children": [
+                          {
+                            "className": "Sugar.ifEqualBool",
+                            "pa": [
+                              {
+                                "className": "SugarNum.greaterThan",
+                                "pa": [
+                                  "%(_getValue(views,0))",
+                                  1000
+                                ]
+                              }
+                            ],
+                            "na": {
+                              "trueValue": {
+                                "className": "FairFunction",
+                                "body": {
+                                  "className": "Container",
+                                  "na": {
+                                    "margin": {
+                                      "className": "EdgeInsets.all",
+                                      "pa": [
+                                        11
+                                      ]
+                                    },
+                                    "padding": {
+                                      "className": "EdgeInsets.all",
+                                      "pa": [
+                                        8
+                                      ]
+                                    },
+                                    "decoration": {
+                                      "className": "BoxDecoration",
+                                      "na": {
+                                        "color": "#(Colors.orange)",
+                                        "borderRadius": {
+                                          "className": "BorderRadius.all",
+                                          "pa": [
+                                            {
+                                              "className": "Radius.circular",
+                                              "pa": [
+                                                5
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "child": {
+                                      "className": "Text",
+                                      "pa": [
+                                        "热门"
+                                      ],
+                                      "na": {
+                                        "style": {
+                                          "className": "TextStyle",
+                                          "na": {
+                                            "color": "#(Colors.white)"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "tag": "Widget Function()",
+                                "rt": "Widget"
+                              },
+                              "falseValue": {
+                                "className": "FairFunction",
+                                "body": {
+                                  "className": "Container"
+                                },
+                                "tag": "Widget Function()",
+                                "rt": "Widget"
+                              }
+                            }
+                          },
+                          {
+                            "className": "Sugar.ifEqual",
+                            "pa": [
+                              "%(_getValue(type,))",
+                              "multi-photo"
+                            ],
+                            "na": {
+                              "trueValue": {
+                                "className": "FairFunction",
+                                "body": {
+                                  "className": "Container",
+                                  "na": {
+                                    "margin": {
+                                      "className": "EdgeInsets.all",
+                                      "pa": [
+                                        8
+                                      ]
+                                    },
+                                    "padding": {
+                                      "className": "EdgeInsets.all",
+                                      "pa": [
+                                        8
+                                      ]
+                                    },
+                                    "decoration": {
+                                      "className": "BoxDecoration",
+                                      "na": {
+                                        "color": "#(Colors.blue)",
+                                        "borderRadius": {
+                                          "className": "BorderRadius.all",
+                                          "pa": [
+                                            {
+                                              "className": "Radius.circular",
+                                              "pa": [
+                                                5
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "child": {
+                                      "className": "Text",
+                                      "pa": [
+                                        "多图"
+                                      ],
+                                      "na": {
+                                        "style": {
+                                          "className": "TextStyle",
+                                          "na": {
+                                            "color": "#(Colors.white)"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "tag": "Widget Function()",
+                                "rt": "Widget"
+                              },
+                              "falseValue": {
+                                "className": "FairFunction",
+                                "body": {
+                                  "className": "Container"
+                                },
+                                "tag": "Widget Function()",
+                                "rt": "Widget"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "className": "Padding",
+                      "na": {
+                        "padding": {
+                          "className": "EdgeInsets.only",
+                          "na": {
+                            "left": 11,
+                            "right": 11,
+                            "bottom": 11
+                          }
+                        },
+                        "child": {
+                          "className": "Wrap",
+                          "na": {
+                            "runSpacing": 5.0,
+                            "spacing": 5.0,
+                            "children": {
+                              "className": "Sugar.mapEach",
+                              "pa": [
+                                {
+                                  "className": "SugarIterable.toList",
+                                  "pa": [
+                                    {
+                                      "className": "SugarIterable.take",
+                                      "pa": [
+                                        "%(_getValue(tags,[]))",
+                                        6
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "className": "FairFunction",
+                                  "body": {
+                                    "className": "Container",
+                                    "na": {
+                                      "padding": {
+                                        "className": "EdgeInsets.all",
+                                        "pa": [
+                                          3.0
+                                        ]
+                                      },
+                                      "decoration": {
+                                        "className": "BoxDecoration",
+                                        "na": {
+                                          "color": {
+                                            "className": "SugarCommon.getRandomColor",
+                                            "pa": [
+                                              "^(index)"
+                                            ]
+                                          },
+                                          "border": {
+                                            "className": "Border.all",
+                                            "na": {
+                                              "color": {
+                                                "className": "Sugar.colorsWithOpacity",
+                                                "pa": [
+                                                  "#(Colors.grey)",
+                                                  0.4
+                                                ]
+                                              },
+                                              "width": 1.0
+                                            }
+                                          },
+                                          "borderRadius": {
+                                            "className": "BorderRadius.all",
+                                            "pa": [
+                                              {
+                                                "className": "Radius.circular",
+                                                "pa": [
+                                                  5.0
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "child": {
+                                        "className": "Text",
+                                        "pa": [
+                                          "#($item)"
+                                        ],
+                                        "na": {
+                                          "textAlign": "#(TextAlign.start)",
+                                          "style": {
+                                            "className": "TextStyle",
+                                            "na": {
+                                              "fontSize": 12,
+                                              "color": {
+                                                "className": "SugarCommon.getLuminanceColor",
+                                                "pa": [
+                                                  {
+                                                    "className": "SugarCommon.colorComputeLuminance",
+                                                    "pa": [
+                                                      {
+                                                        "className": "SugarCommon.getRandomColor",
+                                                        "pa": [
+                                                          "^(index)"
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "parameters": {
+                                    "pa": [
+                                      "index",
+                                      "item"
+                                    ]
+                                  },
+                                  "tag": "Widget Function(int, dynamic)",
+                                  "rt": "Widget"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "className": "Sugar.switchCase",
+                      "pa": [
+                        "%(_getValue(image_count,0))",
+                        [
+                          {
+                            "className": "SugarSwitchCaseObj",
+                            "na": {
+                              "sugarCase": {
+                                "className": "FairFunction",
+                                "body": 0,
+                                "tag": "int Function()",
+                                "rt": "int"
+                              },
+                              "reValue": {
+                                "className": "FairFunction",
+                                "body": {
+                                  "className": "Container"
+                                },
+                                "tag": "Widget Function()",
+                                "rt": "Widget"
+                              }
+                            }
+                          },
+                          {
+                            "className": "SugarSwitchCaseObj",
+                            "na": {
+                              "sugarCase": {
+                                "className": "FairFunction",
+                                "body": 1,
+                                "tag": "int Function()",
+                                "rt": "int"
+                              },
+                              "reValue": {
+                                "className": "FairFunction",
+                                "body": {
+                                  "className": "Image.network",
+                                  "pa": [
+                                    "%(_getImageUrl(0))"
+                                  ]
+                                },
+                                "tag": "Widget Function()",
+                                "rt": "Widget"
+                              }
+                            }
+                          }
+                        ],
+                        {
+                          "className": "FairFunction",
+                          "body": {
+                            "className": "GridView",
+                            "na": {
+                              "shrinkWrap": true,
+                              "padding": {
+                                "className": "EdgeInsets.all",
+                                "pa": [
+                                  11
+                                ]
+                              },
+                              "gridDelegate": {
+                                "className": "SliverGridDelegateWithFixedCrossAxisCount",
+                                "na": {
+                                  "crossAxisCount": 3,
+                                  "mainAxisSpacing": 8,
+                                  "crossAxisSpacing": 8
+                                }
+                              },
+                              "children": {
+                                "className": "Sugar.mapEach",
+                                "pa": [
+                                  {
+                                    "className": "SugarIterable.toList",
+                                    "pa": [
+                                      {
+                                        "className": "SugarIterable.take",
+                                        "pa": [
+                                          "%(_getValue(images,[]))",
+                                          9
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "className": "FairFunction",
+                                    "body": {
+                                      "className": "Image.network",
+                                      "pa": [
+                                        "%(_getImageUrl(^(index)))"
+                                      ],
+                                      "na": {
+                                        "frameBuilder": {
+                                          "className": "FairFunction",
+                                          "body": {
+                                            "className": "Sugar.ifEqualBool",
+                                            "pa": [
+                                              "^(wasSynchronouslyLoaded)"
+                                            ],
+                                            "na": {
+                                              "trueValue": {
+                                                "className": "FairFunction",
+                                                "body": "^(child)",
+                                                "tag": "Widget Function()",
+                                                "rt": "Widget"
+                                              },
+                                              "falseValue": {
+                                                "className": "FairFunction",
+                                                "body": {
+                                                  "className": "AnimatedSwitcher",
+                                                  "na": {
+                                                    "duration": {
+                                                      "className": "Duration",
+                                                      "na": {
+                                                        "milliseconds": 500
+                                                      }
+                                                    },
+                                                    "child": {
+                                                      "className": "Sugar.ifEqualBool",
+                                                      "pa": [
+                                                        {
+                                                          "className": "SugarCommon.isNull",
+                                                          "pa": [
+                                                            "^(frame)"
+                                                          ]
+                                                        }
+                                                      ],
+                                                      "na": {
+                                                        "trueValue": {
+                                                          "className": "FairFunction",
+                                                          "body": {
+                                                            "className": "Container",
+                                                            "na": {
+                                                              "color": {
+                                                                "className": "Sugar.colorsWithOpacity",
+                                                                "pa": [
+                                                                  "#(Colors.grey)",
+                                                                  0.3
+                                                                ]
+                                                              }
+                                                            }
+                                                          },
+                                                          "tag": "Widget Function()",
+                                                          "rt": "Widget"
+                                                        },
+                                                        "falseValue": {
+                                                          "className": "FairFunction",
+                                                          "body": "^(child)",
+                                                          "tag": "Widget Function()",
+                                                          "rt": "Widget"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "tag": "Widget Function()",
+                                                "rt": "Widget"
+                                              }
+                                            }
+                                          },
+                                          "parameters": {
+                                            "pa": [
+                                              "context",
+                                              "child",
+                                              "frame",
+                                              "wasSynchronouslyLoaded"
+                                            ]
+                                          },
+                                          "tag": "Widget Function(BuildContext, Widget, int?, bool)",
+                                          "rt": "Widget"
+                                        }
+                                      }
+                                    },
+                                    "parameters": {
+                                      "pa": [
+                                        "index",
+                                        "item"
+                                      ]
+                                    },
+                                    "tag": "Widget Function(int, dynamic)",
+                                    "rt": "Widget"
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          "tag": "Widget Function()",
+                          "rt": "Widget"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "tag": "Widget Function()",
+          "rt": "Widget"
+        }
+      }
+    }
+  },
+  "methodMap": {},
+  "digest": "ae8d97511d3e8d16ea8a8b37ed6b761b"
+}

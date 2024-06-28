@@ -1,0 +1,1 @@
+-s --no-watch --const-ignore (metadata|zip) --const-array
