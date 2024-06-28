@@ -1,0 +1,259 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "CommomAppBar",
+      "na": {
+        "title": "%(_getRouteName)",
+        "asset": "#(Assets.assets_page_complex_photo_gallery_dart)"
+      }
+    },
+    "body": {
+      "className": "PullToRefreshNotification",
+      "na": {
+        "pullBackOnRefresh": false,
+        "maxDragOffset": 90,
+        "armedDragUpCancel": false,
+        "onRefresh": "@(_onRefresh)",
+        "child": {
+          "className": "Column",
+          "na": {
+            "children": [
+              {
+                "className": "PullToRefreshContainer",
+                "pa": [
+                  {
+                    "className": "FairFunction",
+                    "body": {
+                      "className": "PullToRefreshHeader",
+                      "pa": [
+                        "^(info)",
+                        {
+                          "className": "Sugar.dateTimeFromJs",
+                          "pa": [
+                            "^(lastRefreshTime)"
+                          ]
+                        }
+                      ]
+                    },
+                    "parameters": {
+                      "pa": [
+                        "info"
+                      ]
+                    },
+                    "tag": "Widget Function(PullToRefreshScrollNotificationInfo?)",
+                    "rt": "Widget"
+                  }
+                ]
+              },
+              {
+                "className": "Expanded",
+                "na": {
+                  "child": {
+                    "className": "SizeCacheWidget",
+                    "na": {
+                      "child": {
+                        "className": "LoadingMoreList",
+                        "pa": [
+                          {
+                            "className": "ListConfig",
+                            "na": {
+                              "itemBuilder": "@(_itemBuilder)",
+                              "sourceList": {
+                                "className": "LoadingMoreRepository.onLoadData",
+                                "pa": [
+                                  "^(_repository)",
+                                  "@(_onLoadData)"
+                                ],
+                                "na": {
+                                  "maxLength": 300
+                                }
+                              },
+                              "cacheExtent": {
+                                "className": "SugarNum.toDouble",
+                                "pa": [
+                                  {
+                                    "className": "SugarNum.multiplies",
+                                    "pa": [
+                                      {
+                                        "className": "Sugar.height",
+                                        "pa": [
+                                          "^(context)"
+                                        ]
+                                      },
+                                      2
+                                    ]
+                                  }
+                                ]
+                              },
+                              "physics": {
+                                "className": "BouncingScrollPhysics"
+                              },
+                              "indicatorBuilder": {
+                                "className": "SugarCommon.loadingMoreIndicatorBuilder",
+                                "pa": [
+                                  [
+                                    {
+                                      "className": "SugarSwitchCaseObj",
+                                      "na": {
+                                        "sugarCase": {
+                                          "className": "FairFunction",
+                                          "body": "#(IndicatorStatus.fullScreenBusying)",
+                                          "tag": "IndicatorStatus Function()",
+                                          "rt": "IndicatorStatus"
+                                        },
+                                        "reValue": {
+                                          "className": "FairFunction",
+                                          "body": {
+                                            "className": "Align",
+                                            "na": {
+                                              "alignment": "#(Alignment.center)",
+                                              "child": {
+                                                "className": "Text",
+                                                "pa": [
+                                                  "不要着急，正在加载中..."
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          "tag": "Widget Function()",
+                                          "rt": "Widget"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "className": "SugarSwitchCaseObj",
+                                      "na": {
+                                        "sugarCase": {
+                                          "className": "FairFunction",
+                                          "body": "#(IndicatorStatus.loadingMoreBusying)",
+                                          "tag": "IndicatorStatus Function()",
+                                          "rt": "IndicatorStatus"
+                                        },
+                                        "reValue": {
+                                          "className": "FairFunction",
+                                          "body": {
+                                            "className": "Container",
+                                            "na": {
+                                              "height": 35.0,
+                                              "alignment": "#(Alignment.center)",
+                                              "child": {
+                                                "className": "Text",
+                                                "pa": [
+                                                  "不要拖了，正在加载更多..."
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          "tag": "Widget Function()",
+                                          "rt": "Widget"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "className": "SugarSwitchCaseObj",
+                                      "na": {
+                                        "sugarCase": {
+                                          "className": "FairFunction",
+                                          "body": "#(IndicatorStatus.noMoreLoad)",
+                                          "tag": "IndicatorStatus Function()",
+                                          "rt": "IndicatorStatus"
+                                        },
+                                        "reValue": {
+                                          "className": "FairFunction",
+                                          "body": {
+                                            "className": "Container",
+                                            "na": {
+                                              "height": 35.0,
+                                              "alignment": "#(Alignment.center)",
+                                              "child": {
+                                                "className": "Text",
+                                                "pa": [
+                                                  "拖不动了，没有更多了！"
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          "tag": "Widget Function()",
+                                          "rt": "Widget"
+                                        }
+                                      }
+                                    }
+                                  ]
+                                ],
+                                "na": {
+                                  "isSliver": false
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {
+    "_itemBuilder": {
+      "className": "FrameSeparateWidget",
+      "na": {
+        "index": "^(index)",
+        "child": {
+          "className": "ExtendedFairWidget",
+          "na": {
+            "builder": {
+              "className": "FairFunction",
+              "body": {
+                "className": "PhotoGalleryItem",
+                "na": {
+                  "fairProps": "^(fairProps)"
+                }
+              },
+              "parameters": {
+                "pa": [
+                  "context"
+                ]
+              },
+              "tag": "Widget Function(BuildContext)",
+              "rt": "Widget"
+            },
+            "name": "$(name:)",
+            "fairProps": "^(fairProps)",
+            "holder": {
+              "className": "FairFunction",
+              "body": {
+                "className": "SizedBox",
+                "na": {
+                  "height": "^(height)"
+                }
+              },
+              "parameters": {
+                "pa": [
+                  "b"
+                ]
+              },
+              "tag": "Widget Function(BuildContext)",
+              "rt": "Widget"
+            }
+          }
+        },
+        "placeHolder": {
+          "className": "SizedBox",
+          "na": {
+            "height": "^(height)"
+          }
+        }
+      }
+    },
+    "_onRefresh": {
+      "className": "_repository.refresh"
+    }
+  },
+  "digest": "3c047c1944e0dea6a53e4c35d6d8684a"
+}

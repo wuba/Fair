@@ -1,0 +1,5 @@
+{
+  "plugin": {
+    "fair_common_plugin": "assets/plugin/fair_common_plugin.js"
+  }
+}

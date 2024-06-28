@@ -1,0 +1,232 @@
+{
+  "className": "Scaffold",
+  "na": {
+    "appBar": {
+      "className": "CommomAppBar",
+      "na": {
+        "title": "%(_getRouteName)",
+        "asset": "#(Assets.assets_page_simple_plugin_dart)"
+      }
+    },
+    "body": {
+      "className": "RefreshIndicator",
+      "na": {
+        "onRefresh": {
+          "className": "FairFunction",
+          "body": {
+            "className": "Sugar.createFuture",
+            "na": {
+              "function": "@(_onRefresh)",
+              "argument": "可以传一些参数过去，多个参数用数组"
+            },
+            "ta": "void",
+            "typeArgumentList": [
+              "void"
+            ]
+          },
+          "tag": "Future<void> Function()",
+          "rt": "Future<void>"
+        },
+        "child": {
+          "className": "Sugar.ifEqualBool",
+          "pa": [
+            {
+              "className": "SugarIterable.isEmpty",
+              "pa": [
+                "^(feedList)"
+              ]
+            }
+          ],
+          "na": {
+            "trueValue": {
+              "className": "FairFunction",
+              "body": {
+                "className": "Center",
+                "na": {
+                  "child": {
+                    "className": "CircularProgressIndicator",
+                    "na": {
+                      "strokeWidth": 2.0
+                    }
+                  }
+                }
+              },
+              "tag": "Widget Function()",
+              "rt": "Widget"
+            },
+            "falseValue": {
+              "className": "FairFunction",
+              "body": {
+                "className": "ListView.builder",
+                "na": {
+                  "itemBuilder": {
+                    "className": "FairFunction",
+                    "body": {
+                      "className": "Card",
+                      "na": {
+                        "child": {
+                          "className": "Padding",
+                          "na": {
+                            "padding": {
+                              "className": "EdgeInsets.all",
+                              "pa": [
+                                8.0
+                              ]
+                            },
+                            "child": {
+                              "className": "Column",
+                              "na": {
+                                "mainAxisAlignment": "#(MainAxisAlignment.start)",
+                                "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                "children": [
+                                  {
+                                    "className": "Row",
+                                    "na": {
+                                      "mainAxisAlignment": "#(MainAxisAlignment.start)",
+                                      "crossAxisAlignment": "#(CrossAxisAlignment.start)",
+                                      "children": [
+                                        {
+                                          "className": "Text",
+                                          "pa": [
+                                            {
+                                              "className": "SugarString.concatenates",
+                                              "pa": [
+                                                {
+                                                  "className": "SugarInt.intToString",
+                                                  "pa": [
+                                                    "^(index)"
+                                                  ]
+                                                },
+                                                "."
+                                              ]
+                                            }
+                                          ],
+                                          "na": {
+                                            "style": {
+                                              "className": "TextStyle",
+                                              "na": {
+                                                "height": 1
+                                              }
+                                            },
+                                            "strutStyle": {
+                                              "className": "StrutStyle",
+                                              "na": {
+                                                "height": 1.2
+                                              }
+                                            }
+                                          }
+                                        },
+                                        {
+                                          "className": "SizedBox",
+                                          "na": {
+                                            "width": 5
+                                          }
+                                        },
+                                        {
+                                          "className": "Expanded",
+                                          "na": {
+                                            "child": {
+                                              "className": "Text",
+                                              "pa": [
+                                                "%(_getContent(^(index)))"
+                                              ],
+                                              "na": {
+                                                "maxLines": 5,
+                                                "style": {
+                                                  "className": "TextStyle",
+                                                  "na": {
+                                                    "height": 1
+                                                  }
+                                                },
+                                                "strutStyle": {
+                                                  "className": "StrutStyle",
+                                                  "na": {
+                                                    "height": 1.2
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "className": "Sugar.ifEqual",
+                                    "pa": [
+                                      "%(_getImageUrl(^(index)))",
+                                      ""
+                                    ],
+                                    "na": {
+                                      "trueValue": {
+                                        "className": "FairFunction",
+                                        "body": {
+                                          "className": "SizedBox.shrink"
+                                        },
+                                        "tag": "Widget Function()",
+                                        "rt": "Widget"
+                                      },
+                                      "falseValue": {
+                                        "className": "FairFunction",
+                                        "body": {
+                                          "className": "GestureDetector",
+                                          "na": {
+                                            "onTap": {
+                                              "className": "SugarCommon.voidCallBack",
+                                              "na": {
+                                                "function": "@(_onImageSaveTap)",
+                                                "value": "^(index)"
+                                              }
+                                            },
+                                            "child": {
+                                              "className": "Image.network",
+                                              "pa": [
+                                                "%(_getImageUrl(^(index)))"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "tag": "Widget Function()",
+                                        "rt": "Widget"
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "parameters": {
+                      "pa": [
+                        "context",
+                        "index"
+                      ]
+                    },
+                    "tag": "Widget Function(BuildContext, int)",
+                    "rt": "Widget"
+                  },
+                  "itemCount": {
+                    "className": "SugarList.length",
+                    "pa": [
+                      "^(feedList)"
+                    ]
+                  }
+                }
+              },
+              "tag": "Widget Function()",
+              "rt": "Widget"
+            }
+          }
+        }
+      }
+    }
+  },
+  "methodMap": {
+    "_getContent": {
+      "className": "index.toString"
+    }
+  },
+  "digest": "3e7c957955c53791b551a4d048fce6ea"
+}
