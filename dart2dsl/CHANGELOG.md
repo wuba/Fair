@@ -1,3 +1,6 @@
+## 1.6.1
+- Modify compilation mode.
+
 ## 1.6.0
 - Support FairFunction.
 - Fixed some known issues.

@@ -1,3 +1,6 @@
+## [2.1.0]
+* Modify compilation mode, improve compilation speed.
+
 ## [2.0.0]
 * Extended FunctionDomain, support FairFunction.
 * Fixed some known issues.

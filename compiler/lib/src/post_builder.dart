@@ -6,108 +6,137 @@
 
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:archive/archive.dart';
 import 'package:build/build.dart';
 import 'package:crypto/crypto.dart' show md5;
 import 'package:fair_compiler/src/state_transfer.dart';
-import 'package:path/path.dart' as path;
+import 'package:fair_dart2dsl/fairc.dart' as dart2dsl;
+import 'package:fair_dart2dsl/src/helper.dart' show ModuleNameHelper;
 import 'package:fair_dart2js/index.dart' as dart2js;
+import 'package:intl/intl.dart';
+import 'package:path/path.dart' as path;
 import 'package:yaml/yaml.dart';
-import 'helper.dart' show FlatCompiler, ModuleNameHelper;
+
+import 'helper.dart' show FlatCompiler;
 
 class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
+  bool generated = false;
+
   @override
   FutureOr<void> build(PostProcessBuildStep buildStep) async {
-    final dir = path.join('build','fair');
+    if (generated) {
+      return;
+    }
+    generated = true;
+    var buildDir =
+        Directory(path.join('.dart_tool', 'build', 'fairc', 'build'));
+    if (!buildDir.existsSync()) {
+      return;
+    }
+    var files = await buildDir
+        .list(recursive: true)
+        .map((element) => element.absolute.path)
+        .where((event) => event.endsWith('.dart'))
+        .toList();
+
+    final dir = path.join('build', 'fair');
     Directory(dir).createSync(recursive: true);
+    // dart2dsl
+    try {
+      await dart2dsl
+          .dart2dsl(['-k', 'bundleDir', '-d', buildDir.absolute.path]);
+    } catch (e, s) {
+      var errorLog = await File(path.join('build', 'fair', 'log',
+              '${DateFormat('yyyy-MM-dd_HH:mm:sss').format(DateTime.now())}.txt'))
+          .create(recursive: true);
+      var f = await errorLog.open(mode: FileMode.append);
+      await f.writeString('error:\n${e.toString()}\nstack:\n${s.toString()}\n');
+    }
 
-    /// Get the module value of the bundle file,
-    /// the module value will be used as the prefix of the bundle file name.
-    /// Example：'home_recommend.fair.json'
-    var moduleNameKey = buildStep.inputId.path.replaceAll('.bundle.json', '');
-    var moduleNameValue = ModuleNameHelper().modules[moduleNameKey];
-
-    final bundleName = path.join(
-            dir,
-            buildStep.inputId.path
-                .replaceAll(inputExtensions.first, '.fair.json')
-                .replaceAll('lib', moduleNameValue)
-                .replaceAll('/', '_')
-                .replaceAll('\\', '_'));
-    final jsName = bundleName.replaceFirst('.json', '.js');
-
-    await dart2JS(buildStep.inputId.path, jsName);
-    var isOutputBin = await compileBundle(buildStep, bundleName);
+    var isOutputBin = false;
+    files.forEach((filePath) async {
+      var moduleNameKey = path.withoutExtension(filePath);
+      var moduleNameValue = ModuleNameHelper().modules[moduleNameKey];
+      final bundleFilePath = path.join(
+          dir,
+          filePath
+              .replaceFirst(buildDir.absolute.path, '')
+              .replaceFirst('/', '')
+              .replaceAll('lib', moduleNameValue)
+              .replaceAll('/', '_')
+              .replaceAll('\\', '_')
+              .replaceAll('.dart', '.fair.json'));
+      final jsFilePath = bundleFilePath.replaceFirst('.fair.json', '.fair.js');
+      await dart2JS(filePath, jsFilePath);
+      isOutputBin = await compileBundle(bundleFilePath);
+    });
 
     // 压缩下发产物
     var zipSrcPath = path.join(Directory.current.path, 'build', 'fair');
-    var zipDesPath = path.join(Directory.current.path, 'build', 'fair', 'fair_patch.zip');
+    var zipDesPath =
+        path.join(Directory.current.path, 'build', 'fair', 'fair_patch.zip');
     _zip(Directory(zipSrcPath), File(zipDesPath), isOutputBin);
 
-   await stateTransfer();
+    // delete buildDir
+    await buildDir.delete(recursive: true);
+    await stateTransfer();
   }
 
   @override
-  Iterable<String> get inputExtensions => ['.bundle.json'];
+  Iterable<String> get inputExtensions => ['.dart.temp'];
 
-  Future dart2JS(String input, String jsName) async {
-    var partPath = path.join(Directory.current.path, input.replaceFirst('.bundle.json', '.dart'));
-    print('\u001b[33m [Fair Dart2JS] partPath => ${partPath} \u001b[0m');
-    if (File(partPath).existsSync()) {
+  Future dart2JS(String filePath, String jsFilePath) async {
+    print('\u001b[33m [Fair Dart2JS] partPath => $filePath \u001b[0m');
+    if (File(filePath).existsSync()) {
       try {
         var uglify = true;
-
         var optionsYamlPath =
             path.join(Directory.current.path, 'fair_compiler_options.yaml');
-
         var optionYamlFile = File(optionsYamlPath);
         if (optionYamlFile.existsSync()) {
           var optionsYaml =
               loadYaml(optionYamlFile.readAsStringSync()) as YamlMap?;
-
           if (optionsYaml != null && optionsYaml.containsKey('uglify')) {
             uglify = optionsYaml['uglify'];
           }
         }
-
         print('\u001b[33m [Fair Dart2JS] uglify option: => $uglify \u001b[0m');
-
-        var result = await dart2js.convertFile(partPath, uglify);
-        File(jsName)..writeAsStringSync(result);
+        var result = await dart2js.convertFile(filePath, uglify);
+        File(jsFilePath).writeAsStringSync(result);
       } catch (e) {
-        print('[Fair Dart2JS] e => ${e}');
+        print('[Fair Dart2JS] e => $e');
       }
     }
   }
 
-  Future<bool> compileBundle(PostProcessBuildStep buildStep, String bundleName) async {
-    final bytes = await buildStep.readInputAsBytes();
-    final file = File(bundleName)..writeAsBytesSync(bytes);
-    if (file.lengthSync() > 0) {
-      buildStep.deletePrimaryInput();
+  Future<bool> compileBundle(String bundleFilePath) async {
+    var bundleFile = File(bundleFilePath);
+    if (!bundleFile.existsSync()) {
+      return false;
     }
-    var bin = await compile(file.absolute.path);
+    final bytes = await bundleFile.readAsBytes();
+    var bin = await compile(bundleFile.absolute.path);
     if (bin.success) {
-      print('[Fair] FlatBuffer format generated for ${file.path}');
+      print('[Fair] FlatBuffer format generated for ${bundleFile.path}');
     } else {
       print('error: [Fair] FlatBuffer format fail ${bin.message}');
     }
     final buffer = StringBuffer();
     buffer.writeln('# Generated by Fair on ${DateTime.now()}.\n');
-    final source = buildStep.inputId.path.replaceAll(inputExtensions.first, '.dart');
-    buffer.writeln('source: ${buildStep.inputId.package}|$source');
+    final source = bundleFilePath.replaceAll(inputExtensions.first, '.dart');
+    buffer.writeln('source: $source');
     final digest = md5.convert(bytes).toString();
     buffer.writeln('md5: $digest');
-    buffer.writeln('json: ${buildStep.inputId.package}|${file.path}');
+    buffer.writeln('json: ${bundleFile.path}');
     if (bin.success) {
-      buffer.writeln('bin: ${buildStep.inputId.package}|${bin.data}');
+      buffer.writeln('bin: ${bin.data}');
     }
     buffer.writeln('date: ${DateTime.now()}');
-    File('${bundleName.replaceAll('.json', '.metadata')}').writeAsStringSync(buffer.toString());
+    File('${bundleFilePath.replaceAll('.json', '.metadata')}')
+        .writeAsStringSync(buffer.toString());
 
-    print('[Fair] New bundle generated => ${file.path}');
+    print('[Fair] New bundle generated => $bundleFilePath');
 
     return bin.success;
   }
@@ -121,7 +150,8 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
       if (entity is! File) {
         continue;
       }
-      if (entity.path.endsWith(js_file_extension) || entity.path.endsWith(dsl_file_extension)) {
+      if (entity.path.endsWith(js_file_extension) ||
+          entity.path.endsWith(dsl_file_extension)) {
         final file = entity;
         var filename = file.path.split(Platform.pathSeparator).last;
         final List<int> bytes = file.readAsBytesSync();

@@ -795,6 +795,18 @@ Future<Map> generateAstMap(String path, {String? sourcePath}) async {
   return Future.value();
 }
 
+Future<Map> generateAstMapByCompilation(CompilationUnit compilationUnit, String path, {String? sourcePath}) async {
+  try {
+    //遍历AST
+    var astData = compilationUnit.accept(
+        CustomAstVisitor(sourcePath, await File(path).readAsString()));
+    return Future.value(astData);
+  } catch (e) {
+    stdout.writeln('Visit dart ast error: ${e.toString()}');
+  }
+  return Future.value();
+}
+
 Future _pathCheck(String path) async {
   if (await FileSystemEntity.isDirectory(path)) {
     stderr.writeln('error: $path is a directory');
