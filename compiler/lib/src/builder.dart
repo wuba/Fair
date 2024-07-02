@@ -7,12 +7,12 @@
 import 'package:build/build.dart';
 
 import 'bundle_builder.dart';
-import 'formatter.dart';
 import 'generator.dart';
 import 'post_builder.dart';
 
 Builder build(BuilderOptions options) {
-  return BundleBuilder(BundleGenerator(), formatOutput: JsonFormatter().format);
+  return BundleBuilder(BundleGenerator(),
+      generatedExtension: '.dart.temp',formatOutput: (_) => _);
 }
 
 Builder bind(BuilderOptions options) {

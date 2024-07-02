@@ -12,12 +12,12 @@ import 'package:source_gen/source_gen.dart';
 class BundleBuilder extends LibraryBuilder {
   BundleBuilder(Generator generator, {String? generatedExtension, String Function(String code)? formatOutput})
       : _generator = generator,
-        _generatedExtension = generatedExtension ?? '.bundle.json',
+        _generatedExtension = generatedExtension ?? '.dart.temp',
         super(
           generator,
           header: '',
           formatOutput: formatOutput,
-          generatedExtension: generatedExtension ?? '.bundle.json',
+          generatedExtension: generatedExtension ?? '.dart.temp',
         );
   final String _generatedExtension;
   final Generator _generator;
@@ -62,8 +62,9 @@ source formatter.\n==>\n$genPartContent
         stack,
       );
     }
-
-    unawaited(buildStep.writeAsString(outputId, genPartContent));
+    if (genPartContent.isNotEmpty) {
+      unawaited(buildStep.writeAsString(outputId, genPartContent));
+    }
   }
 
   @override

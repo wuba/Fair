@@ -85,7 +85,7 @@ Future dart2dsl(List<String> arguments) async {
     ..addOption('compile-kind',
         abbr: 'k',
         defaultsTo: 'bundle',
-        allowed: ['bundle', 'dart', 'flutter', 'sdk']);
+        allowed: ['bundle', 'bundleDir', 'dart', 'flutter', 'sdk']);
   var argResults = parser.parse(arguments);
   var kind = argResults['compile-kind'];
   if (kind == 'bundle') {
@@ -94,6 +94,14 @@ Future dart2dsl(List<String> arguments) async {
       _error('file is required, please pass as absolute path');
     }
     return _appendResult(await dsl.parseFile(file, sourcePath: argResults['source-path']));
+
+  } else if (kind == 'bundleDir') {
+    var dirString = argResults['directory'];
+    if (dirString == null || !Directory(dirString).existsSync()) {
+      print('directory is not valid, please pass as absolute path');
+      exit(1);
+    }
+    return _appendResult(await dsl.parseDir(dirString));
 
   } else if (kind == 'dart') {
     var dirString = argResults['directory'];

@@ -132,14 +132,3 @@ class R {
     return R._(false, null, message);
   }
 }
-
-/// Use Map to save the module value of all bundle files.
-class ModuleNameHelper {
-  var modules = {};
-
-  static final ModuleNameHelper _singleton = ModuleNameHelper._internal();
-
-  factory ModuleNameHelper() => _singleton;
-
-  ModuleNameHelper._internal();
-}
