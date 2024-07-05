@@ -1,3 +1,6 @@
+## [2.1.1]
+* bugfix.
+
 ## [2.1.0]
 * Modify compilation mode, improve compilation speed.
 

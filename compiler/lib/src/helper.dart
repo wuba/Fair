@@ -61,7 +61,7 @@ mixin FairCompiler {
   final branch = 'main';
 
   /// Copy fair_bundle.fbs to the current project.
-  Future<File> _syncFbs(BuildStep buildStep) async {
+  Future<File> syncFbs(BuildStep buildStep) async {
     final dir = path.join('.dart_tool', 'build', 'fairc');
     Directory(dir).createSync(recursive: true);
     var fbs =
@@ -86,7 +86,7 @@ mixin FairCompiler {
     var content = '';
     var error = '';
     if (LocalProcessManager().canRun(command)) {
-      await _syncFbs(buildStep);
+      await syncFbs(buildStep);
       try {
         final output = await dart2dsl.dart2dsl(arguments);
         if (output != null && output is String && output.isNotEmpty) {
