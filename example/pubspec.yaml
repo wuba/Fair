@@ -26,7 +26,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.0.0
   flutter_staggered_grid_view: ^0.7.0
-  fair_compiler: ^2.1.0
+  fair_compiler: ^2.1.2
 
 dependency_overrides:
   build_runner: 2.3.3
