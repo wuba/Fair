@@ -55,7 +55,7 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
     }
 
     var isOutputBin = false;
-    files.forEach((filePath) async {
+    for (var filePath in files) {
       var moduleNameKey = path.withoutExtension(filePath);
       var moduleNameValue = ModuleNameHelper().modules[moduleNameKey];
       final bundleFilePath = path.join(
@@ -70,7 +70,7 @@ class ArchiveBuilder extends PostProcessBuilder with FlatCompiler {
       final jsFilePath = bundleFilePath.replaceFirst('.fair.json', '.fair.js');
       await dart2JS(filePath, jsFilePath);
       isOutputBin = await compileBundle(bundleFilePath);
-    });
+    }
 
     // 压缩下发产物
     var zipSrcPath = path.join(Directory.current.path, 'build', 'fair');
