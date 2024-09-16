@@ -26,6 +26,9 @@ const char *invokeJSCommonFuncSync(char *args) {
     if (attach == 1) {
       del_env();
     }
+    env->DeleteLocalRef(clazz_fair_app);
+    env->DeleteLocalRef(javaArgs);
+    env->DeleteLocalRef(result);
     return resultString;
   }
   return "Fair为空";
